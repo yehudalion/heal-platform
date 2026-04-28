@@ -9,6 +9,7 @@ let queue = [];
 let index = 0;
 let revealed = false;
 let extraOpen = false;
+let mnemonicOpen = false;
 let audioEl = null;
 
 async function buildQueue() {
@@ -52,6 +53,7 @@ export async function renderCard(root) {
   index = 0;
   revealed = false;
   extraOpen = false;
+  mnemonicOpen = false;
   draw(root);
 }
 
@@ -93,17 +95,29 @@ function draw(root) {
               revealed
                 ? (() => {
                     const { primary, rest } = splitDefinition(word.definition);
+                    const mnemonic = (word.mnemonic || '').trim();
                     return `
-              <div>
+              <div class="def-block">
                 <div class="section-label">הגדרה</div>
                 <p class="definition" dir="rtl">${primary}</p>
                 ${
                   rest
                     ? `
                   <button class="more-meanings-btn" id="moreMeaningsBtn" ${extraOpen ? 'hidden' : ''}>
-                    משמעויות נוספות
+                    משמעויות נוספות ›
                   </button>
                   <p class="extra-meanings" dir="rtl" ${extraOpen ? '' : 'hidden'}>${rest}</p>
+                `
+                    : ''
+                }
+                ${
+                  mnemonic
+                    ? `
+                  <button class="mnemonic-btn" id="mnemonicBtn">
+                    <span class="bulb">💡</span>
+                    <span>אסוציאציה</span>
+                  </button>
+                  <p class="mnemonic-text" dir="rtl" ${mnemonicOpen ? '' : 'hidden'}>${mnemonic}</p>
                 `
                     : ''
                 }
@@ -164,6 +178,7 @@ function draw(root) {
     root.querySelector('#revealBtn').addEventListener('click', () => {
       revealed = true;
       extraOpen = false;
+      mnemonicOpen = false;
       draw(root);
     });
   } else {
@@ -174,11 +189,20 @@ function draw(root) {
         draw(root);
       });
     }
+    const mnemBtn = root.querySelector('#mnemonicBtn');
+    if (mnemBtn) {
+      mnemBtn.addEventListener('click', () => {
+        mnemonicOpen = !mnemonicOpen;
+        draw(root);
+      });
+      if (mnemonicOpen) mnemBtn.classList.add('active');
+    }
     root.querySelectorAll('.rate-btn').forEach((b) => {
       b.addEventListener('click', async () => {
         await recordRating(word.id, b.dataset.rating);
         revealed = false;
         extraOpen = false;
+        mnemonicOpen = false;
         index = (index + 1) % queue.length;
         draw(root);
       });

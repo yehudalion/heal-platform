@@ -94,7 +94,7 @@ export async function getWords() {
   if (!supabase) return [];
   const { data, error } = await supabase
     .from('words')
-    .select('id, headword, definition, pos')
+    .select('id, headword, definition, pos, mnemonic')
     .order('headword', { ascending: true });
   if (error) return [];
   return data || [];
