@@ -64,9 +64,7 @@ function draw(root) {
         <div class="card">
           <div class="card-headword-row">
             <div class="card-headword" dir="ltr">${word.headword}</div>
-            <div class="card-pos" dir="ltr">${word.pos}</div>
           </div>
-          <div class="card-phon" dir="ltr">${word.phonetic}</div>
 
           <button class="audio-btn" id="audioBtn" ${word.audio_url ? '' : 'disabled'}>
             ${speakerIcon}
