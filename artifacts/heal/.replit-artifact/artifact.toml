@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "HEAL"
+version = "1.0.0"
+id = "artifacts/heal"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25039
+
+[services.development]
+run = "pnpm --filter @workspace/heal run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/heal", "run", "build" ]
+publicDir = "artifacts/heal/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25039"
+BASE_PATH = "/"

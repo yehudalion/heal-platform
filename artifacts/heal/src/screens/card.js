@@ -1,0 +1,146 @@
+import { renderTopbar } from '../topbar.js';
+import { navigate } from '../router.js';
+import { getLevel, recordRating, getAllRatings } from '../supabase.js';
+import wordsData from '../data/words.json';
+
+const speakerIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+
+let queue = [];
+let index = 0;
+let revealed = false;
+let audioEl = null;
+
+async function buildQueue() {
+  const level = getLevel();
+  const ratings = await getAllRatings();
+  const ratedEasy = new Set(ratings.filter((r) => r.rating === 'easy').map((r) => r.word_id));
+
+  const pool = wordsData.filter((w) => w.level === level);
+  const ordered = [
+    ...pool.filter((w) => !ratedEasy.has(w.id)),
+    ...pool.filter((w) => ratedEasy.has(w.id)),
+  ];
+  return ordered.length ? ordered : pool;
+}
+
+export async function renderCard(root) {
+  root.innerHTML = `<div class="shell"><div class="spinner">Loading queue…</div></div>`;
+
+  queue = await buildQueue();
+  index = 0;
+  revealed = false;
+  draw(root);
+}
+
+function draw(root) {
+  if (!queue.length) {
+    root.innerHTML = `
+      <div class="shell">
+        ${renderTopbar()}
+        <div class="spinner">No words available for this level.</div>
+      </div>`;
+    return;
+  }
+
+  const word = queue[index % queue.length];
+  const level = getLevel();
+
+  root.innerHTML = `
+    <div class="shell fade-in">
+      ${renderTopbar()}
+      <div class="card-wrap">
+        <div class="card-meta">
+          <span>Word ${(index % queue.length) + 1} / ${queue.length}</span>
+          <span class="level">${level}</span>
+        </div>
+
+        <div class="card">
+          <div class="card-headword-row">
+            <div class="card-headword">${word.headword}</div>
+            <div class="card-pos">${word.pos}</div>
+          </div>
+          <div class="card-phon">${word.phonetic}</div>
+
+          <button class="audio-btn" id="audioBtn" ${word.audio_url ? '' : 'disabled'}>
+            ${speakerIcon}
+            <span>Pronounce</span>
+          </button>
+
+          <div class="reveal-zone" id="revealZone">
+            ${
+              revealed
+                ? `
+              <div>
+                <div class="section-label">Definition</div>
+                <p class="definition">${word.definition}</p>
+
+                <div class="section-label">Example</div>
+                <p class="sentence">"${word.sentence}"</p>
+              </div>
+
+              <div class="rate-bar">
+                <button class="rate-btn" data-tone="easy" data-rating="easy">
+                  <span class="rk">I knew it</span>
+                  <span>Easy</span>
+                </button>
+                <button class="rate-btn" data-tone="medium" data-rating="medium">
+                  <span class="rk">Half-knew</span>
+                  <span>Medium</span>
+                </button>
+                <button class="rate-btn" data-tone="hard" data-rating="hard">
+                  <span class="rk">New to me</span>
+                  <span>Hard</span>
+                </button>
+              </div>
+              `
+                : `
+              <div class="reveal-prompt">
+                <p>Tap to reveal the definition</p>
+                <button class="reveal-btn" id="revealBtn">Reveal</button>
+              </div>
+              `
+            }
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a href="#/fork">&larr; Session menu</a>
+          <a href="#/gap">View gap report &rarr;</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // audio
+  const audioBtn = root.querySelector('#audioBtn');
+  if (audioBtn && word.audio_url) {
+    audioBtn.addEventListener('click', () => {
+      if (audioEl) {
+        audioEl.pause();
+      }
+      audioEl = new Audio(word.audio_url);
+      audioBtn.classList.add('playing');
+      audioEl.play().catch(() => {
+        audioBtn.classList.remove('playing');
+      });
+      audioEl.addEventListener('ended', () => audioBtn.classList.remove('playing'));
+      audioEl.addEventListener('error', () => audioBtn.classList.remove('playing'));
+    });
+  }
+
+  if (!revealed) {
+    root.querySelector('#revealBtn').addEventListener('click', () => {
+      revealed = true;
+      draw(root);
+    });
+  } else {
+    root.querySelectorAll('.rate-btn').forEach((b) => {
+      b.addEventListener('click', async () => {
+        await recordRating(word.id, b.dataset.rating);
+        revealed = false;
+        index = (index + 1) % queue.length;
+        draw(root);
+      });
+    });
+  }
+}
