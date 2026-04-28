@@ -1,6 +1,6 @@
 import { renderTopbar } from '../topbar.js';
 import { navigate } from '../router.js';
-import { getLevel, recordRating, getAllRatings } from '../supabase.js';
+import { getLevel, recordRating, getAllRatings, getWords } from '../supabase.js';
 import wordsData from '../data/words.json';
 
 const speakerIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
@@ -8,6 +8,7 @@ const speakerIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none"
 let queue = [];
 let index = 0;
 let revealed = false;
+let extraOpen = false;
 let audioEl = null;
 
 async function buildQueue() {
@@ -15,12 +16,27 @@ async function buildQueue() {
   const ratings = await getAllRatings();
   const ratedEasy = new Set(ratings.filter((r) => r.rating === 'easy').map((r) => r.word_id));
 
-  const pool = wordsData.filter((w) => w.level === level);
+  const remote = await getWords();
+  const usingRemote = remote.length > 0;
+  const pool = usingRemote
+    ? remote
+    : wordsData.filter((w) => w.level === level);
+
   const ordered = [
     ...pool.filter((w) => !ratedEasy.has(w.id)),
     ...pool.filter((w) => ratedEasy.has(w.id)),
   ];
   return ordered.length ? ordered : pool;
+}
+
+function splitDefinition(def) {
+  if (!def) return { primary: '', rest: '' };
+  const i = def.indexOf(',');
+  if (i === -1) return { primary: def.trim(), rest: '' };
+  return {
+    primary: def.slice(0, i).trim(),
+    rest: def.slice(i + 1).trim(),
+  };
 }
 
 const LEVEL_LABELS = {
@@ -35,6 +51,7 @@ export async function renderCard(root) {
   queue = await buildQueue();
   index = 0;
   revealed = false;
+  extraOpen = false;
   draw(root);
 }
 
@@ -74,13 +91,22 @@ function draw(root) {
           <div class="reveal-zone" id="revealZone">
             ${
               revealed
-                ? `
+                ? (() => {
+                    const { primary, rest } = splitDefinition(word.definition);
+                    return `
               <div>
                 <div class="section-label">הגדרה</div>
-                <p class="definition" dir="ltr">${word.definition}</p>
-
-                <div class="section-label">דוגמה</div>
-                <p class="sentence" dir="ltr">"${word.sentence}"</p>
+                <p class="definition" dir="rtl">${primary}</p>
+                ${
+                  rest
+                    ? `
+                  <button class="more-meanings-btn" id="moreMeaningsBtn" ${extraOpen ? 'hidden' : ''}>
+                    משמעויות נוספות
+                  </button>
+                  <p class="extra-meanings" dir="rtl" ${extraOpen ? '' : 'hidden'}>${rest}</p>
+                `
+                    : ''
+                }
               </div>
 
               <div class="rate-bar">
@@ -97,7 +123,8 @@ function draw(root) {
                   <span>קשה</span>
                 </button>
               </div>
-              `
+              `;
+                  })()
                 : `
               <div class="reveal-prompt">
                 <p>הקישו לחשיפת ההגדרה</p>
@@ -136,13 +163,22 @@ function draw(root) {
   if (!revealed) {
     root.querySelector('#revealBtn').addEventListener('click', () => {
       revealed = true;
+      extraOpen = false;
       draw(root);
     });
   } else {
+    const moreBtn = root.querySelector('#moreMeaningsBtn');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        extraOpen = true;
+        draw(root);
+      });
+    }
     root.querySelectorAll('.rate-btn').forEach((b) => {
       b.addEventListener('click', async () => {
         await recordRating(word.id, b.dataset.rating);
         revealed = false;
+        extraOpen = false;
         index = (index + 1) % queue.length;
         draw(root);
       });

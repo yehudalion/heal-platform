@@ -541,11 +541,38 @@ a {
 
 .definition {
   font-family: var(--serif);
-  font-size: 22px;
-  line-height: 1.45;
-  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 500;
   color: var(--paper);
+  margin-bottom: 18px;
+}
+
+.more-meanings-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  margin-bottom: 22px;
+  transition: all 140ms ease;
+}
+
+.more-meanings-btn:hover {
+  color: var(--paper);
+  border-color: var(--paper);
+}
+
+.extra-meanings {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 28px;
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid var(--rule);
 }
 
 .sentence {

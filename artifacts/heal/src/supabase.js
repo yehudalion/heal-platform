@@ -88,6 +88,18 @@ export async function getAllRatings() {
   return data || [];
 }
 
+/* -------- Words -------- */
+
+export async function getWords() {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('words')
+    .select('id, headword, definition, pos')
+    .order('headword', { ascending: true });
+  if (error) return [];
+  return data || [];
+}
+
 /* -------- Level (preferred difficulty) -------- */
 
 export function getLevel() {
