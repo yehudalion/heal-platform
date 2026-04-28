@@ -5,17 +5,17 @@ let cachedEmail = null;
 
 export function renderTopbar() {
   const guest = isGuest();
-  const who = guest ? 'Guest' : (cachedEmail || 'Signed in');
+  const who = guest ? 'אורח' : (cachedEmail || 'מחובר');
   return `
     <div class="topbar">
       <a class="brand" href="#/fork">
         <span class="brand-mark">HEAL</span>
-        <span class="brand-sub">vocabulary</span>
+        <span class="brand-sub">אוצר מילים</span>
       </a>
       <div class="topbar-right">
         <span class="who" data-who>${who}</span>
-        <a class="link" href="#/gap">Gap report</a>
-        <a class="link" href="#" data-signout>Sign out</a>
+        <a class="link" href="#/gap">דו״ח פערים</a>
+        <a class="link" href="#" data-signout>התנתק</a>
       </div>
     </div>
   `;

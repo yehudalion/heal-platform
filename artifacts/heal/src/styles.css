@@ -209,7 +209,7 @@ a {
 }
 
 .btn-icon {
-  margin-right: 10px;
+  margin-inline-end: 10px;
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -263,7 +263,7 @@ a {
   background: rgba(255, 255, 255, 0.06);
   font-size: 13px;
   letter-spacing: 0.08em;
-  border-left: 1px solid var(--rule-strong);
+  border-inline-start: 1px solid var(--rule-strong);
 }
 
 .email-row button:hover {
@@ -338,7 +338,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  text-align: start;
   padding: 28px 24px 26px;
   border: 1px solid var(--rule-strong);
   border-radius: 2px;
@@ -554,8 +554,8 @@ a {
   font-size: 17px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.86);
-  padding-left: 18px;
-  border-left: 1px solid var(--rule-strong);
+  padding-inline-start: 18px;
+  border-inline-start: 1px solid var(--rule-strong);
   margin-bottom: 36px;
 }
 
@@ -724,7 +724,7 @@ a {
 .gap-cell .v small {
   font-size: 14px;
   color: var(--muted);
-  margin-left: 4px;
+  margin-inline-start: 4px;
   font-weight: 400;
 }
 
@@ -824,7 +824,7 @@ a {
   padding: 24px 28px;
   border: 1px solid var(--rule-strong);
   border-radius: 2px;
-  text-align: left;
+  text-align: start;
   width: 100%;
   transition: all 140ms ease;
 }

@@ -6,22 +6,22 @@ export function renderFork(root) {
     <div class="shell fade-in">
       ${renderTopbar()}
       <div class="fork">
-        <div class="fork-eyebrow">Today's Session</div>
-        <h1 class="fork-title">What would you like to do?</h1>
+        <div class="fork-eyebrow">המפגש להיום</div>
+        <h1 class="fork-title">מה תרצו לעשות?</h1>
 
         <div class="fork-grid">
           <button class="fork-card" data-go="/card">
             <div class="num">I.</div>
-            <div class="label">Start Working</div>
-            <div class="desc">Step through a queue of words, reveal definitions, and rate what you know.</div>
-            <div class="arrow">Begin &rarr;</div>
+            <div class="label">התחל לעבוד</div>
+            <div class="desc">עברו על רשימת מילים, חשפו הגדרות ודרגו את מה שאתם יודעים.</div>
+            <div class="arrow">להתחלה &rarr;</div>
           </button>
 
           <button class="fork-card" data-go="/level">
             <div class="num">II.</div>
-            <div class="label">Set My Level</div>
-            <div class="desc">Choose a difficulty band — basic, intermediate, or advanced — to tune your queue.</div>
-            <div class="arrow">Choose &rarr;</div>
+            <div class="label">הגדר את הרמה שלי</div>
+            <div class="desc">בחרו רמת קושי — בסיסי, בינוני או מתקדם — כדי לכוון את הרשימה.</div>
+            <div class="arrow">לבחירה &rarr;</div>
           </button>
         </div>
       </div>

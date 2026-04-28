@@ -23,8 +23,14 @@ async function buildQueue() {
   return ordered.length ? ordered : pool;
 }
 
+const LEVEL_LABELS = {
+  basic: 'בסיסי',
+  intermediate: 'בינוני',
+  advanced: 'מתקדם',
+};
+
 export async function renderCard(root) {
-  root.innerHTML = `<div class="shell"><div class="spinner">Loading queue…</div></div>`;
+  root.innerHTML = `<div class="shell"><div class="spinner">טוען רשימה…</div></div>`;
 
   queue = await buildQueue();
   index = 0;
@@ -37,33 +43,34 @@ function draw(root) {
     root.innerHTML = `
       <div class="shell">
         ${renderTopbar()}
-        <div class="spinner">No words available for this level.</div>
+        <div class="spinner">אין מילים זמינות ברמה זו.</div>
       </div>`;
     return;
   }
 
   const word = queue[index % queue.length];
   const level = getLevel();
+  const levelLabel = LEVEL_LABELS[level] || level;
 
   root.innerHTML = `
     <div class="shell fade-in">
       ${renderTopbar()}
       <div class="card-wrap">
         <div class="card-meta">
-          <span>Word ${(index % queue.length) + 1} / ${queue.length}</span>
-          <span class="level">${level}</span>
+          <span>מילה ${(index % queue.length) + 1} / ${queue.length}</span>
+          <span class="level">${levelLabel}</span>
         </div>
 
         <div class="card">
           <div class="card-headword-row">
-            <div class="card-headword">${word.headword}</div>
-            <div class="card-pos">${word.pos}</div>
+            <div class="card-headword" dir="ltr">${word.headword}</div>
+            <div class="card-pos" dir="ltr">${word.pos}</div>
           </div>
-          <div class="card-phon">${word.phonetic}</div>
+          <div class="card-phon" dir="ltr">${word.phonetic}</div>
 
           <button class="audio-btn" id="audioBtn" ${word.audio_url ? '' : 'disabled'}>
             ${speakerIcon}
-            <span>Pronounce</span>
+            <span>השמע</span>
           </button>
 
           <div class="reveal-zone" id="revealZone">
@@ -71,32 +78,32 @@ function draw(root) {
               revealed
                 ? `
               <div>
-                <div class="section-label">Definition</div>
-                <p class="definition">${word.definition}</p>
+                <div class="section-label">הגדרה</div>
+                <p class="definition" dir="ltr">${word.definition}</p>
 
-                <div class="section-label">Example</div>
-                <p class="sentence">"${word.sentence}"</p>
+                <div class="section-label">דוגמה</div>
+                <p class="sentence" dir="ltr">"${word.sentence}"</p>
               </div>
 
               <div class="rate-bar">
                 <button class="rate-btn" data-tone="easy" data-rating="easy">
-                  <span class="rk">I knew it</span>
-                  <span>Easy</span>
+                  <span class="rk">ידעתי</span>
+                  <span>קל</span>
                 </button>
                 <button class="rate-btn" data-tone="medium" data-rating="medium">
-                  <span class="rk">Half-knew</span>
-                  <span>Medium</span>
+                  <span class="rk">ידעתי חלקית</span>
+                  <span>בינוני</span>
                 </button>
                 <button class="rate-btn" data-tone="hard" data-rating="hard">
-                  <span class="rk">New to me</span>
-                  <span>Hard</span>
+                  <span class="rk">חדש לי</span>
+                  <span>קשה</span>
                 </button>
               </div>
               `
                 : `
               <div class="reveal-prompt">
-                <p>Tap to reveal the definition</p>
-                <button class="reveal-btn" id="revealBtn">Reveal</button>
+                <p>הקישו לחשיפת ההגדרה</p>
+                <button class="reveal-btn" id="revealBtn">חשוף</button>
               </div>
               `
             }
@@ -104,8 +111,8 @@ function draw(root) {
         </div>
 
         <div class="card-footer">
-          <a href="#/fork">&larr; Session menu</a>
-          <a href="#/gap">View gap report &rarr;</a>
+          <a href="#/fork">&rarr; תפריט המפגש</a>
+          <a href="#/gap">דו״ח פערים &larr;</a>
         </div>
       </div>
     </div>

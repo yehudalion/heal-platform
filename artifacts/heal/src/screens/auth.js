@@ -9,28 +9,28 @@ export function renderAuth(root) {
     <div class="auth fade-in">
       <div class="auth-inner">
         <div class="auth-mark">HEAL</div>
-        <div class="auth-tag">Vocabulary &middot; Daily Practice</div>
+        <div class="auth-tag">אוצר מילים &middot; תרגול יומי</div>
 
-        <h1 class="auth-title">Sign in to begin your study</h1>
+        <h1 class="auth-title">התחברו כדי להתחיל ללמוד</h1>
 
         <div class="auth-stack">
-          <button class="btn" id="googleBtn">${googleIcon}Continue with Google</button>
+          <button class="btn" id="googleBtn">${googleIcon}המשך עם Google</button>
 
-          <div class="auth-divider">or with email</div>
+          <div class="auth-divider">או באמצעות דוא״ל</div>
 
           <form class="email-row" id="emailForm">
-            <input type="email" id="emailInput" placeholder="you@university.edu" required autocomplete="email" />
-            <button type="submit">${mailIcon}Send link</button>
+            <input type="email" id="emailInput" placeholder="הזינו כתובת דוא״ל" required autocomplete="email" />
+            <button type="submit">${mailIcon}שלח קישור</button>
           </form>
 
-          <div class="auth-divider">or</div>
+          <div class="auth-divider">או</div>
 
-          <button class="btn-ghost btn" id="guestBtn">Continue as Guest</button>
+          <button class="btn-ghost btn" id="guestBtn">המשך כאורח</button>
         </div>
 
         <div id="notice" class="notice"></div>
 
-        <div class="foot-note">A focused study tool. No ads. No noise.</div>
+        <div class="foot-note">כלי לימוד ממוקד. ללא פרסומות. ללא רעש.</div>
       </div>
     </div>
   `;
@@ -42,15 +42,15 @@ export function renderAuth(root) {
   };
 
   if (!isSupabaseConfigured) {
-    setMsg('Supabase is not configured — guest mode still works.', true);
+    setMsg('Supabase לא מוגדר — מצב אורח עדיין פועל.', true);
   }
 
   root.querySelector('#googleBtn').addEventListener('click', async () => {
     if (!supabase) {
-      setMsg('Supabase is not configured.', true);
+      setMsg('Supabase לא מוגדר.', true);
       return;
     }
-    setMsg('Redirecting to Google…');
+    setMsg('מעביר ל-Google…');
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: window.location.origin + window.location.pathname },
@@ -61,12 +61,12 @@ export function renderAuth(root) {
   root.querySelector('#emailForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!supabase) {
-      setMsg('Supabase is not configured.', true);
+      setMsg('Supabase לא מוגדר.', true);
       return;
     }
     const email = root.querySelector('#emailInput').value.trim();
     if (!email) return;
-    setMsg('Sending magic link…');
+    setMsg('שולח קישור התחברות…');
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: window.location.origin + window.location.pathname },
@@ -74,7 +74,7 @@ export function renderAuth(root) {
     if (error) {
       setMsg(error.message, true);
     } else {
-      setMsg('Check your inbox — the link will sign you in.');
+      setMsg('בדקו את תיבת הדוא״ל — הקישור יחבר אתכם.');
     }
   });
 

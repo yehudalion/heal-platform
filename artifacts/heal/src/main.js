@@ -48,7 +48,7 @@ if (!isSupabaseConfigured) {
   const warn = document.createElement('div');
   warn.className = 'config-warn';
   warn.textContent =
-    'Supabase credentials missing — sign-in is disabled. Use "Continue as Guest" to try the app.';
+    'פרטי Supabase חסרים — ההתחברות מושבתת. השתמשו ב"המשך כאורח" כדי לנסות את האפליקציה.';
   document.body.appendChild(warn);
 }
 
