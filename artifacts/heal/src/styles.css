@@ -455,13 +455,6 @@ a {
   color: var(--muted);
 }
 
-.card-phon {
-  font-family: var(--serif);
-  font-size: 16px;
-  color: var(--muted);
-  margin-bottom: 32px;
-}
-
 .audio-btn {
   display: inline-flex;
   align-items: center;
@@ -491,6 +484,13 @@ a {
 .audio-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.audio-btn.small {
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 11px;
+  padding: 6px 12px;
 }
 
 .reveal-zone {
@@ -531,123 +531,117 @@ a {
   background: var(--paper-2);
 }
 
-.section-label {
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--muted-2);
-  margin-bottom: 8px;
-}
-
-.def-block {
-  text-align: right;
-}
-
-.def-block .section-label {
-  text-align: right;
-}
-
 .definition {
   font-family: var(--serif);
   font-size: 32px;
   line-height: 1.35;
   font-weight: 500;
   color: var(--paper);
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   direction: rtl;
   text-align: right;
 }
 
-.more-meanings-btn {
-  display: inline-block;
-  padding: 8px 14px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.04);
+@media (max-width: 560px) {
+  .definition {
+    font-size: 24px;
+  }
+}
+
+/* ---------- Expand sections ---------- */
+
+.expand-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.expand-item {
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  margin-bottom: 22px;
-  transition: all 140ms ease;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
-.more-meanings-btn:hover {
-  color: var(--paper);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--rule-strong);
-}
-
-.extra-meanings {
-  font-family: var(--serif);
-  font-size: 22px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 28px;
-  padding-inline-start: 14px;
-  border-inline-start: 1px solid var(--rule);
-  direction: rtl;
-  text-align: right;
-}
-
-.mnemonic-btn {
-  display: inline-flex;
+.expand-btn {
+  width: 100%;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  justify-content: space-between;
+  padding: 14px 18px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   color: var(--muted);
-  background: rgba(232, 201, 139, 0.06);
-  border: 1px solid rgba(232, 201, 139, 0.25);
-  border-radius: 999px;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  transition: all 140ms ease;
-}
-
-.mnemonic-btn .bulb {
-  font-size: 14px;
-  line-height: 1;
-}
-
-.mnemonic-btn:hover,
-.mnemonic-btn.active {
-  color: var(--accent);
-  background: rgba(232, 201, 139, 0.1);
-  border-color: var(--accent);
-}
-
-.mnemonic-text {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.6;
-  color: rgba(232, 201, 139, 0.92);
-  background: rgba(232, 201, 139, 0.05);
-  padding: 16px 18px;
-  border-radius: 4px;
-  border-inline-start: 2px solid var(--accent);
-  margin-bottom: 28px;
-  direction: rtl;
   text-align: right;
+  direction: rtl;
+  transition: all 140ms ease;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.sentence {
+.expand-btn:hover {
+  color: var(--paper);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.expand-btn.open {
+  color: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.expand-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.expand-content {
+  padding: 16px 18px;
   font-family: var(--serif);
-  font-style: italic;
   font-size: 17px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.86);
-  padding-inline-start: 18px;
-  border-inline-start: 1px solid var(--rule-strong);
-  margin-bottom: 36px;
+  background: rgba(255, 255, 255, 0.01);
 }
+
+.expand-content[dir="rtl"] {
+  text-align: right;
+}
+
+.expand-content[dir="ltr"] {
+  text-align: left;
+  font-style: italic;
+}
+
+/* ---------- Swap mnemonic button ---------- */
+
+.swap-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 14px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(232, 201, 139, 0.3);
+  border-radius: 999px;
+  transition: all 140ms ease;
+}
+
+.swap-btn:hover {
+  background: rgba(232, 201, 139, 0.08);
+  border-color: var(--accent);
+}
+
+/* ---------- Rating bar ---------- */
 
 .rate-bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
   margin-top: auto;
+  padding-top: 24px;
 }
 
 .rate-btn {
