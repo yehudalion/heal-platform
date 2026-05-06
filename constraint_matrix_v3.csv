@@ -1,0 +1,171 @@
+topic,difficulty,green_types,red_type_d1,red_type_d2,red_type_d3
+The collapse of the Western Roman Empire and its long-term impact on European political fragmentation,3,"['G2', 'G3']",R2,R7,R4
+"How the Silk Road enabled the exchange of religions, technologies, and artistic traditions between civilizations",4,"['G1', 'G4', 'G5']",R5,R3,R6
+The role of the Black Death in reshaping European social hierarchies and the bargaining power of peasant labor,4,"['G2', 'G4']",R2,R7,R1
+The economic foundations of the Atlantic slave trade and its generational consequences for African societies,4,"['G1', 'G5']",R6,R4,R1
+How the Ottoman Empire maintained administrative cohesion across its ethnically and religiously diverse territories,4,"['G3', 'G4']",R3,R5,R4
+The causes and immediate consequences of the French Revolution's dismantling of aristocratic governance,5,"['G2', 'G3']",R6,R2,R5
+How railroad expansion reshaped settlement geography and commercial activity across 19th-century North America,5,"['G1', 'G5']",R7,R1,R3
+The role of wartime propaganda in mobilizing civilian populations and shaping public opinion during World War I,5,"['G4', 'G5']",R4,R1,R5
+How colonial education policies eroded indigenous languages and suppressed traditional knowledge transmission,4,"['G1', 'G3']",R3,R2,R6
+The economic mismanagement and institutional failures that deepened the severity of the Great Depression,3,"['G2', 'G4']",R7,R6,R3
+How the Marshall Plan restructured postwar European economies and consolidated Western geopolitical alignments,3,"['G2', 'G3']",R7,R1,R4
+The causes of Japan's Meiji Restoration and the strategic decisions behind its rapid industrialization,5,"['G1', 'G5']",R2,R5,R3
+How the Scramble for Africa produced artificial borders that permanently destabilized the continent's political order,4,"['G3', 'G5']",R4,R6,R7
+"The role of merchant guilds in regulating trade, setting standards, and shaping urban economies in medieval Europe",4,"['G2', 'G4']",R2,R1,R5
+How Mongol conquest routes accelerated the spread of plague and disrupted established Eurasian trade networks,3,"['G1', 'G3']",R1,R7,R6
+The influence of Enlightenment philosophy on democratic revolutionary movements in the 18th and 19th centuries,3,"['G1', 'G4']",R3,R4,R2
+"How the Columbian Exchange transformed agricultural systems, diets, and disease patterns on multiple continents",3,"['G2', 'G5']",R5,R2,R6
+Why the invention of the printing press accelerated Protestant Reformation movements and undermined Church authority,5,"['G4', 'G5']",R3,R7,R1
+How sophisticated water management and irrigation systems enabled the rise of Mesopotamian urban civilizations,4,"['G1', 'G3']",R4,R5,R7
+The role of advances in maritime navigation in enabling and sustaining European colonial expansion,4,"['G2', 'G3']",R1,R4,R2
+How excessive taxation in early modern states generated popular resentment and contributed to political instability,4,"['G4', 'G5']",R5,R3,R6
+The demographic and economic devastation wrought by the Thirty Years' War across Central European populations,4,"['G1', 'G2']",R4,R5,R3
+How the formal abolition of the trans-Atlantic slave trade reshaped West African coastal economies,3,"['G2', 'G5']",R2,R6,R7
+The contribution of female textile workers to industrial output and early labor organizing in 19th-century England,4,"['G3', 'G4']",R6,R1,R3
+How the construction of the Suez Canal redefined global shipping routes and redistributed geopolitical leverage,4,"['G1', 'G2']",R2,R4,R5
+How social capital theory explains persistent disparities in resource access between neighboring communities,3,"['G1', 'G5']",R1,R7,R6
+The role of peer pressure in adolescent risk-taking behavior and the negotiation of emerging personal identity,3,"['G3', 'G4']",R2,R3,R4
+How rapid urbanization disrupts traditional family structures and strains intergenerational support systems,4,"['G1', 'G5']",R1,R5,R7
+The sociology of institutional trust and the conditions under which public confidence in authorities erodes,5,"['G2', 'G3']",R2,R7,R3
+How mass media coverage of crime inflates public fear and distorts collective perceptions of actual risk levels,4,"['G4', 'G5']",R5,R1,R6
+The relationship between income inequality and the effective rate of intergenerational social mobility,3,"['G1', 'G2']",R6,R1,R4
+"How religious institutions foster civic participation, social solidarity, and community cohesion in urban settings",4,"['G3', 'G4']",R2,R3,R7
+The social and psychological consequences of prolonged unemployment on community identity and collective self-worth,4,"['G3', 'G5']",R4,R5,R2
+How digital social networks have transformed the organizational dynamics and reach of political movements,4,"['G1', 'G4']",R4,R5,R1
+The role of status symbols and conspicuous consumption in signaling and reinforcing social hierarchies,4,"['G2', 'G4']",R3,R7,R6
+How residential segregation in cities simultaneously reflects and reproduces ethnic and economic stratification,4,"['G2', 'G5']",R4,R2,R5
+The sociology of public scandal and the conditions under which damaged reputations can be rehabilitated over time,5,"['G1', 'G3']",R3,R7,R6
+How voluntary organizations and civic associations compensate for declining state provision of social services,4,"['G2', 'G3']",R6,R2,R1
+The impact of workplace automation on working-class occupational identity and the solidarity of local communities,3,"['G1', 'G4']",R5,R1,R4
+How gated residential communities affect civic engagement and social cohesion in their surrounding neighborhoods,5,"['G3', 'G5']",R3,R7,R5
+"The role of sports fandom in constructing shared group identities at local, regional, and national scales",5,"['G4', 'G5']",R4,R1,R6
+How the rise of co-working spaces is transforming professional networking norms and the culture of independent work,3,"['G1', 'G2']",R7,R2,R3
+The social dynamics of organizational whistleblowing and the professional costs borne by those who expose misconduct,5,"['G2', 'G5']",R3,R5,R1
+"How internal migration reshapes cultural norms, linguistic practices, and community character in receiving regions",3,"['G1', 'G4']",R2,R7,R4
+The role of neighborhood schools in either reinforcing or bridging the socioeconomic divides of urban communities,5,"['G3', 'G4']",R6,R2,R4
+How the proliferation of public surveillance technology alters individual behavior and erodes trust in civic institutions,5,"['G2', 'G5']",R6,R1,R5
+The sociology of designed waiting environments and what they communicate about power and service relationships,4,"['G1', 'G3']",R4,R7,R3
+How divergent generational expectations about work create friction and reduce cohesion in modern organizations,4,"['G2', 'G3']",R7,R1,R6
+The contrasting roles of shame and guilt across cultural contexts as mechanisms of social regulation and control,4,"['G4', 'G5']",R5,R2,R3
+How charitable giving patterns are shaped by donors' perceived social proximity to the intended beneficiaries,4,"['G1', 'G3']",R4,R3,R2
+How mutualistic relationships between insect pollinators and flowering plants sustain and drive ecosystem biodiversity,4,"['G2', 'G4']",R6,R7,R1
+The role of horizontal gene transfer in enabling the rapid spread of antibiotic resistance among bacterial populations,5,"['G1', 'G5']",R5,R6,R2
+How the composition of the human gut microbiome influences immune system calibration and affects mental health outcomes,4,"['G3', 'G5']",R4,R5,R7
+The physiological mechanisms underlying mammalian hibernation and the potential medical research implications of metabolic suppression,4,"['G2', 'G4']",R3,R7,R1
+How invasive species disrupt established food webs and steadily reduce native biodiversity in ecologically isolated environments,4,"['G1', 'G3']",R3,R1,R2
+The evolutionary trade-offs between sexual and asexual reproduction under varying environmental conditions,5,"['G1', 'G5']",R4,R6,R5
+How bioluminescence evolved independently across multiple marine lineages and the ecological functions it serves in deep-sea environments,3,"['G2', 'G4']",R4,R5,R6
+The role of keystone species in stabilizing and maintaining the structural complexity of ecological communities,5,"['G1', 'G3']",R3,R2,R7
+How forest clearance disrupts regional water cycles and reduces rainfall reliability in tropical watershed areas,4,"['G4', 'G5']",R7,R1,R2
+The mechanisms by which RNA viruses mutate rapidly and how high mutation rates complicate vaccine development and efficacy,4,"['G2', 'G4']",R1,R6,R3
+How hydrothermal vent communities sustain complex ecosystems based entirely on chemosynthesis rather than sunlight,4,"['G1', 'G5']",R2,R4,R5
+The biological basis for altruistic behavior in eusocial animals and competing evolutionary explanations for its persistence,5,"['G2', 'G3']",R3,R5,R1
+Why migratory corridors are essential for species movement and population viability in fragmented landscapes,3,"['G1', 'G2']",R4,R6,R7
+The chemical basis of pheromone communication in social insect colonies and its role in coordinating collective behavior,4,"['G3', 'G5']",R6,R3,R5
+How coastal wetlands function as natural water filtration systems and why their loss increases downstream flood risk,4,"['G2', 'G4']",R4,R2,R1
+The genetic mechanisms of local adaptation and the challenge rapid environmental change poses to natural selection timelines,4,"['G4', 'G5']",R7,R6,R2
+How urban wildlife populations have adapted their foraging behavior and circadian rhythms to city environments,3,"['G1', 'G3']",R7,R1,R3
+The symbiotic relationship between mycorrhizal fungi and tree root systems and its significance for forest nutrient dynamics,4,"['G2', 'G3']",R5,R2,R4
+How ocean acidification reduces the capacity of calcifying marine organisms to build shells and sustain population growth,5,"['G4', 'G5']",R4,R5,R6
+The relationship between species richness and the long-term productivity and stability of agricultural ecosystems,4,"['G1', 'G4']",R7,R3,R1
+How neighborhood walkability scores correlate with residents' physical health outcomes and daily social interaction,5,"['G1', 'G3']",R5,R6,R1
+The role of green roof infrastructure in mitigating urban heat island effects and managing stormwater in dense cities,3,"['G2', 'G5']",R2,R4,R7
+"How hospital spatial design influences patient recovery trajectories, infection rates, and clinical staff performance",4,"['G4', 'G5']",R1,R3,R5
+"The relationship between housing density, land use mix, and the cost-effective provision of public transportation",5,"['G2', 'G3']",R6,R3,R2
+How Brutalist architectural aesthetics embodied the egalitarian social ideals of postwar welfare state governance,3,"['G1', 'G3']",R7,R4,R2
+The role of informal settlements in absorbing rural-to-urban migrants when formal housing markets are inaccessible,5,"['G2', 'G4']",R1,R3,R4
+How heritage conservation legislation balances the preservation of historic built fabric against urban development pressure,5,"['G1', 'G5']",R7,R5,R6
+The psychological benefits of natural daylighting and biophilic design elements in contemporary workplace environments,5,"['G1', 'G5']",R6,R2,R1
+How transit-oriented development concentrates economic activity and reshapes neighborhood character near transport hubs,4,"['G2', 'G4']",R7,R5,R3
+The principles and challenges of adaptive reuse in converting decommissioned industrial buildings into residential or cultural spaces,5,"['G2', 'G3']",R7,R4,R6
+"How grid versus organic street layouts affect pedestrian mobility patterns, traffic flow, and neighborhood social life",4,"['G1', 'G3']",R2,R5,R3
+The design principles behind genuinely inclusive public spaces that accommodate users with diverse mobility limitations,3,"['G4', 'G5']",R4,R3,R1
+How the location and quality of parks and play spaces affects developmental outcomes for children in dense urban areas,4,"['G1', 'G5']",R2,R4,R6
+The role of waterfront redevelopment projects in transforming underused industrial land while displacing existing communities,3,"['G2', 'G4']",R5,R1,R7
+How urban noise mapping informs building envelope design and the spatial logic of residential zoning decisions,5,"['G3', 'G4']",R7,R5,R2
+"The relationship between maximum height regulations, land supply constraints, and urban housing affordability",4,"['G1', 'G3']",R3,R4,R6
+How climate-adaptive architecture integrates passive cooling strategies and natural ventilation to reduce energy demand,3,"['G2', 'G5']",R1,R7,R2
+The design of branch libraries as anchoring civic institutions in neighborhoods experiencing economic disinvestment,4,"['G1', 'G4']",R1,R4,R5
+"How modular prefabricated construction techniques affect the quality, speed, and cost of residential delivery",5,"['G2', 'G3']",R7,R3,R6
+The spatial logic of historic market towns as regional nodes organizing the agricultural and commercial hinterland,4,"['G3', 'G5']",R1,R4,R5
+How central bank interest rate decisions transmit through credit markets to affect consumer borrowing and housing prices,3,"['G1', 'G5']",R2,R6,R3
+"The effects of monopolistic market concentration on consumer welfare, product quality, and the pace of innovation",4,"['G2', 'G4']",R3,R2,R6
+How remittances sent by migrant workers abroad shape the consumption patterns and investment capacity of origin economies,5,"['G1', 'G3']",R7,R1,R5
+The role of secure and enforceable property rights as a prerequisite for long-term productive investment and development,4,"['G2', 'G5']",R4,R3,R1
+How minimum wage increases affect employment and hours in labor markets with different degrees of demand elasticity,4,"['G1', 'G4']",R2,R6,R4
+The economic logic of carbon pricing and how market-based instruments alter industrial energy sourcing decisions,3,"['G4', 'G5']",R7,R3,R5
+How persistent trade imbalances between countries reflect underlying differences in national savings and investment rates,4,"['G2', 'G3']",R6,R2,R1
+The role of microfinance institutions in extending productive credit to small entrepreneurs excluded from formal banking,4,"['G3', 'G5']",R4,R7,R5
+How speculative asset bubbles form in markets with asymmetric information and the conditions that trigger their collapse,4,"['G1', 'G4']",R6,R4,R7
+The economic vulnerability of small island economies dependent on tourism revenues to external demand shocks,5,"['G1', 'G2']",R2,R1,R3
+How intellectual property protections create innovation incentives while restricting knowledge access and diffusion,4,"['G2', 'G5']",R5,R3,R7
+The role of sovereign wealth funds in insulating national economies from commodity price volatility and revenue cycles,3,"['G3', 'G4']",R2,R6,R5
+How labor union density levels affect real wage growth and income distribution across industrial sectors over time,4,"['G1', 'G4']",R4,R3,R1
+The fiscal and care-system pressures generated by demographic aging in high-income economies with shrinking workforces,4,"['G3', 'G5']",R2,R5,R6
+How foreign direct investment transfers management practices and technological capabilities to host country firms,4,"['G2', 'G4']",R1,R7,R4
+The long-run impact of major natural disasters on local labor markets and regional development trajectories,4,"['G1', 'G3']",R5,R7,R3
+How tax havens facilitate capital flight and reduce the domestic tax base of higher-tax economies globally,3,"['G2', 'G5']",R4,R6,R2
+The unintended supply-side consequences of price ceilings and floors when applied to agricultural commodity markets,4,"['G4', 'G5']",R2,R1,R7
+How auction mechanism design affects the efficiency and revenue outcomes of spectrum and public contract allocation,3,"['G2', 'G3']",R4,R6,R1
+The economic geography of industry clusters and why competitive advantages concentrate in particular regional locations,5,"['G1', 'G3']",R5,R3,R7
+How cognitive dissonance theory accounts for the post-hoc rationalization strategies people use after irreversible decisions,4,"['G1', 'G5']",R1,R3,R4
+The long-term psychological effects of solitary confinement on social functioning and mental health among prison inmates,5,"['G2', 'G4']",R5,R2,R6
+How early attachment relationships with caregivers shape the emotional regulation patterns of adult romantic partnerships,4,"['G3', 'G4']",R1,R2,R5
+The role of self-regulatory failure and impulsivity in procrastination behavior among students facing complex academic tasks,4,"['G1', 'G2']",R3,R6,R4
+How emotional contagion spreads affective states through interpersonal interaction in both small groups and large organizations,4,"['G2', 'G5']",R5,R7,R6
+The role of personal narrative construction in shaping autobiographical memory and maintaining a coherent sense of identity,4,"['G3', 'G4']",R2,R7,R1
+How stereotype threat impairs the academic performance of members of groups targeted by negative intellectual stereotypes,4,"['G1', 'G5']",R4,R3,R7
+The cumulative cognitive and emotional costs of chronic occupational stress on executive function and decision-making quality,4,"['G3', 'G5']",R2,R5,R4
+Why the bystander effect consistently reduces individual willingness to intervene in public emergencies as group size grows,4,"['G2', 'G4']",R1,R3,R6
+The role of behavioral incentive design in achieving sustained changes in health-related behaviors such as diet and exercise,3,"['G1', 'G4']",R4,R2,R3
+"How confirmation bias leads people to selectively seek, weight, and recall information that validates existing beliefs",5,"['G1', 'G5']",R7,R5,R6
+The psychological mechanisms underlying brand loyalty and the emotional bonds consumers form with commercial products,3,"['G2', 'G3']",R6,R7,R1
+"How acute and chronic sleep deprivation impairs working memory, emotional regulation, and consequential decision-making",4,"['G1', 'G5']",R1,R4,R3
+"The role of upward social comparison in driving consumer aspiration, dissatisfaction, and status-oriented spending",4,"['G3', 'G4']",R5,R2,R4
+How learned helplessness develops through repeated exposure to uncontrollable outcomes and why it generalizes across contexts,4,"['G2', 'G4']",R6,R5,R7
+The social bonding functions of shared humor and how laughter facilitates group cohesion and trust formation,3,"['G1', 'G3']",R3,R1,R2
+"How specific architectural and environmental cues in workspaces influence users' concentration, creativity, and mood states",4,"['G2', 'G5']",R6,R1,R3
+The role of teacher expectation effects and the self-fulfilling prophecy in shaping divergent student achievement outcomes,4,"['G2', 'G4']",R5,R4,R7
+How nostalgia functions as a psychological resource for restoring meaning and self-continuity under existential threat,3,"['G1', 'G3']",R2,R5,R6
+The cognitive switching costs and emotional fatigue associated with constant digital task-interruption in modern work environments,4,"['G1', 'G5']",R7,R4,R1
+How gift exchange economies in non-market societies create binding social obligations that reinforce community reciprocity,4,"['G4', 'G5']",R3,R2,R1
+The role of culturally enforced taboo in regulating behavior and maintaining clearly defined social boundaries,4,"['G2', 'G3']",R5,R4,R7
+How material culture objects reflect and actively reinforce social stratification in both ancient and contemporary societies,3,"['G1', 'G5']",R2,R3,R6
+The function of rites of passage in publicly marking developmental transitions and redefining an individual's community role,4,"['G3', 'G4']",R2,R7,R4
+How colonial legal systems dismantled indigenous frameworks of collective land stewardship and common property rights,5,"['G1', 'G2']",R6,R1,R5
+The role of language maintenance and revitalization efforts in preserving cultural identity within diaspora communities,5,"['G2', 'G4']",R7,R2,R3
+How sacred landscapes and ancestral sites function as focal points for collective memory and territorial belonging,4,"['G3', 'G5']",R3,R4,R1
+The anthropology of money and how different cultures attach contrasting moral meanings to wealth accumulation and exchange,5,"['G1', 'G5']",R5,R7,R6
+"How sustained cross-cultural contact historically produced hybrid artistic, culinary, and material traditions",3,"['G2', 'G4']",R4,R1,R2
+"The integrative function of traditional healing rituals that simultaneously address physiological, psychological, and social dimensions of illness",5,"['G2', 'G3']",R5,R3,R6
+How demographic transformation through sustained migration reshapes local cultural norms and reconfigures public life,4,"['G3', 'G4']",R1,R5,R3
+"The political role of humor, satire, and trickster narratives in challenging hierarchies of power in oral cultures",5,"['G1', 'G5']",R7,R6,R2
+How different societies construct and negotiate the conceptual boundary between human culture and the natural world,3,"['G3', 'G4']",R4,R1,R5
+The role of apprenticeship and embodied knowledge transmission in sustaining pre-industrial craft traditions across generations,3,"['G1', 'G2']",R2,R6,R3
+How globalization simultaneously homogenizes consumer culture and generates new localized forms of cultural resistance and assertion,4,"['G4', 'G5']",R6,R7,R4
+The philosophical tension between protecting individual rights and maximizing collective welfare in public health emergencies,4,"['G2', 'G3']",R1,R4,R5
+How utilitarian moral frameworks justify policies that impose costs on minorities to maximize aggregate social benefits,4,"['G1', 'G5']",R3,R7,R2
+"The competing philosophical arguments for retributive, rehabilitative, and deterrence-based approaches to criminal punishment",4,"['G1', 'G4']",R1,R4,R3
+How structural inequality and determinism complicate moral attributions of individual responsibility for life outcomes,5,"['G2', 'G5']",R5,R2,R7
+The ethical obligations that arise when employees discover organizational wrongdoing that conflicts with loyalty duties,4,"['G3', 'G4']",R6,R4,R3
+How trained moral intuitions and reasoned ethical principles interact—and sometimes conflict—in real-world decision-making,5,"['G1', 'G3']",R2,R1,R7
+"The philosophical implications of artificial general intelligence for established concepts of consciousness, agency, and personhood",5,"['G2', 'G5']",R6,R3,R5
+"How egalitarian, libertarian, and utilitarian frameworks reach incompatible conclusions about just distribution of social resources",5,"['G3', 'G4']",R4,R5,R1
+"The ethical challenges posed by germline genetic enhancement for human dignity, equal opportunity, and future autonomy",4,"['G1', 'G5']",R7,R2,R6
+How just war theory's proportionality and discrimination principles apply to asymmetric conflicts involving non-state actors,4,"['G2', 'G3']",R4,R6,R1
+How proportional versus majoritarian electoral systems produce systematically different political representation outcomes,3,"['G2', 'G4']",R5,R3,R7
+The role of civil society and independent media in holding governments accountable within fragile or backsliding democracies,3,"['G1', 'G5']",R4,R2,R7
+How federal constitutional arrangements distribute authority between central and regional governments in diverse polities,3,"['G1', 'G3']",R1,R5,R6
+The structural conditions that make authoritarian regimes most vulnerable to elite defection and popular mobilization,4,"['G2', 'G4']",R2,R3,R5
+How binding international treaty obligations constrain domestic policy choices and limit expressions of national sovereignty,5,"['G2', 'G5']",R1,R2,R3
+The mechanisms through which partisan gerrymandering of electoral districts distorts representation and entrenches incumbents,3,"['G4', 'G5']",R6,R4,R7
+How international economic sanctions affect the strategic calculations of targeted regimes versus the welfare of civilian populations,5,"['G1', 'G3']",R6,R7,R1
+What distinguishes peace agreements that achieve durable stability from those that collapse into renewed armed conflict,3,"['G2', 'G4']",R4,R3,R2
+How populist political movements exploit anti-expertise sentiment to challenge technocratic governance and policy institutions,3,"['G1', 'G3']",R5,R6,R7
+The role of constitutional judicial review in protecting minority rights against the tyranny of democratic majoritarian processes,4,"['G2', 'G5']",R1,R2,R3
+How industrial monoculture agriculture increases ecosystem vulnerability to pest outbreaks and pathogen-driven crop failure,4,"['G1', 'G5']",R5,R6,R4
+"The economic, social, and ecological trade-offs involved in an energy system transition from coal to renewable sources",4,"['G3', 'G4']",R4,R5,R2
+How well-enforced marine protected areas support the recovery of overexploited fish populations and coastal livelihoods,3,"['G1', 'G3']",R3,R1,R7
+The relationship between urban green infrastructure investment and both ecological connectivity and human population well-being,3,"['G2', 'G4']",R3,R6,R4
+How permafrost degradation in Arctic and sub-Arctic regions accelerates climate feedback loops through methane and CO2 release,5,"['G3', 'G5']",R7,R1,R2
