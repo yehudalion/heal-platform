@@ -80,9 +80,7 @@ export async function getWords() {
   if (!supabase) return [];
   const { data, error } = await supabase
     .from("words")
-    .select(
-      "id, headword, definition_he, audio_word_url, audio_sentence_url, surface_1, tier, mnemonic, mnemonic_2, mnemonic_3",
-    )
+    .select("id, headword, definition, pos, mnemonic")
     .order("headword", { ascending: true });
   if (error) return [];
   return data || [];
