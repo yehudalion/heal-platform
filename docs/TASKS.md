@@ -73,7 +73,8 @@
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
 | T040 | P0 | M | **`rephrase.data.js`** — פונקציות: `getRephraseQuestions(limit, filters)`, `saveAttempt(userId, questionId, data)` | `src/data/rephrase.data.js` |
-| T041 | P1 | M | **תייג `difficulty_level`** על 199 שאלות — Calibration Batch Method. שאלות הנוכחיות קשות מדי לפי בדיקות Lion. צור גם שאלות קלות יותר. | DB `restatement_questions` |
+| T041a | P0 | L | **Calibration Batch (רמות 1+2)** — יצירת 200 שאלות מקוריות לרמות הקלות. חוסם T043. יעד: 100 שאלות לרמה 1, 100 שאלות לרמה 2. | DB `restatement_questions` |
+| T041b | P1 | L | **Library Balance (רמות 3+5)** — יצירת 118 שאלות מקוריות לאיזון הספרייה. לא חוסם MVP. יעד: 56 שאלות לרמה 3, 62 שאלות לרמה 5. | DB `restatement_questions` |
 | T042 | P1 | M | **`rephrase-learn.js`** — הסבר על 5 המפתחות עם דוגמאות. מוצג לפני תרגול ראשון. | `src/screens/rephrase-learn.js` |
 | T043 | P1 | L | **`rephrase-practice.js`** — Multiple choice + פידבק "למה לשים לב" לפי key_type של התשובה השגויה. | `src/screens/rephrase-practice.js` |
 | T044 | P1 | M | **`rephrase-analyze.js`** — סיכום session + "מפתח חלש" (המפתח עם אחוז ההצלחה הנמוך ביותר). | `src/screens/rephrase-analyze.js` |

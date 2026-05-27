@@ -119,7 +119,7 @@
 | anchors_json | ✅ קיים |
 | blackout_words_json | ✅ קיים |
 | trap_type | ✅ קיים |
-| difficulty_level | ❌ ריק (לא תויג — T041 Calibration Batch) |
+| difficulty_level | ❌ ריק (לא תויג — T041a Calibration Batch) |
 | UI / Practice screen | ❌ לא קיים |
 | Analyze screen | ❌ לא קיים |
 | 520 שאלות מ-NITE PDFs | 🚫 אסור — לא נטענות ל-DB (§2.19) |
@@ -138,7 +138,7 @@
 | האם קבצי אודיו קיימים בסטורג'? | ✅ אומת — קבצים קיימים ונגישים |
 | Google OAuth ב-local — עובד? | ✅ אומת — עובד, trigger יוצר user_profiles |
 | 191 מילים ללא mnemonic — מתי ימולא? | 📋 ב-TASKS.md |
-| difficulty_level ל-199 שאלות — מי ממלא? | 📋 ב-TASKS.md (T041 Calibration Batch) |
+| difficulty_level ל-199 שאלות — מי ממלא? | 📋 ב-TASKS.md (T041a Calibration Batch) |
 
 ## החלטות תוכן (2026-05-27)
 | החלטה | סטטוס |
@@ -146,5 +146,7 @@
 | §2.19 כלל רישוי תוכן נוסף ל-ARCHITECTURE.md | ✅ |
 | 520 שאלות מ-NITE PDFs — לא נטענות ל-DB | ✅ החלטה סופית |
 | T040 ימשיך מול 199 שאלות סינתטיות קיימות | ✅ |
-| T041 Calibration Batch — 30 שאלות מקוריות חדשות לרמות 1+2 | 📋 עתידי |
+| T041a — 200 שאלות מקוריות לרמות 1+2 (חוסם Practice) | 📋 עתידי |
+| T041b — 118 שאלות מקוריות לרמות 3+5 (איזון ספרייה לפני לאנץ') | 📋 עתידי |
+| יעד ספריית שאלות סופית: 517 שאלות (199 קיים + 318 חדש) | 📋 עתידי |
 | CONTENT_SOURCES.md נוצר | ✅ |
