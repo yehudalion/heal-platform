@@ -1,0 +1,371 @@
+# HighScore — Architecture & Project Rules
+**Version:** 1.2  
+**Last Updated:** 2026-05-24
+
+---
+
+## TL;DR — Absolute Rules (קרא תמיד)
+
+> **For AI assistants:** Read this TL;DR section in every session.  
+> Read the full document only when: (1) building a new feature, (2) modifying database schema, (3) explicitly asked to "Review Architecture". For small UI tweaks or bug fixes — TL;DR is enough.
+
+### Hard Rules (no opt-out):
+1. **Auth:** Every FK to a user → `auth.users(id)`, never `user_profiles`.
+2. **Persistence:** User data → Supabase. localStorage only for UI state.
+3. **Two-AI Workflow:** No AI-generated content reaches users without calibration.
+4. **No ads, ever, in-app.**
+5. **No wellbeing-harming mechanics** (no hearts, no punishment for mistakes).
+6. **DB Integrity in SRS:** Only the FIRST rating a word receives in a session may be written to the database. Subsequent intra-session ratings are UI-only. Violating this poisons the SRS algorithm permanently for that user.
+
+### Strong Rules (opt-out requires explicit Lion approval):
+6. **3-Layer Rule:** Every major section = Learn / Practice / Analyze.
+7. **Hebrew-First:** UI in Hebrew RTL. English only inside exercise content.
+8. **Impact Score:** `words.impact_score` is the only basis for word selection. `tier` is a label, not an algorithm input.
+9. **Extensible Simplicity:** Build simple now, schema/code must accommodate future complexity.
+10. **"What to Pay Attention To":** UI term. Backend keeps `trap_type`.
+11. **Data Layer Separation:** All DB calls in `src/data/` modules. No direct Supabase calls from screens.
+
+### Guidelines:
+12. Tone: professional, warm, never cheap.
+13. Mobile-first, desktop-supported.
+14. No placeholder content reaches users.
+
+### The Intelligent Override Clause:
+If strict adherence to a **Strong Rule** or **Guideline** would degrade UX, add unnecessary friction, or create bad code — pause and ask Lion for an explicit opt-out with reasoning. AI should be a smart advisor, not a rigid robot. **Hard Rules cannot be overridden — they protect security, integrity, and wellbeing.**
+
+---
+
+## 1. Product Identity
+
+**Name:** HighScore (used both internally and publicly)  
+**Mission:** End-to-end preparation platform for the Hilal English exam (Israel, December 2026 onward).  
+**Target audience:** Any Israeli candidate sitting for the Hilal exam — not limited to medical students.  
+**Tagline:** הפלטפורמה הראשונה והיחידה בישראל שמכינה אותך להלאל מקצה לקצה.
+
+---
+
+## 2. Rules Detail
+
+### 2.1 The Intelligent Override Clause
+AI assistants working on this codebase are expected to use judgment. If a rule would, in a specific situation:
+- Significantly degrade user experience
+- Add friction that serves no real purpose
+- Force ugly or unmaintainable code
+- Conflict with another rule
+
+…then **pause and propose an opt-out with reasoning**. Do not silently violate the rule, and do not robotically follow it. Wait for Lion's explicit approval.
+
+**Hard Rules are exempt from override.**
+
+### 2.2 The 3-Layer Rule (Strong)
+Every major content section MUST have three layers:
+
+1. **Learn (לימוד)** — Onboarding for the question type. Teaches the relevant keys explicitly — the number of keys is determined by the content of the section, not by a fixed number. Shown once before first practice + available on demand.
+2. **Practice (תרגול)** — Core activity loop.
+3. **Analyze (ניתוח אישי)** — Session summaries + cumulative pattern reports.
+
+### 2.3 The Hint Button Rule — Mastery-Based (Strong)
+The "💡 Hint" button is available by default on every question.
+
+It becomes **optional (visible only on click)** after the user demonstrates mastery of the relevant key — defined as **3 correct consecutive answers on questions where that key is the critical one**.
+
+Mastery is tracked **per key, not per section.** A user can master "מפתח הכיוון" while still receiving prominent hints for "מפתח העוצמה".
+
+If accuracy on a mastered key drops below 70% across the next 10 questions, the hint becomes prominent again.
+
+### 2.4 The Hebrew-First Rule (Strong)
+- All UI text in Hebrew (RTL).
+- English appears only inside exercise content.
+- All labels, buttons, navigation, feedback → Hebrew.
+
+### 2.5 The Authentication Rule (Hard — no override)
+Every foreign key referencing a user MUST point to `auth.users(id)`.
+
+`user_profiles` holds *content* of the user account, not *identity*.
+
+### 2.6 The "What to Pay Attention To" Rule (Strong)
+Database/code keeps `trap_type`, `trap_classification`.  
+UI uses "💡 למה לשים לב", concept "מפתחות".
+
+### 2.7 The Persistence Rule (Hard — no override)
+User-generated data → Supabase, never solely localStorage.
+
+`localStorage` allowed only for:
+- UI state (last tab, scroll position)
+- Pre-auth onboarding draft
+- Performance caches that can be regenerated
+
+### 2.8 The Impact Score Rule (Strong)
+`words.impact_score` = single source of truth for word selection.  
+`words.tier` = marketing label only.
+
+Three pedagogical levels derived from `impact_percentile`:
+- **מילות ליבה** — Top 10%
+- **מילות יתרון** — Top 11–40%
+- **מילות העשרה** — Bottom 60%
+
+### 2.9 The Wellbeing Rule (Hard — no override)
+No mechanism may punish mistakes or create artificial scarcity. Mistakes are framed as learning opportunities.
+
+### 2.10 The Two-AI Workflow — Calibration Batch Method (Hard — no override)
+1. **Generation:** AI creates a small batch (10–15 items).
+2. **Calibration Review:** Lion reviews each item, corrects, explains.
+3. **Iteration:** AI regenerates with corrections.
+4. **Calibration Pass:** When a batch reaches 100% (zero corrections) → AI cleared for autonomous bulk generation.
+5. **Random QA on Bulk:** In every large batch (50+ items), Lion samples 5–10% randomly. If 2+ items fail → return to step 1.
+6. Content guidelines captured in `CONTENT_GUIDELINES.md`, updated each cycle.
+
+### 2.11 The Data Layer Separation Rule (Strong)
+All database interactions MUST go through dedicated data modules in `src/data/`. Screens, components, and lib functions must NEVER call `supabase` directly.
+
+- `src/supabase.js` — only the client initialization and auth helpers
+- `src/data/*.data.js` — one file per domain (words, srs, profiles, rephrase, listening)
+- The user profile data file is named **`profiles.data.js`**, NOT `users.data.js` (to avoid confusion with Supabase `auth.users`)
+- Each data module exports named async functions with clear contracts
+- Errors are caught at the data layer, returned as `{ data, error }` objects
+
+This keeps the codebase testable, maintainable, and allows future migration to a different backend without rewriting all screens.
+
+### 2.12 The Extensible Simplicity Rule (Strong)
+Build simple but extensible:
+- DB schemas include columns for v2/v3 features (kept NULL in v1)
+- Functions accept optional future-feature parameters
+- UI has clear extension points (slots, props, feature flags)
+
+The opposite — "build it tight for now, refactor later" — is forbidden.
+
+### 2.13 The Content-Quality Rule (Guideline)
+No placeholder content reaches users. Hide unready features behind feature flags.
+
+"50 excellent questions" > "200 mediocre questions."
+
+### 2.14 The DB Integrity Rule — Anti-Poisoning (Hard — no override)
+When a word is re-shown within the same session (after 'Again' or 'Hard'), the student's second rating is powered by short-term working memory, NOT long-term retention. Writing this rating to the SRS database would corrupt the algorithm's understanding of the user's actual memory state.
+
+**The rule:** Only the FIRST rating a word receives in a given session is written to `srs_progress` and `srs_review_log`. All subsequent intra-session ratings on the same word affect only the local session queue and the analyze summary — never the database.
+
+This rule has no exceptions. It is enforced at the screen level (`card.js` tracks `firstRatings` per word per session).
+
+### 2.15 The Session Queue Rule — Hostage Protection (Strong)
+A student must not leave a session with words they failed to recall. When a word is rated 'Again' or 'Hard', it is re-queued within the same session (offset 2 cards for 'Again', 5 cards for 'Hard') and the student must eventually rate it 'Good' for the session to progress past it.
+
+**The cap:** Each word may be re-queued at most 2 times per session (3 total appearances). After hitting the cap, the word is removed from the queue regardless of rating, and is handed off to the SRS algorithm to schedule for tomorrow. This prevents fatigue-driven mis-ratings ('Good' clicked just to escape).
+
+### 2.16 The Audio Rule — Always Manual (Strong)
+Audio playback is never automatic. Word audio, sentence audio, and (future) lecture audio all require explicit user interaction (clicking a 🔊 button). Auto-play creates surprise, breaks focus, and is hostile to users in shared spaces.
+
+### 2.17 The Tier Invisibility Rule (Strong)
+The `words.tier` and `words.impact_score` / `words.impact_percentile` fields are never exposed to the student in the UI. They are internal-only — used by the algorithm and by marketing copy. Showing 'Tier A' or 'impact 67.2' to a learner creates cognitive load without pedagogical value.
+
+### 2.18 The Single-Source Explanation Rule (Strong)
+Pedagogical explanations of HOW a section works (cards, SRS, keys, listening format) belong exclusively in the Learn screen (`vocab-learn.js`, `rephrase-learn.js`, `listening-learn.js`) of that section.
+
+Landing pages (`/flashcards`, `/rephrasing`) must NOT duplicate these explanations. Their job is to show stats and provide the 'Start Practice' button. Explanations live in one place — the Learn screen — accessible always via the '?' button from Practice.
+
+### §2.19 רישוי תוכן — חובת מקוריות מוחלטת
+
+**כלל קשיח, ללא יוצא מן הכלל.** כל פיסת תוכן בפרויקט — כל שאלה, 
+כל מסיח, כל הסבר, כל דוגמה, כל משפט אנגלי שהתלמיד רואה — חייבת 
+להיות אחת משתי האפשרויות הבאות:
+
+1. **נוצרה על ידינו** (Lion, מודלים בהנחייתנו, חברי צוות שלנו)
+2. **מורשית במפורש** ברישיון שמתיר שימוש מסחרי ויצירת נגזרות
+
+**מקורות אסורים (רשימה לא ממצה):**
+- מבחנים פסיכומטריים של המרכז הארצי לבחינות והערכה (NITE)
+- חוברות הכנה רשמיות (אמיר, אמירם, אמיר"ם, מבחני בגרות באנגלית)
+- ספרי לימוד מסחריים ללא רישיון מפורש
+- תוכן שחולץ מ-PDFs של מבחנים מוגנים זכויות יוצרים
+- שאלות שנגרדו מאתרי הכנה (Psychometry.co.il, נושאון, וכו')
+- כל תוכן שצריך להחליט "האם זה fair use" — אם צריך להחליט, התשובה לא
+
+**חריג מותר: ניתוח דפוסים (לא תוכן):**
+- ניתוח סטטיסטי של דפוסי מסיחים במבחנים פומביים — מותר
+- ציטוט קצר (פחות מ-15 מילים) לצורך הדגמה במסמכים פנימיים — מותר
+- טקסונומיות של סוגי שאלות — מותר (מנתחות מבנה, לא תוכן)
+
+**משמעות מעשית למצב הנוכחי:**
+- 520 השאלות שחולצו מ-PDFs של NITE — אסורות לשימוש בפרודקשן
+- שאלות סינתטיות הקיימות ב-`restatement_questions` — מותרות אם נוצרו 
+  על ידינו (Lion + Claude) במסגרת הפרויקט
+- כל תוכן עתידי (Calibration Batch של T041 ואילך) חייב להיות מקורי 100%
+
+**בדיקת חובה לפני כל משימת תוכן:**
+לפני שמייצרים, מייבאים, או מתקנים תוכן בפרויקט, יש לענות על:
+1. האם אנחנו יצרנו את זה בעצמנו?
+2. האם יש לנו רישיון מפורש?
+אם התשובה לשניהם "לא" — לעצור ולשאול את Lion.
+
+---
+
+## 3. Technical Stack
+
+### 3.1 Frontend
+- Vite + Vanilla JavaScript
+- Custom hash-based router in `src/router.js` with `route(path, handler)` + `Maps(path)`
+- Each screen = function receiving `rootEl`
+
+### 3.2 Backend
+- Supabase (PostgreSQL)
+- Project: `https://opjtromnkdgehlqeaqzi.supabase.co`
+- Audio: Supabase Storage, public bucket `heal-audio`
+
+### 3.3 Authentication
+- Google OAuth (primary), Magic link email (fallback)
+
+### 3.4 RLS
+- Currently disabled in development
+- Must be enabled pre-launch (tracked in TASKS.md)
+
+---
+
+## 4. Documentation Structure
+
+The project maintains the following active documents:
+
+| File | Purpose | Read When |
+|---|---|---|
+| `ARCHITECTURE.md` | Rules, stack, structure | New feature / schema change / "Review Architecture" |
+| `STATE.md` | What works / what doesn't right now | Each session start |
+| `TASKS.md` | Active tasks by priority | Each session start |
+| `FUTURE_FEATURES.md` | Deferred features with rebuild plans | When considering deferred work |
+| `STRATEGY_NOTES.md` | Marketing, pricing, branding, business decisions | When making business decisions |
+| `CONTENT_GUIDELINES.md` | Rules for AI-generated content quality | Each content generation session |
+| `METHODOLOGY.md` | Impact score formula | When debating word selection logic |
+
+### 4.1 What Goes Where
+
+- **Technical decision** → `ARCHITECTURE.md` (Decision Log)
+- **Feature idea for future** → `FUTURE_FEATURES.md`
+- **Business thought** → `STRATEGY_NOTES.md`
+- **Current bug or unfinished work** → `STATE.md` + `TASKS.md`
+- **Learned lesson** → `ARCHITECTURE.md` (Lessons Learned, see 9)
+
+---
+
+## 5. Code Organization
+
+### 5.1 Project Structure
+
+### 5.2 Layer Responsibilities
+
+| Layer | Responsibility | May Talk To |
+|---|---|---|
+| `screens/` | Render UI, handle user interactions | `data/`, `components/`, `lib/` |
+| `components/` | Reusable UI pieces, presentational | `lib/` (for pure logic only) |
+| `data/` | All Supabase calls, error handling | `supabase.js` |
+| `lib/` | Pure logic, algorithms, no side effects | Nothing (pure functions) |
+| `supabase.js` | Client init + auth | External Supabase only |
+
+**Rule:** Dependencies flow downward. A `lib/` file may never import from `screens/` or `data/`.
+
+### 5.3 Naming Conventions
+- Files: kebab-case (`vocab-practice.js`)
+- Data modules: `{domain}.data.js`
+- JavaScript functions/variables: camelCase
+- Database tables: snake_case
+- Database columns: snake_case
+- CSS classes: kebab-case with BEM-lite
+
+---
+
+## 6. Business Model
+
+See `STRATEGY_NOTES.md` for full business strategy.
+
+Summary:
+- **Free tier:** 200 top-impact words + sampling of each exercise type + 1 mock sim
+- **Premium:** 89₪/month, 199₪/3-month, 299₪/until-exam
+- **Teacher partner program:** 15-20% commission, primary growth channel
+- **No ads, no rewarded video, ever**
+
+---
+
+## 7. UX/UI Principles
+
+### 7.1 Tone
+Professional but warm. Compliments are specific and earned.
+
+### 7.2 Visual Language
+Generous whitespace, 1–2 accent colors, quality fonts, subtle animations, deliberate emojis only.
+
+### 7.3 Responsiveness
+Mobile-first. Desktop fully supported.
+
+### 7.4 Accessibility
+WCAG AA, keyboard navigable, audio with on-screen controls.
+
+---
+
+## 8. The Keys (מפתחות) — Pedagogical Framework
+
+| # | Hebrew | What | Internal Code |
+|---|---|---|---|
+| 1 | מפתח הכיוון | Meaning flipped (X→Y became Y→X) | `direction_flip`, `R1`, `L2` |
+| 2 | מפתח העוצמה | Word strength mismatch | `extremism`, `R2` |
+| 3 | מפתח ההיקף | Information added/removed | `scope_change`, `over_specific`, `R3` |
+| 4 | מפתח האחיזה | Subject/object swap | `subject_swap`, `R4` |
+| 5 | מפתח הדמיון | False resemblance | `hallucination`, `partial_truth`, `R5` |
+
+Not every section uses all keys. Each section's relevant key subset is defined in `STATE.md`. New keys may be added as new question types are introduced.
+
+---
+
+## 9. Lessons Learned
+
+| Date | Lesson | Context |
+|---|---|---|
+| 2026-05-24 | Don't over-engineer before users exist | Listening grew to 7 tables with hard_mode unlocks before a real user touched it |
+| 2026-05-24 | Hardcoded numbers in rules are arbitrary | "5 keys", "5 questions" → replaced with content-driven and mastery-based logic |
+| 2026-05-24 | AI content needs calibration, not per-item review | Per-item approval doesn't scale |
+| 2026-05-24 | Data layer must be separated from screens early | Otherwise `supabase.js` becomes a 1,500-line dumping ground |
+| 2026-05-26 | Working memory ≠ long-term memory in SRS data | A 'Good' clicked 2 minutes after seeing the word does not mean the user knows it long-term. Must be filtered before reaching the DB. |
+| 2026-05-26 | Hostage situations create data poisoning | If a student can't escape a word, they will mis-click to escape the app. Cap re-queues to prevent this. |
+| 2026-05-26 | Stale STATE.md notes can mislead planning | We had 'mnemonic_2/3 empty' in STATE.md when in fact the DB was fully populated. Always verify with a query before acting on documented state. |
+
+---
+
+## 10. Decision Log
+
+| Date | Decision | Rationale |
+|---|---|---|
+| 2026-05-24 | Path B: clean foundation rebuild | DB had too many violations to incrementally fix |
+| 2026-05-24 | "Traps" → "למה לשים לב" in UI only | Cultural friction in Hebrew market |
+| 2026-05-24 | Teacher partner program from launch | Realistic conversion math too slow with only organic growth |
+| 2026-05-24 | No in-app ads, ever | Tone + math + brand integrity |
+| 2026-05-24 | HighScore = both internal & public name | Simplicity, keeps options open |
+| 2026-05-24 | Intelligent Override Clause adopted | AI should be advisor, not rigid robot |
+| 2026-05-24 | Calibration Batch over per-item approval | Time efficiency without sacrificing quality |
+| 2026-05-24 | Hint button mastery-based (3 streak per key) | Performance-based, not arbitrary count |
+| 2026-05-24 | Data layer in `src/data/`, screens never touch Supabase directly | Maintainability + future testability |
+| 2026-05-24 | Layout components (navbar, audio-player, etc.) factored out from day one | Prevent duplication, prepare for complex audio in future |
+| 2026-05-24 | `profiles.data.js` (not `users.data.js`) | Avoid Supabase `auth.users` naming conflict |
+| 2026-05-26 | Rating buttons: 3, not 4 (no 'Easy') | 'Easy' overlaps with 'Good' in practice; users hesitate between them. SM-2 in srs.data.js still supports 4 ratings for future flexibility, but UI only exposes 3. |
+| 2026-05-26 | Session queue logic in frontend, not DB | 'Again'/'Hard' re-queues a word within the session (offset 2/5 cards). Cap of 2 re-queues prevents infinite loop. Local state only — does not touch DB. |
+| 2026-05-26 | DB Integrity Rule (Hard) | Only first rating per word per session writes to DB. Prevents algorithm poisoning from working-memory recalls. |
+| 2026-05-26 | Definition splitting at frontend | `definition_he` is a single string ('מתאים, ראוי, הולם'). Main definition = parts[0], extras = parts.slice(1), split client-side. If true polysemy is needed later, separate DB column will be added. |
+| 2026-05-26 | Audio is always manual | Auto-play removed across vocab card screens. Applies to word audio and sentence audio. |
+| 2026-05-26 | Tier/impact invisible to student | `Tier A`, `impact 67.2` etc. removed from all student-facing UI. Internal use only. |
+| 2026-05-26 | Explanations live in Learn screens only | Removed duplicate SRS-explanation accordion from `/flashcards`. The Learn screen is the canonical place. |
+
+### 2026-05-27 — חובת מקוריות תוכן
+
+**ההחלטה:** לא משתמשים בשאלות מ-NITE או ממקור מוגן זכויות יוצרים 
+אחר. כל תוכן בפרודקשן חייב להיות מקורי או מורשה מפורשות.
+
+**הקשר:** במהלך ניתוח של 64 PDFs של מבחני NITE לצורך הבנת טקסונומיית 
+המסיחים, חולצו 520 שאלות שאומתו מול מפתחות תשובות רשמיים. בשלב מסוים 
+עלתה הצעה לטעון אותן ל-DB ולהשתמש בהן כתוכן Practice. ההצעה נדחתה 
+משום שזה הפרה ברורה של זכויות יוצרים של המרכז הארצי.
+
+**מה כן נשמר מהניתוח:** הטקסונומיה (7 קטגוריות מאקרו), הסטטיסטיקות 
+(35% ATTRIBUTE_DRIFT וכו׳), ההמלצות לרובריקת קושי, ההמלצה להוסיף R8. 
+כל אלה הם ניתוח דפוסים — לא תוכן.
+
+**מה לא נשמר:** 520 השאלות עצמן, ה-catalog JSONs עם משפטי מקור מלאים, 
+ה-CSV הישן (`restatements_final_table__1_.csv`). אסור לטעון אותם 
+ל-DB ואסור לבסס עליהם תוכן.
+
+**השלכה ל-T040:** rewrite של `rephrase.data.js` ימשיך לעבוד מול 199 
+השאלות הסינתטיות הקיימות ב-DB. T041 (Calibration Batch) יייצר 30 
+שאלות חדשות לרמות 1+2, כולן מקוריות.
