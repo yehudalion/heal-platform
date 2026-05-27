@@ -297,17 +297,100 @@ WCAG AA, keyboard navigable, audio with on-screen controls.
 
 ---
 
-## 8. The Keys (מפתחות) — Pedagogical Framework
+## §8 — סוגי מסיחים (Trap Types) ל-Sentence Rephrasing
 
-| # | Hebrew | What | Internal Code |
-|---|---|---|---|
-| 1 | מפתח הכיוון | Meaning flipped (X→Y became Y→X) | `direction_flip`, `R1`, `L2` |
-| 2 | מפתח העוצמה | Word strength mismatch | `extremism`, `R2` |
-| 3 | מפתח ההיקף | Information added/removed | `scope_change`, `over_specific`, `R3` |
-| 4 | מפתח האחיזה | Subject/object swap | `subject_swap`, `R4` |
-| 5 | מפתח הדמיון | False resemblance | `hallucination`, `partial_truth`, `R5` |
+מסך התרגול מציג שאלת רפראז: משפט מקור באנגלית + 4 חלופות. אחת מהן 
+היא פראפראזה לוגית של המקור, שלוש האחרות הן מסיחים. כל מסיח מתויג 
+ב-trap_type המבטא את המנגנון שלו.
 
-Not every section uses all keys. Each section's relevant key subset is defined in `STATE.md`. New keys may be added as new question types are introduced.
+המקורות לטקסונומיה: ניתוח של 100 שאלות אמיתיות ממבחני NITE (ראה 
+`highscore_rephrase_taxonomy.docx`), שזיהה 7 קטגוריות מאקרו. R1-R7 
+מקבילים ל-6 מתוך 7 הקטגוריות; R8 נוסף כדי לכסות את ATTRIBUTE_DRIFT 
+שלא היה מיוצג קודם.
+
+### R1 — שפת מוחלטות (SCOPE_SHIFT: ניפוח)
+
+הוספת ניסוח קיצוני שלא במקור: "כל", "תמיד", "ללא יוצא מן הכלל", 
+"כולם", "היחיד".
+
+**דוגמא:** המקור: "Gardening is a popular pastime."  
+המסיח: "Everyone enjoys a beautiful garden." (פופולרי → כולם)
+
+### R2 — היפוך סיבתי (REVERSAL: סיבה⇄תוצאה)
+
+A גורם ל-B הופך ל-B גורם ל-A. הרכיבים זהים, כיוון הסיבתיות התחלף.
+
+**דוגמא:** המקור: "Prolonged stress erodes executive function."  
+המסיח: "Deteriorating executive function generates persistent stress."
+
+### R3 — סיבה מפוברקת (FABRICATION: הוספת הסבר)
+
+הוספת הסבר סיבתי שלא קיים במקור. המסיח שומר על העובדות אבל מוסיף 
+"because" / "due to" / "as a result of" שלא נאמר.
+
+**דוגמא:** המקור: "Mammals reduce metabolism during hibernation."  
+המסיח: "Because cold exposure triggers stress, mammals reduce 
+metabolism during hibernation." (סיבה מפוברקת)
+
+### R4 — צמצום לא מוצדק (SCOPE_SHIFT: צמצום)
+
+הגבלה לסוג/דוגמא ספציפית שלא הוזכרה במקור. הפוך מ-R1: כאן ההיקף 
+מצטמצם במקום להתנפח.
+
+**דוגמא:** המקור: "Microfinance institutions serve excluded entrepreneurs."  
+המסיח: "Specifically Grameen Bank-style organizations serve excluded 
+entrepreneurs." (כללי → ספציפי)
+
+### R5 — היפוך תוצאה/מטרה (REVERSAL: וקטור התוצאה)
+
+X חיזק את Y הופך ל-X החליש את Y. אותם רכיבים, התוצאה הפוכה.
+
+**דוגמא:** המקור: "Excessive taxation undermined the legitimacy of rulers."  
+המסיח: "Excessive taxation reinforced the legitimacy of rulers."
+
+### R6 — החלפת סוכן (AGENT_SWAP)
+
+A פועל על B הופך ל-B פועל על A. הקורבן הופך לפעיל, המאמץ למאמצן.
+
+**דוגמא:** המקור: "The Hundred Years' War inflicted misery on France."  
+המסיח: "France devastated its enemies in the Hundred Years' War." 
+(קורבן → תוקף)
+
+### R7 — היפוך רצף זמני (TEMPORAL_SHIFT)
+
+סדר אירועים הופך. המקור: A קדם ל-B. המסיח: B קדם ל-A.
+
+**דוגמא:** המקור: "Greater biodiversity enhances productivity."  
+המסיח: "Once productivity was achieved, biodiversity emerged afterward."
+
+### R8 — הסחת תכונה (ATTRIBUTE_DRIFT) ⭐ חדש
+
+המסיח מחליף את התכונה שעליה מדובר במשפט. המקור עוסק בתכונה X של 
+הנושא; המסיח מחליף את התכונה ל-Y, גם אם Y הוא תכונה לגיטימית אחרת 
+של אותו נושא. השפה והאוצרי המילים נראים דומים מאוד למקור, אבל הציר 
+התוכני זז.
+
+זוהי הקטגוריה הכי שכיחה בדאטה האמיתי של NITE (35% מהמסיחים, לפי 
+הניתוח של 100 שאלות מ-64 PDFs).
+
+**דוגמא:** המקור: "Gardening is a popular pastime."  
+המסיח: "Gardening is very time-consuming." (פופולריות → זמן)
+
+### תיוג ב-DB
+
+עמודות `trap_type_1`, `trap_type_2`, `trap_type_3` ב-`restatement_questions` 
+הן `text` ללא CHECK constraint. ערכים מותרים: R1, R2, R3, R4, R5, R6, R7, R8.
+
+### קיבוץ למסך Learn — 4 משפחות
+
+ההצגה לתלמיד תקבץ את שמונת הסוגים לארבע משפחות-על:
+
+| משפחה | כולל | משמעות לתלמיד |
+|---|---|---|
+| היפוך | R2, R5 | "כיוון התחלף — בדוק מי גורם, מי תוצאה" |
+| הזזת היקף | R1, R4 | "כמתים — האם המקור באמת אומר 'כולם'?" |
+| הוספה | R3 + הוספות אחרות | "המקור לא אמר את זה — נוסף מבחוץ" |
+| החלפה | R6, R7, R8 | "מה התחלף — הסוכן, הזמן, או התכונה?" |
 
 ---
 
@@ -380,3 +463,19 @@ Not every section uses all keys. Each section's relevant key subset is defined i
 | 3 | 100 | T041b +56 |
 | 4 | 117 | (שמירה) |
 | 5 | 100 | T041b +62 |
+
+### 2026-05-27 — הוספת R8 (ATTRIBUTE_DRIFT) ותיעוד מלא של R1-R8
+
+**ההחלטה:** הרחבת טקסונומיית סוגי המסיחים מ-R1-R7 ל-R1-R8. עדכון §8 
+לתיעוד מלא של כל 8 הסוגים.
+
+**הקשר:** ניתוח של 100 שאלות אמיתיות מ-NITE זיהה ש-35% מהמסיחים 
+שייכים לקטגוריה ATTRIBUTE_DRIFT (הסחת תכונה) שלא הייתה מיוצגת ב-R1-R7. 
+זו הקטגוריה הגדולה ביותר בדאטה. בנוסף, R6 ו-R7 קיימים ב-DB אך לא 
+היו מתועדים — עם 73 ו-73 שאלות לכל אחד.
+
+**אין שינוי schema ב-DB:** עמודות `trap_type_*` הן text ללא constraint. 
+R8 מותר כברירת מחדל.
+
+**הצעד הבא:** במסך Learn (T042) להציג את 8 הסוגים מקובצים ב-4 משפחות-על 
+(היפוך / היקף / הוספה / החלפה).
