@@ -72,7 +72,7 @@
 
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
-| T040 | P0 | M | **`rephrase.data.js`** — פונקציות: `getRephraseQuestions(limit, filters)`, `saveAttempt(userId, questionId, data)` | `src/data/rephrase.data.js` |
+| T040 | ✅ | M | **`rephrase.data.js` v2** — `fetchPracticeQuestions` (RPC), `logAttempt`, `fetchRecentAttempts`, `aggregateWeakestKeys`. DONE — RPC solution deployed. | `src/data/rephrase.data.js` |
 | T041a | P0 | L | **Calibration Batch (רמות 1+2)** — יצירת 200 שאלות מקוריות לרמות הקלות. חוסם T043. יעד: 100 שאלות לרמה 1, 100 שאלות לרמה 2. | DB `restatement_questions` |
 | T041b | P1 | L | **Library Balance (רמות 3+5)** — יצירת 118 שאלות מקוריות לאיזון הספרייה. לא חוסם MVP. יעד: 56 שאלות לרמה 3, 62 שאלות לרמה 5. | DB `restatement_questions` |
 | T042 | P1 | M | **`rephrase-learn.js`** — הסבר על 5 המפתחות עם דוגמאות. מוצג לפני תרגול ראשון. | `src/screens/rephrase-learn.js` |
@@ -114,12 +114,14 @@
 
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
-| T070 | P0 | L | **הפעל RLS** על כל הטבלאות — policies לפי `auth.uid()`. בדוק מ-client שמשתמש לא יכול לקרוא דאטה של אחר. | Supabase SQL (policies) |
+| T070 | P0 | L | **הפעל RLS** על כל הטבלאות — policies לפי `auth.uid()`. כולל: `restatement_questions`, `rephrase_attempts`. בדוק מ-client שמשתמש לא יכול לקרוא דאטה של אחר. | Supabase SQL (policies) |
 | T071 | P0 | L | **מערכת תשלומים** — Stripe integration, webhooks, עדכון `paid_track`/`paid_expires_at` ב-`user_profiles`. | `src/data/profiles.data.js`, Supabase edge functions |
 | T072 | P0 | M | **Free tier enforcement** — gate תוכן לפי `paid_track`: 200 מילים ראשונות בלבד, sampling של תרגילים, מוק סימולציה אחד. | Data modules + screens |
 | T073 | P1 | M | **Teacher partner landing** — עמוד נחיתה + טופס הצטרפות לשותפי מורים (15-20% עמלה). | דפי landing (מחוץ ל-app) |
 | T074 | P1 | S | **Error tracking** — Sentry או דומה, לפחות console error aggregation. | `src/main.js` |
 | T075 | P2 | M | **Mock simulation** — מבחן מדומה מלא. פיצ'ר premium. | סעיף נפרד בפרויקט |
+| T076 | P0 | S | **⛔ BLOCKER — שדרג Supabase ל-Pro** — free tier מושהה אוטומטית אחרי שבוע חוסר פעילות; יהרוג פרודקשן. שדרג לפני כל חשיפה ציבורית. | Supabase dashboard |
+| T077 | P1 | S | **אשר batch L5-B1** (25 שאלות, is_published=false) — Lion סוקר, לאחר אישור: `UPDATE restatement_questions SET is_published=true WHERE generation_batch='L5-B1'`. חזור לכל batch נוסף. | DB `restatement_questions` |
 
 ---
 

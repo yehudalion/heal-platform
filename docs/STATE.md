@@ -115,13 +115,14 @@
 ### Sentence Rephrasing
 | פריט | מצב |
 |---|---|
-| 199 שאלות ב-DB | ✅ (סינתטיות — מקוריות שלנו) |
-| anchors_json | ✅ קיים |
-| blackout_words_json | ✅ קיים |
-| trap_type | ✅ קיים |
-| difficulty_level | ❌ ריק (לא תויג — T041a Calibration Batch) |
-| UI / Practice screen | ❌ לא קיים |
-| Analyze screen | ❌ לא קיים |
+| legacy 199 שאלות | ⚠️ is_published=false — ממתינות לאישור מחיקה |
+| bank v2 — L5-B1 (25 שאלות, difficulty=5) | 🔄 drafted, is_published=false — ממתין לאישור Lion (T077) |
+| bank v2 — L1-L4 | ❌ טרם נוצר (T041a/T041b) |
+| rephrase.data.js | ✅ v2 — fetchPracticeQuestions (RPC), logAttempt, fetchRecentAttempts, aggregateWeakestKeys |
+| RPC get_rephrase_questions | ✅ live in Supabase |
+| rephrase_attempts table | ✅ live in Supabase (RLS off — dev state, T070) |
+| UI / Practice screen | ❌ לא קיים (T043, blocked by T041a) |
+| Analyze screen | ❌ לא קיים (T044) |
 | 520 שאלות מ-NITE PDFs | 🚫 אסור — לא נטענות ל-DB (§2.19) |
 
 ### Listening
