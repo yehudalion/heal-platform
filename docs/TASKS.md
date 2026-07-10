@@ -1,6 +1,6 @@
 # HighScore — Task Board
 **Version:** 1.0
-**Last Updated:** 2026-05-24
+**Last Updated:** 2026-07-10
 
 > משימות מסודרות לפי פאזה ועדיפות.
 > P0 = חוסם הכל / P1 = MVP קריטי / P2 = חשוב אך לא חוסם
@@ -69,12 +69,17 @@
 ## Phase 2 — Sentence Rephrasing MVP
 
 > שלוש שכבות. MVP = Multiple Choice בלבד. Verification/Blackout לעתיד.
+>
+> **Critical path (2026-07-10):** T041a → T041b → T041c → T042 → T043 → T044. T076 (Supabase Pro) חוסם launch — נמצא INACTIVE ב-2026-07-10.
 
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
 | T040 | ✅ | M | **`rephrase.data.js` v2** — `fetchPracticeQuestions` (RPC), `logAttempt`, `fetchRecentAttempts`, `aggregateWeakestKeys`. DONE — RPC solution deployed. | `src/data/rephrase.data.js` |
-| T041a | P0 | L | **Calibration Batch (רמות 1+2)** — יצירת 200 שאלות מקוריות לרמות הקלות. חוסם T043. יעד: 100 שאלות לרמה 1, 100 שאלות לרמה 2. | DB `restatement_questions` |
-| T041b | P1 | L | **Library Balance (רמות 3+5)** — יצירת 118 שאלות מקוריות לאיזון הספרייה. לא חוסם MVP. יעד: 56 שאלות לרמה 3, 62 שאלות לרמה 5. | DB `restatement_questions` |
+| T041a | P0 | S | **סקירה עיוורת — Move Review Batch** [בתהליך] — Lion מקבל 7 שאלות מגוונות ומציין "מה השתנה בין המשפט המקורי לתשובה הנכונה" בלי לדעת שזו המטרה. תוצאות בונות את Move Book. | DB `restatement_questions` |
+| T041b | P0 | S | **בנה Move Book** — מה שאושר ב-T041a: רשימת וריאציות מבניות מאושרות (synonym swap, clause inversion, etc.) עם דוגמאות. מצורף ל-§1.6 ב-CONTENT_GUIDELINES.md. | `docs/CONTENT_GUIDELINES.md` |
+| T041c | P1 | L | **Curation Pass — אצירה למכסה** — סרוק 199 legacy לפי מכסות (L1=40, L2=60, L3=90, L4=90, L5=50). החל שערי מכניקה. re-level כנדרש (L5-B1 → L4, legacy-L3 קשה → L4). נרמל green_type. | DB `restatement_questions` |
+| T041d | P2 | M | **תיקון B3/B4 רק לפי צורך** — אם אחרי T041c L5 עדיין לא מגיע ל-50: תקן את הפריטים הטובים ביותר של B3/B4 (הארכת R2 + anti-tell). אל תתחל לפני שיודעים את הפער. | DB `restatement_questions` |
+| T041e | P1 | M | **Drip Batches — L1-L2** — batches של ~20 פריטים עם דוח פיזור אוטומטי; Lion מאשר sample של 4-5. ייצור רק לאחר Move Book מאושר (T041b). | DB `restatement_questions` |
 | T042 | P1 | M | **`rephrase-learn.js`** — הסבר על 5 המפתחות עם דוגמאות. מוצג לפני תרגול ראשון. | `src/screens/rephrase-learn.js` |
 | T043 | P1 | L | **`rephrase-practice.js`** — Multiple choice + פידבק "למה לשים לב" לפי key_type של התשובה השגויה. | `src/screens/rephrase-practice.js` |
 | T044 | P1 | M | **`rephrase-analyze.js`** — סיכום session + "מפתח חלש" (המפתח עם אחוז ההצלחה הנמוך ביותר). | `src/screens/rephrase-analyze.js` |
