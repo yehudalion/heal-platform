@@ -76,8 +76,8 @@
 |---|---|---|---|---|
 | T040 | ✅ | M | **`rephrase.data.js` v2** — `fetchPracticeQuestions` (RPC), `logAttempt`, `fetchRecentAttempts`, `aggregateWeakestKeys`. DONE — RPC solution deployed. | `src/data/rephrase.data.js` |
 | T041a | P0 | S | **סקירה עיוורת — Move Review Batch** [בתהליך] — Lion מקבל 7 שאלות מגוונות ומציין "מה השתנה בין המשפט המקורי לתשובה הנכונה" בלי לדעת שזו המטרה. תוצאות בונות את Move Book. | DB `restatement_questions` |
-| T041b | P0 | S | **בנה Move Book** — מה שאושר ב-T041a: רשימת וריאציות מבניות מאושרות (synonym swap, clause inversion, etc.) עם דוגמאות. מצורף ל-§1.6 ב-CONTENT_GUIDELINES.md. | `docs/CONTENT_GUIDELINES.md` |
-| T041c | P1 | L | **Curation Pass — אצירה למכסה** — סרוק 199 legacy לפי מכסות (L1=40, L2=60, L3=90, L4=90, L5=50). החל שערי מכניקה. re-level כנדרש (L5-B1 → L4, legacy-L3 קשה → L4). נרמל green_type. | DB `restatement_questions` |
+| T041b | P0 | M | **הוכחת שיטה + נעילת Move Book** — (1) שכתב Q2/Q5/Q7 מה-review batch תוך שימוש במהלכים המועמדים כהוכחת שיטה → סקירת Lion שנייה לאישור שהמהלכים עובדים בפועל; (2) לאחר אישור: נעל Move Book ומצרף ל-§1.6 ב-CONTENT_GUIDELINES.md. | `docs/CONTENT_GUIDELINES.md`, DB `restatement_questions` |
+| T041c | P1 | L | **Curation Pass — אצירה למכסה** — סרוק 199 legacy לפי מכסות (L1=40, L2=60, L3=90, L4=90, L5=50). **register rewrite pass:** שמור שלד + traps + נושא; החלף עטיפה לשונית לעמידה בתקציב מילים קשות (§1.6 Register). החל שערי מכניקה (length-parity, anti-tell). re-level כנדרש. נרמל green_type. | DB `restatement_questions` |
 | T041d | P2 | M | **תיקון B3/B4 רק לפי צורך** — אם אחרי T041c L5 עדיין לא מגיע ל-50: תקן את הפריטים הטובים ביותר של B3/B4 (הארכת R2 + anti-tell). אל תתחל לפני שיודעים את הפער. | DB `restatement_questions` |
 | T041e | P1 | M | **Drip Batches — L1-L2** — batches של ~20 פריטים עם דוח פיזור אוטומטי; Lion מאשר sample של 4-5. ייצור רק לאחר Move Book מאושר (T041b). | DB `restatement_questions` |
 | T042 | P1 | M | **`rephrase-learn.js`** — הסבר על 5 המפתחות עם דוגמאות. מוצג לפני תרגול ראשון. | `src/screens/rephrase-learn.js` |
