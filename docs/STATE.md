@@ -16,8 +16,8 @@
 | Onboarding | 🟡 חלקי | UI קיים, אבל לא כותב ל-DB (עמודות חסרו — עכשיו תוקן) |
 | Hub / Dashboard | 🟡 קיים אך לא מחובר | מציג UI סטטי, לא שולף דאטה אמיתי |
 | Vocabulary | 🟢 עובד | vocab-practice עובד end-to-end — SRS כותב ל-DB, מנמוניקות + פירושים נוספים + אודיו משפט, data layer נקי |
-| Sentence Rephrasing | 🟡 Infrastructure ready | data layer v2 ✅, RPC ✅, 273 שאלות בDB — UI לא קיים |
-| Listening | 🔴 לא קיים | טבלאות ישנות נמחקו, סכמה חדשה ריקה |
+| Sentence Rephrasing | 🟡 v4 clean slate | Master Plan v4 אומץ (14.7.2026). **0 שאלות ב-DB** — 279 נמחקו ואורכבו. סכימת v4 מוכנה, data layer v2 ✅, RPC ✅, UI לא קיים |
+| Listening | 🟡 Schema + format ready | פורמט מתועד (LISTENING_FORMAT.md v0.1), סכמה מוכנה לpipeline — אין תוכן ב-DB, אין UI |
 | RLS | 🔴 כבוי | מכוון בשלב dev — חובה לפני launch |
 
 ## 🟢 עובד ויציב
@@ -37,7 +37,9 @@
 ### DB Schema (post Migration 001)
 * 10 טבלאות נקיות בפרודקשן
 * `words` — 550 שורות עם הגדרות עבריות, audio URLs, impact_percentile מאוכלס
-* `restatement_questions` — 199 שורות עם anchors_json, blackout_words_json, trap_type
+* `restatement_questions` — **0 שורות** (clean-slate reset של v4, 14.7.2026). 30 עמודות, סכימת v4.
+  לפני האיפוס היו **279 שורות** (מתוכן 19 published) — לא 199 כפי שנרשם כאן בטעות. **כל ספירה בקובץ הזה
+  חייבת להיות מאומתת בשאילתה, לא מהזיכרון.**
 * `impact_percentile` מחולק נכון: 55 / 165 / 330 (Core / Advantage / Enrichment)
 * Trigger `on_auth_user_created` — יוצר user_profiles אוטומטית בכל signup חדש
 * FK-integrity: כל user_id מצביע על `auth.users(id)` — מאומת עם verification query 6.3
@@ -67,8 +69,24 @@
 * data layer v2 מלא — 4 exports: `fetchPracticeQuestions` (RPC), `logAttempt`, `fetchRecentAttempts`, `aggregateWeakestKeys` ✅
 * RPC `get_rephrase_questions` — פעיל ב-Supabase ✅
 * טבלה `rephrase_attempts` — פעילה ב-Supabase (RLS כבוי, dev state — T070) ✅
-* 273 שאלות בDB (מלאי מלא נותח 2026-07-10)
 * UI — עדיין לא קיים (ממתין ל-T042-T044)
+
+#### 🔄 v4 Clean-Slate Reset (14.7.2026)
+* **אומץ Master Plan v4** — מחליף את v3.1. מבוסס על ניתוח ground-truth של **116 פריטים אמיתיים
+  מ-15 מבחנים רשמיים (2021–2025)**. מקור: `docs/HighScore_Rephrase_Master_Plan_v4_2026-07-14.md`.
+* **כל התוכן נמחק:** 279 שאלות (מתוכן 19 published) נמחקו מ-`restatement_questions`.
+  **ארכיון מלא (29 עמודות) קומיט לגיט:** `docs/archive/restatement_questions_pre_v4_2026-07-14.csv`.
+  אומת: 279 רשומות / 279 מזהים ייחודיים / 0 שורות פגומות / עברית תקינה.
+* 🐛 **תוקן באג חוצה-חוק:** `is_published` היה **DEFAULT true** — הפרה ישירה של כלל אישור-התוכן.
+  עכשיו **DEFAULT false**.
+* **סכימה:** 30 עמודות. הוסרו 9 (`green_type`, `trap_type_1/2/3`, `low_surface_similarity_check`,
+  `explanation_trap_1/2/3`, `explanation_correct`), נוספו 10 (`mechanism_1/2/3`, `proximity_1/2/3`,
+  `transformations`, `relation_count`, `hard_word_count`, `recipe`) + CHECK constraint על proximity.
+  מיגרציה: `20260714184952_rephrase_v4_clean_slate`.
+* **מחולל v3 הוצא לארכיון:** `question_generator.py` + ה-CSVs שלו הועברו ל-`docs/archive/v3_generator/`
+  (כתב לעמודות שנמחקו וקידד טקסונומיה שפגה — מלכודת חיה בריפו).
+* **קורפוס האמת** נשאר כ-CSVs להתייחסות ב-`docs/truth_corpus/` בלבד — **לעולם לא ב-DB** (גבול זכויות יוצרים).
+* **הצעד הבא:** T-CAL-V4-L2 — מנת כיול ראשונה, 10 פריטים.
 
 ### Onboarding (src/screens/onboarding.js)
 * UI קיים ועובד ויזואלית
@@ -83,6 +101,7 @@
 
 ## 🔴 שבור / לא קיים
 ### Listening
+* האזנה: פורמט האמת חולץ ותועד ב-docs/LISTENING_FORMAT.md v0.1 (12.7.2026). הסכימה עודכנה לצנרת תוכן (is_published ברירת מחדל false, audio_url nullable, נוספו עמודות קוד-K ועוגן-אחורה). מנת כיול ראשונה (LC1, 3 קטעים / 5 שאלות) נוסחה ב-12.7.2026, ממתינה לביקורת ליאון. פיילוט קול (Google Cloud TTS Chirp3-HD מול Gemini-TTS) בתהליך. עדיין לא הוכנס תוכן ל-DB — אין תוכן האזנה חי.
 * סכמה ישנה נמחקה לחלוטין
 * סכמה חדשה קיימת אך ריקה (אין תוכן, אין UI, אין קוד)
 * ✅ קבצי אודיו אומתו — נגישים ומתנגנים (נבדק ידנית על 5 מילים אקראיות)

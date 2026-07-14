@@ -137,18 +137,37 @@
 - הסבר שאומר רק "זה שגוי כי זה אחרת" — לא עוזר
 - משפט מקורי ארוך מדי (מעל 30 מילה) ברמות 1-2
 
-### 1.5 שדות DB לכל שאלה
+### 1.5 שדות DB לכל שאלה — סכימת v4 (בתוקף מ-14.7.2026)
+
+> ⚠️ **ARCHIVED — הסכימה הישנה שתוארה כאן** (`rephrased_sentence`, `option_a/b/c`,
+> `correct_option`, `trap_type_a/b/c`) **אינה בתוקף — וחלקה מעולם לא תאמה את ה-DB בפועל.**
+> אין לכתוב תוכן לפיה.
+
+הסכימה בפועל, כפי שאומתה בשאילתה מול פרודקשן (30 עמודות, 14.7.2026):
 
 ```
-original_sentence    → המשפט המקורי באנגלית
-rephrased_sentence   → הניסוח הנכון החלופי (התשובה)
-option_a/b/c         → 3 הסחות (A/B/C)
-correct_option       → 'rephrased' (תמיד התשובה הנכונה)
-trap_type_a/b/c      → key_type לכל הסחה
-explanation_a/b/c_he → הסבר עברית לכל הסחה
-difficulty_level     → 1-5
-anchors_json         → מילות מפתח שהסחה מייצרת את השינוי (לתרגיל Verification בעתיד)
+original_sentence      → המשפט המקורי באנגלית
+correct_answer         → הניסוח הנכון החלופי (התשובה)
+distractor_1/2/3       → 3 המסיחים
+mechanism_1/2/3        → R-codes למסיח המקביל (R1,R2,R3,R5,R6,R7,R9). ניתן לשלב: 'R7,R3'
+proximity_1/2/3        → P1 | P2 | P3 — נאכף ב-CHECK constraint
+transformations        → G-codes של התשובה הנכונה, למשל 'G1,G6,G9'
+relation_count         → מספר היחסים הלוגיים בגזע
+hard_word_count        → מספר המילים הקשות
+recipe                 → מזהה כרטיס-מתכון, למשל 'CAL-V4-L2'
+explanation_1/2/3_he   → הסבר עברית לכל מסיח
+correct_explanation_he → הסבר עברית לתשובה הנכונה
+difficulty_level       → 1-5
+generation_batch       → מזהה מנת ייצור (לאישור/דחייה קבוצתית)
+is_published           → ברירת מחדל FALSE. אין פרסום ללא אישור אנושי מפורש.
+anchors_json           → מילות מפתח שהמסיח משנה (לתרגיל Verification בעתיד)
+blackout_words_json    → (שמור למצב blackout)
+topic, source_context, anchor_matches_json
 ```
+
+**אין עמודות הסבר באנגלית.** `explanation_trap_1/2/3` ו-`explanation_correct` הוסרו במיגרציה
+`20260714184952_rephrase_v4_clean_slate` — הן היו NOT NULL, באנגלית, ואף מסך לא קרא אותן.
+ה-UI קורא אך ורק את שדות ה-`_he`.
 
 ---
 
@@ -209,7 +228,15 @@ anchors_json         → מילות מפתח שהסחה מייצרת את השי
 
 #### Data Hygiene
 
-`green_type` ב-legacy נשמר כ-list מחרוזת Python (לדוגמה: `"['G1','G3']"`) — יש לנרמל במהלך האצירה.
+> ⚠️ **ARCHIVED (14.7.2026).** ההערה הזו נגעה לאצירת ה-legacy: `green_type` נשמר כ-list מחרוזת
+> Python (למשל `"['G1','G3']"`) והיה צריך נרמול. **היא כבר לא רלוונטית** — עמודת `green_type`
+> הוסרה מה-DB, וכל 279 הפריטים ה-legacy נמחקו ב-clean-slate של v4 (ארכיון:
+> `docs/archive/restatement_questions_pre_v4_2026-07-14.csv`). אין עוד legacy לאצור.
+> נשמר להיסטוריה בלבד.
+
+**כלל v4 שמחליף אותו:** `transformations` נכתב כמחרוזת שטוחה מופרדת בפסיקים — `'G1,G6,G9'` —
+ולא כ-list מסודר. אותו כלל חל על `mechanism_1/2/3` (למשל `'R7,R3'`).
+`proximity_1/2/3` הוא ערך יחיד בלבד: `P1` / `P2` / `P3` (נאכף ב-CHECK constraint).
 
 #### Register & Difficulty Budget (מאומת מול חומר NITE רשמי, 2026-07-10)
 

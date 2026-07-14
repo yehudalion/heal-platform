@@ -1,0 +1,7 @@
+# Archived content snapshots are byte-exact records. Git must never rewrite their
+# line endings: these CSVs contain newlines INSIDE quoted fields, so EOL conversion
+# would silently mutate the archived data.
+docs/archive/*.csv -text
+
+# Truth-corpus reference CSVs: same reasoning.
+docs/truth_corpus/*.csv -text
