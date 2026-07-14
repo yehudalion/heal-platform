@@ -50,5 +50,14 @@ Thumbs.db
 # HEAL Project - AI and Backup files
 all_code.txt
 my_project.zip
-.envheal_code.zip
+heal_code.zip
 .replit
+
+# Secrets — NEVER commit. Contain live service keys / API keys.
+# (Previously unignored: a missing newline had fused ".env" + "heal_code.zip"
+#  into the meaningless pattern ".envheal_code.zip", so .env was never ignored.)
+.env
+.env.*
+!.env.example
+env.scripts.txt
+artifacts/heal/.env
