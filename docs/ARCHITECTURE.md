@@ -545,7 +545,7 @@ R8 מותר כברירת מחדל.
 ### 2026-06-07 — Re-Queue Principle for Rephrase (§2.15 applied)
 
 **ההחלטה:** תשובות שגויות בסעיף Rephrase **לא** חוזרות לתור הסשן (בניגוד ל-SRS 
-vocab). `violated_key` נרשם ב-`rephrase_attempts` ומוזן ל-`aggregateWeakestKeys()` 
+vocab). `trap_type` נרשם ב-`restatement_attempts` ומוזן ל-`aggregateWeakestKeys()` 
 בשכבת Analyze.
 
 **הנימוק:** שאלות Rephrase ארוכות ויקרות קוגניטיבית יותר מכרטיסי vocab. 

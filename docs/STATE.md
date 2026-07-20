@@ -68,7 +68,7 @@
 ### Sentence Rephrasing — Infrastructure (src/data/rephrase.data.js)
 * data layer v2 מלא — 4 exports: `fetchPracticeQuestions` (RPC), `logAttempt`, `fetchRecentAttempts`, `aggregateWeakestKeys` ✅
 * RPC `get_rephrase_questions` — פעיל ב-Supabase ✅
-* טבלה `rephrase_attempts` — פעילה ב-Supabase (RLS כבוי, dev state — T070) ✅
+* טבלה `restatement_attempts` — פעילה ב-Supabase (RLS כבוי, dev state — T070) ✅
 * UI — עדיין לא קיים (ממתין ל-T042-T044)
 
 #### 🔄 v4 Clean-Slate Reset (14.7.2026)
@@ -144,7 +144,7 @@
 | bank v2 — L1-L4 | ❌ טרם נוצר — נדרשת אצירה מהllegacy + drip batches |
 | rephrase.data.js | ✅ v2 — fetchPracticeQuestions (RPC), logAttempt, fetchRecentAttempts, aggregateWeakestKeys |
 | RPC get_rephrase_questions | ✅ live in Supabase |
-| rephrase_attempts table | ✅ live in Supabase (RLS off — dev state, T070) |
+| restatement_attempts table | ✅ live in Supabase (RLS off — dev state, T070) |
 | UI / Practice screen | ❌ לא קיים (T043) |
 | Analyze screen | ❌ לא קיים (T044) |
 | 520 שאלות מ-NITE PDFs | 🚫 אסור — לא נטענות ל-DB (§2.19) |

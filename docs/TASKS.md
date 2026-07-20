@@ -120,7 +120,7 @@
 
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
-| T070 | P0 | L | **הפעל RLS** על כל הטבלאות — policies לפי `auth.uid()`. כולל: `restatement_questions`, `rephrase_attempts`. בדוק מ-client שמשתמש לא יכול לקרוא דאטה של אחר. | Supabase SQL (policies) |
+| T070 | P0 | L | **הפעל RLS** על כל הטבלאות — policies לפי `auth.uid()`. כולל: `restatement_questions`, `restatement_attempts`. בדוק מ-client שמשתמש לא יכול לקרוא דאטה של אחר. | Supabase SQL (policies) |
 | T071 | P0 | L | **מערכת תשלומים** — Stripe integration, webhooks, עדכון `paid_track`/`paid_expires_at` ב-`user_profiles`. | `src/data/profiles.data.js`, Supabase edge functions |
 | T072 | P0 | M | **Free tier enforcement** — gate תוכן לפי `paid_track`: 200 מילים ראשונות בלבד, sampling של תרגילים, מוק סימולציה אחד. | Data modules + screens |
 | T073 | P1 | M | **Teacher partner landing** — עמוד נחיתה + טופס הצטרפות לשותפי מורים (15-20% עמלה). | דפי landing (מחוץ ל-app) |
