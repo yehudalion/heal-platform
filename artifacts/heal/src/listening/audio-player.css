@@ -1,0 +1,168 @@
+/* ─── Audio Player — M2 ──────────────────────────────────────────────
+   Uses design tokens from styles.css (:root variables).
+   Self-contained; direction: ltr so progress bar runs left → right.
+   ─────────────────────────────────────────────────────────────────── */
+
+.ap-wrap {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius, 18px);
+  padding: 20px 16px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  direction: ltr; /* progress always left → right */
+  max-width: 480px;
+  width: 100%;
+}
+
+/* ── Loading dimmed state ──── */
+.ap-wrap.ap-loading .ap-btn-play {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.ap-wrap.ap-loading .ap-seek-bar {
+  pointer-events: none;
+}
+
+/* ── Controls row ──── */
+.ap-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+/* ── Shared button reset ──── */
+.ap-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: opacity 0.12s, transform 0.1s;
+}
+.ap-btn:active { transform: scale(0.88); }
+
+/* ── Play / Pause button ──── */
+.ap-btn-play {
+  width: 60px;
+  height: 60px;
+  background: var(--green, #4CAF6F);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(76, 175, 111, 0.35);
+  flex-shrink: 0;
+}
+.ap-btn-play svg { width: 24px; height: 24px; }
+.ap-btn-play:active { transform: scale(0.90); }
+
+.ap-btn-play.ap-btn-locked {
+  background: var(--muted, #7A8C80);
+  box-shadow: none;
+  cursor: default;
+}
+.ap-btn-play.ap-btn-locked:active { transform: none; }
+
+/* ── Skip ±10s buttons ──── */
+.ap-btn-skip {
+  width: 48px;
+  height: 48px;
+  color: var(--muted, #7A8C80);
+}
+.ap-btn-skip svg { width: 28px; height: 28px; }
+.ap-btn-skip:active { opacity: 0.45; }
+
+/* ── Icons inside play button ──── */
+.ap-icon { display: flex; align-items: center; justify-content: center; }
+.ap-icon[hidden] { display: none !important; }
+
+/* ── Seek row ──── */
+.ap-seek-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Time labels ──── */
+.ap-time {
+  font-size: 0.72rem;
+  color: var(--muted, #7A8C80);
+  font-variant-numeric: tabular-nums;
+  min-width: 32px;
+  white-space: nowrap;
+}
+
+/* ── Seek bar ──── */
+.ap-seek-bar {
+  flex: 1;
+  /* tall hit area for fat-finger tapping */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  touch-action: none; /* prevent scroll while dragging */
+}
+
+/* Single-pass: no cursor, no pointer events */
+.ap-mode-single-pass .ap-seek-bar {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Track + fill + thumb ──── */
+.ap-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: var(--border, #E0EBE4);
+  border-radius: 2px;
+}
+
+.ap-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--green, #4CAF6F);
+  border-radius: 2px;
+  width: 0%;
+  pointer-events: none;
+}
+
+.ap-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: var(--green, #4CAF6F);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 0 4px rgba(76, 175, 111, 0.18);
+  transition: box-shadow 0.15s;
+}
+
+.ap-seek-bar:active .ap-thumb,
+.ap-seek-bar:focus-within .ap-thumb {
+  box-shadow: 0 0 0 8px rgba(76, 175, 111, 0.22);
+}
+
+/* ── Error message ──── */
+.ap-error {
+  margin-top: 10px;
+  color: var(--red, #e53935);
+  font-size: 0.8rem;
+  text-align: center;
+  direction: rtl;
+}
+.ap-error[hidden] { display: none; }
+
+/* ── Mobile: slightly larger on small screens ──── */
+@media (max-width: 380px) {
+  .ap-btn-play { width: 54px; height: 54px; }
+  .ap-btn-skip { width: 44px; height: 44px; }
+}

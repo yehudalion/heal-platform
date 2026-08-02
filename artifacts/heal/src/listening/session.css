@@ -1,0 +1,292 @@
+/* ─── M5 Practice Session ────────────────────────────────────────────────────
+   RTL layout, mobile-first. Design tokens from styles.css.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.sess-wrap {
+  direction: rtl;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg, #F5F8F6);
+}
+
+/* ── Loading ──── */
+.sess-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted, #7A8C80);
+  font-size: 0.9rem;
+}
+
+/* ── Screen container ──── */
+.sess-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 16px 48px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Fade animation ──── */
+@keyframes sessFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sess-fade-in {
+  animation: sessFadeIn 0.25s ease both;
+}
+
+/* ── Header bar ──── */
+.sess-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 4px;
+}
+
+.sess-header-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text, #1A2E22);
+  flex: 1;
+  text-align: center;
+}
+
+.btn-sess-exit {
+  background: none;
+  border: none;
+  color: var(--muted, #7A8C80);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.btn-sess-exit:hover { background: rgba(0,0,0,0.06); }
+
+/* ── Progress dots ──── */
+.sess-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sess-progress-phase {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted, #7A8C80);
+}
+
+.sess-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sess-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border, #E0EBE4);
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.sess-dot--done   { background: var(--green, #4CAF6F); }
+.sess-dot--active {
+  background: var(--green, #4CAF6F);
+  box-shadow: 0 0 0 3px rgba(76, 175, 111, 0.22);
+}
+
+/* ── Warmup brief card ──── */
+.sess-card {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius, 18px);
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.sess-card-icon  { font-size: 2.8rem; line-height: 1; }
+
+.sess-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text, #1A2E22);
+  margin: 0;
+}
+
+.sess-card-sub {
+  font-size: 0.88rem;
+  color: var(--muted, #7A8C80);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 300px;
+}
+
+/* ── Action buttons ──── */
+.sess-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 4px;
+}
+
+.btn-sess-primary {
+  padding: 13px 24px;
+  background: var(--green, #4CAF6F);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm, 12px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s, transform 0.1s;
+  width: 100%;
+  direction: rtl;
+}
+
+.btn-sess-primary:active { transform: scale(0.97); opacity: 0.88; }
+
+.btn-sess-secondary {
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--muted, #7A8C80);
+  border: 1.5px solid var(--border, #E0EBE4);
+  border-radius: var(--radius-sm, 12px);
+  font-size: 0.88rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s;
+  width: 100%;
+  direction: rtl;
+}
+
+.btn-sess-secondary:active { border-color: var(--muted, #7A8C80); }
+
+/* ── Cooldown / Summary ──── */
+.sess-summary {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius, 18px);
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.sess-summary-icon  { font-size: 2.8rem; line-height: 1; }
+
+.sess-summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text, #1A2E22);
+  margin: 0;
+}
+
+.sess-summary-stats {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.sess-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sess-stat-val {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--green, #4CAF6F);
+  line-height: 1.1;
+}
+
+.sess-stat-lbl {
+  font-size: 0.68rem;
+  color: var(--muted, #7A8C80);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sess-insight {
+  font-size: 0.9rem;
+  color: var(--text, #1A2E22);
+  line-height: 1.55;
+  margin: 0;
+  padding: 12px 16px;
+  background: rgba(76, 175, 111, 0.07);
+  border-radius: var(--radius-sm, 12px);
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ── Readiness score in cooldown ──── */
+.sess-readiness {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 24px;
+  background: rgba(76, 175, 111, 0.08);
+  border-radius: var(--radius-sm, 12px);
+  border: 1px solid rgba(76, 175, 111, 0.18);
+}
+
+.sess-readiness-val {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--green, #4CAF6F);
+  line-height: 1.1;
+}
+
+.sess-readiness-lbl {
+  font-size: 0.72rem;
+  color: var(--muted, #7A8C80);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Item mount: remove double padding from lic-wrap ──── */
+.sess-screen .lic-wrap {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-width: 100%;
+}
+
+/* ── Mobile tweaks ──── */
+@media (max-width: 380px) {
+  .sess-card,
+  .sess-summary    { padding: 22px 14px 18px; }
+  .sess-card-icon,
+  .sess-summary-icon { font-size: 2.2rem; }
+  .sess-card-title,
+  .sess-summary-title { font-size: 1.05rem; }
+}

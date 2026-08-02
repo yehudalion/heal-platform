@@ -1,0 +1,393 @@
+/* ─── Listening Item Component — M3 ──────────────────────────────────
+   RTL layout; design tokens from styles.css.
+   ─────────────────────────────────────────────────────────────────── */
+
+.lic-wrap {
+  direction: rtl;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  font-family: inherit;
+}
+
+/* ── Loading ──── */
+.lic-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: var(--muted, #7A8C80);
+  font-size: 0.9rem;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--border, #E0EBE4);
+  border-top-color: var(--green, #4CAF6F);
+  border-radius: 50%;
+  animation: lic-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes lic-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error ──── */
+.lic-error {
+  padding: 24px;
+  text-align: center;
+  color: var(--red, #e53935);
+  font-size: 0.9rem;
+}
+
+/* ── Content wrapper ──── */
+.lic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section labels ──── */
+.lic-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted, #7A8C80);
+  margin-bottom: 8px;
+}
+
+
+/* ── Question block ──── */
+.lic-question-block {
+  margin-top: 4px;
+}
+
+.lic-question-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text, #1A2E22);
+  line-height: 1.5;
+}
+
+/* ── Options ──── */
+.lic-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lic-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card, #fff);
+  border: 2px solid var(--border, #E0EBE4);
+  border-radius: var(--radius-sm, 12px);
+  padding: 14px 16px;
+  text-align: right;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text, #1A2E22);
+  transition: border-color 0.14s, background 0.14s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.lic-option:not(:disabled):hover {
+  border-color: var(--green, #4CAF6F);
+  background: rgba(76, 175, 111, 0.05);
+}
+
+.lic-option:not(:disabled):active {
+  background: rgba(76, 175, 111, 0.10);
+}
+
+.lic-option-letter {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--border, #E0EBE4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted, #7A8C80);
+  transition: background 0.14s, color 0.14s;
+}
+
+.lic-option-text {
+  flex: 1;
+  line-height: 1.45;
+}
+
+/* ── Correct / wrong states ──── */
+.lic-option--correct {
+  border-color: var(--green, #4CAF6F) !important;
+  background: rgba(76, 175, 111, 0.08) !important;
+}
+
+.lic-option--correct .lic-option-letter {
+  background: var(--green, #4CAF6F);
+  color: #fff;
+}
+
+.lic-option--wrong {
+  border-color: var(--red, #e53935) !important;
+  background: rgba(229, 57, 53, 0.06) !important;
+}
+
+.lic-option--wrong .lic-option-letter {
+  background: var(--red, #e53935);
+  color: #fff;
+}
+
+.lic-option:disabled {
+  cursor: default;
+}
+
+/* ── Silent mode: neutral selected highlight ──── */
+.lic-option--selected {
+  border-color: var(--muted, #7A8C80) !important;
+  background: rgba(122, 140, 128, 0.07) !important;
+}
+
+.lic-option--selected .lic-option-letter {
+  background: var(--muted, #7A8C80);
+  color: #fff;
+}
+
+/* ── Silent mode: continue button ──── */
+.lic-continue {
+  margin-top: 16px;
+}
+
+.lic-continue[hidden] { display: none; }
+
+.btn-lic-continue {
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--green, #4CAF6F);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm, 12px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s, transform 0.1s;
+  direction: rtl;
+}
+
+.btn-lic-continue:active { transform: scale(0.97); opacity: 0.88; }
+
+/* ── Audio lock overlay (lecture items before play) ──── */
+.lic-audio-lock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--muted, #7A8C80);
+  background: rgba(122, 140, 128, 0.08);
+  border: 1px dashed var(--border, #E0EBE4);
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-top: -8px;
+}
+
+.lic-audio-lock-icon {
+  font-size: 0.72rem;
+  color: var(--green, #4CAF6F);
+}
+
+/* ── Locked options (before audio plays) ──── */
+.lic-options--locked {
+  pointer-events: none;
+  opacity: 0.38;
+  user-select: none;
+}
+
+/* ── Feedback panel ──── */
+.lic-feedback {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius, 18px);
+  padding: 18px 20px;
+}
+
+.lic-feedback[hidden] { display: none; }
+
+/* ── Verdict line (4-part feedback) ──── */
+.lic-verdict {
+  margin-bottom: 14px;
+}
+
+.lic-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.lic-verdict--ok  { color: var(--green, #4CAF6F); }
+.lic-verdict--err { color: var(--red, #e53935); }
+
+.lic-verdict-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* Correct answer label (shown when answer is wrong) */
+.lic-correct-label {
+  font-size: 0.82rem;
+  color: var(--muted, #7A8C80);
+  margin-bottom: 6px;
+}
+
+.lic-correct-label strong { color: var(--text, #1A2E22); }
+
+/* Part 1: Correct option explanation */
+.lic-correct-expl {
+  font-size: 0.88rem;
+  color: var(--text, #1A2E22);
+  line-height: 1.55;
+  background: rgba(76, 175, 111, 0.07);
+  border-right: 3px solid var(--green, #4CAF6F);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ── Explanations container ──── */
+.lic-explanations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Part 2: Why wrong */
+.lic-wrong-section {
+  background: rgba(229, 57, 53, 0.05);
+  border-right: 3px solid var(--red, #e53935);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+}
+
+.lic-wrong-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--red, #e53935);
+  margin-bottom: 4px;
+}
+
+.lic-wrong-expl {
+  font-size: 0.88rem;
+  color: var(--text, #1A2E22);
+  line-height: 1.55;
+}
+
+/* Part 3: "איך יכולת לדעת?" cue block */
+.lic-cue-section {
+  background: rgba(2, 136, 209, 0.07);
+  border-right: 3px solid #0288d1;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 12px;
+}
+
+.lic-cue-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0277bd;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.lic-cue-quote {
+  font-size: 0.88rem;
+  color: var(--text, #1A2E22);
+  line-height: 1.55;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.lic-cue-signal {
+  font-size: 0.8rem;
+  color: #0277bd;
+  line-height: 1.45;
+}
+
+.lic-cue-signal strong {
+  font-weight: 700;
+  background: rgba(2, 136, 209, 0.12);
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+/* Part 4: Trap type badge */
+.lic-trap-section {
+  display: flex;
+  align-items: center;
+}
+
+.lic-trap-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #7B5500;
+  background: rgba(255, 193, 7, 0.18);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Legacy expl items (kept for silent mode compatibility) */
+.lic-expl {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--muted, #7A8C80);
+  line-height: 1.5;
+}
+
+.lic-expl--correct {
+  color: var(--text, #1A2E22);
+  font-weight: 600;
+}
+
+.lic-expl-letter {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--border, #E0EBE4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.lic-expl--correct .lic-expl-letter {
+  background: var(--green, #4CAF6F);
+  color: #fff;
+}
+
+.lic-expl-text { flex: 1; }
+
+/* ── Audio player inside item ──── */
+.lic-wrap .ap-wrap {
+  max-width: 100%;
+}

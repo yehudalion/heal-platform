@@ -1,0 +1,294 @@
+/* ─── M4 Diagnostic Flow ────────────────────────────────────────────────────
+   RTL layout, mobile-first. Design tokens from styles.css.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.diag-wrap {
+  direction: rtl;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg, #F5F8F6);
+}
+
+/* ── Loading state ──── */
+.diag-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted, #7A8C80);
+  font-size: 0.9rem;
+}
+
+/* ── Screens ──── */
+.diag-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 16px 40px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Fade animation ──── */
+@keyframes diagFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.diag-fade-in {
+  animation: diagFadeIn 0.25s ease both;
+}
+
+/* ── Home button ──── */
+.btn-diag-home {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--muted, #7A8C80);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-diag-home:active { opacity: 0.6; }
+
+/* ── Progress bar ──── */
+.diag-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.diag-progress-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted, #7A8C80);
+}
+
+.diag-dots {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.diag-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  position: relative;
+}
+
+/* connector line */
+.diag-dot-wrap:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: calc(50% + 8px);
+  right: calc(-50% + 8px);
+  height: 2px;
+  background: var(--border, #E0EBE4);
+}
+
+.diag-dot-wrap:not(:last-child).diag-dot-wrap--passed::after {
+  background: var(--green, #4CAF6F);
+}
+
+.diag-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--border, #E0EBE4);
+  transition: background 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.diag-dot--done {
+  background: var(--green, #4CAF6F);
+}
+
+.diag-dot--active {
+  background: var(--green, #4CAF6F);
+  box-shadow: 0 0 0 4px rgba(76, 175, 111, 0.22);
+}
+
+.diag-dot-lbl {
+  font-size: 0.65rem;
+  color: var(--muted, #7A8C80);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ── Headphone card ──── */
+.diag-card {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius, 18px);
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.diag-card-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.diag-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text, #1A2E22);
+  margin: 0;
+}
+
+.diag-card-sub {
+  font-size: 0.88rem;
+  color: var(--muted, #7A8C80);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ── Player wrapper inside card ──── */
+.diag-player-wrap {
+  width: 100%;
+  max-width: 360px;
+  margin: 8px 0;
+}
+
+/* ── Action buttons ──── */
+.diag-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-diag-primary {
+  padding: 13px 24px;
+  background: var(--green, #4CAF6F);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm, 12px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s, transform 0.1s;
+  width: 100%;
+}
+
+.btn-diag-primary:active { transform: scale(0.97); opacity: 0.88; }
+
+.btn-diag-ghost {
+  padding: 11px 24px;
+  background: transparent;
+  color: var(--muted, #7A8C80);
+  border: 1.5px solid var(--border, #E0EBE4);
+  border-radius: var(--radius-sm, 12px);
+  font-size: 0.9rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.btn-diag-ghost:active { border-color: var(--muted, #7A8C80); }
+
+/* ── Tips panel ──── */
+.diag-tips {
+  background: rgba(122, 140, 128, 0.08);
+  border-radius: var(--radius-sm, 12px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  text-align: right;
+}
+
+.diag-tips-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text, #1A2E22);
+  margin: 0;
+}
+
+.diag-tips-list {
+  margin: 0;
+  padding-right: 18px;
+  font-size: 0.82rem;
+  color: var(--muted, #7A8C80);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Transition screen ──── */
+.diag-transition {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.diag-transition-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border, #E0EBE4);
+  border-top-color: var(--green, #4CAF6F);
+  border-radius: 50%;
+  animation: diagSpin 0.8s linear infinite;
+}
+
+@keyframes diagSpin {
+  to { transform: rotate(360deg); }
+}
+
+.diag-transition-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text, #1A2E22);
+  min-height: 1.5em;
+}
+
+@keyframes diagTxtFade {
+  0%   { opacity: 0; transform: translateY(6px); }
+  20%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.diag-txt-fade {
+  animation: diagTxtFade 0.9s ease both;
+}
+
+/* ── Mobile tweaks ──── */
+@media (max-width: 380px) {
+  .diag-card { padding: 22px 14px 18px; }
+  .diag-card-icon { font-size: 2.2rem; }
+  .diag-card-title { font-size: 1.05rem; }
+}
