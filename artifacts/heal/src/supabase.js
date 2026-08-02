@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_URL     = import.meta.env.VITE_SUPABASE_URL     || 'https://opjtromnkdgehlqeaqzi.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wanRyb21ua2RnZWhscWVhcXppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMzU1NzksImV4cCI6MjA5MjgxMTU3OX0.o0Sz1P5Nvw8xDCi2YbcVCLHo5VQvgfaySBMVuDhSQ-A';
 
-export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+export const isSupabaseConfigured = true;
 
 export const supabase = isSupabaseConfigured
   ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -11,7 +11,7 @@ export const supabase = isSupabaseConfigured
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
-        flowType: "pkce",
+        flowType: "implicit",
       },
     })
   : null;
@@ -70,19 +70,49 @@ export async function getAllRatings() {
   return error ? [] : (data || []);
 }
 
+// ─── Local words fallback (words.json) ───────────────────────────────────────
+// Used when Supabase words table is empty or unavailable.
+// Maps local schema → Supabase schema so normaliseRows works on both.
+async function getLocalWords() {
+  const { default: raw } = await import('./data/words.json', { with: { type: 'json' } }).catch(
+    () => import('./data/words.json')
+  );
+  return raw.map((w, i) => ({
+    id:                 w.id,
+    headword:           w.headword,
+    pos:                w.pos || '',
+    tier:               w.level === 'advanced' ? 'A' : w.level === 'intermediate' ? 'B' : 'C',
+    impact_score:       String((1.0 - i * 0.01).toFixed(2)),
+    definition:         w.definition || '',
+    definition_he:      '',
+    sentence:           w.sentence || '',
+    sentence_he:        '',
+    mnemonic:           null,
+    mnemonic_2:         null,
+    mnemonic_3:         null,
+    audio_word_url:     w.audio_url || null,
+    // Reuse word audio for sentence panel until real sentence audio is available
+    audio_sentence_url: w.audio_url || null,
+  }));
+}
+
 // ─── Words — all columns restored ────────────────────────────────────────────
 export async function getWords() {
-  if (!supabase) return [];
+  if (!supabase) return getLocalWords();
   const { data, error } = await supabase
     .from("words")
     .select(
       "id, headword, tier, impact_score, pos, " +
       "definition, definition_he, " +
+      "surface_1, " +
       "mnemonic, mnemonic_2, mnemonic_3, " +
       "audio_word_url, audio_sentence_url"
     )
+    .in("tier", ["gold", "silver"])
     .order("impact_score", { ascending: false });
-  return error ? [] : (data || []);
+  const result = error ? [] : (data || []);
+  // If Supabase table is empty, fall back to local words
+  return result.length > 0 ? result : getLocalWords();
 }
 
 // ─── SRS helpers ──────────────────────────────────────────────────────────────
@@ -101,10 +131,12 @@ export async function getDueWords(limit = 20) {
       .select(
         "id, headword, tier, impact_score, pos, " +
         "definition, definition_he, " +
+        "surface_1, " +
         "mnemonic, mnemonic_2, mnemonic_3, " +
         "audio_word_url, audio_sentence_url, " +
         "ratings!left(ease_factor, review_count, next_review)"
       )
+      .in("tier", ["gold", "silver"])
       .eq("ratings.user_id", session.user.id)
       .lte("ratings.next_review", now)
       .order("impact_score", { ascending: false })
@@ -121,20 +153,24 @@ export async function getDueWords(limit = 20) {
       .select(
         "id, headword, tier, impact_score, pos, " +
         "definition, definition_he, " +
+        "surface_1, " +
         "mnemonic, mnemonic_2, mnemonic_3, " +
         "audio_word_url, audio_sentence_url"
       )
+      .in("tier", ["gold", "silver"])
       .order("impact_score", { ascending: false })
       .limit(limit - result.length + 10);
 
     if (seenIds.length) q = q.not("id", "in", `(${seenIds.join(",")})`);
 
     const { data: fresh } = await q;
-    return [...result, ...normaliseRows(fresh || []).slice(0, limit - result.length)];
+    const combined = [...result, ...normaliseRows(fresh || []).slice(0, limit - result.length)];
+    if (combined.length > 0) return combined;
+    // Fall through to guest path if auth queries returned nothing
   }
 
-  // Guest — just return top words
-  return getWords().then((ws) => ws.slice(0, limit));
+  // Guest (or auth fallback) — return top words normalised
+  return getWords().then((ws) => normaliseRows(ws).slice(0, limit));
 }
 
 function normaliseRows(rows) {
@@ -142,18 +178,29 @@ function normaliseRows(rows) {
     id:           w.id,
     word:         w.headword,
     pos:          w.pos || "",
-    tier:         w.tier || "A",
+    tier:         w.tier === 'gold' ? 'A' : w.tier === 'silver' ? 'B' : w.tier || 'C',
     impact:       parseFloat(w.impact_score) || 0,
     def:          w.definition || "",
     def_he:       w.definition_he || w.definition || "",
+    sentence:     w.surface_1 || w.sentence || "",
+    sentence_he:  "",
     meanings:     [w.definition_he].filter(Boolean),
     assoc:        [w.mnemonic, w.mnemonic_2, w.mnemonic_3].filter(Boolean),
-    audioWord:    w.audio_word_url  || null,
+    audioWord:    w.audio_word_url   || null,
     audioSentence:w.audio_sentence_url || null,
     // SRS state (may be null for new words)
     easeFactor:   w.ratings?.[0]?.ease_factor  ?? 2.5,
     reviewCount:  w.ratings?.[0]?.review_count ?? 0,
   }));
+}
+
+// ─── Traps ────────────────────────────────────────────────────────────────────
+export async function getTraps() {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("traps")
+    .select("key, g");
+  return error ? [] : (data || []);
 }
 
 // ─── SRS — save rating with SM-2 ─────────────────────────────────────────────

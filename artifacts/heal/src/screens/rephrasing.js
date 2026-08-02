@@ -1,12 +1,55 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 
+let isIntroVisible = true;
+
+const INTRO = {
+  title: 'ברוכים הבאים למודול הניסוח מחדש',
+  subtitle: 'Restatement — מה זה, למה זה קשה, ואיך מתאמנים',
+  body: `
+    <p><strong>מה זה Restatement?</strong><br>
+    שאלות Restatement בוחנות את יכולתך לזהות את <em>אותו רעיון</em> כשהוא מנוסח בצורה שונה.
+    זה לא תרגום, לא פירוש, ולא הסקת מסקנות — אלא ניסוח מחדש <strong>מדויק</strong> של אותו תוכן.
+    אם המשפט המקורי אומר "רוב החולים השתפרו", ניסוח נכון יאמר "הרוב הגיב לטיפול" — לא "כולם החלימו".</p>
+
+    <p><strong>למה זה קשה?</strong><br>
+    השאלות מטמינות 6 סוגי מלכודות קלאסיות: ניסוח קיצוני, היפוך לוגי, פרט שנוסף, עיוות היקף,
+    בלבול מילים נרדפות, והסקה שגויה. כל תשובה שגויה היא מלכודת מכוונת — לא טעות אקראית.
+    ההבנה של <em>למה</em> תשובה שגויה היא שגויה חשובה לא פחות מזיהוי הנכונה.</p>
+
+    <p><strong>איך לומדים כאן — הנתיב המומלץ:</strong></p>
+    <ol style="padding-right:1.2rem;line-height:2">
+      <li><strong>Trap Trainer</strong> — מכירים כל אחת מ-6 המלכודות לפני שרואים שאלה אמיתית. כל קטגוריה כוללת הסבר, דוגמאות מנותחות ותרגיל זיהוי.</li>
+      <li><strong>Explain Your Answer</strong> — עונים על שאלה ואז מסבירים <em>מה הטריק</em> בתשובות השגויות. כל שאלה מלמדת פי שניים.</li>
+      <li><strong>Weakness Dashboard</strong> — הפלטפורמה מנתחת היכן נופלים ומפנה לתרגול ממוקד.</li>
+    </ol>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:1.2rem 0">
+
+    <p><strong>דוגמה 1 — ניסוח קיצוני (Extreme Wording)</strong></p>
+    <div style="background:var(--bg);border-radius:var(--radius-sm);padding:.9rem 1rem;margin:.4rem 0;font-size:.85rem">
+      <div style="margin-bottom:.4rem"><span style="color:var(--muted);font-weight:700">משפט מקורי:</span> [PLACEHOLDER — יש להחליף בדוגמה אמיתית]</div>
+      <div style="margin-bottom:.4rem"><span style="color:var(--red);font-weight:700">✗ מלכודת:</span> [PLACEHOLDER — תשובה קיצונית שגויה]</div>
+      <div><span style="color:var(--green-dark);font-weight:700">✓ נכון:</span> [PLACEHOLDER — ניסוח מדויק]</div>
+    </div>
+
+    <p style="margin-top:1rem"><strong>דוגמה 2 — היפוך לוגי (Logical Reversal)</strong></p>
+    <div style="background:var(--bg);border-radius:var(--radius-sm);padding:.9rem 1rem;margin:.4rem 0;font-size:.85rem">
+      <div style="margin-bottom:.4rem"><span style="color:var(--muted);font-weight:700">משפט מקורי:</span> [PLACEHOLDER — יש להחליף בדוגמה אמיתית]</div>
+      <div style="margin-bottom:.4rem"><span style="color:var(--red);font-weight:700">✗ מלכודת:</span> [PLACEHOLDER — סיבה ותוצאה מתחלפים]</div>
+      <div><span style="color:var(--green-dark);font-weight:700">✓ נכון:</span> [PLACEHOLDER — ניסוח מדויק]</div>
+    </div>
+
+    <p style="color:var(--green-dark);font-weight:700;margin-top:1rem">המטרה: לא לנחש — לזהות. כל שאלה היא הזדמנות להבין לוגיקה אקדמית.</p>
+  `,
+};
+
 const FEATURES = {
   trap: {
     color: 'p', title: 'Trap Trainer',
     sub: 'ללמוד את הטריקים לפני שנחשפים לשאלות אמיתיות — 6 קטגוריות עם הסבר, דוגמאות ותרגיל.',
     steps: [
-      '<strong>הסבר הטריק</strong> — מה בדיוק השאלאים עושים ואיך הם מבלבלים.',
+      '<strong>הסבר הטריק</strong> — מה בדיוק השאלות עושים ואיך הם מבלבלים.',
       '<strong>דוגמאות מנותחות</strong> — מקור, מלכודת עם מילת המפתח מסומנת, וניסוח נכון.',
       '<strong>תרגיל זיהוי</strong> — שאלה אחת מיידית עם פידבק.',
       '<strong>6 קטגוריות ברצף</strong> — Extreme Wording, Logical Reversal ועוד.',
@@ -39,6 +82,27 @@ const FEATURES = {
 export async function renderRephrasing(root) {
   await renderLayout(root, '/rephrasing');
   const el = getPageContent();
+
+  if (isIntroVisible) {
+    el.innerHTML = `
+      <div class="fade-in" style="max-width:660px;margin:0 auto">
+        <div class="page-title">${INTRO.title}</div>
+        <div class="page-sub">${INTRO.subtitle}</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem 1.8rem;line-height:1.8;font-size:.9rem;color:var(--text)">
+          ${INTRO.body}
+        </div>
+        <div style="margin-top:1.4rem;text-align:center">
+          <button class="btn-primary" id="btn-intro-done" style="padding:.85rem 2.2rem;font-size:1rem">
+            הבנתי, נתחיל ←
+          </button>
+        </div>
+      </div>`;
+    el.querySelector('#btn-intro-done').addEventListener('click', () => {
+      isIntroVisible = false;
+      renderRephrasing(root);
+    });
+    return;
+  }
 
   el.innerHTML = `
     <div class="fade-in">

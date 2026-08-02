@@ -739,3 +739,384 @@ a { text-decoration: none; color: inherit; }
   .features-grid { grid-template-columns: 1fr; }
   .cdb { flex-direction: column; align-items: flex-start; gap: .9rem; }
 }
+
+
+/* ─── Vocab Card v3 (full-screen layout) ─── */
+.vc-shell {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
+.vc-topbar {
+  width: 100%;
+  padding: 0.9rem 1.6rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.vc-brand {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  background: var(--green-dark);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.vc-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.card-counter {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.card-help-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.card-help-btn:hover {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-color: var(--green);
+}
+.vc-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.vc-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 680px;
+  min-height: 420px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+.card-headword-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.card-headword {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+.audio-btn {
+  background: var(--green-light);
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.audio-btn:hover { background: var(--green); }
+.reveal-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.reveal-prompt {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+.reveal-btn {
+  background: var(--green-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 1rem 2.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.reveal-btn:hover { background: var(--green); }
+.def-block {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.main-definition {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.4;
+}
+.vc-panel-row {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 1.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.vc-panel-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.vc-panel-btn:hover {
+  background: var(--green-light);
+  border-color: var(--green);
+}
+.vc-panel-btn.open {
+  background: var(--green-light);
+  border-color: var(--green-dark);
+  color: var(--green-dark);
+}
+.vc-panel-content {
+  margin-top: 0.9rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text);
+  animation: hsFadeIn 0.2s ease-out;
+}
+.vc-panel-ltr { direction: ltr; text-align: left; font-style: italic; }
+.vc-panel-rtl { direction: rtl; text-align: right; }
+.vc-mnem-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+.vc-mnem-cycle {
+  background: var(--orange-light);
+  border: 1px solid var(--orange);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 0.95rem;
+  color: var(--orange);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.vc-mnem-cycle:hover { background: var(--orange); color: white; }
+.rate-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+.rate-btn {
+  padding: 1.1rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid;
+  font-size: 0.92rem;
+  font-weight: 700;
+  background: var(--card);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.rate-btn[data-rating="again"] { border-color: var(--red); color: var(--red); }
+.rate-btn[data-rating="hard"]  { border-color: var(--orange); color: var(--orange); }
+.rate-btn[data-rating="good"]  { border-color: var(--green); color: var(--green-dark); }
+.rate-btn[data-rating="again"]:hover { background: var(--red-light); }
+.rate-btn[data-rating="hard"]:hover  { background: var(--orange-light); }
+.rate-btn[data-rating="good"]:hover  { background: var(--green-light); }
+.card-footer {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 0.88rem;
+}
+.card-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.card-footer a:hover { color: var(--green-dark); }
+.vc-done {
+  text-align: center;
+  padding: 4rem 1rem;
+  direction: rtl;
+}
+.vc-done p {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+}
+.vc-done-link {
+  display: inline-block;
+  color: var(--green-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* sentence panel with audio */
+.vc-sent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+.vc-sent-text {
+  flex: 1;
+  font-style: italic;
+  text-align: left;
+}
+.vc-sent-audio-btn {
+  background: var(--green-light);
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.vc-sent-audio-btn:hover { background: var(--green); }
+
+/* ─── Vocab Analyze (session summary) ─── */
+.va-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  text-align: center;
+  direction: rtl;
+}
+.va-celebrate {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.va-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+.va-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
+}
+.va-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+.va-row-n {
+  font-size: 1.6rem;
+  font-weight: 800;
+  min-width: 40px;
+  text-align: center;
+}
+.va-row-l {
+  font-size: 0.95rem;
+  color: var(--text);
+  text-align: right;
+  flex: 1;
+}
+.va-row-good { border-color: var(--green); background: var(--green-light); }
+.va-row-good .va-row-n { color: var(--green-dark); }
+.va-row-recovered { border-color: var(--orange); background: var(--orange-light); }
+.va-row-recovered .va-row-n { color: var(--orange); }
+.va-row-carry { border-color: var(--border); background: var(--bg); }
+.va-row-carry .va-row-n { color: var(--muted); }
+.va-streak {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 1.8rem;
+  padding: 0.7rem;
+  background: var(--orange-light);
+  border-radius: var(--radius-sm);
+}
+.va-cta-row {
+  display: flex;
+  gap: 0.7rem;
+}
+.va-cta {
+  flex: 1;
+  padding: 0.95rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.va-cta-primary {
+  background: var(--green-dark);
+  color: white;
+}
+.va-cta-primary:hover { background: var(--green); }
+.va-cta-secondary {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.va-cta-secondary:hover { background: var(--bg); }

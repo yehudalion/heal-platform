@@ -1,6 +1,6 @@
 # HighScore — Future Features
-**Version:** 1.0
-**Last Updated:** 2026-05-24
+**Version:** 1.1
+**Last Updated:** 2026-07-15 (F-L04 split: MC continuation → core, free-writing stays future)
 
 > פיצ'רים שנדחו מה-MVP בכוונה — לא נשכחו.
 > כל פיצ'ר כאן תועד עם: מה הוא, למה נדחה, מה כבר קיים בשבילו, ומה נדרש לממשו.
@@ -79,11 +79,23 @@
 **מה קיים:** concept מתועד.
 **מה נדרש:** עמודה ב-`user_profiles` + לוגיקה + UI.
 
-### F-L04 | Text Continuation Exercise
-**מה זה:** תרגיל שמציג תחילת טקסט ומבקש מהתלמיד להמשיך אותו בעצמו.
-**למה נדחה:** סוג תרגיל שונה מהותית מ-lecture_qa, דורש pipeline תיקון.
-**מה קיים:** `item_type` enum מוכן לערך `'text_continuation'`.
-**מה נדרש:** טבלת `listening_continuation_passages` נפרדת + UI כתיבה חופשית + מנגנון הערכה.
+### F-L04 | Continuation — free-writing enrichment (NOT the core MC item)
+> ⚠️ **תוקן 15.7.2026.** רשומה זו ערבבה בעבר שני דברים שונים. הבהרה:
+>
+> **`continuation` כפריט MC = ליבת ה-MVP, לא future.** התברר שהשלמת קטע שמע היא **חצי**
+> ממבחן ה-Listening האמיתי (השני מבין שני סוגי הפריטים), כפריט **רב-ברירה** — 4 אפשרויות
+> כתובות מקבילות דקדוקית, הבחנה סמנטית בלבד. הוא **הועבר ל-scope הליבה** ומכוסה כעת ב-
+> `LISTENING_FORMAT.md` (Item Type 2) וב-CONTENT_GUIDELINES §3, עם רכיב UI `Continuation_View`
+> ומשימות ב-TASKS Phase 3. **אין להתייחס אליו כאן כ-future.**
+
+**מה נשאר כאן (future enrichment בלבד, נבדל מהליבה):** תרגיל שבו התלמיד **כותב בעצמו** את ההמשך
+(free-writing response) במקום לבחור מבין 4 אפשרויות, עם מנגנון הערכה/ניקוד של טקסט חופשי.
+**מה זה:** תחילת קטע מוצגת, התלמיד ממשיך אותה בכתיבה חופשית.
+**למה נדחה:** סוג תרגיל שונה מהותית מ-MC (הן מ-lecture_qa והן מ-continuation ה-MC), דורש
+pipeline הערכת כתיבה חופשית — קרוב יותר למודול הכתיבה העתידי מאשר ל-Listening MVP.
+**מה קיים:** `item_type` enum מוכן לערך `'text_continuation'` (שמור לגרסת ה-free-writing; פריט
+ה-MC משתמש בערך continuation הרגיל).
+**מה נדרש:** UI כתיבה חופשית + מנגנון הערכה/ניקוד. (טבלת ה-passages עצמה משותפת עם פריט ה-MC.)
 
 ### F-L05 | Multi-Accent Tracking
 **מה זה:** מעקב אחר ביצועים לפי מבטא (British / American / Australian) וזיהוי מבטא חלש.

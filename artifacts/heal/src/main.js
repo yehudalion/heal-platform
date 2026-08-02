@@ -1,6 +1,6 @@
 import './styles.css';
 import { route, startRouter, navigate } from './router.js';
-import { supabase, isSupabaseConfigured, isGuest, getCurrentSession } from './supabase.js';
+import { supabase, isGuest, getCurrentSession } from './supabase.js';
 
 // ─── Screens ─────────────────────────────────────────────────────────────────
 import { renderHome }        from './screens/home.js';
@@ -12,12 +12,22 @@ import { renderTrapTrainer } from './screens/trap-trainer.js';
 import { renderExplain }     from './screens/explain.js';
 import { renderWeakness }    from './screens/weakness.js';
 import { renderProgress, renderGap } from './screens/progress.js';
+import { renderSentenceCompletion } from './screens/sentence-completion.js';
 
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
 import { renderFork }  from './screens/fork.js';
 import { renderLevel } from './screens/level.js';
 import { renderCard }  from './screens/card.js';
+import { renderVocabLearn } from './screens/vocab-learn.js';
+import { renderVocabAnalyze } from './screens/vocab-analyze.js';
+
+// ─── Listening section ────────────────────────────────────────────────────────
+import { renderListeningTest }     from './listening/test-page.js';
+import { renderListeningItemTest } from './listening/item-test-page.js';
+import { renderDiagnostic }        from './listening/diagnostic.js';
+import { renderSession }              from './listening/session.js';
+import { renderListeningDashboard }  from './listening/dashboard.js';
 
 const app = document.getElementById('app');
 
@@ -52,29 +62,30 @@ route('/explain',      requireAuth(renderExplain));
 route('/weakness',     requireAuth(renderWeakness));
 route('/progress',     requireAuth(renderProgress));
 route('/gap',          requireAuth(renderGap));
+route('/sentence-completion', requireAuth(renderSentenceCompletion));
 
 // Keep old /card and /gap routes for backwards compatibility
 route('/card', requireAuth(renderCard));
+route('/vocab-learn', requireAuth(renderVocabLearn));
+route('/vocab-analyze', requireAuth(renderVocabAnalyze));
+
+// ─── Listening section routes ────────────────────────────────────────────────
+route('/listening/test',       renderListeningTest);                   // M2 audio player test (no auth)
+route('/listening/item-test',  requireAuth(renderListeningItemTest));  // M3 full item test
+route('/listening/diagnostic', requireAuth(renderDiagnostic));         // M4 diagnostic flow
+route('/listening/session',    requireAuth(renderSession));            // M5 practice session
+route('/listening',            requireAuth(renderListeningDashboard)); // M7 section dashboard
 
 // ─── Auth state listener ──────────────────────────────────────────────────────
 if (supabase) {
   supabase.auth.onAuthStateChange((event, session) => {
     if (session) {
       const path = location.hash.replace(/^#/, '') || '/';
-      // If on login screen, redirect to app
       if (path === '/' || path === '') navigate('/home');
-    } else {
+    } else if (event === 'SIGNED_OUT') {
       navigate('/');
     }
   });
-}
-
-// ─── Config warning ───────────────────────────────────────────────────────────
-if (!isSupabaseConfigured) {
-  const warn = document.createElement('div');
-  warn.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#e53935;color:white;text-align:center;padding:8px;font-size:.82rem;z-index:9999;font-family:sans-serif;direction:rtl';
-  warn.textContent = 'פרטי Supabase חסרים — ההתחברות מושבתת. השתמשו ב"המשך כאורח" כדי לנסות את האפליקציה.';
-  document.body.appendChild(warn);
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────

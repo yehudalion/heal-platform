@@ -1,6 +1,6 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
-import { getProgressStats, getCurrentSession } from '../supabase.js';
+import { supabase, getProgressStats, getCurrentSession } from '../supabase.js';
 
 export async function renderHome(root) {
   await renderLayout(root, '/home');
@@ -11,7 +11,23 @@ export async function renderHome(root) {
 
   const session = await getCurrentSession();
   const name    = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
-  const stats   = await getProgressStats();
+
+  // Fetch progress stats + listening state in parallel
+  const [stats, listeningRes] = await Promise.all([
+    getProgressStats(),
+    session && supabase
+      ? supabase
+          .from('listening_user_state')
+          .select('readiness_score, has_completed_diagnostic')
+          .eq('user_id', session.user.id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+  ]);
+
+  const listeningState    = listeningRes?.data ?? null;
+  const listeningScore    = listeningState?.readiness_score ?? 0;
+  const listeningStarted  = !!listeningState?.has_completed_diagnostic;
+  const listeningLabel    = listeningStarted ? `${listeningScore}% מוכנות` : 'התחל עכשיו';
 
   const acquired   = stats?.acquired   || 0;
   const streak     = stats?.streak     || 0;
@@ -68,7 +84,6 @@ export async function renderHome(root) {
           <div class="cdb-bar-outer">
             <div class="cdb-bar-fill" style="width:${targetPct}%"></div>
           </div>
-          <div class="cdb-bar-note">מחושב לפי מילים שנרכשו + דיוק Restatement</div>
         </div>
         <div class="cdb-score">
           <div class="cdb-score-n">${target}</div>
@@ -94,7 +109,7 @@ export async function renderHome(root) {
       <!-- Module grid -->
       <div class="sec-title">מודולים</div>
       <div class="module-grid">
-        <div class="mc mc-g" data-nav="/flashcards">
+        <div class="mc mc-g" data-nav="/card">
           <span class="mc-icon">🃏</span>
           <div class="mc-name">כרטיסיות</div>
           <div class="mc-desc">550 מילים עם אסוציאציות, אודיו וחזרה חכמה</div>
@@ -104,7 +119,7 @@ export async function renderHome(root) {
         <div class="mc mc-p" data-nav="/rephrasing">
           <span class="mc-icon">🔄</span>
           <div class="mc-name">ניסוח מחדש</div>
-          <div class="mc-desc">לוגיקה, מלכודות ואקוויוולנטים אקדמיים</div>
+          <div class="mc-desc">לוגיקה, מפתחות הטעיה ואקוויוולנטים אקדמיים</div>
           <div class="mc-bar"><div class="mc-fill" style="width:8%"></div></div>
           <div class="mc-pct">8% הושלם</div>
         </div>
@@ -124,10 +139,17 @@ export async function renderHome(root) {
           <div class="mc-bar"><div class="mc-fill" style="width:0%"></div></div>
           <div class="mc-pct">בקרוב</div>
         </div>
+        <div class="mc mc-g" data-nav="/listening">
+          <span class="mc-icon">🎧</span>
+          <div class="mc-name">האזנה</div>
+          <div class="mc-desc">פגישות תרגול ממוקדות, ציון מוכנות וניתוח חולשות</div>
+          <div class="mc-bar"><div class="mc-fill" style="width:${listeningScore}%"></div></div>
+          <div class="mc-pct">${listeningLabel}</div>
+        </div>
       </div>
     </div>`;
 
-  el.querySelector('#btn-daily').addEventListener('click', () => navigate('/flashcards'));
+  el.querySelector('#btn-daily').addEventListener('click', () => navigate('/card'));
   el.querySelectorAll('[data-nav]').forEach(el2 => {
     el2.addEventListener('click', () => navigate(el2.dataset.nav));
   });

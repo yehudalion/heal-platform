@@ -1,6 +1,6 @@
 # HighScore — Task Board
-**Version:** 1.0
-**Last Updated:** 2026-07-10
+**Version:** 1.1
+**Last Updated:** 2026-07-15 (Listening tasks reworked per 15.7 design review)
 
 > משימות מסודרות לפי פאזה ועדיפות.
 > P0 = חוסם הכל / P1 = MVP קריטי / P2 = חשוב אך לא חוסם
@@ -90,16 +90,27 @@
 
 ## Phase 3 — Listening MVP
 
-> שכבת lecture_qa בלבד. Audio existence must be confirmed (T002) before starting.
+> **שני** סוגי פריטים בליבה: `lecture_qa` **ו-`continuation`** (השלמת קטע שמע, רב-ברירה) —
+> continuation הוא חצי מהמבחן האמיתי, לא future (עודכן 15.7.2026; ראה `LISTENING_FORMAT.md`,
+> CONTENT_GUIDELINES §3, ו-FUTURE_FEATURES F-L04). Audio existence must be confirmed (T002) before starting.
+> החלטות עיצוב מ-review של 15.7.2026 (שתי ביקורות חיצוניות + הכרעות Lion) משוקפות במשימות T056+.
 
 | ID | עדיפות | גודל | משימה | קבצים מושפעים |
 |---|---|---|---|---|
 | T050 | P0 | S | **אמת אודיו** — T002 חייב להיות ירוק לפני שמתחילים Phase 3. | — |
 | T051 | P0 | M | **`listening.data.js`** — פונקציות: `getLectures(difficulty)`, `getQuestions(lectureId)`, `saveSession(data)`, `saveResponse(data)` | `src/data/listening.data.js` |
-| T052 | P1 | L | **תוכן: הרצאות + שאלות** — Calibration Batch: 2 הרצאות עם 5 שאלות כל אחת → Lion מאשר → bulk. | DB `listening_lectures`, `listening_questions` |
+| T052 | P1 | L | **תוכן: קליפים + שאלות** [תוקן 15.7.2026] — יחידת התוכן היא **section שלם**, לא "2 הרצאות×5 שאלות": או **3 קליפים (1+2+2 שאלות)** ל-`lecture_qa`, או **4 קליפי `continuation`**. Calibration Batch → Lion מאשר → bulk (ראה T067 — מנת הכיול הראשונה היא continuation). | DB `listening_lectures`, `listening_questions` |
 | T053 | P1 | M | **`listening-learn.js`** — הסבר על פורמט הלאל listening, מה לצפות, אסטרטגיות בסיסיות. | `src/screens/listening-learn.js` |
-| T054 | P1 | L | **`listening-practice.js`** — player אודיו + שאלות MC לאחר ההרצאה + שמירת session/responses. | `src/screens/listening-practice.js`, `src/components/audio-player.js` |
+| T054 | P1 | L | **`listening-practice.js`** — player אודיו + שאלות MC לאחר הקליפ + שמירת session/responses. | `src/screens/listening-practice.js`, `src/components/audio-player.js` |
 | T055 | P1 | M | **`listening-analyze.js`** — סיכום session: ציון, מפתח חלש, השוואה לממוצע. | `src/screens/listening-analyze.js` |
+| T056 | P1 | M | **שני רכיבי UI נפרדים** — `LectureQA_View` (עם גזע שאלה) ו-`Continuation_View` (ללא גזע; האפשרויות הן המשכים תחביריים של המשפט החתוך). | `src/screens/listening-practice.js`, `src/components/` |
+| T057 | P1 | M | **Replay חופשי** — מותר להשמיע שוב בכל עת בתוך טיימר הסעיף, ב-practice וב-exam mode. עקוב אחר מספר ה-replays והצג ב-Analyze כ**"cost reflection"** (למשל: "השמעת שוב 40% מהקליפים — זה צרך X מתוך Y דקות"). מלמד ניהול זמן דרך רפלקציה, לא דרך חסימה (Wellbeing Rule). | `src/data/listening.data.js`, `src/screens/listening-practice.js`, `listening-analyze.js` |
+| T058 | P1 | M | **פידבק לאחר טעות** — קודם השמע **רק את אזור המפנה** ("הַאזן שוב לחלק המסומן"); **ללא transcript**. אחר כך הסבר עברי קצר על מה קרה לוגית ב-pivot. (Transcript-in-feedback נדחה — ראה Backlog T082 — מה שגם מסיר את סיכון ה-split-attention.) | `src/components/feedback-panel.js`, `src/screens/listening-practice.js` |
+| T059 | P1 | S | **prompt מטא-קוגניטיבי אחרי טעות** — שאלה אחת: "מה השתבש? [1] לא הצלחתי לזהות את המילים / [2] הבנתי אבל התבלבלתי בין התשובות". תפיסתי → דחוף את המילים למודול הווקאבולרי עם האודיו שלהן. לוגי → תן משקל גבוה יותר לסוג-המפנה הרלוונטי בזרם התרגול. | `src/screens/listening-practice.js`, `src/data/` |
+| T064 | P1 | M | **זרם תרגול עם interleaving אמיתי** — משקלל את סוג-המפנה החלש של התלמיד **יותר** בתוך תערובת interleaved (**לא** 3 קליפים רצופים מאותו סוג — זה blocking). ייתכן set ממוקד אופציונלי קצר של 3 קליפים, אך הוא לא המנגנון הראשי. | `src/data/listening.data.js`, `src/screens/listening-practice.js` |
+| T065 | P1 | M | **Blind-solver validation** — לכל שאלה מחוברת: תן קליפ+שאלה ללא המפתח, ובדוק שה-pivot המכוון אכן קובע את התשובה (אותה שיטה כמו במודול Rephrase, T041a). | תהליך QA + DB `listening_questions` |
+| T066 | P2 | M | **קליפי "global" ללא מפנה יחיד** — לבניית stamina להאזנה לאורך 90 שניות שלמות; מתויגים ככאלה. | DB `listening_lectures` |
+| T067 | P0 | M | **מנת כיול ראשונה** — Calibration-Batch Method חל (batch קטן מבוקר → Lion מאשר → ואז bulk). המנה הראשונה חייבת להיות **פריטי `continuation`** (הסוג שהוזנח פעמיים) כדי לחשוף unknowns מוקדם. `is_published=false` עד אישור. | DB `listening_lectures`, `listening_questions` |
 
 ---
 
@@ -139,6 +150,23 @@
 |---|---|---|---|---|
 | T078 | P2 | S | אתחול Supabase CLI בריפו (supabase init + config.toml) — כרגע אין מנגנון push/pull מקומי. | `supabase/` |
 | T079 | P2 | M | `supabase db pull` מלא כדי לסנכרן את 9 המיגרציות הקיימות ב-production שאין להן קובץ בריפו (כרגע יש רק `listening_pipeline_prep`). | `supabase/migrations/` |
+
+### Backlog — Listening (P2, לא חוסם; החלטות review 15.7.2026)
+
+| ID | עדיפות | גודל | משימה | קבצים מושפעים |
+|---|---|---|---|---|
+| T080 | P2 | M | **סימולציית קושי אדפטיבי** — המבחן אדפטיבי per-section, אבל ה-MVP לא צריך סימולטור אדפטיבי; תרגול טוב בכל רמה מספיק. | — |
+| T081 | P2 | S | **כיול speakingRate מדויק per-genre** — כרגע בשימוש interim 0.90 (monologue) / 0.95 (dialogue); lecture TBD. | `LISTENING_FORMAT.md`, pipeline הפקת אודיו |
+| T082 | P2 | M | **הצגת transcript בפידבק** — נדחה (מסיר בינתיים את חשש ה-split-attention). מומש כרגע כ"השמעת אזור המפנה בלבד" ב-T058. | `src/components/feedback-panel.js` |
+| T083 | P2 | S | **קולות narrator נוספים מעבר ל-Charon** — דרישת שני-הקולות של dialogue (Charon+Kore) נשארת core; קולות single-narrator נוספים הם polish, להוסיף רק אם טריוויאלי. | pipeline הפקת אודיו, `listening_lectures.voice_config` |
+| T084 | P2 | S | **שריון slot ניווט למודול כתיבה עתידי** — ("כתיבה — בקרוב") ולוודא שהסכימה לא חוסמת אותו. מבחן הלאל האמיתי כולל כתיבה/word-formation, אבל זה מודול נפרד, כבר future-scoped — לא תפקיד מודול ה-Listening. | `src/components/navbar.js`, schema |
+
+### Open Validation — Listening (לפני bulk production; לא חוסם עדכון docs)
+
+| ID | עדיפות | גודל | משימה | קבצים מושפעים |
+|---|---|---|---|---|
+| T085 | P1 | M | **הסכמת מומחים על 7 הקליפים הרשמיים** — 2-3 מומחים (מורה לאנגלית / סטודנט חזק לשעבר-פסיכומטרי) פותרים את 7 הקליפים הרשמיים באופן עצמאי; מדוד הסכמה מול מפתח התשובות המשוער. **אין לנו מפתח רשמי** — כל התשובות ה"נכונות" משוערות. | `docs/LISTENING_FORMAT.md` (Inferred answer key) |
+| T086 | P1 | M | **Re-validation של ממצאי n=7** — הממצאים ("מילים קיצוניות מנבאות קושי", "3 משפחות hinge") הם **מחוללי-השערות, לא מוכחים** — לְאמת מחדש ככל שהספרייה גדלה, רצוי עם blind coding בצ'אט נפרד (כפי שנעשה ל-Rephrase). לסווג מחדש את המתאם 0.82 (אורך↔קושי) כ**השערה** (חלקית מעגלי). | `docs/LISTENING_FORMAT.md` |
 
 ---
 

@@ -10,6 +10,19 @@ export async function renderSrs(root) {
   el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
 
   const words = await getDueWords(8);
+
+  if (!words.length) {
+    el.innerHTML = `
+      <div class="srs-done fade-in">
+        <div class="srs-done-emoji">📚</div>
+        <h2>אין מילים לתרגול</h2>
+        <p>לא נמצאו מילים לחזרה כרגע. נסו שוב מאוחר יותר.</p>
+        <button class="btn-primary" id="btn-back">← חזרה לכרטיסיות</button>
+      </div>`;
+    el.querySelector('#btn-back').addEventListener('click', () => navigate('/flashcards'));
+    return;
+  }
+
   queue   = words.sort(() => Math.random() - .5).slice(0, 8);
   idx     = 0;
   correct = 0;
@@ -53,8 +66,8 @@ function drawCard(el) {
           <!-- FRONT -->
           <div class="flip-face">
             <span class="fc-tier-tag ${tc}">${tl}</span>
-            <div class="fc-word">${w.word}</div>
-            <div class="fc-pos">${w.pos}</div>
+            <div class="fc-word">${w.word || ''}</div>
+            <div class="fc-pos">${w.pos || ''}</div>
             <div class="fc-hint">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width:13px;height:13px"><path d="M3 8a5 5 0 0010 0"/><path d="M11 6l2 2-2 2"/></svg>
               לחץ לחשוף
@@ -63,10 +76,10 @@ function drawCard(el) {
 
           <!-- BACK -->
           <div class="flip-face flip-back">
-            <div class="fc-back-word">${w.word}</div>
-            <div class="fc-back-pos">${w.pos} · impact ${w.impact.toFixed(1)}</div>
+            <div class="fc-back-word">${w.word || ''}</div>
+            <div class="fc-back-pos">${w.pos || ''} · impact ${(w.impact ?? 0).toFixed(1)}</div>
             <div class="fc-def-row">
-              <div class="fc-def-he">${w.def_he || w.def}</div>
+              <div class="fc-def-he">${w.def_he || w.def || ''}</div>
               ${w.audioWord ? `<button class="btn-audio" id="btn-audio-word" title="השמע">
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width:12px;height:12px"><path d="M5 3L11 8 5 13V3z"/></svg>
               </button>` : ''}
@@ -89,10 +102,12 @@ function drawCard(el) {
     </div>`;
 
   // Panels content (hidden initially)
-  if (w.def) {
+  const sentenceText = w.sentence || w.def;
+  if (sentenceText) {
     injectPanel(el, 'sentence',
-      `<span style="font-style:italic;direction:ltr;display:block">${w.def}</span>
-       ${w.audioWord ? `<button class="btn-audio" id="btn-audio-sentence" style="margin-top:6px">
+      `<span style="font-style:italic;direction:ltr;display:block">${sentenceText}</span>
+       ${w.sentence_he ? `<div style="font-size:.8rem;color:var(--muted);margin-top:4px;direction:rtl">${w.sentence_he}</div>` : ''}
+       ${w.audioSentence ? `<button class="btn-audio" id="btn-audio-sentence" style="margin-top:6px">
          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width:12px;height:12px"><path d="M5 3L11 8 5 13V3z"/></svg>
        </button>` : ''}`,
       'fc-panel-ltr');

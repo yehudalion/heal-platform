@@ -45,29 +45,9 @@ export async function renderFlashcards(root) {
           </button>
         </div>
 
-        <!-- SRS explanation accordion -->
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-          <button id="btn-srs-exp" style="width:100%;padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;background:none;border:none;font-size:.88rem;font-weight:700;color:var(--text)">
-            <span style="display:flex;align-items:center;gap:8px">💡 מה זו חזרה מרווחת?</span>
-            <svg id="srs-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;transition:transform .2s"><path d="M4 6l4 4 4-4"/></svg>
-          </button>
-          <div id="srs-exp" style="display:none;padding:0 1.2rem 1.2rem;border-top:1px solid var(--border)">
-            <p style="font-size:.83rem;color:var(--muted);line-height:1.7;margin-top:.9rem">
-              חזרה מרווחת (Spaced Repetition) היא שיטת למידה מבוססת מחקר שמנצלת את <strong style="color:var(--text)">"עקומת השכחה"</strong>. כל פעם שאתה מדרג מילה — <strong style="color:var(--green-dark)">קל</strong>, <strong style="color:var(--orange)">בסדר</strong> או <strong style="color:var(--red)">קשה</strong> — האלגוריתם מחשב מתי תצטרך לראות אותה שוב. מילים קשות חוזרות מהר; מילים קלות — אחרי זמן ארוך יותר.
-            </p>
-          </div>
-        </div>
       </div>
     </div>`;
 
-  el.querySelector('#btn-start').addEventListener('click', () => navigate('/srs'));
+  el.querySelector('#btn-start').addEventListener('click', () => navigate('/card'));
 
-  const expBtn = el.querySelector('#btn-srs-exp');
-  const expDiv = el.querySelector('#srs-exp');
-  const chevron = el.querySelector('#srs-chevron');
-  expBtn.addEventListener('click', () => {
-    const open = expDiv.style.display === 'block';
-    expDiv.style.display = open ? 'none' : 'block';
-    chevron.style.transform = open ? '' : 'rotate(180deg)';
-  });
 }

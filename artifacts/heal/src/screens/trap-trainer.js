@@ -1,40 +1,47 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
+import { getTraps } from '../supabase.js';
 
 const TRAPS = [
   {
     key: 'Extreme Wording', name: 'Extreme Wording — ניסוח קיצוני',
-    desc: 'השאלאים מחליפים מילים מתונות (<em>most, some, often</em>) במילים קיצוניות: <strong>always, never, all, none</strong>.',
+    desc: 'השאלות מחליפות מילים מתונות (<em>most, some, often</em>) במילים קיצוניות: <strong>always, never, all, none</strong>.',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת בשאלה: כאן יש לפרט את טכניקת ההסתרה לניסוח קיצוני]',
     examples: [{ orig: 'The treatment is effective for most patients.', trap: 'The treatment is <strong>always</strong> effective.', correct: 'The treatment works for the majority of patients.', why: '"most" → "always": קיצוני ולא נכון.' }],
     quiz: { orig: 'Several studies suggest a link between sleep and memory.', opts: [{ t: 'Some research indicates a connection between sleep and memory.', c: true }, { t: 'All studies prove that sleep always improves memory.', c: false }] },
   },
   {
     key: 'Logical Reversal', name: 'Logical Reversal — היפוך לוגי',
     desc: 'סיבה ותוצאה מתחלפים. "A גורם ל-B" הופך ל-"B <strong>גורם</strong> ל-A".',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת: טכניקת ההסתרה להיפוך לוגי]',
     examples: [{ orig: 'Economic instability led to political unrest.', trap: 'Political unrest <strong>caused</strong> economic instability.', correct: 'Economic instability resulted in political turmoil.', why: 'הכיוון הפוך — במקור הכלכלה גרמה לפוליטיקה.' }],
     quiz: { orig: 'The law was enacted in response to public pressure.', opts: [{ t: 'The law led to increased public pressure.', c: false }, { t: 'Public demand prompted the enactment of the law.', c: true }] },
   },
   {
     key: 'Added Detail', name: 'Added Detail — פרט שנוסף',
     desc: 'הניסוח מוסיף מידע שלא היה במקור. הכלל: אם לא נאמר <strong>במפורש</strong> — זו מלכודת.',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת: טכניקת ההסתרה לפרט שנוסף]',
     examples: [{ orig: 'Researchers found a link between diet and health.', trap: 'Researchers found that a <strong>Mediterranean</strong> diet improves health.', correct: 'Scientists discovered a connection between nutrition and wellbeing.', why: '"Mediterranean" לא הוזכר במקור.' }],
     quiz: { orig: 'The university announced plans to expand its campus.', opts: [{ t: 'The university announced a $50 million expansion.', c: false }, { t: 'The university revealed plans to enlarge its campus.', c: true }] },
   },
   {
     key: 'Scope Distortion', name: 'Scope Distortion — עיוות היקף',
     desc: 'הרחבה לא מוצדקת (<em>some → all</em>) או צמצום (<em>always → sometimes</em>).',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת: טכניקת ההסתרה לעיוות היקף]',
     examples: [{ orig: 'Some students struggle with standardized testing.', trap: 'Students <strong>generally</strong> struggle with testing.', correct: 'Certain students find standardized exams challenging.', why: '"some" → "generally" מרחיב שלא כדין.' }],
     quiz: { orig: 'A few participants reported side effects.', opts: [{ t: 'Most participants experienced side effects.', c: false }, { t: 'Some participants reported adverse effects.', c: true }] },
   },
   {
     key: 'Synonym Confusion', name: 'Synonym Confusion — בלבול עוצמת מילה',
     desc: 'מילה שנראית נרדפת אך עוצמתה שונה. <em>suggest ≠ prove</em>, <em>limit ≠ prevent</em>.',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת: טכניקת ההסתרה לבלבול מילים נרדפות]',
     examples: [{ orig: 'The data suggests a correlation between the variables.', trap: 'The data <strong>proves</strong> a causal relationship.', correct: 'The findings indicate a link between the two variables.', why: '"suggest/correlation" ≠ "prove/causal".' }],
     quiz: { orig: 'The policy aims to reduce carbon emissions.', opts: [{ t: 'The policy guarantees elimination of carbon emissions.', c: false }, { t: 'The policy seeks to lower carbon output.', c: true }] },
   },
   {
     key: 'Wrong Inference', name: 'Wrong Inference — הסקה שגויה',
     desc: 'הניסוח מסיק מסקנה שלא נאמרה. Restatement חייב להיצמד למה שנאמר <strong>במפורש</strong>.',
+    g: '[PLACEHOLDER — כיצד מלכודת זו מוסתרת: טכניקת ההסתרה להסקה שגויה]',
     examples: [{ orig: 'The company reported lower profits this quarter.', trap: 'The company is facing <strong>financial difficulties</strong>.', correct: 'The company experienced reduced earnings this quarter.', why: '"lower profits" ≠ "financial difficulties".' }],
     quiz: { orig: 'The author published three books in five years.', opts: [{ t: 'The author is considered highly prolific.', c: false }, { t: 'The author released three works in five years.', c: true }] },
   },
@@ -45,6 +52,14 @@ let step = 0, quizDone = false;
 export async function renderTrapTrainer(root) {
   await renderLayout(root, '/trap-trainer');
   step = 0; quizDone = false;
+
+  // Merge g-field (hiding method) from Supabase into hardcoded TRAPS
+  const dbTraps = await getTraps();
+  if (dbTraps.length) {
+    const byKey = Object.fromEntries(dbTraps.map(t => [t.key, t]));
+    TRAPS.forEach(t => { if (byKey[t.key]?.g) t.g = byKey[t.key].g; });
+  }
+
   drawStep(getPageContent());
 }
 
@@ -80,6 +95,11 @@ function drawStep(el) {
         <div class="tt-info-badge">קטגוריה ${step + 1}</div>
         <div class="tt-info-name">${T.name}</div>
         <div class="tt-info-desc">${T.desc}</div>
+        ${T.g ? `
+        <div style="margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border)">
+          <div style="font-size:.72rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">🫥 איך הם מסתירים</div>
+          <div class="tt-info-desc">${T.g}</div>
+        </div>` : ''}
       </div>
 
       <div class="sec-title" style="margin-top:1rem">דוגמאות</div>

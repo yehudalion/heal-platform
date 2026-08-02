@@ -66,3 +66,6 @@ ours; exam items are not.
 - **Verify counts by query before writing them into docs.** Stale numbers have caused real errors.
 - **Archive before you delete.** Content deletions get a committed CSV snapshot in `docs/archive/`.
 - Secrets live in `env.scripts.txt` / `.env` — both gitignored. Never commit them.
+- בעת ייצור פריטי השלמת קטע שמע (continuation) — חובה לקרוא את §4 ב-`CONTENT_GUIDELINES.md`
+  ולהריץ את שערי המנה (מבחן ההשהיה, גיוון סוגי-חיתוך, פיזור תשובות, פותר עיוור) לפני הגשה
+  לליאון. קושי נקנה במבנה ובמרחק-עוגן, לא באוצר מילים.
