@@ -6,6 +6,16 @@
 separating from the Psychometric). Target: learners sitting the exam from **December 2026**.
 Not a general English app. Every feature earns its place by raising the score.
 
+## Canonical product map — read first
+
+`docs/SITEMAP.md` is the single source of truth for product structure: screens, student flow, the 3-layer template per module, label vocabularies, and a per-table verdict.
+
+Rules:
+- Before creating, deleting, or refactoring ANY screen or DB table, check SITEMAP.md first.
+- If a screen or table is not in SITEMAP.md, it has no owner — do not build on it, and flag it.
+- If the map does not cover your case, update SITEMAP.md FIRST and get Lion's explicit approval, then write code. Never the reverse.
+- Live query / git output beats any document, including this one. If reality contradicts SITEMAP.md, report the contradiction — do not silently follow either side.
+
 ## Hard rules (violating these is a bug, not a style choice)
 
 1. **Subscription-only. No ads, ever.**
