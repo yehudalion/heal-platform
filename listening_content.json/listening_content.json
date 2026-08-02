@@ -1,0 +1,1484 @@
+[
+  {
+    "id": "78058b80-213a-4397-972b-ebb3bb119fd7",
+    "topic": "Oscar statuettes during World War II",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 1,
+    "transcript": "Academy Awards, also known as Oscars, are presented every year for excellence in the film industry. The Oscar statuettes given to the winners are normally made of gold-plated bronze. During World War II, metals were preserved for the war effort, so the statuettes were made of painted plaster. After the war, those who had received plaster Oscars were",
+    "questions": [
+      {
+        "id": "9abbe1fa-746d-43f4-865a-d910744da429",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "ccdf853a-26ab-46fb-9893-c8af66d4c284",
+            "option_letter": "A",
+            "option_text": "given the option to exchange them for metal ones.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. ההמשך הלוגי: קיבלו אפשרות להחליף."
+          },
+          {
+            "id": "b6486971-23e9-45eb-a502-55ae04d2dc47",
+            "option_letter": "B",
+            "option_text": "asked to return their awards immediately.",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. הגבס היה פתרון מוצדק."
+          },
+          {
+            "id": "d859bba9-5a54-425d-a750-3e2dec4200f4",
+            "option_letter": "C",
+            "option_text": "disappointed that the awards lacked artistic value.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "36a635f0-0240-47b7-9d18-12d2ecea0569",
+            "option_letter": "D",
+            "option_text": "honored with a second ceremony after the war ended.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4796fb4b-0689-42e0-bdb9-b10bc3bd6d66",
+    "topic": "Cranberries and digestive health",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 1,
+    "transcript": "Cranberries are native to North America. The small, bright red berries are beloved for their tart flavor. They are also very nutritious because they are rich in antioxidants and high in fiber. Excessive consumption, however, can cause digestive problems. It is therefore recommended that cranberries be eaten",
+    "questions": [
+      {
+        "id": "d802c2c6-4730-480a-8399-b043ee53cfa6",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "1cd0e3c6-cdfc-42fa-8b71-2c26747267ef",
+            "option_letter": "A",
+            "option_text": "in moderation.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Excessive consumption -> ההמשך הלוגי: במידה."
+          },
+          {
+            "id": "39be73f0-4395-48ab-b42c-e6e1b9459db6",
+            "option_letter": "B",
+            "option_text": "as a replacement for fiber supplements.",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום בלתי-מוצדק."
+          },
+          {
+            "id": "b6eed8bf-0fcb-48d6-94c1-ddb765cfa4c6",
+            "option_letter": "C",
+            "option_text": "only when fresh, not frozen or dried.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "1aa039af-49e9-48f5-80a0-9168f4bf52b3",
+            "option_letter": "D",
+            "option_text": "alongside other antioxidant-rich foods.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bf3af429-874d-487a-a06e-0e7814775c00",
+    "topic": "Gray hair and changing social attitudes",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "In Western societies, gray hair is associated with old age and often stigmatized. As a result, people have spent much time and money hiding their gray hair by coloring it. Recently though, some people have been defying stereotypes and opting to leave their graying hair as it is. What is surprising is that some young people",
+    "questions": [
+      {
+        "id": "e3a67402-58ec-4d73-95ca-a524159bfab5",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "0e450ac6-2e5d-4b78-9ae9-f17e33eaed37",
+            "option_letter": "A",
+            "option_text": "are deliberately dyeing their hair gray as a fashion choice.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Surprising + young people -> הפואנטה."
+          },
+          {
+            "id": "d8f66cd7-68b7-497e-bcfe-85853c71b164",
+            "option_letter": "B",
+            "option_text": "are unaware of the stigma surrounding gray hair.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "32ec8590-05f1-4b9e-83de-b332c0c821ab",
+            "option_letter": "C",
+            "option_text": "have started campaigns against hair dye companies.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "96245f47-df25-4bfd-99a6-396f480c2e63",
+            "option_letter": "D",
+            "option_text": "have always preferred natural hair over dyed hair.",
+            "is_correct": false,
+            "trap_type": "L5",
+            "explanation_he": "Always סותר recently."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "42e3de22-52d1-4d5c-8dcc-16cef5695476",
+    "topic": "Agricultural mechanization in the 19th century",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "In the early 19th century, it took a typical American farmer about 300 hours of manual labor to produce 100 bushels of wheat. Over the course of the century, agricultural inventions such as mechanical harvesters and plows were introduced. As a result,",
+    "questions": [
+      {
+        "id": "83584406-3aa2-479f-82a8-7b8618c85246",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "3854351e-6f42-45b5-98a8-242fdf1638ed",
+            "option_letter": "A",
+            "option_text": "the time required to produce the same amount of wheat dropped dramatically.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. As a result + המצאות חקלאיות."
+          },
+          {
+            "id": "54125abc-c76c-4f70-9849-5ed24a5ac821",
+            "option_letter": "B",
+            "option_text": "farmers began to abandon their land and move to cities.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "3a4401e7-dab7-4d6b-b70f-2fd786151e31",
+            "option_letter": "C",
+            "option_text": "the government imposed limits on wheat production.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "1c04ad27-c81f-446e-ba17-a8a9888d08d3",
+            "option_letter": "D",
+            "option_text": "wheat became less popular as a food source.",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4dad6897-9f8f-4853-b997-11007462c7ce",
+    "topic": "Declining bee populations",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 1,
+    "transcript": "Bees are among the most important pollinators on Earth. As they move from flower to flower collecting nectar, they transfer pollen and enable plants to reproduce. Without bees, many of the fruits and vegetables humans depend on would disappear. Scientists have recently raised the alarm that bee populations are declining worldwide, largely because",
+    "questions": [
+      {
+        "id": "90758326-c50c-4f14-86cb-882d991c4141",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "7f456aa0-4e17-424d-82eb-9f192d1d632e",
+            "option_letter": "A",
+            "option_text": "of pesticide use and the destruction of natural habitats.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. גורמי ירידה ידועים."
+          },
+          {
+            "id": "837b9275-36be-433e-bb68-f5f65c2b2ed2",
+            "option_letter": "B",
+            "option_text": "bees have begun to prefer artificial flowers over natural ones.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "5a47dede-7f0d-4f13-9973-7445e424685f",
+            "option_letter": "C",
+            "option_text": "scientists have not done enough to study their behavior.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "e9bb2702-765f-4412-a5c9-430939dab480",
+            "option_letter": "D",
+            "option_text": "there are now fewer plant species for them to pollinate.",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "8e847c95-0847-4e2a-a1e2-4f17ee7dd54c",
+    "topic": "Sleep deprivation and exam performance",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Research has shown that sleep plays a critical role in memory consolidation. During sleep, the brain replays experiences from the day and transfers them from short-term to long-term storage. People who are sleep-deprived tend to perform worse on memory tests. For this reason, students who study all night before an exam may actually perform worse than those who",
+    "questions": [
+      {
+        "id": "b9a4d6c3-fd79-4979-b15e-ce5a692f3f43",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "13a951f0-06ab-4d00-9f1a-755622404e8d",
+            "option_letter": "A",
+            "option_text": "study for a shorter time but get a full night of sleep.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. שינה עדיפה על שינון לילי."
+          },
+          {
+            "id": "fe99c15e-43db-4b7b-a162-912ed69e5685",
+            "option_letter": "B",
+            "option_text": "begin studying weeks in advance of the exam.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "4736c78c-135f-4be5-a7e2-adcf8b2cd693",
+            "option_letter": "C",
+            "option_text": "take breaks every hour during their study sessions.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "785e38ad-beac-4fce-931c-bec5831f56dc",
+            "option_letter": "D",
+            "option_text": "drink coffee to stay awake during the exam.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "597cf3da-f935-46bf-b66b-6357cfd095c4",
+    "topic": "Coral reef bleaching and recovery",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Coral reefs cover less than one percent of the ocean floor, yet they support approximately twenty-five percent of all marine species. Rising ocean temperatures cause corals to expel the algae living in their tissues, a process known as bleaching. Once bleached, a coral reef can recover, but only if",
+    "questions": [
+      {
+        "id": "8fc76d05-24c3-4b63-a7ec-eb3ae42852eb",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "e3b5b273-8351-4836-882d-602121658e23",
+            "option_letter": "A",
+            "option_text": "water temperatures return to normal within a reasonable period of time.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. התנאי הלוגי: הטמפרטורה יורדת."
+          },
+          {
+            "id": "2ad9d004-c63d-4868-841e-49b2c68f38c4",
+            "option_letter": "B",
+            "option_text": "scientists intervene with chemical treatments.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "03f819ab-88cb-4d7d-88ce-0796154bc078",
+            "option_letter": "C",
+            "option_text": "the surrounding marine species are relocated temporarily.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "170059fc-ac01-4536-b789-053d4b5ac355",
+            "option_letter": "D",
+            "option_text": "the reef is located in a protected marine area.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "70869c65-a27c-4c36-b1c0-772d178109a2",
+    "topic": "Reliability of fingerprint analysis",
+    "item_type": "text_continuation",
+    "primary_skill": "syntactic_prediction",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "For over a century, fingerprints have been used in criminal investigations as a reliable means of identification. Recent advances in forensic science, however, have led some researchers to question whether fingerprint analysis is as reliable as once believed, particularly when",
+    "questions": [
+      {
+        "id": "7ffef41e-cfbc-4adb-831c-c392013f02b6",
+        "question_order": 1,
+        "question_text": "How is the sentence most likely to continue?",
+        "options": [
+          {
+            "id": "fd61b156-8236-4b20-b2b6-e90b502d5de3",
+            "option_letter": "A",
+            "option_text": "the prints collected from a crime scene are partial or smudged.",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Particularly when + ספק באמינות."
+          },
+          {
+            "id": "70a0d500-b5f7-4e91-9d37-bebf450633c5",
+            "option_letter": "B",
+            "option_text": "the suspect has never been arrested before.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "99612838-e95f-48ae-b687-78a6c2209852",
+            "option_letter": "C",
+            "option_text": "the investigating officer lacks sufficient training.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "c9b2b2b5-fd51-48bb-b017-c8a9eda21c35",
+            "option_letter": "D",
+            "option_text": "the crime was committed in a public place.",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6b0950e0-ea79-4cf2-9e54-22d878ef0c95",
+    "topic": "Schleicher linguistic family tree",
+    "item_type": "lecture_qa",
+    "primary_skill": "argument_navigation",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "August Schleicher was a 19th-century German linguist who specialized in comparative linguistics. His research examined the relationships among languages, including whether certain languages may have developed from a shared older language. To illustrate his theory, Schleicher introduced the model of the linguistic family tree. However, there are several flaws in this model. For one thing, it assumes that languages which descended from the same parent language always diverge and never converge. We now know that sister languages sometimes do converge. For example, the regional dialects of England all have the same parent language, Old English. These dialects are now converging, far more similar to one another today than they were even a generation ago. This is because all of them have been strongly influenced by standard British English, the variety heard on radio and television.",
+    "questions": [
+      {
+        "id": "a541ed18-0d3b-4d02-a410-21d5b5a3643e",
+        "question_order": 1,
+        "question_text": "What is the speakers main purpose?",
+        "options": [
+          {
+            "id": "ed1f5579-4b6c-4e22-8aad-1191ab715475",
+            "option_letter": "A",
+            "option_text": "To describe Schleichers theory and point out one of its weaknesses",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. מציג תיאוריה ואז ביקורת."
+          },
+          {
+            "id": "9e9f52ce-90a5-4ed5-b645-f27dfd26236d",
+            "option_letter": "B",
+            "option_text": "To argue that Schleichers model has been completely disproven",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          },
+          {
+            "id": "f728f9ae-f49b-4681-866a-9edeb6b6607e",
+            "option_letter": "C",
+            "option_text": "To explain why English dialects are disappearing",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום. הדיאלקטים הם דוגמה."
+          },
+          {
+            "id": "1f522bc8-084c-44df-a323-2b2554e06b68",
+            "option_letter": "D",
+            "option_text": "To compare Schleichers work with other 19th-century linguists",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      },
+      {
+        "id": "1de46813-7161-4673-b87b-affffe540307",
+        "question_order": 2,
+        "question_text": "According to the speaker, what has caused English dialects to grow more similar?",
+        "options": [
+          {
+            "id": "dfbb7de7-abe2-410b-bc3a-9c81232b66b3",
+            "option_letter": "A",
+            "option_text": "The influence of a widely spoken standard variety",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Standard British English, radio and television."
+          },
+          {
+            "id": "2f701218-2079-40a5-b217-85a7ad904592",
+            "option_letter": "B",
+            "option_text": "Their shared origin in Old English",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. המקור המשותף הוא המשפחה, לא גורם ההתכנסות."
+          },
+          {
+            "id": "6062da5e-0cfd-4d2c-8274-99a9839e353a",
+            "option_letter": "C",
+            "option_text": "Increased contact between speakers from different regions",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "e9b7a4fb-aa5b-43cb-b2c6-d71ce948e368",
+            "option_letter": "D",
+            "option_text": "Government policies promoting a single national language",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6cc9a9f3-29f3-4068-a16b-79b15ec1f45b",
+    "topic": "Allergies as immune system malfunction",
+    "item_type": "lecture_qa",
+    "primary_skill": "argument_navigation",
+    "accent": "us",
+    "voice_id": "21m00Tcm4TlvDq8ikWAM",
+    "speaker_count": 1,
+    "difficulty": 1,
+    "transcript": "The immune system is responsible for protecting our body against harmful intruders such as bacteria and viruses. Most of the time, it can correctly recognize which foreign substances it should fight against. However, in people who suffer from allergies, the immune system malfunctions and mistakenly identifies innocuous substances like flower pollen or the proteins found in milk as harmful. It then attacks these substances, resulting in an allergic reaction.",
+    "questions": [
+      {
+        "id": "1230dab3-f947-4aba-9441-ccd1ce367e68",
+        "question_order": 1,
+        "question_text": "The speakers purpose is to",
+        "options": [
+          {
+            "id": "307e6723-ad5c-46f2-90b6-4f8a95baf1d0",
+            "option_letter": "A",
+            "option_text": "discuss substances that are harmful to the body",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק. אבקת פרחים אינה מזיקה."
+          },
+          {
+            "id": "28fffbe3-b206-41f9-b92b-70458db3b07c",
+            "option_letter": "B",
+            "option_text": "describe how the body protects itself against bacteria and viruses",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום. זה רק הפתיחה."
+          },
+          {
+            "id": "b5557014-ca3b-41dc-9a89-e886c4408aa1",
+            "option_letter": "C",
+            "option_text": "describe a malfunction of the immune system",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. הקטע כולו עוסק בזיהוי שגוי."
+          },
+          {
+            "id": "b4d648df-3b56-4c1d-adfa-bf1519c0e0fe",
+            "option_letter": "D",
+            "option_text": "discuss common allergic reactions",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום. תגובה אלרגית היא התוצאה."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "8f7ad288-badc-4ba1-ba7b-136632eb4033",
+    "topic": "The placebo effect reconsidered",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "The placebo effect has long been regarded as merely a nuisance in clinical trials, a confounding variable to be controlled for rather than studied in its own right. In recent years, however, a number of researchers have begun to argue that this dismissive attitude is itself a kind of scientific blind spot. Patients who receive placebos sometimes experience genuine physiological changes: their pain decreases, their symptoms ease, their recovery accelerates. What these researchers find most intriguing is not that the placebo works, but that it continues to work even when patients are told they are receiving one.",
+    "questions": [
+      {
+        "id": "357f1815-f426-43bf-99b9-2a5464b21c3f",
+        "question_order": 1,
+        "question_text": "How does the speaker view the traditional attitude toward the placebo effect?",
+        "options": [
+          {
+            "id": "91e0db35-868b-4dc4-a360-25dd8af94b5a",
+            "option_letter": "A",
+            "option_text": "As a reasonable caution that has protected clinical research",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. הדובר מתאר blind spot."
+          },
+          {
+            "id": "28b520a8-362f-46e4-b384-cceda912a31f",
+            "option_letter": "B",
+            "option_text": "As a scientific limitation worth reconsidering",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Dismissive attitude is a scientific blind spot."
+          },
+          {
+            "id": "1c905bf0-7597-4800-a2ce-9e48826df2b2",
+            "option_letter": "C",
+            "option_text": "As a position that most researchers still firmly hold",
+            "is_correct": false,
+            "trap_type": "L5",
+            "explanation_he": "שיבוש זמני. In recent years הגישה משתנה."
+          },
+          {
+            "id": "1a5b6915-f2f9-4b4a-bb6e-1e6585c91896",
+            "option_letter": "D",
+            "option_text": "As an example of how placebo research has already advanced medicine",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2ba11f44-2e62-4fcf-99a7-25083b95ee59",
+    "topic": "Magnetic navigation in migratory birds",
+    "item_type": "lecture_qa",
+    "primary_skill": "realtime_processing",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Every year, billions of birds migrate thousands of kilometers between their breeding and wintering grounds. For decades, scientists assumed this navigation was guided primarily by the position of the sun and stars. More recent research, however, suggests that many bird species are also sensitive to the Earths magnetic field. Tiny crystals of magnetite, a naturally occurring magnetic mineral, have been found in the beaks of several migratory species. These crystals may function as a biological compass, allowing birds to detect magnetic north even on overcast nights when celestial cues are unavailable.",
+    "questions": [
+      {
+        "id": "2791bef0-7794-4b2c-a4f3-0b66bf2cfff9",
+        "question_order": 1,
+        "question_text": "What is the main point the speaker makes about bird navigation?",
+        "options": [
+          {
+            "id": "31238741-256e-489f-b2a6-dc8366ace9e8",
+            "option_letter": "A",
+            "option_text": "Birds rely exclusively on magnetic fields to navigate",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט. Also sensitive, בנוסף לשמש."
+          },
+          {
+            "id": "9b419a7a-1227-41aa-958a-9d71820b9264",
+            "option_letter": "B",
+            "option_text": "Navigation may involve multiple systems including sensitivity to magnetism",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Also sensitive, שכבה נוספת."
+          },
+          {
+            "id": "db927669-45f0-4284-820b-ab3bed7dc0e6",
+            "option_letter": "C",
+            "option_text": "The discovery of magnetite has replaced older theories of bird navigation",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. משלים, לא מחליף."
+          },
+          {
+            "id": "c179ef8a-25c4-4f0e-9148-3f275b085ab3",
+            "option_letter": "D",
+            "option_text": "Celestial cues are no longer considered relevant to bird navigation",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "95334523-cfad-4a68-8622-50e03dd13af4",
+    "topic": "Caffeine tolerance and withdrawal",
+    "item_type": "lecture_qa",
+    "primary_skill": "argument_navigation",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Caffeine is the worlds most widely consumed psychoactive substance. It works by blocking adenosine receptors in the brain, adenosine being the chemical that promotes drowsiness. By preventing adenosine from binding, caffeine keeps people alert. However, this effect comes with a trade-off. Over time, the brain responds to regular caffeine consumption by producing more adenosine receptors. The result is that habitual coffee drinkers require increasing amounts of caffeine to achieve the same level of alertness, and when they stop, they experience withdrawal symptoms including headaches and fatigue.",
+    "questions": [
+      {
+        "id": "ce017ca1-952b-450d-bd2b-ecc5854d6cb7",
+        "question_order": 1,
+        "question_text": "What does the speaker suggest about the long-term effects of regular caffeine use?",
+        "options": [
+          {
+            "id": "a1097773-7936-4df0-a9a8-330d6ea31fb5",
+            "option_letter": "A",
+            "option_text": "The brain adapts in ways that reduce caffeine effectiveness over time",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. יותר קולטנים, צריך יותר קפאין."
+          },
+          {
+            "id": "d0f985c3-593f-4462-a4ee-46caa6cf63c9",
+            "option_letter": "B",
+            "option_text": "Caffeine permanently damages adenosine receptors",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט. הסתגלות, לא נזק קבוע."
+          },
+          {
+            "id": "73cee00c-c7b4-4401-86e9-c57e5631d3d6",
+            "option_letter": "C",
+            "option_text": "Regular coffee drinkers become immune to all psychoactive substances",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "4d0bd0af-2608-4649-9eef-bdb49500b870",
+            "option_letter": "D",
+            "option_text": "Caffeine becomes more effective the more regularly it is consumed",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7c3add57-14ec-4c58-8ad9-92936f5c8b40",
+    "topic": "Ashurbanipal library at Nineveh",
+    "item_type": "lecture_qa",
+    "primary_skill": "realtime_processing",
+    "accent": "uk_rp",
+    "voice_id": "XB0fDUnXU5powFXDhCwa",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "The Library of Alexandria is perhaps the most famous library in history, but it was not unique. Across the ancient world, rulers established libraries as symbols of power and learning. The Assyrian king Ashurbanipal assembled a collection of over thirty thousand clay tablets at Nineveh in the seventh century BCE. What made this library unusual was not its size but its organization: the tablets were systematically catalogued by subject, making it one of the earliest known examples of what we would today recognize as a reference system.",
+    "questions": [
+      {
+        "id": "1d100641-8f75-4144-b6ce-f767c3795b7b",
+        "question_order": 1,
+        "question_text": "What does the speaker find most notable about this library?",
+        "options": [
+          {
+            "id": "40bbb584-2dda-4afc-beed-6945f6d36795",
+            "option_letter": "A",
+            "option_text": "The number of tablets it contained",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום. Not its size."
+          },
+          {
+            "id": "520bd2c3-1cb4-4c40-921b-05a3f0ad53da",
+            "option_letter": "B",
+            "option_text": "Its systematic approach to organizing knowledge",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Not its size but its organization."
+          },
+          {
+            "id": "2de5adde-7af4-496b-a242-1dbb7aef737c",
+            "option_letter": "C",
+            "option_text": "Its influence on the Library of Alexandria",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "ee14db10-de0f-4a01-a13f-5932a8473170",
+            "option_letter": "D",
+            "option_text": "The fact that it survived longer than other ancient collections",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3ad56129-ead8-4143-bb92-1d5a2aa48b56",
+    "topic": "Color as a neural construction",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 1,
+    "difficulty": 3,
+    "transcript": "It is tempting to assume that color is simply a property of objects, that a ripe tomato is red in the same way that it is round. But this assumption, comfortable as it is, does not survive scientific scrutiny. Color is not in the object. It is a construction of the nervous system, generated when light of particular wavelengths stimulates photoreceptors in the eye and those signals are interpreted by the brain. Different species perceive different colors from the same wavelengths. A bumblebee and a human looking at the same flower are not, in any meaningful sense, seeing the same thing.",
+    "questions": [
+      {
+        "id": "e5b93858-84e3-4362-862a-501eec557b57",
+        "question_order": 1,
+        "question_text": "What is the speakers attitude toward the assumption that color is a property of objects?",
+        "options": [
+          {
+            "id": "ee15443b-a3e9-4686-b301-b75649b88383",
+            "option_letter": "A",
+            "option_text": "Sympathetic, it is a useful simplification even if technically incorrect",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. Does not survive scrutiny."
+          },
+          {
+            "id": "369a02e0-719c-40a4-ac24-a162b2d217c7",
+            "option_letter": "B",
+            "option_text": "Critical, the assumption is appealing but scientifically unsupported",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Comfortable as it is, does not survive scrutiny."
+          },
+          {
+            "id": "82c5333b-8b82-4d63-aee1-045ea5c47dc5",
+            "option_letter": "C",
+            "option_text": "Neutral, it is one of several valid frameworks",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול."
+          },
+          {
+            "id": "f639a58e-3a15-4126-80ae-916b3b378406",
+            "option_letter": "D",
+            "option_text": "Uncertain, more research is needed",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3f2e00bb-49bc-4317-bdad-2cec5a3e0ab9",
+    "topic": "The printing press and misinformation",
+    "item_type": "lecture_qa",
+    "primary_skill": "realtime_processing",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Gutenbergs printing press, developed in the 1440s, is often cited as one of the most transformative inventions in human history. Within fifty years of its introduction, millions of books had been printed across Europe. This explosion of texts had consequences that Gutenberg could not have anticipated. The rapid spread of printed material did not only accelerate the transmission of knowledge. It also accelerated the transmission of misinformation. Pamphlets containing false medical advice, fraudulent religious claims, and politically motivated fabrications circulated alongside legitimate scholarship.",
+    "questions": [
+      {
+        "id": "b9276af1-1fc3-4592-917c-950fded6e6ab",
+        "question_order": 1,
+        "question_text": "What point does the speaker make about the printing press?",
+        "options": [
+          {
+            "id": "94c6b31d-d249-4f92-9ae7-8fde9f43a019",
+            "option_letter": "A",
+            "option_text": "Gutenberg designed the press specifically to spread misinformation",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. Consequences he could not have anticipated."
+          },
+          {
+            "id": "3291b951-fc18-46d4-9162-d708caec8374",
+            "option_letter": "B",
+            "option_text": "Its spread of knowledge was its only significant historical impact",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          },
+          {
+            "id": "a34f71af-e1d8-4c52-9dd0-71de8003d320",
+            "option_letter": "C",
+            "option_text": "Its benefits were accompanied by unintended negative consequences",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Did not only accelerate knowledge, also misinformation."
+          },
+          {
+            "id": "c08103b5-8b75-4d39-a4a0-2c4cf2253716",
+            "option_letter": "D",
+            "option_text": "It was less influential than other inventions of the same period",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "44244d6d-6101-4bbd-894b-ef1737242a1a",
+    "topic": "The Dead Sea is shrinking",
+    "item_type": "lecture_qa",
+    "primary_skill": "argument_navigation",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "The Dead Sea, located between Jordan and Israel, is one of the saltiest bodies of water on Earth, with a salinity roughly ten times that of the ocean. This extreme salinity makes it impossible for most aquatic life to survive. What is less well known is that the Dead Sea is shrinking. Its water level drops by more than a meter each year, primarily because the Jordan River, its main source of water, has been heavily diverted for agricultural and municipal use. At the current rate, scientists estimate the sea could disappear entirely within a few centuries.",
+    "questions": [
+      {
+        "id": "66dafd07-6927-4459-a186-fbaed2688357",
+        "question_order": 1,
+        "question_text": "What is the speakers main point?",
+        "options": [
+          {
+            "id": "980c5001-f7a9-470c-b080-179d4c9d0bc3",
+            "option_letter": "A",
+            "option_text": "The Dead Sea has always been too salty to support life",
+            "is_correct": false,
+            "trap_type": "L5",
+            "explanation_he": "שיבוש זמני. זה רקע, לא הטענה המרכזית."
+          },
+          {
+            "id": "3377bdfe-c3bc-4bd5-a158-b8aa7ed85bb8",
+            "option_letter": "B",
+            "option_text": "The Dead Sea is at risk of disappearing due to human water use",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. However מסמן מעבר לטענה המרכזית."
+          },
+          {
+            "id": "a5daba30-5302-469f-98e0-5f3faac4b690",
+            "option_letter": "C",
+            "option_text": "Efforts to restore the Jordan River have already shown success",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "6cd2f5b0-e515-4f64-8ea2-41e3ac87913d",
+            "option_letter": "D",
+            "option_text": "Saltwater bodies are more vulnerable to climate change than freshwater lakes",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "e11ba955-251a-4be1-a568-2d6ab0e990ed",
+    "topic": "Heat-resistant corals and reef restoration",
+    "item_type": "lecture_qa",
+    "primary_skill": "argument_navigation",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 1,
+    "difficulty": 3,
+    "transcript": "The relationship between climate change and coral bleaching is now well established. What is less understood is why some coral populations are more resilient than others. Researchers have recently identified a small subset of corals that appear to withstand elevated temperatures without bleaching. Genetic analysis suggests these corals carry specific variants that allow their symbiotic algae to tolerate heat. The hope is that by selectively cultivating their offspring, it may be possible to rebuild reef ecosystems with more heat-tolerant populations, though critics argue this approach addresses symptoms rather than causes.",
+    "questions": [
+      {
+        "id": "b426be78-bf4d-4e3e-9ff9-cd2cd6dba153",
+        "question_order": 1,
+        "question_text": "What does the speaker suggest about heat-resistant corals?",
+        "options": [
+          {
+            "id": "08e99daf-bfcd-4aa5-ab49-a2a4a0162c3d",
+            "option_letter": "A",
+            "option_text": "They have already been used successfully to restore damaged reefs",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק. תקווה עתידית."
+          },
+          {
+            "id": "42faf845-eabf-462d-935a-518206847c91",
+            "option_letter": "B",
+            "option_text": "They could potentially help rebuild reefs, though critics question the approach",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. The hope is... though critics argue."
+          },
+          {
+            "id": "652c727c-29f4-4d8b-b0bc-80e24786508b",
+            "option_letter": "C",
+            "option_text": "Their genetic variants will spread naturally through coral populations",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק. גידול מכוון, לא פיזור טבעי."
+          },
+          {
+            "id": "67b2236f-c765-4f3d-9f54-e26cf2e8a52a",
+            "option_letter": "D",
+            "option_text": "They are immune to all forms of environmental stress",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "e342ece8-944d-4e7b-9925-35f502b91454",
+    "topic": "Dopamine is about anticipation not pleasure",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "us",
+    "voice_id": "21m00Tcm4TlvDq8ikWAM",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "Dopamine is routinely described in popular media as the brains pleasure chemical. The story goes like this: you eat chocolate, dopamine is released, you feel pleasure. It is a tidy narrative and largely wrong. What dopamine actually signals, according to decades of neuroscientific research, is not pleasure itself but anticipation. It is released in response to cues that predict reward, not the reward itself. This is why a slot machine, which rewards unpredictably, is more addictive than one that pays out every time: the unpredictability keeps the dopamine system in a state of constant anticipation.",
+    "questions": [
+      {
+        "id": "19faeb9e-40dc-4a32-84c0-89cdb44514d3",
+        "question_order": 1,
+        "question_text": "How does the speaker characterize the popular understanding of dopamine?",
+        "options": [
+          {
+            "id": "ac9a2056-6e30-4e94-a9bb-6dfac4cb769b",
+            "option_letter": "A",
+            "option_text": "As broadly accurate but in need of minor corrections",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. Largely wrong."
+          },
+          {
+            "id": "b6ca646d-6c6b-448a-a5b2-50d58919524c",
+            "option_letter": "B",
+            "option_text": "As a simplification that is fundamentally misleading",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Tidy narrative and largely wrong."
+          },
+          {
+            "id": "38fca4b6-2540-434f-b73f-42d83288ab54",
+            "option_letter": "C",
+            "option_text": "As a useful teaching tool despite being technically imprecise",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול."
+          },
+          {
+            "id": "05a7e6c1-73f7-4bb2-bbf0-8e3f90f04a36",
+            "option_letter": "D",
+            "option_text": "As a theory that neuroscientists continue to actively debate",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק. קונצנזוס, לא ויכוח."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eb6c9ba4-3fe3-4f06-88c4-c7fd0cd6e2e1",
+    "topic": "Island constraints in syntax",
+    "item_type": "lecture_qa",
+    "primary_skill": "syntactic_prediction",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 1,
+    "difficulty": 2,
+    "transcript": "In syntax, an island is a grammatical structure from which elements cannot be extracted. Consider the sentence: I know the man who fixed the car. You can ask who do you know, but you cannot ask what do you know the man who fixed, because the object is trapped inside the relative clause. What makes islands theoretically interesting is that speakers never need to be taught these constraints. Children acquiring language do not produce island violations. This has led some linguists to argue that island constraints are not learned from input but are instead part of the innate structure of human language.",
+    "questions": [
+      {
+        "id": "300f816a-21f6-4267-8495-b0e8d4e722dd",
+        "question_order": 1,
+        "question_text": "What does the speaker suggest about island constraints?",
+        "options": [
+          {
+            "id": "132680ec-d011-4fcd-b57a-e53a4f505d9c",
+            "option_letter": "A",
+            "option_text": "They are acquired gradually through exposure to adult speech",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. לא נלמדים מחשיפה."
+          },
+          {
+            "id": "3c56380a-227f-4840-bc56-08210620a8a1",
+            "option_letter": "B",
+            "option_text": "They may be innate rather than learned from experience",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Not learned from input but innate."
+          },
+          {
+            "id": "0e043e82-318c-4bfd-bace-e5464e5432b3",
+            "option_letter": "C",
+            "option_text": "They apply only to relative clauses",
+            "is_correct": false,
+            "trap_type": "L4",
+            "explanation_he": "צמצום. הקלאוזה היחסית היא דוגמה."
+          },
+          {
+            "id": "833daf65-ed8f-4875-a061-054cf483d401",
+            "option_letter": "D",
+            "option_text": "They have been confirmed in all human languages studied so far",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ce641ce9-3138-4812-8758-494c90aa7a08",
+    "topic": "The costs of early agriculture",
+    "item_type": "lecture_qa",
+    "primary_skill": "realtime_processing",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 1,
+    "difficulty": 3,
+    "transcript": "For most of the 20th century, the transition from hunter-gathering to agriculture was presented as straightforward progress. Humans discovered farming, settled down, and civilization followed. This narrative has been substantially revised. Archaeological evidence now suggests that early farmers were on average shorter, less well-nourished, and more prone to infectious disease than their hunter-gatherer predecessors. The adoption of agriculture appears to have been driven not by its immediate benefits to individuals but by population pressure: as groups grew larger, mobile foraging became less viable, and farming despite its costs became necessary.",
+    "questions": [
+      {
+        "id": "11301f41-f543-4db2-ae2b-f428f83721c2",
+        "question_order": 1,
+        "question_text": "What does the speaker suggest about the transition to agriculture?",
+        "options": [
+          {
+            "id": "98f09faa-deea-47d5-87e6-abff0294c249",
+            "option_letter": "A",
+            "option_text": "It was a deliberate choice made because farming was superior to foraging",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          },
+          {
+            "id": "aca42ffc-6991-4084-9837-5c7af635cfb7",
+            "option_letter": "B",
+            "option_text": "It may have been driven by necessity rather than by its advantages",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Not by its benefits but by population pressure."
+          },
+          {
+            "id": "1bc458cd-dbfb-4eea-a2aa-8f9145f0b2fa",
+            "option_letter": "C",
+            "option_text": "It led to immediate improvements in human health and nutrition",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך ישיר. חקלאים היו קצרים יותר."
+          },
+          {
+            "id": "75c548a8-ac08-40fa-a09b-c13b59331477",
+            "option_letter": "D",
+            "option_text": "It was adopted simultaneously across all ancient civilizations",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "81cea951-1155-4aba-816a-d9b08198d9f3",
+    "topic": "Einsteins photoelectric effect and solar panels",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 2,
+    "speaker2_voice_id": "XB0fDUnXU5powFXDhCwa",
+    "difficulty": 2,
+    "segments": [
+      {
+        "speaker": 1,
+        "text": "Wow, that was such an interesting lecture. I had no idea that Einsteins theories have such a practical effect on our lives."
+      },
+      {
+        "speaker": 2,
+        "text": "Yeah, I was surprised too. I did not know that GPS navigation apps like Google Maps are based on scientific phenomena he studied."
+      },
+      {
+        "speaker": 1,
+        "text": "I liked that part too, but my favorite part was when the speaker explained how solar panels can be used to generate electricity."
+      },
+      {
+        "speaker": 2,
+        "text": "I did not understand that bit. Could you explain it again?"
+      },
+      {
+        "speaker": 1,
+        "text": "Einstein discovered that light is made up of particles called photons. He even won the Nobel Prize in Physics in 1921 for his work on the photoelectric effect. When sunlight hits a solar panel, the photons bang into atoms and cause the atoms to release electrons. This generates an electrical current which can be used to power appliances."
+      },
+      {
+        "speaker": 2,
+        "text": "So thats how my neighbors generate their own electricity. Thanks for explaining."
+      }
+    ],
+    "questions": [
+      {
+        "id": "8688879a-d41b-4baf-a589-5f75db65dbdf",
+        "question_order": 1,
+        "question_text": "How does Speaker 2 feel about the lecture topic at the start of the conversation?",
+        "options": [
+          {
+            "id": "1de89d06-48b5-4482-8c41-dc24eaaec764",
+            "option_letter": "A",
+            "option_text": "Surprised by how relevant Einsteins work is to everyday technology",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. I was surprised too + GPS."
+          },
+          {
+            "id": "2ce3cabc-79af-4779-96bd-cb413b49f6eb",
+            "option_letter": "B",
+            "option_text": "Disappointed that the lecture focused only on practical applications",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול."
+          },
+          {
+            "id": "64a4eada-a7d9-4d95-bffe-f91b4b445690",
+            "option_letter": "C",
+            "option_text": "Confident that he already understood the key scientific concepts",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי. ביקש הסבר מחדש."
+          },
+          {
+            "id": "fa8c2ccd-0c67-4b64-818b-ad3113a23f84",
+            "option_letter": "D",
+            "option_text": "Skeptical about whether Einsteins theories are truly original",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      },
+      {
+        "id": "5b47d9da-32e9-4994-a1c6-ac441e3007e0",
+        "question_order": 2,
+        "question_text": "Which of the following was discovered by Einstein according to Speaker 1?",
+        "options": [
+          {
+            "id": "e7459238-40db-4675-bb6e-4c9ae9fb59d0",
+            "option_letter": "A",
+            "option_text": "Atoms release electrons when they are hit by photons",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Photons bang into atoms and cause electrons to release."
+          },
+          {
+            "id": "6f579af8-25cf-4c69-b814-de6acc1b023e",
+            "option_letter": "B",
+            "option_text": "Sunlight contains atoms and electrons",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "bc2f4270-0104-4c2b-a56c-c51f78fa823b",
+            "option_letter": "C",
+            "option_text": "Electricity is needed to operate a solar panel",
+            "is_correct": false,
+            "trap_type": "L2",
+            "explanation_he": "היפוך סיבתי."
+          },
+          {
+            "id": "6d68e822-22ec-4c13-a9b3-dc87495966e4",
+            "option_letter": "D",
+            "option_text": "Appliances can work without electricity",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ed3ee2c2-3da0-4cc7-b2bd-f2a8cc892e80",
+    "topic": "The limits of recycling",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "us",
+    "voice_id": "pNInz6obpgDQGcFmaJgB",
+    "speaker_count": 2,
+    "speaker2_voice_id": "21m00Tcm4TlvDq8ikWAM",
+    "difficulty": 2,
+    "segments": [
+      {
+        "speaker": 1,
+        "text": "Did you hear the professor say that recycling might actually be doing more harm than good in some cases?"
+      },
+      {
+        "speaker": 2,
+        "text": "Yeah, that was a surprise. I always thought recycling was straightforwardly good for the environment."
+      },
+      {
+        "speaker": 1,
+        "text": "The argument was about energy cost. Some materials, especially certain plastics, require more energy to recycle than to produce from scratch."
+      },
+      {
+        "speaker": 2,
+        "text": "So it depends on the material?"
+      },
+      {
+        "speaker": 1,
+        "text": "Exactly. Paper and aluminum are genuinely efficient to recycle, but with plastics it is complicated. The professors point was that consumer confidence in recycling can sometimes reduce the pressure to produce less in the first place."
+      },
+      {
+        "speaker": 2,
+        "text": "That is a more uncomfortable message, that doing the right thing might make us feel better without actually solving the problem."
+      }
+    ],
+    "questions": [
+      {
+        "id": "ff518082-54f6-47fb-9be5-f70dc142124a",
+        "question_order": 1,
+        "question_text": "How does Speaker 2 feel at the end of the conversation?",
+        "options": [
+          {
+            "id": "b0f396dc-270d-4cd8-8eae-cd9b8672f6d4",
+            "option_letter": "A",
+            "option_text": "Reassured that recycling is still worthwhile for most materials",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. מביע אי-נוחות."
+          },
+          {
+            "id": "26f809c1-3ce7-473e-be28-3796aa11fa36",
+            "option_letter": "B",
+            "option_text": "Uncomfortable with the idea that recycling may create a false sense of progress",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. More uncomfortable message."
+          },
+          {
+            "id": "3abd5c4f-c232-4f92-8060-ddf8d2762155",
+            "option_letter": "C",
+            "option_text": "Skeptical of the professors expertise on environmental issues",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          },
+          {
+            "id": "bd966c81-b0e5-4e4a-98db-e135d1536cbc",
+            "option_letter": "D",
+            "option_text": "Convinced that all recycling should be abandoned",
+            "is_correct": false,
+            "trap_type": "L1",
+            "explanation_he": "כמת מוחלט."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "8f0016bc-ee24-475b-82c3-2cc13aff6cbf",
+    "topic": "Is musical sadness culturally conditioned",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "uk_rp",
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "speaker_count": 2,
+    "speaker2_voice_id": "XB0fDUnXU5powFXDhCwa",
+    "difficulty": 3,
+    "segments": [
+      {
+        "speaker": 1,
+        "text": "I found the part about music and emotion really thought-provoking."
+      },
+      {
+        "speaker": 2,
+        "text": "The bit about minor keys being sad?"
+      },
+      {
+        "speaker": 1,
+        "text": "No, actually, that was the part I found most questionable. The lecturer pointed out that what makes music emotionally effective varies enormously across cultures. A scale that sounds melancholy in a Western context might be entirely neutral or even cheerful in another."
+      },
+      {
+        "speaker": 2,
+        "text": "So the sadness is not in the music itself."
+      },
+      {
+        "speaker": 1,
+        "text": "That was her point, or at least it is not universally in the music. The emotional response depends heavily on what you have been trained to expect."
+      },
+      {
+        "speaker": 2,
+        "text": "I suppose that makes music more interesting, not less. It means the connection between sound and feeling is something we build, not something we discover."
+      }
+    ],
+    "questions": [
+      {
+        "id": "cf0542c9-1b21-4cd8-b4cc-d733b6e33e67",
+        "question_order": 1,
+        "question_text": "What is Speaker 1 attitude toward the claim that minor keys sound sad?",
+        "options": [
+          {
+            "id": "a5402e97-8e83-46a6-836e-091aab125248",
+            "option_letter": "A",
+            "option_text": "Fully convinced that the claim is accurate",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. Most questionable."
+          },
+          {
+            "id": "1d7839f4-5c6e-4c06-a5cf-34c580fddfce",
+            "option_letter": "B",
+            "option_text": "Skeptical, the emotional effect of musical scales may be culturally conditioned",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Most questionable + שונות תרבותית."
+          },
+          {
+            "id": "b837e791-a618-454b-b9d5-8bfec7ad3346",
+            "option_letter": "C",
+            "option_text": "Indifferent, the question is outside Speaker 1 interests",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. Thought-provoking."
+          },
+          {
+            "id": "993b90ee-9d7f-486a-936d-54c07655ec9e",
+            "option_letter": "D",
+            "option_text": "Uncertain because the lecturer did not provide enough evidence",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "0b86bbc3-3f99-4b71-97c8-5e6931c585f3",
+    "topic": "Urban heat islands solutions under scrutiny",
+    "item_type": "lecture_qa",
+    "primary_skill": "speaker_stance",
+    "accent": "au",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "speaker_count": 2,
+    "speaker2_voice_id": "XB0fDUnXU5powFXDhCwa",
+    "difficulty": 2,
+    "segments": [
+      {
+        "speaker": 1,
+        "text": "The lecture on urban heat islands was pretty alarming, was it not?"
+      },
+      {
+        "speaker": 2,
+        "text": "I thought so too. I did not realize city centers could be several degrees warmer than surrounding rural areas."
+      },
+      {
+        "speaker": 1,
+        "text": "And the solutions they mentioned, green roofs, more tree cover, reflective pavements, they all seem straightforward enough."
+      },
+      {
+        "speaker": 2,
+        "text": "That is what surprised me though. The professor seemed cautious about those solutions. She said the evidence that they work at scale is still limited."
+      },
+      {
+        "speaker": 1,
+        "text": "Right, and she seemed frustrated that cities are being encouraged to implement them before the research is solid."
+      },
+      {
+        "speaker": 2,
+        "text": "It is strange. The problem is real, the proposed solutions sound reasonable, but the science to back them up at a city-wide level is not quite there yet."
+      }
+    ],
+    "questions": [
+      {
+        "id": "d7da1d40-abc4-4e55-9fe0-bcc1a31acc32",
+        "question_order": 1,
+        "question_text": "What is the professors attitude toward proposed solutions to urban heat islands?",
+        "options": [
+          {
+            "id": "75c7128e-e2ff-48e2-b8b5-c90356894f4a",
+            "option_letter": "A",
+            "option_text": "Enthusiastic, she recommends immediate city-wide implementation",
+            "is_correct": false,
+            "trap_type": "L7",
+            "explanation_he": "פספוס נימת קול. Cautious ו-frustrated."
+          },
+          {
+            "id": "cff7b0bf-e111-4e7a-a6b6-26a12a48059b",
+            "option_letter": "B",
+            "option_text": "Cautious, she believes the evidence for large-scale effectiveness is insufficient",
+            "is_correct": true,
+            "trap_type": null,
+            "explanation_he": "נכון. Cautious + frustrated that cities implement before research is solid."
+          },
+          {
+            "id": "94f8f9b9-209e-4e7a-988b-c72f7025ad9b",
+            "option_letter": "C",
+            "option_text": "Dismissive, she does not believe urban heat islands pose a real threat",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק. הבעיה מוכרת כאמיתית."
+          },
+          {
+            "id": "4ea4b934-c44d-4a93-b92e-1564237547ad",
+            "option_letter": "D",
+            "option_text": "Optimistic, she expects research to confirm these solutions within a few years",
+            "is_correct": false,
+            "trap_type": "L3",
+            "explanation_he": "פרט מפוברק."
+          }
+        ]
+      }
+    ]
+  }
+]
