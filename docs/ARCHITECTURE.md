@@ -428,6 +428,13 @@ A פועל על B הופך ל-B פועל על A. הקורבן הופך לפעי�
 עמודות תומכות: `relation_count` (מספר היחסים הלוגיים בגזע), `hard_word_count`, `recipe`
 (מזהה כרטיס-מתכון, למשל `CAL-V4-L2`).
 
+**ציר 4 — קטגוריות טריגר (`trigger_category_1/2/3` + `trigger_word_1/2/3`, טקסט).** המודל הפעיל מול
+התלמיד (2026-08-02). מיושרות למסיח: `trigger_category_n` ו-`trigger_word_n` מתייגות את `distractor_n`.
+חמישה id: `causal`, `logical`, `measure`, `unstated`, `anchor` (ב-UI `anchor` ממוזג ל-`unstated`).
+`trigger_word_n` **מובטח שהוא תת-מחרוזת מילולית של `original_sentence`** — המילה בגזע שהמסיח מסובב עליה.
+ה-UI מתרגם id→תווית דרך `artifacts/heal/src/lib/keys.js` (`resolveTrigger`), ונופל חזרה ל-`mechanism_n`
+כשאין קטגוריה מפורשת. מחליף את מודל 5-המפתחות (§1.3 ב-CONTENT_GUIDELINES.md).
+
 ### קיבוץ למסך Learn — ⚠️ ARCHIVED (הוחלף ב-2026-07-20)
 
 > ⚠️ **ARCHIVED — בוטל.** הקיבוץ ל-4 משפחות למטה הוחלף במיפוי הרשמי של 5 מפתחות

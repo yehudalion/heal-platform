@@ -9,13 +9,13 @@
  *  - Data layer only (fetchPracticeQuestions / logAttempt) — never touches supabase.
  *  - Wellbeing: no red-X shaming, no life/streak loss; mistakes are neutral learning moments.
  *  - Hebrew RTL UI; English content in dir="ltr" blocks.
- * R-code → key translation goes exclusively through lib/keys.js.
+ * Trigger-category resolution goes exclusively through lib/keys.js (resolveTrigger).
  */
 
 import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { fetchPracticeQuestions, logAttempt } from '../data/rephrase.data.js';
-import { keyForMechanism } from '../lib/keys.js';
+import { resolveTrigger } from '../lib/keys.js';
 
 // ─── Tunables ────────────────────────────────────────────────────────────────
 const PACK_SIZE   = 5;    // questions per pack (display cadence)
@@ -26,15 +26,9 @@ const LEVEL_MAX   = 5;
 const START_LEVEL = 2;    // only L2 has published content today
 const PRACTICE_MODE = 'standard'; // SEAM: other practice_modes (verification/blackout) added later
 
-// Short, generic hint cue per key code (names the key, never the answer).
-const KEY_CUES = {
-  direction_flip: 'מי גורם למה? בדוק שהכיוון בין הגורם לתוצאה לא התהפך.',
-  extremism:      "חפש מילים מוחלטות כמו 'כל', 'תמיד', 'רק' — האם המקור באמת אמר את זה?",
-  scope_change:   'האם נוסף פרט, סיבה או זמן שלא הופיעו במשפט המקורי?',
-  subject_swap:   'מי מבצע את הפעולה ועל מי? ודא שהנושא והמושא לא הוחלפו.',
-  hallucination:  'זה נשמע דומה — בדוק אם מילה הוחלפה במילה קרובה, או שרכיב מהותי הושמט.',
-  unknown:        'קרא שוב את המשפט המקורי והשווה כל רעיון לאפשרות שבחרת.',
-};
+// Universal fallback hint (always true) — shown when a distractor's trigger
+// can't be resolved. Teaches the two surface tells that are NOT reliable.
+const GENERIC_HINT = 'אל תסמוך על אורך האופציה או על כמה מילים היא חולקת עם המשפט המקורי — אלה לא סימנים אמינים.';
 
 // ─── Session state (in memory only — never localStorage, never DB) ───────────
 let userId = null;
@@ -250,8 +244,12 @@ function drawQuestion(root) {
 }
 
 function hintBox(q) {
-  const { key, code } = keyForMechanism(criticalDistractor(q).rCode);
-  return `<div class="rp-hintbox">💡 שים לב למפתח ה${esc(key)} — ${esc(KEY_CUES[code] || KEY_CUES.unknown)}</div>`;
+  // Critical-distractor selection unchanged. Name the category + cue only —
+  // never the trigger word (that would give the answer away).
+  const { n } = criticalDistractor(q);
+  const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] });
+  const body = t ? `שים לב ל${esc(t.label)} — ${esc(t.cue)}` : esc(GENERIC_HINT);
+  return `<div class="rp-hintbox">💡 ${body}</div>`;
 }
 
 function feedback(q) {
@@ -261,8 +259,17 @@ function feedback(q) {
   if (isCorrect) {
     chosenExpl = `<div class="rp-expl rp-expl-good"><strong>✓ נכון.</strong> ${esc(q.correct_explanation_he || '')}</div>`;
   } else {
-    const { key } = keyForMechanism(q['mechanism_' + canon]);
-    chosenExpl = `<div class="rp-expl"><strong>מפתח ה${esc(key)}:</strong> ${esc(q['explanation_' + canon + '_he'] || '')}</div>`;
+    // "מה קרה" — always shown, from the DB.
+    const whatHappened = `<div class="rp-expl"><strong>מה קרה:</strong> ${esc(q['explanation_' + canon + '_he'] || '')}</div>`;
+    // "מה היה עוזר" — only when the trigger resolves; otherwise omitted entirely.
+    const t = resolveTrigger({ category: q['trigger_category_' + canon], mechanism: q['mechanism_' + canon] });
+    let whatHelps = '';
+    if (t) {
+      const word = q['trigger_word_' + canon];
+      const detail = word ? `שים לב ל"${esc(word)}". ${esc(t.cue)}` : esc(t.cue);
+      whatHelps = `<div class="rp-expl rp-help"><strong>🔍 ${esc(t.label)} —</strong> ${detail}</div>`;
+    }
+    chosenExpl = whatHappened + whatHelps;
   }
   const last = packIdx >= pack.length - 1;
   return `
@@ -278,10 +285,12 @@ function fullAnalysis(q) {
     `<div class="rp-fa-row"><span class="rp-fa-lbl rp-fa-correct">התשובה הנכונה</span> ${esc(q.correct_explanation_he || '')}</div>`,
   ];
   for (const n of [1, 2, 3]) {
-    const { key } = keyForMechanism(q['mechanism_' + n]);
-    rows.push(`<div class="rp-fa-row"><span class="rp-fa-lbl">מפתח ה${esc(key)}</span> ${esc(q['explanation_' + n + '_he'] || '')}</div>`);
+    // Category label only when the trigger resolves; otherwise just the explanation.
+    const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] });
+    const lbl = t ? `<span class="rp-fa-lbl">🔍 ${esc(t.label)}</span> ` : '';
+    rows.push(`<div class="rp-fa-row">${lbl}${esc(q['explanation_' + n + '_he'] || '')}</div>`);
   }
-  return `<div class="rp-fa">${rows.join('')}</div>`;
+  return `<div class="rp-fa"><div class="rp-fa-intro">כל מסיח בודק משהו אחר:</div>${rows.join('')}</div>`;
 }
 
 function drawSummary(root) {
@@ -338,8 +347,10 @@ const RP_CSS = `
 .rp-hintbox{background:var(--purple-light);color:#4a3aa8;border-radius:var(--radius-sm);padding:.7rem .95rem;margin-bottom:1rem;font-size:.88rem;line-height:1.5}
 .rp-expl{background:var(--bg);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:.9rem;line-height:1.6;margin-bottom:.7rem}
 .rp-expl-good{background:var(--green-light)}
+.rp-help{background:var(--blue-light)}
 .rp-link{background:none;border:none;color:var(--green-dark);font-weight:700;font-size:.83rem;cursor:pointer;padding:.3rem 0;text-decoration:underline}
 .rp-fa{display:flex;flex-direction:column;gap:.5rem;margin:.4rem 0 .8rem}
+.rp-fa-intro{font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:.2rem}
 .rp-fa-row{font-size:.85rem;line-height:1.55;background:var(--bg);border-radius:var(--radius-sm);padding:.6rem .8rem}
 .rp-fa-lbl{display:inline-block;font-weight:800;color:var(--muted);margin-left:.4rem}
 .rp-fa-correct{color:var(--green-dark)}
