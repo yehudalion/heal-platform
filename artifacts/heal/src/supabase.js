@@ -224,30 +224,6 @@ export async function saveSrsRating(wordId, rating, ef, count) {
   return error ? { ok: false } : { ok: true };
 }
 
-// ─── Progress stats ───────────────────────────────────────────────────────────
-export async function getProgressStats() {
-  if (!supabase) return null;
-  const session = await getCurrentSession();
-  if (!session) return null;
-
-  const [ratingsRes, profileRes] = await Promise.all([
-    supabase.from("ratings").select("rating, review_count").eq("user_id", session.user.id),
-    supabase.from("user_profiles").select("streak_days, target_score, exam_date").eq("id", session.user.id).single(),
-  ]);
-
-  const ratings = ratingsRes.data || [];
-  const profile = profileRes.data || {};
-  const acquired = ratings.filter((r) => r.rating === "easy" && r.review_count >= 2).length;
-
-  return {
-    acquired,
-    totalRated:  ratings.length,
-    streak:      profile.streak_days || 0,
-    targetScore: profile.target_score || 130,
-    examDate:    profile.exam_date    || null,
-  };
-}
-
 // ─── Level ────────────────────────────────────────────────────────────────────
 export function getLevel() {
   return localStorage.getItem(LEVEL_KEY) || "intermediate";

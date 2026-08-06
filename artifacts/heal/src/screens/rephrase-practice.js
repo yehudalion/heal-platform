@@ -30,6 +30,11 @@ const LEVEL_MAX   = 5;
 const START_LEVEL = 2;
 const PRACTICE_MODE = 'standard'; // SEAM: other practice_modes (verification/blackout) added later
 
+// Same bar rephrase-analyze.js uses to highlight a row. A label only gets named
+// when it stands out; lift ≈ 1 means the labels are indistinguishable this session
+// and the card stays silent rather than pointing at noise.
+const NOTABLE_LIFT = 1.25;
+
 // Universal fallback hint (always true) — shown when a distractor's trigger
 // can't be resolved. Teaches the two surface tells that are NOT reliable.
 const GENERIC_HINT = 'אל תסמוך על אורך האופציה או על כמה מילים היא חולקת עם המשפט המקורי — אלה לא סימנים אמינים.';
@@ -367,6 +372,7 @@ async function fillInsight(root) {
   if (!report || report.status !== 'ok' || !report.points.length) return;
 
   const top = report.points[0];
+  if (top.lift === null || top.lift < NOTABLE_LIFT) return;   // nothing stands out — stay quiet
   const box = root.querySelector('#rpInsight');
   if (!box) return;
   box.innerHTML = `
