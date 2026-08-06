@@ -15,15 +15,19 @@
 import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { fetchPracticeQuestions, logAttempt } from '../data/rephrase.data.js';
+import { getWeakPoints } from '../data/weakpoints.data.js';
 import { resolveTrigger } from '../lib/keys.js';
+import { LEARN_SEEN_KEY } from './rephrase-learn.js';
 
 // ─── Tunables ────────────────────────────────────────────────────────────────
 const PACK_SIZE   = 5;    // questions per pack (display cadence)
 const WINDOW      = 10;   // rolling window for auto-leveling (SEPARATE from pack size)
 const MIN_WINDOW  = 5;    // don't adjust level until this many answers are in the window
-const LEVEL_MIN   = 1;
+// LEVEL_MIN is 2, not 1, ON PURPOSE: the published pool covers L2–L5 only. A floor
+// of 1 dropped a student who failed their first pack into an empty screen.
+const LEVEL_MIN   = 2;
 const LEVEL_MAX   = 5;
-const START_LEVEL = 2;    // only L2 has published content today
+const START_LEVEL = 2;
 const PRACTICE_MODE = 'standard'; // SEAM: other practice_modes (verification/blackout) added later
 
 // Universal fallback hint (always true) — shown when a distractor's trigger
@@ -40,6 +44,7 @@ const rolling = [];               // last-≤10 booleans (isCorrect) across pack
 let pack = [];                    // current pack (≤ PACK_SIZE questions)
 let packIdx = 0;
 let packCorrect = 0;
+let levelAdjustedThisPack = false; // one level MOVE per pack — see adjustLevel()
 
 // per-question view state
 let order = [0, 1, 2, 3];         // display slot d → canonical index order[d]
@@ -83,6 +88,9 @@ function isHintVisible(_q) { return true; }
 
 // ─── Data-layer driven flow ──────────────────────────────────────────────────
 export async function renderRephrasePractice(root) {
+  // First visit goes through Learn first (same gate card.js uses for vocab-learn).
+  if (!localStorage.getItem(LEARN_SEEN_KEY)) { navigate('/rephrase-learn'); return; }
+
   ensureStyles();
   root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">טוען שאלות…</div></div></div>`;
 
@@ -112,6 +120,7 @@ async function loadPack(root) {
   packLevel = fetchedAt;
   packIdx = 0;
   packCorrect = 0;
+  levelAdjustedThisPack = false;
   startQuestion();
   view = 'question';
   draw(root);
@@ -163,8 +172,19 @@ function adjustLevel() {
   if (rolling.length < MIN_WINDOW) return; // guard against single-answer swings
   const w = rolling.slice(-WINDOW);
   const acc = w.reduce((sum, ok) => sum + (ok ? 1 : 0), 0) / w.length;
-  if (acc >= 0.8) level = Math.min(LEVEL_MAX, level + 1);
-  else if (acc <= 0.4) level = Math.max(LEVEL_MIN, level - 1);
+  let next = level;
+  if (acc >= 0.8) next = Math.min(LEVEL_MAX, level + 1);
+  else if (acc <= 0.4) next = Math.max(LEVEL_MIN, level - 1);
+
+  // ONE level move per pack, never a skip. This runs after EVERY answer, so an
+  // unbroken streak used to climb 2→3→5 (and a collapse to fall 5→2) inside a
+  // single pack, skipping levels the learner never got to practise.
+  // The clamps above are untouched — only the OPPORTUNITY is capped. The flag is
+  // burned solely on a real move, so a clamped no-op at the ceiling/floor does
+  // not silently consume this pack's one adjustment.
+  if (next === level || levelAdjustedThisPack) return;
+  level = next;
+  levelAdjustedThisPack = true;
 }
 
 function nextQuestion(root) {
@@ -189,10 +209,11 @@ function shell(inner) {
   return `<div class="rp-shell fade-in">
     <div class="rp-top">
       <a class="rp-brand" href="#/rephrasing">← ניסוח מחדש</a>
-      ${showMeta ? `<div class="rp-meta">
-        <span class="rp-chip">רמה ${packLevel}</span>
-        <span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>
-      </div>` : ''}
+      <div class="rp-meta">
+        ${showMeta ? `<span class="rp-chip">רמה ${packLevel}</span>
+        <span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        <a class="rp-chip rp-guide" href="#/rephrase-learn">📘 מדריך</a>
+      </div>
     </div>
     ${inner}
     <div class="rp-foot"><a href="#/home">← דף הבית</a></div>
@@ -243,8 +264,12 @@ function drawQuestion(root) {
   }
 }
 
+// The HINT_LEAD override that used to live here is gone (2026-08-05). It existed
+// only because 'שים לב ל' + the old label 'לא נאמר במקור' read as 'שים לב ללא…'.
+// That label no longer exists in the unified vocabulary, and all five current
+// labels read correctly after 'שים לב ל'.
 function hintBox(q) {
-  // Critical-distractor selection unchanged. Name the category + cue only —
+  // Critical-distractor selection unchanged. Name the label + cue only —
   // never the trigger word (that would give the answer away).
   const { n } = criticalDistractor(q);
   const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] });
@@ -305,6 +330,7 @@ function drawSummary(root) {
       <div class="rp-sum-score">${packCorrect} / ${total}</div>
       <div class="rp-sum-sub">ענית נכון על ${packCorrect} מתוך ${total} שאלות.</div>
       ${levelMsg}
+      <div class="rp-insight" id="rpInsight" hidden></div>
       <div class="rp-sum-btns">
         <button class="btn-primary" id="rpMore">המשך ←</button>
         <button class="rp-link" id="rpDone">סיום</button>
@@ -313,6 +339,44 @@ function drawSummary(root) {
   `);
   root.querySelector('#rpMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#rpDone').addEventListener('click', () => navigate('/home'));
+  fillInsight(root);
+}
+
+/**
+ * The end-of-pack Analyze moment. Scoped to THIS SESSION only — answeredIds is
+ * reset on every entry to the screen, so its length is exactly the number of
+ * attempts logged since the learner arrived.
+ *
+ * Silence is the default. If the session is too short, or no single label cleared
+ * the exposure threshold, nothing is rendered — not an "insufficient data" notice,
+ * which would just be noise on a summary screen.
+ *
+ * The label named is the one with the highest LIFT, never the highest raw miss
+ * count: the biggest label in the pool would otherwise win every single time.
+ */
+async function fillInsight(root) {
+  if (!userId) return;
+  let report;
+  try {
+    const reports = await getWeakPoints(userId, { attemptLimit: answeredIds.length });
+    report = reports.find((r) => r.moduleId === 'rephrase');
+  } catch (err) {
+    console.warn('rephrase.insight failed:', err);
+    return;
+  }
+  if (!report || report.status !== 'ok' || !report.points.length) return;
+
+  const top = report.points[0];
+  const box = root.querySelector('#rpInsight');
+  if (!box) return;
+  box.innerHTML = `
+    <div class="rp-insight-title">מה עלה בסשן הזה</div>
+    <div class="rp-insight-body">
+      <a class="rp-insight-key" href="#/rephrase-learn#rl-block-${top.id}">${esc(top.label)}</a>
+      — נבחר ${top.misses} מתוך ${top.exposures} הפעמים שהופיע, יותר משאר הסוגים.
+    </div>
+    <a class="rp-insight-link" href="#/rephrase-analyze">התמונה המלאה ←</a>`;
+  box.hidden = false;
 }
 
 // ─── Scoped styles (injected once; styles.css untouched) ─────────────────────
@@ -330,6 +394,8 @@ const RP_CSS = `
 .rp-brand{font-weight:800;color:var(--green-dark);text-decoration:none;font-size:.9rem}
 .rp-meta{display:flex;gap:.4rem}
 .rp-chip{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.25rem .7rem;font-size:.75rem;font-weight:700;color:var(--muted)}
+.rp-guide{color:var(--green-dark);text-decoration:none;white-space:nowrap}
+.rp-guide:hover{border-color:var(--green)}
 .rp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem}
 .rp-stem{font-size:1.05rem;line-height:1.6;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.1rem;margin-bottom:1.1rem;text-align:left}
 .rp-opts{display:flex;flex-direction:column;gap:.55rem}
@@ -367,6 +433,11 @@ const RP_CSS = `
 .rp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .rp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
 .rp-levelmsg.down{background:var(--orange-light);color:#b5551f}
+.rp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
+.rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
+.rp-insight-body{font-size:.88rem;line-height:1.7}
+.rp-insight-key{font-weight:800;color:var(--green-dark);text-decoration:underline}
+.rp-insight-link{display:inline-block;margin-top:.5rem;font-size:.8rem;font-weight:700;color:var(--green-dark);text-decoration:none}
 .rp-sum-btns{margin-top:1.4rem;display:flex;flex-direction:column;gap:.6rem;align-items:center}
 .rp-sum-btns .btn-primary{width:100%}
 `;

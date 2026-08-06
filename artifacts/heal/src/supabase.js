@@ -194,15 +194,6 @@ function normaliseRows(rows) {
   }));
 }
 
-// ─── Traps ────────────────────────────────────────────────────────────────────
-export async function getTraps() {
-  if (!supabase) return [];
-  const { data, error } = await supabase
-    .from("traps")
-    .select("key, g");
-  return error ? [] : (data || []);
-}
-
 // ─── SRS — save rating with SM-2 ─────────────────────────────────────────────
 export function calcNextReview(rating, ef = 2.5, count = 0) {
   let interval, newEF = ef;
