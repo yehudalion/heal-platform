@@ -53,14 +53,25 @@ async function load() {
 
 // ─── Shared rendering ────────────────────────────────────────────────────────
 
-/** One module's weak points, phrased as a description of the sessions. */
+// A module's own Analyze screen, where the depth lives. Modules without one show
+// the summary only.
+const ANALYZE_ROUTE = { rephrase: '#/rephrase-analyze' };
+
+/**
+ * A SUMMARY, deliberately shallow. The per-label breakdown with examples and next
+ * steps belongs to the module's own Analyze screen; repeating it here produced the
+ * same three cards on /progress, /gap and /rephrase-analyze, and none of the three
+ * told the learner what to do. This one names the headline and hands over.
+ */
 function moduleCard(r) {
+  const deep = ANALYZE_ROUTE[r.moduleId] ?? null;
   return `<div class="wp-card">
     <div class="wp-head">
       <span class="wp-module">${esc(r.moduleLabel)}</span>
-      ${r.status === 'ok' ? `<span class="wp-count">${r.attempts} תרגולים</span>` : ''}
+      ${r.attempts ? `<span class="wp-count">${r.attempts} תרגולים</span>` : ''}
     </div>
     ${moduleBody(r)}
+    ${deep ? `<a class="wp-deep" href="${deep}">ראה ניתוח מלא ←</a>` : ''}
   </div>`;
 }
 
@@ -70,31 +81,14 @@ function moduleBody(r) {
   }
   if (r.status === 'insufficient_data') {
     const left = Math.max(0, r.minAttempts - r.attempts);
-    return `<p class="wp-empty">נאספו ${r.attempts} תרגולים. עוד ${left} ואפשר יהיה לתאר מגמה.</p>`;
+    return `<p class="wp-empty">עוד ${left} תרגולים ואפשר יהיה לתאר מגמה.</p>`;
   }
-  if (!r.points.length) {
-    return `<p class="wp-empty">אין עדיין מספיק פריטים מכל סוג כדי לתאר מגמה.</p>${suppressedNote(r)}`;
+  const notable = r.points.filter((p) => p.lift !== null && p.lift >= NOTABLE_LIFT);
+  if (!notable.length) {
+    return `<p class="wp-empty">בסשנים האחרונים אף סוג לא בלט על פני האחרים.</p>`;
   }
-  return `<div class="wp-rows">${r.points.map(pointRow).join('')}</div>${suppressedNote(r)}`;
-}
-
-function pointRow(p) {
-  const pct = Math.round(p.missRate * 100);
-  const notable = p.lift !== null && p.lift >= NOTABLE_LIFT;
-  return `<div class="wp-row${notable ? ' notable' : ''}">
-    <div class="wp-row-top">
-      <span class="wp-label">${esc(p.label)}</span>
-      <span class="wp-nums">${p.misses} מתוך ${p.exposures}</span>
-    </div>
-    <div class="wp-bar"><div class="wp-bar-fill" style="width:${Math.min(100, pct)}%"></div></div>
-    ${notable ? `<div class="wp-note">חוזר בסשנים האחרונים יותר משאר הסוגים</div>` : ''}
-  </div>`;
-}
-
-function suppressedNote(r) {
-  if (!r.suppressed.length) return '';
-  const names = r.suppressed.map((s) => esc(s.label)).join(' · ');
-  return `<p class="wp-suppressed">עוד לא הופיעו מספיק פעמים כדי לתאר: ${names}</p>`;
+  const names = notable.slice(0, 2).map((p) => esc(p.label)).join(' · ');
+  return `<p class="wp-empty">חוזר בסשנים האחרונים יותר משאר הסוגים: <strong>${names}</strong></p>`;
 }
 
 function signedOut() {
@@ -173,17 +167,11 @@ function ensureStyles() {
 .wp-head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.9rem}
 .wp-module{font-size:1rem;font-weight:800}
 .wp-count{font-size:.75rem;color:var(--muted);font-weight:700}
-.wp-rows{display:flex;flex-direction:column;gap:.85rem}
-.wp-row-top{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.35rem}
-.wp-label{font-size:.88rem;font-weight:700}
-.wp-nums{font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.wp-bar{height:7px;background:var(--bg);border-radius:999px;overflow:hidden}
-.wp-bar-fill{height:100%;background:var(--green);border-radius:999px}
-.wp-row.notable .wp-bar-fill{background:var(--orange)}
-.wp-note{font-size:.75rem;color:var(--muted);margin-top:.3rem}
 .wp-empty{font-size:.88rem;color:var(--muted);line-height:1.7}
 .wp-empty a{color:var(--green-dark);font-weight:700}
-.wp-suppressed{font-size:.75rem;color:var(--muted);margin-top:.9rem;line-height:1.6}
+.wp-empty strong{color:var(--text)}
+.wp-deep{display:inline-block;margin-top:.8rem;font-size:.83rem;font-weight:700;color:var(--green-dark);text-decoration:none}
+.wp-deep:hover{text-decoration:underline}
 .wp-foot{font-size:.75rem;color:var(--muted);margin-top:1.2rem;text-align:center}
 `;
   document.head.appendChild(s);

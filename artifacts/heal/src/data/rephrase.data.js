@@ -1,5 +1,106 @@
 import { supabase } from '../supabase.js'
-import { keyForMechanism } from '../lib/keys.js'
+import { keyForMechanism, resolveTrigger } from '../lib/keys.js'
+
+// Columns the practice screen needs to render a question. Kept in one place so the
+// focused-pack fetch and the RPC stay in sync.
+const QUESTION_COLUMNS = '*'
+
+/** Fisher-Yates on a copy. Pure. */
+function shuffled(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+/**
+ * Fetch a pack of published questions that all contain a distractor of one label.
+ *
+ * Deliberately NOT a new RPC. get_rephrase_questions filters on level only, and
+ * teaching it about labels would mean a migration plus duplicating the keys.js
+ * mapping in SQL — two sources of truth for the vocabulary. Instead this reads the
+ * tagging columns (small: 424 rows of short fields), resolves labels with the very
+ * same resolveTrigger the screens use, then fetches only the chosen rows in full.
+ * Two round trips, zero schema change, one mapping.
+ *
+ * Level is ignored on purpose: a focused pack is about the label, not difficulty.
+ *
+ * @param {{ key: string, limit?: number, excludeIds?: string[] }} options
+ * @returns {{ data: object[]|null, error: object|null }}
+ */
+export async function fetchPracticeQuestionsByKey({ key, limit = 5, excludeIds = [] } = {}) {
+  try {
+    if (!key) throw new Error('fetchPracticeQuestionsByKey: key is required')
+
+    const { data: tagged, error: tagError } = await supabase
+      .from('restatement_questions')
+      .select('id, trigger_category_1, trigger_category_2, trigger_category_3, mechanism_1, mechanism_2, mechanism_3')
+      .eq('is_published', true)
+    if (tagError) throw tagError
+
+    const skip = new Set(excludeIds)
+    const matching = (tagged || []).filter((q) => {
+      if (skip.has(q.id)) return false
+      return [1, 2, 3].some((n) => {
+        const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] })
+        return t?.id === key
+      })
+    })
+    if (!matching.length) return { data: [], error: null }
+
+    const ids = shuffled(matching).slice(0, limit).map((q) => q.id)
+    const { data, error } = await supabase
+      .from('restatement_questions')
+      .select(QUESTION_COLUMNS)
+      .in('id', ids)
+    if (error) throw error
+
+    return { data: shuffled(data || []), error: null }
+  } catch (error) {
+    console.error('rephrase.data.fetchPracticeQuestionsByKey:', error)
+    return { data: null, error }
+  }
+}
+
+/**
+ * The learner's recent wrong answers, with everything needed to re-show the item:
+ * the source sentence, the distractor they picked, and its explanation.
+ *
+ * Feeds the Analyze screen, whose rule is that a label is never shown bare — a
+ * label plus a real sentence the learner actually got wrong is the whole point.
+ *
+ * @param {string} userId
+ * @param {{ limit?: number }} options
+ * @returns {{ data: object[]|null, error: object|null }}
+ */
+export async function fetchRecentMistakes(userId, { limit = 80 } = {}) {
+  try {
+    if (!userId) throw new Error('fetchRecentMistakes: userId is required')
+    const { data, error } = await supabase
+      .from('restatement_attempts')
+      .select(`
+        chosen_option_index, attempted_at,
+        restatement_questions (
+          id, original_sentence, correct_answer,
+          distractor_1, distractor_2, distractor_3,
+          explanation_1_he, explanation_2_he, explanation_3_he,
+          trigger_category_1, trigger_category_2, trigger_category_3,
+          mechanism_1, mechanism_2, mechanism_3
+        )
+      `)
+      .eq('user_id', userId)
+      .eq('is_correct', false)
+      .order('attempted_at', { ascending: false })
+      .limit(limit)
+    if (error) throw error
+    return { data: data || [], error: null }
+  } catch (error) {
+    console.error('rephrase.data.fetchRecentMistakes:', error)
+    return { data: null, error }
+  }
+}
 
 /**
  * Fetch published practice questions for a given difficulty level.

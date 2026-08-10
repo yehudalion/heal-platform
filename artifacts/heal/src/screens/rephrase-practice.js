@@ -12,11 +12,11 @@
  * Trigger-category resolution goes exclusively through lib/keys.js (resolveTrigger).
  */
 
-import { navigate } from '../router.js';
+import { navigate, subAnchor } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
-import { fetchPracticeQuestions, logAttempt } from '../data/rephrase.data.js';
+import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
-import { resolveTrigger } from '../lib/keys.js';
+import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
 import { LEARN_SEEN_KEY } from './rephrase-learn.js';
 
 // ─── Tunables ────────────────────────────────────────────────────────────────
@@ -50,6 +50,8 @@ let pack = [];                    // current pack (≤ PACK_SIZE questions)
 let packIdx = 0;
 let packCorrect = 0;
 let levelAdjustedThisPack = false; // one level MOVE per pack — see adjustLevel()
+let focusKey = null;               // non-null → this session drills ONE label
+let focusLabel = null;             // its student-facing label, for the header
 
 // per-question view state
 let order = [0, 1, 2, 3];         // display slot d → canonical index order[d]
@@ -96,6 +98,12 @@ export async function renderRephrasePractice(root) {
   // First visit goes through Learn first (same gate card.js uses for vocab-learn).
   if (!localStorage.getItem(LEARN_SEEN_KEY)) { navigate('/rephrase-learn'); return; }
 
+  // '#/rephrase-practice?key=nearmiss' — a focused pack, arrived at from Analyze.
+  const params = new URLSearchParams(subAnchor());
+  const requested = params.get('key');
+  focusKey = CATEGORIES.some((c) => c.id === requested) ? requested : null;
+  focusLabel = focusKey ? CATEGORIES.find((c) => c.id === focusKey).label : null;
+
   ensureStyles();
   root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">טוען שאלות…</div></div></div>`;
 
@@ -116,7 +124,12 @@ export async function renderRephrasePractice(root) {
 async function loadPack(root) {
   root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">טוען שאלות…</div></div></div>`;
   const fetchedAt = level;
-  const { data, error } = await fetchPracticeQuestions({ level, limit: PACK_SIZE, excludeIds: answeredIds });
+  // A focused pack is selected by LABEL and ignores level — the point is to meet
+  // that one type again, not to hold a difficulty. Auto-levelling still runs on the
+  // answers, so a focused detour does not freeze the learner's level.
+  const { data, error } = focusKey
+    ? await fetchPracticeQuestionsByKey({ key: focusKey, limit: PACK_SIZE, excludeIds: answeredIds })
+    : await fetchPracticeQuestions({ level, limit: PACK_SIZE, excludeIds: answeredIds });
 
   if (error) { view = 'error'; draw(root); return; }
   if (!data || data.length === 0) { view = 'empty'; draw(root); return; }
@@ -215,6 +228,7 @@ function shell(inner) {
     <div class="rp-top">
       <a class="rp-brand" href="#/rephrasing">← ניסוח מחדש</a>
       <div class="rp-meta">
+        ${focusLabel ? `<span class="rp-chip rp-focuschip">🎯 ${esc(focusLabel)}</span>` : ''}
         ${showMeta ? `<span class="rp-chip">רמה ${packLevel}</span>
         <span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
         <a class="rp-chip rp-guide" href="#/rephrase-learn">📘 מדריך</a>
@@ -333,46 +347,63 @@ function drawSummary(root) {
     <div class="rp-card rp-summary">
       <div class="rp-sum-title">סיכום מנה</div>
       <div class="rp-sum-score">${packCorrect} / ${total}</div>
-      <div class="rp-sum-sub">ענית נכון על ${packCorrect} מתוך ${total} שאלות.</div>
+      <div class="rp-sum-sub">${packCorrect} מתוך ${total} נכון במנה הזו.</div>
+      <div class="rp-sum-total" id="rpTotal"></div>
       ${levelMsg}
       <div class="rp-insight" id="rpInsight" hidden></div>
+      <div class="rp-nextstep">מה עכשיו?</div>
       <div class="rp-sum-btns">
-        <button class="btn-primary" id="rpMore">המשך ←</button>
+        <button class="btn-primary" id="rpMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
+        <a class="rp-sum-alt" href="#/rephrase-learn">📘 חזור למדריך</a>
+        <a class="rp-sum-alt" id="rpToAnalyze" href="#/rephrase-analyze" hidden>מה כדאי לתרגל עכשיו ←</a>
         <button class="rp-link" id="rpDone">סיום</button>
       </div>
     </div>
   `);
   root.querySelector('#rpMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#rpDone').addEventListener('click', () => navigate('/home'));
-  fillInsight(root);
+  fillSummaryExtras(root);
 }
 
 /**
- * The end-of-pack Analyze moment. Scoped to THIS SESSION only — answeredIds is
- * reset on every entry to the screen, so its length is exactly the number of
- * attempts logged since the learner arrived.
+ * Two independent things land on the summary, and they must not be confused:
  *
- * Silence is the default. If the session is too short, or no single label cleared
- * the exposure threshold, nothing is rendered — not an "insufficient data" notice,
- * which would just be noise on a summary screen.
+ *   the FACTUAL line — "you have practised N questions in total". Always shown from
+ *   the very first pack. It states what happened; no threshold applies to a fact.
  *
- * The label named is the one with the highest LIFT, never the highest raw miss
- * count: the biggest label in the pool would otherwise win every single time.
+ *   the DIAGNOSTIC card — "this type keeps coming back". That IS a claim about a
+ *   pattern, so it keeps its sample gate and its notability bar and stays silent
+ *   whenever either is unmet.
+ *
+ * Deliberately no level anywhere in either (Lion, 2026-08-05).
  */
-async function fillInsight(root) {
+async function fillSummaryExtras(root) {
   if (!userId) return;
-  let report;
+
+  let lifetime = null, session = null;
   try {
-    const reports = await getWeakPoints(userId, { attemptLimit: answeredIds.length });
-    report = reports.find((r) => r.moduleId === 'rephrase');
+    const [allTime, thisSession] = await Promise.all([
+      getWeakPoints(userId),
+      getWeakPoints(userId, { attemptLimit: answeredIds.length }),
+    ]);
+    lifetime = allTime.find((r) => r.moduleId === 'rephrase') ?? null;
+    session = thisSession.find((r) => r.moduleId === 'rephrase') ?? null;
   } catch (err) {
-    console.warn('rephrase.insight failed:', err);
+    console.warn('rephrase.summary failed:', err);
     return;
   }
-  if (!report || report.status !== 'ok' || !report.points.length) return;
 
-  const top = report.points[0];
+  // ── factual, no threshold ──
+  const totalBox = root.querySelector('#rpTotal');
+  if (totalBox && lifetime?.attempts) {
+    totalBox.textContent = `סה"כ תרגלת ${lifetime.attempts} שאלות.`;
+  }
+
+  // ── diagnostic, thresholds apply ──
+  if (!session || session.status !== 'ok' || !session.points.length) return;
+  const top = session.points[0];
   if (top.lift === null || top.lift < NOTABLE_LIFT) return;   // nothing stands out — stay quiet
+
   const box = root.querySelector('#rpInsight');
   if (!box) return;
   box.innerHTML = `
@@ -380,9 +411,10 @@ async function fillInsight(root) {
     <div class="rp-insight-body">
       <a class="rp-insight-key" href="#/rephrase-learn#rl-block-${top.id}">${esc(top.label)}</a>
       — נבחר ${top.misses} מתוך ${top.exposures} הפעמים שהופיע, יותר משאר הסוגים.
-    </div>
-    <a class="rp-insight-link" href="#/rephrase-analyze">התמונה המלאה ←</a>`;
+    </div>`;
   box.hidden = false;
+  const toAnalyze = root.querySelector('#rpToAnalyze');
+  if (toAnalyze) toAnalyze.hidden = false;
 }
 
 // ─── Scoped styles (injected once; styles.css untouched) ─────────────────────
@@ -395,11 +427,16 @@ function ensureStyles() {
 }
 
 const RP_CSS = `
-.rp-shell{max-width:720px;margin:0 auto;padding:1.1rem 1rem 3rem;direction:rtl}
+/* 960, not 720: the options are full English sentences and at 720 every one of
+   them wrapped, which is what made the screen feel cramped on a desktop. Scoped to
+   .rp-shell — this screen renders outside the sidebar layout, so no other screen
+   is affected. max-width still collapses cleanly on mobile. */
+.rp-shell{max-width:960px;margin:0 auto;padding:1.1rem 1rem 3rem;direction:rtl}
 .rp-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:1rem}
 .rp-brand{font-weight:800;color:var(--green-dark);text-decoration:none;font-size:.9rem}
 .rp-meta{display:flex;gap:.4rem}
 .rp-chip{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.25rem .7rem;font-size:.75rem;font-weight:700;color:var(--muted)}
+.rp-focuschip{background:var(--purple-light);color:var(--purple);border-color:var(--purple-light);white-space:nowrap}
 .rp-guide{color:var(--green-dark);text-decoration:none;white-space:nowrap}
 .rp-guide:hover{border-color:var(--green)}
 .rp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem}
@@ -443,7 +480,10 @@ const RP_CSS = `
 .rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .rp-insight-body{font-size:.88rem;line-height:1.7}
 .rp-insight-key{font-weight:800;color:var(--green-dark);text-decoration:underline}
-.rp-insight-link{display:inline-block;margin-top:.5rem;font-size:.8rem;font-weight:700;color:var(--green-dark);text-decoration:none}
-.rp-sum-btns{margin-top:1.4rem;display:flex;flex-direction:column;gap:.6rem;align-items:center}
+.rp-sum-total{font-size:.85rem;color:var(--muted);margin-top:.35rem}
+.rp-nextstep{margin-top:1.4rem;font-size:.8rem;font-weight:800;color:var(--muted)}
+.rp-sum-alt{font-size:.85rem;font-weight:700;color:var(--green-dark);text-decoration:none;padding:.35rem 0}
+.rp-sum-alt:hover{text-decoration:underline}
+.rp-sum-btns{margin-top:.7rem;display:flex;flex-direction:column;gap:.5rem;align-items:center}
 .rp-sum-btns .btn-primary{width:100%}
 `;
