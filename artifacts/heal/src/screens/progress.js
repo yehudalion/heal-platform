@@ -1,8 +1,8 @@
 /**
  * src/screens/progress.js — two cross-module screens, one data source.
  *
- *   renderProgress → /progress   "ההתקדמות שלי" — what the recent sessions looked like
- *   renderGap      → /gap        "דו״ח פערים"   — the same data next to the exam target
+ *   renderProgress → /progress   "ההתקדמות שלי" — the whole screen
+ *   renderGap      → /gap        redirect only, kept for old links
  *
  * Rewritten 2026-08-05. The previous version hardcoded every number it showed
  * (68% restatement accuracy, "~25 נקודות לסגירה", a 30%→70% before/after chart)

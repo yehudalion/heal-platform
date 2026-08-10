@@ -57,9 +57,9 @@ export async function renderLayout(root, activePath) {
         <a class="nav-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="nav-icon">${ico.chart}</span>ההתקדמות שלי
         </a>
-        <a class="nav-item${activePath==='/gap'?' active':''}" data-nav="/gap">
-          <span class="nav-icon">${ico.gap}</span>דו"ח פערים
-        </a>
+        <!-- The "דו״ח פערים" item was removed 2026-08-05: /gap merged into
+             /progress, so it pointed at the same screen under a different name.
+             The ROUTE survives as a redirect for old links — see progress.js. -->
 
         <div class="sidebar-foot">
           <div class="foot-av">${avatarHtml}</div>
@@ -108,6 +108,5 @@ const ico = {
   rephrase:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H5M9 5l-3 3 3 3"/><path d="M2 8h2" stroke-dasharray="1.5 1.5"/></svg>`,
   read:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="1" width="12" height="14" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>`,
   chart:   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l4-4 3 3 5-7"/></svg>`,
-  gap:     `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>`,
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
 };
