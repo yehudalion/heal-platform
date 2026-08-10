@@ -14,7 +14,7 @@ export function renderTopbar() {
       </a>
       <div class="topbar-right">
         <span class="who" data-who>${who}</span>
-        <a class="link" href="#/gap">דו״ח פערים</a>
+        <a class="link" href="#/progress">ההתקדמות שלי</a>
         <a class="link" href="#" data-signout>התנתק</a>
       </div>
     </div>
