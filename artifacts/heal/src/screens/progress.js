@@ -95,31 +95,10 @@ function signedOut() {
   return `<p class="wp-empty">יש להתחבר כדי לראות את הנתונים. <a href="#/home">← דף הבית</a></p>`;
 }
 
-// ─── /progress ───────────────────────────────────────────────────────────────
+// ─── /progress — the one implementation ──────────────────────────────────────
 
 export async function renderProgress(root) {
   await renderLayout(root, '/progress');
-  const el = getPageContent();
-  el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
-  ensureStyles();
-
-  const { userId, reports } = await load();
-
-  el.innerHTML = `
-    <div class="fade-in" style="max-width:680px">
-      <div class="page-title">ההתקדמות שלי</div>
-      <div class="page-sub">מה עלה בסשנים האחרונים, לפי סוג השאלה.</div>
-      ${!userId ? signedOut()
-        : reports.length ? reports.map(moduleCard).join('')
-        : `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
-      <p class="wp-foot">המספרים מתארים את הסשנים שנאספו, לא הערכה כוללת.</p>
-    </div>`;
-}
-
-// ─── /gap ────────────────────────────────────────────────────────────────────
-
-export async function renderGap(root) {
-  await renderLayout(root, '/gap');
   const el = getPageContent();
   el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
   ensureStyles();
@@ -133,10 +112,14 @@ export async function renderGap(root) {
 
   el.innerHTML = `
     <div class="fade-in" style="max-width:680px">
-      <div class="page-title">דו"ח פערים</div>
-      <div class="page-sub">${target ? `היעד שהגדרת: ${target}.` : 'עוד לא הוגדר ציון יעד בפרופיל.'}</div>
+      <div class="page-title">ההתקדמות שלי</div>
+      <div class="page-sub">${target ? `מה עלה בסשנים האחרונים. היעד שהגדרת: ${target}.` : 'מה עלה בסשנים האחרונים, לפי סוג השאלה.'}</div>
 
-      ${!userId ? signedOut() : reports.map(moduleCard).join('') || `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
+      ${!userId ? signedOut()
+        : reports.length ? reports.map(moduleCard).join('')
+        : `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
+
+      <p class="wp-foot">המספרים מתארים את הסשנים שנאספו, לא הערכה כוללת.</p>
 
       <!-- PRODUCT DECISION — reproduced verbatim, not this refactor's call -->
       <div class="lock-upsell">
@@ -155,6 +138,22 @@ export async function renderGap(root) {
           : 'לא הוגדר תאריך בחינה בפרופיל.'}</span>
       </div>
     </div>`;
+}
+
+// ─── /gap — redirect only ────────────────────────────────────────────────────
+
+/**
+ * Merged into /progress on 2026-08-05. The two screens rendered the same module
+ * summary; /gap only added the target line, the paywall and the countdown, all of
+ * which now live above. The route survives so existing links and bookmarks keep
+ * working, but it holds NO rendering logic — there is exactly one implementation.
+ *
+ * location.replace, not navigate(): navigate() pushes a history entry, so Back from
+ * /progress would land on /gap and be bounced forward again — a back-button trap.
+ * replace() swaps the current entry instead, and still fires hashchange.
+ */
+export async function renderGap() {
+  location.replace('#/progress');
 }
 
 // ─── Scoped styles ───────────────────────────────────────────────────────────

@@ -7,7 +7,6 @@ const SCREEN_TITLES = {
   '/srs':                  'חזרה מרווחת',
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
-  '/gap':                  'דו"ח פערים',
   '/sentence-completion':  'השלמת משפטים',
 };
 
