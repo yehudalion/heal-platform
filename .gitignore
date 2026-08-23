@@ -67,3 +67,16 @@ scripts/rephrase-gen/out/scan-*.json
 scripts/rephrase-gen/out/solver-cache.json
 scripts/rephrase-gen/out/checkpoint-*.json
 scripts/rephrase-gen/out/smoke-*.json
+
+# Generated audio output — regenerable, already uploaded to Supabase Storage (100MB+)
+scripts/audio_output/
+scripts/audio_output_lecture_qa/
+
+# Official NITE source recordings — reference only, never distributed
+docs/truth_corpus/recordings/
+
+# Python / agent / scratch
+scripts/__pycache__/
+.claude/
+_to_delete/
+_tmp_*
