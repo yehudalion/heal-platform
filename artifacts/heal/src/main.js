@@ -15,6 +15,7 @@ import { renderSentenceCompletion } from './screens/sentence-completion.js';
 
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
+import { renderOnboarding, getGuestProfile } from './screens/onboarding.js';
 import { renderFork }  from './screens/fork.js';
 import { renderLevel } from './screens/level.js';
 import { renderCard }  from './screens/card.js';
@@ -22,11 +23,13 @@ import { renderVocabLearn } from './screens/vocab-learn.js';
 import { renderVocabAnalyze } from './screens/vocab-analyze.js';
 
 // ─── Listening section ────────────────────────────────────────────────────────
-import { renderListeningTest }     from './listening/test-page.js';
-import { renderListeningItemTest } from './listening/item-test-page.js';
-import { renderDiagnostic }        from './listening/diagnostic.js';
-import { renderSession }              from './listening/session.js';
+// test-page.js + item-test-page.js deleted 2026-08-14 (SITEMAP §4 "נמחקים,
+// אושר ע"י ליאון" — old dev screens).
+import { renderDiagnostic }          from './listening/diagnostic.js';
+import { renderSession }             from './listening/session.js';
 import { renderListeningDashboard }  from './listening/dashboard.js';
+import { renderListeningLearn }      from './listening/readiness.js';
+import { renderListeningAnalyze }    from './listening/analyze.js';
 
 const app = document.getElementById('app');
 
@@ -37,6 +40,23 @@ function requireAuth(handler) {
     if (!session && !isGuest()) { navigate('/'); return; }
     await handler(root);
   };
+}
+
+// ─── Onboarding guard (SITEMAP §1) ───────────────────────────────────────────
+// Applied to /home only: the dashboard is the entry point, so this is the one
+// gate — direct links into modules stay friction-free.
+function requireOnboarded(handler) {
+  return requireAuth(async (root) => {
+    if (isGuest()) {
+      if (!getGuestProfile()?.onboarding_complete) { navigate('/onboarding'); return; }
+    } else {
+      const session = await getCurrentSession();
+      const { getProfile } = await import('./data/profiles.data.js');
+      const { data: profile } = await getProfile(session.user.id);
+      if (!profile?.onboarding_complete) { navigate('/onboarding'); return; }
+    }
+    await handler(root);
+  });
 }
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
@@ -50,8 +70,11 @@ route('/', async (root) => {
 route('/fork',  requireAuth(renderFork));
 route('/level', requireAuth(renderLevel));
 
+// Onboarding (SITEMAP §1 — two questions, shown once)
+route('/onboarding', requireAuth(renderOnboarding));
+
 // New main routes
-route('/home',         requireAuth(renderHome));
+route('/home',         requireOnboarded(renderHome));
 route('/flashcards',   requireAuth(renderFlashcards));
 route('/srs',          requireAuth(renderSrs));
 route('/rephrasing',   requireAuth(renderRephrasing));
@@ -68,11 +91,11 @@ route('/vocab-learn', requireAuth(renderVocabLearn));
 route('/vocab-analyze', requireAuth(renderVocabAnalyze));
 
 // ─── Listening section routes ────────────────────────────────────────────────
-route('/listening/test',       renderListeningTest);                   // M2 audio player test (no auth)
-route('/listening/item-test',  requireAuth(renderListeningItemTest));  // M3 full item test
-route('/listening/diagnostic', requireAuth(renderDiagnostic));         // M4 diagnostic flow
-route('/listening/session',    requireAuth(renderSession));            // M5 practice session
-route('/listening',            requireAuth(renderListeningDashboard)); // M7 section dashboard
+route('/listening/diagnostic', requireAuth(renderDiagnostic));         // M4 — PARKED, not in the entry path (SITEMAP: "לא נמחק, לא פעיל"). Reachable by direct URL only; nothing links here.
+route('/listening/learn',      requireAuth(renderListeningLearn));     // Learn layer — the one lesson (direction)
+route('/listening/session',    requireAuth(renderSession));            // Practice layer — session loop
+route('/listening/analyze',    requireAuth(renderListeningAnalyze));   // Analyze layer — cumulative descriptive report
+route('/listening',            requireAuth(renderListeningDashboard)); // Section dashboard (3-layer entry)
 
 // ─── Auth state listener ──────────────────────────────────────────────────────
 if (supabase) {

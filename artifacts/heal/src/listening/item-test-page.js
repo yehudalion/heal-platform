@@ -26,9 +26,9 @@ export async function renderListeningItemTest(root) {
   let items = [];
   if (supabase) {
     const { data, error } = await supabase
-      .from('listening_items')
-      .select('id, topic, item_type, status, accent, difficulty')
-      .eq('status', 'published')
+      .from('listening_lectures')
+      .select('id, topic, item_type, is_published, accent, difficulty')
+      .eq('is_published', true)
       .order('created_at', { ascending: true });
 
     if (error) console.warn('[M3] item picker fetch error:', error.message);
@@ -74,7 +74,7 @@ export async function renderListeningItemTest(root) {
 
     // Destroy previous item and load new one
     if (_currentItem) { _currentItem.destroy(); _currentItem = null; }
-    _currentItem = new ListeningItem(mountEl, { itemId: btn.dataset.id });
+    _currentItem = new ListeningItem(mountEl, { lectureId: btn.dataset.id });
     await _currentItem.load();
   });
 

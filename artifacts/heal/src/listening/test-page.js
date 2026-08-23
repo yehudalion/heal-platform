@@ -145,18 +145,19 @@ export async function renderListeningTest(root) {
     infoEl.innerHTML = `<span class="lt-status-ok">מחפש פריט שמע ב-DB…</span>`;
     try {
       const { data, error } = await supabase
-        .from('listening_items')
-        .select('id, title_he, audio_url')
-        .eq('status', 'published')
+        .from('listening_lectures')
+        .select('id, title, audio_url')
+        .eq('is_published', true)
+        .not('audio_url', 'is', null)
         .limit(1)
         .maybeSingle();
 
       if (data?.audio_url) {
         audioUrl = data.audio_url;
-        const title = data.title_he || `פריט #${data.id}`;
+        const title = data.title || `פריט #${data.id}`;
         infoEl.innerHTML = `<strong>${title}</strong>`;
       } else {
-        infoEl.innerHTML = `<span class="lt-status-err">לא נמצא listening_item עם status='published'${error ? ` (${error.message})` : ''}</span>`;
+        infoEl.innerHTML = `<span class="lt-status-err">לא נמצא listening_lectures עם is_published=true ו-audio_url${error ? ` (${error.message})` : ''}</span>`;
       }
     } catch (e) {
       infoEl.innerHTML = `<span class="lt-status-err">שגיאה: ${e.message}</span>`;

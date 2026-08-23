@@ -370,3 +370,11 @@
   .ldash-chip-val { font-size: 1.25rem; }
   .ldash-main { padding: 20px 14px 16px; }
 }
+
+/* Flow hint under the single CTA (added 2026-08-16 with the layer-picker removal) */
+.ldash-main-note {
+  font-size: .85rem;
+  color: var(--text-muted, #6B8577);
+  text-align: center;
+  margin: 2px 0 0;
+}

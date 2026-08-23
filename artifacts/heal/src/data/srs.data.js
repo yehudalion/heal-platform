@@ -221,3 +221,24 @@ export async function getSessionStats(userId) {
     return { data: null, error }
   }
 }
+
+/**
+ * Daily-menu contract (SITEMAP §6). SRS is time-critical: due cards first,
+ * the composer caps our share of the plan. ~0.5 min per card.
+ * @returns {{ data: { moduleId, itemIds, targetItems, estimatedMinutes }|null, error }}
+ */
+export async function getDailyPlan(userId, minutes) {
+  const maxCards = Math.floor(minutes / 0.5)
+  const { data: due, error } = await getDueWords(userId, { limit: maxCards })
+  if (error) return { data: null, error }
+  const items = due || []
+  return {
+    data: {
+      moduleId: 'vocab',
+      itemIds: items.map(w => w.word_id),
+      targetItems: items.length,
+      estimatedMinutes: Math.round(items.length * 0.5),
+    },
+    error: null,
+  }
+}

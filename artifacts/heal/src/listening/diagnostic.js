@@ -17,9 +17,24 @@ import { ListeningItem }               from './item-component.js';
 import { navigate }                    from '../router.js';
 import './diagnostic.css';
 
-// ─── Seed item IDs (matches M4 migration SQL) ─────────────────────────────────
-const DIAG_TEXT_ITEM_ID    = 'cccccccc-cccc-cccc-cccc-cccccccccccc';
-const DIAG_LECTURE_ITEM_ID = 'dddddddd-dddd-dddd-dddd-dddddddddddd';
+// ─── ⚠️ PARKED SCREEN — NOT part of the product's entry path ──────────────────
+// SITEMAP.md: "listening/diagnostic.js — יוצא מנתיב הכניסה. מועמד להפוך
+// ל'בדוק את עצמך' מרצון בהמשך. לא נמחק, לא פעיל."
+//
+// The forced-diagnostic concept was DROPPED. Nothing routes a user here
+// automatically any more (the dashboard's auto-redirect was removed
+// 2026-08-14); the route still exists so the screen can be reached directly
+// if you want to look at it, and so the file is preserved for the possible
+// future opt-in "test yourself" feature.
+//
+// Do NOT build on this file, and do not treat the item IDs below as a product
+// decision — they are two arbitrary real rows chosen only so the screen does
+// not crash if opened. (The original IDs 'cccc…'/'dddd…' never existed in
+// listening_lectures, so this screen threw "קטע לא נמצא" for everyone.)
+// If the opt-in version is ever built, choosing what it should actually test
+// is an open product question.
+const DIAG_TEXT_ITEM_ID    = 'e73f0172-262b-47b9-9d26-8443c4ca6e58'; // CONT-1: Canals
+const DIAG_LECTURE_ITEM_ID = '03680e7f-e3d4-4691-b727-9d3b9e451eef'; // LQA-CAL2: coffeehouses
 const HEADPHONE_AUDIO_URL  =
   'https://opjtromnkdgehlqeaqzi.supabase.co/storage/v1/object/public/heal-audio/abandoned_word.mp3';
 
@@ -138,7 +153,7 @@ function _showScreen2(root) {
   _currentItem = new ListeningItem(
     root.querySelector('#diag-item-mount'),
     {
-      itemId:       DIAG_TEXT_ITEM_ID,
+      lectureId:    DIAG_TEXT_ITEM_ID,
       sessionId:    _sessionId,
       feedbackMode: 'silent',
       onContinue:   () => _showScreen3(root),
@@ -161,7 +176,7 @@ function _showScreen3(root) {
   _currentItem = new ListeningItem(
     root.querySelector('#diag-item-mount'),
     {
-      itemId:       DIAG_LECTURE_ITEM_ID,
+      lectureId:    DIAG_LECTURE_ITEM_ID,
       sessionId:    _sessionId,
       feedbackMode: 'silent',
       onContinue:   () => _showTransition(root),
@@ -228,7 +243,17 @@ async function _finalizeDiagnostic() {
             .eq('id', _sessionId)
         : Promise.resolve(),
 
-      // Upsert user state
+      // FLAGGED 2026-08-14, not fixed: `listening_user_state` does not exist in
+      // the DB (confirmed via information_schema — 0 rows possible, table is
+      // absent, not just empty) and is not documented in SITEMAP.md or any doc
+      // in docs/. This upsert will error every time and is caught below, so it
+      // fails silently — has_completed_diagnostic never actually gets recorded,
+      // which means dashboard.js's redirect-to-diagnostic check can never see
+      // a "done" state either. This is a real, undesigned gap (a readiness-score
+      // table + algorithm), not a naming mismatch like the rest of this file —
+      // per CLAUDE.md ("if a table is not in SITEMAP.md, it has no owner —
+      // flag it, do not build on it"), decide the schema with Lion before
+      // writing it, not as a silent fix here.
       supabase
         .from('listening_user_state')
         .upsert(

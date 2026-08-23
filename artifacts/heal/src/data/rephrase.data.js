@@ -222,3 +222,22 @@ export function aggregateWeakestKeys(attempts) {
   }
   return Object.values(tally).sort((a, b) => b.count - a.count)
 }
+
+/**
+ * Daily-menu contract (SITEMAP §6). The practice screen's own picker keeps
+ * selection policy (level calibration, packs of 5) — the plan only sets the
+ * item budget. ~1.5 min per question incl. feedback.
+ * @returns {{ data: { moduleId, itemIds, targetItems, estimatedMinutes }|null, error }}
+ */
+export async function getDailyPlan(userId, minutes) {
+  const questions = Math.max(1, Math.round(minutes / 1.5))
+  return {
+    data: {
+      moduleId: 'rephrase',
+      itemIds: [],
+      targetItems: questions,
+      estimatedMinutes: Math.round(questions * 1.5),
+    },
+    error: null,
+  }
+}

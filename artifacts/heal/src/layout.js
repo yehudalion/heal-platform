@@ -61,29 +61,48 @@ export async function renderLayout(root, activePath) {
              /progress, so it pointed at the same screen under a different name.
              The ROUTE survives as a redirect for old links — see progress.js. -->
 
+        <!-- streak pill removed 2026-08-17 — wellbeing rule (no streaks);
+             replaced product-wide by the weekly pace widget on /home -->
         <div class="sidebar-foot">
           <div class="foot-av">${avatarHtml}</div>
           <div style="flex:1;min-width:0">
             <div class="foot-name">${name}</div>
             <div class="foot-plan">תוכנית חינמית</div>
           </div>
-          <div class="streak-pill">🔥 0</div>
         </div>
       </nav>
 
       <!-- MAIN -->
       <div class="main-wrap">
+        <!-- fake XP/word chips removed 2026-08-17 — they were hardcoded zeros -->
         <header class="topbar">
           <div class="topbar-title" id="topbar-title">${title}</div>
-          <div style="display:flex;gap:7px">
-            <span class="chip chip-y">⚡ 0 XP</span>
-            <span class="chip">0 מילים</span>
-          </div>
         </header>
         <div class="page">
           <div id="page-content"></div>
         </div>
       </div>
+
+      <!-- Mobile bottom nav (2026-08-17): below 900px the sidebar disappears
+           and previously left NO navigation at all. Minimal by decision —
+           full visual design pass comes later. -->
+      <nav class="bottomnav">
+        <a class="bn-item${activePath==='/home'?' active':''}" data-nav="/home">
+          <span class="bn-ico">${ico.home}</span>בית
+        </a>
+        <a class="bn-item${activePath==='/listening'?' active':''}" data-nav="/listening">
+          <span class="bn-ico">${ico.listen}</span>האזנה
+        </a>
+        <a class="bn-item${activePath==='/flashcards'?' active':''}" data-nav="/card">
+          <span class="bn-ico">${ico.cards}</span>מילים
+        </a>
+        <a class="bn-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
+          <span class="bn-ico">${ico.rephrase}</span>ניסוח
+        </a>
+        <a class="bn-item${activePath==='/progress'?' active':''}" data-nav="/progress">
+          <span class="bn-ico">${ico.chart}</span>התקדמות
+        </a>
+      </nav>
 
     </div>`;
 
@@ -108,5 +127,6 @@ const ico = {
   rephrase:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H5M9 5l-3 3 3 3"/><path d="M2 8h2" stroke-dasharray="1.5 1.5"/></svg>`,
   read:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="1" width="12" height="14" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>`,
   chart:   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l4-4 3 3 5-7"/></svg>`,
+  listen:  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v-1a5 5 0 0110 0v1"/><rect x="2" y="10" width="3" height="4" rx="1"/><rect x="11" y="10" width="3" height="4" rx="1"/></svg>`,
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
 };
