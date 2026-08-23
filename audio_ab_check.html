@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>בדיקת אוזן — האם השמע שלנו נשמע כמו המבחן?</title>
+<style>
+  :root{--bg:#F7F4EF;--card:#fff;--border:#E0EBE4;--text:#1A2E22;--muted:#7A8C80;--green:#4CAF6F;--amber:#F0A202;--red:#E05252;}
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 16px 60px;background:var(--bg);color:var(--text);
+       font-family:'Heebo',Arial,sans-serif;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:1.5rem;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+  .howto{background:#FFF8E6;border:1px solid #FFD98A;border-radius:12px;padding:16px 18px;margin-bottom:28px}
+  .howto h2{font-size:1rem;margin:0 0 8px}
+  .howto ol{margin:0;padding-inline-start:20px;font-size:.92rem}
+  .howto li{margin-bottom:4px}
+  .pair{background:var(--card);border:1px solid var(--border);border-radius:14px;
+        padding:18px;margin-bottom:18px}
+  .pair-title{font-weight:600;font-size:1.02rem;margin-bottom:2px}
+  .pair-note{color:var(--muted);font-size:.82rem;margin-bottom:14px}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .side{flex:1;min-width:280px;border:1px solid var(--border);border-radius:10px;padding:12px;background:#FBFDFC}
+  .side.real{border-color:#B9D8C4;background:#F3FAF5}
+  .lbl{font-size:.78rem;font-weight:700;letter-spacing:.02em;margin-bottom:8px;display:flex;
+       justify-content:space-between;align-items:center}
+  .lbl .tag{font-weight:400;color:var(--muted);font-size:.74rem}
+  audio{width:100%;height:36px}
+  .listen-for{background:#F0F6F2;border-inline-start:3px solid var(--green);
+              padding:10px 12px;border-radius:6px;margin-top:12px;font-size:.86rem}
+  .listen-for b{display:block;margin-bottom:4px}
+  .verdict{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .verdict span.q{font-size:.86rem;color:var(--muted);margin-inline-end:4px}
+  button.v{border:1px solid var(--border);background:#fff;border-radius:20px;padding:5px 14px;
+           cursor:pointer;font-size:.84rem;font-family:inherit}
+  button.v:hover{border-color:var(--green)}
+  button.v.sel-ok{background:var(--green);color:#fff;border-color:var(--green)}
+  button.v.sel-mid{background:var(--amber);color:#fff;border-color:var(--amber)}
+  button.v.sel-bad{background:var(--red);color:#fff;border-color:var(--red)}
+  .out{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:26px}
+  .out h2{font-size:1.05rem;margin:0 0 10px}
+  textarea{width:100%;min-height:150px;border:1px solid var(--border);border-radius:8px;
+           padding:12px;font-family:ui-monospace,monospace;font-size:.82rem;direction:rtl}
+  .missing{color:var(--red);font-size:.82rem;padding:8px;background:#FFF0F0;border-radius:6px}
+  .sec{margin:32px 0 12px;font-size:1.15rem;font-weight:700;border-bottom:2px solid var(--border);padding-bottom:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>בדיקת אוזן — האם השמע שלנו נשמע כמו המבחן?</h1>
+<div class="sub">
+  עד היום בדקנו את השמע רק <b>מכנית</b> (אורך, אחוז שתיקה, תדר הצליל) — אף אחד לא <b>הקשיב</b>.
+  הדף הזה מעמיד את ההקלטות האמיתיות של המרכז הארצי מול מה שייצרנו, זו לצד זו.
+</div>
+
+<div class="howto">
+  <h2>איך לעשות את זה נכון (10 דקות)</h2>
+  <ol>
+    <li><b>עם אוזניות</b>, לא ברמקול של הלפטופ.</li>
+    <li>בכל זוג — <b>קודם הירוק (האמיתי), אחר כך הלבן (שלנו)</b>. תמיד בסדר הזה.</li>
+    <li>אל תשפוט "האם זה נעים" — שאל <b>"האם תלמיד היה מבחין שזה לא אותו מבחן?"</b></li>
+    <li>סמן תשובה בכל זוג. בסוף יש טקסט מוכן להעתקה — תדביק לי אותו בצ'אט.</li>
+  </ol>
+</div>
+
+<div class="sec">חלק א — השלמות (יש לנו כבר 100 מוכנות)</div>
+
+<div class="pair" data-id="p1">
+  <div class="pair-title">זוג 1 · השלמה קצרה</div>
+  <div class="pair-note">האמיתי: "קרח" (18.4 שניות) · שלנו: Salt (19.8 שניות) — אורך כמעט זהה, השוואה הוגנת</div>
+  <div class="row">
+    <div class="side real">
+      <div class="lbl">🟢 אמיתי — מרכז ארצי <span class="tag">18.4s</span></div>
+      <audio controls preload="none" src="docs/truth_corpus/recordings/השלמה מרכז ארצי - קרח.mp3"></audio>
+    </div>
+    <div class="side">
+      <div class="lbl">⚪ שלנו — Google TTS <span class="tag">19.8s</span></div>
+      <audio controls preload="none" src="scripts/audio_output/6cd36327-e03a-4e2a-b777-7abdd1941936.mp3"></audio>
+    </div>
+  </div>
+  <div class="listen-for">
+    <b>למה להקשיב כאן:</b>
+    המבטא — האם שנינו נשמעים בריטיים? והצליל בסוף (הביפ שמסמן שהמשפט נקטע) —
+    האם הוא מגיע באותו רגע ובאותה עוצמה?
+  </div>
+  <div class="verdict">
+    <span class="q">תלמיד היה מבחין בהבדל?</span>
+    <button class="v" data-v="ok">לא — נשמע אותו דבר</button>
+    <button class="v" data-v="mid">אולי — יש הבדל קל</button>
+    <button class="v" data-v="bad">כן — ברור ששונה</button>
+  </div>
+</div>
+
+<div class="pair" data-id="p2">
+  <div class="pair-title">זוג 2 · השלמה ארוכה יותר</div>
+  <div class="pair-note">האמיתי: "מונה ליזה" (33.2 שניות) · שלנו: Honeybees (23.9 שניות)</div>
+  <div class="row">
+    <div class="side real">
+      <div class="lbl">🟢 אמיתי — מרכז ארצי <span class="tag">33.2s</span></div>
+      <audio controls preload="none" src="docs/truth_corpus/recordings/השלמה מרכז ארצי - מונה ליזה.mp3"></audio>
+    </div>
+    <div class="side">
+      <div class="lbl">⚪ שלנו — Google TTS <span class="tag">23.9s</span></div>
+      <audio controls preload="none" src="scripts/audio_output/ccd3d75b-7583-4248-9fd6-28bfdc028662.mp3"></audio>
+    </div>
+  </div>
+  <div class="listen-for">
+    <b>למה להקשיב כאן:</b>
+    <b>קצב והפסקות.</b> בהקלטה האמיתית יש הרבה אוויר — כמעט שליש מהזמן זו שתיקה.
+    האם שלנו רץ מהר מדי / "רצוף" מדי בלי לנשום?
+  </div>
+  <div class="verdict">
+    <span class="q">תלמיד היה מבחין בהבדל?</span>
+    <button class="v" data-v="ok">לא — נשמע אותו דבר</button>
+    <button class="v" data-v="mid">אולי — יש הבדל קל</button>
+    <button class="v" data-v="bad">כן — ברור ששונה</button>
+  </div>
+</div>
+
+<div class="pair" data-id="p3">
+  <div class="pair-title">זוג 3 · קול גברי, נושא היסטורי</div>
+  <div class="pair-note">האמיתי: "אוסקר" (29.4 שניות) · שלנו: Canals (20.6 שניות)</div>
+  <div class="row">
+    <div class="side real">
+      <div class="lbl">🟢 אמיתי — מרכז ארצי <span class="tag">29.4s</span></div>
+      <audio controls preload="none" src="docs/truth_corpus/recordings/הקלטה 4 - אוסקר.mp3"></audio>
+    </div>
+    <div class="side">
+      <div class="lbl">⚪ שלנו — Google TTS <span class="tag">20.6s</span></div>
+      <audio controls preload="none" src="scripts/audio_output/e73f0172-262b-47b9-9d26-8443c4ca6e58.mp3"></audio>
+    </div>
+  </div>
+  <div class="listen-for">
+    <b>למה להקשיב כאן:</b>
+    <b>טבעיות.</b> נושאים יבשים (היסטוריה, מספרים) נקראים במבחן בטון שטוח ורגוע.
+    האם שלנו נשמע "רובוטי" בצורה שמסגירה שזו מכונה?
+  </div>
+  <div class="verdict">
+    <span class="q">תלמיד היה מבחין בהבדל?</span>
+    <button class="v" data-v="ok">לא — נשמע אותו דבר</button>
+    <button class="v" data-v="mid">אולי — יש הבדל קל</button>
+    <button class="v" data-v="bad">כן — ברור ששונה</button>
+  </div>
+</div>
+
+<div class="sec">חלק ב — קטעי שיחה/הרצאה (עוד לא ייצרנו — רק לשמוע את המקור)</div>
+<div class="sub" style="margin-top:-4px">
+  אלה ההקלטות שנצטרך <b>לחקות</b> כשנייצר את השמע ל-6 הקטעים החדשים.
+  שים לב במיוחד לשיחות: <b>שני קולות שונים</b>, ואיך נשמע המעבר ביניהם.
+</div>
+
+<div class="pair" data-id="p4">
+  <div class="pair-title">מקור · שיחה קצרה (שני דוברים)</div>
+  <div class="pair-note">"בתי ספר" — הדוגמה הכי קרובה למה שנייצר בדיאלוגים שלנו</div>
+  <div class="row">
+    <div class="side real">
+      <div class="lbl">🟢 אמיתי — שיחה, 2 דוברים <span class="tag">48.7s</span></div>
+      <audio controls preload="none" src="docs/truth_corpus/recordings/שיחה קצרה מרכז ארצי - בתי ספר.mp3"></audio>
+    </div>
+    <div class="side">
+      <div class="lbl">⚪ שלנו <span class="tag">עוד לא קיים</span></div>
+      <div class="missing">עדיין לא ייצרנו — זה מה שהסקריפט החדש אמור לעשות.</div>
+    </div>
+  </div>
+  <div class="listen-for">
+    <b>מה לשים לב:</b> כמה זמן עובר בין דובר לדובר? האם הם "נכנסים אחד לשני"
+    או שיש הפסקה ברורה? זה המספר שאני צריך לכוון בסקריפט (כרגע מוגדר 0.35 שניות).
+  </div>
+  <div class="verdict">
+    <span class="q">המעבר בין הדוברים:</span>
+    <button class="v" data-v="ok">מהיר — כמעט בלי הפסקה</button>
+    <button class="v" data-v="mid">בינוני — הפסקה קצרה</button>
+    <button class="v" data-v="bad">איטי — הפסקה ברורה</button>
+  </div>
+</div>
+
+<div class="pair" data-id="p5">
+  <div class="pair-title">מקור · הרצאה ארוכה (דובר יחיד)</div>
+  <div class="pair-note">"מעשיות" (Canterbury Tales) — 90 שניות, הפורמט הארוך</div>
+  <div class="row">
+    <div class="side real">
+      <div class="lbl">🟢 אמיתי — הרצאה <span class="tag">90.2s</span></div>
+      <audio controls preload="none" src="docs/truth_corpus/recordings/שיחה ארוכה מרכז ארצי - מעשיות.mp3"></audio>
+    </div>
+    <div class="side">
+      <div class="lbl">⚪ שלנו <span class="tag">עוד לא קיים</span></div>
+      <div class="missing">עדיין לא ייצרנו.</div>
+    </div>
+  </div>
+  <div class="listen-for">
+    <b>מה לשים לב:</b> המבטא כאן הוא ההוכחה הכי טובה לשאלה
+    "בריטי או אמריקאי?" — תקשיב ותגיד לי מה אתה שומע.
+  </div>
+  <div class="verdict">
+    <span class="q">המבטא שאתה שומע:</span>
+    <button class="v" data-v="ok">בריטי ברור</button>
+    <button class="v" data-v="mid">משהו באמצע / ניטרלי</button>
+    <button class="v" data-v="bad">אמריקאי ברור</button>
+  </div>
+</div>
+
+<div class="out">
+  <h2>📋 הסיכום שלך — להעתיק ולהדביק לי בצ'אט</h2>
+  <textarea id="summary" readonly></textarea>
+  <div style="margin-top:10px">
+    <button class="v" id="copy" style="background:var(--green);color:#fff;border-color:var(--green);padding:8px 22px">
+      העתק
+    </button>
+    <span id="copied" style="color:var(--green);font-size:.85rem;margin-inline-start:10px"></span>
+  </div>
+</div>
+
+</div>
+
+<script>
+const LABELS = {
+  p1:{name:'זוג 1 (השלמה קצרה — מבטא + צליל חיתוך)',
+      ok:'זהה',mid:'הבדל קל',bad:'שונה בבירור'},
+  p2:{name:'זוג 2 (השלמה ארוכה — קצב והפסקות)',
+      ok:'זהה',mid:'הבדל קל',bad:'שונה בבירור'},
+  p3:{name:'זוג 3 (טבעיות / רובוטיות)',
+      ok:'זהה',mid:'הבדל קל',bad:'שונה בבירור'},
+  p4:{name:'מעבר בין דוברים בשיחה אמיתית',
+      ok:'מהיר, כמעט בלי הפסקה',mid:'הפסקה קצרה',bad:'הפסקה ברורה ואיטית'},
+  p5:{name:'המבטא בהקלטה אמיתית',
+      ok:'בריטי ברור',mid:'ניטרלי / באמצע',bad:'אמריקאי ברור'},
+};
+const answers = {};
+
+document.querySelectorAll('.pair').forEach(pair=>{
+  const id = pair.dataset.id;
+  pair.querySelectorAll('button.v').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      pair.querySelectorAll('button.v').forEach(b=>
+        b.classList.remove('sel-ok','sel-mid','sel-bad'));
+      btn.classList.add('sel-'+btn.dataset.v);
+      answers[id]=btn.dataset.v;
+      render();
+    });
+  });
+});
+
+function render(){
+  const lines = ['בדיקת אוזן — תוצאות:',''];
+  Object.keys(LABELS).forEach(id=>{
+    const v = answers[id];
+    lines.push('• '+LABELS[id].name+': '+(v?LABELS[id][v]:'— לא נבדק —'));
+  });
+  const bad = Object.entries(answers).filter(([k,v])=>v==='bad'&&['p1','p2','p3'].includes(k)).length;
+  const done = ['p1','p2','p3'].filter(k=>answers[k]).length;
+  lines.push('');
+  if(done===0){ lines.push('(עוד לא סימנת כלום)'); }
+  else if(bad===0){ lines.push('מסקנה: השמע שייצרנו עובר — אפשר להמשיך לייצור.'); }
+  else { lines.push('מסקנה: '+bad+' מתוך '+done+' זוגות נשמעים שונים בבירור — צריך לבדוק מנוע/הגדרות אחרות לפני ייצור המוני.'); }
+  document.getElementById('summary').value = lines.join('\n');
+}
+
+document.getElementById('copy').addEventListener('click',()=>{
+  const ta=document.getElementById('summary');
+  ta.select(); document.execCommand('copy');
+  document.getElementById('copied').textContent='✓ הועתק';
+  setTimeout(()=>document.getElementById('copied').textContent='',2000);
+});
+
+render();
+</script>
+</body>
+</html>

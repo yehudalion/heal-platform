@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M2 — Audio Player Test</title>
+  <!-- Howler.js from CDN — no build step required -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green:     #4CAF6F;
+      --red:       #e53935;
+      --bg:        #F7F4EF;
+      --card:      #FFFFFF;
+      --text:      #1C2B20;
+      --muted:     #7A8C80;
+      --border:    #E0EBE4;
+      --radius:    18px;
+      --radius-sm: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; direction: rtl; }
+    button { cursor: pointer; font-family: inherit; }
+
+    .page { display: flex; flex-direction: column; align-items: center; padding: 32px 16px 60px; max-width: 520px; margin: 0 auto; }
+    .badge { background: #FFF3CD; border: 1px solid #FFD166; color: #7A6000; font-size: .72rem; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+    h1 { font-size: 1.3rem; margin-bottom: 4px; text-align: center; }
+    .sub { font-size: .82rem; color: var(--muted); margin-bottom: 24px; text-align: center; }
+
+    .url-card { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; }
+    .url-card p { font-size: .85rem; margin-bottom: 12px; }
+    .url-row { display: flex; gap: 8px; }
+    .url-input { flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: .82rem; direction: ltr; outline: none; }
+    .url-input:focus { border-color: var(--green); }
+    .url-btn { padding: 10px 18px; background: var(--green); color: #fff; border: none; border-radius: var(--radius-sm); font-size: .82rem; white-space: nowrap; }
+    .url-btn:active { opacity: .8; }
+
+    .players { display: none; width: 100%; }
+    .players.visible { display: block; }
+    .section { width: 100%; margin-bottom: 28px; }
+    .section-label { font-size: .72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
+
+    /* ── Audio Player ── */
+    .ap-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 16px 16px; user-select: none; -webkit-user-select: none; direction: ltr; }
+    .ap-wrap.ap-loading .ap-btn-play { opacity: .55; pointer-events: none; }
+    .ap-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 14px; }
+    .ap-btn { background: none; border: none; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; -webkit-tap-highlight-color: transparent; touch-action: manipulation; transition: opacity .12s, transform .1s; }
+    .ap-btn:active { transform: scale(.88); }
+    .ap-btn-play { width: 60px; height: 60px; background: var(--green); color: #fff; box-shadow: 0 3px 12px rgba(76,175,111,.35); }
+    .ap-btn-play svg { width: 24px; height: 24px; }
+    .ap-btn-play:active { transform: scale(.9); }
+    .ap-btn-play.ap-locked { background: var(--muted); box-shadow: none; cursor: default; }
+    .ap-btn-play.ap-locked:active { transform: none; }
+    .ap-btn-skip { width: 48px; height: 48px; color: var(--muted); }
+    .ap-btn-skip svg { width: 28px; height: 28px; }
+    .ap-btn-skip:active { opacity: .45; }
+    .ap-icon { display: flex; align-items: center; justify-content: center; }
+    .ap-seek-row { display: flex; align-items: center; gap: 8px; }
+    .ap-time { font-size: .72rem; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 32px; white-space: nowrap; }
+    .ap-seek-bar { flex: 1; height: 40px; display: flex; align-items: center; cursor: pointer; touch-action: none; }
+    .ap-mode-single-pass .ap-seek-bar { cursor: default; pointer-events: none; }
+    .ap-track { position: relative; width: 100%; height: 4px; background: var(--border); border-radius: 2px; }
+    .ap-fill { position: absolute; inset: 0 auto 0 0; background: var(--green); border-radius: 2px; width: 0%; pointer-events: none; }
+    .ap-thumb { position: absolute; top: 50%; left: 0%; transform: translate(-50%,-50%); width: 16px; height: 16px; background: var(--green); border-radius: 50%; pointer-events: none; box-shadow: 0 0 0 4px rgba(76,175,111,.18); }
+    .ap-seek-bar:active .ap-thumb { box-shadow: 0 0 0 8px rgba(76,175,111,.22); }
+    .ap-error { margin-top: 10px; color: var(--red); font-size: .8rem; text-align: center; direction: rtl; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="badge">עמוד בדיקה זמני — M2 · לא לשחרור</div>
+    <h1>בדיקת נגן שמע</h1>
+    <p class="sub">Audio Player Component · Howler.js</p>
+
+    <div class="url-card">
+      <p>הדבק/י URL של קובץ שמע (MP3 / M4A / WAV) מ-Supabase Storage:</p>
+      <div class="url-row">
+        <input id="urlInput" class="url-input" type="url" placeholder="https://…/audio.mp3" autocomplete="off" />
+        <button id="loadBtn" class="url-btn">טען</button>
+      </div>
+    </div>
+
+    <div class="players" id="players">
+      <div class="section">
+        <div class="section-label">מצב רגיל (normal)</div>
+        <div id="playerNormal"></div>
+      </div>
+      <div class="section">
+        <div class="section-label">מצב חד-פעמי (single-pass)</div>
+        <div id="playerSingle"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    function fmt(secs) {
+      if (!isFinite(secs) || secs < 0) return '0:00';
+      var m = Math.floor(secs / 60), s = Math.floor(secs % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    var SVG = {
+      play:  '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>',
+      pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/></svg>',
+      lock:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+      back:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 8.5A9 9 0 1 1 4 16"/><polyline points="1,5 4,8.5 7.5,6"/><text x="8.5" y="15.5" font-size="6.5" fill="currentColor" stroke="none" font-family="inherit">10</text></svg>',
+      fwd:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 8.5A9 9 0 1 0 20 16"/><polyline points="23,5 20,8.5 16.5,6"/><text x="7.5" y="15.5" font-size="6.5" fill="currentColor" stroke="none" font-family="inherit">10</text></svg>',
+    };
+
+    // ── AudioPlayer class ─────────────────────────────────────────────────────
+    function AudioPlayer(container, opts) {
+      var src    = opts.src;
+      var mode   = opts.mode || 'normal';
+      var self   = this;
+      self._container = container;
+      self._mode   = mode;
+      self._locked = false;
+      self._hasStarted = false;
+      self._raf    = null;
+      self._duration = 0;
+
+      // Pause on visibility change (incoming call / screen lock / app switch)
+      self._visHandler = function() {
+        if (document.hidden && self._howl && self._howl.playing()) self._howl.pause();
+      };
+      document.addEventListener('visibilitychange', self._visHandler);
+
+      self._howl = new Howl({
+        src: [src],
+        html5: true,
+        onload: function() {
+          self._duration = self._howl.duration();
+          self._timeDuration.textContent = fmt(self._duration);
+          container.classList.remove('ap-loading');
+        },
+        onplay:  function() { self._syncPlay(); },
+        onpause: function() { self._syncPause(); },
+        onstop:  function() { self._syncPause(); },
+        onend:   function() { self._onEnd(); },
+        onloaderror: function() { self._showError('שגיאה בטעינת האודיו'); },
+        onplayerror: function() {
+          self._howl.once('unlock', function() { if (!self._locked) self._howl.play(); });
+        },
+      });
+
+      self._render();
+      self._bindEvents();
+    }
+
+    AudioPlayer.prototype._render = function() {
+      var c = this._container;
+      var isNormal = this._mode === 'normal';
+      c.className = 'ap-wrap ap-loading' + (isNormal ? '' : ' ap-mode-single-pass');
+      c.innerHTML =
+        '<div class="ap-controls">' +
+          (isNormal ? '<button class="ap-btn ap-btn-skip" data-skip="-10" aria-label="אחורה 10 שניות">' + SVG.back + '</button>' : '') +
+          '<button class="ap-btn ap-btn-play" aria-label="נגן">' +
+            '<span class="ap-icon ap-icon-play">'  + SVG.play  + '</span>' +
+            '<span class="ap-icon ap-icon-pause" style="display:none">' + SVG.pause + '</span>' +
+            '<span class="ap-icon ap-icon-lock"  style="display:none">' + SVG.lock  + '</span>' +
+          '</button>' +
+          (isNormal ? '<button class="ap-btn ap-btn-skip" data-skip="10" aria-label="קדימה 10 שניות">' + SVG.fwd + '</button>' : '') +
+        '</div>' +
+        '<div class="ap-seek-row">' +
+          '<span class="ap-time ap-time-current">0:00</span>' +
+          '<div class="ap-seek-bar" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">' +
+            '<div class="ap-track"><div class="ap-fill"></div><div class="ap-thumb"></div></div>' +
+          '</div>' +
+          '<span class="ap-time ap-time-duration">–:––</span>' +
+        '</div>' +
+        '<div class="ap-error" style="display:none"></div>';
+
+      this._btnPlay      = c.querySelector('.ap-btn-play');
+      this._iconPlay     = c.querySelector('.ap-icon-play');
+      this._iconPause    = c.querySelector('.ap-icon-pause');
+      this._iconLock     = c.querySelector('.ap-icon-lock');
+      this._seekBar      = c.querySelector('.ap-seek-bar');
+      this._fill         = c.querySelector('.ap-fill');
+      this._thumb        = c.querySelector('.ap-thumb');
+      this._timeCurrent  = c.querySelector('.ap-time-current');
+      this._timeDuration = c.querySelector('.ap-time-duration');
+      this._errorEl      = c.querySelector('.ap-error');
+    };
+
+    AudioPlayer.prototype._bindEvents = function() {
+      var self = this;
+      this._btnPlay.addEventListener('click', function() { if (!self._locked) self.togglePlay(); });
+      this._container.querySelectorAll('.ap-btn-skip').forEach(function(btn) {
+        btn.addEventListener('click', function() { self._skip(parseInt(btn.dataset.skip, 10)); });
+      });
+      if (this._mode !== 'single-pass') this._bindSeek();
+    };
+
+    AudioPlayer.prototype._bindSeek = function() {
+      var self = this, dragging = false;
+      var bar = this._seekBar;
+      function getPos(e) {
+        var rect = bar.getBoundingClientRect();
+        var x = e.touches ? e.touches[0].clientX : e.clientX;
+        return Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+      }
+      function doSeek(e) {
+        if (!dragging || self._locked) return;
+        var dur = self._howl.duration();
+        if (dur > 0) { self._howl.seek(getPos(e) * dur); self._updateProgress(); }
+      }
+      bar.addEventListener('mousedown',  function(e) { dragging = true; doSeek(e); });
+      bar.addEventListener('touchstart', function(e) { dragging = true; doSeek(e); }, { passive: true });
+      document.addEventListener('mousemove',  doSeek);
+      document.addEventListener('touchmove',  function(e) { doSeek(e); }, { passive: true });
+      document.addEventListener('mouseup',    function() { dragging = false; });
+      document.addEventListener('touchend',   function() { dragging = false; });
+    };
+
+    AudioPlayer.prototype._skip = function(secs) {
+      if (this._locked) return;
+      var cur = typeof this._howl.seek() === 'number' ? this._howl.seek() : 0;
+      this._howl.seek(Math.max(0, Math.min(this._howl.duration(), cur + secs)));
+      this._updateProgress();
+    };
+
+    AudioPlayer.prototype.togglePlay = function() {
+      if (this._locked) return;
+      this._howl.playing() ? this._howl.pause() : this._howl.play();
+    };
+
+    AudioPlayer.prototype._syncPlay = function() {
+      this._hasStarted = true;
+      this._iconPlay.style.display  = 'none';
+      this._iconPause.style.display = '';
+      this._iconLock.style.display  = 'none';
+      this._btnPlay.setAttribute('aria-label', 'השהה');
+      this._startRaf();
+    };
+
+    AudioPlayer.prototype._syncPause = function() {
+      this._iconPlay.style.display  = '';
+      this._iconPause.style.display = 'none';
+      this._iconLock.style.display  = 'none';
+      this._btnPlay.setAttribute('aria-label', 'נגן');
+      this._stopRaf();
+      this._updateProgress();
+    };
+
+    AudioPlayer.prototype._onEnd = function() {
+      this._stopRaf();
+      this._updateProgress();
+      if (this._mode === 'single-pass') {
+        this._locked = true;
+        this._iconPlay.style.display  = 'none';
+        this._iconPause.style.display = 'none';
+        this._iconLock.style.display  = '';
+        this._btnPlay.classList.add('ap-locked');
+        this._btnPlay.setAttribute('aria-label', 'ההשמעה הסתיימה');
+      } else {
+        this._iconPlay.style.display  = '';
+        this._iconPause.style.display = 'none';
+        this._btnPlay.setAttribute('aria-label', 'נגן שוב');
+      }
+    };
+
+    AudioPlayer.prototype._startRaf = function() {
+      var self = this;
+      cancelAnimationFrame(self._raf);
+      (function tick() {
+        if (self._howl.playing()) { self._updateProgress(); self._raf = requestAnimationFrame(tick); }
+      })();
+    };
+
+    AudioPlayer.prototype._stopRaf = function() {
+      cancelAnimationFrame(this._raf); this._raf = null;
+    };
+
+    AudioPlayer.prototype._updateProgress = function() {
+      var seek = this._howl.seek();
+      if (typeof seek !== 'number') return;
+      var dur = this._howl.duration() || 1;
+      var pct = Math.min(100, (seek / dur) * 100);
+      this._fill.style.width  = pct + '%';
+      this._thumb.style.left  = pct + '%';
+      this._timeCurrent.textContent = fmt(seek);
+      this._seekBar.setAttribute('aria-valuenow', Math.round(pct));
+    };
+
+    AudioPlayer.prototype._showError = function(msg) {
+      this._container.classList.remove('ap-loading');
+      this._errorEl.textContent = msg;
+      this._errorEl.style.display = '';
+      this._btnPlay.disabled = true;
+    };
+
+    AudioPlayer.prototype.destroy = function() {
+      this._stopRaf();
+      document.removeEventListener('visibilitychange', this._visHandler);
+      this._howl.unload();
+      this._container.innerHTML = '';
+      this._container.className = '';
+    };
+
+    // ── Page logic ────────────────────────────────────────────────────────────
+    var normalPlayer = null, singlePlayer = null;
+
+    function initPlayers(src) {
+      if (normalPlayer) normalPlayer.destroy();
+      if (singlePlayer) singlePlayer.destroy();
+      normalPlayer = new AudioPlayer(document.getElementById('playerNormal'), { src: src, mode: 'normal' });
+      singlePlayer = new AudioPlayer(document.getElementById('playerSingle'), { src: src, mode: 'single-pass' });
+      document.getElementById('players').classList.add('visible');
+    }
+
+    document.getElementById('loadBtn').addEventListener('click', function() {
+      var url = document.getElementById('urlInput').value.trim();
+      if (url) initPlayers(url);
+    });
+    document.getElementById('urlInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('loadBtn').click();
+    });
+  </script>
+</body>
+</html>
