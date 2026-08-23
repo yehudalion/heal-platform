@@ -1,0 +1,1319 @@
+{
+  "lectures": [
+    {
+      "key": "D1",
+      "title": "LQA-PROD-D: short_lecture (library_mending_night)",
+      "topic": "A weekly library workshop that teaches visible mending instead of hidden clothing repairs.",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Every Wednesday evening the reading room of the town library turns into a workshop table scattered with scrap fabric and colored thread. A retired tailor named Ruth leads a session the library calls mending night, showing newcomers how to patch a torn sleeve or darn a worn heel. Most people expect a repair to be hidden so nobody notices it. Ruth teaches the opposite approach, called visible mending, where bright stitches are meant to stand out, turning a hole into a small deliberate pattern instead of a flaw to disguise. Participants bring old sweaters and jackets rather than discarding them, and the free sign-up sheet sits by the front desk near the returns cart.",
+      "highlight_spans": [
+        "Ruth teaches the opposite approach, called visible mending, where bright stitches are meant to stand out, turning a hole into a small deliberate pattern instead of a flaw to disguise."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The library's mending night is mainly a class about sorting scrap fabric and thread by color.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "נכשל: אלה רק פרטים מהתיאור (בד גרוטאות, חוט צבעוני), לא הרעיון המרכזי."
+            },
+            {
+              "text": "The library's mending night discourages visible stitching because it distracts from a garment's original design.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: זה הפוך ממה שנאמר - רות דווקא מעודדת תפרים בולטים."
+            },
+            {
+              "text": "The library's mending night teaches participants to sew brand new garments instead of repairing old ones.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "נכשל: המרצה מדברת על תיקון בגדים ישנים, לא על תפירת בגדים חדשים."
+            },
+            {
+              "text": "The library's mending night teaches participants to repair clothes with deliberately visible stitching instead of hidden patches.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"Ruth teaches the opposite approach, called visible mending, where bright stitches are meant to stand out\"."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D2",
+      "title": "LQA-PROD-D: short_lecture (bell_ringing_society)",
+      "topic": "A small town bell-ringing group that practices change ringing patterns every Thursday.",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "The stone tower behind the old market square is home to a small band of bell ringers who meet every Thursday night. Rather than playing a tune, the group practices change ringing, a method where each bell is rung once per round but the order between rounds keeps shifting according to a fixed pattern. Ringers must listen closely to the bell just before their own so the sequence never collapses into overlap or silence. New members often spend months learning to control the rope before they are trusted with a full pattern. The tower captain keeps a logbook of every pattern rung, and the oldest entry in it dates back to the year the church roof was last repaired.",
+      "highlight_spans": [
+        "the group practices change ringing, a method where each bell is rung once per round but the order between rounds keeps shifting according to a fixed pattern."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "The bell ringers avoid fixed patterns entirely so that every Thursday session sounds completely different.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: הפוך - הם דווקא עוקבים אחר תבנית קבועה של סבבים משתנים, לא אקראיות מוחלטת."
+            },
+            {
+              "text": "The bell ringers practice change ringing, shifting the bell order each round according to a set pattern.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"the group practices change ringing... the order between rounds keeps shifting according to a fixed pattern\"."
+            },
+            {
+              "text": "The bell ringers mainly compete against neighboring towers to ring the loudest bells in the region.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "נכשל: אין אזכור לתחרות בין מגדלים, רק תרגול קבוצתי מקומי."
+            },
+            {
+              "text": "The bell ringers mostly discuss repairs to the church roof during their Thursday meetings.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "נכשל: תיקון הגג מוזכר רק כציון תאריך בפנקס, לא כנושא המרכזי."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D3",
+      "title": "LQA-PROD-D: short_lecture (traveling_knife_sharpener)",
+      "topic": "A traveling van that hand-sharpens neighborhood knives and tools on stone wheels twice a month.",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Twice a month a small van parks outside the community center, and word spreads quickly among the neighbors that the knife sharpener has arrived. The man who runs it, Pavel, learned the trade from his father and still sharpens every blade by hand on a set of stone wheels bolted inside the van. Customers hand over kitchen knives, garden shears, and even ice skates, then wait on folding chairs while sparks fly behind the open side door. Pavel checks the angle of each blade before touching it to the wheel, since a mismatched angle can ruin an edge faster than years of ordinary use. Regulars say his prices have barely changed since he first started the route.",
+      "highlight_spans": [
+        "The man who runs it, Pavel, learned the trade from his father and still sharpens every blade by hand on a set of stone wheels bolted inside the van."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Pavel refuses to check a blade's angle, believing any wheel setting works equally well on every knife.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: הפוך - פאבל דווקא בודק את הזווית של כל להב בקפידה לפני חידוד."
+            },
+            {
+              "text": "A traveling van run by Pavel hand-sharpens neighbors' knives and tools on stone wheels twice a month.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"the knife sharpener has arrived... sharpens every blade by hand on a set of stone wheels\"."
+            },
+            {
+              "text": "A traveling van mainly sells handmade kitchen knives and garden tools to neighborhood customers.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "נכשל: הוואן משמש לחידוד סכינים קיימים, לא למכירת סכינים חדשים."
+            },
+            {
+              "text": "The van's visits mostly serve as an occasion for neighbors to sit and chat on folding chairs.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "נכשל: הכיסאות הם פרט אגבי בזמן ההמתנה, לא מטרת הביקור."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D4",
+      "title": "LQA-PROD-D: short_dialogue (cider_press_mechanism)",
+      "topic": "Two friends discuss how soaking, crushing, and pressing apples together squeeze juice out during cider making.",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Nora: Why does the orchard soak the apples before they even reach the press?\nSam: Soaking softens the skins, which lets the crusher break the fruit apart much more easily.\nNora: And what happens after the apples are crushed?\nSam: The crushed pulp, called pomace, gets packed into cloth layers, and pressure squeezes those layers so juice drains through channels into a collecting trough below.\nNora: So the pressure is really what forces the juice out, not the crushing itself?\nSam: Right, the crushing just exposes the juice inside the cells, but only steady pressure on the stacked layers actually pushes the liquid free and keeps the leftover pulp separate.",
+      "highlight_spans": [
+        "the crushing just exposes the juice inside the cells, but only steady pressure on the stacked layers actually pushes the liquid free and keeps the leftover pulp separate."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "According to the dialogue, why does pressure on the stacked pomace layers matter?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Because pressure heats the collecting trough, which causes the leftover pulp to dissolve into the juice.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "נכשל: אין כל אזכור לחימום הגיגית או להמסת הפולפה - זה לא הופיע בשיחה."
+            },
+            {
+              "text": "Because pressure softens the apple skins first, which causes the crusher to break the fruit apart.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: הפוך - ההשריה מרככת את הקליפות, לא הלחץ, וזה קורה לפני הריסוק."
+            },
+            {
+              "text": "Because pressure squeezes the packed pomace layers, which forces the juice out through the channels below.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"pressure squeezes those layers so juice drains through channels into a collecting trough\"."
+            },
+            {
+              "text": "Because pressure keeps the apples whole, which stops the crusher from damaging the fruit's cells too soon.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "נכשל: הפעולה שמונעת נזק לתפוחים היא ההשריה, לא הלחץ, שמופעל רק אחרי הריסוק."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D5",
+      "title": "LQA-PROD-D: short_dialogue (chimney_sweep_creosote)",
+      "topic": "Two friends discuss how creosote buildup narrows a chimney flue and how brush rods scrape it loose.",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Ben: Why does a chimney need sweeping at all if smoke just goes straight up?\nDana: Burning wood leaves behind a sticky residue called creosote, and that residue slowly builds up along the inside walls of the flue.\nBen: And that buildup is actually dangerous?\nDana: Yes, because a thick layer of creosote narrows the passage, which traps heat and can catch fire inside the chimney itself.\nBen: So how do the rods and brushes actually fix that?\nDana: The sweep pushes flexible rods with a stiff brush up through the flue, and each turn scrapes the residue loose so it falls down into a sheet spread below the hearth.",
+      "highlight_spans": [
+        "a thick layer of creosote narrows the passage, which traps heat and can catch fire inside the chimney itself."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to the dialogue, why is a buildup of creosote in the flue dangerous?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Because the brush rods scrape the flue walls too hard, which causes cracks that let smoke leak inside.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "נכשל: אין אזכור לסדקים או לדליפת עשן - זה לא הופיע בשיחה."
+            },
+            {
+              "text": "Because the hearth sheet collects fallen residue, which causes smoke to drift back into the room below.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "נכשל: הסדין תחת האח רק אוסף שאריות שנופלות, הוא לא גורם לעשן לחזור לחדר."
+            },
+            {
+              "text": "Because a thick layer of creosote narrows the flue, which traps heat and can start a fire inside.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"a thick layer of creosote narrows the passage, which traps heat and can catch fire inside the chimney itself\"."
+            },
+            {
+              "text": "Because sweeping the chimney spreads loose residue upward, which causes the buildup to thicken over time.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: הפוך - הטאטוא מסיר את השכבה, הוא לא זה שגורם לה להתעבות."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D6",
+      "title": "LQA-PROD-D: short_dialogue (treadle_sewing_machine)",
+      "topic": "Two friends discuss how pedaling a treadle sewing machine drives the wheel, belt, and needle in sequence.",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Mia: How does an old treadle sewing machine even work without electricity?\nLeo: Your feet rock the flat pedal back and forth, and that rocking motion turns a large wheel beside the table through a connecting rod.\nMia: And the wheel drives the needle somehow?\nLeo: Right, the spinning wheel turns a belt that loops around a smaller wheel on the machine head, so the needle bar rises and falls in a steady rhythm as long as your feet keep moving.\nMia: So if I stop pedaling for a second, the needle just stops with it?\nLeo: Exactly, the whole chain depends on your feet, since nothing else in the machine supplies the motion once the pedal goes still.",
+      "highlight_spans": [
+        "the whole chain depends on your feet, since nothing else in the machine supplies the motion once the pedal goes still."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "According to the dialogue, why does the needle stop moving as soon as the pedal stops?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because the pedal supplies the only motion, so the wheel, belt, and needle all depend on it moving.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נכון: \"the whole chain depends on your feet, since nothing else in the machine supplies the motion once the pedal goes still\"."
+            },
+            {
+              "text": "Because the needle bar controls the connecting rod, which causes the pedal to rock back and forth.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "נכשל: הכיוון הפוך - הדוושה מפעילה את מוט החיבור, לא המחט שולטת בדוושה."
+            },
+            {
+              "text": "Because the large wheel keeps spinning on its own, which causes the pedal to stop moving first.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נכשל: הפוך - הגלגל הגדול הוא זה שמונע על ידי הדוושה, לא להפך."
+            },
+            {
+              "text": "Because the belt loosens on the small wheel, which causes the needle bar to lock in place automatically.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "נכשל: אין אזכור להתרופפות הרצועה - זה לא הופיע בשיחה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D7",
+      "title": "LQA-PROD-D: medium_lecture (mending_circle_darning)",
+      "topic": "A weekly community mending circle teaches a specific darning technique rather than just saving members money.",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Every second Tuesday, a dozen neighbors gather in the community hall with baskets of torn sweaters and worn socks. Many assume this circle exists simply because replacing clothes has become expensive, and that members show up reluctantly, patching holes out of necessity rather than choice. However, the group actually meets to teach a specific structural technique, not just to save money. The core skill they practice is called Swiss darning, which means duplicating the original knit stitch over a worn area so the repair blends into the fabric instead of sitting on top of it as a patch. Beginners start on a sample square donated by a wool shop, working rows of loops until their tension matches the surrounding knit. Only after mastering the sample do members move on to their own garments, usually elbows and heels, where fabric wears thinnest. The organizer keeps a shelf of colored wool ends so that repairs can match the original garment or deliberately contrast with it, whichever the owner prefers.",
+      "highlight_spans": [
+        "However, the group actually meets to teach a specific structural technique, not just to save money.",
+        "The core skill they practice is called Swiss darning, which means duplicating the original knit stitch over a worn area so the repair blends into the fabric instead of sitting on top of it as a patch."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point the speaker makes about the mending circle?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The circle's real purpose is teaching a structural darning technique, not simply cutting clothing costs.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הטענה המרכזית: לאחר 'However' המרצה מבהיר שהמעגל מיועד ללמד טכניקת תיקון, לא רק לחסוך כסף."
+            },
+            {
+              "text": "The circle sells hand-knitted sweaters made from donated wool to raise funds.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "משתמש במילים מהנושא (צמר, סוודרים) אך מתאר פעילות שלא הוזכרה כלל בטקסט."
+            },
+            {
+              "text": "The circle mainly exists to help members save money by avoiding new clothing purchases.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "זו בדיוק ההנחה הרווחת שהמרצה סותר ב-'However' — טענה רחבה באותה מידה אך שגויה."
+            },
+            {
+              "text": "The circle meets to encourage members to throw out worn clothing instead of repairing it.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זהו היפוך מוחלט של מטרת המעגל, שכולו עוסק בתיקון ולא בזריקת בגדים."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "As explained in the lecture, what does the term 'Swiss darning' mean?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Knitting an entirely new sweater from scratch using a pattern found in an old craft book donated to the shop.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "משתמש במילים מהתחום (סריגה) אך מתאר פעולה שונה לגמרי מתיקון בגד קיים."
+            },
+            {
+              "text": "Cutting away the entire worn section and stitching in a brand new piece of matching fabric to replace it.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "טכניקה שונה שלא הוזכרה בטקסט כלל — המצאה שאינה נתמכת."
+            },
+            {
+              "text": "Duplicating the original knit stitch over a worn spot so the repair blends into the fabric instead of forming a patch.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו ההגדרה המילולית שנמסרת בטקסט: 'which means duplicating the original knit stitch over a worn area...'"
+            },
+            {
+              "text": "Sewing a bright, contrasting patch on top of the hole so the repair stands out as a deliberate decoration.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זהו היפוך של ההגדרה עצמה — הטקסט אומר במפורש 'instead of sitting on top of it as a patch'."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D8",
+      "title": "LQA-PROD-D: medium_lecture (letterpress_print_shop)",
+      "topic": "A step-by-step description of how a corner letterpress shop sets type by hand and prints from it.",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "At the corner print shop, the same hand press has produced posters and wedding invitations for three decades. Before any ink touches paper, a compositor selects individual metal letters from a wooden case and arranges them backward, line by line, inside a steel frame called a chase. Once every letter, space, and punctuation mark sits exactly where it belongs, wooden wedges lock the whole arrangement tight so nothing shifts during printing. A roller coated in thick ink passes over the raised surface of the type, coating only the letters that will touch the page. The operator then lowers a sheet of cotton paper onto the inked type and pulls a heavy lever, pressing the two together with even force. The best prints show a faint indentation where the letters pushed into the damp paper, a mark collectors call a kiss impression. Each finished sheet is hung on a line to dry before the next color is added, since every color requires its own separate pass through the press.",
+      "highlight_spans": [
+        "a compositor selects individual metal letters from a wooden case and arranges them backward, line by line, inside a steel frame called a chase",
+        "The best prints show a faint indentation where the letters pushed into the damp paper, a mark collectors call a kiss impression."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What does the compositor do before any ink touches the paper?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Mixes the ink to match the color specified in the customer's order before setting any type.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "הדיו מוזכר בטקסט אך בשלב מאוחר יותר, לא כפעולה הראשונה של הסדר."
+            },
+            {
+              "text": "Loads paper into a feeder tray that pulls sheets in automatically, since the press runs unattended.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין הזנה אוטומטית בתיאור — המפעיל מניח כל גיליון ביד, זו המצאה."
+            },
+            {
+              "text": "Sets the roller's speed to match the size of the print job, so ink spreads faster on larger pages.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הגלגלת שייכת לשלב ההדפסה המאוחר יותר, לא לשלב ההכנה הראשוני של הסידור."
+            },
+            {
+              "text": "Selects individual metal letters from a wooden case and locks them backward into a steel chase.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "מתואר במפורש כצעד הראשון: 'Before any ink touches paper, a compositor selects individual metal letters...'"
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, what does a 'kiss impression' show on a finished print?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Proof that the paper had not fully dried before the ink was applied to it.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף את הגורם הנכון (לחץ המכבש על נייר לח) בגורם שגוי (נייר לא יבש בזמן הדיו)."
+            },
+            {
+              "text": "A faint indentation left in the damp paper where each metal letter pressed down firmly.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "מוגדר במפורש: 'a faint indentation where the letters pushed into the damp paper, a mark collectors call a kiss impression.'"
+            },
+            {
+              "text": "A sign that the print used more than one ink color in a single pass.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "כל צבע דורש מעבר נפרד משלו, כפי שנאמר בסוף — המצאה שאינה נתמכת."
+            },
+            {
+              "text": "A mark showing the wooden wedges were not locked tightly enough before printing began.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: קיס אימפרשן הוא סימן איכות רצוי, לא סימן לתקלה בנעילה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D9",
+      "title": "LQA-PROD-D: medium_lecture (beekeeping_honey_extraction)",
+      "topic": "A beekeeping cooperative contrasts its old hand-crushing method of extracting honey with its current centrifugal extractor.",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "then-now-contrast",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "The beekeeping cooperative on the edge of town has changed how it separates honey from the comb, though the bees themselves work exactly as they always have. Until the nineteen sixties, members crushed the wax comb by hand and let the honey drip slowly through cloth strainers overnight, a method that destroyed the comb completely and left a portion of honey trapped in the wax. Today the cooperative uses a centrifugal extractor, a drum that spins uncapped frames of comb at high speed so honey flies outward against the walls and drains through a tap at the bottom, while the comb itself stays intact and can be returned to the hive for bees to refill. This shift saves the colony weeks of labor each season, since building fresh wax from scratch costs bees far more energy than repairing comb they already built. Members still uncap each cell by hand with a heated knife before loading frames into the extractor, a step no machine at the cooperative has yet replaced.",
+      "highlight_spans": [
+        "Until the nineteen sixties, members crushed the wax comb by hand and let the honey drip slowly through cloth strainers overnight, a method that destroyed the comb completely",
+        "Today the cooperative uses a centrifugal extractor, a drum that spins uncapped frames of comb at high speed so honey flies outward against the walls",
+        "since building fresh wax from scratch costs bees far more energy than repairing comb they already built"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point of this lecture?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Heated knives are the newest piece of equipment the cooperative has adopted in the past few recent years.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "הסכין המחוממת מוזכרת אך היא כלי ישן שעדיין לא הוחלף, לא החידוש המרכזי של הטקסט."
+            },
+            {
+              "text": "The cooperative switched from hand-crushing comb to a centrifugal extractor because it keeps the comb intact for bees to reuse.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הטענה המרכזית: המעבר לחילוץ צנטריפוגלי משמר את החלה השלמה כדי שהדבורים יוכלו למלא אותה מחדש."
+            },
+            {
+              "text": "The cooperative still crushes wax comb by hand today because centrifugal machines are too costly for a small operation.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "היפוך של הטענה המרכזית באותה רמת היקף — הטקסט אומר בדיוק ההפך, שהם עברו למכשיר צנטריפוגלי."
+            },
+            {
+              "text": "The cooperative now sells its honey directly to a local bottling company at the end of each season.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "מכירת דבש לחברת בקבוקים לא מוזכרת כלל בטקסט — המצאה."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, why do bees benefit from having intact comb returned to the hive?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Because the extractor damages frames that are not returned quickly, which causes the wax to crack in storage.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: המחלץ הצנטריפוגלי דווקא משמר את החלה שלמה, הוא לא גורם לה נזק."
+            },
+            {
+              "text": "Because rebuilding wax from scratch costs bees far more energy than repairing comb the extractor left intact.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר במפורש: 'building fresh wax from scratch costs bees far more energy than repairing comb they already built.'"
+            },
+            {
+              "text": "Because intact comb still holds pollen residue, which causes bees to feed on it immediately without extra foraging.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין אזכור של שאריות אבקה בטקסט — סיבתיות מומצאת."
+            },
+            {
+              "text": "Because intact comb keeps the hive warmer through winter, which causes the colony to raise more larvae.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף את הסיבה האמיתית (חיסכון באנרגיית בנייה) בתפקיד שונה לגמרי (חימום הכוורת) שלא הוזכר."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D10",
+      "title": "LQA-PROD-D: medium_dialogue (pottery_kiln_firing)",
+      "topic": "Daniel explains to Maya the two-firing chain that turns raw clay into a finished, glazed piece of pottery.",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Maya: I saw smoke coming from the community kiln shed all weekend. What actually happens in there?\nDaniel: Can I walk you through it? It is basically three stages. First we do a slow bisque firing, which drives all the remaining moisture out of the clay so pieces will not crack later.\nMaya: Okay, so the water leaving causes something else to happen?\nDaniel: Right, once the clay is bone dry, the temperature climbs high enough that the clay particles fuse together, which turns the soft greenware into a hard, porous material called bisqueware.\nMaya: And that is when you add the glaze?\nDaniel: Exactly, we dip each bisqueware piece into a liquid glaze, and because the piece is porous, it soaks up the glaze evenly instead of the glaze sliding off.\nMaya: So the porousness from the first firing is actually necessary for the glaze to work?\nDaniel: Precisely, then a second, hotter firing melts that glaze into glass, which seals the surface and makes the piece watertight.",
+      "highlight_spans": [
+        "First we do a slow bisque firing, which drives all the remaining moisture out of the clay so pieces will not crack later.",
+        "because the piece is porous, it soaks up the glaze evenly instead of the glaze sliding off",
+        "then a second, hotter firing melts that glaze into glass, which seals the surface and makes the piece watertight"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why does the community kiln first do a slow bisque firing?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Because it hardens the clay enough to be painted immediately, which lets potters skip the glazing stage entirely.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין ויתור על שלב הזיגוג בדיאלוג — טענה מומצאת."
+            },
+            {
+              "text": "Because it melts glaze directly onto the raw clay, which seals pieces before they have a chance to dry.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך סדר השלבים: הזיגוג מגיע רק אחרי השריפה השנייה, לא בשלב הראשון."
+            },
+            {
+              "text": "Because it drives all the remaining moisture out of the clay, which stops pieces from cracking later.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "דניאל אומר זאת ישירות: השרפה הראשונה מוציאה לחות מהחימר כדי שלא יסדוק."
+            },
+            {
+              "text": "Because it burns off leftover ash from the kiln, which keeps future glazes free of stray specks.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף את הסיבה האמיתית (ייבוש החימר) בתפקיד שלא הוזכר (ניקוי אפר מהתנור)."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Which speaker explicitly asks whether the porousness from the first firing is necessary for the glaze to work?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Neither speaker directly connects the porousness to how well the glaze is absorbed.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "הקישור כן נעשה במפורש על ידי מאיה — הטענה שאף אחד לא עשה זאת שגויה."
+            },
+            {
+              "text": "Maya, but only after Daniel corrects an earlier, mistaken guess she made about the glaze.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "אין תיקון טעות של מאיה בדיאלוג; זו הוספה שלא קרתה."
+            },
+            {
+              "text": "Daniel, who asks the same question first before Maya simply agrees with him.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מסדר הדוברים - דניאל מסביר את המנגנון, אך מאיה היא שמנסחת את השאלה, לא דניאל."
+            },
+            {
+              "text": "Maya, who asks that question right after Daniel explains how the glaze is absorbed.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "מאיה היא שמנסחת את השאלה במפורש: \"So the porousness from the first firing is actually necessary for the glaze to work?\"."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D11",
+      "title": "LQA-PROD-D: medium_dialogue (food_rescue_sorting)",
+      "topic": "Priya explains to Sam the chain of steps a food rescue van uses to decide which shelter receives surplus food each evening.",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Sam: Priya, could you explain how the food rescue van decides where surplus bread and vegetables end up each evening?\nPriya: Sure. It starts with volunteers weighing whatever the bakeries and grocers donate, since knowing the total weight lets the dispatcher split the load fairly.\nSam: So the weighing affects where things go next?\nPriya: Right, once weighed, the dispatcher checks which shelters reported the fewest deliveries that week, which pushes those shelters higher on tonight's route.\nSam: And the driver just follows that order?\nPriya: Mostly, though the driver also checks temperature logs, since produce that warmed above a safe level gets rerouted to the compost partner instead.\nSam: That seems harsh, cutting food that might still be edible.\nPriya: I get why it looks that way, but the rule protects people with weaker immune systems at these shelters, so the safety margin stays strict on purpose.\nSam: Fair enough. Does the same driver run this route every night?\nPriya: Usually, though a backup driver covers Fridays whenever the regular route runs long.",
+      "highlight_spans": [
+        "the dispatcher checks which shelters reported the fewest deliveries that week, which pushes those shelters higher on tonight's route",
+        "produce that warmed above a safe level gets rerouted to the compost partner instead"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point of this conversation?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The rescue van routes food through weighing, shelter need, and temperature safety before any delivery is made.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "פריה מתארת שרשרת סיבתית: שקילה קובעת חלוקה, מספר משלוחים קובע סדר, וטמפרטורה קובעת מסלול חלופי."
+            },
+            {
+              "text": "The rescue van always delivers food to whichever shelter happens to be closest to the bakery that evening.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה מתחרה באותה מידה, אך שגויה: הקרבה הגאוגרפית לא מוזכרת כלל כקריטריון."
+            },
+            {
+              "text": "The van's main task each evening is composting food that shelters have refused to accept.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "הקומפוסט מוזכר כמסלול חלופי נדיר, לא כתפקיד העיקרי של הרכב."
+            },
+            {
+              "text": "Priya believes the temperature safety rule is too strict and should be relaxed for the shelters.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: פריה דווקא מגנה על הכלל ומסבירה מדוע הוא נשאר קפדני בכוונה."
+            }
+          ]
+        },
+        {
+          "question_type": "negative",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Which of the following is NOT mentioned in the conversation as a factor in deciding which shelter receives food?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "How many deliveries a given shelter received earlier in the same week.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "topic_noun",
+              "explanation_he": "זהו קריטריון שכן הוזכר במפורש בדיאלוג, לכן הוא לא התשובה הנכונה לשאלת ה'לא הוזכר'."
+            },
+            {
+              "text": "Whether the shelter's director personally requested a specific brand of bread that evening.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "אף בקשה אישית של מנהל מקלט לא הוזכרה, וגם במציאות מערכת כזו לרוב לא פועלת לפי בקשות מותג אישיות."
+            },
+            {
+              "text": "The total weight of the donations volunteers collected that evening.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "topic_noun",
+              "explanation_he": "השקילה הוזכרה כשלב הראשון בשרשרת, ולכן אינה התשובה הנכונה לשאלת ה'לא הוזכר'."
+            },
+            {
+              "text": "Whether the produce's temperature stayed within a safe range during the route.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "topic_noun",
+              "explanation_he": "בדיקת הטמפרטורה הוזכרה במפורש כגורם המשפיע על המסלול, ולכן אינה התשובה הנכונה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D12",
+      "title": "LQA-PROD-D: medium_dialogue (darkroom_film_developing)",
+      "topic": "Ronit explains to Noah the chain of steps, darkness, developer, and fixer, that turns exposed film into a stable negative.",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Noah: Ronit, can you explain what actually happens after you take the film out of the camera, before we see a photo?\nRonit: Happily. First the film goes into a developer bath in total darkness, because any stray light would strike the exposed silver crystals and ruin the image before we can control it.\nNoah: So the developer reacts with those crystals somehow?\nRonit: Exactly, the developer converts the exposed crystals into solid black metallic silver, which is what forms the dark areas of the final negative.\nNoah: And the parts that were not exposed just stay clear?\nRonit: Right, which is why the next bath, the fixer, matters so much, since it dissolves away every unexposed crystal, leaving only the developed silver behind so the image will not keep darkening once it reaches the light.\nNoah: So skipping the fixer would ruin everything later?\nRonit: Completely, the negative would slowly turn black all over the moment it was exposed to sunlight, since leftover crystals are still light sensitive.",
+      "highlight_spans": [
+        "any stray light would strike the exposed silver crystals and ruin the image before we can control it",
+        "the developer converts the exposed crystals into solid black metallic silver, which is what forms the dark areas of the final negative",
+        "the negative would slowly turn black all over the moment it was exposed to sunlight, since leftover crystals are still light sensitive"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why must the film go into the developer bath in total darkness?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because stray light would strike the exposed silver crystals, which would ruin the image before it can be controlled.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "רונית מסבירה זאת ישירות בתחילת הדיאלוג כסיבה לחשכה המוחלטת."
+            },
+            {
+              "text": "Because darkness cools the chemical bath, which causes the developer to react more slowly and evenly.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין קשר בין חושך לטמפרטורת האמבטיה בדיאלוג — סיבתיות מומצאת."
+            },
+            {
+              "text": "Because the camera itself is still open at this point, which causes light to leak directly onto the lens.",
+              "k_code": "K-WORLD",
+              "fail_mode": "unsupported",
+              "explanation_he": "המצלמה כבר סגורה בשלב זה במציאות התהליך; זו טענה שגויה ומומצאת."
+            },
+            {
+              "text": "Because the fixer only works properly in darkness, so exposing it to light now would dissolve the wrong crystals.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף שלב: המתקן (fixer) מגיע רק בשלב מאוחר יותר, לא בשלב האמבטיה המפתחת."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to Ronit, what would happen if the fixer step were skipped?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Ronit explains that skipping the fixer would leave the negative permanently blank, with no image at all.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: התוצאה האמיתית היא הכהיה מוחלטת, לא תמונה ריקה."
+            },
+            {
+              "text": "The negative would slowly turn black all over, since leftover silver crystals stay sensitive to light.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "רונית אומרת זאת במפורש בסוף הדיאלוג כתוצאה של דילוג על שלב המתקן."
+            },
+            {
+              "text": "Noah suggests that skipping the fixer only matters if the film was exposed for too long.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מייחס לנוח טענה שאמרה רונית, ומוסיף תנאי (חשיפת יתר) שלא הוזכר."
+            },
+            {
+              "text": "Ronit warns that skipping the fixer would make the developer bath unsafe to reuse later.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין אזכור של בטיחות האמבטיה המפתחת לשימוש חוזר — טענה מומצאת."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D13",
+      "title": "LQA-PROD-D: long_lecture (hedge_laying)",
+      "topic": "How the traditional craft of hedge laying rebuilds a stock-proof living fence",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A farm hedge left untouched for years stops doing its job. The base grows bare and leggy, and livestock wander straight through what should be a living fence. Hedge laying is the traditional craft that fixes this, not by planting anything new, but by cutting the hedge's own stems partway through and bending them over to grow sideways instead of up.\n\nThe first stage is called pleaching. Using a billhook, the hedger cuts each upright stem almost through near its base, leaving a thin hinge of bark and live wood intact. That hinge, called the pleacher once laid over, keeps sap flowing to the stem even after being bent flat along the hedge line.\n\nWith the pleachers laid, the hedger drives stakes upright at intervals to hold the sloping stems in place. Along the top, thinner rods called binders, or heathers, are woven horizontally between the stakes, locking the structure together so wind and livestock cannot push it apart.\n\nHowever, you might think the cutting is the hard part, and that the skill lies mainly in the billhook stroke. In fact, the real point of hedge laying is what happens to that hinge of living tissue: a plant cut this way keeps growing along its whole bent length, sending up fresh vertical shoots from every pleacher, which rebuilds a dense, stock-proof barrier from the base up rather than only at the top.\n\nYet even a hedger who cuts a perfect hinge every time cannot do this work whenever they please. It has to happen in winter, after leaf fall and before nesting season begins, because bending live stems while birds are already building nests in them would destroy the very shelter the hedge is meant to provide.\n\nBy late February the hedgers move on, leaving behind a low tangle of slanted stems and woven binders that looks bare until spring.",
+      "highlight_spans": [
+        "However, you might think the cutting is the hard part, and that the skill lies mainly in the billhook stroke.",
+        "Yet even a hedger who cuts a perfect hinge every time cannot do this work whenever they please.",
+        "By late February the hedgers move on, leaving behind a low tangle of slanted stems and woven binders that looks bare until spring."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point the lecture makes about why hedge laying restores a hedge's density?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Hedges are rebuilt because old stems are removed and replaced with young saplings.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה שגויה ורחבה באותה מידה: התהליך אינו כולל החלפת גזעים בשתילים חדשים, אלא שמירה על הגזעים הקיימים בחיים."
+            },
+            {
+              "text": "Hedge laying is mainly a test of skill in making one clean billhook cut.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "נכון רק לגבי החלק שלפני המהפך בהרצאה — החיתוך הוא רק שלב אחד, לא כל הנקודה."
+            },
+            {
+              "text": "Hedge laying involves driving stakes and weaving binders along the hedge's top edge.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "מזכיר מונחים מההרצאה אך מתאר רק שלב טכני אחד, לא את הרעיון המרכזי."
+            },
+            {
+              "text": "Hedges regain density because cut stems stay alive and resprout along their bent length.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי שההרצאה מדגישה אחרי המהפך הראשון — הציר החי מאפשר צימוח מחדש לכל אורך הגזע."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, why must hedge laying happen only in winter?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because cutting and bending live stems after birds have begun nesting in the hedge would destroy those nests.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הסיבה שמופיעה בהרצאה: יש לפעול לפני עונת הקינון כדי לא לפגוע בקינים."
+            },
+            {
+              "text": "Because the binders woven along the top need bare branches to grip, and leaves get in the way.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מייחס את הסיבה לרכיב הלא נכון במערכת — הבינדרים אינם הסיבה לתזמון החורפי."
+            },
+            {
+              "text": "Because the shoots that sprout from each pleacher every winter need trimming before they crowd the stakes.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הופך את הכיוון הסיבתי: הענפים הטריים צומחים אחרי החורף, לא לפניו, וזו אינה הסיבה לתזמון."
+            },
+            {
+              "text": "Because the wood only bends without cracking once winter frost has fully passed all the way through it.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "טענה מומצאת שאינה מופיעה בהרצאה כלל."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D14",
+      "title": "LQA-PROD-D: long_lecture (bell_foundry_casting)",
+      "topic": "The layered mold process a small bronze bell foundry uses to cast a bell",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A bronze bell cannot be carved or forged the way a blacksmith shapes iron; it has to be cast as one solid piece in a single pour, so the mold has to be exactly right before any metal is melted. Foundries solve this with a mold built in layers around a shape that is made and then destroyed before the real bell exists.\n\nThe first layer is the core, a rough cone of brick and loam built up on a spinning shaft and shaped to match the inside curve of the finished bell. Foundry workers strickle it, running a wooden template around it to scrape the loam smooth as it turns.\n\nOver the dried core goes the false bell, a second layer of loam built up to the precise outer shape of the real bell, inscriptions and all. Once that layer hardens, a third layer called the cope is built directly on top of it, taking its mirror impression.\n\nHowever, you might assume the false bell becomes part of the finished casting somehow, perhaps fused into the metal. In fact, once the cope has hardened, workers lift it away, chip out and discard the entire false bell, and lower the cope back down over the bare core, leaving a bell-shaped gap between the two layers that is empty space waiting for bronze.\n\nYet even with the false bell gone and the mold reassembled, the foundry still cannot pour yet. The core and cope must be buried in a sand pit and weighted down, because molten bronze poured at such high temperature can crack or force the mold apart if it isn't held firmly.\n\nDays later, once the bronze has cooled fully, the pit is dug open and the mold is broken away in pieces to reveal the bell inside, still dull and rough until it is cleaned.",
+      "highlight_spans": [
+        "However, you might assume the false bell becomes part of the finished casting somehow, perhaps fused into the metal.",
+        "Yet even with the false bell gone and the mold reassembled, the foundry still cannot pour yet.",
+        "Days later, once the bronze has cooled fully, the pit is dug open and the mold is broken away in pieces to reveal the bell inside, still dull and rough until it is cleaned."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the false bell's real role in the casting process, according to the lecture?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The false bell is a temporary loam shape destroyed to leave a mold-shaped gap for bronze.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הנקודה שההרצאה מדגישה אחרי המהפך הראשון — הצורה נהרסת כדי ליצור חלל ליציקה."
+            },
+            {
+              "text": "The false bell is the finished bell's rough first casting, later melted down and reused.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה — אין יציקה ראשונית כזו; ה-false bell עשוי לואם, לא ברונזה."
+            },
+            {
+              "text": "The false bell is simply the second loam layer added on top of the dried core.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "נכון רק לחלק שלפני המהפך — מתאר את בנייתו אך לא את תפקידו האמיתי בתהליך."
+            },
+            {
+              "text": "The false bell is built up with fine inscriptions that match the finished bell's exact design.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "מזכיר פרט מדויק מההרצאה אך אינו מסביר את תפקידו המרכזי בתהליך."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, why are the core and cope buried in a sand pit before the pour?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because molten bronze at such high heat generates enough pressure to crack or split the mold apart.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הסיבה שניתנת בהרצאה לקבורת התבנית בבור החול."
+            },
+            {
+              "text": "Because the sand pit cools the bronze slowly enough to keep the false bell from melting into it.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הופך את הסיבתיות וסותר את ההרצאה — ה-false bell כבר הוסר לפני היציקה."
+            },
+            {
+              "text": "Because the core's brick layer needs extra weight to stop it from spinning during the long pour.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מייחס את הסיבה לרכיב הלא נכון — אין אזכור לסיבוב הליבה בהרצאה."
+            },
+            {
+              "text": "Because burying the mold deep underground protects nearby workers from the loud sound of the pour.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "טענה מומצאת שאינה מוזכרת בהרצאה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D15",
+      "title": "LQA-PROD-D: long_lecture (barrel_coopering)",
+      "topic": "how a cooper builds and chars a wooden barrel for aging spirits",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A wine or whiskey barrel starts as a bundle of narrow wooden staves, each one shaped along two edges so that its sides taper slightly from the middle toward each end. A cooper stands the staves upright in a rough circle inside a metal hoop, and because every stave shares the same wedge-shaped cross-section, the ring naturally curves into a barrel shape without a single drop of glue anywhere in the vessel.\n\nYou might assume the hoops alone are what keep the staves from falling outward. However, a loose hoop merely holds the shape; the real seal comes from the taper itself. As the cooper drives each hoop down toward the barrel's wider middle, the staves are forced tighter against one another, and the narrowing gaps between them close until no liquid can pass through. What keeps a barrel watertight, then, is compression, not any adhesive.\n\nBefore the two barrel heads are fitted, the cooper turns the empty shell over an open flame in a process called charring, toasting the inner wood until a thin blackened layer forms across the surface. Distillers value this layer directly: as spirit ages inside, it seeps into the charred wood and draws out sugars and color that a plain, unburned stave could never contribute, which is why two whiskeys aged the same number of years can taste entirely different depending on how deeply their barrels were charred.\n\nYet even a well-charred barrel eventually stops giving anything back. After several years the charred layer is fully spent, and coopers now sell used barrels to breweries or vinegar makers, who value the wood for an entirely different reason: a residual sweetness rather than any smoky depth. A barrel that once held bourbon for years might spend its second life holding stout for only a season.",
+      "highlight_spans": [
+        "However, a loose hoop merely holds the shape; the real seal comes from the taper itself.",
+        "Yet even a well-charred barrel eventually stops giving anything back."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point of this talk?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Coopers stand each stave upright inside a hoop before shaping its two tapered edges by hand.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט מוקדם ומהופך בסדר (בקטע הצורה נחתכת קודם, ורק אז הדופן מוצבת בתוך החישוק), ואינו הרעיון המרכזי."
+            },
+            {
+              "text": "A barrel's main strength comes from glue applied between each stave before the hoops are added.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר - הקטע קובע במפורש \"without a single drop of glue anywhere in the vessel\"."
+            },
+            {
+              "text": "A barrel's shape mainly helps several barrels stack together easily during storage in a warehouse.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה - הקטע לא עוסק בערימת חביות כלל; הצורה קשורה לאיטום, לא לאחסון."
+            },
+            {
+              "text": "A tight seal comes from stave compression as the hoops are driven down, not from adhesive.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי: \"What keeps a barrel watertight, then, is compression, not any adhesive\"."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does 'charring' refer to in the talk?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Sanding the outside of the barrel smooth before the metal hoops are fitted.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי - אין ליטוש בקטע כלל; charring הוא צריבה, לא שיוף."
+            },
+            {
+              "text": "Driving the hoops down toward the barrel's middle to compress the staves tighter together.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זהו תיאור מנגנון הלחיצה (החישוקים), לא הצריבה - חבר אחר במערכת המונחים."
+            },
+            {
+              "text": "Toasting the inside of the empty barrel over a flame until a blackened layer forms.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך מוגדר במפורש: \"turns the empty shell over an open flame in a process called charring, toasting the inner wood until a thin blackened layer forms\"."
+            },
+            {
+              "text": "Soaking the finished barrel in salt water so the wood will not crack later.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין בקטע כל אזכור להשריה במי מלח."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D16",
+      "title": "LQA-PROD-D: long_dialogue (glassblowing_workshop)",
+      "topic": "A visitor asks a glassblower to explain the gather, marver, and punty stages",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Maya: I've watched glassblowers on videos, but I still don't understand how a blob of glass on the end of a pipe turns into an actual bowl. Could you walk me through it?\n\nTomas: Sure. It starts at the furnace. I dip the end of a long hollow pipe into molten glass and turn it slowly, and that's called the gather. It's collecting a glob of hot glass.\n\nMaya: And then you just start blowing?\n\nTomas: Not yet. Right after the gather, I roll the glass on a flat steel table called the marver. That shapes it evenly and cools the skin so it won't sag on the way to the bench.\n\nMaya: So the marver is mainly about control, not shaping the final form?\n\nTomas: Exactly, and it sets up everything that comes after. If the gather isn't centered and even once it's been marvered, the glass ends up thicker on one side, and it can tear open once I start blowing.\n\nMaya: I've also heard the word punty. Is that part of this too?\n\nTomas: That comes near the end. Once the piece has its basic shape, I attach a solid rod called the punty to the base, opposite the blowpipe. That lets me crack the blowpipe off the neck and keep working on the opening without anything blocking it.\n\nMaya: So the punty is what lets you finish the top of the piece.\n\nTomas: Right, and without it, the neck would stay sealed around the blowpipe forever. There'd be no way to open a bowl or a vase at all.\n\nMaya: Out of all three steps, which one do you find hardest?\n\nTomas: If you ask me, the marver is the real skill, even though it looks like the boring part. Get that step wrong and no amount of careful blowing later fixes an uneven wall.",
+      "highlight_spans": [
+        "I dip the end of a long hollow pipe into molten glass and turn it slowly, and that's called the gather.",
+        "Once the piece has its basic shape, I attach a solid rod called the punty to the base, opposite the blowpipe.",
+        "If you ask me, the marver is the real skill, even though it looks like the boring part."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point Tomas makes about why the glass is rolled on the marver right after the gather?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "It reheats the glass evenly so it can be attached to the punty rod later.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה — ה-marver אינו קשור לחימום מחדש או לחיבור ה-punty."
+            },
+            {
+              "text": "It simply collects a small glob of molten glass onto the end of the blowpipe.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "מתאר את שלב ה-gather שקדם ל-marver, לא את תפקיד ה-marver עצמו."
+            },
+            {
+              "text": "It centers and evens the glass so the walls don't end up thick on one side.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הסיבה שטומאס מסביר — הגלגול על ה-marver מייצב ומאזן את הזכוכית לפני הניפוח."
+            },
+            {
+              "text": "It is just the flat steel table that glassblowers use somewhere in the process.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "תיאור כללי מדי שאינו מסביר את התפקיד הסיבתי של ה-marver."
+            }
+          ]
+        },
+        {
+          "question_type": "opinion",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "In Tomas's opinion, which stage of the process is hardest, and why?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The furnace temperature, because it has to be adjusted by hand throughout the whole session.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "טענה מומצאת שאינה מוזכרת כלל בדיאלוג."
+            },
+            {
+              "text": "The punty attachment, because removing the blowpipe too early collapses the whole finished piece.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הופך את הסיבתיות ואינו מופיע בדיאלוג — אין טענה כזו על ה-punty."
+            },
+            {
+              "text": "The gather, because collecting too much glass at once makes the piece too heavy to blow.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מייחס את הקושי לשלב הלא נכון במערכת — טומאס לא ציין את ה-gather כקשה ביותר."
+            },
+            {
+              "text": "The marver, because an uneven roll there ruins the wall thickness no careful blowing can fix later.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו דעתו המפורשת של טומאס בסוף הדיאלוג."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D17",
+      "title": "LQA-PROD-D: long_dialogue (ropewalk_rope_making)",
+      "topic": "A visitor asks a ropemaker to explain the yarn, strand, and lay stages of rope making",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Ben: This building is so narrow and long. What exactly happens here?\n\nRosa: This is a ropewalk. We make rope by twisting fiber together in stages, and each stage needs its own length of straight floor, which is why the building is shaped like this.\n\nBen: Could you explain the stages? I've never seen rope made from scratch.\n\nRosa: Of course. It starts with yarn. We spin loose fiber, hemp traditionally, into thin continuous yarn, twisting it in one direction as it winds onto a bobbin.\n\nBen: And that yarn becomes rope directly?\n\nRosa: Not directly. Several yarns get twisted together in the opposite direction to make a strand, which is thicker and much stronger than any single yarn on its own.\n\nBen: So a strand is just a bundle of yarns twisted the other way?\n\nRosa: Exactly, and that reversal matters. Twisting the strand opposite to the yarn keeps the whole thing from unwinding itself the moment you let go of either end.\n\nBen: What about turning strands into a full rope?\n\nRosa: That's the final stage, called the lay. We take three or four strands, hook them at one end of the walk, and twist them together while a tool called the top spaces them evenly as it's walked backward down the building.\n\nBen: What does the top actually do that hands couldn't?\n\nRosa: Without it, the strands would tangle together unevenly the instant they start twisting, so the rope would come out lumpy, with weak spots wherever the strands crossed wrong. The top keeps tension equal across every strand.\n\nBen: Which stage matters most for a rope's final strength?\n\nRosa: If you ask me, it's the lay, not the spinning. You can spin fine yarn all day, but a rushed lay with uneven tension produces a rope that fails at its weakest twist.",
+      "highlight_spans": [
+        "Several yarns get twisted together in the opposite direction to make a strand, which is thicker and much stronger than any single yarn on its own.",
+        "Without it, the strands would tangle together unevenly the instant they start twisting, so the rope would come out lumpy, with weak spots wherever the strands crossed wrong.",
+        "If you ask me, it's the lay, not the spinning."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point Rosa makes about why the strand is twisted opposite to the yarn?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "A ropewalk is a long, narrow building where rope has traditionally always been made by hand.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "עובדה כללית נכונה אך אינה עונה על השאלה הסיבתית."
+            },
+            {
+              "text": "Twisting the strand in the same direction as the yarn makes the finished rope stronger overall.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה — התהליך דורש כיוון הפוך, לא זהה."
+            },
+            {
+              "text": "Twisting the strand opposite to the yarn keeps the finished strand from unwinding on its own.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הנקודה שרוזה מדגישה — הכיוון ההפוך מונע מהחבל להתפרק."
+            },
+            {
+              "text": "Spinning loose fiber into continuous yarn is described as the very first stage of rope making.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "מתאר שלב מוקדם יותר (ה-yarn) ולא את הסיבה לפיתול ההפוך של ה-strand."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to Rosa, why is the tool called the top necessary during the lay stage?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Because the top spins the strands faster than hands could, finishing the rope more quickly.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הופך את הסיבתיות — התפקיד אינו מהירות אלא אחידות המתיחה."
+            },
+            {
+              "text": "Because without it, strands twist together unevenly and the rope ends up lumpy with weak spots.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הסיבה שרוזה נותנת — ה-top שומר על מתיחה שווה בכל הגדילים."
+            },
+            {
+              "text": "Because the top coats the finished rope with tar as it is walked down the building.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "טענה מומצאת שאינה מוזכרת בדיאלוג."
+            },
+            {
+              "text": "Because the top twists the individual loose yarns together before they're bundled into strands.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מייחס את התפקיד לשלב הלא נכון — ה-top פועל בשלב ה-lay, לא בשלב ה-yarn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "D18",
+      "title": "LQA-PROD-D: long_dialogue (wooden_boat_caulking)",
+      "topic": "a boatwright explains how oakum and pitch seal a wooden hull, and debates modern sealants",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Elias: I keep hearing wooden boats are caulked with rope, not sealed with paint. Could you explain how that works?\nBridget: Happily. Every plank on a wooden hull has a small triangular seam along its edge, and the caulker drives soft fiber into that seam first.\nElias: What kind of fiber?\nBridget: Strands of old rope, unraveled and combed loose, called oakum. Because the fibers are teased apart rather than left twisted, they pack into the seam with a mallet and iron until it is full.\nElias: So the oakum alone keeps water out?\nBridget: Not alone. Packed oakum still leaves tiny gaps between its fibers, so hot pitch is melted and poured over it, flowing into every gap the oakum missed before it cools into a solid plug.\nElias: So the two together make a complete seal.\nBridget: Exactly, and here is the part most people miss: the planks are cut slightly narrower than the gap they will fill, since wood swells once soaked. Because a plank grows wider as it absorbs moisture, the seam tightens shut on its own once the boat is launched, squeezing the oakum and pitch even harder into place.\nElias: So a brand-new boat should leak at first?\nBridget: It should, and traditionally it does. A freshly built hull takes on water for a day or two afloat, until the planks fully swell and the seam closes for good; packing a seam too tightly can crack a plank as it expands.\nElias: I would have assumed modern sealant works better.\nBridget: I actually disagree. If you ask me, the early leaking is the most elegant part of the design: the boat finishes sealing itself. Synthetic sealant does not flex the way pitch does, so it can crack when an old hull works and twists in heavy water, while pitch stays pliable for decades.",
+      "highlight_spans": [
+        "Because a plank grows wider as it absorbs moisture, the seam tightens shut on its own once the boat is launched, squeezing the oakum and pitch even harder into place.",
+        "If you ask me, the early leaking is the most elegant part of the design: the boat finishes sealing itself."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Bridget, why is hot pitch poured over the oakum after it is packed into the seam?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because packed oakum still leaves tiny gaps that the pitch fills and hardens into a plug.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך מסבירה ברידג'ט: \"tightly packed oakum still leaves tiny gaps between its fibers, a coat of hot pitch is melted and poured directly over it... hardens into a solid plug\"."
+            },
+            {
+              "text": "Because the planks are cut narrower than the seam and need pitch to fill that gap.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זהו מנגנון ההתנפחות שמוסבר בהמשך השיחה, לא הסיבה לשפיכת הזפת על האוקום."
+            },
+            {
+              "text": "Because the pitch must be applied first so the oakum has something firm to grip onto afterward.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מסדר הפעולות - אוקום נדחס לפני שהזפת נשפכת, לא אחרי."
+            },
+            {
+              "text": "Because pitch prevents the oakum fibers from rotting once the boat is stored in fresh water.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין בשיחה כל אזכור לריקבון סיבים או אחסון במים מתוקים."
+            }
+          ]
+        },
+        {
+          "question_type": "opinion",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is Bridget's opinion about modern synthetic sealants compared to pitch?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "It is Elias, not Bridget, who says pitch stays flexible for decades while sealant tends to crack.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "ברידג'ט, לא אליאס, היא שאומרת זאת; אליאס דווקא מניח שהאטם המודרני עדיף."
+            },
+            {
+              "text": "She thinks modern sealant is better because it seals a hull permanently without any early leaking at all.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מדעתה - ברידג'ט אומרת \"I actually disagree\" לגבי עדיפות האטם הסינתטי."
+            },
+            {
+              "text": "She thinks a caulker should always tap each seam firmly with a mallet before launching a hull.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין בשיחה כל אזכור לבדיקת הידוק בפטיש לפני ההשקה."
+            },
+            {
+              "text": "She thinks pitch is better since it stays flexible for decades while sealant can crack as the hull moves.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"pitch stays slightly pliable for decades\" לעומת אטם סינתטי ש\"can crack when an old hull works and twists\"."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,812 @@
+[
+  {
+    "lecture_id": "e73f0172-262b-47b9-9d26-8443c4ca6e58",
+    "options": [
+      {
+        "text": "digging the canals had required thousands of strong workers",
+        "k_code": "K-HEDGE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "the price of goods in the cities began to fall",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "boats were still too slow to carry heavy coal",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "rich traders decided that canals were a bad idea",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "In the early 1800s, moving heavy goods across the land was extremely slow and costly for traders. Then a network of canals was dug, letting boats carry coal and iron cheaply between distant cities. Because transporting goods suddenly became so much cheaper,",
+    "id": "41f010f6-824e-46dc-91fd-bf01b2fea22e"
+  },
+  {
+    "lecture_id": "9e7e3054-6b75-42bf-b869-577ae93698f3",
+    "options": [
+      {
+        "text": "lock the fresh tea leaves away in the special boxes",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "buy their own expensive tea from the same shops",
+        "k_code": "K-WORLD",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "throw the old leaves away once the box was empty",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "dry the used leaves and sell them a second time",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      }
+    ],
+    "transcript": "When tea first arrived in Britain in the 1600s, it was extremely expensive. Only the rich could afford it, and they kept their tea locked away in special boxes. Because the leaves were so costly, servants were not allowed to throw the used leaves away. Instead, the servants were permitted to",
+    "id": "4348b22b-6691-48c6-9431-184c226d529d"
+  },
+  {
+    "lecture_id": "ccd3d75b-7583-4248-9fd6-28bfdc028662",
+    "options": [
+      {
+        "text": "shiver harder to send their heat out to the frozen edge",
+        "k_code": "K-ECHO",
+        "fail_mode": "unsupported"
+      },
+      {
+        "text": "crowd even more tightly until the outer bees warm up",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "slowly take turns moving between the edge and the center",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "push the weakest bees to the edge and let them freeze",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Honeybees survive the cold winter without hibernating. Instead of sleeping, they gather tightly inside the hive and shiver their muscles to make heat. The bees at the center stay warm, while those on the freezing outer edge grow dangerously cold. To keep any single bee from freezing, the bees",
+    "id": "84f5b952-904d-40fb-bf8f-db6efb97ec2a"
+  },
+  {
+    "lecture_id": "6cd36327-e03a-4e2a-b777-7abdd1941936",
+    "options": [
+      {
+        "text": "not worth his salt",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "worth his weight in gold",
+        "k_code": "K-WORLD",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "paid far too much money",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "bringing home the bacon",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "In the ancient world, salt was so valuable that it was used as a form of payment. Roman soldiers were sometimes paid in salt instead of coins. This is even where the English word 'salary' comes from. That is why a lazy worker is still described as",
+    "id": "cd146578-3853-4c40-9e8e-3c9067cc0bdc"
+  },
+  {
+    "lecture_id": "a8fc535e-1c71-47b9-8e98-4301ba007e17",
+    "options": [
+      {
+        "text": "close the store until the warm weather returns",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "sell ice cream only on the coldest winter days",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "buy more ice cream machines during the winter",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "hire extra workers to help with the summer rush",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "An ice cream shop in a beach town makes most of its money during the hot summer. In winter, the beaches are completely empty and temperatures drop below freezing. During these cold months, the shop barely gets any customers at all. Because of this, the shop owner decided to",
+    "id": "0d1ac646-2f10-4899-a042-0747aeca2e42"
+  },
+  {
+    "lecture_id": "0c0005c0-70bc-4f03-a4ca-2f5b7a09a8b8",
+    "options": [
+      {
+        "text": "could finally receive letters without worrying about the cost",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "demanded that postmen pay for the letters themselves",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "stopped writing letters because they were too expensive to send",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "refused to use the cheap stamps on their mail",
+        "k_code": "K-ECHO",
+        "fail_mode": "unsupported"
+      }
+    ],
+    "transcript": "Long ago, sending a letter was very expensive, and the person receiving it had to pay for it. Since poor people could not afford this, they often refused to accept mail from the postman. To fix this, the post office introduced cheap stamps that the sender paid for in advance. After this change was made, people",
+    "id": "120a1e16-a777-4254-89c8-95055752f538"
+  },
+  {
+    "lecture_id": "d7bb8055-aca7-4794-81c6-026ff00abbcb",
+    "options": [
+      {
+        "text": "lost their jobs since people woke themselves up",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "started selling expensive mechanical clocks to workers",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "began tapping on windows much louder than before",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "bought longer sticks to reach higher bedroom windows",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Before modern alarm clocks, people called knocker-uppers were paid to wake up workers. Every morning, they walked through the streets and tapped on bedroom windows with long sticks. Eventually, cheap mechanical alarm clocks were invented and became widely available. As a result, the knocker-uppers",
+    "id": "2977516a-4358-4aaf-81aa-d82047de68b6"
+  },
+  {
+    "lecture_id": "f5fd0b3a-863e-4c10-8b9a-93491d4a4eb9",
+    "options": [
+      {
+        "text": "set small, controlled fires on purpose",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "water the oldest trees during dry summers",
+        "k_code": "K-MESSY",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "cut down the giant sequoias for their seeds",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "remove every source of heat from the forest",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Giant sequoia trees have thick bark that can shrug off most forest fires. In fact, their cones need the heat of a fire to crack open and release their seeds. A forest with no fires at all can leave the ground too crowded for young sequoias to grow. For this reason, rangers sometimes decide to",
+    "id": "2dacf84f-4f1f-4428-8d9e-4d5bf02f6a43"
+  },
+  {
+    "lecture_id": "34d457ef-3f84-4c1e-9d8b-2f0021e3b220",
+    "options": [
+      {
+        "text": "a sign of a wealthy and generous household",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "a mark of low status at the table",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "something only served on special holidays",
+        "k_code": "K-MESSY",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "a rare treat that servants looked forward to",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "In colonial America, lobster was so common that it washed up on beaches in huge piles. It was seen as cheap food fit only for prisoners and the poor. Some servants even had it written into their contracts that they would not be fed lobster too often. Back then, being served lobster was widely considered",
+    "id": "329139c4-21c0-4a9e-a761-18910bc5bee5"
+  },
+  {
+    "lecture_id": "bb5f154e-107e-41ef-8fd6-9742ec5ebca3",
+    "options": [
+      {
+        "text": "helping small companies research and develop new inventions",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "sold only to companies that invent useful new technologies",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "given to anyone who files a basic lawsuit",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "being used to block innovation rather than encourage it",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      }
+    ],
+    "transcript": "The patent system was created to reward inventors by giving them exclusive rights to sell their new creations. This protection encourages companies to spend millions of dollars researching useful new technologies. Recently, however, some businesses have been buying up patents just to sue other companies for using basic ideas. As a result of this practice, patents are now",
+    "id": "3a31dc1a-9752-4c76-ad96-bd51566ec828"
+  },
+  {
+    "lecture_id": "efad5ba8-7504-4b51-864a-ce7b1dc56fde",
+    "options": [
+      {
+        "text": "joined the loud workshops with their librarians",
+        "k_code": "K-ECHO",
+        "fail_mode": "unsupported"
+      },
+      {
+        "text": "began complaining about the lack of quiet spaces",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "started studying much louder than they did before",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "demanded that libraries build more community play hubs",
+        "k_code": "K-REVERSE",
+        "fail_mode": "unsupported"
+      }
+    ],
+    "transcript": "For decades, libraries were quiet places where visitors were expected to study in silence. Librarians would quickly quiet anyone who made even the slightest noise. Recently, however, libraries have turned into community hubs with loud workshops and noisy play areas. Because of this noisy shift, some traditional visitors",
+    "id": "42d36160-071d-429c-97a1-9b3aed1de151"
+  },
+  {
+    "lecture_id": "cd72aa26-1b50-43f4-9a0b-e36a7b60e004",
+    "options": [
+      {
+        "text": "redrawn to show even more islands nearby",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "kept exactly as the earlier ones had been",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "copied faster than ever across Europe",
+        "k_code": "K-MESSY",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "finally changed to join California to the mainland",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      }
+    ],
+    "transcript": "For nearly a hundred years, mapmakers drew California as a large island off the coast. The mistake began with one careless map and was copied again and again. Even after explorers sailed around and reported solid land, the island kept appearing. Only when a king ordered the mistake fixed were maps",
+    "id": "430fc714-4ac7-47a8-bf90-53ca2a3be735"
+  },
+  {
+    "lecture_id": "c848e001-f490-48b3-a37c-639b0741bea0",
+    "options": [
+      {
+        "text": "refused to drink the cheap tea",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "returned the silk bags to the merchant",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "demanded heavy tin cans",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "dropped the entire bag into the water",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      }
+    ],
+    "transcript": "A tea merchant wanted to send cheap samples of his loose tea leaves to customers. To save on packaging, he placed the leaves inside small, sewn silk bags instead of tin cans. He expected customers to open the bags and pour the leaves into hot water. Instead, what is surprising is that the customers simply",
+    "id": "d68179c4-2d0e-4540-bbb7-244644570cff"
+  },
+  {
+    "lecture_id": "bf3e2e8e-6649-437b-8cd0-25572988895c",
+    "options": [
+      {
+        "text": "got an early warning to escape the tunnel",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "could tell exactly which direction to dig next",
+        "k_code": "K-MESSY",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "learned to breathe as slowly as the canary",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "no longer needed to worry about gas at all",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Coal miners once carried a small caged canary deep underground with them. The little bird breathed faster than a human and was far more sensitive to poison gas. If dangerous gas leaked into the tunnel, the canary would grow sick long before the miners felt anything. By keeping a close eye on the bird, the miners",
+    "id": "7c757c49-9336-422b-bed5-ad0a73ba3dc8"
+  },
+  {
+    "lecture_id": "b9722f4b-f09b-4f74-bcb2-3fba38f6bc44",
+    "options": [
+      {
+        "text": "attracted to a larger male of his own species",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "saved from danger by the flashing lights",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "eaten by the larger female instead of finding a mate",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "forced to mimic the signals of other female fireflies",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Female fireflies of one species flash their lights in a unique pattern to attract mates of their own kind. Males recognize this specific flash and fly down to meet them. However, females of a different, larger species have learned to mimic this exact signal. Consequently, when a small male flies down, he is often",
+    "id": "83c792f8-6dfd-4dae-8be1-405ce366965c"
+  },
+  {
+    "lecture_id": "b703734d-77b7-4b56-a340-a53109cdc23e",
+    "options": [
+      {
+        "text": "encourage faster scooter riding on the paths",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "remove the green spaces and trees",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "ban these fast vehicles from the walking paths",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "build wider walking paths for family dogs",
+        "k_code": "K-HEDGE",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "City parks are designed as safe spaces for children and families to enjoy nature. Recently, many people have started riding fast electric scooters on the narrow walking paths. Several walkers have already been bumped and hurt by these high-speed riders. As a result, city officials are now planning to",
+    "id": "b608644b-381c-494d-a68e-cd08911ea04c"
+  },
+  {
+    "lecture_id": "82348855-2718-4c70-b85c-ff288d8ae7c8",
+    "options": [
+      {
+        "text": "the price of bulbs kept climbing even higher",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "tulips were banned from every garden in Holland",
+        "k_code": "K-MESSY",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "fortunes collapsed and many were left with worthless bulbs",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "the government stepped in to buy the extra bulbs",
+        "k_code": "K-WORLD",
+        "fail_mode": "unsupported"
+      }
+    ],
+    "transcript": "In the 1630s, a single tulip bulb in Holland could cost more than a house. People from every class poured their savings into buying bulbs, sure the prices would keep climbing. Then one morning, buyers simply stopped showing up at the market. Almost overnight, because no one was willing to buy anymore,",
+    "id": "b74e2011-fd58-49bd-a4f3-9ae0aea792ef"
+  },
+  {
+    "lecture_id": "f3b1d205-ae73-444b-b1c7-d748fdd121f7",
+    "options": [
+      {
+        "text": "burn under the hot sun much faster",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "grow without needing any sunlight at all",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "make the desert air much warmer",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "keep itself cool in the extreme heat",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      }
+    ],
+    "transcript": "Desert plants must find clever ways to survive the burning midday sun. The giant saguaro cactus has deep ridges along its sides that cast small shadows on its own skin. Even a tiny bit of shade can lower the plant's temperature by several degrees. Consequently, the cactus is able to",
+    "id": "c4b3460e-f285-400b-977c-7528639b11e6"
+  },
+  {
+    "lecture_id": "804ecad2-125b-4caf-96e4-5953f2d995d4",
+    "options": [
+      {
+        "text": "the islands can easily float away to different lakes",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "they are now completely made of heavy metal",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "the islands can no longer be moved to escape danger",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "local tribes built more floating reeds to live on",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "In a lake, a tribe built artificial islands out of floating reeds to live on. If enemies approached, the islands could simply be floated away to a safer area. Today, modern bridges connect these reed islands permanently to the mainland. As a result of these new bridges,",
+    "id": "c5023b0c-fb8e-4751-922f-8d08d2f35cec"
+  },
+  {
+    "lecture_id": "f8652d3a-52aa-46ea-b87f-5733e33cfb2b",
+    "options": [
+      {
+        "text": "prefer eating straight wires instead of meat",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "can design their own tools to solve problems",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "only eat food that is kept in glass jars",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "always need researchers to help them find food",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Researchers wanted to see if crows could use tools to get food from deep bottles. They placed a small bucket of meat inside a tall glass jar, leaving a straight wire nearby. Surprisingly, a crow quickly bent the wire into a hook and pulled the food out. This clever behavior proved that these birds",
+    "id": "cb37f916-afa3-41b5-b08f-1d88170ba67e"
+  },
+  {
+    "lecture_id": "216ff4e4-9a0a-4fd8-9756-c8742b9dacd5",
+    "options": [
+      {
+        "text": "bite the bullet",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "spill the beans",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "sour grapes",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "cool as a cucumber",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "In ancient Greece, clubs voted on new members by dropping colored beans into a jar. White beans meant approval, while a black bean meant rejection. If the jar was knocked over early, the secret results were revealed. Because of this custom, we now use the phrase",
+    "id": "cbfb3b51-95ed-497f-87bb-febfb14e7725"
+  },
+  {
+    "lecture_id": "56b4de15-377f-4613-ba13-3828e1878d06",
+    "options": [
+      {
+        "text": "followed by massive beetle outbreaks",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "drowned by the protective resin",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "helpful for the trees' defense",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "ended by a swarm of beetles",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Healthy pine trees protect themselves by spraying sticky resin to drown attacking beetles. However, during long droughts, trees lack the water needed to produce this defensive resin. Without water, the trees become defenseless, allowing beetles to multiply and destroy entire forests. Therefore, a sudden lack of rainfall is often",
+    "id": "119a4a5b-4528-4e62-9ff9-34bb2e42b51a"
+  },
+  {
+    "lecture_id": "c7268b9f-0058-40c5-bbd7-e5c4315051f8",
+    "options": [
+      {
+        "text": "are rarely eaten or spread",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "are easy for birds to find",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "turn red during the winter",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "produce many more seeds",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Most wild berries are bright red or blue to attract hungry birds. These birds eat the colorful fruit and spread the seeds across the forest. However, some rare plants grow green berries that birds cannot see against the leaves. As a result, these green berries",
+    "id": "147d0b36-4827-42bc-aef2-49cffc6741ad"
+  },
+  {
+    "lecture_id": "4f5144b2-c1a4-4c2a-b50c-20bbb03f8ea8",
+    "options": [
+      {
+        "text": "likely to create more black paste",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "necessary to make pedaling easy again",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "guaranteed to break the metal gears",
+        "k_code": "K-ECHO",
+        "fail_mode": "unsupported"
+      },
+      {
+        "text": "only done by professional racers",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Bicycle chains must be covered in oil to move smoothly over the gears. Over time, dirt from the road sticks to the oil and creates a thick black paste. This sticky paste makes it very difficult to pedal the bicycle. Therefore, regularly cleaning and re-oiling the chain is",
+    "id": "19489906-2d37-41cc-bfd5-45d99758dc2c"
+  },
+  {
+    "lecture_id": "95c68e83-1ae4-4d25-8c02-5150a3345cb7",
+    "options": [
+      {
+        "text": "suffer from extreme summer heat",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "lose all their wool naturally",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "run much faster in the wild",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "grow warm wool only in spring",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Wild sheep naturally lose their heavy winter wool every single spring. In contrast, domestic sheep have been bred to grow wool continuously without ever stopping. This means domestic sheep cannot shed their thick coats on their own. Without human shearers to cut the wool, these domestic sheep",
+    "id": "1c06046a-adac-4cbc-998b-f7feac4aef69"
+  },
+  {
+    "lecture_id": "684b6ed3-1834-467b-8c80-1eab1919052c",
+    "options": [
+      {
+        "text": "trap more body heat than dry clothes",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "keep the rainwater from entering",
+        "k_code": "K-ECHO",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "make a person feel extremely cold",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "dry the water using body heat",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Winter coats keep us warm by trapping a layer of air heated by our bodies. However, if the coat gets wet from rain, water fills the spaces where the air was. Since water conducts heat away much faster than air, a wet coat loses its warmth. Therefore, wearing a wet coat in winter will",
+    "id": "23e0cca8-43a1-43a0-a3de-273d8caf8ec5"
+  },
+  {
+    "lecture_id": "58189272-4513-4a88-850f-1e9acc21919e",
+    "options": [
+      {
+        "text": "melt their glue too quickly",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "grow much taller than normal",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "cannot reproduce and grow new trees",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "release their seeds in spring",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "Forest fires can seem destructive, but they are vital for some trees. For example, certain pinecones are sealed tight with a thick, sticky glue. Only the intense heat of a forest fire can melt this glue and release the seeds. Therefore, without occasional forest fires, these trees",
+    "id": "285ff2a8-7019-413b-a9dc-c3d3381a845e"
+  },
+  {
+    "lecture_id": "2e38b3fc-c6d1-400e-a95b-bc70a28dcc24",
+    "options": [
+      {
+        "text": "built tightly with no spaces",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "laid with small gaps between them",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "painted black to absorb more heat",
+        "k_code": "K-REVERSE",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "made entirely of soft wood",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Steel tracks expand and grow longer when heated by the summer sun. In the past, tracks were laid tightly together, leaving no room for this expansion. As a result, the hot rails would push against each other and bend dangerously. To prevent this bending, modern tracks are",
+    "id": "46205069-113f-48a1-8da4-32be961a24d3"
+  },
+  {
+    "lecture_id": "e13631d3-d8bd-4787-8651-0800f482ba5b",
+    "options": [
+      {
+        "text": "bored by the silent screen",
+        "k_code": "K-ECHO",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "happy and started to laugh",
+        "k_code": "K-REVERSE",
+        "fail_mode": "anchor_lost"
+      },
+      {
+        "text": "frightened by the dramatic scene",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "inspired to play the piano",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      }
+    ],
+    "transcript": "Early movies had no sound, so theaters hired pianists to play music. These musicians watched the screen and changed their music to match the action. When scary monsters appeared, the pianist played loud, dark chords. As a result, the audience members felt",
+    "id": "4653c2bc-99c5-4731-a371-da130fdce0ac"
+  },
+  {
+    "lecture_id": "2eb7f766-326d-4b3e-ab6e-130b948279fc",
+    "options": [
+      {
+        "text": "crocodile eyes",
+        "k_code": "K-ECHO",
+        "fail_mode": "unsupported"
+      },
+      {
+        "text": "crocodile tears",
+        "k_code": "CORRECT",
+        "fail_mode": null
+      },
+      {
+        "text": "salty water",
+        "k_code": "K-WORLD",
+        "fail_mode": "wrong_slot"
+      },
+      {
+        "text": "wolf tears",
+        "k_code": "K-WORLD",
+        "fail_mode": "anchor_lost"
+      }
+    ],
+    "transcript": "An ancient myth claimed that crocodiles wept while devouring their prey. In reality, crocodiles produce tears simply to lubricate their eyes while eating. These tears are just a physical reflex, not a sign of real grief. Today, when someone fakes sadness, we say they cry",
+    "id": "7807785d-1b1f-4537-94ff-bf6784fc3823"
+  }
+]

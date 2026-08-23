@@ -1,0 +1,451 @@
+{
+  "batch": "LQA-PROD-A",
+  "lectures": [
+    {
+      "key": "A1",
+      "title": "LQA-PROD-A: block1_short_lecture (telephone box libraries)",
+      "topic": "telephone box libraries (descriptive, no pivot)",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Across the countryside, old telephone boxes have found a second life. Many villages have turned them into tiny public libraries. The idea is simple: anyone may leave a book, and anyone may take one. Nobody checks the books in or out, and there is no librarian. Some boxes hold about two hundred books at a time. Others offer more than books. For example, one village keeps a shelf of seeds for local gardeners, and another stores a first aid kit. Villagers usually repaint the boxes themselves and take turns keeping the shelves tidy.",
+      "highlight_spans": [
+        "turned them into tiny public libraries",
+        "For example"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is this talk mainly about?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "How villages are putting old telephone boxes to new shared uses.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע כולו על כך ש\"old telephone boxes have found a second life\": ספרייה, מדף זרעים, ערכת עזרה ראשונה — כולם שימושים משותפים חדשים."
+            },
+            {
+              "text": "How villages are keeping their old telephone boxes standing and in good repair.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה באותו היקף, ולכן צריך לשמוע איזו מהן הקטע באמת עושה. התחזוקה מוזכרת בסוף (\"repaint the boxes themselves\") אבל היא אמצעי — הקטע עוסק בשימוש החדש, לא בשימור."
+            },
+            {
+              "text": "How villages are keeping a record of every book that passes through the boxes.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך מפורש: \"Nobody checks the books in or out, and there is no librarian\" — אין שום רישום."
+            },
+            {
+              "text": "How villages are choosing which books belong in a shared collection.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "איש אינו בורר ספרים: הכלל הוא \"anyone may leave a book, and anyone may take one\", ו\"Nobody checks the books in or out\"."
+            }
+          ]
+        }
+      ],
+      "_id": "76e50c64-1768-410b-b245-560a511d76be"
+    },
+    {
+      "key": "A2",
+      "title": "LQA-PROD-A: block1_short_dialogue (train replaced by bus)",
+      "topic": "morning train replaced by a bus during rail repairs",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Maya: I waited twenty minutes this morning, and then a bus came instead of the train. What happened?\nTom: They found small cracks in the rails just south of the station.\nMaya: Cracks? Is that dangerous?\nTom: It can be. Until the repair is finished, trains must pass that section very slowly.\nMaya: So why cancel them completely?\nTom: At that speed the whole timetable falls apart. Each trip takes almost twice as long, so the company decided buses would actually be faster.\nMaya: How long will the repair take?\nTom: About three weeks, they say. The buses leave from the usual platform.",
+      "highlight_spans": [
+        "Until the repair is finished",
+        "the whole timetable falls apart"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "According to Tom, why did the company cancel the trains instead of running them slowly?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Because the buses take almost twice as long, so fewer of them are needed.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: \"twice as long\" נאמר על נסיעת הרכבת האיטית, לא על האוטובוס — והמסקנה הייתה ש\"buses would actually be faster\"."
+            },
+            {
+              "text": "Because the platform had to be closed while the rails were being repaired.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "ההפך נאמר במפורש: \"The buses leave from the usual platform\" — הרציף פתוח ומשמש."
+            },
+            {
+              "text": "Because passing trains would widen the cracks faster than the crew could repair them.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הסדקים אכן קיימים, אבל טום תולה את הבעיה במהירות ובלוח הזמנים — \"the whole timetable falls apart\" — ולא בהחמרת הנזק מנסיעה."
+            },
+            {
+              "text": "Because slow running would stretch every trip so far that the timetable collapsed.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "טום מוסר את השרשרת: במהירות הנמוכה \"the whole timetable falls apart\", \"Each trip takes almost twice as long\", ולכן \"buses would actually be faster\"."
+            }
+          ]
+        }
+      ],
+      "_id": "ea531be8-578d-4eaa-ac00-7f3175b8e1de"
+    },
+    {
+      "key": "A3",
+      "title": "LQA-PROD-A: block1_medium_lecture (urban heat island)",
+      "topic": "why cities stay warmer than the countryside",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "On a summer evening, a city center can be several degrees warmer than the fields around it. Many people assume the difference comes from sunshine — city streets simply seem sunnier than shaded country lanes. However, measurements tell a different story. The countryside receives just as much sunlight as the city. The real cause lies in the materials. Concrete and asphalt soak up heat all day and release it slowly through the night, while soil and plants cool quickly after sunset. Traffic and air conditioning add their own warmth as well. Scientists call this pattern the urban heat island: an island of warm air that sits over the built-up area while cooler air surrounds it. The effect is strongest on calm, clear nights, and it can raise a city's nighttime temperature by more than five degrees. City planners respond by planting more trees and by painting roofs in pale colors, which reflect the sunlight instead of storing it.",
+      "highlight_spans": [
+        "However, measurements tell a different story",
+        "Scientists call this pattern"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the speaker mainly explaining?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Why sunshine falls more heavily on streets than on shaded country lanes.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "זו ההנחה שהקטע מפריך: \"Many people assume the difference comes from sunshine\" — ואז \"However, measurements tell a different story. The countryside receives just as much sunlight\"."
+            },
+            {
+              "text": "Why trees and pale roofs have become the standard answer for hot cities.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "post_pivot",
+              "explanation_he": "הפתרונות אכן מוזכרים בסוף — \"planting more trees and by painting roofs in pale colors\" — אבל הקטע מסביר את הסיבה, לא מטיף למדיניות."
+            },
+            {
+              "text": "Why the engines and machines of a city make more heat than open fields do.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה ומפתה: הקטע אכן אומר \"Traffic and air conditioning add their own warmth as well\" — אבל זו תוספת משנית, והסיבה שהקטע מציב היא אגירת החום בחומרים."
+            },
+            {
+              "text": "Why a city holds its heat into the night while the land around it cools.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הטיעון אחרי הפנייה: \"The real cause lies in the materials\" — בטון ואספלט משחררים חום לאורך הלילה בעוד \"soil and plants cool quickly after sunset\"."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does the speaker mean by an \"urban heat island\"?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "A layer of warm air trapped over a city by the buildings that surround it.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "הגדרה מתחרה שנשמעת נכונה, אך הקטע אינו מדבר על לכידה בין מבנים אלא על אוויר חם היושב מעל האזור הבנוי בעוד קריר מקיף אותו."
+            },
+            {
+              "text": "Warm air sitting over the built-up part of a city, with cooler air around it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע מגדיר במפורש: \"an island of warm air that sits over the built-up area while cooler air surrounds it\"."
+            },
+            {
+              "text": "A warm stretch of land with water around it, where the weather stays mild.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זה המובן המילוני של island — אי מוקף מים. בקטע זהו דימוי לאוויר, לא פיסת יבשה."
+            },
+            {
+              "text": "A part of a city that stays cooler than the streets around it, such as a park.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך כיוון: לפי הקטע החם יושב מעל השטח הבנוי והקריר מסביבו — לא כיס קריר בתוך עיר חמה."
+            }
+          ]
+        }
+      ],
+      "_id": "78afc85c-f367-436c-8dcd-e56caae2143c"
+    },
+    {
+      "key": "A4",
+      "title": "LQA-PROD-A: block1_medium_dialogue (windmill guide)",
+      "topic": "how a windmill worked (guide and visitor)",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Guide: Welcome to the old mill. This building ground flour for the whole valley for nearly two hundred years.\nVisitor: Can you explain how it actually worked?\nGuide: Of course. It all starts with the sails. When the wind turns them, they spin a heavy wooden shaft that runs down the middle of the tower.\nVisitor: And the shaft does the grinding?\nGuide: Not directly. The shaft turns two round stones, one resting on the other. Grain trickles between them, and as the top stone turns, it crushes the grain into flour.\nVisitor: What happened if the wind was too strong?\nGuide: The miller could turn the whole roof away from the wind, and he could also fold cloth off the sails to slow them down. In a real storm, he simply stopped the mill — a runaway mill could catch fire from the heat of the stones.\nVisitor: Fire, in a windmill? I never imagined that.",
+      "highlight_spans": [
+        "Not directly",
+        "he simply stopped the mill"
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to the guide, what was the shaft's part in making flour?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "It ground the grain itself as it turned against the floor of the tower.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "המדריך שולל זאת מפורשות: לשאלה אם הציר טוחן הוא עונה \"Not directly\" — הטחינה נעשית בין שתי האבנים."
+            },
+            {
+              "text": "It passed the turning of the sails down to the stones that did the grinding.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "המדריך: הרוח מסובבת את הכנפיים, הן מסובבות \"a heavy wooden shaft\", ו\"The shaft turns two round stones\" — הציר מעביר תנועה."
+            },
+            {
+              "text": "It let the grain down a little at a time so the stones would not jam.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הזרמת התבואה אינה תפקידו של הציר — \"Grain trickles between them\" — וההסבר על חסימה כלל לא נאמר."
+            },
+            {
+              "text": "It held the upper stone just clear of the lower one as the mill ran.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "לא נאמר, וגם סותר את התיאור: האבנים מונחות זו על זו — \"one resting on the other\"."
+            }
+          ]
+        },
+        {
+          "question_type": "negative",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Which of the following is NOT mentioned as a way the miller handled strong wind?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Bringing the mill to a stop when the wind became a storm.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר: \"In a real storm, he simply stopped the mill\"."
+            },
+            {
+              "text": "Folding cloth off the sails so that they turned more slowly.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר: \"fold cloth off the sails to slow them down\"."
+            },
+            {
+              "text": "Ringing a bell in the tower to call for help from the village.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "קריאה לעזרה מהכפר אינה מוזכרת כלל, ואינה אמצעי טיפול ברוח. שלושת האמצעים שנאמרו: סיבוב הגג, קיפול הבד מהכנפיים, ועצירת הטחנה."
+            },
+            {
+              "text": "Turning the whole roof so that the sails faced away from the wind.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר: \"The miller could turn the whole roof away from the wind\" — ולכן אינו התשובה לשאלת ה-NOT."
+            }
+          ]
+        }
+      ],
+      "_id": "1a7976e3-ca00-41a2-90b9-1ff90fddee8f"
+    },
+    {
+      "key": "A5",
+      "title": "LQA-PROD-A: block1_long_lecture (three bridge designs)",
+      "topic": "beam, arch and suspension bridges",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "When engineers plan a river crossing, they usually choose between three classic designs: the beam bridge, the arch bridge, and the suspension bridge. The beam bridge is the simplest — a flat deck resting on supports at each end. For example, most highway bridges over small streams are beam bridges. Because the design is cheap and quick to build, many people assume it is always the best choice for short crossings. However, a beam has a clear limit: the longer it stretches, the weaker its middle becomes, so long beam bridges need many supports standing in the water. The arch bridge solves the problem in a different way. Its curved shape pushes the weight outward into the banks, so the middle needs no support at all. Arches served the Romans for two thousand years, and many of their bridges still stand. Yet even the arch has a boundary: build it too wide, and the sideways push becomes more than the banks can hold. For the widest crossings, engineers turn to the suspension bridge, where the deck hangs from cables strung between tall towers. The cables carry the weight up to the towers and down into deep anchors. In other words, each design passes the load along a different path — down through supports, outward into the banks, or up through cables. The right choice depends less on beauty than on the width of the water.",
+      "highlight_spans": [
+        "a beam has a clear limit",
+        "even the arch has a boundary",
+        "In other words"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the speaker mainly explaining?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "How the cost of building decides which design engineers end up choosing.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "הזול והמהיר אכן מוזכרים לגבי הקורה, אבל הקטע חותם אחרת: \"The right choice depends less on beauty than on the width of the water\"."
+            },
+            {
+              "text": "How each design moves the weight somewhere else, and what that lets it span.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הסיכום שהקטע עצמו נותן: \"each design passes the load along a different path — down through supports, outward into the banks, or up through cables\", והבחירה תלויה ברוחב."
+            },
+            {
+              "text": "How each design was improved on by the one that came after it.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה: הקטע מציג שלושה סוגים לפי סדר, אבל אינו טוען שאחד משפר את קודמו — לכל אחד גבול משלו ותחום שבו הוא מתאים."
+            },
+            {
+              "text": "How the width of a river decides how much a crossing will cost to build.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "שני המרכיבים נאמרו — רוחב ועלות — אבל הקטע קושר את הרוחב לבחירת ה*סוג*: \"The right choice depends less on beauty than on the width of the water\", לא למחיר."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the speaker, why does the middle of an arch bridge need no support?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Because supports standing in the water take the weight before it reaches the middle.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה מנגנון גשר הקורה — \"long beam bridges need many supports standing in the water\" — ולא של הקשת."
+            },
+            {
+              "text": "Because cables lift the weight up to the towers and down into the anchors.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה מנגנון גשר התלייה: \"The cables carry the weight up to the towers and down into deep anchors\"."
+            },
+            {
+              "text": "Because its curve drives the weight sideways into the banks at each end.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר במפורש: \"Its curved shape pushes the weight outward into the banks, so the middle needs no support at all\"."
+            },
+            {
+              "text": "Because the stones press against one another hard enough to hold the span up.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "הסבר סביר על קשתות, אך הקטע אינו אומר אותו — ההסבר היחיד שניתן הוא הדחיפה החוצה אל הגדות."
+            }
+          ]
+        }
+      ],
+      "_id": "cb759760-37fd-4266-af08-a76b71a81d1a"
+    },
+    {
+      "key": "A6",
+      "title": "LQA-PROD-A: block1_long_dialogue (repair cafe moves out)",
+      "topic": "a repair cafe loses its space",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Daniel: I walked past the community hall yesterday evening, and the repair cafe was gone. The room was completely empty.\nPriya: They lost the space. The hall doubled the rent at the start of the year, and the cafe runs entirely on donations.\nDaniel: But the place was always full. Where did the money go?\nPriya: Full of visitors, yes — but visitors don't pay. People bring a broken toaster or a torn coat, a volunteer fixes it for free, and most people leave a coin or two at the door on their way out. That covers tea and spare parts, not rent.\nDaniel: Couldn't they charge a fixed price for each repair?\nPriya: They talked about it and decided against it. The whole idea was that nobody should stay home because they can't afford a repair. Charging would push away exactly the people who need it most.\nDaniel: So what happens now?\nPriya: The library offered them a small corner room, twice a month, without any rent. It's smaller, so they'll take bookings instead of walk-ins.\nDaniel: If you ask me, that's a real loss. Half the point was wandering in with whatever broke that week. Booking a slot two weeks ahead is not the same thing.\nPriya: Maybe. But in my opinion, a small room that lasts is worth more than a big hall they couldn't keep.",
+      "highlight_spans": [
+        "decided against it",
+        "If you ask me",
+        "in my opinion"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Priya, what change forced the repair cafe out of the community hall?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The hall doubled the rent, and donations at the door could not cover it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "פְּרִיָה ישירות: \"The hall doubled the rent at the start of the year, and the cafe runs entirely on donations\"."
+            },
+            {
+              "text": "The library offered a free room, so the cafe gave up its place in the hall.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "החלפת סדר הזמנים: הצעת הספרייה באה *אחרי* אובדן המקום — \"The library offered them a small corner room\" — היא לא גרמה לו."
+            },
+            {
+              "text": "The volunteers began charging for repairs, and regular visitors stopped coming.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: הם דחו את הרעיון — \"They talked about it and decided against it\" — בדיוק כדי לא להרחיק אנשים."
+            },
+            {
+              "text": "Fewer visitors came, so the coins left at the door stopped covering the rent.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: המקום היה מלא — \"the place was always full\", \"Full of visitors, yes\" — מספר המבקרים לא ירד."
+            }
+          ]
+        },
+        {
+          "question_type": "opinion",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is Daniel's opinion of the move to the library?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "He thinks the move is a fair price to pay for keeping the cafe alive.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך עמדה: דניאל מכנה את המעבר \"a real loss\" ואינו משלים איתו כמחיר סביר."
+            },
+            {
+              "text": "He thinks the cafe was right to turn down the idea of charging for repairs.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "ההחלטה אכן נדונה ונדחתה — \"They talked about it and decided against it\" — אבל השאלה מבקשת את דעתו על *המעבר לספרייה*, לא על התמחור."
+            },
+            {
+              "text": "He thinks the cafe loses much of its point once people have to book ahead.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "דניאל: \"If you ask me, that's a real loss\", ומנמק — \"Half the point was wandering in with whatever broke that week\"."
+            },
+            {
+              "text": "He thinks a small room the cafe can keep beats a hall it could not afford.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו דעתה של פְּרִיָה, החולקת עליו: \"in my opinion, a small room that lasts is worth more than a big hall they couldn't keep\"."
+            }
+          ]
+        }
+      ],
+      "_id": "243ec943-43eb-401b-a591-7ce2c7062e3d"
+    }
+  ]
+}

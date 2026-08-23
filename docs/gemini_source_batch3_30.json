@@ -1,0 +1,332 @@
+[
+  {
+    "id": "7e0cf23d-784b-4a37-9b1f-d54b66bf733e",
+    "lecture_id": "83d43042-0a6f-4b13-afd9-b53beb01cac5",
+    "options": [
+      {"text": "become much more slippery", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "freeze at much higher temperatures", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "melt and become safer", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "turn into dry desert sand", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "During cold winters, water on roads freezes and turns into dangerous ice. To prevent accidents, trucks spread large amounts of salt onto the streets. Salt lowers the freezing point of water, keeping it liquid even in cold weather. Because of this salt, the icy roads"
+  },
+  {
+    "id": "8183bcf1-a776-49f0-b875-da53b220e96e",
+    "lecture_id": "6d0efea9-f4b0-482a-ac05-70e4c9b27c87",
+    "options": [
+      {"text": "harder to write with on paper", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "stronger and much cleaner", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "made of pure soft lead", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "painted yellow to attract buyers", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Early pencils were filled with pure lead, which was soft and left dark marks. However, this material also broke easily and often stained people's hands. To fix this, creators mixed the lead with clay and baked it. As a result, the new pencils were"
+  },
+  {
+    "id": "89dac647-69b5-414e-a4de-6ecb216420f3",
+    "lecture_id": "947f7298-8a03-4b35-9032-1e6357b8d7ed",
+    "options": [
+      {"text": "drained the remaining nutrients", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "stopped using the land entirely", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "kept the soil healthy and fertile", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "grew the same crop every year", "k_code": "K-WORLD", "fail_mode": "anchor_lost"}
+    ],
+    "transcript": "For generations, farmers grew the same crop on the same field every single year. Eventually, the plants drained all the nutrients from the soil, leaving the land useless. To fix this, farmers began rotating different crops, which naturally restored the lost nutrients. By rotating their crops, farmers successfully"
+  },
+  {
+    "id": "a85aae05-5793-4c0e-9710-30ac41ac667f",
+    "lecture_id": "bddb8394-b2af-4b58-991d-f2c3b8196e11",
+    "options": [
+      {"text": "became much rougher than before", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "was smooth and clean again", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "melted into a warm pool", "k_code": "K-WORLD", "fail_mode": "unsupported"},
+      {"text": "contained many deep grooves", "k_code": "K-ECHO", "fail_mode": "anchor_lost"}
+    ],
+    "transcript": "Ice rinks need a smooth surface for skaters to glide safely. Over time, skates cut deep grooves into the ice, making it rough. To solve this, a machine was built to shave off the damaged layer and spray fresh water. After the machine finished its work, the ice"
+  },
+  {
+    "id": "b5b93eee-50e3-4928-a527-4ff47b7eadb0",
+    "lecture_id": "1208adde-f91e-42f7-b54e-afd9a6fd2bf2",
+    "options": [
+      {"text": "grow very close to other plants", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "die from a lack of water", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "produce very colorful desert flowers", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "stand completely alone in the sand", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "In dry deserts, plants compete fiercely for every drop of rain. Some bushes release toxic chemicals into the surrounding soil to stop other plants from growing nearby. This clever trick ensures that the bush has no neighbors to steal its water. As a result, these toxic bushes usually"
+  },
+  {
+    "id": "bb27a71f-704c-4805-96c0-852244e99d3a",
+    "lecture_id": "f4ddae03-4baf-4537-9b6e-629bbe07274b",
+    "options": [
+      {"text": "completely stopped eating sugar", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "often gained weight anyway", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "lost fat faster than before", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "demanded the return of fat", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "For decades, food companies removed fat from products to make them healthier. However, food without fat tastes terrible, so companies added massive amounts of sugar instead. This sugar made the low-fat food taste great, but it also caused weight gain. Consequently, people who bought these low-fat products"
+  },
+  {
+    "id": "bffd7489-df9b-4c2e-a805-8f7d45655d15",
+    "lecture_id": "812090c9-e55c-42b5-bfa5-b1c8eacad633",
+    "options": [
+      {"text": "spend most of their time eating", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "hunt other animals for meat", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "have a very strong digestive system", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "sleep through the entire day", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Giant pandas have the digestive system of carnivores, which are built to digest meat. Yet, pandas eat almost nothing but bamboo, which contains very little nutrition. Because bamboo is so weak in nutrients, pandas must eat for sixteen hours a day to survive. As a result of their poor diet, pandas"
+  },
+  {
+    "id": "d21ecfad-db56-43f2-bbe8-9ec04fcdb3eb",
+    "lecture_id": "3d043bbc-eef4-45f8-a8a1-95be05bdad7e",
+    "options": [
+      {"text": "given the exact same color", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "separated by a wide ocean", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "printed in different colors", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "drawn with identical boundaries", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Mapmakers must ensure that countries sharing a border do not have the same color. If neighboring nations looked identical, people would struggle to see where one ended. Using different colors makes political boundaries clear and easy to read. Therefore, two countries that touch each other must be"
+  },
+  {
+    "id": "d7f6c87a-a85c-45b0-aaee-58763a2ba0e4",
+    "lecture_id": "9ef658ea-4ed1-44b2-a1c2-76a301bf0095",
+    "options": [
+      {"text": "half a loaf is better than none", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "a baker's dozen", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "to sell like hotcakes", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "to earn one's daily bread", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "In medieval England, bakers faced severe fines for selling underweight bread. Because loaves can shrink unpredictably in the oven, bakers feared making an honest mistake. To avoid any risk of punishment, they began adding an extra loaf to every order of twelve. This clever practice is the origin of the expression"
+  },
+  {
+    "id": "e443cacf-b45b-440f-945e-860dd9f59974",
+    "lecture_id": "e450d85a-5a74-413e-adef-73b69400160a",
+    "options": [
+      {"text": "is safe for humans to consume", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "protects humans from forest pests", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "tastes extremely sweet to humans", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "helps plants grow larger leaves", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Coffee plants produce a chemical called caffeine to protect themselves from pests. This bitter chemical is highly toxic to small insects that try to eat the plant's leaves. However, larger animals like humans are not harmed by small amounts of it. Therefore, while caffeine kills destructive insects, it"
+  },
+  {
+    "id": "fdea7682-bf15-43cd-a198-fea94c2d474c",
+    "lecture_id": "ede3df07-5a71-4bec-be67-4f19415e2d89",
+    "options": [
+      {"text": "allowed to wear the master's hat", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "given a very tall white hat", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "forced to work outside the kitchen", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "given a very short hat", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "Long ago, royal chefs wore tall white hats to show their high status. The tallest hat always belonged to the master chef of the kitchen. Other cooks wore shorter hats depending on their experience. Therefore, a chef with very little experience was"
+  },
+  {
+    "id": "00b69c60-cb2d-48a4-b8d5-63fb4c7b460b",
+    "lecture_id": "5041866d-e4cb-45da-b8a6-361fa0c48ac0",
+    "options": [
+      {"text": "refused to pay for the sliced potatoes", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "demanded a thicker plate of food", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "absolutely loved the crispy snack", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "left the restaurant to eat elsewhere", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "A chef was angry because a difficult customer kept sending his fried potatoes back for being too thick. To teach the customer a lesson, the chef sliced the potatoes paper-thin and fried them until they were completely hard. What is surprising is that the difficult customer"
+  },
+  {
+    "id": "0206150d-a2b6-4fde-a611-fe98a556ce3c",
+    "lecture_id": "c51f651e-4e2c-4ca1-b725-d772d0d0e492",
+    "options": [
+      {"text": "drank it and discovered tea", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "ordered his servants to cut the tree", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "boiled fresh water in a clean pot", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "realized the windy day was ending", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "An ancient emperor only drank water that was freshly boiled to ensure it was clean. One windy afternoon, while his servants were boiling water under a tree, some wild leaves blew into the pot. The leaves colored the water and released a rich, pleasant aroma. Instead of throwing the dirty water away, the curious emperor"
+  },
+  {
+    "id": "04d906db-ef93-4979-9f84-b650d9ca0c90",
+    "lecture_id": "5234993c-fbfa-43fa-aad7-7631fc936386",
+    "options": [
+      {"text": "require sheep intestines to function", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "stay in tune much better", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "produce a terrible sound", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "break during damp winter storms", "k_code": "K-WORLD", "fail_mode": "anchor_lost"}
+    ],
+    "transcript": "For centuries, violin strings were made from the dried intestines of sheep. These traditional strings produced a beautiful warm sound, but they easily went out of tune in damp weather. Modern makers solved this constant frustration by wrapping durable metal wire around synthetic plastic cores. Because of this modern change, the strings now"
+  },
+  {
+    "id": "08edc807-d54f-43dd-82bf-8b0e219bba44",
+    "lecture_id": "3dbbd1ce-5fe2-449e-a004-4760a21830c7",
+    "options": [
+      {"text": "dark and lasted much longer", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "light gray and very weak", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "much more expensive to purchase", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "filled with natural rubber powder", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Early car tires were made of pure natural rubber, which was light gray. To make them stronger, tire manufacturers started adding carbon black chemical powder. This protective black powder increased the lifespan of the rubber by five times. As a result, car tires became"
+  },
+  {
+    "id": "1620bec2-5f73-4070-874d-18f0bc33513c",
+    "lecture_id": "890ccbcc-c7b9-421f-a789-f7e28a110ff0",
+    "options": [
+      {"text": "struggle to catch enough food", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "easily find seals in the winter", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "enjoy swimming in the warm water", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "grow much larger and stronger", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Polar bears hunt seals on the white sea ice to survive. During the cold winter, they easily find plenty of food on the thick frozen surface. However, global warming is now melting the sea ice much earlier in the spring. Because of this loss of ice, the polar bears"
+  },
+  {
+    "id": "3f19d83d-03cd-4f64-8c95-bd9406089032",
+    "lecture_id": "8a15b075-550e-4499-a2ec-fb1e724f3332",
+    "options": [
+      {"text": "are still harvested from elephant tusks", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "turn yellow and crack much faster", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "require more ivory to remain white", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "last longer and stay clean easily", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "Early piano keys were covered in real ivory harvested from elephant tusks. Over time, the ivory keys would turn yellow, crack easily, and require constant cleaning. Today, piano makers protect wild elephants and solve these durability issues by using high-quality white plastic. Because of this transition to plastic, modern piano keys"
+  },
+  {
+    "id": "44dd2699-e88d-4f84-9ca0-3b7c11cf323a",
+    "lecture_id": "79eba269-7fcf-436e-85a2-a6626bfaf508",
+    "options": [
+      {"text": "mixed with expensive argon gas", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "brighter than any other color", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "much cheaper to run than blue ones", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "built with electricity instead of neon", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Neon gas glows with a bright red color when electricity passes through it. To create different colors, sign makers must mix neon with other gases like argon or mercury. However, these other gases require higher voltage and are much more expensive to use. Therefore, simple red signs are generally"
+  },
+  {
+    "id": "4a49dcb2-b935-415f-8824-c96983f905ea",
+    "lecture_id": "5159ca4c-213e-4748-8997-aff00026ed09",
+    "options": [
+      {"text": "wealthy people stopped buying them", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "writers refused to write new books", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "they became much cheaper and more common", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "copying books by hand became faster", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Before the printing press was invented, books had to be copied slowly by hand. Consequently, books were rare luxury items that only very wealthy people could buy. This situation changed when a machine was built that could print thousands of pages quickly. Because books could now be printed easily,"
+  },
+  {
+    "id": "4a999e88-4faf-4c2a-bc12-384cb6d22a4c",
+    "lecture_id": "47d6cacd-f951-4fbd-a98d-6622685821dd",
+    "options": [
+      {"text": "lay eggs in their nests", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "chew dry wood anymore", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "need to find human paper", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "build nests during the summer", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Paper wasps are known for building sturdy, waterproof nests to protect their eggs. To do this, they chew dry wood and mix it with their own sticky saliva to make a paste. This raw paste is then spread out in thin sheets, which quickly dry into tough paper. Consequently, to build their nests, these wasps do not"
+  },
+  {
+    "id": "60fa90a6-1592-47fb-9fe1-725a2112b151",
+    "lecture_id": "fb96d4c3-f498-4efe-b0d8-b7e13a77319d",
+    "options": [
+      {"text": "turn back to a dull gray", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "start eating tiny red fish", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "lose all their feathers", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "become bright pink", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "Baby flamingos are born with dull gray feathers. As they grow up, they eat massive quantities of tiny red algae and pink shrimp. These colorful foods contain natural red pigments that accumulate inside the birds' growing feathers over time. Therefore, as adult flamingos eat more of this food, they"
+  },
+  {
+    "id": "6295529f-fcc6-4e26-9c07-1aef4b4e05f0",
+    "lecture_id": "74d96fcd-1fad-4736-8c25-874375ef5cf1",
+    "options": [
+      {"text": "boots on the ground", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "a heart of gold", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "a head in the clouds", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "cold feet", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "In medieval times, soldiers had to buy their own warm leather boots before joining a battle. Poor soldiers who could not afford boots marched into battle with bare, freezing feet. Often, these terrified soldiers would run away from the battlefield to save themselves from freezing. Today, someone too afraid to act has"
+  },
+  {
+    "id": "69942a65-df36-43c1-8210-55c4cd4edadc",
+    "lecture_id": "dbf7e2de-b7c9-4959-9b2b-bf0092e6af36",
+    "options": [
+      {"text": "kept the wooden ships from sinking", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "ate tiny holes into the copper sheets", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "made the ships sink much faster", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "were made from heavy wooden planks", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Wooden ships used to be attacked by shipworms, which ate tiny holes into the wood. Over time, these small holes would fill with water and cause the ship to sink. To protect the wood, builders eventually covered the bottom of the ships with thin copper sheets. Because shipworms could not bite through metal, the copper sheets"
+  },
+  {
+    "id": "720c8291-3c16-41c4-8686-c01829bc2cb0",
+    "lecture_id": "56589639-b510-4a9e-a618-37a716eeb456",
+    "options": [
+      {"text": "burned much more coal than before", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "were closed to passengers completely", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "became even smokier and more dangerous", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "became clean and safe to breathe in", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "Early subway trains were powered by steam engines that burned coal. This coal burning filled the underground tunnels with thick, black smoke that choked the passengers. To solve this health crisis, cities replaced the steam engines with clean electric trains. After the electric trains were introduced, the underground tunnels"
+  },
+  {
+    "id": "73e08152-2060-4c75-a89b-8fa52e713e3b",
+    "lecture_id": "cb7c1678-9e6c-4e09-aba9-d20a7d8e11b3",
+    "options": [
+      {"text": "earn more coins from the Roman Empire", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "campaign to find more winter food", "k_code": "K-ECHO", "fail_mode": "unsupported"},
+      {"text": "melt the blocks of salt quickly", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "struggle to keep his food fresh", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "In the ancient Roman Empire, salt was highly valuable and hard to obtain. Soldiers were often paid their monthly wages directly in valuable blocks of salt instead of coins. This salt was used to preserve food, making it essential for survival during long winter military campaigns. Consequently, a soldier who lost his salt would"
+  },
+  {
+    "id": "824044fa-293a-4dd1-93ce-e8858f5e423f",
+    "lecture_id": "c56dad1f-9336-4466-aca6-6637cbfa5302",
+    "options": [
+      {"text": "replace the green light completely", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "make cars go even faster", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "turn red during the night", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "warn drivers to slow down", "k_code": "CORRECT", "fail_mode": null}
+    ],
+    "transcript": "Early traffic signals used red lights for stop and green lights for go. However, drivers had no warning when the green light was about to end, causing sudden car crashes. To fix this dangerous problem, engineers added a bright yellow light in the middle. Therefore, the new yellow light was meant to"
+  },
+  {
+    "id": "87f29225-92bc-4cb9-b96f-3f9b5c94332b",
+    "lecture_id": "e0f889c3-c8d5-44f0-a56d-93771a645eec",
+    "options": [
+      {"text": "freely shared their secrets with other nations", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "built clean ships to escape the island", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "were essentially prisoners in their own homes", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "protected the assassins from the city's laws", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "In ancient Venice, the secret formula for making clear glass was protected by strict laws. Glassblowers were treated like royalty but were forced to live on an isolated island to prevent secrets from spreading. If a glassmaker tried to escape the island, assassins were sent to hunt him down. Therefore, despite their wealthy and royal lifestyles, Venice's glassmakers"
+  },
+  {
+    "id": "8a95b17f-61d8-4386-8120-64b6d896d863",
+    "lecture_id": "bba09677-e7a6-42b2-8858-da426e3da924",
+    "options": [
+      {"text": "produce even more bamboo seeds", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+      {"text": "attack human farms for food", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "starve because the bamboo blooms again", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+      {"text": "sleep under the dry forest floor", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "Certain rare bamboo species bloom and produce seeds only once every hundred years. When they finally bloom, they release millions of seeds across the forest floor at once. This sudden flood of food attracts giant swarms of forest rats that multiply rapidly. After the seeds are gone, these rat swarms"
+  },
+  {
+    "id": "8f25c0a0-81c6-449d-9526-c7348345d594",
+    "lecture_id": "8accd93f-4066-4eed-aeda-de7fb3b5811e",
+    "options": [
+      {"text": "rejected because it used too much natural ice", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "welcomed as a way to preserve food safely", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "built to harvest ice from northern lakes", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+      {"text": "only used during the cold winter months", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+    ],
+    "transcript": "In the early nineteenth century, keeping food fresh during hot summer months was extremely difficult. People had to buy large blocks of natural ice harvested from cold northern lakes during winter. However, this ice melted quickly, causing food to spoil within days. Therefore, the invention of the electric refrigerator was"
+  },
+  {
+    "id": "9498a8bf-a05d-4ff4-ae9f-62446677b9b3",
+    "lecture_id": "d78e88b9-c2b5-47f1-bd7a-70fd95ec0a48",
+    "options": [
+      {"text": "bend under their own heavy weight", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+      {"text": "be made much larger without distorting", "k_code": "CORRECT", "fail_mode": null},
+      {"text": "only view the sun during the day", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+      {"text": "be easily replaced with thick glass lenses", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"}
+    ],
+    "transcript": "Early telescopes used glass lenses that were thick and heavy, which limited their size. If the lenses were made any larger, they would bend under their own weight and distort images. Consequently, astronomers built modern telescopes using lightweight, curved mirrors instead of glass lenses. Because these modern mirrors are so light, they can"
+  }
+]

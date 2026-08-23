@@ -1,0 +1,765 @@
+[
+  {
+    "question_id": "7e0cf23d-784b-4a37-9b1f-d54b66bf733e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שפיזור המלח נועד \"To prevent accidents\" ולשמור על המים במצב נוזלי. לכן, התוצאה היא לא כבישים חלקים ומסוכנים יותר כמו \"become much more slippery\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי המלח \"lowers the freezing point\", כלומר מוריד את נקודת הקיפאון. לכן, לא ייתכן שהכבישים יקפאו בטמפרטורות גבוהות יותר כמו \"freeze at much higher temperatures\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מציג מטרה של \"To prevent accidents\" ומסביר שהמלח שומר על המים נוזליים. מכאן שהתוצאה היא שהקרח נמס והדרכים בטוחות יותר, כפי שמתואר ב-\"melt and become safer\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המלח שומר על המים במצב נוזלי, אך אין בקטע שום אזכור לכך שהכבישים הופכים לחול מדברי יבש, כפי שמוצע בביטוי \"turn into dry desert sand\". זהו מידע לא רלוונטי."
+      }
+    ],
+    "highlight_spans": [
+      "To prevent accidents",
+      "Because of this salt"
+    ]
+  },
+  {
+    "question_id": "8183bcf1-a776-49f0-b875-da53b220e96e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המטרה המוזכרת בקטע היא \"To fix this\" — כלומר לפתור את בעיית השבירה והלכלוך. פתרון זה לא אמור להפוך את העפרונות לקשים יותר לכתיבה כפי שמתואר ב-\"harder to write with on paper\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר בעיה של שבירה ולכלוך, ולאחר מכן ניסיון \"To fix this\" על ידי עירוב חרסית. התוצאה \"stronger and much cleaner\" פותרת ישירות את הבעיות הללו ומציגה שיפור."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע פותח בכך שהעפרונות הראשונים היו עשויים \"pure lead\", אך כדי לפתור את חסרונות החומר \"mixed the lead with clay\". לכן העפרונות החדשים כבר אינם עשויים רק מעופרת רכה וטהורה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "השינוי בקטע נועד לפתור בעיות פיזיות של שבירה ולכלוך. צביעת העפרונות בצהוב, המתוארת ב-\"painted yellow to attract buyers\", היא פרט שלא מוזכר כלל בטקסט ואינו קשור לפתרון."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "To fix this",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "89dac647-69b5-414e-a4de-6ecb216420f3",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציע פתרון לבעיית ריקון האדמה ממזינים. הפעולה החדשה של מחזור היבולים נועדה לשקם את האדמה, ולכן התוצאה אינה ריקון נוסף של חומרי הזנה כפי שמתואר ב-\"drained the remaining nutrients\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מחזור היבולים מתואר כפתרון שנועד להחזיר לאדמה את חומרי ההזנה שאיבדה. לכן, הפעולה לא הובילה לכך שהחקלאים הפסיקו להשתמש באדמה לגמרי, כפי שנאמר ב-\"stopped using the land entirely\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מסביר שבעבר החקלאים רוקנו את האדמה ממזינים, אך כדי לפתור זאת החלו במחזור יבולים ששחזר אותם. התוצאה \"kept the soil healthy and fertile\" מתארת בהצלחה את השמירה על בריאות האדמה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מראה שגידול אותו יבול מדי שנה הוביל לאדמה חסרת תועלת. כדי לפתור זאת, החקלאים \"began rotating different crops\", ולכן המסקנה אינה שהם המשיכו לגדל את אותו היבול מדי שנה."
+      }
+    ],
+    "highlight_spans": [
+      "Eventually",
+      "To fix this",
+      "By rotating their crops"
+    ]
+  },
+  {
+    "question_id": "a85aae05-5793-4c0e-9710-30ac41ac667f",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המכונה נבנתה \"To solve this\" — כלומר לפתור את בעיית החיספוס. לא הגיוני שלאחר פעולת המכונה הקרח יהפוך למחוספס עוד יותר, כפי שנטען בביטוי \"became much rougher than before\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר כיצד החלקה מייצרת חריצים עמוקים בקרח. המכונה פותחה כדי לגלח את השכבה הפגועה ולרסס מים טריים, ולכן הגיוני שלאחר עבודתה משטח הקרח \"was smooth and clean again\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "פעולת המכונה כוללת ריסוס מים טריים כדי להחזיר את משטח ההחלקה למצב חלק. אין בקטע כל עדות לכך שהמכונה גרמה לקרח להימס לכדי בריכה חמה, כפי שמוצע ב-\"melted into a warm pool\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "החריצים העמוקים המוזכרים ב-\"contained many deep grooves\" הם הבעיה המקורית שגרמו המחליקים. המכונה נועדה לגלח שכבה זו, ולכן לאחר עבודתה לא הגיוני שהחריצים יישארו."
+      }
+    ],
+    "highlight_spans": [
+      "To solve this",
+      "After the machine finished"
+    ]
+  },
+  {
+    "question_id": "b5b93eee-50e3-4928-a527-4ff47b7eadb0",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הפרשת החומרים הרעילים נועדה במפורש \"to stop other plants from growing nearby\". לכן, התוצאה היא הפוכה מהטענה שהשיחים הללו יצמחו קרוב מאוד לצמחים אחרים, כפי שמוצע ב-\"grow very close to other plants\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "השיטה של השיח \"ensures that the bush has no neighbors to steal its water\", כלומר היא נועדה להבטיח לו מים. לכן, אין זה הגיוני שהתוצאה של מנגנון הישרדות מוצלח זה תהיה \"die from a lack of water\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "החלק האחרון של הפסקה עוסק במרחב הגידול של השיח ובמניעת תחרות על מים. הקטע אינו מזכיר ייצור של פרחים צבעוניים כמו \"produce very colorful desert flowers\", ואין לזה קשר לתוכן הפדגוגי."
+      },
+      {
+        "index": 3,
+        "explanation_he": "לפי הקטע, הפרשת הרעלים נועדה למנוע מצמחים אחרים לצמוח קרוב כדי שלא יגנבו מים. כתוצאה מכך, השיחים הללו נותרים מבודדים בסביבתם, כפי שמתואר בביטוי \"stand completely alone in the sand\"."
+      }
+    ],
+    "highlight_spans": [
+      "to stop other plants",
+      "This clever trick ensures",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "bb27a71f-704c-4805-96c0-852244e99d3a",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "החברות הוסיפו \"massive amounts of sugar\" למוצרים דלי השומן. מכיוון שהלקוחות קנו ואכלו את המוצרים הללו, הם דווקא צרכו סוכר רב ולא הפסיקו לאכול אותו כפי שנטען ב-\"completely stopped eating sugar\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר כיצד הוצאת השומן הובילה להוספת סוכר רב שגרם לעלייה במשקל. לכן, כתוצאה מכך, האנשים שקנו מוצרים דלי שומן אלו כדי להיות בריאים יותר \"often gained weight anyway\" בגלל הסוכר."
+      },
+      {
+        "index": 2,
+        "explanation_he": "למרות שהמוצרים היו דלי שומן, הקטע מציין כי תוספת הסוכר \"caused weight gain\". לכן, התוצאה לפיה אותם אנשים השילו שומן מגופם במהירות רבה יותר, כפי שמוצע ב-\"lost fat faster than before\", אינה נכונה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "אף על פי שהורדת השומן פגעה בטעם, החברות פתרו זאת על ידי הוספת סוכר רב. הקטע לא מציין בשום שלב שהצרכנים דרשו את החזרת השומן, כפי שנטען באפשרות \"demanded the return of fat\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "but it also",
+      "Consequently"
+    ]
+  },
+  {
+    "question_id": "bffd7489-df9b-4c2e-a805-8f7d45655d15",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "מכיוון שהבמבוק דל בחומרי תזונה, הפנדות נדרשות לאכול \"sixteen hours a day to survive\". זמן ממושך זה מהווה את רוב היום, ולכן התוצאה היא שהן \"spend most of their time eating\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "למרות שלפנדות יש מערכת עיכול של טורפים, נאמר במפורש שהן \"eat almost nothing but bamboo\". לכן, הן אינן צדות חיות אחרות עבור בשר, כפי שמוצע באפשרות \"hunt other animals for meat\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מציין כי לפנדות יש מערכת עיכול של טורפים, אך הבמבוק דל בחומרים מזינים. הביטוי \"have a very strong digestive system\" אינו נובע מהתזונה הדלה שלהן ואינו מסביר את משך האכילה הארוך."
+      },
+      {
+        "index": 3,
+        "explanation_he": "אם הפנדות צריכות לאכול במשך \"sixteen hours a day\" כדי לשרוד, הן אינן יכולות לישון לאורך כל היום, כפי שנטען באפשרות \"sleep through the entire day\"."
+      }
+    ],
+    "highlight_spans": [
+      "Yet, pandas eat almost",
+      "Because bamboo is so",
+      "As a result of their"
+    ]
+  },
+  {
+    "question_id": "d21ecfad-db56-43f2-bbe8-9ec04fcdb3eb",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שאם מדינות שכנות ייראו זהות, אנשים יתקשו לראות את הגבולות ביניהן. לכן, צביעתן באותו צבע בדיוק, \"given the exact same color\", היא ההפך המוחלט מהמטרה להפוך את המפות לקלות לקריאה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מטרת יצרני המפות היא להבחין בין מדינות שחולקות גבול יבשתי. הפרדה באמצעות אוקיינוס רחב, כפי שמוצע ב-\"separated by a wide ocean\", אינה קשורה לפתרון הצבעוני של גבולות יבשתיים נושקים."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בקטע מוסבר כי שימוש בצבעים שונים מבהיר את הגבולות הפוליטיים. לכן, שתי מדינות שנוגעות זו בזו חייבות להיות מודפסות בצבעים שונים, כפי שנכתב ב-\"printed in different colors\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "יצרני המפות מנסים להבהיר את הגבולות ולא לטשטש אותם. ציור גבולות זהים לחלוטין לשתי מדינות שכנות, כפי שמוצע ב-\"drawn with identical boundaries\", נוגד את מטרת הקטע להבהיר את קווי ההפרדה."
+      }
+    ],
+    "highlight_spans": [
+      "If neighboring nations looked",
+      "Therefore, two countries that"
+    ]
+  },
+  {
+    "question_id": "d7f6c87a-a85c-45b0-aaee-58763a2ba0e4",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המנהג המתואר בקטע כולל הוספת כיכר לחם נוספת מעל לנדרש כדי להימנע מקנס, כלומר להגדיל את הכמות. לכן, הביטוי \"half a loaf is better than none\" אינו מתאים לתוכן זה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "האופים הוסיפו כיכר נוספת לכל הזמנה של שתים-עשרה כדי להימנע מעונש. מנהג זה יצר קבוצה של שלוש-עשרה פריטים, המכונה \"a baker's dozen\", כפי שנובע מתיאור ההיסטוריה בקטע."
+      },
+      {
+        "index": 2,
+        "explanation_he": "תוספת הלחם נועדה למנוע קנסות על משקל חסר, ולא לתאר קצב מכירות מהיר של לחם. לכן, הביטוי \"to sell like hotcakes\" אינו המקור ההיסטורי שמתואר כאן."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הוספת כיכר הלחם ה-13 נועדה למנוע \"risk of punishment\". אף על פי שהמילה לחם מופיעה בביטוי \"to earn one's daily bread\", אין קשר בין המשמעות שלו למנהג ההוספה של כיכר לחם."
+      }
+    ],
+    "highlight_spans": [
+      "Because loaves can shrink",
+      "To avoid any risk"
+    ]
+  },
+  {
+    "question_id": "e443cacf-b45b-440f-945e-860dd9f59974",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי \"humans are not harmed by small amounts of it\". משום כך, עבור בני אדם, צריכת החומר בטוחה, כפי שמוסבר בביטוי \"is safe for humans to consume\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקפאין מגן על צמח הקפה מפני מזיקים. אין בקטע כל עדות לכך שהחומר מגן על בני אדם מפני מזיקי יער, כפי שמוצע באפשרות \"protects humans from forest pests\", אלא רק שהם אינם נפגעים ממנו."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע פותח בתיאור הקפאין כחומר מר, \"This bitter chemical\". לכן, לא ייתכן שהחומר בעל טעם מתוק מאוד עבור בני אדם, כפי שמוצע באפשרות \"tastes extremely sweet to humans\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקפאין משמש כמנגנון הגנה נגד חרקים האוכלים את העלים של הצמח. הקטע אינו טוען שהקפאין מסייע לצמח להצמיח עלים גדולים יותר, כפי שמוצע ב-\"helps plants grow larger leaves\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Therefore, while caffeine kills"
+    ]
+  },
+  {
+    "question_id": "fdea7682-bf15-43cd-a198-fea94c2d474c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי \"The tallest hat always belonged to the master chef\". לכן, טבח חסר ניסיון לא היה מורשה לחבוש את כובעו של השף הראשי, כפי שמוצע ב-\"allowed to wear the master's hat\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כובעים גבוהים הראו על מעמד גבוה וניסיון רב. לכן, שף בעל מעט מאוד ניסיון לא היה מקבל כובע לבן גבוה מאוד, כפי שמוצע באפשרות \"given a very tall white hat\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "גובה הכובע הותאם לניסיון של הטבחים בתוך המטבח, אך הקטע אינו מציין שטבחים חסרי ניסיון אולצו לעבוד מחוץ למטבח, כפי שנכתב באפשרות \"forced to work outside the kitchen\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מסביר שגובה הכובע תלוי בניסיון, \"depending on their experience\", וכובעים קצרים יותר נועדו לבעלי פחות ניסיון. לכן, שף חסר ניסיון קיבל כובע קצר מאוד, \"given a very short hat\"."
+      }
+    ],
+    "highlight_spans": [
+      "depending on their experience",
+      "Therefore, a chef with"
+    ]
+  },
+  {
+    "question_id": "00b69c60-cb2d-48a4-b8d5-63fb4c7b460b",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "השף רצה להעניש את הלקוח והכין תפוחי אדמה דקים וקשים. פתיח המשפט \"What is surprising\" מרמז על תפנית מפתיעה. סירוב לשלם הוא תגובה צפויה וכועסת, ולא התפנית המפתיעה המתוארת בקטע."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הלקוח אכן התלונן קודם לכן שהמנה עבה מדי, אך המילים \"What is surprising\" מעידות על כך שהתגובה שלו למנה הדקה והקשה הייתה מפתיעה ולא המשך של אותה דרישה כמו \"demanded a thicker plate of food\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "השף חתך את תפוחי האדמה דק מאוד וטיגן אותם עד שהתקשו כדי להרגיז את הלקוח. המילים \"What is surprising\" מסמנות תפנית: הלקוח הקשה דווקא אהב מאוד את החטיף הפריך, \"absolutely loved the crispy snack\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "עזיבת המסעדה היא תגובה הגיונית וצפויה של לקוח כועס שקיבל אוכל קשה כעונש. אולם, הביטוי \"What is surprising\" מכוון לתגובה לא צפויה, ולכן אפשרות זו אינה מתאימה להקשר."
+      }
+    ],
+    "highlight_spans": [
+      "To teach the customer",
+      "What is surprising is that"
+    ]
+  },
+  {
+    "question_id": "0206150d-a2b6-4fde-a611-fe98a556ce3c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המילים \"Instead of throwing the dirty water away\" מראות שהקיסר בחר לא לשפוך את המים שבהם נפלו העלים. בשל סקרנותו, הוא שתה מהם וגילה את התה, כפי שמוסבר ב-\"drank it and discovered tea\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המילים \"Instead of throwing\" מלמדות על פעולה שעשה הקיסר עם המים שקיבלו צבע וניחוח. פקודה לכרות את העץ, כפי שמוצע ב-\"ordered his servants to cut the tree\", אינה קשורה לסקרנותו לגבי הנוזל."
+      },
+      {
+        "index": 2,
+        "explanation_he": "אם הקיסר היה מרתיח מים חדשים כפי שמוצע ב-\"boiled fresh water in a clean pot\", זה היה מעשה רגיל. אולם, המילים \"Instead of throwing\" מצביעות על כך שהוא בחר לפעול אחרת עם המים המלוכלכים."
+      },
+      {
+        "index": 3,
+        "explanation_he": "נפילת העלים למים התרחשה אחר צהריים רוחבי אחד, אך המילים \"Instead of throwing\" מצביעות על החלטה אקטיבית של הקיסר לגבי המים, ולא על הבנה סתמית לגבי מזג האוויר כמו \"realized the windy day was ending\"."
+      }
+    ],
+    "highlight_spans": [
+      "One windy afternoon, while",
+      "Instead of throwing"
+    ]
+  },
+  {
+    "question_id": "04d906db-ef93-4979-9f84-b650d9ca0c90",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "היצרנים המודרניים פתרו את הבעיה על ידי שימוש ב-\"synthetic plastic cores\" וחוטי מתכת. לכן, המיתרים המודרניים אינם דורשים עוד מעי כבשים כדי לפעול כפי שנטען ב-\"require sheep intestines to function\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מסביר שהמיתרים המסורתיים יצאו מכיוון בקלות במזג אוויר לח. יצרנים מודרניים פתרו זאת עם חומרים סינתטיים ומתכת, ולכן התוצאה היא שהמיתרים כעת שומרים על כיוון טוב בהרבה, כפי שמתואר ב-\"stay in tune much better\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המטרה של יצרני הכינורות הייתה לפתור בעיה טכנית בלי לפגוע בכלי. לא נאמר בקטע שהחומרים החדשים גרמו למיתרים להפיק צליל נורא כמו \"produce a terrible sound\", אלא שהם פתרו את התסכול."
+      },
+      {
+        "index": 3,
+        "explanation_he": "השימוש בחומרי מתכת ופלסטיק נועד לפתור את רגישות המיתרים הישנים ללחות. לכן, לא הגיוני שהתוצאה של השינוי תהיה שהם יישברו בסערות לחות, כפי שנטען באפשרות \"break during damp winter storms\"."
+      }
+    ],
+    "highlight_spans": [
+      "but they easily went",
+      "Modern makers solved this",
+      "Because of this modern change"
+    ]
+  },
+  {
+    "question_id": "08edc807-d54f-43dd-82bf-8b0e219bba44",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "תוספת ה-\"carbon black\" שיפרה את עמידות הגומי פי חמישה. לכן, התוצאה של הוספת אבקה שחורה ומגינה זו היא שהצמיגים הפכו לכהים ועמידים בהרבה, כפי שמתואר בביטוי \"dark and lasted much longer\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הצבע האפור והחולשה, המתוארים ב-\"light gray and very weak\", אפיינו את הצמיגים הישנים שעשויי גומי טבעי בלבד, לפני שהוסיפו להם את האבקה השחורה המחזקת כדי לפתור בעיות אלו."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מתמקד בשינוי הפיזי של צבע הצמיגים ועמידותם לאורך זמן בזכות האבקה. אין בטקסט מידע על כך שהמחיר שלהם הפך ליקר בהרבה לקנייה, כפי שנטען באפשרות \"much more expensive to purchase\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "היצרנים הוסיפו אבקת פחם שחורה לגומי הטבעי, ולא אבקת גומי טבעי כפי שמוצע ב-\"filled with natural rubber powder\". הצמיגים המקוריים הם שהיו עשויים מגומי טבעי טהור."
+      }
+    ],
+    "highlight_spans": [
+      "To make them stronger",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "1620bec2-5f73-4070-874d-18f0bc33513c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מראה שדובים זקוקים למשטח הקרח כדי לצוד כלבי ים. המילה \"However\" מציגה תפנית: התחממות גלובלית ממיסה את הקרח מוקדם יותר, ולכן בשל אובדן הקרח הדובים \"struggle to catch enough food\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מציאת מזון בקלות בחורף, \"easily find seals in the winter\", מתארת את המצב הרגיל והתקין שהיה בעבר, ולא את התוצאה השלילית שנוצרה בעקבות אובדן הקרח באביב עקב ההתחממות."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המסת הקרח מתוארת כאיום על הישרדות הדובים הזקוקים לו לציד. הרעיון שהדובים נהנים לשחות במים חמימים, כפי שמוצע ב-\"enjoy swimming in the warm water\", אינו קשור למאבק ההישרדות שלהם."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המסת הקרח המוקדמת מקשה על הדובים לצוד את מזונם. לכן, אין זה הגיוני שהם יגדלו ויהפכו לחזקים וגדולים בהרבה, כפי שמוצע באפשרות \"grow much larger and stronger\"."
+      }
+    ],
+    "highlight_spans": [
+      "During the cold winter",
+      "However, global warming",
+      "Because of this loss"
+    ]
+  },
+  {
+    "question_id": "3f19d83d-03cd-4f64-8c95-bd9406089032",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שהמעבר לפלסטיק נועד \"protect wild elephants\". לכן, קלידי הפסנתר המודרניים אינם מופקים עוד מחומר השנהב של פילים, כפי שמוצע ב-\"are still harvested from elephant tusks\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הצהבה וסדקים מהירים היו הבעיות של קלידי השנהב הישנים. המעבר לפלסטיק נועד \"solve these durability issues\", ולכן הקלידים המודרניים אינם נסדקים או מצהיבים מהר יותר כמו \"turn yellow and crack much faster\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מטרת יצרני הפסנתרים כיום היא להגן על פילים על ידי שימוש בפלסטיק במקום שנהב. לכן, הקלידים המודרניים אינם דורשים עוד שנהב כלל, בניגוד לנטען ב-\"require more ivory to remain white\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בעבר קלידי השנהב נסדקו והצהיבו, אך יצרנים מודרניים פתרו בעיות עמידות אלו באמצעות פלסטיק איכותי. לכן, הקלידים החדשים עמידים יותר ונשמרים נקיים בקלות, \"last longer and stay clean easily\"."
+      }
+    ],
+    "highlight_spans": [
+      "Over time",
+      "Today",
+      "Because of this transition"
+    ]
+  },
+  {
+    "question_id": "44dd2699-e88d-4f84-9ca0-3b7c11cf323a",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי ערבוב של ניאון עם גזים אחרים כמו \"argon\" הופך את השלטים ליקרים יותר. שלטים אדומים פשוטים משתמשים רק בגז ניאון בסיסי, ולכן אינם מעורבבים עם גז ארגון יקר זה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתמקד בעלויות ובמתח החשמלי הנדרש להפקת צבעים שונים, ולא ברמת הבהירות היחסית של הצבעים. לכן, אין בסיס לטענה ששלטים אדומים בהירים יותר מכל צבע אחר, \"brighter than any other color\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הפקת צבעים שאינם אדום דורשת ערבוב גזים אחרים שצורכים מתח גבוה והם \"much more expensive to use\". מכאן ששלטים אדומים פשוטים, שאינם דורשים זאת, זולים בהרבה להפעלה כפי שמוצע ב-\"much cheaper to run than blue ones\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מסביר ששלטי ניאון אדומים זוהרים כאשר \"electricity passes through it\". לכן, החשמל אינו מחליף את גז הניאון אלא מפעיל אותו, בניגוד להצעה \"built with electricity instead of neon\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Therefore, simple red signs"
+    ]
+  },
+  {
+    "question_id": "4a49dcb2-b935-415f-8824-c96983f905ea",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין שבעבר רק \"wealthy people\" יכלו להרשות לעצמם לקנות ספרים. הנגשת הספרים להמונים בזכות הדפוס לא גרמה לאנשים העשירים להפסיק לקנות אותם, כפי שנטען באפשרות \"wealthy people stopped buying them\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המצאת מכונת הדפוס הקלה על ייצור הספרים. אין בקטע כל אזכור לכך שסופרים סירבו לכתוב ספרים חדשים בעקבות השינוי הטכנולוגי, כפי שמוצע באפשרות \"writers refused to write new books\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בעבר ספרים היו נדירים ויקרים כי הועתקו ידנית. המצאת המכונה שבעזרתה ניתן \"print thousands of pages quickly\" שינתה זאת, ולכן הספרים הפכו לזולים ונפוצים בהרבה, כפי שמתואר ב-\"they became much cheaper and more common\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המצאת מכונת הדפוס ייתרה את הצורך להעתיק ספרים ידנית ולא הפכה את ההעתקה הידנית למהירה יותר. לכן, אין הגיון בטענה שמוצגת באפשרות \"copying books by hand became faster\"."
+      }
+    ],
+    "highlight_spans": [
+      "Consequently",
+      "This situation changed when",
+      "Because books could now"
+    ]
+  },
+  {
+    "question_id": "4a999e88-4faf-4c2a-bc12-384cb6d22a4c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "לפי הקטע, מטרת בניית הקן היציב היא \"to protect their eggs\". לכן, בניגוד מוחלט לנטען באופציה \"lay eggs in their nests\", הצרעות בהחלט מטילות את ביציהן בתוך הקן שהן בונות."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כדי להכין את העיסה לקן, הצרעות צריכות ללעוס עץ יבש, כפי שנאמר \"they chew dry wood\". לכן, לא ייתכן שהן אינן זקוקות ללעוס עץ יבש עוד, כפי שנטען באפשרות \"chew dry wood anymore\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מתאר כיצד הצרעות מייצרות בעצמן חומר דמוי נייר על ידי עירוב רוק ועץ יבש. לכן, הן אינן צריכות למצוא נייר מעשה ידי אדם כדי לבנות את קינן, כפי שמתואר בביטוי \"need to find human paper\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מפרט את אופן הכנת חומרי הבנייה של הקן ומטרתו. אין בו כל מידע על עונות השנה או טענה לפיה הן אינן בונות קנים במהלך הקיץ, כפי שמוצע באפשרות \"build nests during the summer\"."
+      }
+    ],
+    "highlight_spans": [
+      "To do this",
+      "Consequently, to build"
+    ]
+  },
+  {
+    "question_id": "60fa90a6-1592-47fb-9fe1-725a2112b151",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הגוון האפור, \"dull gray\", מאפיין את גוזלי הפלמינגו בלידתם. מכיוון שהתזונה שלהם גורמת להצטברות פיגמנטים אדומים, הם אינם חוזרים לצבע האפור כפי שנטען ב-\"turn back to a dull gray\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי הפלמינגו ניזונים מאצות אדומות וחסילונים ורודים, \"tiny red algae and pink shrimp\". דגים אדומים קטנים אינם מוזכרים בקטע כמזונם, ולכן האפשרות \"start eating tiny red fish\" אינה נכונה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הפיגמנטים האדומים מצטברים בתוך נוצות הציפורים הגדלות, \"inside the birds' growing feathers\". צריכת המזון אינה גורמת להן לאבד את נוצותיהן כפי שנטען באפשרות \"lose all their feathers\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מסביר שהפלמינגו נולדים אפורים, אך אכילת אצות וחסילונים המכילים \"natural red pigments\" צובעת את נוצותיהם לאורך זמן. לכן, ככל שהם אוכלים יותר ממנו הם הופכים לוורודים, \"become bright pink\"."
+      }
+    ],
+    "highlight_spans": [
+      "As they grow up",
+      "Therefore, as adult"
+    ]
+  },
+  {
+    "question_id": "6295529f-fcc6-4e26-9c07-1aef4b4e05f0",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הביטוי \"boots on the ground\" מתייחס לנוכחות פיזית של כוחות צבא בשטח. אולם, הקטע מתמקד בתיאור חיילים מפוחדים שברחו בגלל רגליים קפואות, ולכן ביטוי זה אינו מתאים למי שחושש לפעול."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הביטוי \"a heart of gold\" מתאר אדם טוב לב ונדיב. אין לכך קשר לסיפור על החיילים שרגליהם קפאו וברחו מהקרב מתוך פחד, ולכן הוא אינו מתאים לתיאור אדם המפחד לפעול."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הביטוי \"a head in the clouds\" מתאר אדם חולם בהקיץ שאינו מרוכז במציאות. הסיפור עוסק בחיילים שברחו עקב פחד וקור פיזי, ואינו קשור לחוסר ריכוז או חלומות בהקיץ."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בעבר חיילים עניים נלחמו ללא מגפיים וברחו מהקרב כדי להציל את רגליהם הקופאות, \"freezing feet\". כיום, הביטוי \"cold feet\" משמש לתיאור אדם שמפחד מכדי לפעול, כפי שעולה מההקשר ההיסטורי."
+      }
+    ],
+    "highlight_spans": [
+      "Often, these terrified",
+      "Today, someone too afraid"
+    ]
+  },
+  {
+    "question_id": "69942a65-df36-43c1-8210-55c4cd4edadc",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "חדירת המים דרך החורים שחפרו התולעים גרמה לספינות לטבוע. מכיוון שלוחות הנחושת מנעו את החפירה בגוף העץ, הם מנעו מהספינות לטבוע, כפי שמתואר באפשרות \"kept the wooden ships from sinking\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין במפורש כי \"shipworms could not bite through metal\". לכן, הן לא יכלו לאכול חורים בלוחות הנחושת כפי שנטען באפשרות \"ate tiny holes into the copper sheets\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "ציפוי הנחושת נועד להגן על העץ מפני חורים שגורמים לטביעה. לכן, לא הגיוני שהתוצאה של השימוש בלוחות אלו תהיה שהספינות יטבעו מהר יותר, כפי שנטען באפשרות \"made the ships sink much faster\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מציין כי לוחות הנחושת עשויים ממתכת כדי למנוע נשיכות, ולכן הם לא היו עשויים מלוחות עץ כבדים כפי שנטען באפשרות \"were made from heavy wooden planks\". זה סותר את פתרון המתכת."
+      }
+    ],
+    "highlight_spans": [
+      "Over time",
+      "To protect the wood",
+      "Because shipworms could not"
+    ]
+  },
+  {
+    "question_id": "720c8291-3c16-41c4-8686-c01829bc2cb0",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הערים החליפו את מנועי הקיטור ברכבות חשמליות נקיות, \"clean electric trains\". רכבות חשמליות אינן שורפות פחם, ולכן המנהרות לא שרפו פחם רב יותר מבעבר כפי שמוצע ב-\"burned much more coal than before\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המעבר לרכבות חשמליות נועד לפתור את משבר הבריאות ולאפשר נסיעה בטוחה. לכן, אין היגיון בטענה שהמנהרות נסגרו לחלוטין בפני נוסעים, כפי שנטען באפשרות \"were closed to passengers completely\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מנועי הקיטור שגרמו לעשן הוחלפו ברכבות חשמליות נקיות כדי לפתור את המשבר. לכן, לא הגיוני שהמנהרות הפכו למלאות עשן ומסוכנות עוד יותר, כפי שנטען ב-\"became even smokier and more dangerous\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בעבר שריפת הפחם מילאה את המנהרות בעשן חונק. כדי לפתור זאת, הערים הציגו רכבות חשמליות נקיות, ולכן לאחר כניסתן המנהרות הפכו לנקיות ובטוחות לנשימה, כפי שמתואר ב-\"became clean and safe to breathe in\"."
+      }
+    ],
+    "highlight_spans": [
+      "To solve this health crisis",
+      "After the electric trains were"
+    ]
+  },
+  {
+    "question_id": "73e08152-2060-4c75-a89b-8fa52e713e3b",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שחיילים קיבלו מלח במקום מטבעות, \"instead of coins\". אובדן המלח שקיבלו כמשכורת אינו מוביל לכך שהם ירוויחו מטבעות נוספים מהאימפריה, כפי שמוצע ב-\"earn more coins from the Roman Empire\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המלח שימש לשימור מזון קיים ולא למציאת מזון חדש. לכן, אובדן המלח לא יוביל את החייל לצאת למערכה למציאת מזון חורפי נוסף, כפי שמוצע באפשרות \"campaign to find more winter food\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המלח שימש לשימור מזון בחורף והיה בעל ערך רב. המסה מהירה של גושי המלח, כפי שמוצע ב-\"melt the blocks of salt quickly\", אינה קשורה לאובדן המלח או לתוצאה ההגיונית של אובדן המשכורת."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בקטע מוסבר שהמלח שימש לשימור מזון, \"used to preserve food\", והיה חיוני להישרדות. לכן, חייל שאיבד את המלח שלו יתקשה לשמור על מזונו טרי במהלך החורף, כפי שמתואר ב-\"struggle to keep his food fresh\"."
+      }
+    ],
+    "highlight_spans": [
+      "making it essential for",
+      "Consequently, a soldier who"
+    ]
+  },
+  {
+    "question_id": "824044fa-293a-4dd1-93ce-e8858f5e423f",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "האור הצהוב נוסף כתוספת בין הירוק לאדום כדי לפתור את בעיית חוסר האזהרה. הוא לא נועד להחליף את האור הירוק לחלוטין, כפי שנטען באפשרות \"replace the green light completely\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הבעיה המקורית בקטע הייתה תאונות דרכים פתאומיות. מטרת האור הצהוב אינה לגרום למכוניות לנסוע מהר יותר כפי שנטען ב-\"make cars go even faster\", שכן הדבר רק יגביר את הסכנה בכביש."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המטרה של הנדסת האור הצהוב הייתה להעניק לנהגים אזהרה לפני שהאור הירוק מסתיים. אין בקטע כל התייחסות לכך שהאור הצהוב נועד להפוך לאדום במהלך הלילה, כפי שמוצע ב-\"turn red during the night\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "נהגים היו מעורבים בתאונות כי לא קיבלו אזהרה לפני שהאור הירוק הסתיים. מהנדסים הוסיפו אור צהוב \"To fix this dangerous problem\", ולכן מטרתו הייתה להזהירם להאט, כפי שכתוב ב-\"warn drivers to slow down\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "To fix this dangerous",
+      "Therefore, the new yellow"
+    ]
+  },
+  {
+    "question_id": "87f29225-92bc-4cb9-b96f-3f9b5c94332b",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "החוקים הנוקשים והבידוד נועדו \"to prevent secrets from spreading\". לכן, יצרני הזכוכית לא שיתפו את סודותיהם בחופשיות עם מדינות אחרות, בניגוד לטענה ב-\"freely shared their secrets with other nations\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי שליחת מתנקשים הייתה התוצאה של ניסיון בריחה מהאי. בניית ספינות לבריחה, כפי שמוצע ב-\"built clean ships to escape the island\", אינה נובעת מהטקסט כעובדה לגבי חייהם של נפחי הזכוכית."
+      },
+      {
+        "index": 2,
+        "explanation_he": "למרות שקיבלו יחס מלכותי, החוקים אילצו אותם לחיות באי מבודד, \"forced to live on an isolated island\", ואסרו עליהם לברוח. לכן, למעשה הם היו אסירים בביתם, כפי שמתואר ב-\"were essentially prisoners in their own homes\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המתנקשים נשלחו לצוד את יצרני הזכוכית שניסו לברוח. לכן, לא הגיוני שהיצרנים הגנו על אותם מתנקשים מפני חוקי העיר, כפי שמוצע באפשרות \"protected the assassins from the city's laws\"."
+      }
+    ],
+    "highlight_spans": [
+      "but were forced to",
+      "If a glassmaker tried",
+      "Therefore, despite their"
+    ]
+  },
+  {
+    "question_id": "8a95b17f-61d8-4386-8120-64b6d896d863",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "חולדות היער אינן מייצרות זרעי במבוק, שכן אלו מיוצרים רק על ידי \"Certain rare bamboo species\". לכן, נחיל החולדות אינו יכול לייצר זרעים נוספים כפי שנטען באפשרות \"produce even more bamboo seeds\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "פריחת הבמבוק יצרה שפע מזון שהוביל להתרבות מהירה של חולדות. לאחר שהזרעים נגמרו, \"After the seeds are gone\", נחילי החולדות הרעבים חיפשו מקורות מזון אחרים ותקפו חוות חקלאיות, \"attack human farms for food\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הבמבוק פורח רק פעם במאה שנים, \"once every hundred years\". לכן, החולדות אינן יכולות להינצל מרעב הודות לפריחה מחודשת ומהירה של הבמבוק כפי שמוצע ב-\"starve because the bamboo blooms again\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתאר נחילי חולדות שהתרבו במהירות וזקוקים למזון לאחר שזרעי הבמבוק נגמרו. שינה מתחת לאדמה, כפי שמוצע ב-\"sleep under the dry forest floor\", אינה מתארת את דרך ההתמודדות של החולדות הרעבות."
+      }
+    ],
+    "highlight_spans": [
+      "When they finally bloom",
+      "After the seeds are gone"
+    ]
+  },
+  {
+    "question_id": "8f25c0a0-81c6-449d-9526-c7348345d594",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המקרר החשמלי הומצא כדי לפתור את התלות בקרח שנמס מהר. לכן, לא הגיוני שהמצאה זו נדחתה בגלל שימוש רב מדי בקרח טבעי, כפי שנטען באפשרות \"rejected because it used too much natural ice\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציג קושי בשימור מזון בקיץ עקב המסת קרח מהירה. המקרר החשמלי פתר בעיה זו, ולכן המצאתו התקבלה בברכה כדרך לשמר מזון בבטחה, כפי שמתואר באופציה \"welcomed as a way to preserve food safely\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "איסוף הקרח מהאגמים הצפוניים, \"harvested from cold northern lakes\", היה השיטה הישנה והבעייתית. המקרר החשמלי הומצא כדי להחליף שיטה זו, ולא כדי לאסוף קרח בעצמו מהאגמים הללו."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בחורף היה קל יחסית להשיג קרח טבעי, והבעיה המרכזית הייתה \"during hot summer months\". לכן, המקרר החשמלי לא נועד לשימוש רק בחודשי החורף הקרים, כפי שנטען ב-\"only used during the cold winter months\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Therefore, the invention of"
+    ]
+  },
+  {
+    "question_id": "9498a8bf-a05d-4ff4-ae9f-62446677b9b3",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי רק עדשות הזכוכית הישנות התכופפו תחת משקלן, \"bend under their own weight\". המראות המודרניות הן קלות משקל, ולכן התופעה הזו אינה מתרחשת בהן כפי שמוצע ב-\"bend under their own heavy weight\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "עדשות הזכוכית הישנות והכבדות התכופפו ועיוותו תמונות כשהיו גדולות מדי. בזכות המראות המודרניות שהן קלות משקל, ניתן לייצר אותן בגודל רב בהרבה ללא עיוות, כפי שמתואר ב-\"be made much larger without distorting\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע דן במגבלות המבניות של גודל הטלסקופים והעיוות האופטי שנובע ממשקל העדשות. אין בו כל אזכור או מגבלה הנוגעת לצפייה בשמש במהלך היום, כפי שמוצע ב-\"only view the sun during the day\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המראות המעוקלות והקלות משמשות כתחליף מודרני לעדשות הזכוכית הכבדות והמגבילות. לכן, אין היגיון בטענה שהן מוחלפות בקלות בעדשות זכוכית עבות, כפי שמוצע באפשרות \"be easily replaced with thick glass lenses\"."
+      }
+    ],
+    "highlight_spans": [
+      "If the lenses were",
+      "Consequently",
+      "Because these modern mirrors"
+    ]
+  }
+]

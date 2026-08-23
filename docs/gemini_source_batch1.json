@@ -1,0 +1,112 @@
+[
+    {
+        "id": "00a04a54-3621-437d-81c7-7bb2ce652b98",
+        "options": [
+            {"text": "rely on the fat inside its hump", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "find real pools of water on the ground", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "travel to colder climates during the day", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "avoid drinking any liquids for several years", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"}
+        ],
+        "lecture_id": "11564c7b-5297-4ca7-82bb-397767cb098b",
+        "transcript": "Camels live in hot deserts where water is very hard to find. People long believed their humps were filled with water to help them survive. Actually, the hump is made of fat, which acts as a rich food source. Therefore, to drink water, a camel must"
+    },
+    {
+        "id": "9f24b8b1-1efd-487b-b2ff-37b8f7b9f4ce",
+        "options": [
+            {"text": "attract rain to the dry Egyptian fields", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "help people swim in the deep Nile river", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "block out sunlight rather than water", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "keep dry during major winter storms", "k_code": "K-ECHO", "fail_mode": "anchor_lost"}
+        ],
+        "lecture_id": "43ede19b-a287-42d2-a44a-a9492441bebb",
+        "transcript": "Today, we use umbrellas to keep dry during heavy rainstorms. Thousands of years ago in ancient Egypt, however, people used them for a very different reason. The wealthy wanted to protect their pale skin from the harsh, burning sun. Therefore, early Egyptian umbrellas were made to"
+    },
+    {
+        "id": "ce470e8a-f5f8-44a7-a7a3-3ae1889ceacd",
+        "options": [
+            {"text": "print even more wooden coins for the shopkeepers", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "replace all the metal coins with carved wood", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+            {"text": "hire local criminals to carve the official money", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "stop using the wooden money much earlier than planned", "k_code": "CORRECT", "fail_mode": null}
+        ],
+        "lecture_id": "dec68434-0b1b-4259-a3bf-7e8749cbd681",
+        "transcript": "During a metal shortage, a town printed temporary coins made of wood. Shopkeepers accepted them because the local government promised to replace them with real money later. However, criminals quickly realized how easy it was to carve matching pieces of wood at home. Because of this growing problem, the government was forced to"
+    },
+    {
+        "id": "3a5ad3d8-17ba-46d5-84b6-59bbf1651313",
+        "options": [
+            {"text": "entirely safe to use even though they contain no lead", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "much more toxic than the original wooden pencils", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "made of lead that is painted with graphite", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "unable to leave any dark marks on paper", "k_code": "K-HEDGE", "fail_mode": "wrong_slot"}
+        ],
+        "lecture_id": "70dc005f-4017-474f-a6f4-12963464305d",
+        "transcript": "Early pencils were made of pure lead, which left dark, clear marks on paper. Unfortunately, lead is a toxic material that can make people very sick if it enters the body. To solve this safety concern, manufacturers replaced the lead with a harmless mineral called graphite. Therefore, modern pencils are"
+    },
+    {
+        "id": "210a9576-4cba-4c1b-842f-0ef2c11af689",
+        "options": [
+            {"text": "hunt for insects on the sand", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "drink water from dry clouds", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "remain hidden below the surface", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "die from the extreme cold", "k_code": "K-ECHO", "fail_mode": "wrong_slot"}
+        ],
+        "lecture_id": "87912f2c-e8e7-4143-a783-f4b8e2d5c400",
+        "transcript": "Desert frogs must stay wet to live, but they inhabit very dry sand. To survive the hot daytime heat, they dig deep underground where the soil is damp. Only after the sun sets and the air cools do they emerge. During the hot day, these frogs"
+    },
+    {
+        "id": "2d24d481-55cb-445f-ac03-a63253f1a2d7",
+        "options": [
+            {"text": "be kept in even smaller bowls", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "breathe less oxygen to survive", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "be fed only twice a week", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "live in large, filtered tanks", "k_code": "CORRECT", "fail_mode": null}
+        ],
+        "lecture_id": "43a325fc-b8d9-49c2-a43c-8d7c536acec4",
+        "transcript": "Goldfish are very often kept in small, round bowls without filters. However, these small bowls hold very little oxygen, which goldfish need to breathe. Without enough oxygen, the fish become weak and struggle to survive. For this reason, experts recommend that goldfish"
+    },
+    {
+        "id": "1cf0467d-00f4-4abc-9fc5-0322003c84be",
+        "options": [
+            {"text": "completely safe during the daytime", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "improved by drinking alcohol", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "prevented by sleeping while driving", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "just as dangerous as drunk driving", "k_code": "CORRECT", "fail_mode": null}
+        ],
+        "lecture_id": "c2a08053-580a-4e2b-9879-584524395980",
+        "transcript": "Scientists studied how sleep loss affects a person's ability to drive safely. They discovered that staying awake for twenty-four hours slows reactions significantly. Surprisingly, this level of sleep deprivation matches the impairment caused by drinking too much alcohol. Thus, driving while extremely tired can be"
+    },
+    {
+        "id": "4ffb3e42-a7b8-46e2-a047-0dc1db48e5ad",
+        "options": [
+            {"text": "let more light escape into space", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "cool down the planet's surface", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "destroy the protective glass roof", "k_code": "K-WORLD", "fail_mode": "wrong_slot"},
+            {"text": "make the Earth warmer", "k_code": "CORRECT", "fail_mode": null}
+        ],
+        "lecture_id": "b84b504a-0529-4e42-9472-d6dcccd17324",
+        "transcript": "Glass greenhouses let in light, which warms the soil inside. The warm soil then releases heat, but this heat cannot pass back through the glass roof. This trapping of heat makes the greenhouse much warmer than the air outside. Earth's atmosphere works similarly by trapping heat with greenhouse gases. Consequently, an increase in these gases will"
+    },
+    {
+        "id": "b71b7e6b-2e55-4fce-b2ef-49ecf32491e1",
+        "options": [
+            {"text": "able to store water inside their bodies", "k_code": "K-ECHO", "fail_mode": "wrong_slot"},
+            {"text": "kept away from the plant's water", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "invited to eat the fleshy stems safely", "k_code": "K-REVERSE", "fail_mode": "anchor_lost"},
+            {"text": "forced to migrate to northern forests", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+        ],
+        "lecture_id": "a1d62ced-3036-4a25-a20c-368675169505",
+        "transcript": "Desert cactus plants store large quantities of water inside their thick, fleshy stems to survive droughts. However, this hidden water supply makes them prime targets for thirsty desert animals. To protect themselves, cacti grew hundreds of sharp, painful needles over generations. As a result of these sharp needles, thirsty animals are"
+    },
+    {
+        "id": "920216b3-c943-4a09-bbb9-7488bb9c2562",
+        "options": [
+            {"text": "unable to guide their mates to flowers", "k_code": "CORRECT", "fail_mode": null},
+            {"text": "forced to do the wiggle dance faster", "k_code": "K-REVERSE", "fail_mode": "wrong_slot"},
+            {"text": "still able to find sweet flowers easily", "k_code": "K-ECHO", "fail_mode": "anchor_lost"},
+            {"text": "likely to fly to other distant hives", "k_code": "K-WORLD", "fail_mode": "wrong_slot"}
+        ],
+        "lecture_id": "d8ab6947-b692-4bbb-bcac-ed62d0b488f4",
+        "transcript": "Honeybees use a complex wiggle dance to show their hive mates where sweet flowers are located. The angle of the dance tells the other bees the exact direction of the food. However, if cloudy skies block the sun, the bees cannot calculate this angle correctly. Therefore, on dark and cloudy days, bees are"
+    }
+]

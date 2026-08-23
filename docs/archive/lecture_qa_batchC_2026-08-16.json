@@ -1,0 +1,1319 @@
+{
+  "batch": "LQA-PROD-C",
+  "lectures": [
+    {
+      "key": "C1",
+      "title": "LQA-PROD-C: short_lecture (seed_library)",
+      "topic": "a community seed library where members borrow and return seeds",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A seed library works much like a regular library, except members borrow small packets of seeds instead of books. Visitors browse wooden drawers sorted by vegetable, herb, and flower, then pick a few packets to take home for the season. The library exists mainly to keep older regional plant varieties in circulation, since large seed companies often stop selling strains that do not sell in huge volumes. Members plant the seeds in spring, and by late summer many of the vegetables and flowers have produced their own seeds. Gardeners are then asked to dry a portion of those new seeds and return some to the drawers so other members can borrow them the following year. Volunteers write the grower's name and the harvest date on each returned packet before it goes back on the shelf.",
+      "highlight_spans": [
+        "The library exists mainly to keep older regional plant varieties in circulation, since large seed companies often stop selling strains that do not sell in huge volumes."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "A seed library's central purpose is to sell rare regional varieties that commercial companies refuse to stock.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "המרצה אומר שהספרייה מבוססת על השאלה (\"borrow\") והחזרת זרעים, לא על מכירה - זו טענה רחבה אך שגויה."
+            },
+            {
+              "text": "A seed library's central purpose is to keep older regional plant varieties in circulation from season to season.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי שמופיע באמצע הקטע: \"the library exists mainly to keep older regional plant varieties in circulation\"."
+            },
+            {
+              "text": "A seed library's central purpose is to help commercial companies decide which regional strains are worth stocking.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הקטע אומר שהספרייה קיימת דווקא כי חברות הזרעים \"often stop selling\" זנים אזוריים - ההיפך מעזרה להן."
+            },
+            {
+              "text": "A seed library's central purpose is to train members for regional vegetable and flower growing competitions.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "המילים \"vegetable\" ו-\"flower\" מופיעות בקטע, אך שום תחרות (competitions) לא נזכרת כלל."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C2",
+      "title": "LQA-PROD-C: short_lecture (village_weathervane)",
+      "topic": "a hand-forged weathervane on a village hall and its upkeep",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A weathervane sits above many old village halls, and most were originally forged by local blacksmiths rather than bought ready-made from a catalog. The smith hammered a flat iron silhouette, often shaped like a rooster or a running fox, and mounted it on a spindle so it could turn freely in the wind. Villagers used it to judge the day's work, since a shift from a west wind to a north wind often warned of colder weather ahead. However, once mounted, a weathervane needs regular oiling at the pivot point, or rust will lock it in one direction and it stops giving any useful reading at all. For example, the town clock keeper still climbs up each spring to grease the bearing before the market fair begins.",
+      "highlight_spans": [
+        "However, once mounted, a weathervane needs regular oiling at the pivot point, or rust will lock it in one direction and it stops giving any useful reading at all."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "Why does a weathervane need regular oiling at its pivot point?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Because regular oiling makes the metal rust faster, which causes the vane to spin only in one direction.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הקטע אומר שחוסר שימון גורם לחלודה, לא שהשימון עצמו \"makes the metal rust faster\" - זהו היפוך הכיוון הסיבתי."
+            },
+            {
+              "text": "Because the blacksmith needs to reshape the rooster figure every spring, which keeps the silhouette from rusting.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "בקטע דווקא שומר השעון, לא הנפח, מטפל בציר מדי אביב; אין שום עיצוב מחדש של הצורה."
+            },
+            {
+              "text": "Because villagers use the vane's changing direction to judge whether colder weather is moving in that day.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "זה פרט נכון מהקטע (\"often warned of colder weather ahead\"), אך הוא לא מסביר מדוע צריך לשמן את הציר."
+            },
+            {
+              "text": "Because rust can freeze the pivot in one direction, which stops the vane from giving any useful reading.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע אומר במפורש: \"rust will lock it in one direction and it stops giving any useful reading at all\"."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C3",
+      "title": "LQA-PROD-C: short_lecture (cheese_aging_cellar)",
+      "topic": "a cheese-aging cellar and the daily tending of the wheels",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A cheese-aging cellar is usually dug into a hillside or built below ground, where the stone walls hold a steady cool temperature and a damp, mossy smell fills the air. Workers carry each new wheel down on wooden boards and set it on a shelf to rest for weeks or months, depending on the variety. However, the wheels cannot simply be left alone, because mold and moisture would ruin them within days. Instead, staff turn every wheel by hand, brush off any unwanted growth, and rub the rind with salt water on a fixed schedule. This careful daily tending, known as affinage, is what allows a plain young wheel to develop a firm rind and a deep, complex flavor over time. The largest cellars track hundreds of wheels on a single handwritten chart.",
+      "highlight_spans": [
+        "This careful daily tending, known as affinage, is what allows a plain young wheel to develop a firm rind and a deep, complex flavor over time."
+      ],
+      "questions": [
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "In the lecture, what does the word affinage mean?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The daily process of turning, brushing, and salting each wheel by hand while it ages.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע מגדיר את המונח ישירות: \"This careful daily tending, known as affinage, is what allows a plain young wheel to develop...\"."
+            },
+            {
+              "text": "The natural underground cave where wild mold first begins to grow on cheese.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "המרתף עצמו נזכר בקטע, אך המילה affinage מתארת את הטיפול היומיומי, לא את המערה הטבעית."
+            },
+            {
+              "text": "The general term for any building used to store farm produce underground.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זהו פירוש רחב מדי; affinage מתייחס באופן ספציפי לתהליך הטיפול בגלגלי הגבינה, לא לכל מבנה אחסון."
+            },
+            {
+              "text": "The steady cool temperature that keeps mold spores from spreading across the stone cellar walls.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "זהו פרט נכון מתחילת הקטע (\"hold a steady cool temperature\"), אך הוא לא הפירוש של המילה affinage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C4",
+      "title": "LQA-PROD-C: short_dialogue (bicycle_repair_co_op)",
+      "topic": "two friends discussing why a bicycle repair co-op teaches self-repair",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Maya: Why does the co-op make everyone fix their own bike instead of doing it for them?\nNoam: It comes down to a chain of reasons. First, a volunteer shows you how to spot the problem, so you learn to recognize a wobbling wheel or a loose brake cable.\nMaya: Okay, so that builds a skill.\nNoam: Right, and because you learn the skill, you can fix small problems at home without waiting for a session to open again.\nMaya: Which saves you time later.\nNoam: Exactly, and since you save that time, you end up riding the bike far more often instead of leaving it in the garage.\nMaya: So teaching people directly keeps bikes on the road.\nNoam: That is the whole idea. We keep a small shelf of tools and spare tubes, and members sign them out for an hour.",
+      "highlight_spans": [
+        "Right, and because you learn the skill, you can fix small problems at home without waiting for a session to open again."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "According to Noam, what is the final result of teaching members to fix their own bikes?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Members end up leaving their bikes in the garage because repairs take too long to learn.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נעם אומר בדיוק ההפך: התוצאה היא שהחברים \"riding the bike far more often instead of leaving it in the garage\"."
+            },
+            {
+              "text": "Volunteers end up riding each member's repaired bike home to test it themselves afterward.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "בשיחה החברים עצמם רוכבים יותר, לא המתנדבים; זהו החלפת התפקיד השגויה."
+            },
+            {
+              "text": "Members end up riding their bikes far more often because they can fix small problems themselves.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נעם מסכם את שרשרת הסיבתיות: \"you end up riding the bike far more often instead of leaving it in the garage\"."
+            },
+            {
+              "text": "Members learn to recognize a wobbling wheel or a loose brake cable right away.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "זהו פרט נכון אך מוקדם בשרשרת ההסבר (\"recognize a wobbling wheel or a loose brake cable\"), לא התוצאה הסופית שנשאלה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C5",
+      "title": "LQA-PROD-C: short_dialogue (communal_bread_oven)",
+      "topic": "two neighbors discussing why the village still lights a shared stone oven",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Dana: Can you explain why the village still lights that big stone oven every Friday?\nYossi: Sure. The oven takes hours to heat because the walls are so thick, but once they're hot, they hold that heat for a very long time.\nDana: So it's slow to start.\nYossi: Right, and because the stone stays hot long after the fire dies down, the baker can slide in loaf after loaf without relighting anything.\nDana: In other words, one fire bakes bread for the whole street.\nYossi: Exactly, and since so many households share that single fire, the oven really keeps the whole neighborhood's bread costs down, not just one family's.\nDana: That is clever.\nYossi: The bakers rotate the schedule every week, and the same oven still turns out the Sunday pastries by mid-morning.",
+      "highlight_spans": [
+        "since so many households share that single fire, the oven really keeps the whole neighborhood's bread costs down, not just one family's."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "What is the main idea of the conversation?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "The conversation is mainly about how the village replaced the old stone oven with a faster gas oven.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "שום החלפה של התנור לא נזכרת; יוסי מדבר על אותו \"stone oven\" מדי שבוע, לא על תנור גז חדש - זו טענה רחבה אך שגויה."
+            },
+            {
+              "text": "The conversation is mainly about how one weekly fire in the shared oven keeps the street's bread costs down.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי, שמופיע באמצע השיחה: \"the oven really keeps the whole neighborhood's bread costs down, not just one family's\"."
+            },
+            {
+              "text": "The conversation is mainly about how individual households now heat their own ovens instead of sharing one fire.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זה הפוך מהנאמר: המשפחות דווקא חולקות אש אחת (\"share that single fire\"), לא מחממות תנורים נפרדים."
+            },
+            {
+              "text": "The conversation is mainly about how the village bakers compete each week to bake the best Sunday pastries.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "\"Sunday pastries\" מוזכר בסוף השיחה כפרט קונקרטי, אך שום תחרות בין האופים לא נזכרת - זהו מלכודת המשפט האחרון."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C6",
+      "title": "LQA-PROD-C: short_dialogue (eel_trap_river)",
+      "topic": "two river workers discussing why an eel trap is only checked at night",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Reuven: Why do you check the eel trap only at night, Tamar?\nTamar: Because eels feed mostly after dark, so during the day they hide under stones and barely move near the funnel entrance.\nReuven: So daytime checks would be pointless.\nTamar: Pretty much. And since they only start swimming once it's dark, the trap only really starts filling after sunset.\nReuven: Which is why you wait.\nTamar: Right, and because the current pushes them straight toward the narrow mouth of the trap, most of them swim in without even noticing the wicker walls closing around them.\nReuven: I always thought you set it in the morning.\nTamar: No, my grandfather taught me to lower it right before dusk and lift it at first light, when the whole basket is heaviest.",
+      "highlight_spans": [
+        "since they only start swimming once it's dark, the trap only really starts filling after sunset."
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Tamar, why does the trap only start filling after sunset?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Because eels stop swimming once it gets dark, so the trap fills up before sunset instead.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "תמר אומרת בדיוק ההפך: הצלופחים \"only start swimming once it's dark\", לא מפסיקים לשחות."
+            },
+            {
+              "text": "Because Reuven resets the trap at dawn, which sends the eels back upstream before Tamar arrives.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "תמר, לא ראובן, היא זו שמטפלת במלכודת; אין שום איפוס בשחר בשיחה."
+            },
+            {
+              "text": "Because the current pushes the eels toward the narrow mouth of the trap without them noticing.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "זה פרט נכון מהשיחה (\"the current pushes them straight toward the narrow mouth\"), אך הוא מסביר איך הם נלכדים, לא מדוע דווקא אחרי השקיעה."
+            },
+            {
+              "text": "Because eels only start swimming once it gets dark, so the trap has nothing to catch during daylight.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "תמר מסבירה במפורש: \"they only start swimming once it's dark, the trap only really starts filling after sunset\"."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C10",
+      "title": "LQA-PROD-C: medium_dialogue (bicycle repair co-op)",
+      "topic": "a bicycle repair co-op",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Maya: Can you explain how the bicycle co-op works? I've never quite understood the process.\nOwen: Sure. When you bring in a broken bike, a volunteer sits with you at a repair stand and helps you fix it, rather than taking the bike away alone.\nMaya: So I do the actual repair?\nOwen: Yes, and here is the reasoning behind that. The co-op only stocks used parts salvaged from donated bikes, which keeps costs low enough that members pay one small yearly fee instead of a charge for every repair. Because parts are limited, volunteers teach you to diagnose the real problem before replacing anything, so you never swap a part that was not broken. Because you learn to diagnose it yourself, you can usually fix the same problem again at home without coming back. In other words, the limited supply of parts shaped the whole teaching approach.\nMaya: What happens once I've learned to fix something myself?\nOwen: The co-op keeps laminated sheets above each stand, one for every common repair, so members can look one up without needing a volunteer each time.",
+      "highlight_spans": [
+        "a volunteer sits with you at a repair stand and helps you fix it, rather than taking the bike away alone",
+        "the limited supply of parts shaped the whole teaching approach"
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What does Owen explain about how the co-op actually works?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The co-op charges members a fee for every single repair instead of one yearly fee.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר — השיעור מציין 'members pay one small yearly fee instead of a charge for every repair'."
+            },
+            {
+              "text": "Volunteers repair each bike themselves while the owner simply waits in a separate room.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף תפקידים — למעשה החבר עצמו מתקן: 'a volunteer sits with you at a repair stand and helps you fix it, rather than taking the bike away alone'."
+            },
+            {
+              "text": "Members repair their own bikes at a stand with a volunteer's guidance and advice.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו ההסבר של אואן: 'a volunteer sits with you at a repair stand and helps you fix it, rather than taking the bike away alone'."
+            },
+            {
+              "text": "The co-op only accepts brand-new parts ordered directly from bicycle manufacturers each month.",
+              "k_code": "K-NEW",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר — השיתופייה משתמשת ב'used parts salvaged from donated bikes', לא בחלקים חדשים."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does Owen say hangs above each repair stand?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Laminated sheets, one for each common repair problem.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך נאמר: 'The co-op keeps laminated sheets above each stand, one for every common repair'."
+            },
+            {
+              "text": "A logbook listing which used parts each member has taken.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "אין בשיחה אזכור ליומן כזה; מוזכרים רק דפים מצופים מעל כל עמדה."
+            },
+            {
+              "text": "A price list showing the cost of every part in stock.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "אין אזכור לרשימת מחירים בשיחה."
+            },
+            {
+              "text": "A schedule showing which volunteer is on duty each day.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "אין בשיחה מידע על לוח משמרות מתנדבים, למרות שמתנדבים מוזכרים בהקשר אחר."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C11",
+      "title": "LQA-PROD-C: medium_dialogue (eel trap on a river)",
+      "topic": "an eel trap on a river",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Priya: Could you explain how the eel trap on the river actually catches anything? I only see a fence in the water.\nTom: The fence is called the leader, which means a wall of woven willow withies angled across the current to guide eels toward a narrow opening rather than to stop them outright.\nPriya: So the eels swim into the fence and then what?\nTom: Because the leader is angled downstream, an eel moving with the current gets pushed sideways along the fence until it reaches a gap, and because that gap connects to a woven basket called a fyke, the eel swims into the basket while searching for a way past. Because the basket narrows toward its far end and has an inward-facing funnel of willow rods, the eel can push forward while the rods spring back and block a retreat. And because eels usually migrate at night in autumn, the fisherman only needs to check the trap once each morning.\nPriya: So the whole design depends on the eel's own instinct to keep moving forward.\nTom: That's exactly it.",
+      "highlight_spans": [
+        "a wall of woven willow withies angled across the current to guide eels toward a narrow opening",
+        "eels usually migrate at night in autumn"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Tom, what does the leader actually do?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "It is a fence set straight across the river that stops eels from moving upstream at all.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהתפקיד שתואר — המובילה נועדה 'to guide eels toward a narrow opening rather than to stop them outright'."
+            },
+            {
+              "text": "It is a fence angled across the current that guides eels sideways toward a narrow gap.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך מסביר טום: המובילה היא 'a wall of woven willow withies angled across the current to guide eels toward a narrow opening'."
+            },
+            {
+              "text": "It is a floating net that scoops eels out of the water as they leap upward.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין בדיאלוג כל אזכור לרשת צפה; התיאור עוסק אך ורק בגדר הענפים והסל."
+            },
+            {
+              "text": "It is the woven basket at the far end of the trap where eels finally get stuck.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף בין חלקי המלכודת — זהו תיאור הסל ('fyke') ולא המובילה עצמה."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Why does Tom say the fisherman only needs to check the trap once each morning?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Because the fyke basket automatically releases unwanted fish back into the river by itself.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף גורם — הדיאלוג אינו מתאר שחרור אוטומטי; הסל דווקא 'block a retreat'."
+            },
+            {
+              "text": "Because the leader is checked by a different fisherman every afternoon instead.",
+              "k_code": "K-ECHO",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר — אין אזכור לדייג אחר; אותו דייג בודק את המלכודת."
+            },
+            {
+              "text": "Because the woven withies need a full day to dry out between uses.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט זה אינו נאמר בדיאלוג לגבי זמן ייבוש הענפים."
+            },
+            {
+              "text": "Because eels usually migrate at night in autumn, so little happens during the day.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך מסביר טום: 'eels usually migrate at night in autumn', כך שביום כמעט אין תנועה לבדוק."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C12",
+      "title": "LQA-PROD-C: medium_dialogue (wool-washing shed)",
+      "topic": "a wool-washing shed",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Dana: Can you explain why the wool-washing shed uses so many separate tubs? It seems like it could just be one big tub.\nRavi: There's a reason for the sequence. Raw fleece arrives coated in what's called the yolk, which means the natural grease produced by the sheep's skin, not the yellow part of an egg, and that grease has to come out gradually or the wool fibers get damaged.\nDana: So the first tub removes the grease?\nRavi: Because hot water alone would shrink the wool instantly, the first tub uses lukewarm water with a mild soap to loosen the yolk without shocking the fibers. Because that first wash only loosens the grease rather than removing it fully, the fleece moves to a second, hotter tub where the loosened grease rinses away. And because soap residue left behind would attract dirt again during drying, a final cold tub rinses the fleece completely clean.\nDana: So each tub exists because of what the one before it couldn't finish.\nRavi: Precisely. Once the fleece leaves that last tub, it goes straight onto the drying racks outside.",
+      "highlight_spans": [
+        "the yolk, which means the natural grease produced by the sheep's skin",
+        "each tub exists because of what the one before it couldn't finish"
+      ],
+      "questions": [
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "As used in the dialogue, what does 'the yolk' mean when Ravi describes the fleece?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The natural grease on raw wool that must be washed out before spinning.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך מגדיר ראווי: 'the yolk, which means the natural grease produced by the sheep's skin', שיש לשטוף לפני הטוויה."
+            },
+            {
+              "text": "The yellow center part of an egg used to test water temperature.",
+              "k_code": "K-ECHO",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי — ראווי מבהיר במפורש 'not the yellow part of an egg'."
+            },
+            {
+              "text": "A dye applied to wool to give it a golden color.",
+              "k_code": "K-ROLE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי — אין מדובר בצבע אלא בשומן טבעי שיש להסיר."
+            },
+            {
+              "text": "A tool used to check whether the wash water is warm enough.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי — 'yolk' אינו כלי בדיקה אלא השומן עצמו על הצמר."
+            }
+          ]
+        },
+        {
+          "question_type": "main_idea",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is the main idea of the dialogue?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The shed uses several tubs mainly because one large tub would be too heavy to lift.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה — הסיבה לריבוי האמבטיות אינה משקל אלא תפקיד מדורג של כל שלב בניקוי."
+            },
+            {
+              "text": "The first tub uses lukewarm water with a mild soap to loosen the grease slowly.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט נכון אך חלקי — מתאר רק את השלב הראשון: 'lukewarm water with a mild soap to loosen the yolk'."
+            },
+            {
+              "text": "The shed uses a sequence of tubs because each stage removes what the previous one could not finish.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי: כל אמבטיה קיימת כי 'each tub exists because of what the one before it couldn't finish'."
+            },
+            {
+              "text": "A final cold tub rinses away any soap residue left behind before the wool is dried.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט נכון אך חלקי — מתאר רק את השלב האחרון: 'a final cold tub rinses the fleece completely clean'."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C7",
+      "title": "LQA-PROD-C: medium_lecture (seed library)",
+      "topic": "a public seed library",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A seed library works like a book library, except what circulates are seed packets instead of novels. Members borrow seeds for the growing season, plant them in a garden, and are asked to return twice as many seeds as they took once their plants have matured. The collection depends on open-pollinated varieties, which means the plant is fertilized by insects, birds, or wind rather than by a breeder in a laboratory, so seeds saved from the fruit grow into a plant nearly identical to its parent. For example, a tomato labeled Cherokee Purple will produce true Cherokee Purple tomatoes again next year if it was pollinated naturally. Volunteers sort donated seeds into small paper envelopes, label each one with the plant name and the year collected, and file it in a repurposed card catalog drawer near the entrance. Each drawer is organized by plant family rather than alphabetically, so beans sit beside peas and squash beside melons. New members attend a short orientation before they may borrow, learning to keep varieties from cross-pollinating in a small yard.",
+      "highlight_spans": [
+        "open-pollinated varieties, which means the plant is fertilized by insects, birds, or wind rather than by a breeder in a laboratory",
+        "return twice as many seeds as they took"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "The library's central goal is rescuing heirloom tomato varieties that are close to extinction.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "התשובה מציגה טענה רחבה אך שגויה — השיעור אינו עוסק בהצלת זנים נכחדים אלא בהשאלת זרעים; הדוגמה 'a tomato labeled Cherokee Purple' משמשת להמחשה בלבד."
+            },
+            {
+              "text": "A seed library lends open-pollinated seeds and asks borrowers to return twice as many seeds.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי: הספרייה משאילה זרעים 'open-pollinated' ומבקשת מהחברים 'to return twice as many seeds as they took' לאחר הגידול."
+            },
+            {
+              "text": "Volunteers sort every seed donated to the library into a small paper envelope for storage.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "זהו פרט משני ולא הרעיון המרכזי — השיעור מציין ש'volunteers sort donated seeds into small paper envelopes', אך זה רק חלק מהתהליך."
+            },
+            {
+              "text": "New members must complete a short orientation session before they are permitted to borrow seeds.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "זהו פרט צר מדי — השיעור מזכיר ש'new members attend a short orientation before they may borrow', אך זה אינו תמצית השיעור כולו."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, how are the seed drawers organized inside the library?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Alphabetically, by each vegetable's common English name printed on the label.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זו טענה הפוכה לנאמר — השיעור קובע במפורש 'organized by plant family rather than alphabetically'."
+            },
+            {
+              "text": "By the year that is printed on each seed envelope's label.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "פרט זה נכון לגבי התווית אך אינו עונה על השאלה — המעטפות מתויגות עם 'the plant name and the year it was collected', אך זה אינו עקרון הסידור במגירות."
+            },
+            {
+              "text": "By the size of the drawer needed to hold each seed packet.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין לכך כל אזכור בשיעור; אין מידע על סידור לפי גודל המגירה."
+            },
+            {
+              "text": "By plant family, so beans sit beside peas and squash beside melons.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "כך נאמר במפורש: 'organized by plant family... so beans sit beside peas and squash sits beside melons'."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C8",
+      "title": "LQA-PROD-C: medium_lecture (village weathervane)",
+      "topic": "a village weathervane",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Many people assume a weathervane sits on a roof purely as decoration, its shape chosen just to look attractive against the sky. However, the object's real purpose is functional: the vane is deliberately unbalanced, with more surface area on one side of the pivot than the other, so wind pressure turns the wider end away, leaving the narrow end, often shaped like an arrow point, facing into the wind. A village weathervane was traditionally mounted on the tallest building, usually the church or the mill, so it could be read from a distance by farmers deciding whether to bring in hay before a storm. Underneath the decorative figure sits a simple rod resting in a socket lined with a low-friction metal, allowing the vane to swing freely even in a light breeze. Blacksmiths who made these pieces often shaped the figure to reflect the village's trade, a fish for a fishing town or a sheaf of wheat for a farming one, turning a working instrument into a local emblem as well.",
+      "highlight_spans": [
+        "the vane is deliberately unbalanced, with more surface area on one side of the pivot than the other",
+        "a socket lined with a low-friction metal"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Based on the lecture, why does the vane turn to point into the wind?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Because the vane is unevenly balanced, wind pushes the wider side away, leaving the narrow end facing the wind.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו ההסבר הנכון: 'the vane is deliberately unbalanced, with more surface area on one side... wind pressure turns the wider end away', כך שהקצה הצר פונה לרוח."
+            },
+            {
+              "text": "Because the vane is evenly balanced, wind spins it around in circles until it randomly stops turning.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר — השיעור מדגיש שהכנף 'deliberately unbalanced' ולא מאוזנת, ולכן אינה מסתובבת אקראית."
+            },
+            {
+              "text": "Because the narrow end is heavier than the wide end, gravity alone pulls it around to face the wind.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מחליף את הגורם הסיבתי: מדובר בלחץ הרוח על שטח הפנים הלא-שווה, לא במשקל או בכוח הכבידה."
+            },
+            {
+              "text": "Because a hidden motor inside the pivot slowly rotates the vane to face shifting wind currents.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "אין בשיעור כל אזכור למנוע; ההסבר מתייחס אך ורק ללחץ הרוח על הכנף."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "In the lecture, what does the phrase 'low-friction metal' most likely describe?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "A lining that locks the rod firmly so the vane cannot rotate at all.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "הפוך מהמשמעות — השקע נועד לאפשר לכנף 'to swing freely even in a light breeze', לא לנעול אותה."
+            },
+            {
+              "text": "A coating added to the socket only to make it look decorative and shiny.",
+              "k_code": "K-ECHO",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי — התפקיד פונקציונלי ולא קישוטי; המתכת מפחיתה חיכוך, אינה קישוט."
+            },
+            {
+              "text": "A lining that lets the rod turn smoothly with little resistance inside the socket.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו המשמעות הנכונה: מתכת דלת-חיכוך המאפשרת לציר 'to swing freely even in a light breeze'."
+            },
+            {
+              "text": "A layer inside the socket that measures wind speed as the rod turns.",
+              "k_code": "K-ROLE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "פירוש שגוי — אין בשיעור קשר בין השקע למדידת מהירות רוח."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C9",
+      "title": "LQA-PROD-C: medium_lecture (communal bread oven)",
+      "topic": "a communal bread oven",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "then-now-contrast",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Long before household ovens became common, many villages built a single large oven of brick and clay near the center of town, and every family took a turn using it. A day each week was set aside for baking: one household would light the fire before dawn, and as the bricks reached temperature, neighbors arrived in sequence with their own loaves, each family's bread marked with a private stamp pressed into the dough so loaves would not be mixed up once the oven cooled. Today the ovens that survive are rarely used for daily bread. Most have been restored by local heritage groups and are fired only a few times a year, usually for festivals, where residents bring dough to bake side by side much as their grandparents once did. In other words, the oven has shifted from a daily necessity to an occasional gathering point. The restoration groups keep detailed logs of firing dates and repairs, since the intense heat gradually cracks the clay lining, which must be replastered every few years by a trained specialist.",
+      "highlight_spans": [
+        "the oven has shifted from a daily necessity to an occasional gathering point",
+        "each family's bread marked with a private stamp pressed into the dough"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of the lecture?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Communal ovens were abandoned completely once households got their own ovens at home.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך שגויה — השיעור אינו טוען שהתנורים ננטשו לגמרי; להפך, הם עדיין 'fired only a few times a year'."
+            },
+            {
+              "text": "The oven's clay lining gradually cracks from the intense heat of repeated firings.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט נכון אך משני — מוזכר ש'the intense heat gradually cracks the clay lining', אך זה אינו תמצית השיעור."
+            },
+            {
+              "text": "A single household lit the fire before dawn on the village's shared baking day.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "פרט מוקדם בשיעור ('one household would light the fire before dawn') ולא הרעיון הכללי של המעבר לאירועי קהילה."
+            },
+            {
+              "text": "Communal bread ovens have moved from a daily necessity to occasional festival gatherings for the village.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הרעיון המרכזי: 'the oven has shifted from a daily necessity to an occasional gathering point'."
+            }
+          ]
+        },
+        {
+          "question_type": "negative",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the lecture, which of the following is NOT true about the communal oven?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Restoration groups keep detailed logs of firing dates and repairs each year.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: 'the restoration groups keep detailed logs of firing dates and repairs' — לכן זו עובדה נכונה ולא התשובה לשאלת השלילה."
+            },
+            {
+              "text": "The oven is traditionally heated with bundles of dried seaweed carried from the coast.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זהו הפרט שאינו מוזכר כלל בשיעור — אין שום איזכור לחימום באמצעות אצות ים."
+            },
+            {
+              "text": "Neighbors used to bring their loaves in sequence once the fire was lit.",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: 'neighbors arrived in sequence with their own loaves' — לכן זו עובדה נכונה ולא התשובה."
+            },
+            {
+              "text": "Families pressed a private stamp into their dough to identify their loaves.",
+              "k_code": "K-ROLE",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: 'each family's bread marked with a private stamp pressed into the dough' — לכן זו עובדה נכונה ולא התשובה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C13",
+      "title": "LQA-PROD-C: long_lecture (ancient_water_clocks)",
+      "topic": "How ancient water clocks (clepsydras) measured time using outflow, inflow, and anaphoric designs",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Long before mechanical gears regulated time, ancient societies turned to the movement of water. The simplest device, the outflow clepsydra, was a stone vessel marked with lines along its inner wall. Water drained through a narrow hole near the base, and as the surface sank past each mark, an observer announced that another interval had passed. Temple priests used such vessels to time speeches, keeping orators from running past their turn.\n\nHowever, the outflow design carried a built-in flaw: water drains faster when a vessel is full than when nearly empty, since pressure at the hole depends on the height of water above it. What made these instruments matter was their independence from sunlight: a water clock let judges measure fixed intervals at night, something no sundial could offer. Craftsmen shaped the vessel as an inverted cone, narrower at the base, so the falling level slowed at exactly the rate pressure dropped, keeping marks evenly spaced.\n\nA rival approach, the inflow clepsydra, reversed the arrangement. Water dripped at a steady rate into a receiving vessel, and a float riding the rising surface carried a pointer past a fixed scale. Because the vessel could be shaped however was convenient, inflow designs proved easier to calibrate, and Alexandrian craftsmen refined them for courts, where a plaintiff's speaking time had to be measured fairly.\n\nYet even the inflow clepsydra stayed vulnerable to temperature, since cool water is thicker and drips more slowly than warm water, so a device set at midday could run slow by a cold midnight. The most elaborate answer, the anaphoric clock, used a float connected by a cord over a pulley to a rotating star-painted dial. Long after such refinements faded, plain float-driven vessels kept marking hours in scattered rural monasteries into the eighteenth century, valued less for precision than for making no sound at all.",
+      "highlight_spans": [
+        "the outflow design carried a built-in flaw",
+        "Yet even the inflow clepsydra stayed vulnerable to temperature",
+        "plain float-driven vessels kept marking hours in scattered rural monasteries into the eighteenth century"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of this talk?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Ancient societies mainly built water clocks to forecast coming storms and rainfall.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "זו טענה רחבה אך שגויה - ההרצאה לא עוסקת בחיזוי מזג אוויר; שעוני המים נועדו למדוד זמן, לא גשם."
+            },
+            {
+              "text": "The outflow clepsydra was replaced everywhere once conical vessels were invented.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "זהו פרט מהשלב הראשון בלבד (\"Craftsmen shaped the vessel as an inverted cone\") ולא הרעיון המרכזי של כל ההרצאה."
+            },
+            {
+              "text": "Water clocks let people track fixed intervals of time without needing daylight to work.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: ההרצאה קובעת ש\"What made these instruments matter was their independence from sunlight\" - שעוני המים אפשרו מדידת זמן קבועה בלי תלות באור השמש."
+            },
+            {
+              "text": "Monasteries invented water clocks to keep prayer schedules silent at night.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "המנזרים מוזכרים רק בסוף כאנקדוטה (\"scattered rural monasteries\") אך לא הם שהמציאו את שעוני המים."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What did the talk identify as a reason a water clock calibrated at midday might run slow by night?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "The float connected to the anaphoric dial slowly grew heavier over time.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זהו מנגנון השייך לשעון האנפורי (\"a float connected by a cord over a pulley\") ולא הסיבה לאיטיות שהוזכרה עבור שעון הזרימה הפנימית."
+            },
+            {
+              "text": "Cooler water is thicker and drips more slowly than warm water.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה, כפי שנאמר במפורש: \"cool water is thicker and drips more slowly than warm water\"."
+            },
+            {
+              "text": "The inflow vessel's convenient shape made it harder to calibrate in cold weather.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - הצורה הנוחה דווקא הקלה על הכיול (\"inflow designs proved easier to calibrate\"), לא הקשתה עליו."
+            },
+            {
+              "text": "Pressure at the outflow hole depended on how much water sat above it.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "זו עובדה נכונה אך שייכת לשלב הראשון על שעון הזרימה החיצונית (\"pressure at the hole depends on the height of water above it\"), לא לסיבת האיטיות בלילה הקר."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C14",
+      "title": "LQA-PROD-C: long_lecture (blacksmith_heat_treatments)",
+      "topic": "How a blacksmith uses quenching, tempering, and annealing to control the hardness of steel",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Inside a working forge, a blacksmith's control over heat matters more than strength at the anvil, because the same piece of steel can be made brittle, tough, or soft depending on how it cools. The first treatment, quenching, plunges red-hot steel into water or oil, cooling it within seconds and locking its structure into an extremely hard state. A blade quenched this way can hold a keen edge for a long time, which is why swordsmiths rely on the step.\n\nHowever, a fully quenched blade is often dangerously brittle, likely to snap under a sudden shock rather than bend. What actually makes a good tool, then, is not raw hardness but a careful balance between hardness and toughness, achieved by treating the steel a second time. That treatment, tempering, reheats the hardened steel to a much lower temperature and holds it there briefly. As the surface warms, a thin layer of oxide forms and shifts color from pale straw to blue, and a smith reads that shifting color like a thermometer, pulling the piece from the fire at the shade matching the tool's intended use.\n\nYet even a well-tempered blade can carry stress from the earlier hammering, stress that shows up later as warping or hidden cracks. The forge's oxide layer itself, known among smiths simply as scale, is the flaking gray-black skin that forms on iron whenever it glows hot in open air, and thick scale left on a blade can trap grit during grinding. To relieve stress rather than harden anything further, smiths turn to annealing, heating the metal until it glows and then letting it cool for hours, buried in ash rather than plunged into liquid.\n\nA fully annealed bar turns soft enough to file or bend by hand, ready to be hardened all over again for its next use.",
+      "highlight_spans": [
+        "a fully quenched blade is often dangerously brittle",
+        "Yet even a well-tempered blade can carry stress from the earlier hammering",
+        "known among smiths simply as scale, is the flaking gray-black skin that forms on iron"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point of this talk?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Blacksmiths today rely on modern furnaces instead of traditional quenching methods.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך לא נתמכת - ההרצאה לא משווה תנורים מודרניים לישנים, אלא מסבירה שלבי חימום מסורתיים."
+            },
+            {
+              "text": "Quenching alone is the only step a blacksmith needs for a strong blade.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "זהו טווח חלקי מהשלב הראשון בלבד; ההרצאה מסבירה שההשחתה \"often dangerously brittle\" ודורשת שלבים נוספים."
+            },
+            {
+              "text": "Annealing is the fastest way to harden a freshly forged blade.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מהנאמר - חישול (annealing) מרכך את המתכת (\"turns soft enough to file or bend\"), לא מקשיח אותה."
+            },
+            {
+              "text": "A useful blade needs a careful balance between hardness and toughness, not hardness alone.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה, כפי שנאמר: \"a careful balance between hardness and toughness\" הוא מה שבאמת עושה כלי טוב."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "In the talk, what does the word \"scale\" refer to?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The flaking gray-black oxide skin that forms on hot iron.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה כהגדרה מפורשת בהרצאה: \"scale, is the flaking gray-black skin that forms on iron whenever it glows hot\"."
+            },
+            {
+              "text": "A device used to weigh finished tools before selling them.",
+              "k_code": "K-NEW",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זו משמעות אחרת ונפוצה של המילה \"scale\" (משקל), אך לא זו שבה משתמשים בהרצאה."
+            },
+            {
+              "text": "The set of marks used to measure water level in a vessel.",
+              "k_code": "K-ECHO",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זו משמעות אחרת של \"scale\" כסרגל מדידה, שאינה קשורה לשכבת החמצון על הברזל שמתוארת כאן."
+            },
+            {
+              "text": "The hard protective covering found on the body of a fish.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זו משמעות רווחת של \"scale\" (קשקש דג), אך אינה המשמעות שבה השתמש הדובר בהרצאה על הנפחות."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C15",
+      "title": "LQA-PROD-C: long_lecture (dockside_lifting_machines)",
+      "topic": "Three human-powered dockside lifting machines: the windlass, the capstan, and the treadwheel crane",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Long before steam or electric motors, harbors relied on three human-powered machines to multiply pulling strength. The simplest, the windlass, was a horizontal barrel mounted on a frame, turned by hand cranks or removable spokes fitted into holes around its rim. A rope wound around the barrel as it turned, hauling in anchors or lifting moderate loads a few dozen feet, and a single sailor could operate one without help.\n\nHowever, a windlass's horizontal barrel limited how many hands could push at once, so heavier loads called for a different arrangement. The capstan stood its barrel upright instead, and long wooden bars slotted through its head let several people walk in a circle, each pushing a bar, multiplying force well beyond what any windlass could manage. What let a medieval harbor move enormous weight without an engine was matching the right machine to the load at hand, never raw strength alone. In other words, standing the barrel on end let a crew recruit far more muscle onto the same rope, and dockworkers used capstans to haul ships up a slipway, a task no windlass crew could attempt.\n\nYet even a capstan's advantage was limited by how many bars fit around its head and how much floor space a crew had to walk in. For truly heavy vertical lifts, such as raising stone blocks up a cathedral wall, builders turned to the treadwheel crane, a large hollow wheel resembling a giant hamster wheel. One or two laborers walked inside it, their own weight turning an axle that wound a lifting rope taut, and the wheel's wide diameter meant even a slow, steady pace could raise loads no team of capstan-walkers could match.\n\nA handful of treadwheel cranes still stand in old English ports today, their timber floors worn into shallow grooves by centuries of pacing feet.",
+      "highlight_spans": [
+        "a windlass's horizontal barrel limited how many hands could push at once",
+        "Yet even a capstan's advantage was limited by how many bars fit around its head",
+        "their timber floors worn into shallow grooves by centuries of pacing feet"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to the talk, how did dockworkers typically operate a windlass?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Several sailors pushed long bars around its upright barrel together.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה מנגנון הקבסטן (\"long wooden bars slotted through its head\"), לא הווינדלס שנשאל עליו."
+            },
+            {
+              "text": "A single sailor turned it using hand cranks or removable spokes.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"turned by hand cranks or removable spokes... a single sailor could operate one without help\"."
+            },
+            {
+              "text": "One or two laborers walked inside it to turn its axle.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה מנגנון גלגל הדריכה (treadwheel crane) - \"One or two laborers walked inside it\" - לא של הווינדלס."
+            },
+            {
+              "text": "A small waterwheel beside the dock powered its rotation automatically.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "פרט זה לא הופיע כלל בהרצאה; הווינדלס תואר כמופעל ביד בלבד."
+            }
+          ]
+        },
+        {
+          "question_type": "negative",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to the talk, which of the following is NOT true about these three lifting devices?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "A capstan multiplied force by letting several people push bars around an upright barrel.",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"long wooden bars slotted through its head let several people walk in a circle\" - זו עובדה נכונה שהוזכרה, ולכן אינה התשובה הנכונה לשאלת השלילה."
+            },
+            {
+              "text": "A treadwheel crane depended on someone walking inside its wheel to turn the axle.",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"One or two laborers walked inside it, their own weight turning an axle\" - עובדה נכונה שהוזכרה, ולכן אינה התשובה לשאלת ה-NOT."
+            },
+            {
+              "text": "A treadwheel crane was powered by a team of oxen circling it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה לשאלת ה-NOT: זו טענה שאינה מוזכרת בהרצאה כלל, ואף אינה נכונה במציאות - גלגלי דריכה הופעלו על ידי בני אדם (\"laborers walked inside it\"), לא שוורים."
+            },
+            {
+              "text": "A windlass was turned using simple hand-fitted cranks around its horizontal barrel.",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"turned by hand cranks or removable spokes fitted into holes around its rim\" - עובדה נכונה שהוזכרה, ולכן אינה התשובה לשאלת ה-NOT."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C16",
+      "title": "LQA-PROD-C: long_dialogue (dry_stone_hillside_terracing)",
+      "topic": "A farmer explains to a visitor how dry-stone terrace walls prevent hillside erosion and enable farming",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Noah: Could you explain how these dry-stone walls keep the hillside from washing away?\nElena: Picture bare soil on a slope: heavy rain sends water downhill, carrying loose soil with it. A steep field like this would soon lose most of its topsoil.\nNoah: So the walls simply stop the water?\nElena: More slow and redirect it. We build each wall along a contour line, sitting at the same height around the hill. With no mortar, water seeps through the gaps instead of pressure building up behind a solid barrier.\nNoah: Is that why the walls survive storms that would crack a normal wall?\nElena: Right. A mortared wall traps water like a dam and eventually bursts, while a dry-stone wall breathes. Behind each one, soil that would otherwise slide downhill gets caught, and over years it builds into a flat bed.\nNoah: So each terrace is just soil that used to sit higher up.\nElena: In a sense, yes. A flat bed lets rain soak in rather than race off, giving roots time to draw up moisture. A hillside too steep to plow safely turns into level fields where olive trees can take hold.\nNoah: How steep are the upper terraces?\nElena: Steep enough that climbing them means pausing for breath. Without the walls holding soil in place, nothing but scrub would survive up there.\nNoah: What happens if one wall further up the hill fails?\nElena: For example, one collapsed wall dumps its soil and water onto the terrace below, overwhelming a wall never built to carry double the weight, and a failure can travel down several terraces in one season.\nNoah: That sounds like constant upkeep.\nElena: It is, though a well-built wall with no mortar to crack can outlast the farmer who built it, sometimes standing for centuries with nothing more than an occasional loosened stone reset by hand.",
+      "highlight_spans": [
+        "Could you explain how these dry-stone walls keep the hillside from washing away",
+        "one collapsed wall dumps its soil and water onto the terrace below",
+        "a well-built wall with no mortar to crack can outlast the farmer who built it"
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Early in the conversation, what does Elena say happens on a bare slope during heavy rain?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Elena says heavy rain sends water downhill, carrying loose soil with it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה, כפי שאלנה אומרת: \"heavy rain sends water downhill, carrying loose soil with it\"."
+            },
+            {
+              "text": "It's Noah, not Elena, who says runoff carries topsoil down a bare slope.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה נח שואל, אך אלנה היא זו שאומרת את המשפט הזה, לא נח."
+            },
+            {
+              "text": "Elena says heavy rain has little effect on bare, unterraced soil.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - אלנה מסבירה שגשם כבד גורם לשחיקה משמעותית, לא שיש לו השפעה מועטה."
+            },
+            {
+              "text": "Elena says terraced hillsides need less rainfall than flat farmland does.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נושא כמויות הגשם הנדרשות כלל לא עלה בשיחה; אלנה מדברת על שחיקה, לא על צריכת מים."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does Elena say can happen if a wall further up the hill fails?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The farmer must rebuild the entire hillside from the top down.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "פרט זה לא נאמר בשיחה; אלנה מדברת על עומס שעובר לטרסה הבאה, לא על בנייה מחדש של כל הגבעה."
+            },
+            {
+              "text": "The terrace below absorbs the extra load without any strain at all.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - אלנה אומרת שהקיר התחתון עלול \"overwhelming a wall never built to carry double the weight\", כלומר כן נפגע."
+            },
+            {
+              "text": "Dry-stone walls generally require fresh mortar repairs every few years.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נושא זה לא נדון; למעשה אלנה מציינת שאין מלט כלל בקירות היבשים."
+            },
+            {
+              "text": "Its soil and water can overwhelm the terrace wall below it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"one collapsed wall dumps its soil and water onto the terrace below, overwhelming a wall never built to carry double the weight\"."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C17",
+      "title": "LQA-PROD-C: long_dialogue (salt_evaporation_ponds)",
+      "topic": "A salt-pond worker explains the intake-evaporation-saturation-crystallization process, then debates the taste of sea salt",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Marcus: Could you explain how you get solid salt out of a shallow pool of seawater?\nSofia: We let seawater flow into a shallow intake pond through a sluice gate. From there it moves through smaller ponds, and at every stage, sun and wind pull water out through evaporation, so the brine left behind gets steadily saltier.\nMarcus: How long does that take?\nSofia: Weeks, usually. A dry, windy stretch speeds things up, while a rainy week can undo days of progress in an afternoon, since fresh rain dilutes the brine right back down.\nMarcus: And the salt just appears once it's concentrated enough?\nSofia: Once the brine reaches its saturation point, meaning it holds as much dissolved salt as the water can carry, further evaporation forces the excess to crystallize as solid grains, settling on the pond floor as a thin white crust.\nMarcus: So the process is really just four steps: intake, evaporation, saturation, then crystallization.\nSofia: Exactly that chain. Once a good crust forms, we rake the ponds to gather the crystals into low piles so they can drain and dry before we bag them.\nMarcus: Does the color of the pond matter? Some of these look almost pink.\nSofia: The tint comes from tiny organisms that thrive in water this salty, harmless to the salt but a useful sign that a pond has reached a particular concentration.\nMarcus: If you ask me, that pink color is the most interesting part of the whole operation.\nSofia: In my opinion, the real interest is in the taste. I think salt harvested this way carries trace minerals that give it a rounder flavor than plain mined rock salt.\nMarcus: Honestly, I am not convinced. I think that difference is mostly in people's heads, since refined salt is chemically almost identical either way.\nSofia: Maybe, but the workers here would tell you otherwise, and I trust decades of tasting over a lab analysis.",
+      "highlight_spans": [
+        "intake, evaporation, saturation, then crystallization",
+        "In my opinion, the real interest is in the taste",
+        "I think that difference is mostly in people's heads"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Early in the conversation, what does Sofia say happens as seawater moves through the smaller ponds?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Filters at each pond remove sand and debris from the seawater.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "פרט זה אינו נזכר; סופיה מתארת את שלב האידוי, לא סינון פסולת."
+            },
+            {
+              "text": "Sun and wind evaporate water, making the remaining brine saltier.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"sun and wind pull water out through evaporation, so the brine left behind gets steadily saltier\"."
+            },
+            {
+              "text": "The ponds add fresh water at each stage to dilute the brine.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - התהליך מרכז את התמלחת, לא מדלל אותה; גשם דווקא \"dilutes the brine\" ומעכב את התהליך."
+            },
+            {
+              "text": "Salt crystals dissolve back into the brine at every stage.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - הבריין הופך מרוכז יותר ויותר, ובסוף גבישי מלח מתגבשים החוצה (\"forces the excess to crystallize\"), הם לא נמסים בחזרה."
+            }
+          ]
+        },
+        {
+          "question_type": "opinion",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is Sofia's opinion about sea salt harvested this way, according to the conversation?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "She thinks the taste difference is mostly imagined by picky tasters.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו דעתו של מרקוס, לא של סופיה: \"I think that difference is mostly in people's heads\" נאמר על ידי מרקוס."
+            },
+            {
+              "text": "She thinks refined salt tastes better, since refining removes minerals.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך מדעתה - סופיה אומרת שמלח הים \"carries trace minerals... a rounder flavor than plain mined rock salt\", כלומר עדיף בעיניה."
+            },
+            {
+              "text": "She thinks it carries trace minerals that give it a rounder flavor.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"I think salt harvested this way carries trace minerals that give it a rounder flavor\"."
+            },
+            {
+              "text": "She thinks the pond's dark color helps speed up the evaporation.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "סופיה כן מדברת על הצבע הוורוד, אך רק כסימן לריכוז מלח, לא כדעה על טעם, ואינה קושרת אותו לקצב האידוי."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C18",
+      "title": "LQA-PROD-C: long_dialogue (watermill_gearing)",
+      "topic": "A miller explains to a visitor how gearing converts a slow-turning waterwheel into fast millstone rotation",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Ben: How does a mill turn something as slow as flowing water into fast enough motion to grind grain?\nGrace: It comes down to gearing. Water hits the paddles from above, and the wheel turns slowly, maybe ten or twelve times a minute even with a strong flow.\nBen: That sounds slow for grinding anything.\nGrace: It is, alone. The axle carries a large gear called the pit wheel, meshing with a smaller gear on a vertical spindle. With far fewer teeth, the small gear spins many times for every turn of the big one.\nBen: So the size difference between the gears is what speeds everything up?\nGrace: Exactly, and that is the whole point: it is not the water that grinds grain, it is a chain of gearing turning a slow push into a fast spin. By the millstone, the surface turns well over a hundred times a minute, fast enough to shear grain apart.\nBen: Does the stone touch the grain directly, or is there something in between?\nGrace: Grain drops through a hole in the upper stone, and grooves cut into both stones carry it outward as it is crushed, releasing flour at the outer edge.\nBen: How do you keep the gap between the stones consistent?\nGrace: We adjust it constantly. Too tight and the stones throw off sparks, wearing themselves down for nothing. Too loose and the grain passes through only half crushed, coming out coarse.\nBen: Is that adjustment done by hand while the mill runs?\nGrace: It is, through a lever the miller shifts without stopping the wheel, raising or lowering the upper stone by a hair's width.\nBen: That is a lot of judgment for something so mechanical.\nGrace: It is, passed down rather than written in any manual. I still check the gap the way my grandfather did, rubbing a pinch of flour between finger and thumb before a sack goes out the door.",
+      "highlight_spans": [
+        "it is not the water that grinds grain, it is a chain of gearing turning a slow push into a fast spin",
+        "the grain passes through only half crushed, coming out coarse",
+        "rubbing a pinch of flour between finger and thumb before a sack goes out the door"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of this conversation?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "A chain of gearing turns the wheel's slow motion into fast grinding.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: גרייס אומרת \"it is a chain of gearing turning a slow push into a fast spin\"."
+            },
+            {
+              "text": "Modern engines have mostly replaced gear-driven mills like this one.",
+              "k_code": "K-WORLD",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך לא נתמכת - השיחה לא עוסקת בהחלפת המנגנון במנועים מודרניים."
+            },
+            {
+              "text": "Water pressure alone is strong enough to grind grain quickly.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "גרייס אומרת במפורש ההפך: \"it is not the water that grinds grain\", אלא שרשרת ההילוכים."
+            },
+            {
+              "text": "Millstones must be replaced often because grinding wears them down fast.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "נושא בלאי האבנים לא עלה בשיחה כלל; הדגש הוא על ההילוכים ועל התאמת הרווח בין האבנים."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Near the end of the conversation, what does Grace say she still does the way her grandfather did?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Ben is the one who tests the gap by rubbing flour on his fingers.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו גרייס שאומרת זאת על עצמה (\"I still check the gap\"), לא בן שמדבר עליו."
+            },
+            {
+              "text": "She now uses a modern gauge instead of feeling the flour.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך ממה שנאמר - גרייס עדיין משתמשת בשיטה הישנה: \"rubbing a pinch of flour between finger and thumb\", לא במד מודרני."
+            },
+            {
+              "text": "She still greases the gears using a recipe from her grandfather.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "פרט זה לא נזכר כלל בשיחה."
+            },
+            {
+              "text": "She still judges the gap by the texture of the flour coming out.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "התשובה הנכונה: \"I still check the gap the way my grandfather did, rubbing a pinch of flour between finger and thumb\"."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

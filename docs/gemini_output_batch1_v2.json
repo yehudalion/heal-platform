@@ -1,0 +1,102 @@
+[
+  {
+    "question_id": "00a04a54-3621-437d-81c7-7bb2ce652b98",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע פותח באמונה שדבשת הגמל מלאה במים, אך המילה \"Actually\" מבהירה שהיא עשויה משומן, שהוא \"a rich food source\". מכיוון שהדבשת מכילה שומן ולא מים, הגמל לא יכול \"rely on the fat inside its hump\" כדי לשתות."},
+      {"index": 1, "explanation_he": "בקטע מוסבר כי האמונה שהדבשת מלאה במים שגויה, וכי \"Actually, the hump is made of fat\". מכיוון שהדבשת אינה מקור למים אלא לשומן, כדי לשתות מים הגמל חייב למצוא מקור חיצוני ועל כן עליו \"find real pools of water on the ground\"."},
+      {"index": 2, "explanation_he": "לפי הקטע, הגמלים חיים במדבריות חמים שבהם \"water is very hard to find\". עם זאת, אין בקטע מידע על מעבר לאזורים קרים יותר במהלך היום, והאפשרות \"travel to colder climates during the day\" מציגה פתרון שלא מוזכר בטקסט."},
+      {"index": 3, "explanation_he": "הקטע דן בקושי למצוא מים ובכך שהדבשת היא \"made of fat\" ולא מים. עם זאת, לא נטען שהגמל יכול לשרוד ללא שתייה במשך שנים, ולכן האפשרות \"avoid drinking any liquids for several years\" אינה הגיונית לפי הטקסט."}
+    ],
+    "highlight_spans": ["People long believed", "Actually", "Therefore, to drink water"]
+  },
+  {
+    "question_id": "9f24b8b1-1efd-487b-b2ff-37b8f7b9f4ce",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע מציין כי המצרים השתמשו במטריות כדי להגן על עורם מפני \"the harsh, burning sun\". המטרה הייתה הגנה מהשמש, ולכן הטענה שהמטריות נועדו למשוך גשם לשדות, \"attract rain to the dry Egyptian fields\", אינה מתאימה להקשר."},
+      {"index": 1, "explanation_he": "לפי הקטע, מטרת המטריות בעבר הייתה שונה מאוד מהיום, והעשירים השתמשו בהן כדי \"protect their pale skin\". השימוש נועד להצל מפני השמש, ולכן האפשרות שהן סייעו לשחות בנהר, \"help people swim in the deep Nile river\", אינה קשורה."},
+      {"index": 2, "explanation_he": "המילה \"however\" מסמנת מעבר משימוש במטריות נגד גשם כיום, לשימוש בעבר נגד \"the harsh, burning sun\". לכן, המטריות המצריות הראשונות נועדו לחסום את השמש במקום את הגשם, \"block out sunlight rather than water\"."},
+      {"index": 3, "explanation_he": "השימוש המודרני במטריות הוא \"to keep dry during heavy rainstorms\". אולם, המילה \"however\" מציגה ניגוד ומבהירה שבעבר השתמשו בהן למטרה אחרת, ולכן האפשרות \"keep dry during major winter storms\" מתארת את ההפך מהשינוי ההיסטורי."}
+    ],
+    "highlight_spans": ["Today", "however", "Therefore"]
+  },
+  {
+    "question_id": "3a5ad3d8-17ba-46d5-84b6-59bbf1651313",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע מתאר את רעילות העופרת בעבר, ומסביר כי \"manufacturers replaced the lead\" בגרפיט שאינו מזיק. התוצאה של המעבר לחומר הבטוח היא שהעפרונות המודרניים בטוחים לחלוטין לשימוש, \"entirely safe to use even though they contain no lead\"."},
+      {"index": 1, "explanation_he": "היצרנים החליפו את העופרת המסוכנת בחומר שמוגדר \"harmless mineral called graphite\". לכן, לא ייתכן שהעפרונות המודרניים הפכו לרעילים הרבה יותר, כפי שטוענת האפשרות \"much more toxic than the original wooden pencils\"."},
+      {"index": 2, "explanation_he": "כדי לפתור את בעיית הרעילות, היצרנים לא רק ציפו את החומר אלא ביצעו החלפה מלאה: \"replaced the lead with a harmless mineral\". האפשרות \"made of lead that is painted with graphite\" סותרת זאת משום שהיא טוענת שהעופרת הרעילה עדיין שם."},
+      {"index": 3, "explanation_he": "החלפת העופרת בגרפיט נועדה לפתור רק את בעיית הבטיחות, \"To solve this safety concern\". אין בקטע רמז לכך שהשינוי פגע ביכולת הכתיבה והפך את העפרונות לחסרי יכולת להשאיר סימנים כהים, \"unable to leave any dark marks on paper\"."}
+    ],
+    "highlight_spans": ["Unfortunately", "To solve this safety concern", "Therefore"]
+  },
+  {
+    "question_id": "ce470e8a-f5f8-44a7-a7a3-3ae1889ceacd",
+    "options": [
+      {"index": 0, "explanation_he": "המילה \"However\" מציגה את הבעיה: פושעים החלו לזייף את המטבעות בקלות. פתרון שבו הממשלה תדפיס עוד מטבעות עץ, \"print even more wooden coins for the shopkeepers\", רק יחמיר את בעיית הזיופים המתוארת ולא יפתור אותה."},
+      {"index": 1, "explanation_he": "הקטע פותח בכך שמטבעות העץ היו פתרון זמני בשל \"metal shortage\". מאחר שהתברר שקל לזייף אותם, הממשלה לא תרצה להחליף את כל מטבעות המתכת בעץ, ולכן האפשרות \"replace all the metal coins with carved wood\" אינה הגיונית."},
+      {"index": 2, "explanation_he": "לפי הקטע, הפעולה של \"criminals quickly realized\" כיצד לזייף את המטבעות יצרה בעיה חמורה לממשלה. העסקת פושעים אלה לצורך ייצור המטבעות הרשמיים, \"hire local criminals to carve the official money\", אינה פתרון הגיוני לבעיית הזיוף."},
+      {"index": 3, "explanation_he": "המילה \"However\" מציגה את הבעיה שנוצרה מזיופי הפושעים. בשל הקושי הגובר, \"Because of this growing problem\", הממשלה נאלצה להפסיק את השימוש בכסף הזמני מעץ מוקדם מהצפוי, \"stop using the wooden money much earlier than planned\"."}
+    ],
+    "highlight_spans": ["However", "Because of this growing problem"]
+  },
+  {
+    "question_id": "210a9576-4cba-4c1b-842f-0ef2c11af689",
+    "options": [
+      {"index": 0, "explanation_he": "כדי לשרוד את חום היום, הצפרדעים מתחפרות עמוק באדמה הלחה. הן יוצאות אל פני השטח רק בלילה, \"Only after the sun sets\". לכן, הן אינן צדות חרקים על החול החם במהלך היום, \"hunt for insects on the sand\", שכן בשעות אלו הן מתחת לאדמה."},
+      {"index": 1, "explanation_he": "הקטע מסביר שהצפרדעים חייבות להישאר רטובות, \"must stay wet to live\". עם זאת, הרעיון שהן שותות מים מעננים יבשים, \"drink water from dry clouds\", אינה הגיוני מבחינה מדעית ואינו מוזכר בקטע, המדגיש את התחפרותן באדמה הלחה."},
+      {"index": 2, "explanation_he": "הקטע מסביר שכדי לשרוד את החום, הצפרדעים \"dig deep underground\". הן יוצאות רק לאחר השקיעה, \"Only after the sun sets\", ולכן במהלך שעות היום החמות הן נשארות חבויות מתחת לפני השטח, \"remain hidden below the surface\"."},
+      {"index": 3, "explanation_he": "הצפרדעים מתחפרות באדמה הלחה כדי \"To survive the hot daytime heat\" — כלומר, כדי לשרוד את החום הקיצוני של היום ולא את הקור. לכן, הטענה שהן מתות מקור קיצוני במהלך היום החם, \"die from the extreme cold\", סותרת את הנתונים בקטע."}
+    ],
+    "highlight_spans": ["but they inhabit", "To survive", "Only after"]
+  },
+  {
+    "question_id": "2d24d481-55cb-445f-ac03-a63253f1a2d7",
+    "options": [
+      {"index": 0, "explanation_he": "המילה \"However\" מציגה את הבעיה: קערות קטנות מכילות \"very little oxygen\". מאחר שהמחסור בחמצן מחליש את דגי הזהב, המלצה להחזיקם בקערות קטנות עוד יותר, \"be kept in even smaller bowls\", תחמיר את הבעיה במקום לפתור אותה."},
+      {"index": 1, "explanation_he": "הקטע מבהיר שדגי הזהב זקוקים לחמצן כדי לנשום, \"which goldfish need to breathe\". ללא כמות מספקת של חמצן הם נחלשים, ולכן המלצה שהדגים פשוט ינשמו פחות חמצן כדי לשרוד, \"breathe less oxygen to survive\", אינה הגיונית מבחינה ביולוגית."},
+      {"index": 2, "explanation_he": "הקטע מתמקד בבעיית החמצן והנשימה בקערות קטנות, \"Without enough oxygen\". נושא התזונה של הדגים או תדירות האכלתם אינו מוזכר כלל בטקסט, ולכן ההמלצה \"be fed only twice a week\" אינה נובעת מתוכן הקטע."},
+      {"index": 3, "explanation_he": "בקטע מתואר הקושי של הדגים לשרוד בקערות קטנות ללא פילטר, שכן \"these small bowls hold very little oxygen\". לכן, מומחים ממליצים להעבירם לסביבה שתספק חמצן רב ומים נקיים: מכלים גדולים עם מסננים, \"live in large, filtered tanks\"."}
+    ],
+    "highlight_spans": ["However", "Without enough oxygen", "For this reason"]
+  },
+  {
+    "question_id": "4ffb3e42-a7b8-46e2-a047-0dc1db48e5ad",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע מסביר שהאטמוספירה פועלת כמו חממה על ידי \"trapping heat\". עליית כמות הגזים הללו מגבירה את כליאת החום, בניגוד לרעיון שהם יאפשרו ליותר אור לחמוק לחלל, \"let more light escape into space\", שאינו מתיישב עם מנגנון הכליאה."},
+      {"index": 1, "explanation_he": "התהליך המתואר בקטע מביא לכך שכליאת החום \"makes the greenhouse much warmer\". מכיוון שהאטמוספירה פועלת באופן דומה, עלייה בגזים אלו תעלה את הטמפרטורה ולא תביא להתקררות כדור הארץ, \"cool down the planet's surface\"."},
+      {"index": 2, "explanation_he": "הקטע משתמש בחממה בעלת \"glass roof\" רק כאנלוגיה כדי להסביר כיצד האטמוספירה עובדת, \"works similarly\". באטמוספירה עצמה אין גג זכוכית אמיתי, ולכן גזים אלו אינם יכולים להרוס גג פיזי, \"destroy the protective glass roof\"."},
+      {"index": 3, "explanation_he": "הקטע מקביל בין כליאת החום בחממה לבין פעולת האטמוספירה, \"works similarly\". המילה \"Consequently\" מצביעה על התוצאה: אם גזים אלו כולאים חום, הרי שעלייה בריכוז שלהם תגרום לכך שהם יחממו את כדור הארץ, \"make the Earth warmer\"."}
+    ],
+    "highlight_spans": ["but this heat cannot", "works similarly", "Consequently"]
+  },
+  {
+    "question_id": "1cf0467d-00f4-4abc-9fc5-0322003c84be",
+    "options": [
+      {"index": 0, "explanation_he": "המחקר מראה שחוסר שינה של יממה שלמה \"slows reactions significantly\" ופוגע בבטיחות הנהיגה. לכן, בלתי אפשרי להסיק שנהיגה במצב כזה היא בטוחה לחלוטין בשעות היום, \"completely safe during the daytime\"."},
+      {"index": 1, "explanation_he": "הקטע קובע כי חוסר שינה גורם לפגיעה בנהיגה שמשתווה לזו הנגרמת על ידי \"drinking too much alcohol\". מכיוון ששני המצבים פוגעים בנהיגה באופן משמעותי, שתיית אלכוהול לא תשפר את המצב כפי שנטען ב-\"improved by drinking alcohol\"."},
+      {"index": 2, "explanation_he": "הקטע דן בסכנות של חוסר שינה בזמן נהיגה. למרות שהפתרון לעייפות הוא שינה, הרעיון של שינה תוך כדי נהיגה עצמה, \"prevented by sleeping while driving\", הוא בלתי אפשרי פיזית, מסוכן ביותר ואינו פתרון הגיוני שעולה מהטקסט."},
+      {"index": 3, "explanation_he": "בקטע נכתב כי רמת הפגיעה מחוסר שינה \"matches the impairment caused\" על ידי שתיית אלכוהול מופרזת. המילה \"Thus\" מובילה למסקנה המתבקשת: נהיגה בעייפות קיצונית מסוכנת בדיוק כמו נהיגה תחת השפעת אלכוהול, \"just as dangerous as drunk driving\"."}
+    ],
+    "highlight_spans": ["They discovered", "Surprisingly", "Thus"]
+  },
+  {
+    "question_id": "920216b3-c943-4a09-bbb9-7488bb9c2562",
+    "options": [
+      {"index": 0, "explanation_he": "הדבורים רוקדות כדי \"show their hive mates\" היכן הפרחים. המילה \"However\" מסמנת קושי: בימים מעוננים הן אינן יכולות לחשב את הזווית הנדרשת, ולכן \"Therefore\" הן לא מסוגלות להנחות את חברותיהן, \"unable to guide their mates to flowers\"."},
+      {"index": 1, "explanation_he": "לפי הקטע, העננים מונעים מהדבורים לחשב נכון את זווית הריקוד, \"cannot calculate this angle correctly\". הקטע אינו מזכיר שינוי במהירות הריקוד, ולכן הטענה שהן נאלצות לרקוד מהר יותר, \"forced to do the wiggle dance faster\", אינה קשורה לבעיה."},
+      {"index": 2, "explanation_he": "המשפט \"Therefore, on dark and cloudy days\" מסמן תוצאה של הבעיה שנגרמת מכך שאין שמש. כיוון שהדבורים אינן יכולות לחשב את זווית הריקוד המכוון, הן לא יצליחו למצוא את הפרחים בקלות, ובכך נסתרת האפשרות \"still able to find sweet flowers easily\"."},
+      {"index": 3, "explanation_he": "הבעיה בימים מעוננים היא חוסר היכולת לחשב את זווית הריקוד כדי למצוא מזון עבור הכוורת שלהן, \"show their hive mates\". אין בקטע רמז לכך שהדבורים יעזבו ויעופו לכוורות זרות ומרוחקות, \"likely to fly to other distant hives\"."}
+    ],
+    "highlight_spans": ["However", "Therefore"]
+  },
+  {
+    "question_id": "b71b7e6b-2e55-4fce-b2ef-49ecf32491e1",
+    "options": [
+      {"index": 0, "explanation_he": "הקקטוסים פיתחו מחטים חדות כדי \"To protect themselves\" מפני חיות צמאות. המחטים מונעות פגיעה בצמח, ואינן מעניקות לחיות הצמאות יכולת חדשה לאגור מים בעצמן, \"able to store water inside their bodies\", טענה שאינה קשורה למטרת המחטים."},
+      {"index": 1, "explanation_he": "המחטים החדות התפתחו לאורך דורות כדי להגן על הקקטוס מפני החיות, \"To protect themselves\". המילים \"As a result of\" מסמנות את תוצאת ההגנה הזו: בעלי החיים הצמאים נרתעים מהקוצים ונשמרים הרחק ממאגר המים של הצמח, \"kept away from the plant's water\"."},
+      {"index": 2, "explanation_he": "החיות הצמאות מעוניינות להגיע אל המים שבתוך ה-\"fleshy stems\" של הקקטוס. אולם, המחטים החדות והמכאיבות נועדו להרתיע אותן, ולכן לא הגיוני שהמחטים \"invited to eat the fleshy stems safely\" בצורה בטוחה."},
+      {"index": 3, "explanation_he": "הקקטוסים פיתחו מחטים כדי להתגונן מפני בעלי החיים במדבר, \"To protect themselves\". פתרון הבעיה המקומית אולי מרחיק את החיות מהצמח, אך הקטע אינו טוען שהקוצים גורמים להן לנדוד ליערות צפוניים מרוחקים, \"forced to migrate to northern forests\"."}
+    ],
+    "highlight_spans": ["However", "To protect themselves", "As a result of"]
+  }
+]

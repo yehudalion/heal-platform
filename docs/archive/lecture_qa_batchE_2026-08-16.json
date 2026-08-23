@@ -1,0 +1,1282 @@
+[
+  {
+    "title": "LQA-PROD-E: short_dialogue (community_time_bank)",
+    "topic": "Two friends discuss how a community time-banking scheme lets residents trade an hour of one skill for an hour of another.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Noa: Have you signed up for the community time bank yet? You give an hour of your own skills, and in return you can request an hour from someone else.\nDaniel: I signed up last month. I taught someone how to fix a bicycle, and later a retired teacher helped my daughter with her math homework.\nNoa: That's exactly how it works. Nobody pays money, and every hour counts the same, whether you're mending a fence or writing a letter.\nDaniel: The tricky part is finding people quickly. Right now requests get posted on a small board near the entrance, and you just wait for someone to notice.\nNoa: They're planning an online list soon, which should make matching much faster.",
+    "highlight_spans": [
+      "a retired teacher helped my daughter with her math homework"
+    ],
+    "questions": [
+      {
+        "question_text": "What does Daniel say he received in exchange for teaching someone bicycle repair?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Advice on how to mend a garden fence",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מנחה מוזכר בשיחה בהקשר כללי לגבי גדר, אבל זה לא מה שדניאל קיבל בפועל בתמורה."
+          },
+          {
+            "text": "Help from a retired teacher with math homework",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דניאל אומר במפורש שמורה בדימוס עזרה לבתו בשיעורי בית במתמטיקה, בתמורה לתיקון אופניים שלימד."
+          },
+          {
+            "text": "A math lesson in exchange for cycling repair",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך התפקידים: דניאל הוא שלימד תיקון אופניים וקיבל עזרה במתמטיקה, לא להפך."
+          },
+          {
+            "text": "A discount voucher from the local bike shop",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין כל אזכור של שובר הנחה בחנות אופניים; זהו פרט מומצא שלא נתמך בתמליל."
+          }
+        ]
+      }
+    ],
+    "_key": "E1"
+  },
+  {
+    "title": "LQA-PROD-E: short_lecture (town_crier_tradition)",
+    "topic": "A narrator describes how a small market town's traditional town crier role has continued by shifting from delivering news to a ceremonial welcome.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Every Saturday morning, a man in a red coat and a tall hat walks through the market square ringing a heavy brass bell. He is the town crier, a role that dates back centuries, when criers announced news before most people could read. Today the crier no longer delivers real news. Instead, he welcomes visitors, announces the opening of market stalls, and reads short messages that local shopkeepers pay to have shared aloud. Children often follow him around the square, imitating his booming voice. The current crier learned the job from his predecessor, who held the post for nearly thirty years and trained him in the proper rhythm and volume needed to be heard over market noise.",
+    "highlight_spans": [
+      "Today the crier no longer delivers real news",
+      "welcomes visitors, announces the opening of market stalls"
+    ],
+    "questions": [
+      {
+        "question_text": "What is this lecture mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "How market stalls are organized every Saturday morning",
+            "k_code": "K-NEW",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה מתחרה סבירה כשלעצמה, אך התמליל עוסק בתפקיד הכרוז ולא בארגון הדוכנים בשוק."
+          },
+          {
+            "text": "How widespread reading made the crier's job disappear",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "התמליל לא טוען שהתפקיד נעלם; להפך, הוא ממשיך להתקיים בצורה מותאמת."
+          },
+          {
+            "text": "How the town crier's role changed while continuing",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "התמליל מתאר כיצד הכרוז המשיך להתקיים אך שינה את תפקידו מהעברת חדשות לברכת מבקרים וטקסיות."
+          },
+          {
+            "text": "How the current crier trained under his predecessor",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זהו פרט תומך בסוף התמליל, לא הרעיון המרכזי של הקטע כולו."
+          }
+        ]
+      }
+    ],
+    "_key": "E2"
+  },
+  {
+    "title": "LQA-PROD-E: short_dialogue (memorial_bench_dedication)",
+    "topic": "Two friends discuss the process of dedicating a memorial park bench, including plaque wording rules and where different benches ended up being placed.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Sam: I finally got approval for the bench dedication. The plaque will go near the rose garden, close to where my grandmother used to sit every afternoon.\nEmma: That's a lovely spot. Did the council make you choose the wording yourself, or do they have some kind of template?\nSam: They gave me a short list of approved phrases, but I could add extra words of my own after that. I picked something she used to say to me as a child.\nEmma: I remember when my neighbor did the same thing last year. Hers ended up near the playground instead, because the rose garden spot was already taken.\nSam: Apparently there's a waiting list now. Mine only came through because someone else canceled their request.",
+    "highlight_spans": [
+      "Hers ended up near the playground instead, because the rose garden spot was already taken"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the conversation, whose bench dedication was placed near the playground instead of the rose garden?",
+        "question_type": "speaker_ref",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Emma's neighbor, whose bench was dedicated last year",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אמה מספרת שהשכנה שלה עשתה את אותו הליך בשנה שעברה, וספסלה הגיע ליד המגרש כי המקום ליד גינת הוורדים כבר היה תפוס."
+          },
+          {
+            "text": "Sam's grandmother, who requested that spot herself",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "הסבתא של סם מוזכרת רק כמי שישבה ליד גינת הוורדים; אין כל טענה שהיא ביקשה מקום ליד המגרש."
+          },
+          {
+            "text": "Sam, whose rose garden request was denied",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "בקשתו של סם דווקא אושרה ליד גינת הוורדים; זהו היפוך של העובדה בתמליל."
+          },
+          {
+            "text": "The council officer who approved dedication requests",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "פקיד המועצה מוזכר באופן כללי בהקשר לתהליך האישור, אך אינו זה שהספסל שלו הוקדש."
+          }
+        ]
+      }
+    ],
+    "_key": "E3"
+  },
+  {
+    "title": "LQA-PROD-E: short_lecture (volunteer_dialaride_minibus)",
+    "topic": "A narrator explains how a volunteer-run minibus service helps elderly residents of a rural district reach the market, pharmacy, and medical appointments.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "In a small rural district, a group of volunteer drivers runs a minibus service for elderly residents who cannot easily reach the nearest town on their own. Riders call a coordinator by phone the day before, and the coordinator matches them with a driver heading in a similar direction. The service is not part of the regular bus network and does not follow a fixed timetable. Trips usually go to the market, the pharmacy, or medical appointments. Drivers are unpaid, though the group covers their fuel costs from a small annual grant. Because demand is highest on Fridays, when the weekly market takes place, the coordinator now asks riders to book two days ahead during that period instead of just one.",
+    "highlight_spans": [
+      "does not follow a fixed timetable"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the lecture, which statement is NOT true about the minibus service?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Riders must call a coordinator one day ahead",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_in_transcript",
+            "explanation_he": "זהו פרט נכון: הרוכבים מתקשרים לרכז יום מראש כדי לתאם נסיעה."
+          },
+          {
+            "text": "Unpaid volunteer drivers provide the minibus service",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_in_transcript",
+            "explanation_he": "זהו פרט נכון: הנהגים הם מתנדבים שאינם מקבלים שכר."
+          },
+          {
+            "text": "Riders book two days ahead during market week",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_in_transcript",
+            "explanation_he": "זהו פרט נכון: בתקופת השוק השבועי מתבקשים הרוכבים להזמין יומיים מראש."
+          },
+          {
+            "text": "The service follows a fixed regional bus timetable",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "התמליל קובע במפורש שהשירות אינו חלק מרשת האוטובוסים הרגילה ואינו פועל לפי לוח זמנים קבוע."
+          }
+        ]
+      }
+    ],
+    "_key": "E4"
+  },
+  {
+    "title": "LQA-PROD-E: short_dialogue (christmas_lights_switchon_committee)",
+    "topic": "Two committee members debate who should be chosen to switch on the town's annual holiday lights this year.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Tom: The lights switch-on is only three weeks away, and we still haven't decided who presses the button this year.\nGrace: I think we should ask the oldest shopkeeper on the high street. She's run her shop for decades, and people would love seeing her do it.\nTom: That's a nice idea, but last year we chose a schoolchild, and the crowd seemed to enjoy that even more. Maybe we should keep rotating between different groups.\nGrace: Honestly, I still think the shopkeeper deserves it this time. She's never been asked, and it would mean a lot to her.\nTom: Fair enough. Let's put it to the committee on Thursday and see what everyone else thinks.",
+    "highlight_spans": [
+      "I still think the shopkeeper deserves it this time"
+    ],
+    "questions": [
+      {
+        "question_text": "What is Grace's opinion about who should switch on the lights this year?",
+        "question_type": "opinion",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "She believes a schoolchild should switch on lights",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זו דעתו של טום לגבי החזרה על בחירת ילד בית ספר, לא דעתה של גרייס."
+          },
+          {
+            "text": "She believes the longtime shopkeeper deserves the honor",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "גרייס אומרת פעמיים שהיא חושבת שהחנוונית הוותיקה מגיעה לה הכבוד הזה, כי מעולם לא הוצע לה."
+          },
+          {
+            "text": "She believes a local charity should choose instead",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין כל אזכור של עמותה מקומית בשיחה; זהו פרט מומצא."
+          },
+          {
+            "text": "She believes the committee should decide without discussion",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הצעת ההצבעה בוועדה ביום חמישי היא של טום, ואינה מבטאת את עמדתה האישית של גרייס."
+          }
+        ]
+      }
+    ],
+    "_key": "E5"
+  },
+  {
+    "title": "LQA-PROD-E: short_lecture (public_clock_tower_keeper)",
+    "topic": "A narrator describes the volunteer keeper who hand-winds and corrects an old stone clock tower in a market town every week.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "At the center of the old market town stands a stone clock tower, built more than a century ago and still wound by hand every week. The task falls to a volunteer known locally as the keeper, who climbs a narrow staircase each Sunday morning to turn the heavy mechanism. Modern clocks rarely need this kind of attention, since most now run on electricity, but the tower's mechanism was never converted, partly to preserve its original craftsmanship. The keeper also adjusts the hands slightly when the clock drifts, a small but essential correction that keeps the tower reliable for residents who still glance up at it out of habit. Visitors sometimes assume the task is largely ceremonial, but the keeper insists it demands real precision.",
+    "highlight_spans": [
+      "adjusts the hands slightly when the clock drifts"
+    ],
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"drifts\" most nearly mean when describing the clock?",
+        "question_type": "vocab_in_context",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Suddenly stops working completely",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל לא מתאר תקלה מוחלטת, אלא סטייה קלה שדורשת תיקון קבוע."
+          },
+          {
+            "text": "Becomes more accurate on its own",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך המשמעות: השעון דווקא סוטה וזקוק לתיקון, לא משתפר מעצמו."
+          },
+          {
+            "text": "Gradually becomes inaccurate over time",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, 'drifts' מתאר את השעון שסוטה בהדרגה מהזמן הנכון, ולכן השומר מתקן את המחוגים."
+          },
+          {
+            "text": "Moves slightly on its stone base",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו החלפה של המשמעות בפועל ('drifts' של הזמן) בתיאור פיזי של מבנה האבן, שאינו נתמך בתמליל."
+          }
+        ]
+      }
+    ],
+    "_key": "E6"
+  },
+  {
+    "title": "LQA-PROD-E: medium_dialogue (cobbler_resoling)",
+    "topic": "A cobbler explains to a customer the steps for resoling a pair of worn boots.",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Maya: These boots are still comfortable, but the soles are worn straight through. Is it worth fixing them?\nSam: Easily. First I peel the old sole away with a wide flat blade, working slowly so the leather upper is not nicked.\nMaya: Doesn't that damage the stitching?\nSam: Not if I'm careful. Once the old rubber is off, I rough the bare surface with sandpaper so the new sole has something to grip onto.\nMaya: Then you just glue the new one on?\nSam: Almost. I spread a strong cement on both surfaces, let it turn tacky, then press the new sole into place and hold it under a clamp overnight.\nMaya: That seems like a long wait for a small repair.\nSam: It is, but rushing that step is exactly why cheap repairs fall apart within a month. In the morning I trim the extra rubber flush and buff the edge smooth.\nMaya: So the boots will look almost new.\nSam: Close enough that most customers forget which pair they handed in.",
+    "highlight_spans": [
+      "First I peel the old sole away with a wide flat blade",
+      "I rough the bare surface with sandpaper so the new sole has something to grip onto",
+      "I spread a strong cement on both surfaces, let it turn tacky, then press the new sole into place and hold it under a clamp overnight",
+      "rushing that step is exactly why cheap repairs fall apart within a month"
+    ],
+    "questions": [
+      {
+        "question_text": "According to Sam, what is the first thing he does to the boot once he begins the repair?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "He removes the old sole with a wide blade.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "סם מתאר שהוא מתחיל בקילוף הסוליה הישנה באמצעות להב רחב, כפי שנאמר בתחילת הקטע."
+          },
+          {
+            "text": "He sands the leather upper to loosen the stitching.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "מדובר בפרט סביר לחנות סנדלרות אך לא נאמר בקטע; הליטוש מתייחס לסוליה החדשה, לא לחלק העליון."
+          },
+          {
+            "text": "He applies cement to both surfaces before removing anything.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך הסדר: הדבקת הדבק מתרחשת רק לאחר הסרת הסוליה הישנה וליטוש המשטח, לא לפניה."
+          },
+          {
+            "text": "He clamps the boot to check how worn the sole is.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "המהדק (clamp) מוזכר בהמשך כחלק מהדבקת הסוליה החדשה, לא כשלב בדיקה ראשוני."
+          }
+        ]
+      },
+      {
+        "question_text": "Why does Sam say it is important to leave the clamped sole overnight rather than working faster?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because the sandpaper needs the extra time to fully smooth the rubber.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "הליטוש בנייר הזכוכית מתואר כשלב נפרד ומהיר יותר; הוא אינו הסיבה לזמן ההמתנה הארוך של הדבק."
+          },
+          {
+            "text": "Because rushing the drying time is why cheap repairs come apart quickly.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "סם אומר במפורש שחיפזון בשלב הזה הוא הסיבה שתיקונים זולים מתפרקים תוך חודש."
+          },
+          {
+            "text": "Because the glue only becomes tacky after the boot cools down overnight.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך הגיוני: הדבק כבר נהיה דביק (tacky) לפני ההצמדה, וההמתנה הלילית משמשת לייבוש ולא ליצירת הדביקות."
+          },
+          {
+            "text": "Because Maya asked him to double check the stitching overnight.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מאיה לא ביקשה בדיקה כזו; היא רק העירה שההמתנה נראית ארוכה, וסם הסביר את הסיבה מיוזמתו."
+          }
+        ]
+      }
+    ],
+    "_key": "E7"
+  },
+  {
+    "title": "LQA-PROD-E: medium_dialogue (locksmith_key_cutting)",
+    "topic": "A locksmith explains to a customer the steps involved in cutting a copy of a house key.",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Owen: I need a copy of this key before the weekend. How long does that take?\nPriya: Only a few minutes, if the original isn't too worn. First I clamp your key and a blank side by side in the machine so they sit at exactly the same height.\nOwen: What happens if they are not lined up?\nPriya: Then every cut lands in the wrong place and the copy will never turn the lock. Once level, a guide arm traces the grooves of your key while a wheel cuts the same pattern into the blank.\nOwen: So the machine does all the work?\nPriya: Mostly, but I still run a small file over the new key afterward to smooth any rough edges the wheel left behind.\nOwen: Does that step really matter?\nPriya: It does. A rough edge can slowly wear down the pins inside a lock every time the key is turned.\nOwen: I never thought about that.\nPriya: Most people don't, until a brand new key jams on the first try.",
+    "highlight_spans": [
+      "First I clamp your key and a blank side by side in the machine so they sit at exactly the same height",
+      "every cut lands in the wrong place and the copy will never turn the lock",
+      "I still run a small file over the new key afterward to smooth any rough edges the wheel left behind",
+      "A rough edge can slowly wear down the pins inside a lock every time the key is turned"
+    ],
+    "questions": [
+      {
+        "question_text": "Why does Priya make sure the original key and the blank sit at the same height in the machine?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "So the blank will be easier to remove once cutting finishes.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "פרט סביר לתהליך חיתוך מפתחות אך לא מוזכר בקטע; ההסבר של פריה עוסק בדיוק המיקום ולא בהסרה בסוף."
+          },
+          {
+            "text": "So the spinning wheel will move more slowly and cut more quietly.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: מהירות הגלגל אינה קשורה ליישור הגובה; ההיגיון האמיתי הוא מיקום החריצים, לא מהירות או רעש."
+          },
+          {
+            "text": "So the cuts on the copy match the grooves in the exact right places.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה מסבירה שאם המפתחות אינם מיושרים, כל חיתוך ייפול במקום הלא נכון וההעתק לא יפתח את המנעול."
+          },
+          {
+            "text": "So Owen can watch both keys clearly while the machine runs.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הצפייה של אוון אינה הסיבה שניתנה; ההסבר של פריה מתמקד בדיוק החיתוך ולא בנוחות הצפייה של הלקוח."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Priya say could eventually happen if the filing step after cutting is skipped?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The blank would not fit into the cutting machine at all.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין קשר בין הליטוש לבין התאמת הבוהן למכונה; הליטוש מתרחש רק אחרי החיתוך, לא לפני ההכנסה למכונה."
+          },
+          {
+            "text": "The guide arm would trace your key's pattern in the wrong direction.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך סדר הגיוני: זרוע ההנחיה פועלת לפני שלב הליטוש, כך שהליטוש לא יכול להשפיע על כיוון המעקב שכבר הסתיים."
+          },
+          {
+            "text": "The customer would need to bring both keys back the same day.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "אין אמירה כזו בקטע; פריה מדברת על מפתח חדש שנתקע במנעול, לא על החזרת שני המפתחות באותו יום."
+          },
+          {
+            "text": "The rough edge could gradually wear down the pins inside the lock.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת במפורש שקצה מחוספס יכול לשחוק לאט את הפינים בתוך המנעול בכל סיבוב של המפתח."
+          }
+        ]
+      }
+    ],
+    "_key": "E8"
+  },
+  {
+    "title": "LQA-PROD-E: medium_dialogue (picture_framer_joining)",
+    "topic": "A picture framer explains to a customer how a wooden frame is measured, cut, and joined at the corners.",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Dana: This print deserves a proper frame. How do you build one from those wooden strips?\nLiam: I start by measuring the print, then cut each strip at a forty five degree angle so the four pieces form a neat square corner.\nDana: Do you cut all four pieces before joining anything?\nLiam: Yes, otherwise a small mistake on one piece throws off the whole frame later. Once the angles match, I spread wood glue on each joint and pull the corners together with a strap clamp.\nDana: And that holds the frame together permanently?\nLiam: Not quite yet. While the glue is still wet, I drive a thin pin through each corner from the side, which keeps the joint from shifting as it dries overnight.\nDana: So the glue and pin do different things.\nLiam: Exactly. The glue gives the joint its strength, and the pin just holds the corner steady until the glue can finish setting. Skip the pin and a corner can creep open before it sets.",
+    "highlight_spans": [
+      "cut each strip at a forty five degree angle so the four pieces form a neat square corner",
+      "I spread wood glue on each joint and pull the corners together with a strap clamp",
+      "I drive a thin pin through each corner from the side, which keeps the joint from shifting as it dries overnight",
+      "The glue gives the joint its strength, and the pin just holds the corner steady until the glue can finish setting"
+    ],
+    "questions": [
+      {
+        "question_text": "What is this conversation mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "The steps a framer follows to cut and join a wooden frame.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "השיחה כולה עוקבת אחרי התהליך: מדידה, חיתוך בזווית, הדבקה והצמדה עם סיכה."
+          },
+          {
+            "text": "A comparison between wooden frames and metal frames for prints.",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה רחבה מקבילה אך שגויה; הקטע אינו משווה בין סוגי מסגרות שונים כלל, אלא מתאר בניית מסגרת עץ אחת."
+          },
+          {
+            "text": "The correct angle to hang a finished frame on a wall.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "תלייה על קיר אינה מוזכרת בקטע; כל השיחה עוסקת בבניית המסגרת עצמה, לפני שהיא מגיעה לקיר."
+          },
+          {
+            "text": "How Liam chooses which print is worth framing at all.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "דנה כבר קבעה שההדפס ראוי למסגרה בפתיחת השיחה; ליאם לא דן בבחירת ההדפס אלא בבניית המסגרת."
+          }
+        ]
+      },
+      {
+        "question_text": "According to Liam, what would happen to a corner if the pin were skipped?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The forty five degree angle would no longer be accurate.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "דיוק הזווית נקבע בשלב החיתוך, לפני ההדבקה; דילוג על הסיכה אינו משפיע על זווית החיתוך שכבר בוצעה."
+          },
+          {
+            "text": "The corner could quietly creep open before the glue fully sets.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "ליאם אומר במפורש שבלי הסיכה הפינה עלולה להיפתח בהדרגה לפני שהדבק מתייצב לגמרי."
+          },
+          {
+            "text": "The strap clamp would no longer hold the frame at all.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך תפקידים: המהדק פועל באופן עצמאי בשלב ההדבקה; הסיכה היא תוספת מאוחרת יותר ולא תנאי לפעולת המהדק."
+          },
+          {
+            "text": "Dana would need to remeasure the print before framing it again.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "אין קשר בין דילוג על הסיכה למדידת ההדפס; המדידה מתבצעת בתחילת התהליך ואינה תלויה בשלב ההצמדה."
+          }
+        ]
+      }
+    ],
+    "_key": "E9"
+  },
+  {
+    "title": "LQA-PROD-E: medium_lecture (candle_dipping)",
+    "topic": "A narrator describes how candles are still made by hand at a shop, through repeated dipping of a wick into melted wax.",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "In the back room of the shop, candles are still made the slow way, by dipping rather than pouring into molds. A length of cotton wick is tied to a wooden frame and lowered into a pot of melted wax kept just above its melting point. Each dip lasts only a second or two, followed by a pause in the open air so the thin layer of wax can harden before the next dip. New workers often try to speed things up by leaving the wick in the wax longer, hoping to build thickness faster. However, a longer dip actually melts away the layer that was just added, leaving the candle no thicker than before. The trick is patience: dozens of short dips, each followed by a full cooling pause, slowly build an even layer around the wick. After enough rounds, the candle reaches its final width and is trimmed at the base to stand upright.",
+    "highlight_spans": [
+      "followed by a pause in the open air so the thin layer of wax can harden before the next dip",
+      "a longer dip actually melts away the layer that was just added, leaving the candle no thicker than before"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the lecture, what happens right after each dip of the wick into the wax?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The wick is dipped again immediately to build up more wax.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: הקטע מציין הפסקה באוויר הפתוח בין הטבילות, לא טבילה חוזרת ומיידית."
+          },
+          {
+            "text": "The wick is dried with a cloth to speed up hardening.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "פרט סביר לתהליך הכנת נרות אך לא מוזכר בקטע; ההקשיה נעשית באוויר בלבד, ללא מגע מטלית."
+          },
+          {
+            "text": "The wick is left in the open air so the thin layer can harden.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע מציין במפורש הפסקה באוויר הפתוח בין הטבילות כדי שהשכבה הדקה תתקשה."
+          },
+          {
+            "text": "The pot of wax is stirred so the temperature stays even.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הקטע מזכיר שהשעווה נשמרת בטמפרטורה קבועה בסיר, אך לא כפעולה שקורית בין הטבילות עצמן."
+          }
+        ]
+      },
+      {
+        "question_text": "Why does leaving the wick in the wax longer than usual fail to make the candle thicker, according to the lecture?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The wax cools too fast once removed from the pot, so it never bonds.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "פרט סביר אך לא נאמר בקטע; הקטע לא מתאר כישלון הידבקות אלא המסה מחדש של השכבה שנוספה."
+          },
+          {
+            "text": "A longer dip actually adds several extra layers of wax at once.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך ישיר: הקטע אומר שטבילה ארוכה ממיסה את השכבה שנוספה, לא מוסיפה שכבות נוספות."
+          },
+          {
+            "text": "The wooden frame holding the wick warps slightly in the heat, ruining the shape.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מייחס את הבעיה למסגרת העץ במקום לשכבת השעווה עצמה, בעוד שהקטע מתמקד רק בשכבת השעווה."
+          },
+          {
+            "text": "A longer dip melts away the layer of wax that was just added.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע קובע במפורש שטבילה ארוכה יותר ממיסה את השכבה שנוספה זה עתה, כך שהנר לא מתעבה."
+          }
+        ]
+      }
+    ],
+    "_key": "E10"
+  },
+  {
+    "title": "LQA-PROD-E: medium_lecture (leather_belt_tooling)",
+    "topic": "A narrator describes how a leather worker dampens, stamps, and dyes a belt by hand in a small workshop.",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "A small leather workshop down the lane still makes belts entirely by hand, and the process begins long before any tool touches the leather. A strip cut to length is dampened with a wet sponge until it turns slightly darker and soft enough to hold an impression. Once the leather feels right, a metal stamp is placed on the surface and struck firmly with a mallet, pressing a pattern into the softened fibers rather than cutting through them. Each stamp is repeated along the strip, slightly overlapping the last mark so the design flows without visible gaps. When the pattern is finished, the belt is left to dry flat for several hours, which locks the impression permanently into the leather. Only after it has fully dried does the maker apply dye, working it into the stamped areas first so the pattern stands out darker than the smooth background around it.",
+    "highlight_spans": [
+      "dampened with a wet sponge until it turns slightly darker and soft enough to hold an impression",
+      "left to dry flat for several hours, which locks the impression permanently into the leather",
+      "Only after it has fully dried does the maker apply dye, working it into the stamped areas first"
+    ],
+    "questions": [
+      {
+        "question_text": "Why is the leather strip dampened before it is stamped, according to the lecture?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "So the leather becomes soft enough to hold an impression from the stamp.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע מציין שהרטבת הרצועה הופכת אותה לרכה דיה כדי לקלוט את החותם."
+          },
+          {
+            "text": "So the leather will absorb the dye more evenly before it is stamped.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך סדר: הצביעה מתרחשת רק בסוף התהליך, אחרי הייבוש, ואינה קשורה להרטבה הראשונית."
+          },
+          {
+            "text": "So the metal stamp will not rust when it strikes the mallet.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מייחס את הסיבה לתחזוקת הכלי במקום לרכות העור, בעוד שהקטע מתמקד רק בהשפעה על העור."
+          },
+          {
+            "text": "So the belt will weigh less once it is finished.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "פרט לא קשור שאינו מוזכר בקטע כלל; הרטבה אינה משפיעה על משקל הרצועה הסופי."
+          }
+        ]
+      },
+      {
+        "question_text": "According to the lecture, which of the following does NOT happen after the belt has been stamped?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The belt is left to dry flat for several hours.",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון מהקטע ולכן אינו התשובה הנכונה לשאלה השוללת; הקטע מציין זאת במפורש."
+          },
+          {
+            "text": "The dye is applied before the belt is left to dry.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע קובע שהצבע מוחל רק אחרי שהרצועה מתייבשת לגמרי, ולכן טענה זו אינה קורית ומהווה את התשובה הנכונה לשאלה השוללת."
+          },
+          {
+            "text": "The dye is worked into the stamped areas first.",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון מהקטע ולכן אינו התשובה הנכונה לשאלה השוללת; כך אכן קורה לפי הקטע."
+          },
+          {
+            "text": "The drying process locks the impression permanently into the leather.",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון מהקטע ולכן אינו התשובה הנכונה לשאלה השוללת; הקטע מציין זאת במפורש."
+          }
+        ]
+      }
+    ],
+    "_key": "E11"
+  },
+  {
+    "title": "LQA-PROD-E: medium_lecture (umbrella_repair)",
+    "topic": "A narrator describes how a small repair stall replaces a torn fabric panel on an umbrella and reattaches it to the ribs.",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Tucked behind the market, a tiny stall repairs umbrellas that most people would simply throw away. When a canopy rips in the wind, the torn fabric panel is unpicked from the metal ribs rather than pulled free, since yanking it can bend the thin spokes underneath. A fresh piece of matching fabric is cut slightly larger than the damaged panel, using the neighboring panel as a template for the exact shape. The new piece is then stitched along both seams by hand, joining it to the panels on either side while the umbrella lies open and flat on the workbench. Once the stitching is complete, the repaired panel is reattached to its rib with a few small loops of thread at the tip, which keep the fabric taut without tearing it under strain. The umbrella is opened and closed several times to check that the panel moves smoothly before the customer collects it.",
+    "highlight_spans": [
+      "the torn fabric panel is unpicked from the metal ribs rather than pulled free, since yanking it can bend the thin spokes underneath",
+      "reattached to its rib with a few small loops of thread at the tip, which keep the fabric taut without tearing it under strain"
+    ],
+    "questions": [
+      {
+        "question_text": "Why is the torn fabric panel unpicked from the ribs rather than pulled free, according to the lecture?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Because unpicking keeps the metal ribs from rusting in the rain.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "פרט סביר אך לא מוזכר בקטע כלל; הקטע לא דן בחלודה, אלא בסכנה לכיפוף הצלעות."
+          },
+          {
+            "text": "Because pulling the fabric free actually strengthens the ribs underneath.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך ישיר: הקטע אומר שמשיכת הבד עלולה לכופף את הצלעות הדקות, לא לחזק אותן."
+          },
+          {
+            "text": "Because pulling it free could bend the thin spokes underneath.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע קובע במפורש שמשיכת הבד עלולה לכופף את הצלעות הדקות מתחתיו."
+          },
+          {
+            "text": "Because the customer asked to keep the original stitching as a keepsake.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מייחס את הסיבה לבקשת לקוח שאינה מוזכרת בקטע, במקום לסיכון המבני לצלעות."
+          }
+        ]
+      },
+      {
+        "question_text": "In the lecture, what does the word \"taut\" most nearly mean as used to describe the reattached fabric?",
+        "question_type": "vocab_in_context",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "loosely folded over the rib",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "משמעות שגויה שאינה קשורה להקשר; המילה מתארת בד מתוח ולא בד מקופל."
+          },
+          {
+            "text": "hanging free and slightly loose",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך משמעות ישיר: taut פירושו מתוח, ההפך המדויק מרפוי או משתחרר."
+          },
+          {
+            "text": "brightly colored to match the ribs",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מחליף את המשמעות במאפיין שונה לגמרי, צבע במקום מתיחות, שאינו קשור למילה בהקשרה."
+          },
+          {
+            "text": "pulled tight with no slack",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר זה taut מתאר בד מתוח היטב ללא רפיון, כפי שנדרש כדי שלא ייקרע במתח."
+          }
+        ]
+      }
+    ],
+    "_key": "E12"
+  },
+  {
+    "title": "LQA-PROD-E: long_dialogue (wheelwrighting)",
+    "topic": "A wheelwright explains the order and reasoning behind building a wooden cart wheel: hub, spokes, felloes, and the hot iron tire.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Nora: Sam, I've been staring at this cart wheel all morning and still don't understand how it goes together. Can you walk me through how it's built?\nSam: Sure. It starts with the hub, some call it the nave. That's the round block of elm at the center, and the wheelwright bores it out to take the axle.\nNora: So the hub comes first. Then what?\nSam: Once the hub is shaped and bored, the wheelwright drives the spokes into it. Getting the hub done properly is what lets the spokes seat without splitting the wood, so that step has to happen first.\nNora: And the spokes lead to the rim pieces?\nSam: Right. The outer ends of the spokes fit into the felloes, the curved wooden sections that form the rim. Because the spokes were already trimmed to a matching length, the felloes can be cut to close tolerances and still meet flush around the circle.\nNora: However, wood alone wouldn't survive the road, would it?\nSam: No, that's the last stage. Once the felloes are pegged into a full circle, the wheelwright heats an iron tire slightly larger than the rim and drops it over the wheel, then douses it with water. The metal contracts as it cools, and that shrinking clamps every felloe and spoke tight against the hub. Yet if the tire is fitted before the felloes are seated, the wheel can end up warped.\nNora: So the strength really comes from that shrinking iron band?\nSam: Right. People assume the glue or the pegs hold a cart wheel together, but it's really the compression from the cooled tire. The hub gives the frame its center, the spokes carry that force outward, and the felloes are what actually get squeezed.\nNora: That's nothing like I imagined seeing it in the barn.",
+    "questions": [
+      {
+        "question_text": "Based on the conversation, why does the wheelwright shape and bore the hub before doing anything else?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because the felloes need to be measured against the hub's curve before they can be cut",
+            "k_code": "K-FELLOE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "השיחה לא אומרת שהפלואות נמדדות מול ההאב; הן מותאמות לקצוות החישורים, לא לגובה."
+          },
+          {
+            "text": "Because a properly finished hub lets the spokes wedge into their sockets without splitting the wood",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זה בדיוק מה שסם אומר: השלמת ההאב היא מה שמאפשר לחישורים להיכנס בלי לבקוע את העץ."
+          },
+          {
+            "text": "Because the iron tire has to be measured to the hub's exact width before it is heated",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "הטבעת נמדדת מול ההיקף החיצוני, לא מול ההאב, וזה לא מוזכר בשיחה."
+          },
+          {
+            "text": "Because the spokes are what allow the hub to be bored out safely without cracking",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך של סדר הסיבתיות שתואר בשיחה: ההאב מאפשר לחישורים, לא להפך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point the conversation makes about what actually holds a cart wheel together?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The wooden pegs joining the felloes are what provide most of the wheel's strength",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "סם אומר במפורש שאנשים טועים לחשוב שהיתדות מחזיקות את הגלגל, וזה לא הטענה המרכזית."
+          },
+          {
+            "text": "The hub's bored center is what bears most of the wheel's structural load",
+            "k_code": "K-HUB",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "ההאב נותן מרכז, אך לפי השיחה הכוח המחזיק מגיע מכיווץ הטבעת, לא מההאב עצמו."
+          },
+          {
+            "text": "The spokes alone are stiff enough to keep the wheel round under weight",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "זו טענה כללית שלא נתמכת בשיחה; החישורים מעבירים כוח אך אינם המקור לו."
+          },
+          {
+            "text": "The iron tire's shrinking as it cools is what clamps the whole wheel tightly together",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זה הרעיון המרכזי שסם מדגיש: הכיווץ של הטבעת המתקררת הוא מה שמהדק את כל הגלגל."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "Getting the hub done properly is what lets the spokes seat without splitting the wood",
+      "it's really the compression from the cooled tire"
+    ],
+    "_key": "E13"
+  },
+  {
+    "title": "LQA-PROD-E: long_lecture (mechanical_watchmaking)",
+    "topic": "A lecture explaining how the mainspring, going train, escapement, and balance wheel of a mechanical watch work together to keep time.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "A mechanical watch runs without a battery, and the reason lies in a few cooperating parts most owners never think about. The mainspring is a tightly coiled strip of steel housed inside the barrel, and winding the crown simply coils that spring tighter. As the mainspring slowly unwinds, it releases stored energy through a chain of gears called the going train, which steps the force down and passes it along toward the front of the movement.\n\nHowever, raw energy flowing straight through the gears would spin the hands too fast to read, so a regulating mechanism has to meter it out. That job belongs to the escapement, a toothed wheel and lever pair that locks and releases in tiny, repeated clicks, letting only a measured trickle of energy escape at a time. Each click corresponds to a fraction of a second, which is why a watch ticks instead of sweeping smoothly.\n\nWhat actually sets the pace of those clicks is the balance wheel, a weighted ring that swings back and forth on a hairspring at a fixed rate, the same way a pendulum swings at a fixed rate no matter how far it is pushed. The escapement only releases a tooth when the balance wheel swings back into position, so the balance wheel is really what governs the watch's timekeeping, not the escapement itself and not the mainspring. Adjust the balance wheel's rate, and the whole watch runs faster or slower, while the escapement simply obeys the tempo the balance wheel sets.\n\nYet none of this matters if the mainspring has been wound too tightly, since the extra tension can distort the going train's alignment before the energy reaches the escapement, which is why watchmakers tell owners to stop winding the moment they feel resistance.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, what is the role of the going train in a mechanical watch?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "It carries and reduces the mainspring's released energy along toward the front of the movement",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "ההרצאה מתארת בדיוק זאת: שרשרת הגלגלים מעבירה ומורידה את הכוח מהקפיץ הראשי קדימה."
+          },
+          {
+            "text": "It stores the coiled energy that the crown winds into the watch",
+            "k_code": "K-MAINSPRING",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "אחסון האנרגיה הוא תפקידו של הקפיץ הראשי, לא של שרשרת הגלגלים."
+          },
+          {
+            "text": "It counts the escapement's clicks and displays them on the watch face",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בהרצאה שום התייחסות לספירת לחיצות או תצוגה כזו."
+          },
+          {
+            "text": "It slows the balance wheel's swing so the escapement can lock more securely",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: הגלגל המאזן קובע את הקצב, ושרשרת הגלגלים לא משפיעה עליו."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the lecture's main point about what actually governs a mechanical watch's timekeeping rate?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The escapement's tooth count is what fixes how fast the watch runs",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "ההרצאה אומרת במפורש שהגלגל המאזן, לא הבורג, הוא מה שקובע את הקצב."
+          },
+          {
+            "text": "The mainspring's winding tightness is what determines the watch's overall speed",
+            "k_code": "K-MAINSPRING2",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מתח הקפיץ הראשי משפיע על אספקת האנרגיה, לא על הקצב עצמו, לפי ההרצאה."
+          },
+          {
+            "text": "The balance wheel's fixed swing rate sets the pace for the whole movement",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הטענה המרכזית: הגלגל המאזן הוא זה שקובע את הקצב שכל שאר המנגנון מצייתות לו."
+          },
+          {
+            "text": "The going train's gear ratios are what set the watch's ticking speed",
+            "k_code": "K-NEW2",
+            "fail_mode": "unsupported",
+            "explanation_he": "שרשרת הגלגלים מעבירה כוח בלבד; ההרצאה לא טוענת שהיא קובעת את הקצב."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "releases stored energy through a chain of gears called the going train, which steps the force down and passes it along toward the front of the movement",
+      "the balance wheel is really what governs the watch's timekeeping, not the escapement itself and not the mainspring"
+    ],
+    "_key": "E14"
+  },
+  {
+    "title": "LQA-PROD-E: long_dialogue (hand_loom_weaving)",
+    "topic": "A weaver explains how warp, heddles, harnesses, the shed, and the shuttle work together to determine a woven cloth's pattern.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Ben: I keep hearing weavers talk about warp and weft, but I've never seen a loom worked. Could you explain how it comes together?\nPriya: Happy to. Everything starts with the warp, the long threads stretched tight from front to back on the loom's frame. Before anything else, each warp thread is threaded through its own heddle, a little wire or string loop hanging from the harness.\nBen: So the warp goes through the heddles first?\nPriya: Right, and that step is what lets the weaver control the threads later. Because each heddle is tied to a separate harness, lifting one harness raises only the warp threads strung through its heddles, while the rest stay down. That gap between the raised and lowered threads is called the shed.\nBen: And the shuttle goes through the shed?\nPriya: Exactly, once the shed opens. The weaver throws the shuttle, carrying the weft thread, straight across that gap. Because the heddles already separated the warp into two layers, the shuttle crosses in one clean pass instead of the weaver picking threads by hand. However, if a heddle is threaded out of sequence, the shed forms unevenly and the shuttle catches on a stray thread.\nBen: So one misplaced heddle can throw off the whole cloth?\nPriya: It can, yes. After the shuttle passes, the reed beats the new weft thread snugly against the row before it, then the harnesses swap for the next shed. Yet people watching a weaver assume the shuttle does the clever part, when really the heddles and harnesses did all the real work before the shuttle ever moved. It's just carrying thread through a path already prepared for it.\nBen: I always thought the shuttle was the star of the show.\nPriya: Everyone does, but the pattern is decided earlier, up in the heddles.",
+    "questions": [
+      {
+        "question_text": "Based on the conversation, why does lifting one harness raise only some of the warp threads?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Because the reed only beats against threads that are already raised",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "החיכה של הסירק אינה קשורה לשאלה אילו חוטים מורמים; זה לא נאמר בשיחה."
+          },
+          {
+            "text": "Because the shuttle only carries weft through threads tied to that harness",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: החרך נוצר על ידי ההרמה, והכרכרה רק עוברת דרכו אחר כך."
+          },
+          {
+            "text": "Because only the warp threads strung through that harness's heddles are tied to it",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת זאת במפורש: כל נירה קשורה לחישוק מסוים, ולכן רק החוטים שלה מתרוממים."
+          },
+          {
+            "text": "Because the shed forms only where the weft thread has already passed",
+            "k_code": "K-SHED",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החרך נוצר לפני מעבר חוט הערב, לא בגללו; זהו שיוך שגוי בין שני מונחים."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point the weaver makes about which part of the process really controls the cloth's pattern?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "The heddles and harnesses set the pattern before the shuttle ever moves",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי שפריה מדגישה: הנירות והחישוקים כבר קבעו את הדוגמה לפני שהכרכרה זזה."
+          },
+          {
+            "text": "The shuttle's speed across the shed is what determines how tight the pattern is",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה כללית ומקבילה שנשמעת סבירה אך לא זו הנקודה שפריה מציגה בשיחה."
+          },
+          {
+            "text": "The reed's spacing is what actually decides the pattern woven into the cloth",
+            "k_code": "K-REED",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הסירק רק הודק את חוט הערב שכבר עבר; הוא לא זה שקובע את הדוגמה."
+          },
+          {
+            "text": "The warp thread's material is what determines the cloth's final pattern",
+            "k_code": "K-NEW2",
+            "fail_mode": "unsupported",
+            "explanation_he": "חומר החוט אינו מוזכר כגורם קובע דוגמה בשיחה כלל."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "Because each heddle is tied to a separate harness, lifting one harness raises only the warp threads strung through its heddles",
+      "the heddles and harnesses did all the real work before the shuttle ever moved"
+    ],
+    "_key": "E15"
+  },
+  {
+    "title": "LQA-PROD-E: long_lecture (malting_and_brewing)",
+    "topic": "A lecture on how steeping, germination, and kilning transform raw barley into brewing malt, and why germination's timing matters most.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Turning raw barley into malt for brewing is a controlled process of tricking the grain into thinking it is sprouting, then stopping it at exactly the right moment. The first stage is steeping, where the barley is submerged in water and drained in alternating cycles over roughly two days, raising the moisture until the grain wakes up and begins to metabolize.\n\nOnce steeping has raised the moisture enough, the barley moves to germination, spread on a malting floor or in rotating drums where it is turned constantly to keep the sprouting grains from matting together and overheating. During germination, enzymes inside the grain break down the hard starchy interior, converting it into sugars the yeast will later feed on. However, if germination runs too long, the sprouting rootlet consumes those sugars for its own growth instead of leaving them for the brewer.\n\nThat risk is why maltsters treat the timing of germination as the real turning point of the entire process, more than either the soak before it or the drying after it, since a maltster can always adjust kilning temperature but cannot undo a grain that has sprouted too far and burned through its own reserves. Get germination right and the rest mostly takes care of itself.\n\nYet germination cannot run forever in the other direction either, because unsprouted grain never develops the enzymes needed for brewing. Once the maltster judges germination complete, the grain moves to kilning, where hot air passes through the bed to halt enzyme activity, dry the grain, and, depending on the temperature used, produce anything from a pale malt to a dark, roasted one. The kiln does not create the malt's sugars, it only locks in whatever germination already produced.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, what happens to the barley during the steeping stage?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Enzymes inside the grain convert the starchy interior into sugars for the yeast",
+            "k_code": "K-GERM",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "פירוק העמילן לסוכרים קורה בשלב הנביטה, לא בשלב ההשריה."
+          },
+          {
+            "text": "Hot air is passed through the grain bed to halt enzyme activity",
+            "k_code": "K-KILN",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זה מתאר את שלב הייבוש בכבשן, לא את שלב ההשריה."
+          },
+          {
+            "text": "The sprouting rootlet consumes the sugars produced earlier in the process",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "זה שייך לסיכון בשלב הנביטה הממושכת מדי, לא לתיאור שלב ההשריה עצמו."
+          },
+          {
+            "text": "The barley is submerged and drained repeatedly until its moisture rises enough to metabolize",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זה בדיוק מה שההרצאה מתארת כשלב ההשריה."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the lecture's main point about which stage is the real turning point in making malt?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Kilning temperature is the real turning point because it decides the malt's final color.",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "ההרצאה אומרת שהכבשן רק נועל את מה שהנביטה כבר יצרה, לא שהוא נקודת המפנה."
+          },
+          {
+            "text": "Germination's timing is the real turning point because it cannot be corrected later in kilning",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הטענה המרכזית: תזמון הנביטה הוא נקודת המפנה כי אי אפשר לתקן אותה בשלב הכבשן."
+          },
+          {
+            "text": "Steeping's moisture level is the real turning point because it decides how dark the malt becomes.",
+            "k_code": "K-STEEP",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "רמת הלחות בהשריה מכינה את הגרעין לנביטה, אך לא היא קובעת את הצבע הסופי."
+          },
+          {
+            "text": "The malting floor's temperature is the real turning point because it decides the malt's final flavor.",
+            "k_code": "K-NEW2",
+            "fail_mode": "unsupported",
+            "explanation_he": "טמפרטורת רצפת ההנבטה אינה מוזכרת כגורם המכריע בהרצאה."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "submerged in water and drained in alternating cycles over roughly two days, raising the moisture until the grain wakes up and begins to metabolize",
+      "maltsters treat the timing of germination as the real turning point of the entire process"
+    ],
+    "_key": "E16"
+  },
+  {
+    "title": "LQA-PROD-E: long_dialogue (violin_making)",
+    "topic": "A luthier explains the order in which a violin's ribs, belly, back, and neck are built, and why the unnoticed ribs matter most.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Jonah: I've watched you carve on that maple block for weeks now. Can you walk me through how a violin comes together?\nMira: Sure. It starts with the ribs, six thin strips of maple bent with heat and glued around a mold to form the instrument's waist. The ribs set the outline everything else has to match.\nJonah: So the ribs come before the plates?\nMira: They do. Because the ribs are glued to the mold first, they hold a fixed shape, and that shape is what lets me carve the belly, the spruce top plate, to fit precisely against them.\nJonah: And the belly is carved separately?\nMira: Right, arched and thinned by hand until it resonates the way I want. Once it's glued onto the ribs, I carve the back the same way, from maple, and glue it on. However, if the ribs had warped on the mold, neither plate would seat flush, and that gap quietly kills the tone. That's really the heart of it: the ribs are the part nobody notices, even though the belly and the back both depend on that hidden shape being exact.\nJonah: So a crooked rib ruins the instrument before you even reach the plates?\nMira: Essentially, yes. Once the body is closed, I fit the neck and carve the scroll, then set the neck into a notch cut in the ribs. Yet plenty of people assume the scroll is purely decorative, when its weight and the neck's angle both affect how the strings sit under tension.\nJonah: I always figured the scroll was just there to look impressive.\nMira: It earns its keep. Visitors ask about the varnish and the scroll, but never about the ribs sitting quietly underneath it all.",
+    "questions": [
+      {
+        "question_text": "Based on the conversation, why must the ribs be glued to the mold before the belly is carved to fit?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because the ribs glued to the mold hold a fixed shape that the belly can be carved against",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "מירה אומרת זאת במפורש: הצלעות המחוברות לתבנית מחזיקות צורה קבועה שאליה מגלפים את הבטן."
+          },
+          {
+            "text": "Because the belly's arching has to be measured before the ribs can be bent to match it",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: לפי השיחה הצלעות נקבעות קודם, והבטן מותאמת אליהן, לא להפך."
+          },
+          {
+            "text": "Because the scroll's angle determines how the ribs need to be bent around the mold",
+            "k_code": "K-SCROLL",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הגליל נוגע לזווית הצוואר בלבד ואינו קשור לכיפוף הצלעות, לפי השיחה."
+          },
+          {
+            "text": "Because the back plate's curve sets the outline the ribs are later bent to follow",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "לפי השיחה הצלעות נקבעות ראשונות והגב מותאם אליהן, לא ההפך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point the luthier makes about which part of the violin matters most, even though it goes unnoticed?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The scroll's carved weight is what most affects the instrument's final tone",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "מירה מדברת על השפעת הגליל על מתיחת המיתרים, לא על הטענה שהוא הגורם העיקרי לצליל."
+          },
+          {
+            "text": "The back plate's maple grain is what determines the instrument's resonance",
+            "k_code": "K-NEW2",
+            "fail_mode": "unsupported",
+            "explanation_he": "מרקם עץ הגב אינו מוזכר כגורם המכריע בשיחה."
+          },
+          {
+            "text": "The belly's spruce arching is what the whole instrument's shape depends on",
+            "k_code": "K-BELLY",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "לפי השיחה הבטן עצמה תלויה בצורת הצלעות, ולא ההפך."
+          },
+          {
+            "text": "The ribs' mold shape is what the belly and back both depend on",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הנקודה המרכזית שמירה מדגישה: צורת הצלעות על התבנית היא הבסיס שהבטן והגב תלויים בו."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "Because the ribs are glued to the mold first, they hold a fixed shape, and that shape is what lets me carve the belly",
+      "the ribs are the part nobody notices, even though the belly and the back both depend on that hidden shape being exact"
+    ],
+    "_key": "E17"
+  },
+  {
+    "title": "LQA-PROD-E: long_lecture (thatching_roofs)",
+    "topic": "A lecture on how a thatcher's base coat, spars, sways, and ridge cap combine to make a straw roof weatherproof and wind-resistant.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Thatching a roof looks like piling straw on top of a house, but the finished coat only holds together because of a fastening system most passersby never notice. The thatcher starts by laying the base coat, thick bundles of straw or reed fixed onto the roof timbers in overlapping rows called courses, each course covering the fixing points of the one below it.\n\nBecause each course must overlap and hide the fixings of the previous one, the thatcher cannot simply pile material upward, the bundles have to be laid in a fixed sequence from eave to ridge, or the fixings would be left exposed to weather. Holding every bundle in place are spars, thin lengths of hazel or willow split and twisted into a staple shape, then driven through the straw into the roof timbers below. A skilled thatcher can drive many spars in an hour, each one bridging several bundles so the coat behaves as a single, continuous skin.\n\nHowever, spars alone would only pin the straw at scattered points, so horizontal rods called sways are worked in across each course, and the spars are driven through both the straw and the sways together, clamping the whole course down along its entire length rather than at isolated spots. It is this combination, sways binding the coat lengthwise and spars pinning it vertically, that actually keeps a thatched roof from lifting in wind, far more than the sheer weight of the straw itself.\n\nYet none of this fixing work matters at the very top of the roof, where two slopes meet and there is no timber underneath to spar into directly. That is where the ridge comes in, a separate capping layer of straw or sedge bent over the apex and spar-fixed to the courses just below it, sealing the one place ordinary courses cannot reach.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, why must the base coat be laid in a fixed sequence from eave to ridge?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because the spars can only be driven through straw that has already been rained on",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בהרצאה שום התייחסות לגשם כתנאי להנחת הקוצים."
+          },
+          {
+            "text": "Because each course has to overlap and hide the fixings of the course laid below it",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הסיבה שההרצאה נותנת במפורש לסדר ההנחה הקבוע."
+          },
+          {
+            "text": "Because the sways must be woven in before any straw bundles are laid down",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך סדר: הצרורות מונחות תחילה, והסוואיז נשזרות דרכן אחר כך, לא להפך."
+          },
+          {
+            "text": "Because the ridge cap needs the base coat's fixings left exposed underneath it",
+            "k_code": "K-RIDGE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הרכס נועד לכסות ולא זקוק לחיזוקים חשופים; זהו שיוך שגוי בין שני חלקים."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the lecture's main point about what actually keeps a thatched roof from lifting in the wind?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The sheer weight of the piled straw is what keeps the roof from lifting",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "ההרצאה שוללת זאת במפורש ואומרת שהמשקל לבדו הוא לא הגורם העיקרי."
+          },
+          {
+            "text": "The ridge cap's stitching alone is what secures the whole roof against wind",
+            "k_code": "K-RIDGE2",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הרכס מכסה רק את קו הפסגה; אינו זה שמחזיק את הגג כולו מפני רוח."
+          },
+          {
+            "text": "Sways binding each course together with spars pinning it is what holds the roof",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הנקודה המרכזית: השילוב של הסוואיז והקוצים הוא מה שמונע מהגג להתרומם ברוח."
+          },
+          {
+            "text": "The number of courses laid determines how well the roof resists wind",
+            "k_code": "K-NEW2",
+            "fail_mode": "unsupported",
+            "explanation_he": "מספר השורות אינו מוזכר בהרצאה כגורם הקובע עמידות ברוח."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "each course must overlap and hide the fixings of the previous one",
+      "sways binding the coat lengthwise and spars pinning it vertically, that actually keeps a thatched roof from lifting in wind"
+    ],
+    "_key": "E18"
+  }
+]

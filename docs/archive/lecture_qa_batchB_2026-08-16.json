@@ -1,0 +1,1349 @@
+{
+  "batch": "LQA-PROD-B",
+  "lectures": [
+    {
+      "key": "B1",
+      "title": "LQA-PROD-B: short_lecture (rooftop-community-garden)",
+      "topic": "a community garden on the roof of an old post office",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "The community garden on the roof of the old post office has been running for six seasons now. Twenty households share the space, and each one keeps two planting boxes along the eastern wall. The soil is a light mixture, because the roof cannot carry ordinary garden earth. Watering happens twice a week from a tank that collects rain off the stairwell. Members grow herbs and salad crops, for example mint, parsley, and lettuce, which all do well in shallow boxes. A schedule pinned by the door lists who waters on which evening. In August the group holds a shared supper on the roof, and neighbors from the building are invited.",
+      "highlight_spans": [
+        "A schedule pinned by the door lists who waters on which evening."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the speaker mainly doing in this talk?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The speaker describes a rooftop garden that the households have voted to close.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "אפשרות רחבה בדיוק כמו הנכונה, אבל הטענה הפוכה: הקטע אומר שהגינה \"has been running for six seasons now\" ואף מילה על סגירה."
+            },
+            {
+              "text": "The speaker explains how collected rain supplies drinking water to twenty households.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מי הגשם אכן מוזכרים, אבל בתפקיד אחר: \"Watering happens twice a week from a tank that collects rain off the stairwell\" — השקיה, לא מי שתייה."
+            },
+            {
+              "text": "The speaker sets out how a shared rooftop garden is organized and used.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע מצטבר בלי תפנית: חלוקת התאים, סוג האדמה, ההשקיה, ו\"A schedule pinned by the door lists who waters on which evening\" — כולם מרכיבים של ארגון ושימוש."
+            },
+            {
+              "text": "The speaker's subject is planting boxes on the old post office roof.",
+              "k_code": "K-ECHO",
+              "fail_mode": "topic_noun",
+              "explanation_he": "זו רק שם הנושא בלי טענה כלשהי עליו. הקטע כן טוען משהו: \"Twenty households share the space, and each one keeps two planting boxes\" מתאר סדר עבודה שלם."
+            }
+          ]
+        }
+      ],
+      "_id": "721a4f2a-1a3c-4223-9685-ca3b02bbee7f"
+    },
+    {
+      "key": "B2",
+      "title": "LQA-PROD-B: short_lecture (beach-sand-replenishment)",
+      "topic": "the yearly replenishment of sand on a town beach",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Every spring the town brings sand back to the main beach. Barges pump a wet mixture ashore through a floating pipe, and bulldozers spread it along the shoreline before the summer visitors arrive. The work takes about three weeks and costs the town a great deal. However, the new sand does not stay where it is put, because the current along this stretch runs steadily from north to south and carries loose grains toward the harbor mouth every winter. Divers who checked the seabed in March found much of last year's sand piled outside the harbor wall. The town now plans a low stone barrier at the northern end to slow that drift.",
+      "highlight_spans": [
+        "However, the new sand does not stay where it is put, because the current along this stretch runs steadily from north to south and carries loose grains toward the harbor mouth every winter."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "Why does the new sand fail to stay on the beach?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The current runs from north to south, so it carries loose grains toward the harbor.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו בדיוק השרשרת שאחרי התפנית: \"the current along this stretch runs steadily from north to south and carries loose grains toward the harbor mouth\"."
+            },
+            {
+              "text": "The barges pump the mixture out too far from the shoreline to settle.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "המשאבות אכן מוזכרות — \"Barges pump a wet mixture ashore through a floating pipe\" — אבל הן מביאות את החול לחוף; מה שמסיע אותו משם הוא הזרם."
+            },
+            {
+              "text": "The low stone barrier at the northern end pulls grains down toward the harbor mouth.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "המחסום אכן מוזכר, אבל בתפקיד ההפוך: \"The town now plans a low stone barrier at the northern end to slow that drift\" — הוא נועד לבלום, והוא עדיין בגדר תוכנית."
+            },
+            {
+              "text": "The work lasts about three weeks, so the sand is spread before the summer visitors arrive.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "המשפט נכון ונאמר — \"The work takes about three weeks\" — אבל הוא עונה על שאלת לוח הזמנים, לא על השאלה למה החול לא נשאר."
+            }
+          ]
+        }
+      ],
+      "_id": "224783e7-baf2-45a5-bffd-38a56943e1a2"
+    },
+    {
+      "key": "B3",
+      "title": "LQA-PROD-B: short_lecture (lost-property-office)",
+      "topic": "a lost property office under a bus station",
+      "bucket": "s30",
+      "format": "lecture",
+      "difficulty": 2,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "The lost property office under the bus station holds about four thousand items at any one time. Umbrellas and gloves arrive by the sackful, and each one gets a paper tag with the date and the route number. Staff keep an item for ninety days, and anything still on the shelf after that is called derelict, which means that no owner has ever come forward to collect it. In other words, the label on the shelf records a silence rather than a fault. Derelict goods used to go straight to a charity shop across the road. However, the office now runs its own public sale on the first Sunday of every month.",
+      "highlight_spans": [
+        "anything still on the shelf after that is called derelict, which means that no owner has ever come forward to collect it"
+      ],
+      "questions": [
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 1,
+          "question_text": "What does the speaker mean by items that are derelict?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Items that the staff tagged with the wrong date and route number.",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "התיוג אכן מוזכר — \"each one gets a paper tag with the date and the route number\" — אבל הוא שייך לקליטת הפריט, לא להגדרת המילה."
+            },
+            {
+              "text": "Items so worn and neglected that the office cannot sell them.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זו המשמעות היומיומית של derelict כמשהו מוזנח והרוס. הקטע מגדיר אחרת במפורש: \"which means that no owner has ever come forward to collect it\"."
+            },
+            {
+              "text": "Items that an owner collected before the ninety days had run out.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זה בדיוק ההיפך: \"Staff keep an item for ninety days, and anything still on the shelf after that is called derelict\"."
+            },
+            {
+              "text": "Items that no owner has ever come forward to collect.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הקטע מגדיר את המונח בעצמו: \"which means that no owner has ever come forward to collect it\", ומחזק זאת ב\"records a silence rather than a fault\"."
+            }
+          ]
+        }
+      ],
+      "_id": "88ab3fb9-99ec-43eb-a7e9-4f134eb16165"
+    },
+    {
+      "key": "B4",
+      "title": "LQA-PROD-B: short_dialogue (village-bakery-sourdough-starter)",
+      "topic": "a village bakery's forty year old sourdough starter",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Tom: The bakery says its sourdough starter is forty years old. Can you explain what that actually means?\nRosa: It means that the same living mixture of flour and water has been fed every day since then. The flour brings in wild yeast, the yeast eats the sugars in the dough, and that feeding produces the gas that makes the loaf rise. Because the mixture is never thrown out, the same population of yeast keeps working.\nTom: So the age is really about feeding, not about storage.\nRosa: Exactly. Miss a week of feeding and the yeast weakens, the dough rises slowly, and the crumb comes out dense.",
+      "highlight_spans": [
+        "The flour brings in wild yeast, the yeast eats the sugars in the dough, and that feeding produces the gas that makes the loaf rise."
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Rosa, what keeps the starter alive over so many years?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Throwing out the mixture weekly, so that fresh flour replaces the tired yeast.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "רוזה אומרת את ההיפך: \"Because the mixture is never thrown out, the same population of yeast keeps working\"."
+            },
+            {
+              "text": "Feeding the same mixture every day, so the same yeast population keeps working.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו בדיוק הטענה של רוזה: \"the same living mixture of flour and water has been fed every day since then\"."
+            },
+            {
+              "text": "Storing the mixture cold, so the wild yeast eats the sugars more slowly.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "האחסון נשלל בשיחה: \"So the age is really about feeding, not about storage\", ורוזה מאשרת."
+            },
+            {
+              "text": "The gas from the yeast, which makes the loaf rise as it is baked.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נכון ונאמר — \"that feeding produces the gas that makes the loaf rise\" — אבל זו התוצאה בכיכר, לא מה ששומר על המחמצת לאורך השנים."
+            }
+          ]
+        }
+      ],
+      "_id": "8952177d-caa5-4af0-a31d-39b2ff608f67"
+    },
+    {
+      "key": "B5",
+      "title": "LQA-PROD-B: short_dialogue (tool-library-opening-hours)",
+      "topic": "a neighborhood tool library changing its opening hours",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Sam: The tool library has moved its opening hours to Thursday evenings. Why did they change them?\nPriya: Because most borrowers work during the day. When the library opened at two in the afternoon, only retired members could come, so the drills and the sanders sat on the rack all week. Fewer loans meant less money from the membership fees, and the volunteers could not cover the rent.\nSam: And the Thursday evening slot fixes that?\nPriya: It has so far. Borrowing doubled in the first month and the rent is covered again. The tools go out on Thursday and return on Monday, which suits weekend repairs.",
+      "highlight_spans": [
+        "When the library opened at two in the afternoon, only retired members could come, so the drills and the sanders sat on the rack all week."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why did the afternoon hours leave the tool library short of money?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The volunteers raised the membership fees, so borrowers left and loans fell.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "דמי החבר אכן מוזכרים, אבל בתפקיד הפוך: \"Fewer loans meant less money from the membership fees\" — ההכנסה ירדה בעקבות ההשאלות, לא מחיר שהועלה."
+            },
+            {
+              "text": "Retired members borrowed so heavily that the drills were never on the rack.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הכיוון הפוך: \"only retired members could come, so the drills and the sanders sat on the rack all week\"."
+            },
+            {
+              "text": "The tools go out on Thursday and return on Monday, which suits weekend repairs.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נכון ונאמר — \"The tools go out on Thursday and return on Monday\" — אבל זה ההסדר החדש שהצליח, ולא הסיבה למחסור בכסף לפני השינוי."
+            },
+            {
+              "text": "Most borrowers worked during the day, so few loans were made and fees fell.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו השרשרת שפריה מפרטת: \"most borrowers work during the day\" ואז \"Fewer loans meant less money from the membership fees\"."
+            }
+          ]
+        }
+      ],
+      "_id": "2179ca57-055d-4d99-9fdc-ee8bd483a290"
+    },
+    {
+      "key": "B6",
+      "title": "LQA-PROD-B: short_dialogue (ferry-timetable-change)",
+      "topic": "a change to a morning ferry timetable",
+      "bucket": "s30",
+      "format": "dialogue",
+      "difficulty": 2,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Ella: The morning ferry now leaves at six forty instead of seven. Can you explain why they moved it?\nNoor: The harbor was rebuilt last year and the new berth sits farther out. The crossing takes eight minutes longer, so the boat used to reach the island after the school bus had left. Children were waiting a whole hour on the quay. Moving the departure earlier puts the ferry in before the bus goes.\nElla: And the evening sailings?\nNoor: Those stayed the same. The last boat still leaves the island at nine, because nothing on that side depends on the bus.",
+      "highlight_spans": [
+        "The crossing takes eight minutes longer, so the boat used to reach the island after the school bus had left."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is this conversation mainly about?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "A longer crossing made the ferry miss the school bus, so mornings moved earlier.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו כל השרשרת של נור: \"The crossing takes eight minutes longer, so the boat used to reach the island after the school bus had left\"."
+            },
+            {
+              "text": "The school bus was retimed, so the company rewrote both morning and evening sailings.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "אפשרות רחבה בדיוק כמו הנכונה, אך הטענה שגויה: מה שהשתנה הוא הנמל, ו\"Those stayed the same\" נאמר במפורש על ההפלגות בערב."
+            },
+            {
+              "text": "The new berth shortened the crossing, so the ferry now reaches the island before the bus.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "ההפך ממה שנאמר: \"the new berth sits farther out. The crossing takes eight minutes longer\"."
+            },
+            {
+              "text": "The last boat still leaves the island at nine, since nothing there depends on the bus.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נכון ונאמר: \"The last boat still leaves the island at nine\" — אבל זו הערת שוליים על הפלגות הערב, לא הנושא המרכזי של השיחה."
+            }
+          ]
+        }
+      ],
+      "_id": "bd1dfcd4-8820-417f-9a2b-2fb5a7671a53"
+    },
+    {
+      "key": "B7",
+      "title": "LQA-PROD-B: medium_lecture (town-water-tower)",
+      "topic": "a town water tower",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "single-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Most people who pass the old water tower on the edge of town assume it was built tall so that the water inside would stay clean, high above the dusty streets. That guess sounds sensible, and local guides repeat it. However, the height has nothing to do with cleanliness. A water tower is a battery made of water. Pumps fill the tank slowly through the night, while the town sleeps. Then gravity empties it quickly at breakfast time, when every tap opens at once. Every extra foot of height adds pressure in the pipes below, and pressure is what pushes water to a tap on a third floor. That stored pressure is the point, because the tank keeps the taps running when the pumps go quiet. Modern pressure pumps can do the same work, yet they stop the moment the electricity stops. The tank on our tower holds enough for about half a day, which is why the town keeps drinking when a pump dies at four in the morning and nobody notices for hours.",
+      "highlight_spans": [
+        "However, the height has nothing to do with cleanliness",
+        "Pumps fill the tank slowly through the night",
+        "Then gravity empties it quickly at breakfast time",
+        "Every extra foot of height adds pressure in the pipes below",
+        "yet they stop the moment the electricity stops"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What does the speaker say happens at the tower during the night?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Pumps refill the tank slowly, storing water for the morning rush",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר במפורש \"Pumps fill the tank slowly through the night\" — המילוי האיטי נעשה בלילה לקראת שעות הבוקר."
+            },
+            {
+              "text": "Gravity drains the tank slowly, so pressure builds up before dawn",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך כיוון: הכובד לא מרוקן לאט אלא \"empties it quickly at breakfast time\", ובלילה דווקא ממלאים."
+            },
+            {
+              "text": "Pumps empty the tank quickly and send the stored water back downhill",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "החלפת תפקידים בין שני הגורמים: המשאבות ממלאות, ואילו \"gravity empties it quickly\" הוא שמרוקן."
+            },
+            {
+              "text": "Engineers check the pressure gauges, because failures happen around four o'clock",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "בדיקת מדים לא הוזכרה כלל; הקטע דווקא אומר שכשמשאבה נכשלת \"nobody notices for hours\"."
+            }
+          ]
+        },
+        {
+          "question_type": "main_idea",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is the speaker's main point about the water tower?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The tower stands high mainly to keep the stored water above the dirty streets",
+              "k_code": "K-ECHO",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "זו ההנחה שנשללת לפני המפנה: \"the height has nothing to do with cleanliness\"."
+            },
+            {
+              "text": "The tower is needed because electric pumps cannot produce pressure in tall town buildings",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה שגויה: נאמר ש\"Modern pressure pumps can do the same work\" — הבעיה שלהן היא החשמל, לא הלחץ."
+            },
+            {
+              "text": "The tower turns height into pressure and keeps water flowing when the pumps stop",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זה בדיוק הצירוף של \"Every extra foot of height adds pressure in the pipes below\" עם \"they stop the moment the electricity stops\"."
+            },
+            {
+              "text": "The tower proves that towns should fill their tanks by night rather than morning",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "המילוי הלילי נכון אך שולי: \"Pumps fill the tank slowly through the night\" הוא פרט, לא הרעיון המרכזי."
+            }
+          ]
+        }
+      ],
+      "_id": "f78a6958-7ab8-4ab0-b84e-d4784da3a4ea"
+    },
+    {
+      "key": "B8",
+      "title": "LQA-PROD-B: medium_lecture (ice-houses)",
+      "topic": "country-house ice houses",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "then-now-contrast",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Before mechanical refrigeration, a large country house kept its ice in a brick chamber sunk into the ground, usually under a mound of earth and trees. What such a house really bought with that chamber was not coolness but a calendar: the ice house tied a household's summer to one cold week in winter, and the modern kitchen has forgotten that week entirely. Today the same problem is solved by a machine the size of a cupboard that runs on electricity and needs no planning at all. The old design was simple and stubbornly effective. The walls were built double, with a gap of air between them, and the chamber narrowed toward the bottom like an egg. Straw or sawdust was packed around the blocks, and a drain at the base carried away whatever melted, because standing meltwater eats ice faster than warm air does. Servants cut the blocks from a frozen pond in January and carried them down before sunrise, when the air was coldest. In a good year the store lasted until autumn.",
+      "highlight_spans": [
+        "The walls were built double, with a gap of air between them",
+        "a drain at the base carried away whatever melted",
+        "the ice house tied a household's summer to one cold week in winter"
+      ],
+      "questions": [
+        {
+          "question_type": "negative",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Which feature of the ice house is NOT mentioned by the speaker?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Double walls with a gap of air between them",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"The walls were built double, with a gap of air between them\"."
+            },
+            {
+              "text": "Straw or sawdust packed around the ice blocks",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"Straw or sawdust was packed around the blocks\"."
+            },
+            {
+              "text": "A drain at the base to remove the meltwater",
+              "k_code": "K-ECHO",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"a drain at the base carried away whatever melted\"."
+            },
+            {
+              "text": "A bright metal roof to reflect the midday sunlight",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "גג מתכת מחזיר-אור לא מוזכר כלל; המבנה מתואר כ\"a brick chamber sunk into the ground, usually under a mound of earth and trees\"."
+            }
+          ]
+        },
+        {
+          "question_type": "main_idea",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is the speaker's main point in comparing ice houses with modern cooling?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Ice houses kept food colder than modern machines, which explains their careful earth covering",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה שלא נאמרה: \"not coolness but a calendar\" — הקור דווקא לא השתנה."
+            },
+            {
+              "text": "Machines removed the need to plan a household's summer around one cold winter week",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זה בדיוק \"the ice house tied a household's summer to one cold week in winter, and the modern kitchen has forgotten that week entirely\"."
+            },
+            {
+              "text": "Servants worked hardest before sunrise, and modern kitchens no longer employ such early labor",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "העבודה המוקדמת אמנם נזכרת — \"carried them down before sunrise\" — אך היא פרט ולא הנקודה המרכזית."
+            },
+            {
+              "text": "Electric cooling failed to match the ice house until cupboard-sized machines were invented",
+              "k_code": "K-ECHO",
+              "fail_mode": "rival_claim",
+              "explanation_he": "לא נטען כישלון היסטורי כזה; נאמר פשוט ש\"Today the same problem is solved by a machine the size of a cupboard\"."
+            }
+          ]
+        }
+      ],
+      "_id": "1840f641-5f02-4d76-85e0-054483f4a337"
+    },
+    {
+      "key": "B9",
+      "title": "LQA-PROD-B: medium_lecture (canal-locks)",
+      "topic": "canal locks",
+      "bucket": "s60",
+      "format": "lecture",
+      "difficulty": 3,
+      "pivot_type": "descriptive-no-pivot",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A canal has to cross country that is never flat, and a lock is how it does that. A lock is a short chamber with a gate at each end, and it works as a water staircase, which means a loaded barge can climb a hill without ever leaving the water. The flat stretch of canal between two locks is called a pound; in other words, a pound is one level step of that staircase, and it also serves as a small reservoir. To go up, the crew closes the lower gate, opens a sluice in the upper gate, and lets the chamber fill until the boat has risen. Nothing is pumped. Every rise costs one chamber of water, which runs down from the summit and is gone for good. That is why keepers walk the banks each morning in a dry summer, checking the gates for leaks, since a leaking gate drains the summit as surely as a passing boat does.",
+      "highlight_spans": [
+        "The flat stretch of canal between two locks is called a pound",
+        "in other words, a pound is one level step of that staircase",
+        "Nothing is pumped",
+        "a leaking gate drains the summit as surely as a passing boat does"
+      ],
+      "questions": [
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "In this talk, what is a pound?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "A weight of cargo that a barge may legally carry",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "משמעות אחרת של המילה מחוץ להקשר; כאן \"a pound is one level step of that staircase\"."
+            },
+            {
+              "text": "The level stretch of canal lying between two neighboring locks",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הגדרה עצמית בקטע: \"The flat stretch of canal between two locks is called a pound\"."
+            },
+            {
+              "text": "The chamber of water spent each time a boat rises",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זהו עוגן אחר: \"Every rise costs one chamber of water\" מתאר את המחיר, לא את המונח."
+            },
+            {
+              "text": "The small sluice opened to let the upper water in",
+              "k_code": "K-ROLE",
+              "fail_mode": "topic_noun",
+              "explanation_he": "שם עצם מהקטע בתפקיד שגוי: ה\"sluice in the upper gate\" הוא פתח, ולא ה-pound."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Why do the keepers inspect the gates every morning in a dry summer?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Because keepers must set the gates before the first barges reach the summit",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "תפקיד שגוי: הפעולה המתוארת היא \"checking the gates for leaks\", לא הכנת מעבר לסירות."
+            },
+            {
+              "text": "Because pumping water back to the summit costs more in a dry season",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "סותר את הקטע: נאמר בפירוש \"Nothing is pumped\"."
+            },
+            {
+              "text": "Because a dry summer warps the wooden gates and jams the sluices",
+              "k_code": "K-NEW",
+              "fail_mode": "rival_claim",
+              "explanation_he": "הקטע אינו מזכיר עיוות של שערים מיובש; הסיבה שניתנת לסיור היא \"checking the gates for leaks\"."
+            },
+            {
+              "text": "Because a leaking gate drains the summit just as a passing boat does",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זה בדיוק ההסבר בסוף: \"a leaking gate drains the summit as surely as a passing boat does\"."
+            }
+          ]
+        }
+      ],
+      "_id": "75a98d32-03f1-4c89-ad8c-e7e26f492aa3"
+    },
+    {
+      "key": "B10",
+      "title": "LQA-PROD-B: medium_dialogue (postal-sorting-office)",
+      "topic": "a postal sorting office",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Tom: I still do not understand why my parcel went to Leeds when I live two streets from the person who sent it. Could you explain how that happens?\nNadia: Gladly. Nothing here is sorted by how near two addresses are; everything you post walks the same path. First, a van takes the day's collection to one regional hub, because a reader that handles sixty thousand items an hour is far too costly to place in every town.\nTom: So the hub is the only place with that machine.\nNadia: Right. The reader photographs the label and turns the postcode into a barcode, and from that moment the barcode, not the writing, decides where your parcel travels. Then the sorter drops each item into the chute for the delivery office that covers its postcode, and the chute for your street was being filled in Leeds that night.\nTom: So the detour is the price of the machine.\nNadia: Exactly. One expensive reader beats forty cheap ones, and the extra miles cost far less than the extra machines would.",
+      "highlight_spans": [
+        "Could you explain how that happens?",
+        "a reader that handles sixty thousand items an hour is far too costly to place in every town",
+        "the barcode, not the writing, decides where your parcel travels",
+        "One expensive reader beats forty cheap ones"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why is there only one reading machine for the whole region?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Because a delivery office cannot handle sixty thousand items in an hour",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "הסיבה בקטע היא מחיר ולא קיבולת: \"a reader that handles sixty thousand items an hour is far too costly to place in every town\"."
+            },
+            {
+              "text": "Because one large hub can store far more parcels than forty offices",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "השוואת המספרים בקטע נוגעת למחיר — \"One expensive reader beats forty cheap ones\" — ולא לשטח אחסון."
+            },
+            {
+              "text": "Because a reader that fast is too costly to place in every town",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר במפורש: \"a reader that handles sixty thousand items an hour is far too costly to place in every town\"."
+            },
+            {
+              "text": "Because each delivery office only handles the streets inside its own postcode",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_not_asked",
+              "explanation_he": "נכון בקטע — \"the delivery office that covers its postcode\" — אך זו לא הסיבה למכונה היחידה."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "According to Nadia, what decides where a parcel travels once it reaches the hub?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The barcode made from the postcode, rather than the written address",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נדיה אומרת: \"the barcode, not the writing, decides where your parcel travels\"."
+            },
+            {
+              "text": "The photograph of the label, which the delivery office reads later",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "התצלום הוא שלב ביניים בלבד: \"The reader photographs the label and turns the postcode into a barcode\"."
+            },
+            {
+              "text": "The van driver's collection round, which fixes the order of sorting",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "לא נאמר דבר על סדר שנקבע בידי הנהג; תפקידו מסתיים ב\"takes the day's collection to one regional hub\"."
+            },
+            {
+              "text": "The distance between the sender and the person receiving the parcel",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "נדיה שוללת זאת מפורשות: \"Nothing here is sorted by how near two addresses are\"."
+            }
+          ]
+        }
+      ],
+      "_id": "8376109f-0a5d-4a85-8aa6-c53eedc2e829"
+    },
+    {
+      "key": "B11",
+      "title": "LQA-PROD-B: medium_dialogue (drystone-walls)",
+      "topic": "drystone field walls",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Ruth: Every wall on this hillside is standing without a drop of cement, and I cannot see what holds them up. Could you talk me through it?\nCallum: Certainly. A drystone wall is a wall built with no mortar at all, which means the only things holding it together are its own weight and the way the stones lean. Start at the bottom. The foundation stones are set below the turf, so frost lifting the ground moves the whole wall together instead of cracking one course.\nRuth: And the shape? They all narrow toward the top.\nCallum: That taper is deliberate. A narrow top throws the weight of every stone back toward the middle, and weight pressing inward is what stops a face from bulging outward. The middle itself is packed with small stones, and that packing is called the hearting; the hearting is the hidden filling at the heart of the wall, and it locks the two faces against each other.\nRuth: So a wall fails from the inside.\nCallum: Nearly always. Once the hearting shakes loose, the faces have nothing left to press against.",
+      "highlight_spans": [
+        "Could you talk me through it?",
+        "The foundation stones are set below the turf, so frost lifting the ground moves the whole wall together",
+        "the hearting is the hidden filling at the heart of the wall",
+        "Once the hearting shakes loose, the faces have nothing left to press against"
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why are the foundation stones set below the turf?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "So that the weight of every stone leans inward toward the middle",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה תפקיד ההצרה בראש הקיר: \"A narrow top throws the weight of every stone back toward the middle\", ולא של אבני היסוד."
+            },
+            {
+              "text": "So that the wall's weight pushes outward and grips the turf firmly",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הכיוון הפוך: \"weight pressing inward is what stops a face from bulging outward\"."
+            },
+            {
+              "text": "So that each course can shift on its own when the soil moves",
+              "k_code": "K-SCOPE",
+              "fail_mode": "reversed",
+              "explanation_he": "ההיפך מהמנגנון שתואר: המטרה היא לזוז יחד, \"instead of cracking one course\"."
+            },
+            {
+              "text": "So that frost lifting the ground moves the whole wall as one",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "קלום מסביר: \"frost lifting the ground moves the whole wall together instead of cracking one course\"."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does Callum mean by the hearting?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The base of the wall hidden beneath the growing grass",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זהו עוגן אחר בשיחה — \"The foundation stones are set below the turf\" — ולא המונח שהוגדר."
+            },
+            {
+              "text": "The warm inner face that shelters animals during winter storms",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "משמעות עולמית שגויה של \"heart\"; בקטע ההגדרה היא \"the hidden filling at the heart of the wall\"."
+            },
+            {
+              "text": "The small stones packed between the two faces of the wall",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "הגדרה עצמית: \"The middle itself is packed with small stones, and that packing is called the hearting\"."
+            },
+            {
+              "text": "The narrow top course that presses the weight back inward",
+              "k_code": "K-ROLE",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "זהו ה-taper: \"A narrow top throws the weight of every stone back toward the middle\", לא ה-hearting."
+            }
+          ]
+        }
+      ],
+      "_id": "9dd171a9-e5d4-4963-acb3-fc7b1b1e368e"
+    },
+    {
+      "key": "B12",
+      "title": "LQA-PROD-B: medium_dialogue (street-tree-planting)",
+      "topic": "street tree planting",
+      "bucket": "s60",
+      "format": "dialogue",
+      "difficulty": 3,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Dan: Half the young trees the council planted along the high street are dead already. Why do they keep failing? Could you explain it to me?\nMaya: The answer is under the pavement rather than in the branches. A street tree goes into a pit about the size of a bathtub, and that pit is surrounded by soil compacted by machines until it is almost as hard as concrete. Roots cannot push into ground that dense, so they circle inside the pit instead. A root system that circles never spreads wide enough to gather water in a dry August, and a tree that cannot gather water in August starves in its second summer, long after the planting crew has gone home.\nDan: So the damage is done before the tree even arrives.\nMaya: Before the hole is dug. And that delay is why the failure looks mysterious: nobody connects a death in year two with a machine that rolled the ground in year one.",
+      "highlight_spans": [
+        "Could you explain it to me?",
+        "that pit is surrounded by soil compacted by machines until it is almost as hard as concrete",
+        "Roots cannot push into ground that dense, so they circle inside the pit instead",
+        "nobody connects a death in year two with a machine that rolled the ground in year one"
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "According to Maya, what surrounds the pit of a newly planted street tree?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "A ring of gravel that keeps the pavement from cracking",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "מאיה מדברת על אדמה ולא על חצץ: \"that pit is surrounded by soil compacted by machines\"."
+            },
+            {
+              "text": "Soil compacted by machines until it is almost as hard as concrete",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "ציטוט ישיר של מאיה: \"soil compacted by machines until it is almost as hard as concrete\"."
+            },
+            {
+              "text": "Ground loosened by machines so that roots can spread out sideways",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "היפוך: המכונות מהדקות, ולכן \"Roots cannot push into ground that dense\"."
+            },
+            {
+              "text": "Roots from older trees that already circle beneath the high street",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הסיבוב שייך לעץ החדש בתוך הבור: \"they circle inside the pit instead\", ולא לעצים ותיקים."
+            }
+          ]
+        },
+        {
+          "question_type": "main_idea",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What is Maya's main point about why the street trees die?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Damage done to the site before planting traps the roots, so the tree starves",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו שרשרת הסיבות של מאיה: \"Roots cannot push into ground that dense\" ועד \"starves in its second summer\"."
+            },
+            {
+              "text": "The council chose species that cannot survive a dry August on a high street",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "מאיה שוללת הסבר כזה: \"The answer is under the pavement rather than in the branches\"."
+            },
+            {
+              "text": "Planting crews leave too early, so nobody waters the trees through year two",
+              "k_code": "K-ROLE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "עזיבת הצוות היא רק תזמון — \"long after the planting crew has gone home\" — ולא סיבת המוות."
+            },
+            {
+              "text": "Salt spread on the pavement each winter poisons the young roots",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "מלח כבישים אינו מוזכר כלל; מאיה תולה את הכישלון ב\"soil compacted by machines until it is almost as hard as concrete\"."
+            }
+          ]
+        }
+      ],
+      "_id": "e752b527-1dc7-4bcc-bb1f-2570e6a84354"
+    },
+    {
+      "key": "B13",
+      "title": "LQA-PROD-B: long_lecture (pipe-organ-sound)",
+      "topic": "How a pipe organ makes sound: flue, reed and stopped pipes",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "Stand beside a pipe organ during tuning and you notice something odd. The player never blows into anything. Hands and feet only open valves. A blower keeps a large store of air under steady pressure, and every pipe waits until its own valve lets it in.\n\nAlmost every organ contains three families of pipe, and they make their sound in genuinely different ways. A flue pipe behaves like a whistle. Air is squeezed through a narrow slit and thrown against a sharp edge, and the air inside the pipe begins to vibrate. A reed pipe works nothing like that. A thin strip of brass beats rapidly at the foot of the pipe, and the tube above only shapes that buzz into a tone. A stopped pipe is a flue pipe with a plug in its top. The plug turns the wave back down the tube, so the pipe sounds a full octave below what its length promises.\n\nYou might conclude that a large organ is simply a loud one. However, the builder is not chasing loudness at all. He is matching those three families to the room, and the room decides everything. In a stone church, where sound hangs in the air for seconds, he sets the pipes softly and lets the building do the swelling. In a dry hall of carpet and cloth, the same pipes get more wind and a brighter edge, because nothing will be added by the room itself.",
+      "highlight_spans": [
+        "The player never blows into anything.",
+        "However, the builder is not chasing loudness at all.",
+        "He is matching those three families to the room, and the room decides everything."
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main point of the talk?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "Organ builders enlarge an instrument chiefly to make it louder in the room.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה רחבה אך הפוכה: ההרצאה אומרת \"the builder is not chasing loudness at all\"."
+            },
+            {
+              "text": "The player forces air into each pipe by pressing the keys and pedals.",
+              "k_code": "K-ECHO",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך: \"The player never blows into anything\" — הידיים רק פותחות שסתומים."
+            },
+            {
+              "text": "Three pipe families make tone by different means, and the room shapes their sound.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זה הציר: \"three families of pipe\" שמשמיעות בדרכים שונות, ואז \"the room decides everything\"."
+            },
+            {
+              "text": "The lingering sound of a stone church explains why organ pipes were invented.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "post_pivot",
+              "explanation_he": "האקוסטיקה מופיעה רק אחרי הפנייה השנייה — \"In a stone church, where sound hangs in the air for seconds\" — ואינה הרעיון הכולל."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "How does the builder treat the pipes for a dry hall of carpet and cloth?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "They are given more wind and a brighter edge, since the hall adds nothing.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר במפורש: \"the same pipes get more wind and a brighter edge, because nothing will be added\"."
+            },
+            {
+              "text": "They are set softly, because sound in that hall hangs for several seconds.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "זה בדיוק ההפך: הקול נשאר באוויר \"In a stone church, where sound hangs in the air for seconds\", ושם דווקא מנגנים רך."
+            },
+            {
+              "text": "A plug is set in each top, so the note drops a full octave.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זה תיאור ה-stopped pipe — \"The plug turns the wave back down the tube\" — ולא התאמה לאולם."
+            },
+            {
+              "text": "A thin strip of brass is bent so that the buzz carries farther.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "רצועת הפליז שייכת ל-reed pipe: \"A thin strip of brass beats rapidly at the foot of the pipe\"."
+            }
+          ]
+        }
+      ],
+      "_id": "33247c3e-37b5-4090-8ec8-287d0c034804"
+    },
+    {
+      "key": "B14",
+      "title": "LQA-PROD-B: long_lecture (lighthouse-optics)",
+      "topic": "Lighthouse optics: the mirror, the lens and the rings of prisms",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "A lighthouse has one problem to solve. A flame is weak and the sea is wide. Everything in the tower is an answer to that problem.\n\nThe earliest towers burned coal in an open basket, and most of that light climbed uselessly into the sky. The first real answer was a curved metal mirror set behind the flame, gathering the rays that would have escaped backward and throwing them out toward the water. The second answer was a lens placed in front of the flame, bending the spreading rays until they run parallel, in a flat sheet just above the waves. The third answer, the one that made the tall towers famous, was rings of glass prisms set around both the mirror and the lens. The prisms catch the steepest rays, bend them once, reflect them inside the glass, and send them out again alongside the main beam. Almost nothing is wasted.\n\nYou might think, then, that this is a story of brighter and brighter lamps. However, the lamp itself changed very little for a century. What changed was the glass around it.\n\nYet even the glass is not the point. A mariner does not need light. He needs to know which light he is looking at. So every station is given a character, that is, a fixed rhythm of flash and darkness which the station repeats exactly, one tower every ten seconds, its neighbor every four. The lens is cut into panels and turned slowly on a bath of mercury, and it is that turning, not the flame, that writes the station's signature across the horizon.",
+      "highlight_spans": [
+        "However, the lamp itself changed very little for a century.",
+        "Yet even the glass is not the point.",
+        "it is that turning, not the flame, that writes the station's signature across the horizon"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the speaker's main claim about lighthouse towers?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "Each stage of glass rescued rays that the flame threw away.",
+              "k_code": "K-ECHO",
+              "fail_mode": "pre_pivot",
+              "explanation_he": "נכון עד המפנה בלבד. הדובר עצמו מוריד את הזכוכית מהמרכז: \"Yet even the glass is not the point.\""
+            },
+            {
+              "text": "Collecting more light matters less than telling one station from another.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זו הטענה של הקטע: \"He needs to know which light he is looking at\", ולכן \"it is that turning, not the flame, that writes the station's signature across the horizon\"."
+            },
+            {
+              "text": "The lamp grew steadily brighter as the towers grew taller.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "טענה מתחרה שנשללת: \"the lamp itself changed very little for a century\"."
+            },
+            {
+              "text": "Rings of prisms were the earliest optics fitted in the towers.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הפריזמות הן הפתרון השלישי — \"The third answer, the one that made the tall towers famous\" — ולא הראשון."
+            }
+          ]
+        },
+        {
+          "question_type": "vocab_in_context",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What does the speaker mean by a station's 'character'?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The reputation the tower holds among sailors who pass it.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "משמעות יומיומית של המילה, לא זו שבקטע: \"that is, a fixed rhythm of flash and darkness\"."
+            },
+            {
+              "text": "The steady temper expected of the keeper who tends the lamp.",
+              "k_code": "K-WORLD",
+              "fail_mode": "wrong_sense",
+              "explanation_he": "שוב המובן האנושי של המילה; הקטע מגדיר במפורש \"a fixed rhythm of flash and darkness\"."
+            },
+            {
+              "text": "The height at which the flat sheet of light leaves the tower.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "\"in a flat sheet just above the waves\" מתאר את העדשה שלפני הלהבה, לא את המונח."
+            },
+            {
+              "text": "The fixed rhythm of flash and darkness the station repeats exactly.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "ההגדרה נמצאת בקטע עצמו: \"which the station repeats exactly\"."
+            }
+          ]
+        }
+      ],
+      "_id": "1a23eb9c-969d-4896-b10e-c2f66f55870a"
+    },
+    {
+      "key": "B15",
+      "title": "LQA-PROD-B: long_lecture (hand-papermaking)",
+      "topic": "Papermaking by hand: the mold, the deckle and the felt",
+      "bucket": "s90",
+      "format": "lecture",
+      "difficulty": 4,
+      "pivot_type": "two-pivot-plus-terminology",
+      "num_speakers": 1,
+      "wpm_target": 155,
+      "transcript": "To make a sheet of paper by hand you need three objects, and each of them does one job only. The mold is a shallow wooden frame with a fine wire screen stretched across it; water drains through the wire and the fibers stay behind. The deckle is a second frame, without a screen, that sits on the mold like a lid with its middle cut out; it holds the pulp inside the edges and decides how large the sheet will be. The felt is a thick woolen cloth; the wet sheet is rolled off the wire onto the felt, which grips it and lets the mold go free.\n\nYou might suppose the skill lies in the recipe for the pulp. However, the vatman's art is almost entirely in his wrists. He dips the mold, lifts it level, and shakes it twice, once toward himself and once sideways, so that the fibers land crossing one another instead of lying in one direction. A sheet shaken well is strong in every direction; a sheet shaken badly tears along a line.\n\nYet even a perfect sheet is not finished paper. Straight from the press it drinks ink like blotting cloth. So the sheets are dipped in warm gelatin. Then they are hung in the loft in groups of four or five. Finally each sheet is pressed a second time to flatten the ripples that drying leaves behind. Only then will a pen cross the surface without feathering. Three frames, two shakes and a bath of glue: in other words, the sheet is made four times before it is paper.",
+      "highlight_spans": [
+        "However, the vatman's art is almost entirely in his wrists.",
+        "Yet even a perfect sheet is not finished paper.",
+        "in other words, the sheet is made four times before it is paper"
+      ],
+      "questions": [
+        {
+          "question_type": "main_idea",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What is the main idea of this talk?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "Three simple tools divide the work, and the vatman's hands decide the quality.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "זה בדיוק המהלך: שלושה כלים, ואז \"the vatman's art is almost entirely in his wrists\"."
+            },
+            {
+              "text": "The strength of a handmade sheet is set by the recipe mixed in the vat.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "זו ההנחה שנדחית: \"You might suppose the skill lies in the recipe for the pulp\", ומיד נדחית"
+            },
+            {
+              "text": "The deckle carries the wire screen through which the water drains away.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הרשת שייכת ל-mold: \"a fine wire screen stretched across it\"; ה-deckle הוא מסגרת בלי רשת."
+            },
+            {
+              "text": "The sheet is shaken twice so that all the fibers lie in one direction.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הפוך: \"the fibers land crossing one another instead of lying in one direction\"."
+            }
+          ]
+        },
+        {
+          "question_type": "negative",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Which of these is NOT mentioned as part of finishing the sheets?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "The damp sheets hang in the loft in groups of four or five.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"hung in the loft in groups of four or five\"."
+            },
+            {
+              "text": "The sheets are pressed a second time to flatten the drying ripples.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"pressed a second time to flatten the ripples that drying leaves behind\"."
+            },
+            {
+              "text": "The sheets are brushed with warm wax to seal the finished surface.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "שעווה אינה מוזכרת כלל; הקטע מדבר על \"a bath of glue\" בלבד."
+            },
+            {
+              "text": "The sheets are dipped in warm gelatin so that ink will not feather.",
+              "k_code": "K-TRUE-NOT-ASKED",
+              "fail_mode": "true_stated",
+              "explanation_he": "נאמר במפורש: \"the sheets are dipped in warm gelatin\" וכך העט עובר \"without feathering\"."
+            }
+          ]
+        }
+      ],
+      "_id": "5f981aa3-e670-46ec-9ae7-7bf119f2e8c4"
+    },
+    {
+      "key": "B16",
+      "title": "LQA-PROD-B: long_dialogue (stained-glass-workshop)",
+      "topic": "A cathedral stained glass workshop: why medieval panels cloud over",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Daniel: Can you explain why the old panels look cloudy from inside?\nRuth: I can. Start outside, with the rain. Rainwater here has always carried a little acid from the city's chimneys.\nDaniel: And the acid eats the glass?\nRuth: Slowly. Medieval glass is rich in potash, and potash dissolves. The acid lifts the potash out of the surface and leaves a skin of tiny pits.\nDaniel: What does that do?\nRuth: Each pit holds a drop of water long after the rain has stopped. The wet dirt sits in the pit, the pit widens, and the pits join into a crust. Light that reaches that crust is scattered, not transmitted. From inside, the panel looks like a gray fog with a picture somewhere behind it.\nDaniel: And the painting itself?\nRuth: That is the loss we cannot repair. The faces were painted in a black oxide and then fired, so the paint fuses into the glass. But the fired layer is thin. Once the crust lifts, it carries flakes of paint away with it, and a nose or an eyebrow simply goes.\nDaniel: So what do you actually do here?\nRuth: Three things, in order. We clean with a soft brush and distilled water, never acid. Then we set a new sheet of clear glass into the stone opening and hang the old panel just behind it, with a narrow gap. That gap is opened to the air of the church, which is warmer, so the medieval surface never falls to the temperature at which water forms on it. Dry glass does not dissolve. And before we touch anything, every panel is photographed.\nDaniel: So the new glass takes the weather.\nRuth: The new glass takes the weather. That is its whole job.",
+      "highlight_spans": [
+        "Can you explain why the old panels look cloudy from inside?",
+        "The acid lifts the potash out of the surface and leaves a skin of tiny pits.",
+        "The new glass takes the weather. That is its whole job."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why do the medieval panels look cloudy when seen from inside?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "The black oxide was fired too hot, so it clouded right across the surface.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הצבע אכן נשרף — \"painted in a black oxide and then fired\" — אבל אין טענה ששרפו חזק מדי."
+            },
+            {
+              "text": "Soot from the city's chimneys settled inside the church and coated the panels.",
+              "k_code": "K-ECHO",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הארובות מוזכרות בכיוון אחר: \"Rainwater here has always carried a little acid from the city's chimneys\"."
+            },
+            {
+              "text": "The lead strips corroded, and the green corrosion crept onto the nearby glass.",
+              "k_code": "K-NEW",
+              "fail_mode": "unsupported",
+              "explanation_he": "העופרת אינה מוזכרת בשיחה כלל; ההסבר היחיד הוא \"a skin of tiny pits\"."
+            },
+            {
+              "text": "Acid rain dissolved the potash, and the pits then filled up with dirt.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "שרשרת הסיבות: \"potash dissolves\", ואז \"The wet dirt sits in the pit, the pit widens\"."
+            }
+          ]
+        },
+        {
+          "question_type": "detail",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Why is the narrow gap behind the new outer sheet opened to the church's air?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "The open gap lets any rain that passes the new sheet drain away below.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הגשם נעצר בחוץ: \"The new glass takes the weather\"; הרווח אינו נתיב ניקוז."
+            },
+            {
+              "text": "The warmer inside air keeps water from ever forming on the old surface.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר: \"the medieval surface never falls to the temperature at which water forms on it\"."
+            },
+            {
+              "text": "Air moving in the gap cools the panel, so the fired paint contracts evenly.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "כיוון הפוך: האוויר מהכנסייה \"is warmer\", ותפקידו אינו קירור הצבע."
+            },
+            {
+              "text": "The gap holds still, sealed air that stops the potash dissolving any further.",
+              "k_code": "K-ECHO",
+              "fail_mode": "reversed",
+              "explanation_he": "הרווח פתוח ולא אטום: \"That gap is opened to the air of the church\"."
+            }
+          ]
+        }
+      ],
+      "_id": "c1f193e3-119b-43cb-8f59-f3ddf8b02b98"
+    },
+    {
+      "key": "B17",
+      "title": "LQA-PROD-B: long_dialogue (herring-fishery-collapse)",
+      "topic": "The herring fishery and its collapse",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Karl: You have read the landing books for the whole century. Can you explain to me how a fish that filled every harbor simply stopped arriving?\nAnna: I can, and the explanation is not really about greed. It begins with the habits of the fish.\nKarl: My grandfather fished with drift nets from this same harbor, and he always said the herring hid in winter.\nAnna: He was right. Herring spend the winter packed into a few deep basins, almost motionless, hardly feeding. In summer they scatter across half the sea, and a hanging net can only take what swims into it.\nKarl: So the winter shoals were safe because nobody could find them.\nAnna: Exactly. Then, inside one decade, three things arrived together. Echo sounders drew the shoal on paper. Bigger boats could work in winter weather. And the purse seine could close a wall of net around a whole shoal at once, instead of straining a curtain through it.\nKarl: And a winter shoal is not an ordinary catch.\nAnna: No. A winter shoal is the breeding stock, resting before it spawns. Take that basin and you have not taken one season of fish; you have taken the next twelve. The young never appear, the fleet works harder on what remains, and the arithmetic ends where it ended.\nKarl: If you ask me, the echo sounder was the true turning point. A net is useless until you know exactly where to drop it.\nAnna: In my opinion the gear was never the fault. The quota each year was set from last year's catch, so a falling stock always bought a generous quota. We were, by design, one year too late, every single year.",
+      "highlight_spans": [
+        "Can you explain to me how a fish that filled every harbor simply stopped arriving?",
+        "A winter shoal is the breeding stock, resting before it spawns.",
+        "In my opinion the gear was never the fault."
+      ],
+      "questions": [
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "What does Karl say about his own link to the fishery?",
+          "correct_option_index": 1,
+          "options": [
+            {
+              "text": "He has read the harbor's landing books for the whole century.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו אנה: קרל פונה אליה \"You have read the landing books for the whole century\"."
+            },
+            {
+              "text": "His grandfather fished with drift nets from this same harbor.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "קרל אומר בעצמו: \"My grandfather fished with drift nets from this same harbor\"."
+            },
+            {
+              "text": "He keeps the harbor's record of every summer's scattered catch.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הפיזור הקיצי הוא הסבר של אנה: \"In summer they scatter across half the sea\"."
+            },
+            {
+              "text": "He explains why the shoals rest almost motionless through winter.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "ההסבר הביולוגי הוא של אנה: \"packed into a few deep basins, almost motionless\"."
+            }
+          ]
+        },
+        {
+          "question_type": "opinion",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "What opinion does Anna state about the cause of the collapse?",
+          "correct_option_index": 0,
+          "options": [
+            {
+              "text": "The quota rule was at fault, because it always followed a falling stock.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "דעתה המפורשת: \"In my opinion the gear was never the fault\", והסיבה — \"set from last year's catch\"."
+            },
+            {
+              "text": "The echo sounder was the turning point, since a net needs a target.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו דעתו של קארל, לא של אנה: \"If you ask me, the echo sounder was the true turning point\"."
+            },
+            {
+              "text": "Greed among the owners drove the fleet into the winter basins.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "אנה פותחת בשלילת ההסבר הזה: \"the explanation is not really about greed\" — היא תולה את הקריסה בכלל המכסה."
+            },
+            {
+              "text": "The bigger winter boats mattered most, because only they could work that weather.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "הסירות הגדולות הן אחד משלושת הדברים שהגיעו יחד — \"Bigger boats could work in winter weather\" — אבל אנה אומרת ש\"the gear was never the fault\"."
+            }
+          ]
+        }
+      ],
+      "_id": "d2ea21f2-c968-4b93-bef9-3cace716d340"
+    },
+    {
+      "key": "B18",
+      "title": "LQA-PROD-B: long_dialogue (canal-barge-horses)",
+      "topic": "Canal barge horses, towpaths and tunnel legging",
+      "bucket": "s90",
+      "format": "dialogue",
+      "difficulty": 4,
+      "pivot_type": "explanation-chain",
+      "num_speakers": 2,
+      "wpm_target": 170,
+      "transcript": "Nadia: One horse, fifty tons. I do not believe it. Explain it to me.\nPeter: Gladly. Nothing about it is magic; it is all the water. On a road that same horse pulls perhaps two tons, because every wheel is fighting the ground.\nNadia: And on the canal?\nPeter: A floating boat has almost no friction to fight. What it has instead is water that must be pushed aside. In a narrow cut the displaced water cannot escape sideways, so it slides back along the hull as a current running against you.\nNadia: Which gets worse the faster you go.\nPeter: Far worse, and not gently. Below walking pace the resistance is small. Push past that and the boat starts climbing its own wave, and the load on the rope multiplies. That is why the horse walks. It is not a slow horse; it is a boat that punishes speed.\nNadia: Was that why the companies fined fast boats?\nPeter: Partly. A fast boat also throws a wash that tears the clay bank apart, and the company then pays to rebuild it.\nNadia: And the tunnels? There is no towpath in there.\nPeter: There is not. The horse was walked over the hill by a boy, and men called leggers lay on planks across the bow and walked the boat through on the tunnel walls, sometimes for two hours in the dark. I have legged a short tunnel once, for a film. Twenty minutes, and I could not lift my arms afterward.\nNadia: I have only ever driven the horse. That part I would not attempt.",
+      "highlight_spans": [
+        "One horse, fifty tons. I do not believe it. Explain it to me.",
+        "the displaced water cannot escape sideways, so it slides back along the hull",
+        "It is not a slow horse; it is a boat that punishes speed."
+      ],
+      "questions": [
+        {
+          "question_type": "detail",
+          "target_zone": "early",
+          "display_order": 1,
+          "question_text": "Why can one horse move fifty tons on a canal but only two on a road?",
+          "correct_option_index": 3,
+          "options": [
+            {
+              "text": "Water pushed aside by the hull returns and helps to carry the boat forward.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "הכיוון הפוך: המים חוזרים \"as a current running against you\"."
+            },
+            {
+              "text": "A boat below walking pace climbs its own wave, which lightens the rope.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "רק מעל קצב ההליכה: \"Push past that and the boat starts climbing its own wave\", והעומס גדל."
+            },
+            {
+              "text": "The towpath is flat and smooth, so the horse never pulls uphill.",
+              "k_code": "K-SCOPE",
+              "fail_mode": "rival_claim",
+              "explanation_he": "פיטר תולה הכול במים: \"Nothing about it is magic; it is all the water\" — מצב הדרך אינו ההסבר."
+            },
+            {
+              "text": "A floating hull has almost no friction, so only displaced water resists it.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "נאמר: \"A floating boat has almost no friction to fight\" מול הגלגל שנאבק בקרקע."
+            }
+          ]
+        },
+        {
+          "question_type": "speaker_ref",
+          "target_zone": "late",
+          "display_order": 2,
+          "question_text": "Which experience does Peter describe as his own?",
+          "correct_option_index": 2,
+          "options": [
+            {
+              "text": "He drove the horse along the towpath but never entered the tunnels.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "זו נדיה: \"I have only ever driven the horse. That part I would not attempt.\""
+            },
+            {
+              "text": "He walked a horse over the hill while a boy legged the boat through.",
+              "k_code": "K-REVERSE",
+              "fail_mode": "reversed",
+              "explanation_he": "התפקידים הפוכים: \"The horse was walked over the hill by a boy\", והגברים הם ה-leggers."
+            },
+            {
+              "text": "He legged a short tunnel once and could not lift his arms after.",
+              "k_code": "CORRECT",
+              "fail_mode": null,
+              "explanation_he": "פיטר מספר: \"I have legged a short tunnel once, for a film\"."
+            },
+            {
+              "text": "He rebuilt a clay bank that a fast boat had washed away.",
+              "k_code": "K-ROLE",
+              "fail_mode": "anchor_swap",
+              "explanation_he": "התיקון נזקף לחברה: \"the company then pays to rebuild it\", לא לפיטר."
+            }
+          ]
+        }
+      ],
+      "_id": "0e012119-6e56-40c2-9336-882785cd7e17"
+    }
+  ]
+}

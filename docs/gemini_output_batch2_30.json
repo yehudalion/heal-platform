@@ -1,0 +1,761 @@
+[
+  {
+    "question_id": "41f010f6-824e-46dc-91fd-bf01b2fea22e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שההובלה הפכה לזולה יותר, אך האפשרות \"digging the canals\" עוסקת במאמץ הנדרש לחפירה בעבר. זהו נושא שאינו נובע מהתוצאה הכלכלית המוצגת בסוף."
+      },
+      {
+        "index": 1,
+        "explanation_he": "תחילת הקטע מתארת מצב שבו ההובלה הייתה \"slow and costly\". המילה \"Because\" מסמנת תוצאה ישירה להוזלת ההובלה, ולכן הגיוני שבעקבותיה \"the price of goods\" בערים יתחיל לרדת."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בקטע נאמר שחפירת התעלות אפשרה לסירות להוביל פחם וברזל \"cheaply between distant cities\". האפשרות שסירות היו \"too slow to carry\" סותרת את השיפור שהתעלות הביאו."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מציין שהתעלות אפשרו להוביל סחורות \"cheaply\". לכן, הקביעה שסוחרים עשירים חשבו שהתעלות הן \"a bad idea\" הפוכה לחלוטין מההקשר הכלכלי החיובי המתואר."
+      }
+    ],
+    "highlight_spans": [
+      "Then",
+      "Because transporting goods"
+    ]
+  },
+  {
+    "question_id": "4348b22b-6691-48c6-9431-184c226d529d",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המילה \"Instead\" מציגה חלופה לאיסור לזרוק את העלים המשומשים. משרתים לא יכלו לשמור \"fresh tea leaves\", שכן הקטע מבהיר שרק העשירים נעלו אותם בקופסאות."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע פותח בכך שהתה היה \"extremely expensive\" ורק עשירים יכלו להרשות לעצמם לקנות אותו. המשרתים העניים לא יכלו \"buy their own\" תה יקר כזה בעצמם."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המילה \"Instead\" דורשת חלופה לפעולה של זריקת העלים. האפשרות \"throw the old leaves away\" חוזרת בדיוק על הפעולה שנאסרה על המשרתים לעשות בקטע."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מכיוון שנאסר על המשרתים לזרוק את העלים המשומשים \"Because the leaves were so costly\", המילה \"Instead\" מציגה חלופה חסכונית: הם הורשו לייבשם ולמכור אותם שוב, \"sell them a second time\"."
+      }
+    ],
+    "highlight_spans": [
+      "Because the leaves were so costly",
+      "Instead"
+    ]
+  },
+  {
+    "question_id": "84f5b952-904d-40fb-bf8f-db6efb97ec2a",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בקטע מוסבר שהדבורים שבמרכז חמות ואילו בחוץ הן \"grow dangerously cold\". הפעולה \"shiver harder\" אינה מנגנון שיכול להעביר חום ישירות החוצה ללא תנועה פיזית."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שהדבורים כבר מתקהלות \"tightly inside the hive\", אך זה עדיין משאיר את הדבורים בקצה קפואות. התקהלות צפופה יותר לא תפתור את בעיית הקצה עבורן."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המשפט האחרון מציג מטרה: \"To keep any single bee from freezing\". כדי למנוע קפיאה של דבורים ספציפיות בקצה, הדבורים \"take turns\" ומחליפות מקומות בין המרכז החם לקצה הקר."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המטרה המוצהרת בסוף הקטע היא \"To keep any single bee from freezing\". האפשרות לתת להן לקפוא, \"let them freeze\", הפוכה לחלוטין למטרה זו ומציגה תוצאה שלילית."
+      }
+    ],
+    "highlight_spans": [
+      "Instead of",
+      "To keep any single bee"
+    ]
+  },
+  {
+    "question_id": "cd146578-3853-4c40-9e8e-3c9067cc0bdc",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מקשר בין מלח לבין שכר ותשלום לעובדים, ומסביר שממנו מגיע המונח \"salary\". לכן, עובד עצלן שאינו עובד היטב יתואר כמי שאינו שווה את שכרו, כלומר \"not worth his salt\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המילה \"That is why\" דורשת ביטוי הקשור למלח, \"salt\", שהוזכר כבסיס לשכר בקטע. האפשרות \"worth his weight in gold\" עוסקת בזהב ואינה מתקשרת למקור המילה המתואר."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע דן במקור המונח לשכר על בסיס מלח, \"salt\". התיאור \"paid far too much money\" אינה ביטוי לשוני המבוסס על מלח, ולכן אינו מתאים כהמשך למשפט על מקור המילים."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בקטע מוסבר שהמילה לשכר מגיעה ממלח, \"salt\". הביטוי \"bringing home the bacon\" עוסק בבשר חזיר ואינו קשור פילולוגית או תמטית לפרטים שהוצגו על מלח בעולם העתיק."
+      }
+    ],
+    "highlight_spans": [
+      "instead of",
+      "That is why"
+    ]
+  },
+  {
+    "question_id": "0d1ac646-2f10-4899-a042-0747aeca2e42",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בקטע מוסבר שבחורף החוף ריק ו\"the shop barely gets any customers\". המילה \"Because of this\" דורשת תוצאה הגיונית לחוסר בלקוחות, ולכן בעל החנות החליט לסגור אותה: \"close the store\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שבחורף הטמפרטורות יורדות מתחת לאפס ואין לקוחות. לכן, ההחלטה למכור גלידה דווקא בימים הקרים ביותר, \"on the coldest winter days\", אינה הגיונית מבחינה עסקית."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מאחר שבחורף החנות כמעט לא רואה לקוחות, \"barely gets any customers\", אין היגיון כלכלי ברכישת מכונות גלידה נוספות, \"buy more ice cream machines\", בתקופה זו."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המילים \"During these cold months\" ו\"Because of this\" מעבירות את המיקוד לפעולה שקורית בחורף. העסקת עובדים נוספים כדי לעזור בקיץ, \"to help with the summer rush\", אינה פותרת את בעיית החורף."
+      }
+    ],
+    "highlight_spans": [
+      "In winter",
+      "During these cold months",
+      "Because of this"
+    ]
+  },
+  {
+    "question_id": "120a1e16-a777-4254-89c8-95055752f538",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר בעיה שבה נמענים עניים סירבו לקבל מכתבים כי \"the person receiving it had to pay\". פתרון ה\"cheap stamps\" ששולם מראש פתר זאת, ולכן כעת הם יכלו \"receive letters without worrying\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כדי לפתור את בעיית העלות עבור הנמען, הדואר הנהיג בולים ששולמו מראש על ידי השולח, \"the sender paid for\". אין שום היגיון בדרישה שהדוורים עצמם, \"postmen pay\", ישלמו על המכתבים."
+      },
+      {
+        "index": 2,
+        "explanation_he": "השינוי המתואר בקטע נועד להפוך את שליחת המכתבים לנגישה באמצעות \"cheap stamps\". האפשרות שאנשים הפסיקו לכתוב מכתבים, \"stopped writing letters\", הפוכה להשפעת הפתרון."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הבולים הזולים הוצגו כדי לפתור את הבעיה שבה אנשים \"refused to accept mail\". האפשרות שאנשים יסרבו להשתמש בהם, \"refused to use the cheap stamps\", סותרת את הצלחת הפתרון החדש."
+      }
+    ],
+    "highlight_spans": [
+      "Since",
+      "To fix this",
+      "After this change was made"
+    ]
+  },
+  {
+    "question_id": "2977516a-4358-4aaf-81aa-d82047de68b6",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר מקצוע ישן של מעוררים ידניים. עם המצאת השעון המכני, \"cheap mechanical alarm clocks were invented\", לא היה בהם עוד צורך, ולכן כתוצאה מכך הם איבדו את עבודתם, \"lost their jobs\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מטרת המעוררים הייתה להעיר אנשים באמצעות \"tapped on bedroom windows\". אין סיבה הגיונית שהם יתחילו למכור שעונים מכניים יקרים, \"selling expensive mechanical clocks\", למרות שהשעונים החדשים היו זולים."
+      },
+      {
+        "index": 2,
+        "explanation_he": "השעונים המכניים החליפו את תפקיד המעוררים. לכן, אין היגיון בכך שהם ימשיכו לעבוד ויקישו חזק יותר על החלונות, \"began tapping on windows much louder\", כאשר לא היה בהם עוד צורך."
+      },
+      {
+        "index": 3,
+        "explanation_he": "השעונים המכניים שהומצאו ונהיו נפוצים, \"became widely available\", ייתרו את המקצוע כולו. קניית מקלות ארוכים יותר, \"bought longer sticks\", אינה קשורה לפתרון הטכנולוגי שהחליף אותם."
+      }
+    ],
+    "highlight_spans": [
+      "Eventually",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "2dacf84f-4f1f-4428-8d9e-4d5bf02f6a43",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שהעצים זקוקים לחום האש כדי \"release their seeds\" וכי היעדר אש מונע מהם לצמוח. לכן, כדי לעזור להם, שומרי היערות החליטו להצית שריפות קטנות ומבוקרות, \"set small, controlled fires\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע עוסק בצורך של עצי הסקויה באש וחום כדי לשחרר זרעים. השקיית העצים העתיקים, \"water the oldest trees\", אינה קשורה לצורך בשריפות ומניעת צפיפות הקרקע המתוארת בסוף."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הבעיה המוצגת היא שהאצטרובלים זקוקים לחום כדי להיפתח. כריתת העצים הענקיים, \"cut down the giant sequoias\", אינה דרך הגיונית לעזור להם להתרבות ולגדול באופן טבעי."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בקטע מוסבר שהעצים חייבים את חום האש, \"need the heat of a fire\", כדי שזרעיהם ישתחררו. הסרת כל מקור חום, \"remove every source of heat\", תמנע מהם להתרבות ותחמיר את הבעיה."
+      }
+    ],
+    "highlight_spans": [
+      "In fact",
+      "For this reason"
+    ]
+  },
+  {
+    "question_id": "329139c4-21c0-4a9e-a761-18910bc5bee5",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר את הלובסטר כמאכל זול המתאים לאסירים ולעניים, \"fit only for prisoners and the poor\". לכן, הגשת לובסטר לא נחשבה לסימן של בית עשיר ונדיב, \"a wealthy and generous household\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מאחר שהלובסטר נחשב בעבר ל\"cheap food fit only for prisoners\", הגשתו בארוחה נתפסה כסימן למעמד נמוך בשולחן, \"a mark of low status at the table\", כפי שעולה מחוזי המשרתים."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מציין שהלובסטר היה כה נפוץ עד שנפלט לערימות בחופים, \"washed up on beaches\". הוא לא היה מאכל חגיגי או נדיר שנשמר רק לחגים מיוחדים, \"something only served on special holidays\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מהחוזה של המשרתים עולה שהם ביקשו במפורש \"not be fed lobster too often\". כלומר, הלובסטר לא נחשב למעדן נדיר שהם ציפו לו בשמחה, \"a rare treat that servants looked forward to\"."
+      }
+    ],
+    "highlight_spans": [
+      "so common",
+      "cheap food",
+      "Back then"
+    ]
+  },
+  {
+    "question_id": "3a31dc1a-9752-4c76-ad96-bd51566ec828",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המילים \"Recently, however\" מסמנות שינוי לרעה במערכת הפטנטים. לכן, התוצאה אינה עזרה לחברות קטנות במחקר ופיתוח המצאות חדשות, \"helping small companies research\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "לפי הקטע, חברות רוכשות פטנטים רק כדי לתבוע אחרים על שימוש ברעיונות בסיסיים, \"just to sue other companies\". הן אינן מוגבלות לרכישה של \"useful new technologies\" בלבד."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע דן בחברות שקונות פטנטים קיימים כדי להגיש תביעות משפטיות, \"just to sue other companies\". המערכת עצמה לא נותנת פטנטים חדשים לכל מי שמגיש תביעה, \"anyone who files a basic lawsuit\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "במקור המערכת נועדה לעודד פיתוח, אך השינוי המסומן ב-\"Recently, however\" מראה שחברות משתמשות בפטנטים לתביעות קנטרניות. לכן, כיום הם משמשים לחסימת חדשנות, \"to block innovation rather than encourage it\"."
+      }
+    ],
+    "highlight_spans": [
+      "Recently, however",
+      "As a result of this practice"
+    ]
+  },
+  {
+    "question_id": "42d36160-071d-429c-97a1-9b3aed1de151",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר מבקרים מסורתיים שהיו רגילים ללמוד ב-\"silence\". השינוי הרועש מפריע להם, ולכן לא סביר שהם יצטרפו בהתלהבות לסדנאות הרועשות, \"joined the loud workshops\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המבקרים המסורתיים היו רגילים ללמוד בשקט, \"study in silence\". המעבר הרועש המתואר ב-\"noisy shift\" מפריע להרגליהם, ולכן הגיוני שהם יתלוננו על המחסור במרחבים שקטים: \"complaining about the lack of quiet spaces\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המבקרים המסורתיים רגילים ללמוד ב-\"silence\". למרות שהספרייה הפכה לרועשת, אין זה אומר שהם עצמם ישנו את אופי הלימוד שלהם ויתחילו ללמוד בקול רם, \"started studying much louder\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המבקרים המסורתיים מעדיפים שקט, \"expected to study in silence\". דרישה להקמת אזורי משחק רועשים נוספים, \"build more community play hubs\", סותרת את אופיית ואת רצונם בסביבת לימוד שקטה."
+      }
+    ],
+    "highlight_spans": [
+      "Recently, however",
+      "Because of this noisy shift"
+    ]
+  },
+  {
+    "question_id": "430fc714-4ac7-47a8-bf90-53ca2a3be735",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המלך הורה לתקן את הטעות של ציור קליפורניה כאי, \"ordered the mistake fixed\". יצירת מפות עם איים נוספים, \"show even more islands nearby\", הייתה מחמירה את הטעות במקום לתקן אותה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שרק בעקבות צו המלך תוקנה הטעות, \"ordered the mistake fixed\". לכן, לא הגיוני שהמפות נשארו בדיוק כפי שהיו קודם לכן, \"kept exactly as the earlier ones\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "המילה \"Only\" מדגישה שצו המלך הביא לתיקון המפות לאחר ש\"the island kept appearing\". העתקה מהירה יותר של המפות השגויות, \"copied faster than ever\", אינה מהווה תיקון של הטעות."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מגלי ארצות דיווחו שקליפורניה היא יבשה רציפה, \"reported solid land\", אך המפות המשיכו להציג אותה כאי. רק בהוראת המלך לתקן את הטעות, המפות שונו וקליפורניה חוברה ליבשת, \"changed to join California to the mainland\"."
+      }
+    ],
+    "highlight_spans": [
+      "Even after",
+      "Only when"
+    ]
+  },
+  {
+    "question_id": "d68179c4-2d0e-4540-bbb7-244644570cff",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הסוחר שלח את התה כדוגמיות חינם ללקוחותיו, \"send cheap samples\". ההפתעה המוצגת ב-\"Instead, what is surprising\" נוגעת לאופן השימוש בשקיות המשי, ולא לסירוב לשתות את התה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המילה \"Instead\" מנגידה את ציפיית הסוחר שהלקוחות יפתחו את השקיות וישפכו את העלים למים, \"pour the leaves into hot water\". החזרת השקיות לסוחר, \"returned the silk bags\", אינה קשורה לאופן הכנת התה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בקטע נאמר שהסוחר השתמש בשקיות משי במקום פחיות כבדות כדי לחסוך באריזה, \"To save on packaging\". דרישת הלקוחות לקבל פחיות, \"demanded heavy tin cans\", אינה הפעולה המפתיעה שביצעו עם השקיות שקיבלו."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הסוחר ציפה שהלקוחות יפתחו את השקיות, \"expected customers to open the bags\". ההפתעה המסומנת ב-\"Instead\" היא שהם לא פתחו אותן, אלא פשוט השליכו את השקית כולה למים החמים: \"dropped the entire bag into the water\"."
+      }
+    ],
+    "highlight_spans": [
+      "instead of",
+      "Instead, what is surprising is that"
+    ]
+  },
+  {
+    "question_id": "7c757c49-9336-422b-bed5-ad0a73ba3dc8",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקנרית רגישה לגזים רעילים ונעשית חולה \"long before the miners felt anything\". לכן, מעקב צמוד אחר הציפור, \"keeping a close eye on the bird\", העניק לכורים אזהרה מוקדמת לברוח מהמנהרה, \"got an early warning\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "תפקיד הקנרית היה לזהות דליפת גז רעיל, \"poison gas\". התנהגותה לא סיפקה מידע גיאולוגי, ולכן היא לא יכלה לעזור לכורים לדעת לאיזה כיוון לחפור, \"which direction to dig next\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מציין שהציפור נשמה מהר יותר מבני אדם, \"breathed faster than a human\". הכורים לא יכלו ללמוד לנשום לאט כמוה, \"breathe as slowly as the canary\", וזה ממילא לא היה עוזר להם לשרוד גז רעיל."
+      },
+      {
+        "index": 3,
+        "explanation_he": "למרות נוכחות הקנרית, הסכנה מהגז הרעיל, \"poison gas\", נותרה בעינה. מעקב אחר הציפור עזר לזהות סכנות אך לא ביטל את הצורך של הכורים לחשוש מגזים, \"no longer needed to worry about gas\"."
+      }
+    ],
+    "highlight_spans": [
+      "If",
+      "By keeping a close eye"
+    ]
+  },
+  {
+    "question_id": "83c792f8-6dfd-4dae-8be1-405ce366965c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שנקבות ממין גדול יותר מחקות את האות של המין הקטן, \"mimic this exact signal\". הזכר נמשך לנקבה המחקָה, ולא לזכר גדול מבני מינו, \"a larger male of his own species\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המילה \"However\" מסמנת נקודת מפנה שלילית ומסוכנת עבור הזכר הקטן. לכן, התוצאה של המשיכה לאות המזויף אינה הצלה מסכנה, \"saved from danger\", אלא הגעה ישירות לתוך סכנה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "נקבות ממין גדול מחקות את אות המשיכה, \"mimic this exact signal\". כתוצאה מכך, \"Consequently\", הזכר הקטן שעף אליהן טועה ונטרף על ידי הנקבה הגדולה במקום למצוא בת זוג, \"eaten by the larger female\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הזכר הקטן עף מטה בגלל שחשב שמדובר בבת זוג ממינו. הוא אינו מנסה או נאלץ לחקות בעצמו את האותות של נקבות הגחליליות, \"forced to mimic the signals\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Consequently"
+    ]
+  },
+  {
+    "question_id": "b608644b-381c-494d-a68e-cd08911ea04c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר בעיה שבה הולכי רגל נפגעו מרוכבי קורקינט מהירים, \"bumped and hurt\". עידוד רכיבה מהירה עוד יותר, \"encourage faster scooter riding\", רק יחמיר את הסכנה ויעמוד בניגוד לתפקיד העירייה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הפארקים מיועדים למשפחות כדי \"enjoy nature\". הסרת השטחים הירוקים והעצים, \"remove the green spaces and trees\", תהרוס את מהות הפארק ואינה פותרת את בעיית בטיחות הולכי הרגל בנתיבי ההליכה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הולכי רגל רבים כבר נפגעו מרוכבים מהירים בשבילים הצרים, \"bumped and hurt by these high-speed riders\". כתוצאה מכך, \"As a result\", הגיוני שהעירייה תאסור על כניסת הכלים הללו לשבילים: \"ban these fast vehicles\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הבעיה המרכזית היא שרוכבי קורקינט מהירים פוגעים בהולכי רגל בשבילים. הרחבת השבילים עבור כלבי משפחות, \"walking paths for family dogs\", אינה קשורה לפתרון הסיכון שיוצרים הקורקינטים."
+      }
+    ],
+    "highlight_spans": [
+      "Recently",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "b74e2011-fd58-49bd-a4f3-9ae0aea792ef",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בקטע מתאר מהפך שבו קונים הפסיקו להגיע, \"buyers simply stopped showing up\". היעדר הקונים מסביר מדוע המחירים לא יכלו להמשיך לטפס מעלה, \"kept climbing even higher\", אלא להפך."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הבעיה שנוצרה היא כלכלית עקב עצירת הקניות בשוק, \"no one was willing to buy anymore\". אין שום אזכור לכך שהמדינה החליטה לאסור על גידול הצמח בגנים, \"tulips were banned\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "אנשים השקיעו את כל חסכונותיהם בבצלים מתוך מחשבה שהמחיר יעלה, \"poured their savings\". כשהקונים נעלמו לפתע ואיש לא קנה עוד, \"no one was willing to buy\", ההון שלהם קרס והם נותרו ללא ערך: \"fortunes collapsed\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתאר משבר שבו לפתע אף אחד לא רצה לקנות, \"no one was willing to buy\". הממשלה לא מוזכרת בקטע כמי שהתערבה כדי לרכוש את הבצלים העודפים, \"government stepped in to buy\"."
+      }
+    ],
+    "highlight_spans": [
+      "Then one morning",
+      "because no one was willing"
+    ]
+  },
+  {
+    "question_id": "c4b3460e-f285-400b-977c-7528639b11e6",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שמטרת החריצים היא להטיל צל כדי להוריד את טמפרטורת הקקטוס, \"lower the plant's temperature\". לכן, מנגנון זה מונע ממנו להישרף מהר יותר בשמש, \"burn under the hot sun\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הצל הקטן שמטילים החריצים עוזר להפחית חום, אך הקקטוס עדיין זקוק לשמש כדי לצמוח במדבר. האפשרות שהוא יגדל ללא כל צורך באור שמש, \"without needing any sunlight\", אינה נכונה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מנגנון ההצללה של הקקטוס משפיע על הטמפרטורה הפנימית שלו ונועד להגן עליו. אין לו יכולת פיזיקלית להפוך את כל אוויר המדבר לחם יותר, \"make the desert air much warmer\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בזכות החריצים שמטילים צל, \"cast small shadows\", הקקטוס מפחית את חום גופו בכמה מעלות. כתוצאה מכך, \"Consequently\", הוא מצליח לשמור על עצמו קריר יחסית בחום הקיצוני: \"keep itself cool\"."
+      }
+    ],
+    "highlight_spans": [
+      "Even a tiny bit",
+      "cast small shadows",
+      "Consequently"
+    ]
+  },
+  {
+    "question_id": "c5023b0c-fb8e-4751-922f-8d08d2f35cec",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הגשרים החדשים מחברים את האיים באופן קבוע ליבשת, \"connect these reed islands permanently\". לכן, האיים כבר אינם יכולים לצוף בקלות לאגמים אחרים, \"easily float away\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שהגשרים המודרניים מחברים את איי הקנים ליבשת. חיבור זה לא משנה את הרכב האיים עצמם, והם אינם עשויים כעת לחלוטין ממתכת כבדה, \"completely made of heavy metal\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בעבר ניתן היה להשיט את האיים כדי להימלט מאויבים, \"floated away to a safer area\". כיום, הגשרים מחברים אותם ליבשת לצמיתות, \"permanently\", ולכן לא ניתן עוד להזיזם לשם הגנה: \"can no longer be moved\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע דן בתוצאה המבנית של חיבור הגשרים המודרניים, \"As a result of these new bridges\". בניית עוד איים צפים מקנים, \"built more floating reeds\", אינה תוצאה של הגשרים המחברים אותם ליבשת."
+      }
+    ],
+    "highlight_spans": [
+      "If",
+      "Today",
+      "As a result of"
+    ]
+  },
+  {
+    "question_id": "cb37f916-afa3-41b5-b08f-1d88170ba67e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "העורב כיופף את התיל כדי להגיע אל האוכל, \"pulled the food out\". התיל שימש רק ככלי עזר להשגת הבשר, ואין זה אומר שהוא מעדיף לאכול את חוטי המתכת עצמם, \"prefer eating straight wires\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "העורב הצליח לכופף תיל ישר לצורת קרס, \"bent the wire into a hook\", כדי להגיע לבשר שבתוך הצנצנת. התנהגות זו הוכיחה שהציפורים מסוגלות לעצב כלים משלהן לפתרון בעיות, \"design their own tools\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הניסוי נועד לבדוק אם עורבים יכולים להשתמש בכלים, \"use tools to get food\". העובדה שהבשר הונח בצנצנת זכוכית אינה מוכיחה שהם אוכלים אך ורק מזון שנמצא בתוך צנצנות כאלה, \"only eat food\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מציג עורב שפתר את הבעיה בכוחות עצמו ובמהירות, \"quickly bent the wire\". לכן, הניסוי מוכיח את עצמאותם ויכולתם השכלית, ולא שהם זקוקים תמיד לעזרת חוקרים, \"need researchers to help\"."
+      }
+    ],
+    "highlight_spans": [
+      "Surprisingly",
+      "This clever behavior proved that"
+    ]
+  },
+  {
+    "question_id": "cbfb3b51-95ed-497f-87bb-febfb14e7725",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המנהג היווני כלל שימוש בפולי שעועית בקלפי סודית, \"dropping colored beans into a jar\". הביטוי \"bite the bullet\" עוסק בקליע ואינו קשור כלל לשעועית או לחשיפת תוצאות הצבעה חשאיות."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כאשר הכד עם פולי השעועית הופל בטעות, התוצאות הסודיות נחשפו מוקדם מהצפוי, \"secret results were revealed\". מזה נוצר הביטוי המוכר לחשיפת סודות ושמועות: \"spill the beans\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הביטוי \"sour grapes\" עוסק בענבים חמוצים ומתאר קנאה או תסכול. הוא אינו קשור למנהג ההצבעה הסודית ביוון העתיקה שבו נעשה שימוש בפולי שעועית, \"dropping colored beans\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הביטוי \"cool as a cucumber\" מתאר אדם רגוע ונינוח מאוד. אין לו קשר למנהג ההצבעה החשאית שבו נפילת הכד חשפה את הפולים הצבעוניים, \"colored beans\", ואת תוצאות הבחירות."
+      }
+    ],
+    "highlight_spans": [
+      "If",
+      "Because of this custom"
+    ]
+  },
+  {
+    "question_id": "119a4a5b-4528-4e62-9ff9-34bb2e42b51a",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "מחסור במים מונע מהעצים לייצר את שרף ההגנה, \"lack the water needed to produce\". לכן, \"Therefore\", חוסר בגשם הופך את העצים לחסרי הגנה ומוביל להתפרצות מסיבית של חיפושיות: \"massive beetle outbreaks\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מסביר שבזמן בצורת לעצים אין מים לייצור שרף, \"trees lack the water\". לכן, המחסור בגשם לא יכול להוביל לכך שהחיפושיות יטבעו בשרף מגן, \"drowned by the protective resin\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "ללא גשם, העצים הופכים לחסרי הגנה לחלוטין מול החיפושיות, \"the trees become defenseless\". לפיכך, מחסור במשקעים אינו מועיל להגנת העצים, \"helpful for the trees' defense\", אלא להפך."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מחסור בגשם גורם לעצים להיות פגיעים ומאפשר לחיפושיות להתרבות, \"allowing beetles to multiply\". התרבות החיפושיות היא תוצאה של הבצורת, והן אינן אלו שמביאות לסיומה, \"ended by a swarm\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Without water",
+      "Therefore"
+    ]
+  },
+  {
+    "question_id": "147d0b36-4827-42bc-aef2-49cffc6741ad",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שציפורים מפיצות את הזרעים כשהן אוכלות פירות בולטים, אך פירות ירוקים הן אינן יכולות לראות, \"birds cannot see\". כתוצאה מכך, הפירות הירוקים כמעט ואינם נאכלים או מופצים: \"rarely eaten or spread\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "בניגוד לפירות האדומים והכחולים הבולטים, הציפורים אינן יכולות לראות את הפירות הירוקים על רקע העלים, \"cannot see against the leaves\". לכן, הם אינם קלים למציאה עבורן, \"easy for birds to find\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע דן בבעיה שנוצרת מכך שהפירות ירוקים ומוסווים בין העלים. האפשרות שהם הופכים לאדומים בחורף, \"turn red during the winter\", אינה מוזכרת בקטע ואינה נובעת מבעיית הראות של הציפורים."
+      },
+      {
+        "index": 3,
+        "explanation_he": "חוסר היכולת של הציפורים לראות את הפירות הירוקים משפיע על הפצתם בטבע. ייצור זרעים רבים יותר, \"produce many more seeds\", הוא מאפיין ביולוגי פנימי שאינו נובע ישירות מקושי הראייה של הציפורים."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "19489906-2d37-41cc-bfd5-45d99758dc2c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הצטברות הלכלוך על השמן יוצרת משחה דביקה שמקשה על הדיווש, \"makes it very difficult to pedal\". ניקוי קבוע ושימון מחדש נועדו להסיר אותה, ולא לייצר עוד משחה שחורה, \"create more black paste\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "העיסה הדביקה שנוצרת מלכלוך ושמן מקשה מאוד על הדיווש, \"makes it very difficult to pedal\". לכן, \"Therefore\", ניקוי קבוע ושימון מחדש נחוצים כדי להפוך את הדיווש לקל ונוח שוב: \"make pedaling easy again\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "שימון שרשרת האופניים נועד לאפשר לה לנוע בצורה חלקה על גבי גלגלי השיניים, \"move smoothly over the gears\". לכן, פעולה זו שומרת על המנגנון ואינה גורמת לשבירתו, \"break the metal gears\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתאר בעיה יומיומית שמשפיעה על כל רוכב אופניים, כאשר הדיווש הופך לקשה, \"difficult to pedal\". ניקוי השרשרת הוא פעולת תחזוקה בסיסית, ואינו מוגבל רק לרוכבים מקצוענים: \"only done by professional racers\"."
+      }
+    ],
+    "highlight_spans": [
+      "Over time",
+      "Therefore"
+    ]
+  },
+  {
+    "question_id": "1c06046a-adac-4cbc-998b-f7feac4aef69",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "כבשים מבויתות אינן יכולות להשיל את צמרן בעצמן, \"cannot shed their thick coats on their own\". ללא גוזזים אנושיים שיסירו את הצמר העבה לקראת הקיץ, הן יסבלו מחום קיצוני: \"suffer from extreme summer heat\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "בניגוד לכבשי בר, בקטע מוסבר במפורש שכבשים מבויתות אינן מסוגלות להשיל את הצמר בעצמן באופן טבעי, \"cannot shed their thick coats on their own\". לכן, הן לא יאבדו את צמרן לבד, \"lose all their wool naturally\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הצמר של הכבשים המבויתות ממשיך לצמוח ללא הפסקה, \"grow wool continuously\". מעיל צמר כה כבד ועבה יכביד עליהן, ולכן הן לא ירוצו מהר יותר בטבע, \"run much faster in the wild\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מציין שכבשים מבויתות הושבחו כך שהצמר שלהן צומח ברציפות ובלי להפסיק לעולם, \"grow wool continuously without ever stopping\". לכן, צמיחת הצמר אינה מוגבלת רק לעונת האביב, \"only in spring\"."
+      }
+    ],
+    "highlight_spans": [
+      "In contrast",
+      "Without human shearers"
+    ]
+  },
+  {
+    "question_id": "23e0cca8-43a1-43a0-a3de-273d8caf8ec5",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "מים מוליכים חום החוצה במהירות רבה יותר מאוויר, \"conducts heat away much faster\". לכן, מעיל רטוב מאבד את החום שלו, ואינו יכול לכלוא יותר חום גוף מאשר בגדים יבשים, \"trap more body heat\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "האפשרות עוסקת במניעת חדירת מי גשם, \"keep the rainwater from entering\". המשפט האחרון דן במצב שבו המעיל כבר נרטב והחלל התמלא במים, \"if the coat gets wet\", ולכן המשפט לא עוסק בהגנה מפני חדירת מים."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מכיוון שמים מוליכים חום החוצה במהירות, \"water conducts heat away much faster\", המעיל הרטוב מאבד את יכולת החימום שלו. לכן, \"Therefore\", לבישת מעיל כזה בחורף תגרום לתחושת קור עזה: \"make a person feel extremely cold\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מסביר שמעיל רטוב מאבד את החום שלו בגלל שמים מוליכים את החום הרחק מהגוף, \"conducts heat away\". ייבוש המעיל באמצעות חום הגוף אינו התוצאה המרכזית או הישירה של לבישת מעיל רטוב, \"dry the water\"."
+      }
+    ],
+    "highlight_spans": [
+      "However",
+      "Since",
+      "Therefore"
+    ]
+  },
+  {
+    "question_id": "285ff2a8-7019-413b-a9dc-c3d3381a845e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הדבק האוטם את האצטרובלים נמס רק בחום קיצוני, \"Only the intense heat\". ללא שריפות יער, הדבק לא יימס כלל, ולכן אין חשש שהוא יימס מהר מדי, \"melt their glue too quickly\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר את השפעת האש על שחרור הזרעים לצורך רבייה. גובה העצים, \"grow much taller\", אינו קשור למנגנון המסייע להמסת הדבק ופתיחת האצטרובלים, \"melt this glue\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "רק החום העז של השריפה יכול להמיס את הדבק, \"Only the intense heat of a forest fire\". לכן, \"Therefore\", ללא שריפות אקראיות, העצים לא יוכלו להפיץ זרעים ולהתרבות: \"cannot reproduce and grow new trees\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "האצטרובלים זקוקים לחום העז של שריפת יער, \"heat of a forest fire\", כדי להיפתח. ללא שריפות אלה, הם לא יוכלו לשחרר את זרעיהם בעונת האביב הרגילה, \"release their seeds in spring\"."
+      }
+    ],
+    "highlight_spans": [
+      "but",
+      "Only",
+      "Therefore, without"
+    ]
+  },
+  {
+    "question_id": "46205069-113f-48a1-8da4-32be961a24d3",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בעבר הניחו את המסילות בצפיפות, \"tracks were laid tightly together\", מה שגרם להן להתעקם. בניית מסילות הדוקות ללא מרווחים, \"built tightly with no spaces\", רק תחזור על הטעות ותגרום לעיקומן."
+      },
+      {
+        "index": 1,
+        "explanation_he": "בעבר המסילות הונחו ללא מקום להתרחבות, \"leaving no room for this expansion\". כדי למנוע את העיקום המסוכן, \"To prevent this bending\", מסילות מודרניות מונחות עם מרווחים קטנים ביניהן, \"laid with small gaps\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הבעיה נובעת מכך שהחום גורם למסילות להתרחב ולהתעקם, \"expand and grow longer\". צביעתן בשחור כדי לקלוט עוד חום, \"absorb more heat\", רק תחמיר את הבעיה ותגביר את התרחבות המתכת."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מסילות רכבת עשויות פלדה, \"Steel tracks\". החלפתן לחלוטין בעץ רך, \"made entirely of soft wood\", אינה פתרון הנדסי סביר לנשיאת רכבות כבדות, ואינה קשורה לבעיית התרחבות המתכת בחום."
+      }
+    ],
+    "highlight_spans": [
+      "In the past",
+      "As a result",
+      "To prevent this bending"
+    ]
+  },
+  {
+    "question_id": "4653c2bc-99c5-4731-a371-da130fdce0ac",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המוזיקה הותאמה כדי להעצים את החוויה בקולנוע האילם, \"match the action\". לכן, נגינת אקורדים אפלים ומפחידים מנעה מהקהל להשתעמם מהמסך האילם, \"bored by the silent screen\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כאשר מפלצות מפחידות מופיעות על המסך, \"scary monsters appeared\", הפסנתרן מנגן מוזיקה דרמטית ואפלה. מוזיקה כזו נועדה לעורר פחד, ולא לגרום לקהל להרגיש שמח ולצחוק, \"happy and started to laugh\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הפסנתרנים התאימו את המוזיקה למתרחש על המסך, \"match the action\". כאשר הופיעו מפלצות והפסנתרן ניגן אקורדים אפלים, \"played loud, dark chords\", הקהל נבהל מהסצנה הדרמטית: \"frightened by the dramatic scene\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המוזיקה הושמעה כדי ללוות את עלילת הסרט ולהגביר את הרגש בקרב הצופים. מטרת הנגינה לא הייתה לעורר בהם השראה לנגן בעצמם בפסנתר, \"inspired to play the piano\"."
+      }
+    ],
+    "highlight_spans": [
+      "When",
+      "As a result"
+    ]
+  },
+  {
+    "question_id": "7807785d-1b1f-4537-94ff-bf6784fc3823",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "המיתוס מתאר תנינים המזילים דמעות בזמן אכילה, \"crocodiles wept\". הביטוי המוכר לזיוף עצב מתייחס לבכי ולדמעות עצמן, ולא לעיני התנין, \"crocodile eyes\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המיתוס מספר על תנינים הבוכים בזמן טריפה, \"crocodiles wept while devouring\". מכיוון שבכי זה אינו אמיתי אלא רק רפלקס פיזי, כיום אנו קוראים לעצב מזויף בשם דמעות תנין: \"crocodile tears\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הביטוי המודרני לזיוף עצב מבוסס על המיתוס העתיק העוסק בדמעות התנינים, \"crocodiles wept\". הביטוי הגנרי מים מלוחים, \"salty water\", אינו מתייחס ספציפית למקור המיתולוגי הזה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המיתוס העתיק המתואר בקטע מספר על תנינים המזילים דמעות, \"crocodiles wept\", ולא על זאבים. לכן, אין היגיון להשתמש בביטוי הכולל דמעות זאב, \"wolf tears\", כדי לתאר עצב מזויף."
+      }
+    ],
+    "highlight_spans": [
+      "In reality",
+      "Today, when"
+    ]
+  }
+]

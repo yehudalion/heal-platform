@@ -1,0 +1,102 @@
+[
+  {
+    "question_id": "00a04a54-3621-437d-81c7-7bb2ce652b98",
+    "options": [
+      {"index": 0, "explanation_he": "האפשרות \"rely on the fat inside its hump\" מתארת שימוש בשומן, אך הקטע מציין כי השומן הוא מקור מזון ולא מים."},
+      {"index": 1, "explanation_he": "המילה \"Actually\" מתקנת את האמונה השגויה שהדבשת מכילה מים, ומבהירה שהיא עשויה משומן. לכן, כדי לשתות, הגמל חייב \"find real pools of water on the ground\"."},
+      {"index": 2, "explanation_he": "בקטע נאמר שגמלים חיים במדבריות חמים, \"hot deserts\", ואין כל אזכור לכך שהם צריכים לנדוד לאקלים קר כדי לשתות מים."},
+      {"index": 3, "explanation_he": "האפשרות \"avoid drinking any liquids for several years\" מציעה הימנעות משתייה, אך המשפט האחרון עוסק בפעולה שהגמל נדרש לבצע כדי לשתות מים."}
+    ],
+    "highlight_spans": ["People long believed", "Actually", "Therefore"]
+  },
+  {
+    "question_id": "9f24b8b1-1efd-487b-b2ff-37b8f7b9f4ce",
+    "options": [
+      {"index": 0, "explanation_he": "בקטע מוסבר שמטרת המטריות הייתה \"protect their pale skin\", כלומר להגן על העור מהשמש, ולא למשוך גשם לשדות."},
+      {"index": 1, "explanation_he": "הקטע עוסק בהגנה מפני השמש החמה, \"burning sun\", ואינו מזכיר שחייה בנהר."},
+      {"index": 2, "explanation_he": "המילה \"Therefore\" מקשרת בין הרצון להגן על העור מפני השמש, \"protect their pale skin\", לבין תפקיד המטריות המוקדמות שנועדו לחסום את אור השמש."},
+      {"index": 3, "explanation_he": "שמירה על יובש בגשם, \"keep dry during heavy rainstorms\", מתוארת כשימוש המודרני במטריות, בניגוד לשימוש המקורי במצרים העתיקה."}
+    ],
+    "highlight_spans": ["however", "Therefore"]
+  },
+  {
+    "question_id": "3a5ad3d8-17ba-46d5-84b6-59bbf1651313",
+    "options": [
+      {"index": 0, "explanation_he": "המילים \"To solve this safety concern\" מסבירות שהיצרנים החליפו את העופרת הרעילה במינרל בטוח, ולכן העפרונות המודרניים בטוחים לשימוש."},
+      {"index": 1, "explanation_he": "האפשרות מתארת עפרונות רעילים יותר, אך הקטע מציין שהיצרנים עברו להשתמש במינרל לא מזיק, \"harmless mineral\", כדי לפתור את בעיית הבטיחות."},
+      {"index": 2, "explanation_he": "בקטע נכתב שהיצרנים החליפו לחלוטין את העופרת, \"replaced the lead\", ולכן העפרונות המודרניים אינם מכילים עוד עופרת."},
+      {"index": 3, "explanation_he": "הטענה לפיה העפרונות \"unable to leave any dark marks on paper\" אינה נתמכת בקטע, שעוסק בפתרון בעיית הבטיחות בלבד."}
+    ],
+    "highlight_spans": ["Unfortunately", "To solve this safety concern", "Therefore"]
+  },
+  {
+    "question_id": "ce470e8a-f5f8-44a7-a7a3-3ae1889ceacd",
+    "options": [
+      {"index": 0, "explanation_he": "הדפסת מטבעות עץ נוספים הייתה מחמירה את הבעיה של זיוף המטבעות בקלות, \"easy it was to carve matching pieces of wood\"."},
+      {"index": 1, "explanation_he": "הקטע מתאר בעיית זיופים שביצעו פושעים בביתם, \"carve matching pieces of wood at home\", ולכן הממשלה לא תרצה להחליף את כל מטבעות המתכת בעץ."},
+      {"index": 2, "explanation_he": "בקטע נאמר שהפושעים זייפו את המטבעות, אך אין כל אזכור לכך שהממשלה שכרה אותם, \"hire local criminals\", כדי לייצר את הכסף הרשמי."},
+      {"index": 3, "explanation_he": "הביטוי \"Because of this growing problem\" מתייחס לבעיית הזיופים. לכן הממשלה נאלצה \"stop using the wooden money much earlier than planned\"."}
+    ],
+    "highlight_spans": ["However", "Because of this growing problem"]
+  },
+  {
+    "question_id": "210a9576-4cba-4c1b-842f-0ef2c11af689",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע מציין שהצפרדעים יוצאות רק לאחר השקיעה, \"Only after the sun sets\", ולכן הן אינן צדות על החול במהלך היום החם."},
+      {"index": 1, "explanation_he": "שתיית מים מעננים יבשים אינה מוזכרת בקטע, והיא נוגדת את האמור לפיו הצפרדעים שורדות בזכות הלחות באדמה, \"soil is damp\"."},
+      {"index": 2, "explanation_he": "כדי לשרוד את החום, הצפרדעים מתחפרות עמוק באדמה, \"dig deep underground\", ונשארות שם מוגנות במהלך היום."},
+      {"index": 3, "explanation_he": "הקטע מתאר כיצד הצפרדעים שורדות את חום היום, \"To survive the hot daytime heat\", ואינו עוסק במוות מקור קיצוני."}
+    ],
+    "highlight_spans": ["but", "To survive", "Only after"]
+  },
+  {
+    "question_id": "2d24d481-55cb-445f-ac03-a63253f1a2d7",
+    "options": [
+      {"index": 0, "explanation_he": "בקטע נאמר שקערות קטנות מחזיקות מעט מאוד חמצן, \"hold very little oxygen\", ולכן החזקתן בקערות קטנות עוד יותר רק תחמיר את מצבן."},
+      {"index": 1, "explanation_he": "דגי זהב זקוקים לחמצן כדי לנשום, \"which goldfish need to breathe\", ולכן הם אינם יכולים לנשום פחות חמצן כדי לשרוד."},
+      {"index": 2, "explanation_he": "האפשרות \"be fed only twice a week\" עוסקת בתדירות האכלה, נושא שאינו מוזכר או קשור לבעיית החמצן המתוארת בקטע."},
+      {"index": 3, "explanation_he": "המילים \"For this reason\" מקשרות בין המחסור בחמצן בקערות קטנות לבין ההמלצה להחזיק את דגי הזהב באקווריום גדול ומסונן, \"live in large, filtered tanks\"."}
+    ],
+    "highlight_spans": ["However", "Without", "For this reason"]
+  },
+  {
+    "question_id": "4ffb3e42-a7b8-46e2-a047-0dc1db48e5ad",
+    "options": [
+      {"index": 0, "explanation_he": "מנגנון כליאת החום, \"trapping of heat\", מונע מהחום לצאת, ולכן עלייה בגזים אלו לא תגרום ליותר אור או חום לברוח לחלל."},
+      {"index": 1, "explanation_he": "פעולת כליאת החום גורמת לחממה להיות חמה יותר, \"much warmer\", ולכן עלייה בגזים אלה באטמוספירה תביא לחימום כדור הארץ ולא לקירורו."},
+      {"index": 2, "explanation_he": "גג הזכוכית, \"glass roof\", מוזכר רק כמשל לאופן שבו האטמוספירה פועלת, ואין קשר פיזי בינו לבין הגזים באטמוספירה."},
+      {"index": 3, "explanation_he": "המילה \"Consequently\" מצביעה על תוצאת כליאת החום. מכיוון שהגזים פועלים כמו חממה, עלייה בריכוזם תגרום לכך שהם \"make the Earth warmer\"."}
+    ],
+    "highlight_spans": ["but", "similarly", "Consequently"]
+  },
+  {
+    "question_id": "1cf0467d-00f4-4abc-9fc5-0322003c84be",
+    "options": [
+      {"index": 0, "explanation_he": "הקטע קובע כי חוסר שינה מאט את התגובות באופן משמעותי, \"slows reactions significantly\", ולכן נהיגה במצב כזה אינה בטוחה באף שעה ביום."},
+      {"index": 1, "explanation_he": "שתיית אלכוהול מוזכרת כגורם לפגיעה בנהיגה, \"impairment caused by drinking too much alcohol\", ולכן היא לא יכולה לשפר את הנהיגה."},
+      {"index": 2, "explanation_he": "האפשרות \"sleeping while driving\" מציעה לישון תוך כדי נהיגה, דבר שאינו הגיוני ומסוכן ביותר בפני עצמו."},
+      {"index": 3, "explanation_he": "המילה \"Thus\" מסמנת מסקנה המבוססת על כך שחוסר שינה משתווה להשפעת אלכוהול, ולכן נהיגה בעייפות קיצונית היא \"just as dangerous as drunk driving\"."}
+    ],
+    "highlight_spans": ["Surprisingly", "Thus"]
+  },
+  {
+    "question_id": "920216b3-c943-4a09-bbb9-7488bb9c2562",
+    "options": [
+      {"index": 0, "explanation_he": "המילה \"Therefore\" מקשרת בין חוסר היכולת לחשב את זווית הריקוד בגלל העננים, \"cannot calculate this angle correctly\", לבין חוסר היכולת להכווין את שאר הדבורים אל הפרחים."},
+      {"index": 1, "explanation_he": "בקטע נאמר שהעננים מונעים מהדבורים לחשב את הזווית הנכונה, אך אין אזכור לכך שהן נאלצות לבצע את הריקוד מהר יותר, \"do the wiggle dance faster\"."},
+      {"index": 2, "explanation_he": "האפשרות \"still able to find sweet flowers easily\" סותרת את המידע בקטע לפיו ללא שמש הדבורים אינן יכולות לחשב את הזווית המכוונת אל המזון."},
+      {"index": 3, "explanation_he": "מעוף לכוורות אחרות אינו מוזכר בקטע, שכן מטרת הריקוד היא לכוון את חברות הכוורת למזון, \"show their hive mates where sweet flowers are located\"."}
+    ],
+    "highlight_spans": ["However", "if", "Therefore"]
+  },
+  {
+    "question_id": "b71b7e6b-2e55-4fce-b2ef-49ecf32491e1",
+    "options": [
+      {"index": 0, "explanation_he": "הצורך של הקקטוס להתגונן, \"To protect themselves\", מסביר את צמיחת הקוצים, ואין קשר ליכולת של חיות לאגור מים בגופן."},
+      {"index": 1, "explanation_he": "הביטוי \"As a result of\" מסמן את תוצאת התפתחות הקוצים הכואבים, אשר מרחיקים את בעלי החיים הצמאים ומביאים לכך שהם \"kept away from the plant's water\"."},
+      {"index": 2, "explanation_he": "הקוצים הכואבים פותחו כדי להגן על הקקטוס, ולכן הם אינם מאפשרים לחיות לאכול את הגבעולים בבטחה, \"eat the fleshy stems safely\"."},
+      {"index": 3, "explanation_he": "האפשרות \"forced to migrate to northern forests\" מציעה נדידה ליערות צפוניים, מידע שאינו נזכר או נרמז בקטע העוסק במדבר."}
+    ],
+    "highlight_spans": ["However", "To protect themselves", "As a result of"]
+  }
+]

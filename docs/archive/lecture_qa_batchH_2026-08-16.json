@@ -1,0 +1,1317 @@
+[
+  {
+    "title": "The Umbrella Stand",
+    "topic": "public umbrella-share stand",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Dana: Have you noticed that metal rack by the station entrance? It's full of umbrellas anyone can borrow for free.\nBen: I used one last week when I got caught in a sudden downpour. You just slide one out and go.\nDana: The idea is you return it at any stand across town once you're done, not necessarily the same one.\nBen: Does anyone actually bring them back, though? Seems like people would just walk off with them.\nDana: Mostly, yes. A local shop restocks each stand every morning, and most umbrellas turn up again within a day or two.\nBen: That's clever. Cheaper than buying a new one just because you forgot to check the forecast.",
+    "highlight_spans": [
+      "most umbrellas turn up again within a day or two"
+    ],
+    "questions": [
+      {
+        "question_text": "What does Dana say happens to most borrowed umbrellas?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "A local shop restocks each stand every morning, and most umbrellas turn up again within a day or two."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Most are never returned",
+            "k_code": "CONTRADICTION",
+            "fail_mode": "reversal",
+            "explanation_he": "זהו היפוך: הטקסט אומר שרוב המטריות חוזרות תוך יום או יומיים, ולא שהן נעלמות."
+          },
+          {
+            "text": "They come back within days",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דנה אומרת שרוב המטריות חוזרות ומופיעות שוב תוך יום או יומיים."
+          },
+          {
+            "text": "The shop sells them used",
+            "k_code": "NOT_STATED",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "הטקסט מזכיר שהחנות מחדשת את המלאי, אך לא נאמר שהיא מוכרת מטריות משומשות."
+          },
+          {
+            "text": "Ben restocks them each morning",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_agent",
+            "explanation_he": "לפי הטקסט חנות מקומית היא זו שמחדשת את המלאי מדי בוקר, לא בן."
+          }
+        ]
+      }
+    ],
+    "_key": "H1"
+  },
+  {
+    "title": "The Little Free Library",
+    "topic": "little free library book box",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "A small wooden box on a post stands at the corner of Elm and Fourth, its glass door propped open to reveal rows of paperbacks. Anyone walking past may take a book or leave one behind, with no signing in and no return date required. A retired teacher built the first box after clearing out her own shelves, and neighbors soon added several more along nearby streets. Volunteers check the boxes weekly, swapping out damp or torn covers and restocking spaces left empty by popular titles. Children's picture books disappear fastest, often within a single afternoon.",
+    "highlight_spans": [
+      "Anyone walking past may take a book or leave one behind, with no signing in and no return date required."
+    ],
+    "questions": [
+      {
+        "question_text": "What is this passage mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "A small wooden box on a post stands at the corner of Elm and Fourth, its glass door propped open to reveal rows of paperbacks.",
+          "Anyone walking past may take a book or leave one behind, with no signing in and no return date required."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The library charges late fees",
+            "k_code": "RIVAL_CLAIM",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה מנוגדת: הטקסט מדגיש שאין הרשמה ואין תאריך החזרה, כלומר אין קנסות."
+          },
+          {
+            "text": "A teacher grades student essays",
+            "k_code": "AGENT_DISTORTION",
+            "fail_mode": "distortion",
+            "explanation_he": "המורה הפורשת בנתה את התיבה, אך הטקסט אינו מזכיר בדיקת חיבורים; זהו עיוות של פרט קיים."
+          },
+          {
+            "text": "Neighbors share books freely",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע מתאר תיבת ספרים ציבורית שבה שכנים לוקחים ומשאירים ספרים בחינם וללא נהלים."
+          },
+          {
+            "text": "Volunteers photograph old books",
+            "k_code": "FABRICATED_DETAIL",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "המתנדבים מחליפים כריכות פגומות ומחדשים מלאי, אך אין אזכור לצילום ספרים."
+          }
+        ]
+      }
+    ],
+    "_key": "H2"
+  },
+  {
+    "title": "The Square's Piano",
+    "topic": "public piano placed for anyone to play",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Ravi: Someone dragged an old piano into the square this weekend and just left it there, uncovered.\nSofia: I saw a woman playing it during her lunch break yesterday, and a small crowd gathered around her.\nRavi: Apparently a local music school donates a piano every summer and repaints it a different color each time.\nSofia: Doesn't the rain ruin it eventually?\nRavi: It does, after a few months, but by then someone usually plays it every single day.\nSofia: Honestly, I think it's the nicest thing in the square. It turns strangers into an audience within minutes.",
+    "highlight_spans": [
+      "It turns strangers into an audience within minutes."
+    ],
+    "questions": [
+      {
+        "question_text": "What does Sofia think about the piano?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Honestly, I think it's the nicest thing in the square. It turns strangers into an audience within minutes."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "It creates instant audiences",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "סופיה אומרת שהפסנתר הופך זרים לקהל תוך דקות ספורות, ושזה הדבר הכי נחמד בכיכר."
+          },
+          {
+            "text": "It rarely attracts listeners",
+            "k_code": "CONTRADICTION",
+            "fail_mode": "reversal",
+            "explanation_he": "זהו היפוך: סופיה אומרת שהפסנתר דווקא מושך קהל תוך דקות, לא שהוא נכשל במשיכת מאזינים."
+          },
+          {
+            "text": "The school repaints it weekly",
+            "k_code": "TIME_CONFUSION",
+            "fail_mode": "distortion",
+            "explanation_he": "הטקסט אומר שבית הספר תורם פסנתר צבוע מחדש כל קיץ, לא שהוא נצבע מחדש כל שבוע."
+          },
+          {
+            "text": "Ravi thinks it's the nicest thing",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_speaker_opinion",
+            "explanation_he": "זו דעתה של סופיה, לא של רווי; הטקסט מייחס בטעות את הדעה לדובר הלא נכון."
+          }
+        ]
+      }
+    ],
+    "_key": "H3"
+  },
+  {
+    "title": "The Community Fridge",
+    "topic": "community fridge for surplus food",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "A repurposed refrigerator sits under a small awning outside the community center, plugged into an outdoor outlet and stocked by anyone who has extra food to share. Neighbors leave bread, vegetables, and leftover meals for others to take, free of charge and without any paperwork. A rotating group of residents wipes down the shelves each evening and tosses anything that looks spoiled. The fridge stays unlocked around the clock, so people can visit whenever they need something, even late at night. Only fresh, unopened, or clearly labeled items are welcome inside.",
+    "highlight_spans": [
+      "free of charge and without any paperwork"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about the community fridge?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Neighbors leave bread, vegetables, and leftover meals for others to take, free of charge and without any paperwork."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Residents wipe down the shelves each evening",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: קבוצת תושבים מנקה את המדפים מדי ערב."
+          },
+          {
+            "text": "The fridge stays unlocked around the clock",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המקרר נשאר פתוח וזמין בכל שעה, גם בשעות מאוחרות."
+          },
+          {
+            "text": "It sits outside the community center",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המקרר ממוקם מתחת לגגון קטן מחוץ למרכז הקהילתי."
+          },
+          {
+            "text": "It requires signed paperwork",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הקביעה השגויה: הטקסט אומר במפורש שהאוכל ניתן בחינם וללא כל נייר עבודה."
+          }
+        ]
+      }
+    ],
+    "_key": "H4"
+  },
+  {
+    "title": "Adopting the Defibrillator",
+    "topic": "public defibrillator adoption and checking scheme",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Karen: Did you know the bakery on the corner adopted that defibrillator box outside the bus stop?\nOmar: I didn't. What does adopting it actually involve?\nKaren: The owner signed up to check the battery light every month and report if the box ever gets opened.\nOmar: That seems like a lot of responsibility for someone just running a bakery.\nKaren: It only takes a minute, and the health service sends a text reminder so nobody forgets to check.\nOmar: Good, because if it ever fails during an emergency, that minute of checking suddenly matters a lot.",
+    "highlight_spans": [
+      "check the battery light every month and report if the box ever gets opened"
+    ],
+    "questions": [
+      {
+        "question_text": "According to Karen, what does adopting the defibrillator involve?",
+        "question_type": "speaker_ref",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "The owner signed up to check the battery light every month and report if the box ever gets opened."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Checking the battery monthly",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "קארן אומרת שהבעלים נרשם לבדוק את נורית הסוללה מדי חודש ולדווח אם הקופסה נפתחה."
+          },
+          {
+            "text": "Replacing the box each month",
+            "k_code": "DISTORTION",
+            "fail_mode": "distortion",
+            "explanation_he": "קארן אומרת שהבעלים בודק את נורית הסוללה מדי חודש, לא שהוא מחליף את הקופסה כולה."
+          },
+          {
+            "text": "Omar signed up to check it",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_agent",
+            "explanation_he": "לפי הטקסט בעל המאפייה הוא זה שנרשם, לא עומר."
+          },
+          {
+            "text": "The bakery pays a monthly fee",
+            "k_code": "NOT_STATED",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט שום אזכור לתשלום חודשי; מדובר רק בבדיקה של הסוללה."
+          }
+        ]
+      }
+    ],
+    "_key": "H5"
+  },
+  {
+    "title": "The Park Chess League",
+    "topic": "park outdoor chess and checkers league",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Every Tuesday evening, a dozen or so regulars gather under the park pavilion for the outdoor chess and checkers league. Players sign a chalkboard ladder near the entrance, and the standings shift as newcomers challenge whoever sits just above them on the list. Games are timed loosely with an old kitchen timer rather than official clocks, which keeps matches relaxed but still moving along. A volunteer referee, usually a retired teacher, settles any disputes about touched pieces or forgotten moves. By late autumn, the league quietly pauses until the weather turns mild again.",
+    "highlight_spans": [
+      "Players sign a chalkboard ladder near the entrance, and the standings shift as newcomers challenge whoever sits just above them on the list."
+    ],
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"ladder\" most nearly mean?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "Players sign a chalkboard ladder near the entrance, and the standings shift as newcomers challenge whoever sits just above them on the list."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "A tool for climbing over walls",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "המשמעות המילולית של סולם פיזי אינה קשורה להקשר; מדובר ברשימת דירוג, לא בכלי טיפוס."
+          },
+          {
+            "text": "A fixed schedule that never changes",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: הטקסט אומר שהדירוג דווקא משתנה כל הזמן כשמתחרים חדשים מאתגרים שחקנים."
+          },
+          {
+            "text": "A ranked list of players",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, 'ladder' מתאר רשימת דירוג שבה שחקנים מאתגרים את מי שמדורג מעליהם."
+          },
+          {
+            "text": "The timer used to clock games",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו החלפה עם פרט אחר בטקסט - שעון המטבח ששולט בקצב המשחקים, לא רשימת הדירוג עצמה."
+          }
+        ]
+      }
+    ],
+    "_key": "H6"
+  },
+  {
+    "title": "Repairing a Camera Strap Edge",
+    "topic": "camera strap and lens-cap leather repair",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Maya: Whenever a camera strap or a lens cap starts cracking at the edges, the first thing I do is trim away every bit of the damaged leather right back to healthy material underneath.\nTheo: Even if only a small corner looks bad?\nMaya: Even then, because a soft spot left behind will just keep spreading under the stitching later on. Once the edge is clean, I cut a fresh patch from matching leather and glue it directly onto the backing so it sits flush with the surrounding surface.\nTheo: How long before you can stitch it down?\nMaya: I let the glue set overnight, then I punch even holes along both edges and stitch the patch with waxed thread, pulling each stitch snug so no gap is left for dirt to work into.\nTheo: That seems like a lot of care for something that just holds a lens cap on a strap.\nMaya: It is, but a loose patch there means a scratched lens the very next time the cap slips free.",
+    "highlight_spans": [
+      "trim away every bit of the damaged leather",
+      "cut a fresh patch from matching leather and glue it directly onto the backing",
+      "stitch the patch with waxed thread"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Maya does when a strap or lens cap starts cracking?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "the first thing I do is trim away every bit of the damaged leather right back to healthy material underneath."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "trimming away the damaged leather",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "מאיה אומרת שהדבר הראשון שהיא עושה הוא לגזור את העור הפגום."
+          },
+          {
+            "text": "gluing a fresh leather patch on",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההדבקה מתרחשת רק אחרי שהקצה כבר נוקה מהעור הפגום."
+          },
+          {
+            "text": "stitching the patch with thread",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "התפירה היא השלב האחרון בתהליך, לא הראשון."
+          },
+          {
+            "text": "waiting for the glue to dry",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההמתנה לייבוש הדבק מתוארת רק אחרי הדבקת הטלאי."
+          }
+        ]
+      },
+      {
+        "question_text": "According to the conversation, which of these does Maya NOT do while repairing the strap?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "I let the glue set overnight, then I punch even holes along both edges and stitch the patch with waxed thread, pulling each stitch snug so no gap is left for dirt to work into."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "punching holes along the edges",
+            "k_code": "K_W1",
+            "fail_mode": "actually-performed",
+            "explanation_he": "מאיה מתארת בפירוש ניקוב חורים לאורך הקצוות, זו פעולה שהיא כן מבצעת."
+          },
+          {
+            "text": "dyeing the leather to match color",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "צביעת העור אינה נזכרת בשיחה כלל, זו הפעולה שאינה מבוצעת."
+          },
+          {
+            "text": "letting the glue set overnight",
+            "k_code": "K_W2",
+            "fail_mode": "actually-performed",
+            "explanation_he": "מאיה אומרת בפירוש שהיא נותנת לדבק להתייבש לילה שלם, זו פעולה שהיא כן מבצעת."
+          },
+          {
+            "text": "pulling each stitch snug",
+            "k_code": "K_W3",
+            "fail_mode": "actually-performed",
+            "explanation_he": "מאיה מתארת משיכת כל תפר בחוזקה, זו פעולה שהיא כן מבצעת."
+          }
+        ]
+      }
+    ],
+    "_key": "H7"
+  },
+  {
+    "title": "Splinting a Broken Kite Spar",
+    "topic": "kite frame spar repair",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Ines: When a kite spar snaps out on the field, the first thing I do is pull the two broken ends free from the sail pocket so I am not working blind inside the fabric.\nSam: Do you throw away the broken piece completely?\nInes: No, I trim both broken ends flat and even, then I slide a short sleeve of tubing over one end to bridge the break, sizing it so the spar still fits snugly inside the sail pocket.\nSam: How do you stop the sleeve from sliding around once it is on?\nInes: I push the other broken end into the open side of the sleeve until the two ends meet inside it, then I wrap the whole sleeve tightly with strong thread so it cannot twist under wind pressure.\nSam: Does a repaired spar fly the same as a new one?\nInes: Almost always, as long as the wrap sits flush and does not add extra weight to one side of the frame.",
+    "highlight_spans": [
+      "pull the two broken ends free from the sail pocket",
+      "slide a short sleeve of tubing over one end to bridge the break",
+      "wrap the whole sleeve tightly with strong thread"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Ines does when a kite spar snaps in the field?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "the first thing I do is pull the two broken ends free from the sail pocket so I am not working blind inside the fabric."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "trimming the broken ends flat",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "החיתוך הישר מתואר רק אחרי שהקצוות כבר הוצאו מכיס המפרש."
+          },
+          {
+            "text": "sliding a sleeve over the end",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "השרוול מוחלק רק בשלב מאוחר יותר בתהליך."
+          },
+          {
+            "text": "freeing the broken ends from the pocket",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אינס אומרת שהדבר הראשון שהיא עושה הוא לשלוף את שני הקצוות השבורים מכיס המפרש."
+          },
+          {
+            "text": "wrapping the sleeve with strong thread",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "העטיפה בחוט היא הפעולה האחרונה בתהליך, לא הראשונה."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Ines suggest about a spar repaired this way?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Almost always, as long as the wrap sits flush and does not add extra weight to one side of the frame."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "it always flies worse than new",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "אינס אומרת בדיוק ההפך, שהזרז המתוקן טס כמעט תמיד כמו חדש."
+          },
+          {
+            "text": "it should be replaced soon after",
+            "k_code": "K_W2",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "אין בשיחה שום רמז להמלצה להחליף את הזרז המתוקן בקרוב."
+          },
+          {
+            "text": "it needs rebalancing every flight",
+            "k_code": "K_W3",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "אינס לא מזכירה צורך באיזון מחדש בכל טיסה."
+          },
+          {
+            "text": "it flies about as well as new",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אינס אומרת שכמעט תמיד הזרז המתוקן טס כמו חדש, כל עוד העטיפה שטוחה."
+          }
+        ]
+      }
+    ],
+    "_key": "H8"
+  },
+  {
+    "title": "Patching a Punctured Garden Hose",
+    "topic": "garden hose puncture patching",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Callum: When a hose starts spraying water from a pinhole, the first thing I do is run water through it slowly and watch along the length until I spot the exact leak.\nRuth: Do you cut right at that spot?\nCallum: Not right away. I mark the spot with tape first, then dry the hose and cut the tube cleanly on either side of the damaged section, taking out a short stretch around the leak.\nRuth: So you end up with two separate pieces?\nCallum: Right, and I join them back together by pushing a short coupling into both open ends, then sliding a clamp over each joint and tightening it firmly so no water escapes under pressure.\nRuth: Does the patched spot ever leak again later on?\nCallum: Rarely, as long as the clamps stay snug and the coupling sits fully seated inside both ends of the tube.",
+    "highlight_spans": [
+      "run water through it slowly and watch along the length",
+      "cut the tube cleanly on either side of the damaged section",
+      "pushing a short coupling into both open ends"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Callum does when he notices a hose spraying water?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "the first thing I do is run water through it slowly and watch along the length until I spot the exact leak."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "cutting the tube on both sides",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "החיתוך מתואר רק אחרי שהדליפה כבר סומנה במקומה."
+          },
+          {
+            "text": "marking the spot with tape",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הסימון בסרט מגיע רק אחרי שהדליפה כבר אותרה בריצת המים."
+          },
+          {
+            "text": "joining the ends with a coupling",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "החיבור מחדש הוא אחד השלבים האחרונים בתהליך, לא הראשון."
+          },
+          {
+            "text": "running water to find the leak",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "קאלום אומר שהדבר הראשון שהוא עושה הוא להריץ מים לאט כדי לאתר את הדליפה."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Ruth ask about near the end of the conversation?",
+        "question_type": "speaker_ref",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Does the patched spot ever leak again later on?"
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "how long the repair takes",
+            "k_code": "K_W1",
+            "fail_mode": "invented-claim",
+            "explanation_he": "רות לא שואלת כלל כמה זמן לוקח התיקון."
+          },
+          {
+            "text": "whether the clamps are expensive",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "מחיר המהדקים אינו נזכר בשיחה בשום שלב."
+          },
+          {
+            "text": "whether the repair leaks again",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "רות שואלת אם המקום המתוקן דולף שוב מאוחר יותר."
+          },
+          {
+            "text": "whether a new hose is cheaper",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "השאלה על מחיר צינור חדש לעומת תיקון אינה מופיעה בשיחה."
+          }
+        ]
+      }
+    ],
+    "_key": "H9"
+  },
+  {
+    "title": "Resoling a Wooden Clog",
+    "topic": "wooden clog resoling",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "Resoling a wooden clog does not mean building a new shoe from scratch, since only the worn sole layer needs attention. The first step is prying the thin protective sole layer away from the wooden base, working slowly along the edge so the wood underneath is not gouged or cracked in the process. Once the old layer is off, a new sole blank, cut slightly oversized, is coated with strong adhesive and pressed onto the wood, then clamped evenly along its length until the glue has fully cured. After the clamps come off, the final job is trimming the overhanging edge of the new sole flush with the wooden upper, using a sharp blade angled close to the wood so the seam disappears into a single smooth line. Many customers expect the whole clog to be rebuilt when they bring one in for resoling, yet the wooden body itself rarely wears out at all, and only this outer layer ever needs replacing.",
+    "highlight_spans": [
+      "prying the thin protective sole layer away from the wooden base",
+      "coated with strong adhesive and pressed onto the wood",
+      "yet the wooden body itself rarely wears out at all"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first step in resoling a wooden clog, according to the narrator?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The first step is prying the thin protective sole layer away from the wooden base, working slowly along the edge so the wood underneath is not gouged or cracked in the process."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "pressing on a new sole blank",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הצמדת הסוליה החדשה מתוארת רק אחרי הסרת הישנה."
+          },
+          {
+            "text": "prying off the old sole layer",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהשלב הראשון הוא הסרת שכבת הסוליה הישנה מהבסיס העצי."
+          },
+          {
+            "text": "clamping the sole until it cures",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההידוק בכלי לחיצה מתואר רק אחרי הדבקת הסוליה החדשה."
+          },
+          {
+            "text": "trimming the edge of the new sole",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הגזירה של הקצה היא השלב האחרון בתהליך, לא הראשון."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the narrator's main point about resoling a wooden clog?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Many customers expect the whole clog to be rebuilt when they bring one in for resoling, yet the wooden body itself rarely wears out at all, and only this outer layer ever needs replacing."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "only the outer sole layer needs replacing",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסכם שרק שכבת הסוליה החיצונית צריכה להתחלף, לא הגוף העצי."
+          },
+          {
+            "text": "regular refinishing of the wood is what keeps a clog usable",
+            "k_code": "K_W1",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה רחבה מתחרה על טיפול בגוף העץ, אך המרצה אומר במפורש שרק שכבת הסוליה החיצונית צריכה החלפה, לא גוף העץ."
+          },
+          {
+            "text": "the whole clog must be rebuilt",
+            "k_code": "K_W2",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "זו הטענה הרווחת שהמרצה סותר במפורש במילה yet."
+          },
+          {
+            "text": "the glue needs curing overnight",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "משך זמן ההתייבשות של הדבק אינו מוזכר בתמליל כלל."
+          }
+        ]
+      }
+    ],
+    "_key": "H10"
+  },
+  {
+    "title": "Recovering a Fabric Lampshade",
+    "topic": "lampshade re-covering",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Recovering a lampshade starts with removing the fabric that is already on the frame, peeling it away from the wire ribs a section at a time so that each removed panel can be kept flat and used as a pattern. Once every old panel is off, those panels are laid onto the new fabric and traced around with a little extra allowance at each edge, then the new panels are cut out along those traced lines. The final stage is gluing the fresh panels onto the wire frame one at a time, starting at a top rib and smoothing each piece downward and around so the fabric sits taut and shows no wrinkles once it wraps fully around the shade. A thin trim is pressed along the top and bottom rings last, hiding the raw fabric edges and giving the finished shade a clean, tidy line all the way round.",
+    "highlight_spans": [
+      "peeling it away from the wire ribs a section at a time",
+      "laid onto the new fabric and traced around",
+      "gluing the fresh panels onto the wire frame"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first step in recovering a lampshade, according to the narrator?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "Recovering a lampshade starts with removing the fabric that is already on the frame, peeling it away from the wire ribs a section at a time so that each removed panel can be kept flat and used as a pattern."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "removing the old fabric from the frame",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהתהליך מתחיל בהסרת הבד הישן מהמסגרת."
+          },
+          {
+            "text": "tracing panels onto new fabric",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הסימון על הבד החדש מתואר רק אחרי הסרת הפנלים הישנים."
+          },
+          {
+            "text": "gluing fresh panels onto the frame",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההדבקה היא שלב מאוחר יותר בתהליך, לא הראשון."
+          },
+          {
+            "text": "pressing trim along the rings",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הצמדת הסרט הדק היא הפעולה האחרונה שמתוארת בתמליל."
+          }
+        ]
+      },
+      {
+        "question_text": "In the lecture, what does the word \"taut\" describe about the fabric once it is glued on?",
+        "question_type": "vocab_in_context",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "smoothing each piece downward and around so the fabric sits taut and shows no wrinkles once it wraps fully around the shade."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "loose and slightly baggy",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "זהו ההפך ממה שהמרצה מתאר, הבד אמור להיות מתוח ולא רופף."
+          },
+          {
+            "text": "pulled tight with no slack",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מתאר בד שמתוח היטב וללא קמטים לאחר ההדבקה."
+          },
+          {
+            "text": "folded over at the seams",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "התמליל אינו מזכיר קיפול בד בתפרים."
+          },
+          {
+            "text": "faded from too much glue",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "דהייה של הבד מדבק אינה נזכרת בתמליל כלל."
+          }
+        ]
+      }
+    ],
+    "_key": "H11"
+  },
+  {
+    "title": "Restringing a Wind Chime",
+    "topic": "wind chime restringing",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "Restringing a wind chime looks simple, but getting the tubes to hang correctly takes attention to length and order. The first task is untying the old cord from each tube and setting the tubes aside in the order they came off, since mixing up their sequence can leave the chime looking uneven once it is rehung. Next, a length of new cord is measured for each tube individually rather than cut all at once, because slightly longer cords are needed toward the outer edge of the ring to keep the tubes level under the central disk. Once every cord is cut to its own length, each one is threaded up through its tube, tied off at the top with a secure double knot, and looped onto the mounting ring in the same order the tubes were removed. Some people assume every cord should match in length for a neat look, yet uneven lengths are exactly what keeps the ring balanced and the tubes hanging level.",
+    "highlight_spans": [
+      "untying the old cord from each tube",
+      "measured for each tube individually rather than cut all at once",
+      "yet uneven lengths are exactly what keeps the ring balanced"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first task when restringing a wind chime, according to the narrator?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The first task is untying the old cord from each tube and setting the tubes aside in the order they came off, since mixing up their sequence can leave the chime looking uneven once it is rehung."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "cutting new cord to the right length",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "מדידת החוט החדש מתוארת רק אחרי הסרת החוט הישן מכל צינורית."
+          },
+          {
+            "text": "tying a double knot at the top",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "קשירת הקשר הכפול מתרחשת בשלב מאוחר יותר בתהליך."
+          },
+          {
+            "text": "untying the old cord from each tube",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהמשימה הראשונה היא התרת החוט הישן מכל צינורית."
+          },
+          {
+            "text": "looping cords onto the mounting ring",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הכריכה על טבעת התלייה היא הפעולה האחרונה בתהליך, לא הראשונה."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the narrator's main point about cord length when restringing a wind chime?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Some people assume every cord should match in length for a neat look, yet uneven lengths are exactly what keeps the ring balanced and the tubes hanging level."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "equal lengths look neatest overall",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "זו הטענה הרווחת שהמרצה סותר במפורש במילה yet."
+          },
+          {
+            "text": "the type of wood used for the tubes determines the chime's balance",
+            "k_code": "K_W2",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה רחבה מתחרה על סוג העץ, אך המרצה מדגיש שאורכי החוט הבלתי שווים, לא חומר הצינורות, הם שמאזנים את הפעמונים."
+          },
+          {
+            "text": "shorter cords hang better outdoors",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "התמליל אינו מזכיר דבר על תלייה בחוץ או אורך קצר במיוחד."
+          },
+          {
+            "text": "uneven lengths keep the tubes balanced",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסכם שדווקא אורכים שונים שומרים על איזון הטבעת והצינוריות."
+          }
+        ]
+      }
+    ],
+    "_key": "H12"
+  },
+  {
+    "title": "LQA-PROD-H: long_dialogue (hull_planking)",
+    "topic": "An apprentice shipwright asks a master to explain the sequence from spiling through steam-bending and fitting hood ends that turns a flat board into a plank that fits the hull's curve.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Priya: Otis, before I cut another plank wrong, can you explain how a flat board becomes a plank that fits the hull's curve?\nOtis: Sure. It starts with spiling. I hold a thin batten against the frames and trace the curve of the gap onto its edge with a pencil.\nPriya: So the batten is the pattern for the plank?\nOtis: Right, because you can't cut good stock until you know the shape needed at every point along that run. Once transferred onto the plank, I saw it close to the line, then it goes into the steam box.\nPriya: And steaming just makes the wood soft enough to bend by hand?\nOtis: After roughly an hour of steam, the fibers loosen enough that two of us pull the hot plank onto the frames and clamp it down section by section before it stiffens.\nPriya: However, couldn't we skip the spiling and just steam a wide board, then trim the extra away once it's bent?\nOtis: People assume steaming alone shapes the plank, but a board spiled wrong will still crack or gap along the frames no matter how long it steams, because the fault was cut in before any heat touched it. It is the spiling, not the steaming, that actually determines whether the plank fits the hull's curve.\nPriya: So the batten work decides everything before the hot part begins.\nOtis: Exactly. Once a plank is clamped and cooled to shape, we trim its hood ends, the tapered ends that slide into the rabbet along the stem, unlike the garboard strake by the keel, whose ends sit flush rather than tapered.\nPriya: Yet wouldn't a loose hood end get filled in later with caulking?\nOtis: Not safely. A loose hood end works free under strain long before a caulking seam would, so we fit it tight by hand.",
+    "questions": [
+      {
+        "question_text": "According to Otis, why must the spiling be done before the plank is cut?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because the plank's curve must be known before cutting",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אוטיס אומר שאי אפשר לחתוך חומר טוב לפני שיודעים בדיוק את הצורה הנדרשת בכל נקודה."
+          },
+          {
+            "text": "Because the hood ends cannot be cut before steaming",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו טעות המחליפה מונח: עיצוב קצוות ה-hood ends מגיע אחרי ההרכבה, לא קשור לסדר הספיילינג."
+          },
+          {
+            "text": "Because the plank cannot be spiled until it is cut",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: הספיילינג קודם לחיתוך, לא להפך."
+          },
+          {
+            "text": "Because the batten must be soaked before spiling begins",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל כל אזכור של השרייה של הבאטן; פרט מומצא שנשמע סביר אך אינו נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Otis makes about what actually determines whether a plank fits the hull's curve?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Steaming the plank long enough guarantees it fits the curve",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך אוטיס אומר במפורש שלוח שנחתך לא נכון עדיין יתפצל או ייצור רווח לא משנה כמה זמן יאדה."
+          },
+          {
+            "text": "Fitting the hood ends snugly determines the plank's final curve",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "התאמת ה-hood ends נוגעת להתאמה לרבט בסוף התהליך, לא לקביעת עקומת הלוח מלכתחילה."
+          },
+          {
+            "text": "Clamping the plank onto the frames sets its curve permanently",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "ההידוק רק מחזיק את הלוח בזמן הקירור; התמליל מייחס את קביעת הצורה לספיילינג, לא להידוק."
+          },
+          {
+            "text": "Spiling the plank correctly determines whether it fits the curve",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: הספיילינג, לא האידוי, הוא שקובע אם הלוח יתאים לעקומת הגוף."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "you can't cut good stock until you know the shape needed at every point along that run",
+      "It is the spiling, not the steaming, that actually determines whether the plank fits the hull's curve"
+    ],
+    "_key": "H13"
+  },
+  {
+    "title": "LQA-PROD-H: long_lecture (cloisonne_enamel)",
+    "topic": "A lecture explaining how a cloisonne plate moves through wirework, counter-enamel, firing, and stoning on its way to a finished enameled surface.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "A cloisonne plate begins as a plain sheet of copper, hammered slightly domed so it can flex without buckling. Before any color goes on, the metalworker glues wire onto the copper, bending each strip into tight loops that form cloisons, the small compartments that will later hold enamel powder. Each cloison has to sit flush against the metal, because a wire that lifts even slightly leaves a gap where the powdered glass will slump sideways during firing instead of staying inside its cell. Once the wirework is set, colored enamel powder is packed into every cloison by hand, then the whole plate goes into the kiln until the powder melts into smooth glass. However, before that first firing ever happens, the back of the plate gets its own coat of plain enamel, called counter-enamel, even though no one will ever see it once the piece is framed. It is the counter-enamel, not the cloisons themselves, that actually keeps the plate from warping in the kiln, since a thin copper sheet glazed only on one side pulls into a bow as the glass on the front cools and shrinks. Many assume the wirework alone holds the plate flat, but an unbalanced plate warps regardless of how carefully the cloisons were set. After several rounds of firing and refilling sunken cells, the surface is ground back with an abrasive stone in a stage called stoning, leveling the raised enamel until it sits flush with the wire tops. Yet stoning only reveals a clean surface if the earlier firings filled every cloison completely, since a cell left low will show as a dull pit no amount of grinding can fix.",
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"cloisons\" most nearly mean as used to describe the wirework?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Empty gaps left in the copper where no wire was applied",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך המשמעות: cloisons הם תאים שנוצרים על ידי חוט, לא רווחים ריקים ללא חוט."
+          },
+          {
+            "text": "The small wire-formed cells that hold enamel powder",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, cloisons הם התאים הקטנים שנוצרים מהחוט ומחזיקים את אבקת האמייל."
+          },
+          {
+            "text": "A special alloy mixed into the enamel powder before firing",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל אזכור של סגסוגת מיוחדת; פרט מומצא שנשמע סביר אך אינו נתמך."
+          },
+          {
+            "text": "The ground and leveled surface produced after firing",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "פני השטח המיושרים הם תוצאה של שלב הסטונינג, לא הגדרת ה-cloisons עצמם."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually keeps the plate from warping in the kiln?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The cloisons hold the plate flat on their own",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר שרבים מניחים כך בטעות ושלוח לא מאוזן יתעקם בכל זאת."
+          },
+          {
+            "text": "Stoning after firing is what keeps the plate flat",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "סטונינג רק מיישר את פני השטח לאחר האפייה; מניעת העיוות מיוחסת בתמליל לקאונטר-אנאמל."
+          },
+          {
+            "text": "Coating the back with counter-enamel keeps the plate flat",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: שכבת הקאונטר-אנאמל בגב הלוח היא שמונעת עיוות בכבשן."
+          },
+          {
+            "text": "Hammering the copper into a dome keeps the plate flat",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "עיצוב הכיפה נעשה כדי לאפשר גמישות בלבד; התמליל אינו מייחס לו מניעת עיוות."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "a wire that lifts even slightly leaves a gap where the powdered glass will slump sideways during firing instead of staying inside its cell",
+      "It is the counter-enamel, not the cloisons themselves, that actually keeps the plate from warping in the kiln"
+    ],
+    "_key": "H14"
+  },
+  {
+    "title": "LQA-PROD-H: long_dialogue (wig_wefting)",
+    "topic": "An apprentice wigmaker asks a master to explain the sequence from sorting through wefting, knotting, and blocking that turns loose hair into a finished wig.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Wren: Del, before I sew another weft in the wrong place, can you explain how loose hair actually becomes a finished wig?\nDel: Sure. First the hair gets sorted and matched, strand by strand, for color and thickness, because mismatched hair shows immediately once it's styled together.\nWren: So sorting happens before any sewing starts?\nDel: Right, because you can't sew a uniform weft from hair that doesn't match. Once it's sorted, we machine-sew rows of it onto a thread to make wefts, long strips that cover the bulk of the wig quickly.\nWren: And wefts cover the whole head, hairline included?\nDel: Not the hairline. However, wouldn't a fine weft look natural enough right at the parting?\nWren: That's exactly what I assumed.\nDel: Most people do, but a sewn weft always shows a slight ridge where the thread runs, and along a parting that ridge is impossible to hide. It is knotting, not wefting, that actually gives the hairline its natural look, since each single hair gets tied by hand through the lace foundation, strand by strand, with no thread to catch the light.\nWren: So the front takes far longer than the rest of the wig.\nDel: Much longer. A knotted hairline can take days, while wefting the back and crown takes only hours. Yet even after every hair is placed, the wig still isn't finished, because loose knotting and wefting leave the piece shapeless.\nWren: That's where blocking comes in?\nDel: Exactly. We pin the whole wig onto a wooden head block carved to size, dampen it, and let it set until the style holds its shape on its own.",
+    "questions": [
+      {
+        "question_text": "When Wren asks whether a fine weft would look natural right at the parting, how does Del respond?",
+        "question_type": "speaker_ref",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Del says wefts are used only for the crown",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל לא אומר שהוואפטים מוגבלים לכתר בלבד; פרט מומצא שאינו נתמך."
+          },
+          {
+            "text": "Del agrees that a sewn weft looks natural at the parting",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: דל דוחה בדיוק את הטענה הזו ומסביר שהתפר תמיד יוצר בליטה נראית."
+          },
+          {
+            "text": "Del explains that a sewn weft always leaves a visible ridge",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דל מסביר שוואפט תפור תמיד משאיר בליטה קלה שבולטת לאורך השביל בשיער."
+          },
+          {
+            "text": "Del explains that blocking removes the ridge left by wefts",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "בלוקינג מתייחס לעיצוב הפאה על תבנית עץ, לא להסרת הבליטה של הוואפט; זו החלפת מונח מהמערכת."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Del makes about what actually gives the hairline its natural look?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Hand-knotting each hair through the lace produces the hairline's natural look",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: קשירת כל שערה ביד דרך התחרה, לא התפירה, היא שיוצרת מראה טבעי בשביל."
+          },
+          {
+            "text": "A finely sewn weft already looks natural along the parting",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך דל דוחה אותה במפורש ומסבירה שהתפר תמיד נראה."
+          },
+          {
+            "text": "Blocking the wig on its head form shapes the hairline naturally",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "בלוקינג נועד לעצב את הצורה הכללית של הפאה, לא ליצור את המראה הטבעי של השביל; החלפת מונח."
+          },
+          {
+            "text": "Sorting hair carefully by color creates the hairline's natural blend",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "מיון השיער חשוב לאחידות הצבע בכלל הפאה, אך התמליל לא מייחס לו את המראה הטבעי של קו השיער."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "a sewn weft always shows a slight ridge where the thread runs, and along a parting that ridge is impossible to hide",
+      "It is knotting, not wefting, that actually gives the hairline its natural look"
+    ],
+    "_key": "H15"
+  },
+  {
+    "title": "LQA-PROD-H: long_lecture (lime_plastering)",
+    "topic": "A lecture explaining how a lath wall moves through the scratch coat, browning coat, and setting coat on its way to a finished plastered surface.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Traditional lime plastering on a lath wall always follows the same three-coat sequence, no matter the size of the room. The laths themselves are thin wood strips nailed across the studs with small gaps between each one, and it's through those gaps that the first coat, the scratch coat, gets pressed. As the wet plaster squeezes through, it curls over on the far side of the lath and hardens into a small hook called a key, which is what actually anchors the entire wall of plaster to the timber underneath. Once the scratch coat has begun to firm up, the plasterer drags a comb across its face, cutting shallow scratches into the surface before it fully sets. However, those scratches aren't there to make the wall look interesting, since no one will ever see this coat again once the work is finished. It is the scratch coat's key, not the thickness of any single coat, that actually keeps the whole wall from falling away from the laths, since a smooth, unkeyed first coat would simply peel off under its own weight given enough time. After the scratch coat has cured for several days, the browning coat goes on next, a thicker layer built up to bring the wall's surface level and flat, ready for a final skim. Yet a browning coat that is trowelled too smooth gives the last layer nothing to grip, which is why it too gets scratched lightly before it hardens. Only then does the setting coat, a thin, fine-grained finish layer, get trowelled on and polished to the smooth, hard surface a room actually shows.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about the scratch coat?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "It is pressed through gaps between the laths",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל מתאר שהמריחה הראשונה נדחסת דרך הרווחים בין הלאטים."
+          },
+          {
+            "text": "It hardens into small keys that hook over the laths",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הטיח מתקשה לצורת וו קטן שמעגן אותו ללאטים."
+          },
+          {
+            "text": "It gets scored with a comb before it fully sets",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הטייחן מסרק את השכבה כדי ליצור שריטות לפני שהיא מתקשה לגמרי."
+          },
+          {
+            "text": "It is trowelled smooth to form the finished surface",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הפרט השגוי: מריחה חלקה ליצירת פני השטח הסופיים מתארת את שכבת הסטינג, לא את שכבת הסקראץ'."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually anchors the plaster to the wall?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The overall thickness of the coats anchors the plaster wall",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שהעוגן הוא הוו, לא עובי השכבה."
+          },
+          {
+            "text": "The scratch coat's keys are what anchor the plaster wall",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: הוו שנוצר בשכבת הסקראץ' הוא שמעגן את כל קיר הטיח ללאטים."
+          },
+          {
+            "text": "The setting coat's smooth finish anchors the plaster wall",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "שכבת הסטינג היא שכבת הגימור בלבד; העיגון הפיזי מיוחס בתמליל לוו של שכבת הסקראץ'."
+          },
+          {
+            "text": "The nails holding the laths anchor the plaster wall",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "המסמרים מחזיקים את הלאטים לקירות בלבד; התמליל לא מייחס להם עיגון של הטיח עצמו."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "it curls over on the far side of the lath and hardens into a small hook called a key",
+      "It is the scratch coat's key, not the thickness of any single coat, that actually keeps the whole wall from falling away from the laths"
+    ],
+    "_key": "H16"
+  },
+  {
+    "title": "LQA-PROD-H: long_dialogue (brick_clamp_firing)",
+    "topic": "An apprentice brickmaker asks a master to explain the sequence from pugging through molding, drying, and clamp firing that turns raw clay into a finished brick.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Jonas: Ada, before I load the clamp wrong again, can you explain how raw clay becomes a proper brick?\nAda: Sure. It starts with pugging, working the clay by hand or with the pug mill until every air pocket is worked out, because trapped air will make a brick crack apart the moment it's fired.\nJonas: So the clay has to be perfectly smooth before anything else happens?\nAda: Right, because you can't press good bricks from lumpy clay. Once it's pugged, we press it into sanded wooden molds to shape green bricks, which still hold their raw, unfired form.\nJonas: And green bricks go straight into the fire from there?\nAda: Not straight away. However, wouldn't drying them slowly just waste good working days?\nJonas: That's what I would have guessed too.\nAda: Most newcomers think that, but a green brick fired while still damp will crack or explode from trapped steam, so we let them dry under cover for weeks before they see fire. Once dry, we stack them into a clamp, a temporary structure of bricks with fuel layered between the courses, rather than a proper kiln.\nJonas: Yet doesn't every brick in the clamp end up fired the same way?\nAda: Not at all, and that's the part people misjudge most. It is the brick's position in the clamp, not the clay itself, that actually decides how it turns out, since the ones nearest the fuel become clinkers, glassy and overfired, while the ones at the cooler edges come out as samels, crumbly and underfired.\nJonas: Which kind do you actually prefer working with?\nAda: Honestly, I'd rather deal with clinkers than samels. A clinker still has a use in foundations where no one sees it, but a samel is too weak for anything and usually gets crushed back into hardcore.",
+    "questions": [
+      {
+        "question_text": "What is Ada's opinion about clinkers compared with samels?",
+        "question_type": "opinion",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "She would rather work with clinkers than with samels",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אדה אומרת במפורש שהיא מעדיפה להתמודד עם קלינקרים על פני סאמלים."
+          },
+          {
+            "text": "She finds clinkers too weak to use in foundations",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: אדה אומרת שהסאמל, לא הקלינקר, חלש מדי לכל שימוש."
+          },
+          {
+            "text": "She thinks samels make better facing bricks than clinkers",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל תמיכה לכך שסאמלים טובים יותר לחיפוי; פרט מומצא."
+          },
+          {
+            "text": "She prefers bricks pugged twice over bricks pugged once",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת מונח: הפוגינג הוא שלב מוקדם בעיבוד החומר, לא קשור להעדפה בין קלינקר לסאמל."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Ada makes about what actually decides how a brick turns out?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "The clay's original quality decides how a brick turns out",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך אדה אומרת במפורש שזה לא החומר עצמו שקובע."
+          },
+          {
+            "text": "How long a brick dries under cover decides how it turns out",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "משך הייבוש מונע סדקים בשלב מוקדם, אך התמליל מייחס את התוצאה הסופית למיקום בקלמפ, לא לייבוש."
+          },
+          {
+            "text": "A brick's position in the clamp decides how it turns out",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: מיקום הלבנה בקלמפ, לא החומר עצמו, קובע אם תהיה קלינקר או סאמל."
+          },
+          {
+            "text": "The shape of the wooden mold decides how a brick turns out",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התבנית קובעת רק את צורת הלבנה הירוקה; התמליל לא מייחס לה את תוצאת השריפה."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "a green brick fired while still damp will crack or explode from trapped steam",
+      "It is the brick's position in the clamp, not the clay itself, that actually decides how it turns out"
+    ],
+    "_key": "H17"
+  },
+  {
+    "title": "LQA-PROD-H: long_lecture (water_gilding)",
+    "topic": "A lecture explaining how a carved panel moves through gesso, bole, leaf-laying, and burnishing on its way to a finished gilded surface.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Water gilding begins long before any gold ever touches the panel. The carved wood first receives many thin coats of gesso, a mixture of chalk and animal glue, built up layer after layer and sanded smooth until every tool mark from the carving disappears beneath it. Once the gesso is fully hard and level, the gilder brushes on several coats of bole, a fine clay bound with glue, traditionally tinted red or sometimes yellow depending on the effect wanted. The bole has to be polished slick before any leaf goes down, because gold leaf is thinner than a soap bubble and will show every bump hiding underneath it. To lay the leaf, the gilder breathes gently onto the bole to reactivate the glue, then lifts a square of gold with a soft brush and lets it settle onto the tacky surface. However, freshly laid leaf still looks dull and slightly cloudy, nothing like the bright shine people expect from gilded objects. It is the bole, not the gesso beneath it, that actually gives water-gilded leaf its warm glow, since the thin gold becomes almost transparent once burnished, and light passing through picks up the clay's color underneath rather than the plain white gesso further down. Burnishing itself is done with a smooth agate stone, rubbed firmly back and forth across the leaf until friction compacts the gold and brings up a mirror shine. Yet burnishing too hard in one spot can rub straight through the thin gold and expose the bole beneath, so the gilder works evenly and never lingers too long in any single place.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, why must the bole be polished slick before the leaf is applied?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because the gesso beneath needs to be sanded slick first",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת מונח: מלטשים את הג'סו בתחילת התהליך, לא בגלל היישור לפני הנחת עלה הזהב."
+          },
+          {
+            "text": "Because gold leaf is thin enough to show every bump beneath it",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסביר שעלה הזהב דק מבועת סבון ולכן כל בליטה מתחתיו תיראה."
+          },
+          {
+            "text": "Because polishing the bole happens only after the leaf is applied",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: הליטוש קודם להנחת העלה, לא אחריו."
+          },
+          {
+            "text": "Because the bole must dry fully before glue is reactivated",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל אזכור של ייבוש מלא לפני הפעלת הדבק מחדש; פרט מומצא."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually gives water-gilded leaf its warm glow?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The gesso ground beneath already gives the leaf its color",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שלא הג'סו הוא שנותן את הגוון החם."
+          },
+          {
+            "text": "Burnishing with the agate stone creates the leaf's warm tone",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הברנישינג מדחיס את הזהב ומעניק ברק מראה, אך הגוון החם מיוחס בתמליל לבול שמתחת."
+          },
+          {
+            "text": "A thicker square of gold creates the leaf's warm tone",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל מדגיש שהזהב דק מאוד ושקוף כמעט; אין תמיכה בכך שעובי גדול יוצר את הגוון."
+          },
+          {
+            "text": "The bole's color underneath is what gives the leaf its warm glow",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: צבע הבול הנראה מבעד לזהב השקוף כמעט הוא שמעניק את הזוהר החם."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "gold leaf is thinner than a soap bubble and will show every bump hiding underneath it",
+      "It is the bole, not the gesso beneath it, that actually gives water-gilded leaf its warm glow"
+    ],
+    "_key": "H18"
+  }
+]

@@ -1,0 +1,855 @@
+[
+  {
+    "title": "The Board Game Shelf",
+    "topic": "community board game library",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Priya: Have you seen the shelf of board games in the community center lobby? Anyone can borrow one for free.\nTom: I noticed it last week. Do you need a membership card or anything like that?\nPriya: No, you just write the title and your name on a clipboard by the door, then bring it back within two weeks.\nTom: What happens if a game is missing a piece when someone returns it?\nPriya: A pair of volunteers meets every month to check each box and replace anything that's lost or broken.\nTom: That's reassuring. I always worry about handing back something that isn't quite complete.",
+    "highlight_spans": [
+      "A pair of volunteers meets every month to check each box and replace anything that's lost or broken."
+    ],
+    "questions": [
+      {
+        "question_text": "What does Priya say the volunteers do each month?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "They interview new borrowers",
+            "k_code": "NOT_STATED",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט שום אזכור לראיון שואלים חדשים; מדובר רק בבדיקת התיבות."
+          },
+          {
+            "text": "They inspect and repair the games",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת שזוג מתנדבים בודק כל קופסה מדי חודש ומחליף כל מה שאבד או נשבר."
+          },
+          {
+            "text": "They throw out broken games",
+            "k_code": "DISTORTION",
+            "fail_mode": "distortion",
+            "explanation_he": "הטקסט אומר שהמתנדבים מחליפים חלקים שאבדו או נשברו, לא שהם זורקים משחקים שלמים."
+          },
+          {
+            "text": "They ask Tom to check the boxes",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_agent",
+            "explanation_he": "לפי הטקסט זוג מתנדבים מבצע את הבדיקה מדי חודש, לא טום לבדו."
+          }
+        ]
+      }
+    ],
+    "_key": "I1"
+  },
+  {
+    "title": "The Ping Pong Sign-Up",
+    "topic": "park outdoor table tennis sign-up board",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Mara: Did you see they set up a ping pong table by the fountain? There's a little whiteboard attached to the post.\nDeacon: Yeah, you write your name on it and wait your turn instead of just hovering around the table.\nMara: Right, and whoever wins the current game stays on to face the next name on the list.\nDeacon: Does the board reset every day, or do names stay up overnight?\nMara: Someone wipes it clean at sunset, so every morning starts with an empty list.\nDeacon: Smart. Otherwise the same few people would probably hog the table for weeks.",
+    "highlight_spans": [
+      "the same few people would probably hog the table for weeks"
+    ],
+    "questions": [
+      {
+        "question_text": "In this dialogue, what does the word \"hog\" most nearly mean?",
+        "question_type": "vocab_in_context",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "To clean thoroughly",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "המשמעות המילולית של ניקיון אינה קשורה להקשר; מדובר בהשתלטות על התור, לא בניקוי."
+          },
+          {
+            "text": "To lose on purpose",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: הדובר חושש שאותם אנשים ינצחו שוב ושוב ולא יוותרו על מקומם, לא שהם יפסידו בכוונה."
+          },
+          {
+            "text": "To dominate for oneself",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, 'hog' מתאר אנשים שמשתלטים על השולחן לעצמם למשך זמן ארוך."
+          },
+          {
+            "text": "To wipe the board clean",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו החלפה עם פרט אחר בטקסט - ניקוי הלוח בשקיעה, לא ההשתלטות על השולחן עצמו."
+          }
+        ]
+      }
+    ],
+    "_key": "I2"
+  },
+  {
+    "title": "The Pond Mailbox",
+    "topic": "park pond message-in-a-bottle mailbox",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "A small waterproof mailbox stands on a post beside the park pond, painted a faded blue so it blends with the water behind it. Visitors may leave a folded note inside for a stranger to find, or take one that someone else left earlier that day. No name or address is required, and nobody signs anything before dropping a page through the narrow slot. A caretaker checks the box once a week, removing pages that have gone soft with damp or torn at the edges. Most notes are short, just a passing thought about the weather or a line meant to cheer up whoever opens the box next.",
+    "highlight_spans": [
+      "A small waterproof mailbox stands on a post beside the park pond, painted a faded blue so it blends with the water behind it.",
+      "Visitors may leave a folded note inside for a stranger to find, or take one that someone else left earlier that day."
+    ],
+    "questions": [
+      {
+        "question_text": "What is this passage mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Strangers leave anonymous notes for others",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע מתאר תיבת דואר ליד הבריכה שבה זרים משאירים ולוקחים פתקים אנונימיים זה לזה."
+          },
+          {
+            "text": "A caretaker maintains the mailbox weekly",
+            "k_code": "RIVAL_CLAIM",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה מנוגדת: הבדיקה השבועית היא פרט תומך, לא הרעיון המרכזי של חילופי הפתקים."
+          },
+          {
+            "text": "Visitors reserve pond seats in advance",
+            "k_code": "FABRICATED_DETAIL",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט שום אזכור להזמנת מקומות ישיבה; מדובר רק בהשארת פתקים."
+          },
+          {
+            "text": "The pond itself is painted blue",
+            "k_code": "DISTORTION",
+            "fail_mode": "distortion",
+            "explanation_he": "זהו עיוות: תיבת הדואר צבועה בכחול דהוי, ולא הבריכה עצמה."
+          }
+        ]
+      }
+    ],
+    "_key": "I3"
+  },
+  {
+    "title": "The Rain Gauge Volunteer",
+    "topic": "town civic rain-gauge volunteer recorder",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Every town keeps a rain gauge in the same courtyard it has occupied for generations, and a resident volunteer reads it each morning before heading to work. The volunteer jots the total in a logbook stored inside a small covered box beside the gauge. Whenever a volunteer moves away, the role passes to a neighbor after a short handover explaining how to empty and reset the gauge. Readings are phoned in to the regional weather service every afternoon, though nothing about the process is automated. Most volunteers say they keep doing it simply because they enjoy the quiet ritual of stepping outside before anyone else is awake.",
+    "highlight_spans": [
+      "though nothing about the process is automated"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about the rain gauge tradition?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The volunteer role passes to neighbors",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: כאשר מתנדב עוזב, התפקיד עובר לשכן אחר."
+          },
+          {
+            "text": "Readings are phoned in every afternoon",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הקריאות מועברות בטלפון לשירות המטאורולוגי מדי אחר צהריים."
+          },
+          {
+            "text": "The gauge sits in the same courtyard",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: מד הגשם נמצא באותה חצר כבר דורות."
+          },
+          {
+            "text": "No one needs to write the readings down",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הקביעה השגויה: הטקסט אומר במפורש שדבר בתהליך אינו אוטומטי, כלומר רישום עדיין נעשה ביד."
+          }
+        ]
+      }
+    ],
+    "_key": "I4"
+  },
+  {
+    "title": "Reweaving a Wicker Chair Seat",
+    "topic": "wicker chair-seat reweaving",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Priya: When a wicker chair seat starts sagging or the strands are cracked, the first thing I do is cut out every old strand from the frame, working outward from the center so no weak pieces stay tangled in the corners.\nOwen: Do you use the same kind of cane for the new seat?\nPriya: Usually, yes. Before I start weaving, I soak the new lengths of cane in water for about twenty minutes so they bend without snapping, then I thread each strand through the frame holes, following the same over-under pattern the original seat used.\nOwen: How do you keep the pattern from drifting off center as you go?\nPriya: I check the spacing every few rows and pull each strand snug. Once the whole seat is woven tight, I trim the loose ends close to the frame and tuck the stubs underneath so nothing catches on clothing later.\nOwen: That sounds like it takes patience.\nPriya: It does, but a seat woven this way holds up for years before it needs touching again.",
+    "highlight_spans": [
+      "cut out every old strand from the frame",
+      "soak the new lengths of cane in water for about twenty minutes",
+      "trim the loose ends close to the frame and tuck the stubs underneath"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Priya does when a wicker chair seat starts sagging or the strands are cracked?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "soaking cane in water",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "השרייה במים מתוארת רק אחרי שהגדילים הישנים כבר הוסרו מהמסגרת."
+          },
+          {
+            "text": "threading cane through the frame",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "השזירה דרך חורי המסגרת מתרחשת רק אחרי ההשריה, לא ראשונה."
+          },
+          {
+            "text": "cutting out the old strands",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת שהדבר הראשון שהיא עושה הוא לגזור את הגדילים הישנים מהמסגרת."
+          },
+          {
+            "text": "trimming the loose ends",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "גזירת הקצוות המיותרים היא הפעולה האחרונה בתהליך, לא הראשונה."
+          }
+        ]
+      },
+      {
+        "question_text": "According to the conversation, which of these does Priya NOT do while reweaving the wicker seat?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "checking spacing every few rows",
+            "k_code": "K_W1",
+            "fail_mode": "actually-performed",
+            "explanation_he": "פריה מתארת בפירוש בדיקת המרווח כל כמה שורות, זו פעולה שהיא כן מבצעת."
+          },
+          {
+            "text": "sanding the wooden frame smooth",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "ליטוש המסגרת העצית בנייר זכוכית אינו נזכר בשיחה כלל, זו הפעולה שאינה מבוצעת."
+          },
+          {
+            "text": "pulling each strand snug",
+            "k_code": "K_W2",
+            "fail_mode": "actually-performed",
+            "explanation_he": "פריה אומרת בפירוש שהיא מותחת כל גדיל בחוזקה, זו פעולה שהיא כן מבצעת."
+          },
+          {
+            "text": "tucking the stubs underneath",
+            "k_code": "K_W3",
+            "fail_mode": "actually-performed",
+            "explanation_he": "פריה מתארת תחיבת קצוות הגדילים מתחת למושב, זו פעולה שהיא כן מבצעת."
+          }
+        ]
+      }
+    ],
+    "_key": "I5"
+  },
+  {
+    "title": "Resewing a Leather Watch Strap",
+    "topic": "leather watch-strap resewing",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Noor: When a leather watch strap starts pulling apart along the seam, the first thing I do is remove the whole strap from the watch case so I'm not working near the metal springs.\nFelix: Do you throw out the torn stitches first?\nNoor: Right, I pick out every loose stitch with a fine needle, following the original holes so I don't punch new ones and weaken the leather further. Once the old thread is fully gone, I thread waxed cord through those same holes and stitch the seam back together, pulling each pass tight so the layers sit flush against each other.\nFelix: Does the strap need anything after the stitching is done?\nNoor: One more thing. I press the finished strap flat under a heavy book overnight, which sets the stitches evenly and stops the leather from curling at the edges once it's back on the watch.\nFelix: Does a repaired strap ever tear again at the same spot?\nNoor: Rarely, as long as the new stitches follow the original holes instead of drifting.",
+    "highlight_spans": [
+      "remove the whole strap from the watch case",
+      "thread waxed cord through those same holes and stitch the seam back together",
+      "press the finished strap flat under a heavy book overnight"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Noor does when a leather watch strap starts pulling apart along the seam?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "removing the strap from the case",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נור אומרת שהדבר הראשון שהיא עושה הוא להסיר את הרצועה מגוף השעון."
+          },
+          {
+            "text": "picking out the loose stitches",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הוצאת התפרים הרופפים מתוארת רק אחרי שהרצועה כבר הוסרה מהשעון."
+          },
+          {
+            "text": "stitching the seam with waxed cord",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "התפירה מחדש היא שלב מאוחר יותר בתהליך, לא הראשון."
+          },
+          {
+            "text": "pressing the strap under a book",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הלחיצה תחת ספר כבד היא הפעולה האחרונה שמתוארת, לא הראשונה."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Noor suggest about a strap repaired this way?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "it always tears again quickly",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "נור אומרת בדיוק ההפך, שרצועה מתוקנת כך נדירות קורעת שוב."
+          },
+          {
+            "text": "it needs restitching every month",
+            "k_code": "K_W2",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "אין בשיחה שום רמז לצורך בתפירה חוזרת מדי חודש."
+          },
+          {
+            "text": "it should be replaced instead",
+            "k_code": "K_W3",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "נור לא מציעה להחליף את הרצועה במקום לתקן אותה."
+          },
+          {
+            "text": "it rarely tears at the same spot",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נור אומרת שזה קורה נדירות, כל עוד התפרים החדשים עוקבים בדיוק אחר החורים המקוריים."
+          }
+        ]
+      }
+    ],
+    "_key": "I6"
+  },
+  {
+    "title": "Re-fitting a Ceramic Teapot Lid",
+    "topic": "ceramic teapot lid re-fitting and grinding",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "Re-fitting a loose or chipped ceramic teapot lid does not mean replacing the whole lid, since only the rim needs reshaping to seat correctly again. The first step is marking the high points where the lid rocks or catches against the pot's opening, usually done by rubbing a pencil lightly around the rim while the lid is turned in place. Once those spots are marked, a fine grinding stone is used to remove material only at the marked points, checking the fit again every few passes so too much is never taken off in one go. After the rim sits level and turns smoothly, the final step is polishing the ground edge with a soft cloth and mild abrasive so the newly exposed ceramic matches the glossy finish of the rest of the lid. Many owners assume a rocking lid means the whole pot is ruined, yet a careful regrind restores a smooth, secure fit almost every time, leaving the rest of the teapot untouched.",
+    "highlight_spans": [
+      "marking the high points where the lid rocks or catches against the pot's opening",
+      "a fine grinding stone is used to remove material only at the marked points",
+      "yet a careful regrind restores a smooth, secure fit almost every time"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first step in re-fitting a loose ceramic teapot lid, according to the narrator?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "grinding material off the rim",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "השחיזה מתוארת רק אחרי שהנקודות הגבוהות כבר סומנו."
+          },
+          {
+            "text": "marking the high points",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהשלב הראשון הוא סימון הנקודות הגבוהות שבהן המכסה מתנדנד."
+          },
+          {
+            "text": "polishing the ground edge",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הליטוש של הקצה המושחז הוא השלב האחרון בתהליך, לא הראשון."
+          },
+          {
+            "text": "checking the fit repeatedly",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "בדיקת ההתאמה חוזרת ונשנית מתוארת רק תוך כדי השחיזה, לא לפניה."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the narrator's main point about a rocking teapot lid?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "a regrind restores a secure fit",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסכם ששחיזה זהירה משיבה כמעט תמיד התאמה חלקה ובטוחה."
+          },
+          {
+            "text": "the whole pot is usually ruined",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "זו הטענה הרווחת שהמרצה סותר במפורש במילה yet."
+          },
+          {
+            "text": "matching the glaze color matters more than the fit",
+            "k_code": "K_W2",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה רחבה מתחרה על חשיבות התאמת הזיגוג, אך המרצה מדגיש שההתאמה הפיזית שמושגת בליטוש היא הגורם המכריע, לא הצבע."
+          },
+          {
+            "text": "the glaze needs re-firing in a kiln",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "צריבה מחדש בכבשן אינה נזכרת בתמליל כלל."
+          }
+        ]
+      }
+    ],
+    "_key": "I7"
+  },
+  {
+    "title": "Rejoining a Wooden Picture-Frame Corner",
+    "topic": "wooden picture-frame corner rejoining",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Rejoining a broken corner on a wooden picture frame starts with cleaning out the old, cracked glue from inside the joint, since fresh glue never bonds well over old residue. A fine brush or a pick is used to work the dried glue out of the mitered edges without widening the crack any further. Once the joint is clean, fresh wood glue is spread thinly across both mitered faces and the corner is pressed back together, lining up the outer edge of the frame so the profile matches on both sides. The joint is then held with a corner clamp while the glue sets, usually overnight, so the two pieces cannot shift out of alignment before the bond is fully cured. After the clamp comes off, any glue that squeezed out along the seam is scraped away carefully with a blade, and the corner is lightly sanded so the repaired joint blends smoothly into the rest of the frame.",
+    "highlight_spans": [
+      "cleaning out the old, cracked glue from inside the joint",
+      "fresh wood glue is spread thinly across both mitered faces",
+      "held with a corner clamp while the glue sets"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first step in rejoining a broken picture-frame corner, according to the narrator?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "spreading fresh glue on the faces",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "מריחת הדבק הטרי מתוארת רק אחרי שהמפרק כבר נוקה מהדבק הישן."
+          },
+          {
+            "text": "clamping the corner overnight",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההידוק במלחצת מגיע רק אחרי הדבקת הפינה, לא לפני ניקוי המפרק."
+          },
+          {
+            "text": "cleaning out the old glue",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהתהליך מתחיל בניקוי הדבק הישן והסדוק מתוך המפרק."
+          },
+          {
+            "text": "sanding the repaired joint",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הליטוש בנייר זכוכית הוא השלב האחרון בתהליך, לא הראשון."
+          }
+        ]
+      },
+      {
+        "question_text": "In the lecture, what does the word \"cured\" describe about the glue bond?",
+        "question_type": "vocab_in_context",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "still wet and movable",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "זהו ההפך ממה שהמרצה מתאר, הדבק אמור להיות קשוי לחלוטין ולא רטוב."
+          },
+          {
+            "text": "colored to match the wood",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "התאמת צבע הדבק לעץ אינה נזכרת בתמליל כלל."
+          },
+          {
+            "text": "sanded smooth already",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "הליטוש מתואר רק אחרי הסרת המלחצת, לא כחלק ממצב הדבק בזמן ההתקשות."
+          },
+          {
+            "text": "fully hardened and set",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מתאר את הדבק כמי שהתקשה לחלוטין לפני הסרת המלחצת."
+          }
+        ]
+      }
+    ],
+    "_key": "I8"
+  },
+  {
+    "title": "LQA-PROD-I: long_dialogue (saddle_making)",
+    "topic": "An apprentice saddler asks a master to explain the sequence from fitting the tree through flocking the panel to stitching the skirts and billets that turns a bare frame into a saddle that fits a horse.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Noor: Callum, before I flock another panel wrong, can you explain how a saddle actually goes from a bare tree to something that fits a horse's back?\nCallum: Sure. It starts with the tree, the rigid frame underneath everything else. I check its width against the horse's shoulders, because a tree that's too narrow will pinch no matter what padding goes on top.\nNoor: So the tree decides how everything else fits?\nCallum: Right, because you can't correct a bad tree fit with anything added afterward. Once the tree's confirmed, the panel gets stuffed with wool flocking beneath the seat, shaped to follow the tree's curve and cushion the horse's spine.\nNoor: And the panel is what actually touches the horse's back?\nCallum: Mostly, yes, but only if the tree beneath it was shaped correctly. However, couldn't we just pack extra flocking into the panel to fix a tree that sits crooked?\nCallum: Most people assume more stuffing solves it, but a lopsided tree twists the panel out of shape no matter how much wool goes in, because the fault sits in the frame, not the padding. It is the tree, not the panel, that actually determines whether the saddle sits level on the horse's back.\nNoor: So the frame underneath settles the whole fit before the padding is ever touched.\nCallum: Exactly. Once the panel's flocked and level, we stitch on the skirts, the leather flaps that cover the tree's edges and the stirrup bars, for a clean finish. Yet wouldn't a loose skirt just get pulled snug later by the girth?\nCallum: Not quite. The girth buckles onto the billets, straps fixed to points on the tree itself, never to the skirts, so a loose skirt stays loose however tight the girth is drawn.",
+    "questions": [
+      {
+        "question_text": "According to Callum, why must the tree be checked before the panel is flocked?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because flocking the panel comes before the tree is ever fitted",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: התמליל אומר שהעץ נבדק לפני הריפוד, לא להפך."
+          },
+          {
+            "text": "Because the panel's fit depends on the tree's shape",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "קאלום אומר במפורש שאי אפשר לתקן עץ פגום בעזרת מה שמתווסף אחר כך; צורת הריפוד תלויה בצורת העץ."
+          },
+          {
+            "text": "Because the skirts must be fitted before the billets are stitched",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו טעות החלפת עוגן: ה-skirts וה-billets נתפרים בשלב מאוחר יותר ואינם קשורים לבדיקת העץ לפני הריפוד."
+          },
+          {
+            "text": "Because the leather must be soaked before the tree is shaped",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל שום אזכור להשריית העור לפני עיצוב העץ; פרט מומצא שנשמע סביר אך לא נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Callum makes about what actually determines whether the saddle sits level on the horse's back?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Extra flocking in the panel corrects any tree that sits crooked",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה שנשמעת הגיונית, אך קאלום דוחה אותה במפורש: ריפוד נוסף לא מתקן עץ עקום."
+          },
+          {
+            "text": "Fitting the billets precisely is what levels the saddle",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: ה-billets מחברים את החגורה לעץ, אך אינם הגורם לישור האוכף לפי התמליל."
+          },
+          {
+            "text": "Stitching the skirts tightly is what keeps the saddle level",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין קשר בתמליל בין תפירת ה-skirts ליציבות האוכף; פרט מומצא."
+          },
+          {
+            "text": "The tree's shape is what determines whether the saddle sits level",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: קאלום קובע במפורש שהעץ, לא הריפוד, הוא שקובע אם האוכף יושב ישר."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "you can't correct a bad tree fit with anything added afterward",
+      "It is the tree, not the panel, that actually determines whether the saddle sits level on the horse's back"
+    ],
+    "_key": "I9"
+  },
+  {
+    "title": "LQA-PROD-I: long_lecture (stone_lettering)",
+    "topic": "A lecture explaining how monumental stone lettering moves through setting-out, V-cutting, and leading on its way to a finished, weatherproof inscription.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Traditional monumental lettering begins in a stage called setting-out, where the mason draws every letter directly onto the stone's face by hand, spacing each one to the curve and grain of that particular block rather than to a fixed template. Once the layout is confirmed, the mason moves to V-cutting, driving a chisel along both sides of each stroke so the groove narrows to a point at its center, forming a V-shaped channel rather than a flat trench. Many assume a deeper cut simply reads better from a distance, and depth does matter for a stone left outdoors for decades. However, depth is not the deciding factor. It is the angle of the V, not the depth of the groove, that actually determines whether the letter catches enough shadow to read clearly in low light, since two cuts of the same depth can look completely different depending on how steeply the walls of the V meet. A shallow-angled V scatters light across the whole groove and blurs the letter's edge, while a sharp, narrow V throws one crisp line of shadow down the center of every stroke. Once every letter is cut and checked against raking light, some inscriptions move on to leading, in which molten lead is poured into the incised grooves and struck flush with the surface. Yet leading has nothing to do with legibility at all; its purpose is to keep rainwater from pooling in the cut and freezing, which would otherwise widen the groove and crack the stone over time. A mason can V-cut a beautifully legible inscription that is never leaded, and a poorly cut one that is leaded perfectly, because the two stages solve entirely different problems.",
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"setting-out\" most nearly mean as used to describe the first stage?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Marking each letter's outline directly onto the stone",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהגדרה: setting-out הוא השלב שבו הסתת מסמן כל אות ישירות על פני האבן."
+          },
+          {
+            "text": "Cutting a V-shaped groove into the stone",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: זהו תיאור של V-cutting, השלב הבא, לא של setting-out."
+          },
+          {
+            "text": "Polishing the stone surface until it shines",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל שום אזכור לליטוש פני האבן; פרט מומצא שאינו נתמך."
+          },
+          {
+            "text": "Removing marks left behind from an earlier carving",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: קווי ההנחיה משמשים לפני החריטה כדי לתאר אותה, לא נמחקים כשריד מעבודה קודמת."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually determines whether a letter is legible?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Cutting the groove deeper always reads better from a distance",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה נפוצה, אך התמליל דוחה אותה: העומק לבדו אינו קובע את הקריאות."
+          },
+          {
+            "text": "Filling the groove with lead is what makes it legible",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: leading נועד להגנה מפני מים, לא לקריאות, כפי שנאמר מפורשות."
+          },
+          {
+            "text": "The steepness of the V-cut's walls is what makes it legible",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: זווית ה-V, לא עומק החריטה, קובעת אם האות תיקרא בבירור."
+          },
+          {
+            "text": "Spacing every letter evenly during setting-out is what makes it legible",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "המרווח בין אותיות מוזכר לגבי סידור התבנית, אך לא כגורם הקובע קריאות לפי התמליל."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "the mason draws every letter directly onto the stone's face by hand, spacing each one to the curve and grain of that particular block rather than to a fixed template",
+      "It is the angle of the V, not the depth of the groove, that actually determines whether the letter catches enough shadow to read clearly in low light"
+    ],
+    "_key": "I10"
+  },
+  {
+    "title": "LQA-PROD-I: long_dialogue (goldwork_embroidery)",
+    "topic": "An apprentice embroiderer asks a master to explain the sequence from framing-up through couching and underside-couching that turns bare linen into a finished gold motif.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Freya: Mateo, before I couch another thread crooked, can you explain how goldwork actually goes from bare fabric to a finished gold motif?\nMateo: Sure. It starts with framing-up. The linen gets stretched drum-tight across a wooden frame, laced along all four edges, because any slack in the fabric will let the stitches pucker later.\nFreya: So the frame decides how the finished stitching lies?\nMateo: Right, because you can't correct a slack frame once the gold thread's already couched onto it. Once it's taut, we lay the gold thread flat across the design and secure it every few millimeters with tiny couching stitches in matching silk.\nFreya: And couching is what holds the whole thread in place?\nMateo: Mostly, yes, but only if the frame beneath stayed tight the whole time. However, couldn't a looser frame just be pulled snug again partway through the stitching?\nMateo: Most people think so, but retensioning midway shifts the design that's already stitched, so the earlier couching goes crooked no matter how tight the frame ends up. It is the frame tension, not the couching stitches, that actually determines whether the finished motif lies flat.\nFreya: So the tension has to be right before a single stitch goes down.\nMateo: Exactly. Once the main couching is finished, we go back over the outline threads with underside-couching, where the same securing stitch gets pulled all the way through to the back of the fabric instead of staying on top. Yet doesn't that just waste thread that couching already used on the surface?\nMateo: Not quite. A stitch left on the surface always shows as a small dot of silk beside the gold, but pulling it through hides it completely, which is the only way to get a crisp, unbroken outline around the motif.",
+    "questions": [
+      {
+        "question_text": "When Freya asks whether a looser frame could just be pulled snug again partway through the stitching, how does Mateo respond?",
+        "question_type": "speaker_ref",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Mateo says framing-up is only needed for large motifs",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל אזכור לגודל המוטיב כגורם בצורך במתיחת המסגרת; פרט מומצא."
+          },
+          {
+            "text": "Mateo agrees that retensioning midway fixes the problem",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "היפוך: מתאו דוחה בדיוק את הרעיון הזה ומסביר שמתיחה מחדש רק מזיזה את הרקמה הקיימת."
+          },
+          {
+            "text": "Mateo explains that underside-couching corrects a loose frame",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: underside-couching קשור להסתרת התפר, לא לתיקון מתיחת המסגרת."
+          },
+          {
+            "text": "Mateo explains that retensioning shifts the already-stitched design",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "מתאו אומר במפורש שמתיחה מחדש באמצע מזיזה את התפר הקיים ומעקמת אותו."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Mateo makes about what actually determines whether the finished motif lies flat?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Keeping the frame's tension tight determines whether the motif lies flat",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: מתח המסגרת, לא תפרי ה-couching עצמם, הוא שקובע אם המוטיב ייצא שטוח."
+          },
+          {
+            "text": "Couching the gold thread carefully keeps the motif lying flat",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך מתאו מבהיר שהתפירה עצמה תלויה במתח המסגרת שמתחתיה."
+          },
+          {
+            "text": "Pulling stitches through in underside-couching keeps the motif flat",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: underside-couching נועד להסתרת התפר לצורך קו נקי, לא לשטיחות המוטיב."
+          },
+          {
+            "text": "Matching the silk thread color keeps the motif looking flat",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "צבע חוט המשי מוזכר כפרט טכני בלבד ואינו מוצג כגורם לשטיחות המוטיב."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "you can't correct a slack frame once the gold thread's already couched onto it",
+      "It is the frame tension, not the couching stitches, that actually determines whether the finished motif lies flat"
+    ],
+    "_key": "I11"
+  },
+  {
+    "title": "LQA-PROD-I: long_lecture (copper_roof_seaming)",
+    "topic": "A lecture explaining how traditional copper roofing panels are joined through standing seams, flat-lock seams, and batten seams, and how the exposed copper eventually forms a protective patina.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Traditional copper roofing relies on three named seam types, chosen panel by panel according to how much water will cross that part of the roof. A standing seam is formed by turning up the edges of two adjacent copper panels and folding them over each other twice, creating a raised ridge that runs the full length of the panel and sheds water simply by standing above the level where water can pool. A flat-lock seam, by contrast, is used on flatter sections and low-pitched roofs, where the panel edges are folded flat against the roof deck rather than raised, then interlocked and hand-hammered tight. A batten seam covers the same raised-ridge idea as a standing seam but does it over a wooden batten strip nailed beneath the joint, giving a more uniform, decorative line preferred on visible facades. However, roofers often assume seam choice is only about appearance, since a batten seam and a standing seam look similar from the ground. It is the roof's pitch, not the desired appearance, that actually determines which seam type keeps water out, since a flat-lock seam left on a steep pitch will still shed water fine, but a standing seam used on a nearly flat section lets water back up under the raised fold during heavy rain. Once the panels are seamed and the roof is weathertight, the exposed copper begins to darken on its own, moving from bright pink-orange through brown before eventually forming the blue-green patina that protects it for centuries. Yet that patina takes decades to develop naturally, which is why some architects instead have the copper chemically patinated in the workshop before installation, so the roof already reads as aged copper on the day it goes up.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about a flat-lock seam?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "It folds panel edges flat against the roof deck",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל מתאר שהקצוות מקופלים שטוח כלפי גג הבית ולא מורמים."
+          },
+          {
+            "text": "It is hand-hammered tight after interlocking",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: לאחר החיבור זה לזה, התפר נחבט ביד עד שהוא הדוק."
+          },
+          {
+            "text": "It forms a raised ridge along the panel's length",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הפרט השגוי: רכס מוגבה מתאר את ה-standing seam, לא את ה-flat-lock seam שמקופל שטוח."
+          },
+          {
+            "text": "It is used on flatter, low-pitched roof sections",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל אומר במפורש שהתפר הזה משמש בחלקים שטוחים יותר של הגג."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually determines which seam type keeps water out?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Choosing a seam mainly for how a roof looks still makes it watertight",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה נפוצה, אך התמליל דוחה אותה במפורש: המראה אינו הגורם הקובע."
+          },
+          {
+            "text": "Matching seam type to roof pitch prevents water from backing up",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: שיפוע הגג, לא המראה הרצוי, קובע איזה סוג תפר ימנע חדירת מים."
+          },
+          {
+            "text": "A chemically patinated surface keeps rain from pooling on copper",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החלפת עוגן: הפטינה היא תופעה קוסמטית-מגנה מאוחרת, לא הגורם לאטימות התפר."
+          },
+          {
+            "text": "Hammering every seam tighter than usual keeps a roof dry",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "רמת ההידוק בפטיש מוזכרת כפרט טכני של flat-lock, לא כגורם כללי לאטימות."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "a raised ridge that runs the full length of the panel and sheds water simply by standing above the level where water can pool",
+      "It is the roof's pitch, not the desired appearance, that actually determines which seam type keeps water out"
+    ],
+    "_key": "I12"
+  }
+]

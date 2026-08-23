@@ -1,0 +1,760 @@
+[
+  {
+    "question_id": "6d4c4625-d163-4460-aff0-3fe255e60410",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי ונציה בנויה על בוץ רך, \"soft mud\", ומחוזקת בעמודי עץ. אין בקטע כל רמז לכך שהעיר כולה צפה או נעה ממקום למקום, ולכן האפשרות \"float gently from one lagoon to another\" אינה עולה בקנה אחד עם התיאור."
+      },
+      {
+        "index": 1,
+        "explanation_he": "למרות החשש שמא העץ ירקב, נכתב כי \"the poles slowly turned as hard as stone\". לכן, מילת הניגוד \"Despite its watery base\" מובילה למסקנה שוונציה הצליחה לשרוד ולהישאר יציבה, כלומר \"stay standing for hundreds of years\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מסביר כי עמודי העץ מתחת למים הפכו לקשים כמו אבן: \"the poles slowly turned as hard as stone\". לפיכך, אין סיבה להניח שהיה צורך להחליפם בעמודי פלדה כפי שמציעה האפשרות \"replace its wooden poles with steel ones\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "אף על פי שוונציה בנויה על בוץ, \"soft mud\", העמודים התקשו והפכו לאבן. מילת הניגוד \"Despite its watery base\" מראה שהעיר לא שקעה כמצופה, ולכן האפשרות \"sink a little lower into the mud each year\" אינה מתאימה."
+      }
+    ],
+    "highlight_spans": [
+      "You might expect",
+      "But underwater",
+      "Despite its watery base"
+    ]
+  },
+  {
+    "question_id": "8d48b282-4bce-4bb8-80da-31fa7dee15bd",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר כיצד ממשלות הוסיפו אמצעי הגנה כגון \"glowing ink and tiny metal threads\". מילת הסיבה \"Because of these security features\" מובילה למסקנה שאמצעים אלו מקשים על זייפנים: \"struggle to make convincing fakes\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר את המאמצים למנוע זיוף של שטרות באמצעות \"complex designs and special paper\". לכן, סימון הסיבתיות \"Because of these security features\" מראה שלא ייתכן שזייפנים כיום יכולים להדפיס שטרות בקלות רבה, כפי שנטען."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בקטע מוסבר כי בעבר זייפנים השתמשו במכונות פשוטות, \"basic printing presses\", אך כיום ישנם אמצעי אבטחה מתקדמים. לכן, לא סביר שהם עדיין משתמשים רק בטכנולוגיה הישנה הזו, כפי שנטען ב-\"only use basic printing presses\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתמקד בניסיונות של זייפנים להעתיק שטרות נייר, \"paper money\", ובאמצעי האבטחה שנועדו לסכל זאת. בקטע אין שום אזכור או רמז לכך שהם מעדיפים לעבור לשימוש במטבעות זהב, כפי שמוצע ב-\"prefer to use actual gold coins\"."
+      }
+    ],
+    "highlight_spans": [
+      "To stop this",
+      "Because of these security features"
+    ]
+  },
+  {
+    "question_id": "a59da05a-bbc6-4cc1-942e-900c7c652d82",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע עוסק באמונה שפיזור חלב בטעות היה \"considered a blessing\" ולכן כעס עליו היה מיותר. ביטוי זה אינו קשור למצבים של העדפת הקיים על פני סיכון עתידי, כפי שמציע פתגם הציפורים \"a bird in the hand is worth two in the bush\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הסיפור מתאר כיצד כעס על שפיכת חלב נתפס כמיותר משום ש-\"the spill was considered a blessing\". פתגם זה עוסק בחרטה על טעויות עבר, ואינו קשור לרעיון שאין מתנות חינם המבוטא ב-\"there is no such thing as a free lunch\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מכיוון שחלב שנשפך נחשב לברכה, נכתב כי \"getting angry about the lost milk was seen as useless\". קישור זה מסביר מדוע כיום, בעת דאגה מטעויות עבר, משתמשים בביטוי \"there is no use crying over spilled milk\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתאר את המקור ההיסטורי לכך שאין טעם להצטער על חלב שנשפך, \"getting angry about the lost milk was seen as useless\". פתגם הסלים והביצים \"don't put all your eggs in one basket\" עוסק בפיזור סיכונים ואינו קשר לכך."
+      }
+    ],
+    "highlight_spans": [
+      "Whenever a servant accidentally",
+      "Because the spill was considered"
+    ]
+  },
+  {
+    "question_id": "bc38bc2d-c4a3-425e-b498-98f82b53238e",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מסביר שגוף הגמל הופך את השומן המאוחסן למים ואנרגיה, \"turn this stored fat into water and energy\". לכן, מים אלו נצרכים במהלך המסע ואינם נותרים לאגירה נוספת כפי שמציעה האפשרות \"filled with more fresh water\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "במהלך המסע, גוף הגמל \"slowly turn this stored fat into water and energy\". מילת התוצאה \"Consequently, camels can survive\" מבהירה שהשומן מתכלה, ולכן הגיוני שלאחר מסע ארוך דבשת הגמל תהיה קטנה ורכה יותר: \"much smaller and softer\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הטקסט מתמקד בניצול השומן שבדבשת לטובת מים ואנרגיה, \"turn this stored fat into water and energy\". שינוי בצבע הדבשת אינו מוזכר או נרמז בקטע כלל, ולכן האפשרות \"turning into a dark gray color\" אינה רלוונטית לתוכן."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע דן בשימוש בשומן שנמצא בדבשת לצורך הישרדות, \"survive for many days\". מטרת הדבשת אינה מוצגת כהגנה מפני השמש אלא כמאגר אנרגיה, ולכן האפשרות שהדבשת תהיה \"protected from the hot sun\" אינה המשך הגיוני לקטע."
+      }
+    ],
+    "highlight_spans": [
+      "When traveling through the",
+      "Consequently, camels can survive"
+    ]
+  },
+  {
+    "question_id": "d2b28088-ebeb-4bc8-b24c-f4672ebd838d",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מזהיר כי שוקולד מכיל חומרים שהם \"highly toxic to dogs\" ועלולים לגרום לנזק חמור ללב. מילת התוצאה \"Consequently\" מקשרת זאת לכך שהאכלת כלב בשוקולד עלולה לגרום לו לחלות קשות: \"make the animal extremely sick\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "בקטע מצוין במפורש שחומרי הקקאו עלולים \"cause severe heart damage\" לכלבים. לכן, ההנחה שהאכלת הכלב בשוקולד תסייע להגן על ליבו, כפי שמציעה האפשרות \"help protect the dog's heart\", סותרת לחלוטין את הנאמר."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מציין כי פולי הקקאו הם ממילא \"harmless to humans\" (לא מזיקים לבני אדם). לכן, אין היגיון בטענה שהאכלת כלב בשוקולד היא זו שתהפוך את פולי הקקאו לבטוחים עבור בני אדם, כפי שמוצע ב-\"make cocoa beans harmless to humans\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "למרות שטיפול רפואי עשוי לעלות כסף, האזהרות של הווטרינרים מתמקדות בבריאות הכלב ובעובדה שהחומרים \"highly toxic to dogs\". המניע אינו כלכלי, ולכן האפשרות \"cost pet owners a lot of money\" אינה מהווה את התוצאה הישירה והמתאימה."
+      }
+    ],
+    "highlight_spans": [
+      "though harmless to humans",
+      "For this reason"
+    ]
+  },
+  {
+    "question_id": "0f1ec6cf-8db0-416c-a3eb-c5cc71e78225",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקרח היבש הופך ישירות לגז \"without melting\", בניגוד לקרח רגיל. מילת הקישור \"Therefore\" מביאה למסקנה שכאשר החבילה מתחממת, המזון נותר יבש ובטוח ללא נוזלים, כפי שמתואר באפשרות \"kept completely dry and safe\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "בניגוד לקרח רגיל שנמעך לנוזל רטוב, קרח יבש \"turns directly into gas without melting\". לכן, מילת הסיכום \"Therefore\" מלמדת שהחבילה לא תהיה מלאה במים נוזליים, בניגוד לנטען באפשרות \"filled with wet liquid water\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "לפי הקטע, הקרח היבש עשוי מפחמן דו-חמצני קפוא, אך הוא הופך לגז כאשר הוא מתחמם: \"turns directly into gas\". לכן, האוכל בחבילה לא יכול לקפוא בעצמו ולהפוך לגז כפי שמוצע באפשרות \"frozen into carbon dioxide gas\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מסביר שחברות משלוחים משתמשות בקרח יבש \"for sending frozen foods by mail\" כדי לשמור על האוכל. אין כל אזכור לכך שהחבילה תוחזר לחברת המשלוחים עקב ההתחממות, כפי שנטען באפשרות \"returned to the shipping company\"."
+      }
+    ],
+    "highlight_spans": [
+      "turns directly into gas",
+      "Because of this, shipping companies"
+    ]
+  },
+  {
+    "question_id": "15350c58-6d73-4072-b29a-8d25e40bf469",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "שימוש בלחם למחיקה \"attracted mice into the artists' studios\". המעבר לגומי טבעי נועד לפתור בעיה זו. לכן, לא הגיוני שהחלפת הלחם בגומי תמשוך עכברים רעבים נוספים, כפי שנטען באפשרות \"attracted many more hungry mice\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר כיצד מחקי לחם משכו עכברים, בעוד שגומי טבעי \"could erase pencil marks just as well\". פתרון בעיה זו הוביל לכך שהאמנים הצליחו לשמור על סביבה נקייה ממזיקים, כפי שנאמר ב-\"kept their studios clean and pest-free\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "האמנים השתמשו בלחם כדי למחוק ולא כדי לאכול אותו: \"used soft pieces of bread to erase\". המעבר לשימוש בגומי טבעי נועד למנוע את הגעת העכברים, ואין קשר לצריכת לחם למאכל, כפי שמציעה האפשרות \"had to eat more soft bread\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "השימוש בגומי נועד להחליף את הלחם במחיקת טעויות עיפרון בלבד, \"erase pencil marks just as well\". אין הכוונה שהאמנים מחקו את כל נייר הציור שלהם לחלוטין, כפי שמניחה האפשרות \"erased all their drawing paper completely\"."
+      }
+    ],
+    "highlight_spans": [
+      "However, these bread erasers",
+      "This messy problem was solved"
+    ]
+  },
+  {
+    "question_id": "1682e4b7-1f7c-4580-8e25-12d71f029267",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הסכרים מונעים מטורפים להגיע לבונים: \"Without these protective ponds, wild predators could easily reach\". לכן, מילת הסיכום \"Therefore, building these wooden\" מבהירה שהבנייה לא נועדה לעזור לטורפים, בניגוד ל-\"predators to find food easily\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הסכרים יוצרים בריכות מוגנות, ומצוין כי ללא בריכות אלו \"wild predators could easily reach the beavers\". מילת הסיכום \"Therefore, building these wooden\" מובילה למסקנה שבניית הסכרים חיונית לבטיחותם ולהישרדותם: \"safety and survival\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "נכתב בקטע כי הסכרים חוסמים את המים הזורמים: \"These dams block the flowing water\". פעולה זו מאיטה את הזרימה ויוצרת בריכות רגועות, ולכן לא יייתכן שהסכרים נועדו לגרום לזרם לזרום מהר יותר כפי שמוצע ב-\"streams to flow faster\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הבונים משתמשים בבוץ ואבנים כחומרי בנייה לסכר: \"using mud, stones, and tree branches\". חומרים אלה אינם משמשים כמזון עבורם, ולכן לא ניתן להסיק שבניית הסכרים חיונית לתזונה שלהם, כפי שטוענת האפשרות \"diet of mud and stones\"."
+      }
+    ],
+    "highlight_spans": [
+      "Without these protective ponds",
+      "Therefore, building these wooden"
+    ]
+  },
+  {
+    "question_id": "1d92b037-9cfb-4a9e-a3d8-77364fd9cfd9",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "החוקים נועדו למנוע קילוף מוקדם שבו העץ \"loses its protection and dies\". מילת התוצאה \"Consequently, these strict laws\" מראה שהחוקים נועדו להגן על עצים חיים, ולא לאפשר קילוף מעצים מתים, כפי שמציעה האפשרות \"harvest bark from dead trees\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי קילוף מוקדם גורם לכך שהעץ מת: \"the tree loses its protection and dies\". החוקים נועדו למנוע פגיעה זו, ולכן לא הגיוני שהחוקים הנוקשים יגרמו למות העצים, כפי שמציעה האפשרות השגויה \"kill the cork oak trees\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "קילוף מוקדם פוגע בעץ, אך קילוף בזמן הנכון נעשה \"without harming the tree\". מילת התוצאה \"Consequently, these strict laws\" מקשרת את הגבלת הזמן בחוק לשמירה על העצים חיים ובריאים, כפי שמופיע באפשרות \"keep the trees alive and healthy\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "החוקים אוסרים על קילוף לפני שחלפו תשע שנים כדי להגן על העץ, \"prevent workers from harvesting bark\". החוקים אינם משפיעים על קצב הגידול הטבעי של העץ ואינם מקצרים אותו, בניגוד לנאמר ב-\"reduce the nine years of growth\"."
+      }
+    ],
+    "highlight_spans": [
+      "However, if workers harvest",
+      "Therefore, strict laws prevent",
+      "Consequently, these strict laws"
+    ]
+  },
+  {
+    "question_id": "29af436c-9eec-4719-bd78-8d11c066e6ed",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע עוסק בשיתוף פעולה ובחלוקת מאמץ בזמן תעופה: \"flying at the front is exhausting\". חילופי התפקידים נועדו להמשך הטיסה המשותפת, ולא לשם ירידה לחיפוש מזון באותו רגע כפי שמוצע ב-\"flies down to find winter food\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המוביל מתעייף מהובלת הלהק מאחר ש-\"flying at the front is exhausting\". לכן, מילת הסיכום \"Therefore, when the leader\" מובילה לפתרון שיקל עליו, ולא להפעלת לחץ עליו לעוף מהר יותר כפי שנטען באפשרות \"forces the leader to fly faster\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מתאר את הקושי להוביל ברצף מאחר ש-\"no single goose can do it forever\". מילת הקישור \"Therefore, when the leader\" מסבירה שכאשר המוביל מתעייף, אווז אחר מחליף אותו ומקבל את ההובלה, כפי שנאמר ב-\"takes over the front position\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מבנה ה-V נועד לחסוך באנרגיה, \"save energy on long winter migrations\". המטרה של חילופי התפקידים היא לשמור על יעילות המבנה הקיים ולא לשבור או לפגוע בו, בניגוד למשתמע מהאפשרות \"cuts through the V-shape formation\"."
+      }
+    ],
+    "highlight_spans": [
+      "However, flying at the front",
+      "Therefore, when the leader"
+    ]
+  },
+  {
+    "question_id": "2c31c400-81ec-48c4-a304-6dffcd9212fb",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בקטע מוסבר שבימים ללא רוח \"there is no moving air to push the blades\". מילת התוצאה \"As a result, on these\" מבהירה שללא תנועת להבים, הטורבינות אינן יכולות לייצר חשמל כלל, כפי שנאמר באפשרות \"cannot produce any electricity\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי הלהבים מסתובבים מהר כאשר הרוח חזקה, \"the blades spin very quickly\". בימים ללא רוח אין מה שיניע אותם, ולכן הם לא יכולים להסתובב מהר מהרגיל כפי שטוענת האפשרות \"spin much faster than usual\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הטורבינות מתוארות כמקור לייצור \"clean electricity\" המבוסס על רוח בלבד. הקטע אינו מציין שימוש בפחם כמקור אנרגיה חלופי בימים ללא רוח, ולכן האפשרות \"burn massive amounts of coal\" אינה רלוונטית ומנוגדת להקשר."
+      },
+      {
+        "index": 3,
+        "explanation_he": "בימים ללא רוח מצוין במפורש כי \"there is no moving air to push\". לפיכך, מילת התוצאה \"As a result, on these\" מראה שהטורבינות לא מסוגלות לקלוט יותר אוויר נע, בניגוד למה שנטען באפשרות \"capture more clean moving air\"."
+      }
+    ],
+    "highlight_spans": [
+      "When the wind blows strongly",
+      "On completely calm days, however",
+      "As a result, on these"
+    ]
+  },
+  {
+    "question_id": "2d6cf9ac-b998-4ca4-8f33-583c769bdfe7",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר את הבעיה שבה \"electric clocks will turn off completely\" בזמן הפסקת חשמל. מילת התוצאה \"Consequently, even if a power\" מצביעה על כך שסוללת הגיבוי פותרת זאת ושומרת על השעון פועל: \"keep the clocks running\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "מטרת סוללת הגיבוי היא \"To prevent this, some modern\", כלומר למנוע מהשעונים להיכבות לחלוטין בהעדר חשמל מהרשת. לכן, לא ייתכן שתוצאת השימוש בהן תהיה כיבוי מוחלט של השעון כפי שמציעה האפשרות \"turn the clocks off completely\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "סוללות הגיבוי מותקנות בשעונים הביתיים כדי למנוע את כיבוים בזמן הפסקת חשמל, \"To prevent this, some modern\". אין להן כל קשר להעברת דיווח או להערת עובדי חברת החשמל, כפי שמניחה האפשרות הלא קשורה \"wake up the electricity workers\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע דן בבעיה החשמלית של השעון, \"if the power goes out\", ובפתרון הסוללה. האפשרות \"require loud alarms to wake\" עוסקת ברמת הרעש של המעורר ולא בבעיית אספקת האנרגיה שהסוללה נועדה לפתור באופן ישיר."
+      }
+    ],
+    "highlight_spans": [
+      "However, if the power goes",
+      "To prevent this, some modern",
+      "Consequently, even if a power"
+    ]
+  },
+  {
+    "question_id": "38d3ed7f-a06f-4a94-a2b1-801262c87060",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "החום מאיץ את ייצור החומצה אשר \"turns the sweet milk sour\". הקירור נועד להאט תהליך זה. לכן, בהשפעת הטמפרטורה הקרה החלב אינו מחמיץ מהר מהרגיל, בניגוד לטענה באפשרות \"turns sour much faster than usual\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "לפי הקטע, שמירה על חלב במקרר \"slows the growth of these bacteria\". מילת הסיבה \"Because of this cold temperature\" מקשרת את הטמפרטורה הקרה להאטת קצב ההחמצה, ולכן החלב נשאר מתוק למשך זמן רב יותר: \"stays sweet for a longer time\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקור במקרר \"slows the growth of these bacteria\", כלומר מעכב את התרבות החיידקים. לכן, לא ייתכן שהטמפרטורה הקרה תגרום לחלב להכיל מספר רב יותר של חיידקים בהשוואה לחלב חם, כפי שנטען ב-\"contains many more harmless bacteria\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "שמירה במקרר נועדה לעכב את החיידקים על ידי צינון, \"slows the growth\". הקטע אינו עוסק בהקפאה של החלב בפריזר אלא רק בקירורו, ולכן האפשרות שהחלב יקפא לגוש מוצק, \"freezes into a solid white block\", אינה מתאימה."
+      }
+    ],
+    "highlight_spans": [
+      "As these bacteria multiply, they",
+      "Because of this cold temperature"
+    ]
+  },
+  {
+    "question_id": "39d58861-6b8b-435a-a414-a753485c8a26",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הכספת כבר ממוקמת באזור קפוא, \"inside a freezing arctic mountain\", כדי לשמור על הזרעים. אין צורך או היגיון בהקפאה נוספת של ההר בעת אסון עולמי, ולכן האפשרות \"freeze the arctic mountain further\" אינה המשך מתאים."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מתאר כספת קיימת שבה \"millions of crop seeds are safely stored\". במקרה של אסון חקלאי, המטרה היא להשתמש בזרעים הקיימים ולא להתחיל לבנות כספת חדשה וגדולה יותר, כפי שמציעה האפשרות \"build a larger secure vault\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הכספת נבנתה \"To protect the future of\" על ידי שמירת זרעים. לכן, אם מחלה תשמיד יבולים, המדענים יוכלו להשתמש בזרעים השמורים כדי לשתול אותם מחדש ולשקם את המזון: \"use the stored seeds to replant them\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הכספת הוקמה במטרה מוצהרת שהיא \"To protect the future of\" המזון. לכן, שימוש בזרעים בעת אסון נועד לממש מטרה זו, ולא להימנע מהגנה על עתיד המזון כפי שטוענת האפשרות \"avoid protecting the future of food\"."
+      }
+    ],
+    "highlight_spans": [
+      "To protect the future of",
+      "Inside this frozen vault, millions"
+    ]
+  },
+  {
+    "question_id": "3cc02b35-279c-47c2-945c-acab2234714a",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין שהרופאים שמו בפיהם של החיילים קליע עופרת רך, \"a soft lead bullet\". למרות שהחיילים נשכו אותו, הביטוי המודרני המקובל להתמודדות אמיצה עם כאב אינו \"chew the lead\" אלא ביטוי מטאפורי מדויק יותר שנוצר מהמנהג."
+      },
+      {
+        "index": 1,
+        "explanation_he": "כדי להתמודד עם הכאב הונח בפיהם \"a soft lead bullet\" שעליו הם נאלצו להדק שיניים. כיום, כאשר מתארים התמודדות אמיצה עם קושי או כאב, משתמשים בביטוי שמקורו במנהג היסטורי זה, והוא \"bite the bullet\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מתאר את המקור ההיסטורי להנחת קליע עופרת, \"placed a soft lead bullet\", בפיהם של הפצועים כדי לסייע להם להחזיק מעמד. הביטוי \"fight tooth and nail\" עוסק במאבק עיקש וקשוח ואינו קשור ישירות למנהג רפואי זה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הרופאים שמו את הקליע בפיהם של החיילים \"To stop soldiers from screaming\" או נשיכת לשונם. למרות שהביטוי \"hold their tongue\" קשור לפה ולשתיקה, הוא משמש לתיאור הימנעות מדיבור ולא להתמודדות אמיצה עם כאב וקושי."
+      }
+    ],
+    "highlight_spans": [
+      "To stop soldiers from screaming",
+      "Soldiers had to grit down"
+    ]
+  },
+  {
+    "question_id": "49820553-9c93-4958-953b-dcbb45acbf6c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "נכתב כי \"artists can easily bend and shape it\" כל עוד הזכוכית חמה. לכן, מילת הסיכום \"Therefore, any shaping or bending\" מבהירה שאין להפסיק את העבודה כשהזכוכית חמה, אלא להיפך — זה הזמן היחיד לעצב אותה, בניגוד ל-\"stopped when the glass is hot\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין כי האמנים מעצבים את הזכוכית בקלות כשהיא חמה, \"artists can easily bend and shape it\". לכן, מילת הסיכום \"Therefore, any shaping or bending\" מראה שאין סיבה שהאמנים יימנעו מעיצוב הזכוכית, כפי שמציעה האפשרות \"avoided by the glass artists\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הזכוכית מגיעה לדרגת רגישות גבוהה בכבשן, \"heated to extremely high temperatures\". לא מוזכר בקטע שימוש במים חמים כלשהם או שטיפה שלהם, ולכן האפשרות \"washed with hot furnace water\" אינה רלוונטית כלל לתהליך העיצוב המתואר."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מציג ניגוד באמצעות \"However, as the glass cools\", שכן הזכוכית מתקררת ומתקשה מחדש. לכן מילת הסיכום \"Therefore, any shaping or bending\" דורשת שהעיצוב יושלם לפני שהחומר יתקרר, כפי שמצוין ב-\"completed before the material cools\"."
+      }
+    ],
+    "highlight_spans": [
+      "While the glass is in",
+      "However, as the glass cools",
+      "Therefore, any shaping or bending"
+    ]
+  },
+  {
+    "question_id": "4ccf48bd-2fe9-43b9-bccc-3c4fb8d59a7b",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "לפי הקטע, התבלינים שנבחרו היו ידועים בכך שהם \"naturally kill these bacteria\". מילת התוצאה \"Consequently, using heavy spices\" מדגישה שהתבלינים מנעו את התרבות החיידקים, ולכן הם לא נועדו למשוך חיידקים נוספים כפי שנטען ב-\"attract more harmful bacteria\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שהשימוש בתבלינים \"was not just about improving the taste\". השימוש בהם נועד לטפל בבעיית החיידקים ולא רק לשפר טעם של בשר מקולקל, ולכן האפשרות \"improve the taste of bad meat\" אינה תואמת את מטרת השימוש העיקרית."
+      },
+      {
+        "index": 2,
+        "explanation_he": "התבלינים שנמצאו יעילים \"naturally kill these bacteria\" המקלקלים את הבשר בחום. לפיכך, מילת הניגוד \"Instead\" מבהירה שהתועלת הנוספת של התבלינים הייתה שימור הבשר לאורך זמן, כפי שנכתב באפשרות \"preserve the meat for longer\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הבשר מתקלקל מהר באקלים חם, \"In warm climates\". התבלינים נועדו להרוג חיידקים המתרבים בחום, ולא להשפיע על מזג האוויר או לחמם את האקלים המקומי, ולכן האפשרות השגויה היא \"warm up the local climate\"."
+      }
+    ],
+    "highlight_spans": [
+      "because harmful bacteria multiply",
+      "Consequently, using heavy spices"
+    ]
+  },
+  {
+    "question_id": "4da6937d-2c65-4791-83ca-3da9c35d600c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "תולעי המשי אוכלות אך ורק את עלי תות העץ: \"only eat fresh leaves\". מילת הסיכום \"Therefore, if the mulberry\" מובילה למסקנה שאם עצי התות ימותו, לתולעים לא יהיה מזון והפקת המשי תיעצר לחלוטין, כפי שמצוין ב-\"silk production will completely stop\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מדגיש שתולעי המשי הן יצורים בררניים מאוד ו-\"only eat fresh leaves\" של תות עץ לבן. לכן, אם העצים ימותו, הן לא יעברו לאכול עלים של עצים אחרים כפי שמציעה האפשרות השגויה \"silkworms will eat other tree leaves\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "ללא עצי התות, הזחלים לא יוכלו לייצר את הסיבים הנדרשים, \"cannot produce the strong fibers\". פגיעה ביכולת הייצור תביא למחסור במשי, ולכן לא סביר שמחירו יוזל כפי שמציעה האפשרות \"high-quality silk will become very cheap\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "לפי הקטע, ללא העלים הספציפיים \"cannot produce the strong fibers\". בהיעדר תזונה מתאימה התולעים לא יוכלו לייצר סיבים חזקים, ולכן האפשרות שהן ייצרו פקעות חזקות יותר, \"the worms will produce stronger cocoons\", שגויה."
+      }
+    ],
+    "highlight_spans": [
+      "Farmers grow entire orchards",
+      "Therefore, if the mulberry"
+    ]
+  },
+  {
+    "question_id": "531d2c10-c52c-4ee8-b1d4-ace1f9fb43f7",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בחלל החיצון אין חמצן כלל, \"no oxygen for humans to breathe\". לכן, מילת התוצאה \"Consequently, without these protective\" מבהירה שללא החליפות האסטרונאוטים לא יוכלו לנשום חמצן בבטחה, בניגוד למה שנטען ב-\"breathe the freezing oxygen safely\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "החליפה חיונית להישרדות מחוץ לחללית, \"astronauts must wear thick, heavy spacesuits\". ללא החליפה האסטרונאוט לא יוכל לשרוד אפילו כדי לחזור פנימה, ולכן האפשרות \"return to their warm spacecraft\" אינה התוצאה הישירה והסבירה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מתאר את החלל כסביבה קטלנית שבה \"no oxygen for humans to breathe\". מילת התוצאה \"Consequently, without these protective\" מלמדת שללא חליפת המגן האסטרונאוטים ימותו בתוך שניות ספורות, כפי שנכתב באפשרות \"die within a few seconds\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "החלל מתואר כסביבה קפואה, \"a freezing vacuum\". ללא חליפת מגן שתספק חימום, האסטרונאוטים לא ירגישו חמים יותר אלא יקפאו מיד, ולכן האפשרות \"feel much warmer and lighter\" עומדת בסתירה מוחלטת לתנאי החלל המתוארים."
+      }
+    ],
+    "highlight_spans": [
+      "To survive these deadly conditions",
+      "Consequently, without these protective"
+    ]
+  },
+  {
+    "question_id": "56f5eb5f-e232-40e8-9566-880a2e78c12c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "שעוני השמש היו מוגבלים משום ש-\"sundials rely on sunlight\". לעומתם, שעוני המים נועדו לפתור מגבלה זו, ולכן לא הגיוני שהם שימשו רק בימים שטופי שמש כפי שטוענת האפשרות \"were only used on sunny days\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מסביר שבעבר \"people could not tell time at night\" בגלל החיסרון של שעוני השמש. שעוני המים פתרו זאת, ומילת הסיבה \"To solve this, inventors\" מובילה למסקנה שהם איפשרו לדעת מה השעה בלילה: \"allowed people to tell time at night\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מנגד בין שעוני שמש, \"which track the sun's shadow\", לבין שעוני מים המבוססים על טפטוף מים. שעוני המים לא נזקקו לשמש כלל, ולכן לא הגיוני שהם עקבו אחר צל השמש כפי שמציעה האפשרות השגויה \"tracked the shadow of the sun\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "שעוני המים נועדו להראות את השעה באמצעות \"dripping water\" ללא תלות באור השמש. בקטע אין שום אזכור או רמז לכך שהם התרוקנו ממים במהלך סופות, ולכן האפשרות \"ran out of water during storms\" אינה רלוונטית לנושא."
+      }
+    ],
+    "highlight_spans": [
+      "However, because sundials rely",
+      "To solve this, inventors"
+    ]
+  },
+  {
+    "question_id": "5c750471-f4db-4bc9-92b8-3c3220fd00ba",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הרופאים גילו שהסביבה במכרות \"helps heal damaged lungs\". מילת התוצאה \"As a result, many old\" מבהירה שהמכרות הישנים הוסבו לשימוש מועיל לבריאות, ולכן הם משמשים כיום כמרפאות לחולים, כפי שנכתב ב-\"used as health clinics for patients\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הקטע מציין שהאוויר במכרות הוא כה נקי עד ש-\"miners rarely suffered from breathing problems\". לכן, מילת התוצאה \"As a result, many old\" מראה שאין סיבה לסגור אותם כדי להגן על הריאות, בניגוד ל-\"closed to protect the miners' lungs\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "נכתב במפורש כי מכרות המלח הללו \"are completely free of pollen, dust\". לכן, לא ייתכן שהתוצאה של גילוי סגולות המרפא שלהם תהיה מילוי המכרות באבק ובאבקנים, כפי שמציעה האפשרות השגויה \"filled with pollen and dust\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הקטע מתמקד ביתרונות הבריאותיים של האוויר במכרות ובעובדה ששהות בהם \"helps heal damaged lungs\". השימוש המודרני במכרות קשור לרפואה ולא להעמקת הכרייה לצורך הפקת מלח, בניגוד לנטען ב-\"dug deeper to find more salt\"."
+      }
+    ],
+    "highlight_spans": [
+      "Because of this clean air",
+      "As a result, many old"
+    ]
+  },
+  {
+    "question_id": "65c03447-d5d3-4919-935b-cac76787ccb1",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מציין כי פנסי הרחוב \"make the night sky too bright\" ומקשים על ראיית הבהוב הגחליליות. לכן, מילת התוצאה \"As a result of this light\" מובילה למסקנה שהנקבות יתקשו למצוא בני זוג מתאימים, כפי שמוצע ב-\"struggle to find the correct mates\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הזכרים הם אלו שמפיקים את האורות, \"Male fireflies flash bright yellow\". זיהום האור מקשה על ראיית ההבהובים, ואין סימוכין לכך שהנקבות יתחילו להבהב באור חזק יותר בעצמן, כפי שמציעה האפשרות \"flash yellow lights even brighter\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "זיהום האור מקשה על זיהוי דפוסי ההבהוב הייחודיים, \"unique flashing pattern\". הקטע אינו מציין שהנקבות נמשכות או עפות ישירות לעבר פנסי הרחוב העירוניים, ולכן האפשרות \"fly toward the city streetlights\" אינה מתאימה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "פנסי הרחוב הופכים את השמים לבהירים מדי \"for these flashes to be seen\". לפיך, מילת התוצאה \"As a result of this light\" מראה שנקבות הגחליליות לא יוכלו לזהות את הדפוסים בקלות, בניגוד לנאמר ב-\"recognize the unique flashing patterns easily\"."
+      }
+    ],
+    "highlight_spans": [
+      "Today, however, bright streetlights",
+      "As a result of this light"
+    ]
+  },
+  {
+    "question_id": "68163876-4023-4f99-a9d8-d919cbc39fb9",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "שריפת דלקים פחמיים היא זו שמשחררת פחמן דו-חמצני אשר \"traps heat in the atmosphere\". לכן, המעבר לאנרגיה נקייה נועד לפתור זאת, ולא יביא ללכידת חום נוסף באטמוספרה כפי שמציעה האפשרות \"expected to trap more atmospheric heat\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "השקעה באנרגיה סולארית וברוח נועדה להחליף את שריפת הפחם והנפט: \"investing heavily in solar and wind\". לכן, מילת הסיכום \"Therefore, switching to these\" מראה שהמעבר לא יגרום למפעלים לשרוף יותר נפט, בניגוד לנטען."
+      },
+      {
+        "index": 2,
+        "explanation_he": "ההשקעה באנרגיה נקייה מטרתה \"To prevent catastrophic warming\". מילת הסיכום \"Therefore, switching to these\" מבהירה שהמעבר לאנרגיות אלו הוא חיובי ונועד להגן על האקלים, ולא להוות סכנה למזג האוויר כפי שנטען."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מדינות משקיעות באנרגיות חלופיות כדי למנוע התחממות: \"To prevent catastrophic warming\". מילת הסיכום \"Therefore, switching to these\" מובילה למסקנה שהמעבר למקורות נקיים אלו נועד לצמצם את ההתחממות הגלובלית, כפי שנאמר ב-\"meant to reduce global warming\"."
+      }
+    ],
+    "highlight_spans": [
+      "However, this process releases",
+      "To prevent catastrophic warming",
+      "Therefore, switching to these"
+    ]
+  },
+  {
+    "question_id": "6bd1a6af-d578-4541-aebb-8a539e40f903",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקטע מתאר את הרעש החזק, \"loud screeching noises\", שנוצר מחיכוך הגלגלים. מריחת הגריז נועדה לפתור זאת. לכן, מילת הסיבה \"Because this grease reduces\" מבהירה שהתוצאה היא לא הגברת הרעש, בניגוד לנטען ב-\"generate much louder screeching noises\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המהנדסים מצאו פתרון לרעש על ידי ריסוס גריז, \"spray a thin layer of grease\". מילת הסיבה \"Because this grease reduces\" מסבירה שהפחתת החיכוך מאפשרת לרכבות לנסוע בסיבובים בצורה שקטה בהרבה, כפי שמופיע באפשרות \"travel around curves much more quietly\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "מערכת השימון מתוכננת לרסס חומר סיכה על המסילות בלבד, \"spray a thin layer of grease onto the tracks\". לפיכך, מילת הסיבה \"Because this grease reduces\" מתייחסת לגלגלים, ואין חשש שהגריז ירוסס על הנוסעים כפי שמוצע."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הבעיה של חריקת הרכבות מתרחשת בסיבובים חדים: \"travel around sharp curves\". מערכת השימון פותרת בעיה זו, ולכן הרכבות אינן חייבות לנסוע רק במסלולים ישרים, בניגוד למה שמשתמע מהאפשרות \"must travel on straight tracks only\"."
+      }
+    ],
+    "highlight_spans": [
+      "This noise occurs because",
+      "To solve this, engineers",
+      "Because this grease reduces"
+    ]
+  },
+  {
+    "question_id": "89360d09-f75f-4b91-bdd1-dd0b02af3985",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "השוקולד הופך לנוזלי כאשר הוא נחשף לחום, למשל \"inside a hot car during summer\". לכן, השארתו ברכב החם לא תחזיר אותו למצב מוצק כפי שנדרש, והאפשרות \"kept in the warm car\" עומדת בניגוד מוחלט להיגיון הפיזיקלי של הקטע."
+      },
+      {
+        "index": 1,
+        "explanation_he": "חום גורם לשומנים המיוחדים בשוקולד להימס בקלות, \"melt easily when exposed\". לכן, חימומו לטמפרטורה גבוהה יותר רק יגביר את המסת השוקולד במקום להקשותו, בניגוד למה שמוצע באפשרות \"heated to a higher temperature\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע דן בשינוי מצב הצבירה של השוקולד מנוזל דביק, \"sticky liquid\", חזרה למוצק. שטיפת השוקולד במים חמים וסבון אינה קשורה לתהליך החזרתו למרקם מוצק ורק תהרוס אותו, ולכן האפשרות \"washed with warm soapy water\" שגויה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "מכיוון שהשוקולד נמס והופך לנוזל דביק כשהוא נחשף לטמפרטורות חמות, \"exposed to warm temperatures\", הרי שכדי להחזירו למצב מוצק וקשיח יש לצנן אותו. פתרון זה בא לידי ביטוי באפשרות \"placed in a cool area\"."
+      }
+    ],
+    "highlight_spans": [
+      "melt easily when exposed",
+      "To return it to a"
+    ]
+  },
+  {
+    "question_id": "9c08db0f-5a5e-4500-8496-b970174dd5d3",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הקושי נבע מכך שקהלים בחו״ל \"did not understand spoken English\". מילת התוצאה \"Consequently, because of the\" מבהירה שהוספת הכתוביות פתרה זאת, ואיפשרה להם להבין וליהנות מהסרטים, כפי שנכתב ב-\"could finally understand and enjoy the films\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "לפני הוספת הכתוביות, הקהל הזר סירב לצפות בסרטים: \"refused to watch these movies\". הוספת הכתוביות נועדה לפתור את הבעיה הכלכלית הזו, ולכן לא הגיוני שהן גרמו להם להפסיק לצפות לחלוטין, כפי שנטען ב-\"completely stopped watching\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "בקטע מצוין כי האולפנים הדפיסו כתוביות מתורגמות על המסך, \"printed translated subtitles on screen\". אין כל עדות לכך שהצופים התקשו לראות את תחתית המסך בשל כך, ולכן האפשרות \"struggled to see the bottom of the screen\" שגויה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הכתוביות נועדו לתרגם את הסרטים עבור צופים שאינם דוברי אנגלית, \"Since foreign audiences did not understand\". קריאת כתוביות בשפת האם אינה כלי ללימוד מהיר של אנגלית מדוברת, בניגוד לנאמר באפשרות \"learned how to speak English quickly\"."
+      }
+    ],
+    "highlight_spans": [
+      "Since foreign audiences did not",
+      "This economic problem was solved",
+      "Consequently, because of the"
+    ]
+  },
+  {
+    "question_id": "b3dcfe1a-c8c5-4346-96f3-9c37f5732c04",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "הבטון המודרני ללא האפר הוא זה שמתפרק מהר: \"often crumbles apart after just a few decades\". מילת התוצאה \"Consequently, adding volcanic ash\" מראה שהוספת האפר תמנע זאת, ולכן הבטון לא יתפרק תוך כמה עשורים כפי שמציעה האפשרות השגויה."
+      },
+      {
+        "index": 1,
+        "explanation_he": "הבטון הרומי עמיד במיוחד במים, כפי שנכתב: \"still stands strong, even in ocean water\". לכן, מילת התוצאה \"Consequently, adding volcanic ash\" מלמדת שהוספת האפר לבטון מודרני תגן עליו ולא תגרום לו להימס במים מלוחים, בניגוד לנאמר."
+      },
+      {
+        "index": 2,
+        "explanation_he": "הקטע מסביר שהבטון הרומי עמיד בזכות הרכיב ש-\"seals cracks over time\". הקטע אינו עוסק כלל במהירות הייבוש של הבטון אלא בחוזק שלו, ולכן האפשרות שנוגעת למהירות הייבוש, \"dry much faster than Roman concrete\", אינה קשורה לנושא."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הרומאים השתמשו באפר געשי אשר \"seals cracks over time\" וכך שמרו על הבטון. מילת התוצאה \"Consequently, adding volcanic ash\" מובילה למסקנה שהוספת האפר לבטון המודרני תאפשר לו להחזיק מעמד זמן רב ללא התפוררות."
+      }
+    ],
+    "highlight_spans": [
+      "Modern concrete, in contrast, often",
+      "Consequently, adding volcanic ash"
+    ]
+  },
+  {
+    "question_id": "b932326d-adc8-4fab-b11b-d4ec8b49ea4c",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "בגלל הדמיון הגנטי של תפוחי האדמה, הם \"lacked any defense\". לכן, השימוש בזן יחיד החליש את העמידות ולא הפך את ההגנה הגנטית לחזקה יותר, בניגוד למה שמוצע באפשרות השגויה \"genetic defenses became much stronger\"."
+      },
+      {
+        "index": 1,
+        "explanation_he": "המחלה המהירה פגעה בכל היבולים: \"this fast-spreading disease rotted almost every\". מילת התוצאה \"As a result of planting\" מובילה למסקנה שהשמדת המזון גרמה לרעב כבד בכל המדינה, כפי שמצוין ב-\"the entire nation suffered a massive famine\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "נטיעת זן יחיד היא זו שהובילה לאסון משום שכל הצמחים היו \"genetically identical\". האסון שנגרם כתוצאה מכך היה רעב, ולא החלטה מודעת של החקלאים להתחיל לשתול זרעים זהים, כפי שמציעה האפשרות השגויה."
+      },
+      {
+        "index": 3,
+        "explanation_he": "המחלה התפשטה במהירות ופגעה קשות ביבולים: \"this fast-spreading disease rotted almost every\". לכן, מילת התוצאה \"As a result of planting\" מבהירה שהמחלה לא נעלמה מעצמה תוך חודשים ספורים, בניגוד לנטען באפשרות."
+      }
+    ],
+    "highlight_spans": [
+      "Because all the potato plants",
+      "As a result of planting"
+    ]
+  },
+  {
+    "question_id": "c4ddbf3b-40c8-4fa5-8100-3c7f07cca347",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "קרם ההגנה נועד למנוע נזקי שמש כגון \"painful burns and skin damage\", ולא לחסום לחלוטין את ייצור הוויטמין החיוני. לכן, מילת הסיכום \"Therefore, wearing sunscreen allows\" אינה מובילה למסקנה שהמטרה היא להימנע מייצור ויטמין D."
+      },
+      {
+        "index": 1,
+        "explanation_he": "ויטמין D שמיוצר בעזרת השמש \"is essential for strong bones\". חבישת קרם הגנה נועדה להגן על העור מפגיעה ולא לפגוע בעצמות או להחלישן, ולכן האפשרות השגויה היא \"make their bones much weaker\"."
+      },
+      {
+        "index": 2,
+        "explanation_he": "חשיפת יתר לשמש גורמת ל-\"painful burns and skin damage\". מילת הסיכום \"Therefore, wearing sunscreen allows\" מקשרת את מריחת קרם ההגנה ליכולת ליהנות בחוץ בלי להיכוות, כפי שמתואר ב-\"enjoy the outdoors without getting burned\"."
+      },
+      {
+        "index": 3,
+        "explanation_he": "הרופאים ממליצים על מריחת קרם ההגנה \"before going outside\", כלומר כהכנה ליציאה אל השמש. לכן, מילת הסיכום \"Therefore, wearing sunscreen allows\" מבהירה שקרם ההגנה מאפשר לצאת החוצה בבטחה ולא מחייב להישאר בבית כל היום."
+      }
+    ],
+    "highlight_spans": [
+      "However, getting too much direct",
+      "To prevent this damage, doctors"
+    ]
+  },
+  {
+    "question_id": "d37242ad-9f33-45f0-a3ea-8cbfe58fbdd5",
+    "options": [
+      {
+        "index": 0,
+        "explanation_he": "שתילת העשב נועדה לעצור את תנועת הדיונות הנגרמת על ידי \"Strong winds in dry deserts\". לכן, מילת הסיכום \"Therefore, once the grass\" מראה שהעשב יבלום את החול ולא יגרום לו לנוע מהר יותר בהשפעת הרוח, בניגוד לנטען."
+      },
+      {
+        "index": 1,
+        "explanation_he": "החול הנודד עלול לחסום מסילות רכבת, \"block railways\". מטרת שתילת העשב היא לעצור זאת, ולכן מילת הסיכום \"Therefore, once the grass\" סותרת את האפשרות שהדיונות יכסו את המסילות מהר יותר, כפי שמציעה האפשרות השגויה."
+      },
+      {
+        "index": 2,
+        "explanation_he": "העובדים שותלים סוג מיוחד של עשב, \"deep-rooted grass\", כדי לקבע את החול בשולי הדיונות. אין בכך כדי להפוך את המדבר היבש ליערות ירוקים של ממש, ולכן התיאור באפשרות \"turned into green forests\" הוא מוגזם ואינו מבוסס בקטע."
+      },
+      {
+        "index": 3,
+        "explanation_he": "העשב בעל השורשים העמוקים נשתל במטרה מוצהרת של \"To stop this\" (נדידת החול). לפיכך, מילת הסיכום \"Therefore, once the grass\" מובילה למסקנה שהדיונות נבלמות ואינן יכולות להמשיך לנוע על פני השטח: \"prevented from moving across the land\"."
+      }
+    ],
+    "highlight_spans": [
+      "This moving sand can quickly",
+      "To stop this, workers plant"
+    ]
+  }
+]

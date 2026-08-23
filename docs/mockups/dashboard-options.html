@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HighScore — שלוש אפשרויות ללוח הבקרה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#4CAF6F; --green-dark:#3a9558; --green-light:#E8F7EE;
+    --orange:#FF7D3B; --orange-light:#FFF0E8;
+    --yellow:#FFD166; --purple:#7B61FF; --purple-light:#EEF0FF;
+    --blue:#3B8EEA; --blue-light:#EAF2FF;
+    --bg:#F7F4EF; --card:#FFFFFF; --text:#1C2B20; --muted:#7A8C80;
+    --border:#E0EBE4; --radius:18px; --radius-sm:10px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Heebo',Arial,sans-serif;background:#EDE8E0;color:var(--text);direction:rtl;padding:32px 20px 60px}
+
+  h1{font-size:1.55rem;font-weight:700;text-align:center;margin-bottom:6px}
+  .sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:32px}
+
+  .row{display:flex;gap:26px;justify-content:center;align-items:flex-start;flex-wrap:wrap;max-width:1300px;margin:0 auto}
+  .col{flex:0 0 370px;max-width:370px}
+
+  .opt-head{text-align:center;margin-bottom:12px}
+  .opt-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.4px;
+    padding:4px 12px;border-radius:99px;background:var(--text);color:#fff;margin-bottom:8px}
+  .opt-title{font-size:1.05rem;font-weight:700}
+  .opt-note{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.5;min-height:52px;padding:0 6px}
+
+  /* phone frame */
+  .phone{background:var(--bg);border:9px solid #2A3A2F;border-radius:34px;overflow:hidden;
+    box-shadow:0 14px 34px rgba(0,0,0,.16)}
+  .notch{background:#2A3A2F;height:20px;display:flex;align-items:center;justify-content:center}
+  .notch span{width:80px;height:5px;background:#4a5a50;border-radius:99px}
+  .screen{padding:18px 16px 26px;min-height:530px}
+
+  /* shared bits */
+  .greet{font-size:1.18rem;font-weight:700;margin-bottom:3px}
+  .exam-line{font-size:.82rem;color:var(--muted);margin-bottom:18px}
+  .exam-line b{color:var(--orange);font-weight:700}
+
+  .week{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:13px 15px;margin-bottom:16px}
+  .week-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+  .week-label{font-size:.79rem;color:var(--muted);font-weight:500}
+  .week-count{font-size:.79rem;font-weight:700;color:var(--green-dark)}
+  .dots{display:flex;gap:7px}
+  .dot{flex:1;height:7px;border-radius:99px;background:var(--border)}
+  .dot.on{background:var(--green)}
+
+  .cta{display:block;width:100%;border:none;border-radius:var(--radius);
+    padding:19px;font-size:1.06rem;font-weight:700;font-family:inherit;
+    background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(76,175,111,.32);margin-bottom:7px}
+  .cta small{display:block;font-size:.76rem;font-weight:500;opacity:.92;margin-top:4px}
+  .quiet{display:block;text-align:center;font-size:.83rem;color:var(--muted);
+    padding:10px;text-decoration:none;font-weight:500}
+
+  /* entry cards (option B) */
+  .entry{display:flex;align-items:center;gap:12px;background:var(--card);
+    border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:10px}
+  .entry.primary{border:2px solid var(--green);background:var(--green-light)}
+  .entry-ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:1.15rem;flex:0 0 auto}
+  .entry-txt{flex:1;min-width:0}
+  .entry-t{font-size:.94rem;font-weight:700;margin-bottom:2px}
+  .entry-d{font-size:.75rem;color:var(--muted);line-height:1.4}
+  .chev{color:var(--muted);font-size:1.1rem;flex:0 0 auto}
+
+  /* module grid */
+  .grid-label{font-size:.78rem;color:var(--muted);font-weight:600;margin:16px 0 9px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .mod{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:13px 11px;text-align:center}
+  .mod-ico{font-size:1.3rem;margin-bottom:5px}
+  .mod-n{font-size:.81rem;font-weight:600}
+  .mod-s{font-size:.68rem;color:var(--muted);margin-top:2px}
+  .mod.locked{opacity:.45}
+
+  .verdict{margin-top:14px;background:var(--card);border:1px solid var(--border);
+    border-right:3px solid var(--green);border-radius:var(--radius-sm);padding:12px 14px;font-size:.78rem;line-height:1.65}
+  .verdict b{display:block;margin-bottom:4px}
+  .verdict .con{color:#b23c17}
+</style>
+</head>
+<body>
+
+<h1>לוח הבקרה — שלוש אפשרויות</h1>
+<p class="sub">כולן מציגות את אותו מדד שבועי (במקום רצף ימים). ההבדל הוא רק בנקודות הכניסה.</p>
+
+<div class="row">
+
+  <!-- ══════════ A ══════════ -->
+  <div class="col">
+    <div class="opt-head">
+      <div class="opt-tag">אפשרות א׳</div>
+      <div class="opt-title">כפתור אחד</div>
+      <div class="opt-note">החלטה אחת בכניסה. "בחר נושא" קיים אבל שקט — צריך לחפש אותו.</div>
+    </div>
+
+    <div class="phone">
+      <div class="notch"><span></span></div>
+      <div class="screen">
+        <div class="greet">בוקר טוב, ליאון</div>
+        <div class="exam-line">הבחינה בעוד <b>112 ימים</b></div>
+
+        <div class="week">
+          <div class="week-top">
+            <span class="week-label">השבוע</span>
+            <span class="week-count">4 מתוך 5 ימים</span>
+          </div>
+          <div class="dots">
+            <i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i>
+          </div>
+        </div>
+
+        <button class="cta">
+          המשך מהמקום שעצרת
+          <small>האזנה · נשארו 12 דקות מהמנה של היום</small>
+        </button>
+        <a class="quiet" href="#">או בחר נושא בעצמך ←</a>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <b>מה זה נותן</b>
+      אפס חיכוך — התלמיד שלא יודע מה לעשות פשוט לוחץ.<br>
+      <span class="con">מה זה עולה:</span> תלמיד שיודע בדיוק מה הוא רוצה צריך קליק נוסף, והמודולים לא נראים לעין.
+    </div>
+  </div>
+
+  <!-- ══════════ B ══════════ -->
+  <div class="col">
+    <div class="opt-head">
+      <div class="opt-tag">אפשרות ב׳</div>
+      <div class="opt-title">שלוש נקודות כניסה</div>
+      <div class="opt-note">כמו ש-SITEMAP §1 מגדיר היום. שלוש דרכים גלויות להתחיל.</div>
+    </div>
+
+    <div class="phone">
+      <div class="notch"><span></span></div>
+      <div class="screen">
+        <div class="greet">בוקר טוב, ליאון</div>
+        <div class="exam-line">הבחינה בעוד <b>112 ימים</b></div>
+
+        <div class="week">
+          <div class="week-top">
+            <span class="week-label">השבוע</span>
+            <span class="week-count">4 מתוך 5 ימים</span>
+          </div>
+          <div class="dots">
+            <i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i>
+          </div>
+        </div>
+
+        <div class="entry primary">
+          <div class="entry-ico" style="background:var(--green);color:#fff">▶</div>
+          <div class="entry-txt">
+            <div class="entry-t">התחל כאן</div>
+            <div class="entry-d">המנה של היום · 20 דקות</div>
+          </div>
+          <div class="chev">‹</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-ico" style="background:var(--blue-light);color:var(--blue)">↺</div>
+          <div class="entry-txt">
+            <div class="entry-t">המשך</div>
+            <div class="entry-d">האזנה · נשארו 12 דקות</div>
+          </div>
+          <div class="chev">‹</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-ico" style="background:var(--purple-light);color:var(--purple)">☰</div>
+          <div class="entry-txt">
+            <div class="entry-t">בחר נושא</div>
+            <div class="entry-d">גישה ישירה למודול</div>
+          </div>
+          <div class="chev">‹</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <b>מה זה נותן</b>
+      שליטה מלאה, וכל אפשרות מוסברת בשורה.<br>
+      <span class="con">מה זה עולה:</span> שלוש החלטות ברגע הכניסה. "התחל כאן" ו"המשך" נראים דומים — תלמיד חדש לא בהכרח מבין את ההבדל.
+    </div>
+  </div>
+
+  <!-- ══════════ C ══════════ -->
+  <div class="col">
+    <div class="opt-head">
+      <div class="opt-tag">אפשרות ג׳ — מומלצת</div>
+      <div class="opt-title">כפתור ראשי + מודולים</div>
+      <div class="opt-note">החלטה אחת בולטת, אבל המודולים גלויים מתחת בלי קליק נוסף.</div>
+    </div>
+
+    <div class="phone">
+      <div class="notch"><span></span></div>
+      <div class="screen">
+        <div class="greet">בוקר טוב, ליאון</div>
+        <div class="exam-line">הבחינה בעוד <b>112 ימים</b></div>
+
+        <div class="week">
+          <div class="week-top">
+            <span class="week-label">השבוע</span>
+            <span class="week-count">4 מתוך 5 ימים</span>
+          </div>
+          <div class="dots">
+            <i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i>
+          </div>
+        </div>
+
+        <button class="cta">
+          המשך מהמקום שעצרת
+          <small>האזנה · נשארו 12 דקות מהמנה של היום</small>
+        </button>
+
+        <div class="grid-label">או תרגל נושא מסוים</div>
+        <div class="grid">
+          <div class="mod"><div class="mod-ico">🎧</div><div class="mod-n">האזנה</div><div class="mod-s">250 קטעים</div></div>
+          <div class="mod"><div class="mod-ico">🗂️</div><div class="mod-n">אוצר מילים</div><div class="mod-s">18 לחזרה</div></div>
+          <div class="mod"><div class="mod-ico">✍️</div><div class="mod-n">ניסוח מחדש</div><div class="mod-s">45 שאלות</div></div>
+          <div class="mod locked"><div class="mod-ico">🔒</div><div class="mod-n">השלמת משפטים</div><div class="mod-s">בקרוב</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <b>מה זה נותן</b>
+      התלמיד המבולבל לוחץ למעלה; היודע גולל ובוחר. אף אחד לא משלם קליק מיותר. המודולים גם מציגים מצב אמיתי ("18 לחזרה") במקום להיות תפריט ריק.<br>
+      <span class="con">מה זה עולה:</span> מסך ארוך יותר — צריך גלילה קצרה בטלפון.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1317 @@
+[
+  {
+    "title": "The Lost Pet Board",
+    "topic": "lost pet bulletin board",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Maya: Have you seen the board outside the market? Someone pinned up a photo of a missing tabby cat this morning.\nTom: I noticed it. There must be a dozen photos on there already, and most of them are dogs.\nMaya: The shop owner started that board last spring. Neighbors just walk up and pin a flyer whenever a pet wanders off.\nTom: Does it actually work? Do people find their animals through it?\nMaya: Surprisingly, yes. Someone told me three cats were reunited with their owners last month alone, just from that corkboard.\nTom: That beats posting online, honestly. People actually stop and read while they wait in line at the register.",
+    "highlight_spans": [
+      "three cats were reunited with their owners last month"
+    ],
+    "questions": [
+      {
+        "question_text": "What did Maya say happened last month?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Someone told me three cats were reunited with their owners last month alone, just from that corkboard."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "A dozen dogs went missing",
+            "k_code": "QTY_CONFUSION",
+            "fail_mode": "distortion",
+            "explanation_he": "בטקסט מדובר על תריסר תמונות שכבר תלויות בלוח, ורובן של כלבים - לא שתריסר כלבים נעלמו. זהו בלבול בין כמות התמונות לאירוע האובדן."
+          },
+          {
+            "text": "The market removed the board",
+            "k_code": "NOT_STATED",
+            "fail_mode": "unsupported_reversal",
+            "explanation_he": "הטקסט לא מזכיר הסרה של הלוח; להיפך, בעל החנות הוא זה שהקים אותו באביב שעבר."
+          },
+          {
+            "text": "Three cats found their owners",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "מאיה מספרת שבחודש שעבר שלושה חתולים אוחדו עם בעליהם הודות ללוח המודעות."
+          },
+          {
+            "text": "Tom pinned up a flyer",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_speaker_action",
+            "explanation_he": "בטקסט השכנים תולים מודעות, אך לא נאמר שטום עשה זאת; זהו ייחוס שגוי של פעולה לדובר."
+          }
+        ]
+      }
+    ],
+    "_key": "G1"
+  },
+  {
+    "title": "Bandstand Summer Lineup",
+    "topic": "park bandstand concert schedule",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Priya: Did you catch the schedule for the bandstand this summer? They posted it by the fountain.\nSam: Not yet. Is the brass band still playing on Sunday evenings?\nPriya: They moved to Thursday nights instead, so more families could come without missing the weekend markets.\nSam: That makes sense. Who decides the lineup each year?\nPriya: A small committee of retired musicians picks the acts, and they always save the last night for the youth orchestra.\nSam: I remember that concert. The whole park fills up and kids sit right on the grass in front of the stage.",
+    "highlight_spans": [
+      "A small committee of retired musicians picks the acts"
+    ],
+    "questions": [
+      {
+        "question_text": "According to Priya, who decides the bandstand lineup?",
+        "question_type": "speaker_ref",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "A small committee of retired musicians picks the acts, and they always save the last night for the youth orchestra."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Retired musicians choose performers",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת שוועדה קטנה של מוזיקאים בגמלאות בוחרת את המופעים מדי שנה."
+          },
+          {
+            "text": "Sam picks the schedule",
+            "k_code": "MISATTRIBUTION",
+            "fail_mode": "wrong_agent",
+            "explanation_he": "סאם הוא זה ששואל מי מחליט, ולא הוא זה שקובע את הלוח הזמנים; הטקסט לא תומך בכך."
+          },
+          {
+            "text": "Families vote on acts",
+            "k_code": "NOT_STATED",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט שום אזכור להצבעה של משפחות; הבחירה נעשית על ידי הוועדה בלבד."
+          },
+          {
+            "text": "The fountain committee decides",
+            "k_code": "LOCATION_CONFUSION",
+            "fail_mode": "distortion",
+            "explanation_he": "המזרקה היא רק המקום שבו פורסם הלוח, לא שם הוועדה שמחליטה על המופעים."
+          }
+        ]
+      }
+    ],
+    "_key": "G2"
+  },
+  {
+    "title": "The Buddy Bench",
+    "topic": "buddy bench scheme",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Noa: They installed a new bench by the playground, painted bright yellow. It's called a buddy bench.\nEli: I heard about that. If you sit there, it means you're looking for someone to talk to or play with.\nNoa: Exactly. The idea came from a resident who noticed some kids sitting alone at lunch in the park.\nEli: Does it actually get used, though?\nNoa: All the time. Volunteers from the community center check on it twice a week, and other kids know to go say hello.\nEli: That's such a simple idea. It just gives people permission to ask for company without feeling awkward.",
+    "highlight_spans": [
+      "gives people permission to ask for company without feeling awkward"
+    ],
+    "questions": [
+      {
+        "question_text": "What does Eli think about the buddy bench?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "It just gives people permission to ask for company without feeling awkward."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "It rarely gets used",
+            "k_code": "CONTRADICTION",
+            "fail_mode": "reversal",
+            "explanation_he": "נועה אומרת שהספסל בשימוש כל הזמן, ולא שהוא נדיר בשימוש - זהו היפוך של העובדה."
+          },
+          {
+            "text": "It replaced the playground",
+            "k_code": "FABRICATED_REPLACEMENT",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "הספסל הותקן ליד המגרש, אך הוא לא החליף אותו; אין לכך תמיכה בטקסט."
+          },
+          {
+            "text": "Kids dislike sitting there",
+            "k_code": "OPPOSITE_SENTIMENT",
+            "fail_mode": "opposite_sentiment",
+            "explanation_he": "הטקסט מתאר תגובה חיובית לספסל, לא סלידה של ילדים ממנו."
+          },
+          {
+            "text": "It gives easy permission",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אלי אומר שהספסל נותן לאנשים רשות פשוטה לבקש חברה בלי להרגיש מוזר."
+          }
+        ]
+      }
+    ],
+    "_key": "G3"
+  },
+  {
+    "title": "Saturday Compost Drop-off",
+    "topic": "community compost drop-off point",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Every Saturday morning, residents bring food scraps to the drop-off bins behind the community center. The site started three years ago when a small group of gardeners wanted a way to keep vegetable peels and coffee grounds out of the regular trash. Volunteers turn the piles by hand and sift out anything that doesn't belong, like plastic bags or bones. Once the compost is ready, usually after several months, it gets bagged up and given back to anyone in the neighborhood for free. Local gardeners say their tomatoes have never grown better.",
+    "highlight_spans": [
+      "Every Saturday morning, residents bring food scraps to the drop-off bins behind the community center."
+    ],
+    "questions": [
+      {
+        "question_text": "What is this passage mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "Every Saturday morning, residents bring food scraps to the drop-off bins behind the community center.",
+          "The site started three years ago when a small group of gardeners wanted a way to keep vegetable peels and coffee grounds out of the regular trash."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The center sells compost",
+            "k_code": "FABRICATED_SALE",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "הקומפוסט ניתן בחינם לתושבים, ולא נמכר; הטקסט סותר את הטענה הזו."
+          },
+          {
+            "text": "Neighbors turn scraps into compost",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "הקטע מתאר כיצד שכנים מביאים שאריות מזון ומתנדבים הופכים אותן לקומפוסט."
+          },
+          {
+            "text": "The site bans food scraps",
+            "k_code": "RIVAL_CLAIM",
+            "fail_mode": "opposite_purpose",
+            "explanation_he": "זוהי טענה מנוגדת - האתר בעצם נועד לאסוף שאריות מזון, לא לאסור אותן."
+          },
+          {
+            "text": "How the town reduces its overall landfill waste",
+            "k_code": "AGENT_DISTORTION",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה רחבה מתחרה על צמצום פסולת עירונית באופן כללי, אך הקטע מתמקד ספציפית בנקודת האיסוף השכונתית ולא במדיניות עירונית רחבה."
+          }
+        ]
+      }
+    ],
+    "_key": "G4"
+  },
+  {
+    "title": "Coins in the Wishing Well",
+    "topic": "public wishing well charity collection",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "The old stone well in the market square hasn't held water for decades, but people still toss coins into it every day. A local charity empties the well once a month and counts whatever has collected inside. Last year the well raised enough to cover new heating for the children's ward at the hospital. Nobody polices what people wish for, though staff joke that most requests are probably for good weather or exam luck. The town added a small plaque last spring thanking visitors for keeping the tradition alive.",
+    "highlight_spans": [
+      "Last year the well raised enough to cover new heating for the children's ward at the hospital."
+    ],
+    "questions": [
+      {
+        "question_text": "What did the money raised last year pay for?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Last year the well raised enough to cover new heating for the children's ward at the hospital."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "New benches for the square",
+            "k_code": "FABRICATED_BENCHES",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט אזכור לספסלים חדשים; הכסף שימש למשהו אחר לגמרי."
+          },
+          {
+            "text": "A plaque near the well",
+            "k_code": "DETAIL_CONFUSION",
+            "fail_mode": "distortion",
+            "explanation_he": "השלט הוצמד באביב האחרון כתודה על המסורת, אך הוא לא מה שמומן מהכסף שנאסף."
+          },
+          {
+            "text": "Heating for the children's ward",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בטקסט נאמר שהכסף שנאסף בשנה שעברה כיסה חימום חדש למחלקת הילדים בבית החולים."
+          },
+          {
+            "text": "Repairs to the stone well",
+            "k_code": "FABRICATED_REPAIR",
+            "fail_mode": "fabricated_detail",
+            "explanation_he": "אין בטקסט שום אזכור לתיקון הבאר עצמה; היא רק לא מחזיקה מים כבר עשרות שנים."
+          }
+        ]
+      }
+    ],
+    "_key": "G5"
+  },
+  {
+    "title": "The Plant-Swap Table",
+    "topic": "neighborhood plant-swap table",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Outside the library, a small wooden table has become the neighborhood's plant-swap spot. Anyone with extra cuttings, seedlings, or spare pots can leave them there for someone else to take home. A retired teacher started the table after noticing how many healthy cuttings ended up in the compost bin instead of a new garden. There's no sign-up sheet and no limit on how much a person can take. Regulars say the table empties and refills within a single afternoon, especially in early spring when everyone is thinning out their seedlings.",
+    "highlight_spans": [
+      "There's no sign-up sheet and no limit on how much a person can take."
+    ],
+    "questions": [
+      {
+        "question_text": "Which of the following is NOT true about the plant-swap table?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "There's no sign-up sheet and no limit on how much a person can take."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "There is a sign-up sheet",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זו הקביעה השגויה - הטקסט אומר במפורש שאין דף הרשמה לשולחן החלפת הצמחים."
+          },
+          {
+            "text": "A retired teacher started it",
+            "k_code": "TRUE_TEACHER",
+            "fail_mode": "true_but_wrong_for_negative",
+            "explanation_he": "זו קביעה נכונה לפי הטקסט, ולכן אינה התשובה לשאלה שמבקשת את הפרט שאינו נכון."
+          },
+          {
+            "text": "The table is outside the library",
+            "k_code": "TRUE_LOCATION",
+            "fail_mode": "true_but_wrong_for_negative",
+            "explanation_he": "הטקסט אכן ממקם את השולחן מחוץ לספרייה, כך שזו קביעה נכונה ולא מתאימה לשאלה השלילית."
+          },
+          {
+            "text": "The table often empties quickly",
+            "k_code": "TRUE_TURNOVER",
+            "fail_mode": "true_but_wrong_for_negative",
+            "explanation_he": "לפי הטקסט השולחן אכן מתרוקן ומתמלא מחדש באותו יום, לכן זו קביעה נכונה."
+          }
+        ]
+      }
+    ],
+    "_key": "G6"
+  },
+  {
+    "title": "Rehairing a Violin Bow",
+    "topic": "violin bow rehairing",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Nora: The first thing I do when rehairing a bow is loosen the frog and pull out all the old horsehair completely.\nBen: So you clear out everything before starting fresh?\nNora: Right. Once the channel is empty, I gather a fresh bundle of horsehair and thread one end through the tip plate at the top of the stick.\nBen: How do you keep the strands from twisting?\nNora: I comb them flat before I lock that end in place with a small wedge, so the hair stays even along its whole length.\nBen: And the other end, down by the frog?\nNora: That end gets combed the same way, pulled to a firm tension, and wedged into the frog, then I seal both wedges with a drop of glue.\nBen: That's more careful than I imagined for something that just looks like white string.\nNora: It has to be, because uneven tension makes the bow grip the string differently on each stroke.",
+    "highlight_spans": [
+      "pull out all the old horsehair completely",
+      "thread one end through the tip plate",
+      "seal both wedges with a drop of glue"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Nora does when rehairing the bow?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The first thing I do when rehairing a bow is loosen the frog and pull out all the old horsehair completely."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "removing the old horsehair",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נורה מסבירה שהיא מתחילה בהוצאת שיער הסוס הישן מהקשת."
+          },
+          {
+            "text": "threading hair through the tip plate",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "זהו שלב מאוחר יותר, אחרי שהערוץ כבר ריק משיער ישן."
+          },
+          {
+            "text": "combing the hair completely straight",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הסירוק מתואר בהמשך התהליך, לא כפעולה הראשונה."
+          },
+          {
+            "text": "sealing the wedges with glue",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "אטימת הטריזים בדבק היא הפעולה האחרונה בתהליך, לא הראשונה."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Ben suggest about the rehairing process by the end of the conversation?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "That's more careful than I imagined for something that just looks like white string."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "annoyed by how slow it is",
+            "k_code": "K_W1",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "בן לא מביע כעס או חוסר סבלנות, רק הפתעה מהזהירות הנדרשת."
+          },
+          {
+            "text": "more careful than he expected",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בן אומר שזה נראה לו קפדני יותר משציפה."
+          },
+          {
+            "text": "confident he could redo it himself",
+            "k_code": "K_W2",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "אין בתמליל שום רמז לביטחון של בן ביכולתו לבצע זאת."
+          },
+          {
+            "text": "certain the tension does not matter",
+            "k_code": "K_W3",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "נורה מסבירה בדיוק ההפך, שהמתיחה חייבת להיות אחידה."
+          }
+        ]
+      }
+    ],
+    "_key": "G7"
+  },
+  {
+    "title": "Resoldering a Kettle Spout",
+    "topic": "kettle spout resoldering",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Priya: When a kettle spout comes loose, the first step is scraping away the old solder around the joint until the metal underneath looks clean and bright.\nOwen: You take off all of it, even if some still looks solid?\nPriya: All of it, because leftover solder stops the new layer from bonding. Once the joint is bare, I heat both the spout and the body evenly until they're hot enough to melt fresh solder on contact.\nOwen: And that's when you add the new solder?\nPriya: Right, I touch a thin wire of solder to the joint and let the heat pull it into the gap, flowing all the way around.\nOwen: What stops the spout from sliding while the metal is soft?\nPriya: I hold it steady with a clamp until everything cools, then I file the excess solder flush so the seam is barely visible.\nOwen: I always assumed you just glued these back on.\nPriya: Glue would fail the first time you poured boiling water through it.",
+    "highlight_spans": [
+      "scraping away the old solder around the joint",
+      "heat both the spout and the body evenly",
+      "hold it steady with a clamp until everything cools"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing Priya does when repairing the loose spout?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "When a kettle spout comes loose, the first step is scraping away the old solder around the joint until the metal underneath looks clean and bright."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "heats the spout and body evenly",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "החימום מתרחש רק אחרי שהמפרק כבר גורד ונקי מבדיל ישן."
+          },
+          {
+            "text": "files the excess solder flush",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "השיוף הוא הפעולה האחרונה בתהליך, לא הראשונה."
+          },
+          {
+            "text": "scrapes away the old solder",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת שהשלב הראשון הוא גירוד הבדיל הישן מהמפרק."
+          },
+          {
+            "text": "clamps the spout in place",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ההידוק במלחציים מתואר בהמשך התהליך, אחרי הלחמה."
+          }
+        ]
+      },
+      {
+        "question_text": "What does Owen assume about how spouts like this are normally fixed?",
+        "question_type": "speaker_ref",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "I always assumed you just glued these back on."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "that solder joints rarely last",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "פריה מדגישה שהלחמה מחזיקה, בניגוד לטענה שהיא לא עמידה."
+          },
+          {
+            "text": "that clamping alone holds the spout",
+            "k_code": "K_W2",
+            "fail_mode": "process-conflation",
+            "explanation_he": "המלחציים משמשים רק לייצוב זמני בזמן הקירור, לא כפתרון קבע."
+          },
+          {
+            "text": "that the spout needs full replacement",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "אף אחד מהדוברים אינו מציע להחליף את כל הפייה."
+          },
+          {
+            "text": "that these joints are simply glued",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אואן אומר שתמיד הניח שמחברים את זה סתם בדבק."
+          }
+        ]
+      }
+    ],
+    "_key": "G8"
+  },
+  {
+    "title": "Regluing a Wobbly Chair Leg",
+    "topic": "chair-leg regluing",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Dana: Before I can fix this wobbly chair leg, I work it loose from the seat frame and scrape every bit of the old, dried glue off both surfaces.\nKofi: Doesn't pulling it out risk cracking the wood?\nDana: A little, so I twist it gently instead of yanking, then once it's free I brush fresh glue evenly across the joint and push the leg back into its socket.\nKofi: How do you know you've used enough glue?\nDana: A thin bead squeezes out around the edge when the leg seats fully. I wipe that excess away with a damp cloth before it sets.\nKofi: And then you just let it sit?\nDana: Not quite yet. I clamp the leg tight against the frame for a full day so the joint cures under steady pressure, otherwise it loosens again.\nKofi: I thought regluing a chair was a five-minute fix.\nDana: It can look that simple, but rushing the clamping step is why the same leg keeps coming back broken.",
+    "highlight_spans": [
+      "scrape every bit of the old, dried glue",
+      "push the leg back into its socket",
+      "clamp the leg tight against the frame for a full day"
+    ],
+    "questions": [
+      {
+        "question_text": "In this conversation, what does Dana mean by the leg's \"socket\"?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "then once it's free I brush fresh glue evenly across the joint and push the leg back into its socket."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "a type of wood clamp",
+            "k_code": "K_W1",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "המלחציים הם כלי נפרד, לא הפתח שהרגל נכנסת אליו."
+          },
+          {
+            "text": "the hole the leg fits into",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דנה מתארת דחיפת הרגל חזרה לתוך הפתח במסגרת הכיסא."
+          },
+          {
+            "text": "a brand of wood glue",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "אין בתמליל שום התייחסות למותג דבק כלשהו."
+          },
+          {
+            "text": "the loose part of the leg",
+            "k_code": "K_W3",
+            "fail_mode": "process-conflation",
+            "explanation_he": "הרגל עצמה היא הבעיה, לא הפתח שאליו היא נכנסת."
+          }
+        ]
+      },
+      {
+        "question_text": "Which of these does Dana NOT do while fixing the chair leg?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "I clamp the leg tight against the frame for a full day so the joint cures under steady pressure, otherwise it loosens again."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "sanding the wood smooth",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דנה אינה מזכירה כלל ליטוש או השחזת העץ בתהליך."
+          },
+          {
+            "text": "wiping away extra glue",
+            "k_code": "K_W1",
+            "fail_mode": "actually-performed",
+            "explanation_he": "דנה מציינת שהיא מנגבת את הדבק העודף במטלית לחה."
+          },
+          {
+            "text": "clamping the leg for a day",
+            "k_code": "K_W2",
+            "fail_mode": "actually-performed",
+            "explanation_he": "דנה אומרת בפירוש שהיא מהדקת את הרגל למשך יום שלם."
+          },
+          {
+            "text": "scraping off old dried glue",
+            "k_code": "K_W3",
+            "fail_mode": "actually-performed",
+            "explanation_he": "דנה מתארת גירוד הדבק הישן והיבש מהמשטחים כשלב ראשון."
+          }
+        ]
+      }
+    ],
+    "_key": "G9"
+  },
+  {
+    "title": "Fixing a Sagging Garden Gate",
+    "topic": "garden gate hinge repair",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "When a garden gate starts sagging and scraping the ground, the hinge is almost always blamed, so the first job is loosening the screws that hold the top hinge plate and checking whether the wood underneath has softened or split. If the wood is sound, the next step is packing the old screw holes with wood filler or thin dowel plugs, since worn holes let the screws sit loose and let the gate drop over time. Once the filler has hardened, fresh, slightly longer screws go back into the same holes, angled a touch deeper than before so they bite into solid wood rather than the crumbled edges of the original holes. Many people assume swapping the hinge itself will solve a sagging gate, yet in most cases the hinge is perfectly fine and it is the screw holes doing all the damage, so replacing hardware without repairing the wood just repeats the same failure within a season.",
+    "highlight_spans": [
+      "checking whether the wood underneath has softened or split",
+      "packing the old screw holes with wood filler or thin dowel plugs",
+      "yet in most cases the hinge is perfectly fine"
+    ],
+    "questions": [
+      {
+        "question_text": "What does the narrator check first when a gate starts sagging?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "the first job is loosening the screws that hold the top hinge plate and checking whether the wood underneath has softened or split."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "whether the latch is bent",
+            "k_code": "K_W1",
+            "fail_mode": "invented-claim",
+            "explanation_he": "התמליל אינו מזכיר בדיקה של תפס השער כלל."
+          },
+          {
+            "text": "whether the paint is peeling",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "מצב הצבע אינו נזכר בתמליל בשום שלב."
+          },
+          {
+            "text": "whether the screws are the right length",
+            "k_code": "K_W3",
+            "fail_mode": "process-conflation",
+            "explanation_he": "אורך הבורגים נבחר רק בשלב מאוחר יותר, כשמחזירים בורגים חדשים."
+          },
+          {
+            "text": "whether the wood has softened",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהבדיקה הראשונה היא אם העץ מתחת לציר התרכך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the narrator's main point about fixing a sagging gate?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Many people assume swapping the hinge itself will solve a sagging gate, yet in most cases the hinge is perfectly fine and it is the screw holes doing all the damage, so replacing hardware without repairing the wood just repeats the same failure within a season."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "routine hinge oiling is the real key to a working gate",
+            "k_code": "K_W1",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה רחבה מתחרה על תחזוקת ציר שוטפת, אך התמליל אומר במפורש שהציר עצמו תקין וחורי הבורג הם הבעיה האמיתית."
+          },
+          {
+            "text": "the gate should be replaced entirely",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "אין בתמליל כל המלצה להחליף את השער כולו."
+          },
+          {
+            "text": "the screw holes are the real problem",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה טוען שהחורים השחוקים, לא הציר, גורמים לנפילת השער."
+          },
+          {
+            "text": "any repair here is only temporary",
+            "k_code": "K_W3",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "המרצה לא טוען שהתיקון עצמו זמני, רק שהחלפת חומרה בלבד נכשלת."
+          }
+        ]
+      }
+    ],
+    "_key": "G10"
+  },
+  {
+    "title": "Swapping a Fountain Pen Nib",
+    "topic": "fountain-pen nib replacement",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Replacing a fountain pen nib is simpler than most people expect, as long as you work slowly. The first step is unscrewing the section, the small part that holds the nib and feed, from the barrel of the pen, then gently pulling the nib and feed straight out together rather than twisting them, since twisting can bend the delicate tines. Once the old nib is out, the feed, the grooved piece that channels ink to the nib, gets wiped clean of any dried ink before the new nib is lined up with the feed's central channel. The nib and feed are then pressed back into the section together, checking that the nib sits centered and slightly proud of the feed rather than sunk below it. A final check is holding the assembled section up to the light to confirm the tines meet evenly at the tip, since even a hairline gap there will make the pen skip when writing.",
+    "highlight_spans": [
+      "gently pulling the nib and feed straight out together",
+      "gets wiped clean of any dried ink",
+      "holding the assembled section up to the light"
+    ],
+    "questions": [
+      {
+        "question_text": "What does the narrator do immediately after removing the section from the barrel?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The first step is unscrewing the section, the small part that holds the nib and feed, from the barrel of the pen, then gently pulling the nib and feed straight out together rather than twisting them, since twisting can bend the delicate tines."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "pulls the nib and feed out",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסביר שאחרי הסרת החלק המחזיק, שולפים את הניב והמזין ישר החוצה."
+          },
+          {
+            "text": "wipes the feed clean",
+            "k_code": "K_WRONG_SEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הניקוי מתרחש רק אחרי שהניב הישן כבר הוצא."
+          },
+          {
+            "text": "aligns the replacement nib",
+            "k_code": "K_WRONG_SEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "היישור מתואר בשלב מאוחר יותר, אחרי ניקוי המזין."
+          },
+          {
+            "text": "checks the tines in the light",
+            "k_code": "K_WRONG_SEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "בדיקת האור היא הפעולה האחרונה שמתוארת בתמליל."
+          }
+        ]
+      },
+      {
+        "question_text": "According to the narrator, which of these is NOT part of checking the new nib?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "A final check is holding the assembled section up to the light to confirm the tines meet evenly at the tip, since even a hairline gap there will make the pen skip when writing."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "holding the section up to the light",
+            "k_code": "K_W1",
+            "fail_mode": "actually-performed",
+            "explanation_he": "המרצה מתאר בפירוש החזקת החלק המורכב מול האור לבדיקה."
+          },
+          {
+            "text": "checking the tines meet evenly",
+            "k_code": "K_W2",
+            "fail_mode": "actually-performed",
+            "explanation_he": "המרצה מציין שהבדיקה מוודאת שהקצוות נפגשים בצורה אחידה."
+          },
+          {
+            "text": "confirming the nib sits centered",
+            "k_code": "K_W3",
+            "fail_mode": "actually-performed",
+            "explanation_he": "המרצה מתאר בדיקה שהניב ממורכז ומעט בולט מעל המזין."
+          },
+          {
+            "text": "measuring the nib's width",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "מדידת רוחב הניב אינה מוזכרת כלל בתהליך הבדיקה."
+          }
+        ]
+      }
+    ],
+    "_key": "G11"
+  },
+  {
+    "title": "Replacing a Broken Suitcase Wheel",
+    "topic": "suitcase-wheel replacement",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "Fixing a broken suitcase wheel starts with turning the case upside down and removing the small screws or rivets that hold the wheel housing to the corner of the shell, keeping track of which size goes where since the corners are rarely identical. With the housing off, the broken wheel assembly slides out of its mount, and this is the moment to match the old wheel's diameter and axle width against a replacement, because a wheel even slightly too wide will drag against the case as it turns. The new wheel assembly then clips or bolts into the same mount, and the housing gets screwed back over it, snug enough that the wheel spins freely but does not wobble side to side. Some people expect any generic replacement wheel to work, however cases from different makers use mounts of slightly different shapes, so a wheel that fits perfectly on one bag can bind or fall out entirely on another.",
+    "highlight_spans": [
+      "removing the small screws or rivets that hold the wheel housing",
+      "match the old wheel's diameter and axle width against a replacement",
+      "however cases from different makers use mounts of slightly different shapes"
+    ],
+    "questions": [
+      {
+        "question_text": "In this lecture, what does \"housing\" refer to?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "removing the small screws or rivets that hold the wheel housing to the corner of the shell"
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "the suitcase's main compartment",
+            "k_code": "K_W1",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "התא הראשי של המזוודה אינו קשור לחלק המכסה את הגלגל."
+          },
+          {
+            "text": "the wheel's rubber tread",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "צמיג הגלגל אינו מוזכר, ההאוזינג הוא החלק המכסה אותו."
+          },
+          {
+            "text": "the cover holding the wheel in place",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מתאר את ההאוזינג כחלק שמחזיק את הגלגל בפינת המזוודה."
+          },
+          {
+            "text": "the retractable handle mechanism",
+            "k_code": "K_W3",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "מנגנון הידית אינו נזכר כלל בתמליל."
+          }
+        ]
+      },
+      {
+        "question_text": "What does the narrator suggest about using a generic replacement wheel?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Some people expect any generic replacement wheel to work, however cases from different makers use mounts of slightly different shapes, so a wheel that fits perfectly on one bag can bind or fall out entirely on another."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "it always fits regardless of brand",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "המרצה סותר טענה זו ומסביר שהתבניות שונות בין יצרנים."
+          },
+          {
+            "text": "it may not fit every suitcase",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסביר שגלגל שמתאים למזוודה אחת עלול לא להתאים לאחרת."
+          },
+          {
+            "text": "it costs less than original parts",
+            "k_code": "K_W2",
+            "fail_mode": "invented-claim",
+            "explanation_he": "אין בתמליל שום השוואת מחירים בין חלקים."
+          },
+          {
+            "text": "it wears out faster than original wheels",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "עמידות הגלגל לאורך זמן אינה נדונה בתמליל."
+          }
+        ]
+      }
+    ],
+    "_key": "G12"
+  },
+  {
+    "title": "LQA-PROD-G: long_dialogue (ship_rigging)",
+    "topic": "An apprentice rigger asks a shipwright to explain the sequence from stepping the mast through shrouds, deadeyes and lanyards, stays, and ratlines that turns a bare mast into a fully rigged one.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Mara: Finn, before I splice another line wrong, can you explain how a bare mast actually becomes fully rigged?\nFinn: Sure. It starts with stepping the mast, dropping the base into the step at the bottom of the hull so it stands upright and takes the ship's weight.\nMara: So nothing else happens until the mast is standing?\nFinn: Right, because you can't attach anything above until the pole itself is secured below. Once it's stepped, we run the shrouds, thick ropes from the masthead down to each side of the hull, to hold the mast steady side to side.\nMara: And the shrouds just get tied off tight?\nFinn: Not tied, tensioned. The shrouds end in deadeyes, round wooden blocks with holes bored through them, and a lanyard is laced back and forth between the upper and lower deadeye and hauled taut.\nMara: However, wouldn't the shrouds hold the mast even without the lanyards pulled tight?\nFinn: They'd hang there, but loose. People assume the deadeyes themselves grip the mast in place, but it's really the lanyard's tension threaded through them that keeps the shrouds rigid enough to stop the mast swaying.\nMara: So the deadeye is just a frame for the real work.\nFinn: Exactly. Only once every shroud is tensioned do we add the stays, running fore and aft from the masthead to the bow and stern, to stop the mast rocking forward and back.\nMara: Yet climbing all that rigging must be dangerous with nothing to grip.\nFinn: It would be, which is why ratlines go on last, short lines woven across the shrouds like the rungs of a ladder, so a sailor can climb aloft once everything below is already taut and permanent.",
+    "questions": [
+      {
+        "question_text": "According to Finn, why must the mast be stepped before the shrouds are attached?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because the shrouds cannot be attached until the mast stands firm",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פין אומר במפורש שאי אפשר לחבר דבר מעל עד שהתורן עצמו מאובטח למטה."
+          },
+          {
+            "text": "Because the ratlines cannot be woven until the shrouds are tensioned",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו טענה נכונה לגבי זווית אחרת בשרשרת (ratlines אחרי shrouds), אך היא מיוחסת כאן בטעות ליחס בין התורן לשרוודס."
+          },
+          {
+            "text": "Because the mast can only stand after the shrouds are tensioned",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: לפי השיחה התורן מוצב ומאובטח קודם, והשרוודס מגיעים אחריו."
+          },
+          {
+            "text": "Because the mast step must be oiled before shrouds attach",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בשיחה כל אזכור של שימון בסיס התורן; זהו פרט מומצא שנשמע סביר אך אינו נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Finn makes about what actually keeps the shrouds rigid?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The deadeye's wooden frame is what keeps the shrouds rigid",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך פין אומר במפורש שאנשים טועים לחשוב כך; המתח בפועל מגיע מהלניארד."
+          },
+          {
+            "text": "The lanyard's tension is what actually keeps the shrouds rigid",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: פין מדגיש שהמתח של הלניארד דרך הדדאיז הוא שמחזיק את השרוודס נוקשים, לא הדדאיז עצמו."
+          },
+          {
+            "text": "The ratlines woven across the shrouds keep them rigid",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הראטליינס מתוארים רק כשלב מאוחר לטיפוס, ולא כמה שמעניק נוקשות לשרוודס עצמם."
+          },
+          {
+            "text": "The mast step alone keeps the shrouds rigid permanently",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "בסיס התורן רק מאבטח את התורן עצמו; אין תמיכה בשיחה לכך שהוא מעניק נוקשות לשרוודס."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "you can't attach anything above until the pole itself is secured below",
+      "it's really the lanyard's tension threaded through them that keeps the shrouds rigid enough to stop the mast swaying"
+    ],
+    "_key": "G13"
+  },
+  {
+    "title": "LQA-PROD-G: long_dialogue (cheese_making)",
+    "topic": "An apprentice cheesemaker asks a master to explain the sequence from curdling through cutting the curd, pressing, and brining that turns milk into a wheel of cheese.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Sam: Before I ruin another batch, can you explain how milk actually turns into a wheel of cheese?\nDelia: Happy to. It starts with curdling. Rennet goes into the warmed milk, and within an hour the whole pot sets into a single wobbling mass, part solid, part whey.\nSam: So the solid part is already cheese at that point?\nDelia: Not yet, it's still too wet and loose to hold a shape. Next comes cutting the curd, slicing that soft mass into small cubes with a long knife so the trapped whey can start draining out through the cut faces.\nSam: And the smaller the cubes, the more whey drains?\nDelia: Right, because more cut surface means more whey escapes, which is why a drier cheese gets cut into finer cubes than a soft one. Once enough whey has drained, the curds go into a mold and pressing begins.\nSam: However, doesn't the curd already hold together enough by then?\nDelia: It holds loosely, but pressing forces the curds to knit into one solid mass and pushes out whatever whey cutting left behind. Without real weight on the mold, the wheel would stay crumbly instead of dense.\nSam: So pressing is doing more than just shaping it round.\nDelia: Much more. People assume the mold alone gives the wheel its firm body, but it's really the pressure applied through the mold that fuses the curds solid. The mold only decides the shape, not the density.\nSam: Yet the wheel still looks pale and soft once it's pressed.\nDelia: For now, yes. That's why brining comes last: the pressed wheel soaks in a strong salt bath for days, which draws out extra moisture, firms the rind, and stops unwanted bacteria before the cheese ever reaches the aging cellar, where it will continue to develop flavor for weeks or months to come.",
+    "questions": [
+      {
+        "question_text": "According to Delia, which of the following is NOT true about curdling?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "It is done by adding rennet to warmed milk",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: דליה אומרת שרנט נכנס לחלב שחומם."
+          },
+          {
+            "text": "It sets into a single mass within about an hour",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הסיר מתייצב למסה אחת תוך כשעה."
+          },
+          {
+            "text": "It already yields curd firm enough to hold its shape",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו פרט שגוי: דליה אומרת במפורש שהגבינה עדיין רטובה ורופפת מכדי להחזיק צורה בשלב הזה."
+          },
+          {
+            "text": "It leaves the mass part solid and part liquid whey",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המסה מתוארת כחלקה מוצקה וחלקה נסיוב."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Delia makes about what actually gives the wheel its firm, dense body?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The mold's shape alone accounts for the cheese's density",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך דליה אומרת במפורש שהתבנית רק קובעת את הצורה, לא את הצפיפות."
+          },
+          {
+            "text": "Brining is the stage that makes the finished wheel dense",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הברריינג מתואר כשלב שמייבש ומחזק את הקליפה בסוף התהליך, לא כמה שיוצר את הצפיפות הפנימית."
+          },
+          {
+            "text": "Cutting the curd into cubes produces its dense texture",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "חיתוך הקרד רק מנקז נסיוב; אין בשיחה תמיכה לכך שהוא זה שמעניק לגלגל את המוצקות."
+          },
+          {
+            "text": "The pressure applied through the mold fuses the curds solid",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: דליה מדגישה שהלחץ שמופעל דרך התבנית, לא התבנית עצמה, הוא שמאחה את הגבינה למוצק."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "it's still too wet and loose to hold a shape",
+      "it's really the pressure applied through the mold that fuses the curds solid"
+    ],
+    "_key": "G14"
+  },
+  {
+    "title": "LQA-PROD-G: long_dialogue (basket_weaving)",
+    "topic": "An apprentice basket maker asks a weaver to explain the sequence from the base through stakes, randing, and the border that turns a bundle of willow rods into a finished basket.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Noa: Hugo, before I ruin this willow, can you explain how a basket actually takes shape from a bundle of rods?\nHugo: Sure. It starts with the base, a small flat lattice of split rods woven into a cross so the whole basket has something to grow from.\nNoa: So nothing else can go on until the base is finished?\nHugo: Right, because the base is what everything else attaches to. Once it's woven tight, the stakes go in next, longer rods pushed into the base and bent upright to form the basket's skeleton, one for each rib you'll see in the finished wall.\nNoa: And the stakes just stay bare like that?\nHugo: For a moment. Then comes randing, weaving a thinner rod called a weaver over and under each stake in turn, round and round, building the solid wall of the basket row by row.\nNoa: However, don't the stakes just fall over sideways while you're weaving between them?\nHugo: They would, loose stakes lean and gap, which is why we wet and pack them close before randing starts, so each pass of the weaver holds the previous one snug against it.\nNoa: So the weaver is doing the real shaping work, not the stakes?\nHugo: Exactly right. People assume the stakes give the basket its strength, but it's really the packed rows of randing that lock the wall rigid; the stakes on their own would splay apart under any pressure.\nNoa: Yet the tops of the stakes are still just sticking up loose once randing stops.\nHugo: They are, until the border goes on: the stake ends get bent down and woven back into the top rows, which is the only step that actually keeps the whole rim from unraveling once you let go of it.",
+    "questions": [
+      {
+        "question_text": "According to the conversation, who first raises the concern that the stakes might fall over while being woven?",
+        "question_type": "speaker_ref",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Noa, while asking about weaving between the stakes",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נועה שואלת במפורש אם הסטייקס לא נופלים הצידה בזמן הרנדינג ביניהם."
+          },
+          {
+            "text": "Hugo, while asking Noa to check the stakes' spacing",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך תפקידים: הוגו הוא זה שמסביר ומרגיע, לא הוגו שמעלה את החשש."
+          },
+          {
+            "text": "A neighboring weaver watching the demonstration from outside",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בשיחה כל אזכור לאורג שכן שצופה מבחוץ; זהו פרט מומצא שאינו נתמך."
+          },
+          {
+            "text": "Noa, while asking about the border locking the rim",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החשש של נועה נאמר בהקשר לרנדינג בין הסטייקס, לא בהקשר לשלב הבורדר שמגיע רק בסוף."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Hugo makes about what actually locks the basket wall rigid?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The stakes alone give the basket wall its rigid strength",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך הוגו אומר במפורש שאנשים טועים לחשוב כך; הנוקשות בפועל מגיעה מהרנדינג."
+          },
+          {
+            "text": "The packed rows of randing lock the basket wall rigid",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: הוגו מדגיש ששורות הרנדינג הצפופות, לא הסטייקס לבדם, הן שמקבעות את הדופן."
+          },
+          {
+            "text": "The border weave locks the basket wall rigid",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הבורדר מתואר כמה שמונע מהשפה להתפרק בסוף, לא כמה שמקבע את הדופן עצמה."
+          },
+          {
+            "text": "The base lattice locks the basket wall rigid once woven",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "הבסיס רק נותן נקודת התחלה לסטייקס; אין תמיכה בשיחה לכך שהוא מקבע את הדופן."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "the base is what everything else attaches to",
+      "it's really the packed rows of randing that lock the wall rigid"
+    ],
+    "_key": "G15"
+  },
+  {
+    "title": "LQA-PROD-G: long_lecture (pattern_welded_blade)",
+    "topic": "A lecture explaining how a pattern-welded blade moves through the billet, forge-welding, twisting, and etching on its way to a finished patterned blade.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Long before a pattern-welded blade takes its final shape, it begins as a billet, a stack of alternating steel layers, some harder and some softer, clamped together so the layers cannot shift out of place. The smith heats the billet in the forge until it glows and then hammers the layers together at the seams, a process called forge-welding, fusing the separate strips into a single solid bar. This fusing has to hold completely before anything else happens, since any gap left between the layers would open into a crack later on. Once the bar is solidly welded, the smith grips each end and twists it under heat, winding the layered steel into a tight spiral so the once-flat bands now wrap around the bar's core in a continuous helix. However, the twisted bar still looks like plain gray steel at this stage, showing no pattern at all. The smith then forges the twisted bar flat again, hammering the spiral down until it becomes a straight blade blank, though the helix buried inside remains unchanged in structure even as the outer surface flattens. It is the etching that follows, not the twisting itself, that actually reveals the pattern, since the acid bath eats into the softer steel layers faster than the harder ones, leaving the spiral visible as light and dark bands across the blade's face. Many assume the twisting alone creates the visible pattern, but a twisted, unetched blade shows almost nothing to the eye. Yet etching only works because the forge-welding fused the layers perfectly in the first place; a poorly welded billet will show gaps and flaws in the acid bath rather than a clean pattern.",
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"fuses\" most nearly mean when describing what forge-welding does to the layers?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Separates them cleanly into individual strips",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך המשמעות: פוסס מתאר איחוד השכבות לגוש אחד, לא הפרדה שלהן."
+          },
+          {
+            "text": "Cools them rapidly to lock in hardness",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל כל אזכור של קירור מהיר; זהו פרט מומצא שנשמע סביר אך אינו נתמך."
+          },
+          {
+            "text": "Joins them permanently into one solid piece",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, 'fuses' מתאר את השכבות שמתאחדות לחתיכה אחת מוצקה במהלך פורג'-וולדינג."
+          },
+          {
+            "text": "Reveals them as visible light and dark bands",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "חשיפת השכבות כפסים בהירים וכהים היא תפקיד האצ'ינג בסוף התהליך, לא הפורג'-וולדינג."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually reveals a pattern-welded blade's pattern?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Twisting the heated bar alone creates a visible pattern",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שלהב מפותל שטרם עבר אצ'ינג כמעט ואינו מראה דבר."
+          },
+          {
+            "text": "Fusing the layers during forge-welding produces the visible spiral",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "פורג'-וולדינג רק מאחה את השכבות לגוש מוצק; חשיפת הדוגמה מיוחסת בתמליל לאצ'ינג, לא לריתוך."
+          },
+          {
+            "text": "Flattening the twisted bar again brings out its coloring",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "השטחת המוט משנה רק את הצורה החיצונית; התמליל אומר שהדוגמה הפנימית נשארת בלתי משתנה ובלתי נראית בשלב זה."
+          },
+          {
+            "text": "The acid bath in etching is what reveals the pattern",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שדווקא האצ'ינג, לא הפיתול עצמו, הוא שחושף את דוגמת השכבות."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "any gap left between the layers would open into a crack later on",
+      "It is the etching that follows, not the twisting itself, that actually reveals the pattern"
+    ],
+    "_key": "G16"
+  },
+  {
+    "title": "LQA-PROD-G: long_lecture (pewter_casting)",
+    "topic": "A lecture explaining how pewter moves through melting, pouring into a mold, turning on a lathe, and burnishing on its way to a finished bright object.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "A pewter candlestick begins as nothing more than scrap metal and fresh ingots melted together in a crucible over low heat, since pewter melts at a far lower temperature than most metals used for casting. Once the metal is fully liquid, the caster pours it into a mold, usually two carved halves of bronze or wood clamped tightly shut, and the pewter fills every groove of the design before cooling into a rough, solid casting. This rough casting already carries the object's shape, but its surface is dull, pitted, and marked with the seams where the mold's two halves met. Next the piece is mounted on a lathe for turning, where a sharp tool is pressed against the spinning metal to shave away the seam lines and thin the walls to an even, precise thickness. However, even after turning, the surface still looks gray and slightly rough to the touch. That dullness is not something turning is meant to fix; its job is only to true up the shape and thickness. It is burnishing, not the turning itself, that actually gives pewter its bright, silvery shine, since rubbing the surface hard with a smooth steel or agate tool compresses the metal's surface and polishes it without removing any material. Many people assume the lathe alone produces that gleam, but a freshly turned piece still looks flat and lifeless until it is burnished. Yet burnishing only works cleanly on a piece that has already been turned true, since any leftover seam or uneven wall would show through the polish as a visible flaw.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, why does the rough casting still need turning after it comes out of the mold?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because the surface is pitted and marked with mold seams",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "התמליל אומר במפורש שהיציקה הגולמית משטחה עמום, מנוקד וסימני התפר של התבנית ניכרים עליו."
+          },
+          {
+            "text": "Because burnishing cannot begin until the metal has melted",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "היתוך הוא שלב מוקדם ונפרד; הצורך בטרנינג מיוחס בתמליל לפגמי המשטח, לא ליחס בין היתוך לברניש."
+          },
+          {
+            "text": "Because turning happens before the metal enters the mold",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: לפי התמליל היציקה לתבנית קודמת לטרנינג, לא להפך."
+          },
+          {
+            "text": "Because the mold halves crack from the pewter's heat",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל כל אזכור של סדיקת התבנית; זהו פרט מומצא שנשמע סביר אך אינו נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually gives pewter its bright, silvery shine?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Turning on the lathe alone gives pewter its bright shine",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שחתיכה שרק עברה טרנינג עדיין נראית שטוחה וחסרת ברק."
+          },
+          {
+            "text": "Burnishing is what actually gives pewter its bright shine",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שדווקא הברניש, לא הטרנינג עצמו, הוא שמעניק לפיוטר את הברק הכסוף."
+          },
+          {
+            "text": "Pouring the metal into the mold gives pewter its shine",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "היציקה לתבנית קובעת רק את הצורה הגולמית; הברק מיוחס בתמליל לשלב הברניש בלבד."
+          },
+          {
+            "text": "Melting the scrap metal evenly gives pewter its bright shine",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "היתוך רק מכין את המתכת הנוזלית; אין בתמליל תמיכה לכך שהוא מקור הברק."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "its surface is dull, pitted, and marked with the seams where the mold's two halves met",
+      "It is burnishing, not the turning itself, that actually gives pewter its bright, silvery shine"
+    ],
+    "_key": "G17"
+  },
+  {
+    "title": "LQA-PROD-G: long_lecture (tapestry_weaving)",
+    "topic": "A lecture explaining how a tapestry moves through the cartoon, the warp, bobbin weaving, and beating-in on its way to a finished woven panel.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Long before any colored thread crosses the loom, a tapestry begins as a cartoon, a full-size drawing of the finished design that is placed directly behind or beneath the warp threads so the weaver can see exactly where each color belongs. The warp itself, the strong vertical threads stretched tight from top to bottom of the loom, is set up next, since no weft can be woven at all until there is a fixed structure to weave across. Once the warp is mounted and tensioned, the weaver begins passing small bobbins, wooden spools wound with colored weft thread, back and forth by hand across sections of the warp, following the cartoon's outlines row by row. However, a single pass of the bobbin leaves the weft loose and visibly slack against the warp threads. That looseness is not a flaw the bobbin itself is built to fix. It is beating-in, not the bobbin work alone, that actually makes the tapestry solid and hides the warp completely, since a wide-toothed comb presses each new row of weft down hard against the row below, packing the threads until no gaps remain. Many assume that simply passing the bobbin enough times will pack the weave tight, but without beating-in after every row, the weft stays loose and the warp threads show through like stripes. Yet the cartoon's influence never disappears once weaving starts, since the weaver keeps glancing back at the drawing throughout the entire process to judge exactly where one color block should end and the next should begin.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about the warp?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "It consists of strong threads stretched vertically on the loom",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הוורפ מתואר כחוטים אנכיים חזקים המתוחים על הנול."
+          },
+          {
+            "text": "It must be mounted before any weft can be woven",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל אומר שאי אפשר לארוג ווסט כלל לפני שיש מבנה ורפ קבוע."
+          },
+          {
+            "text": "It gets pressed down tightly with a comb after weaving",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו פרט שגוי: המסרק לוחץ על שורות הווסט בשלב הביטינג-אין, לא על הוורפ עצמו."
+          },
+          {
+            "text": "It is tensioned from top to bottom of the loom",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הוורפ מתואר כמתוח מלמעלה למטה על הנול."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually makes the tapestry solid and hides the warp?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Enough passes of the bobbin alone pack the weave tight",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שזו הנחה שגויה נפוצה; בלי ביטינג-אין הווסט נשאר רופף."
+          },
+          {
+            "text": "The cartoon's outline is what conceals the warp threads",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הקרטון רק מנחה את מיקום הצבעים; מוצקות האריגה וכיסוי הוורפ מיוחסים בתמליל לביטינג-אין."
+          },
+          {
+            "text": "Stretching the warp tight is what conceals it from view",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "מתיחת הוורפ רק מכינה מבנה לאריגה; אין בתמליל תמיכה לכך שהיא מה שמכסה את הוורפ."
+          },
+          {
+            "text": "Beating-in with the comb is what hides the warp completely",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שדווקא הביטינג-אין, לא עבודת הבובין לבדה, היא שמוצקת את האריגה ומכסה את הוורפ."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "no weft can be woven at all until there is a fixed structure to weave across",
+      "It is beating-in, not the bobbin work alone, that actually makes the tapestry solid and hides the warp completely"
+    ],
+    "_key": "G18"
+  }
+]

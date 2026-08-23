@@ -1,0 +1,1315 @@
+[
+  {
+    "title": "LQA-PROD-F: short_dialogue (noticeboard_lost_and_found)",
+    "topic": "Two neighbors discuss how a new lost-and-found noticeboard near their building's mailboxes works.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Dana: Have you seen the new board by the mailboxes?\nMarcus: The wooden one with the little pins?\nDana: Yes, the building manager set it up last month for lost and found notices.\nMarcus: I noticed someone posted about a missing set of keys.\nDana: Right, and there is also a section for items people found, like an umbrella and a child's glove.\nMarcus: Does anyone actually check it?\nDana: Apparently people take photographs on their phones now instead of writing things down, so notices get answered faster.\nMarcus: That is clever. I should post about the scarf I lost near the elevator.\nDana: Do it before someone else claims it as their own.",
+    "highlight_spans": [
+      "set it up last month for lost and found notices",
+      "people take photographs on their phones now instead of writing things down, so notices get answered faster"
+    ],
+    "questions": [
+      {
+        "question_text": "According to Dana, why do notices on the board get answered faster now?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Because the manager now checks the board every single morning.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין אזכור בשיחה שהמנהל בודק את הלוח מדי בוקר; זהו פרט שלא נאמר."
+          },
+          {
+            "text": "Because people photograph notices with their phones and respond more quickly.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "דנה אומרת במפורש שאנשים מצלמים את המודעות בטלפון במקום להעתיק אותן, ולכן התגובה מהירה יותר."
+          },
+          {
+            "text": "Because fewer people post notices than they did before.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: השיחה לא אומרת שיש פחות מודעות, אלא שהתגובה עליהן מהירה יותר."
+          },
+          {
+            "text": "Because Marcus began writing replies directly on the board.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "מרקוס הוא זה ששוקל לפרסם מודעה על צעיף אבוד; הוא לא מי שכתב תשובות על הלוח."
+          }
+        ]
+      }
+    ],
+    "_key": "F1"
+  },
+  {
+    "title": "LQA-PROD-F: short_lecture (allotment_waiting_list)",
+    "topic": "A narrator explains how a parish council manages and prunes its allotment garden waiting list.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Anyone wanting an allotment plot in this town must first join a waiting list managed by the parish council. Names are added in the order they apply, and plots become available only when a current gardener gives one up. Because demand rose sharply after gardening grew popular again, some applicants now wait more than three years before a plot opens. To keep the list current, the council sends a yearly letter asking whether people still want a place, and anyone who does not reply within a set period is removed. Officials say this yearly check has shortened the effective list considerably, since many names on it belonged to people who had already found space elsewhere.",
+    "highlight_spans": [
+      "join a waiting list managed by the parish council",
+      "the council sends a yearly letter asking whether people still want a place",
+      "this yearly check has shortened the effective list considerably"
+    ],
+    "questions": [
+      {
+        "question_text": "What is this talk mainly about?",
+        "question_type": "main_idea",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "How the parish council decided to build new allotment plots.",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה רחבה מתחרה, אך ההרצאה לא עוסקת בבניית חלקות חדשות אלא בניהול רשימת ההמתנה הקיימת."
+          },
+          {
+            "text": "How gardeners are taught to grow vegetables more efficiently.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בהרצאה שום התייחסות להדרכת גננים בגידול ירקות; זהו פרט שלא נזכר כלל."
+          },
+          {
+            "text": "How the town manages and maintains its allotment waiting list.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "כל ההרצאה מתארת כיצד נרשמים לרשימת ההמתנה וכיצד המועצה שומרת אותה מעודכנת מדי שנה."
+          },
+          {
+            "text": "How falling demand led the council to end the waiting list.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: ההרצאה אומרת שהביקוש עלה, לא ירד, והרשימה עדיין קיימת ולא בוטלה."
+          }
+        ]
+      }
+    ],
+    "_key": "F2"
+  },
+  {
+    "title": "LQA-PROD-F: short_dialogue (babysitting_co_op)",
+    "topic": "Two neighbors discuss how a neighborhood babysitting point-exchange circle is organized.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Priya: How does the babysitting circle actually work?\nOwen: Parents earn points by watching other members' children, and they spend those points when they need a sitter themselves.\nPriya: So no money changes hands at all?\nOwen: None. The organizer just keeps a shared notebook that tracks everyone's balance.\nPriya: What happens if someone runs out of points?\nOwen: They can still request a sitter, but they go to the bottom of the list until their balance improves.\nPriya: That seems fair. How do new families join?\nOwen: They attend one meeting, agree to the rules, and start with a small number of points already in their account.",
+    "highlight_spans": [
+      "Parents earn points by watching other members' children",
+      "they go to the bottom of the list until their balance improves"
+    ],
+    "questions": [
+      {
+        "question_text": "According to Owen, what happens to a family whose point balance runs out?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "They remain eligible for a sitter but are placed lower on the request list.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אוון אומר שהם עדיין יכולים לבקש שמרטפית, אבל הם עוברים לתחתית הרשימה עד שהיתרה שלהם משתפרת."
+          },
+          {
+            "text": "They must attend an extra meeting before requesting a sitter again.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין אזכור בשיחה לפגישה נוספת שיש להשתתף בה; זהו פרט שהומצא."
+          },
+          {
+            "text": "They are moved to the top of the list so their balance can recover.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: לפי השיחה הם עוברים לתחתית הרשימה, לא לראש הרשימה."
+          },
+          {
+            "text": "New families must wait until their balance improves before joining at all.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "התיאור הזה מתאים למשפחות קיימות שאזל להן היתרה, לא למשפחות חדשות המצטרפות למעגל."
+          }
+        ]
+      }
+    ],
+    "_key": "F3"
+  },
+  {
+    "title": "LQA-PROD-F: short_lecture (litter_pick_group)",
+    "topic": "A narrator describes how a volunteer litter-picking group organizes its biweekly walks and record keeping.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Every second Saturday, a group of local volunteers meets outside the community center to clear litter from the riverside path and the park beyond it. The organizer divides the walkers into small teams, each assigned a different stretch so no area gets covered twice. Bags and gloves are supplied by the town council, though volunteers are encouraged to bring their own reusable gloves if they have them. After the walk, everyone gathers back at the center to weigh the collected bags together, and the total is recorded in a logbook kept since the group began. Members say watching the yearly totals slowly fall has been the most encouraging part of taking part.",
+    "highlight_spans": [
+      "Every second Saturday",
+      "Bags and gloves are supplied by the town council",
+      "weigh the collected bags together",
+      "the total is recorded in a logbook"
+    ],
+    "questions": [
+      {
+        "question_text": "According to the talk, which of the following is NOT true about the litter-pick group?",
+        "question_type": "negative",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Volunteers meet outside the community center every second Saturday.",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: ההרצאה אומרת שהמתנדבים נפגשים ליד המרכז הקהילתי מדי שבת שנייה."
+          },
+          {
+            "text": "Each walking team is assigned its own stretch to cover.",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המארגן מחלק את המתנדבים לקבוצות, וכל קבוצה מקבלת קטע נפרד."
+          },
+          {
+            "text": "The collected bags are weighed and the total logged afterward.",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: לאחר ההליכה שוקלים את השקיות ורושמים את הסכום ביומן."
+          },
+          {
+            "text": "Volunteers must purchase their own bags and gloves each time.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זה בדיוק ההיפך ממה שנאמר: השקיות והכפפות מסופקות על ידי מועצת העיר, לא נרכשות על ידי המתנדבים."
+          }
+        ]
+      }
+    ],
+    "_key": "F4"
+  },
+  {
+    "title": "LQA-PROD-F: short_dialogue (street_chess_table)",
+    "topic": "Two neighbors discuss the informal coin system that decides turns at a public square's stone chess table.",
+    "format": "dialogue",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "Theo: Why is there always a crowd around that stone chess table in the square?\nIris: People have played there since the town rebuilt the square decades ago, and it just became a habit.\nTheo: Do you need to sign up to play?\nIris: Not exactly. Whoever wins stays at the board, and the next challenger simply places a coin on the edge to mark their turn.\nTheo: So no one keeps a formal list?\nIris: No list, just the coins lined up. Regulars say the unspoken rule has never caused an argument.\nTheo: That is surprising for something so informal.\nIris: People here take it seriously without needing rules written down.",
+    "highlight_spans": [
+      "the next challenger simply places a coin on the edge to mark their turn",
+      "the unspoken rule has never caused an argument"
+    ],
+    "questions": [
+      {
+        "question_text": "What does Iris seem to believe about the informal coin system?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "She believes the town council should introduce an official waiting list.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "איריס לא מציעה שהעירייה תנהל רשימת המתנה רשמית; זהו פרט שלא נאמר."
+          },
+          {
+            "text": "She believes the coin system often leads to disagreements among players.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: איריס אומרת שהכלל הבלתי כתוב מעולם לא גרם לוויכוח."
+          },
+          {
+            "text": "She believes it works well even though no rules are written down.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "איריס אומרת שהאנשים כאן מתייחסים לזה ברצינות בלי צורך בכללים כתובים, כלומר המערכת עובדת היטב."
+          },
+          {
+            "text": "She believes Theo prefers a more formal way of organizing turns.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "תיאו הוא זה שמתפלא כמה זה בלתי פורמלי, אך איריס לא מתארת אותו כמעדיף שיטה רשמית יותר."
+          }
+        ]
+      }
+    ],
+    "_key": "F5"
+  },
+  {
+    "title": "LQA-PROD-F: short_lecture (toy_library)",
+    "topic": "A narrator explains how a toy library lends out toys and relies on volunteers to inspect and clean returns.",
+    "format": "lecture",
+    "bucket": "s30",
+    "difficulty": 2,
+    "pivot_type": null,
+    "transcript": "A toy library operates much like a book library, except the shelves hold puzzles, building blocks, and board games instead of novels. Families pay a small yearly membership fee, then borrow toys for a few weeks at a time before returning them and choosing something new. Volunteers inspect every returned item, checking that all the pieces are present and cleaning anything that needs it before the toy goes back on the shelf. Because toys rotate through so many households, organizers say children are exposed to a much wider variety of play than most families could otherwise afford. The library relies entirely on donated toys and a small team of volunteers to keep the shelves stocked and organized.",
+    "highlight_spans": [
+      "borrow toys for a few weeks at a time",
+      "Because toys rotate through so many households",
+      "checking that all the pieces are present and cleaning anything that needs it"
+    ],
+    "questions": [
+      {
+        "question_text": "In this context, what does the word 'rotate' most nearly mean?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "Spin slowly on a display shelf for viewing.",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "המשמעות המילולית של סיבוב פיזי על מדף אינה קשורה להקשר; הצעצועים לא מסתובבים על תצוגה."
+          },
+          {
+            "text": "Move regularly from one household to another.",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר של הצעצועים העוברים בין משפחות רבות, 'rotate' פירושו לעבור באופן קבוע ממשפחה למשפחה."
+          },
+          {
+            "text": "Stay permanently with a single family once borrowed.",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך: הצעצועים דווקא לא נשארים אצל משפחה אחת, אלא חוזרים ומושאלים הלאה."
+          },
+          {
+            "text": "Take turns being cleaned by different volunteers.",
+            "k_code": "K-ROLE",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "הניקוי מבוצע על ידי מתנדבים, אך המילה 'rotate' בהרצאה מתארת את תנועת הצעצועים בין בתים, לא את חלוקת עבודת הניקוי."
+          }
+        ]
+      }
+    ],
+    "_key": "F6"
+  },
+  {
+    "title": "Resizing a Ring at the Jeweler's Bench",
+    "topic": "ring resizing",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Elena: To make this ring smaller, I cut through the band on one side with a fine saw blade, right where the join used to be.\nSam: So you're removing a piece of metal entirely?\nElena: Exactly. I measure how much needs to come out, cut that section free, and then bring the two open ends back together so they touch cleanly.\nSam: How do they stay together after that?\nElena: I heat the seam with a small torch and add a matching alloy that melts and flows into the gap, fusing the ends into one solid ring again.\nSam: Does the heating change the shape at all?\nElena: A little, so the last step is filing the seam smooth and rounding the band back on a steel mandrel until it sits evenly on your finger.\nSam: That sounds much more careful than I expected.\nElena: It has to be, otherwise the ring will read as thinner exactly where we joined it.",
+    "highlight_spans": [
+      "cut through the band on one side",
+      "heat the seam with a small torch",
+      "filing the seam smooth and rounding the band back on a steel mandrel"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first step Elena takes to make the ring smaller?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "To make this ring smaller, I cut through the band on one side with a fine saw blade, right where the join used to be."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "cutting a section from the band",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אלנה מסבירה שהיא חותכת חלק מהטבעת כדי להקטין אותה."
+          },
+          {
+            "text": "melting the entire ring down",
+            "k_code": "K_WRONG_MECH1",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "לא נאמר שהיא ממיסה את כל הטבעת, רק חותכת חלק ממנה."
+          },
+          {
+            "text": "hammering the band thinner",
+            "k_code": "K_WRONG_MECH2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "הפחתת עובי בפטיש אינה מוזכרת בתמליל."
+          },
+          {
+            "text": "soldering on a smaller clasp",
+            "k_code": "K_WRONG_SEQ",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הריתוך מוזכר בהמשך התהליך לחיבור הקצוות, לא כשלב ראשון של הוספת אבזם."
+          }
+        ]
+      },
+      {
+        "question_text": "How does Sam react after hearing the whole resizing process?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "That sounds much more careful than I expected."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "doubtful the ring will fit",
+            "k_code": "K_W1",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "סאם לא מביע ספק לגבי ההתאמה, רק הפתעה מהתהליך."
+          },
+          {
+            "text": "surprised at the process's complexity",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "סאם אומר שזה נשמע הרבה יותר קפדני משציפה, כלומר הוא מופתע."
+          },
+          {
+            "text": "worried the seam might show",
+            "k_code": "K_W2",
+            "fail_mode": "speaker-swap",
+            "explanation_he": "החשש מהתפר הנראה לעין נאמר על ידי אלנה, לא על ידי סאם."
+          },
+          {
+            "text": "impatient with how long it took",
+            "k_code": "K_W3",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "אין בתמליל שום רמז לחוסר סבלנות מצד סאם."
+          }
+        ]
+      }
+    ],
+    "_key": "F7"
+  },
+  {
+    "title": "Rebacking a Book Spine at the Bindery",
+    "topic": "book spine rebacking",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Priya: This old spine has cracked away from the boards, so the first thing I do is lift the original leather carefully with a bone knife.\nTom: You don't throw the old spine away?\nPriya: No, I save it, because once the book is repaired I'll paste that same piece back on top to keep the original look.\nTom: What happens underneath while it's off?\nPriya: I clean out the old glue, then attach a strip of new material across the spine so it bridges the boards and the pages again.\nTom: Is that strip strong enough by itself?\nPriya: It needs help, so I press it firmly and let it dry under weight overnight before touching the book again.\nTom: And that's when the old leather goes back on?\nPriya: Right, I paste it down last, working it into the grooves so the repair barely shows and the spine flexes normally when you open the covers.",
+    "highlight_spans": [
+      "lift the original leather carefully with a bone knife",
+      "attach a strip of new material across the spine",
+      "press it firmly and let it dry under weight overnight"
+    ],
+    "questions": [
+      {
+        "question_text": "What does Priya do first when repairing the spine?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "This old spine has cracked away from the boards, so the first thing I do is lift the original leather carefully with a bone knife."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "clean out the old glue",
+            "k_code": "K_WSEQ1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "ניקוי הדבק הישן מתרחש בשלב מאוחר יותר, לא כפעולה הראשונה."
+          },
+          {
+            "text": "attach a strip of new material",
+            "k_code": "K_WSEQ2",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הרצועה החדשה מוצמדת רק אחרי הסרת העור הישן וניקוי הדבק."
+          },
+          {
+            "text": "lift off the original leather",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה אומרת שהפעולה הראשונה היא הרמת העור המקורי בעדינות בעזרת סכין עצם."
+          },
+          {
+            "text": "press the spine under weight",
+            "k_code": "K_WSEQ3",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הלחיצה תחת משקל מתרחשת רק אחרי הצמדת הרצועה החדשה."
+          }
+        ]
+      },
+      {
+        "question_text": "Why does Priya paste the original leather back on last?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Right, I paste it down last, working it into the grooves so the repair barely shows and the spine flexes normally when you open the covers."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "so the new material looks finished",
+            "k_code": "K_W1",
+            "fail_mode": "unsupported-inference",
+            "explanation_he": "המטרה אינה עיצוב הרצועה החדשה אלא שמירה על המראה המקורי של הספר."
+          },
+          {
+            "text": "so the spine continues drying evenly",
+            "k_code": "K_W2",
+            "fail_mode": "process-conflation",
+            "explanation_he": "הייבוש תחת משקל כבר הושלם קודם, לפני החזרת העור המקורי."
+          },
+          {
+            "text": "so the boards stay tightly pressed",
+            "k_code": "K_W3",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "הלחיצה הייתה קשורה להצמדת הרצועה החדשה, לא לחיבור העור בסוף."
+          },
+          {
+            "text": "so the repair stays nearly invisible",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פריה מסבירה שהחזרת העור המקורי גורמת לכך שהתיקון כמעט ואינו נראה."
+          }
+        ]
+      }
+    ],
+    "_key": "F8"
+  },
+  {
+    "title": "Truing a Bicycle Wheel",
+    "topic": "bicycle wheel truing",
+    "format": "dialogue",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "explanation-chain",
+    "transcript": "Noah: Your wheel has a wobble, so I start by spinning it slowly in the stand and watching where the rim drifts sideways against this pointer.\nIvy: So you can see exactly where the bend is?\nNoah: Yes, and once I find the loose section, I turn the spoke nipples there with this small wrench, tightening some and loosening others.\nIvy: How do you know which spokes to adjust?\nNoah: The rim pulls toward whichever side has the tighter spokes, so I loosen that side slightly and tighten the opposite spokes to pull it back straight.\nIvy: Do you just do that once?\nNoah: No, I spin it again after every small adjustment and keep repeating the process until the rim runs true and barely brushes the pointer.\nIvy: It looks like patient work.\nNoah: It is, small turns matter more than big ones here.",
+    "highlight_spans": [
+      "spinning it slowly in the stand and watching where the rim drifts sideways",
+      "turn the spoke nipples there with this small wrench",
+      "spin it again after every small adjustment and keep repeating the process"
+    ],
+    "questions": [
+      {
+        "question_text": "How does Noah first locate the bend in the wheel?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "Your wheel has a wobble, so I start by spinning it slowly in the stand and watching where the rim drifts sideways against this pointer."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "by measuring the spoke lengths",
+            "k_code": "K_W1",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "אין בתמליל אזכור למדידת אורך החישורים."
+          },
+          {
+            "text": "by spinning the wheel against a pointer",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נח מסביר שהוא מסובב את הגלגל לאט ומתבונן בסטייה מול המצביע."
+          },
+          {
+            "text": "by removing the tire completely",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "הסרת הצמיג אינה מוזכרת כלל בתהליך."
+          },
+          {
+            "text": "by checking the tire pressure",
+            "k_code": "K_W3",
+            "fail_mode": "irrelevant-mechanism",
+            "explanation_he": "בדיקת לחץ אוויר אינה קשורה לאיתור העיוות בחישוק."
+          }
+        ]
+      },
+      {
+        "question_text": "What best describes Noah's overall approach to truing the wheel?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "No, I spin it again after every small adjustment and keep repeating the process until the rim runs true and barely brushes the pointer.",
+          "It is, small turns matter more than big ones here."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "small adjustments repeated until straight",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "נח חוזר על התאמות קטנות ובודק שוב ושוב עד שהחישוק ישר, ומדגיש שסיבובים קטנים חשובים יותר מגדולים."
+          },
+          {
+            "text": "one large adjustment fixes it fast",
+            "k_code": "K_RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זו טענה מנוגדת: נח אומר במפורש שסיבובים קטנים חשובים יותר מגדולים, לא תיקון גדול ומהיר."
+          },
+          {
+            "text": "spoke tension is set before spinning",
+            "k_code": "K_W1",
+            "fail_mode": "wrong-sequence",
+            "explanation_he": "הסיבוב הראשוני משמש לאיתור המיקום, וההתאמה של החישורים מגיעה אחריו, לא לפניו."
+          },
+          {
+            "text": "pointer alignment is checked only once",
+            "k_code": "K_W2",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "נח מדגיש שהוא בודק שוב ושוב אחרי כל התאמה, לא רק פעם אחת."
+          }
+        ]
+      }
+    ],
+    "_key": "F9"
+  },
+  {
+    "title": "The Routine at a Shoe-Shine Stand",
+    "topic": "shoe-shine polishing routine",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": "pivot",
+    "transcript": "At the shoe-shine stand on the corner, the routine always starts the same way. The shiner brushes off loose dust and dried mud with a stiff brush, working from the toe back toward the heel so grit does not get pressed into the leather. Next comes a thin layer of cream polish, rubbed in with a soft cloth in small circles until the color evens out across every scuff. The shiner lets that layer sit for a minute so the leather can absorb it fully before doing anything else. After that, a wax polish goes on in an even thinner coat, and this is buffed hard with a separate cloth, snapped tight between both hands, until the surface starts to catch the light. Some customers expect the whole process to take only a minute or two, yet a careful shiner spends closer to ten, since rushing the buffing stage leaves the wax looking cloudy instead of glossy.",
+    "highlight_spans": [
+      "brushes off loose dust and dried mud with a stiff brush",
+      "a thin layer of cream polish, rubbed in with a soft cloth",
+      "yet a careful shiner spends closer to ten"
+    ],
+    "questions": [
+      {
+        "question_text": "Which direction does the shiner brush the shoe first?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The shiner brushes off loose dust and dried mud with a stiff brush, working from the toe back toward the heel so grit does not get pressed into the leather."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "starting at the middle of the shoe and brushing outward",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "הכיוון ההפוך מהמצוין בתמליל, שהוא מהבוהן לעקב."
+          },
+          {
+            "text": "in small circles around the shoe",
+            "k_code": "K_W2",
+            "fail_mode": "process-conflation",
+            "explanation_he": "תנועה מעגלית מתוארת בשלב מריחת המשחה, לא בשלב הברשת האבק."
+          },
+          {
+            "text": "side to side across the sole",
+            "k_code": "K_W3",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "תנועה מצד לצד אינה מוזכרת כלל בתמליל."
+          },
+          {
+            "text": "from the toe to the heel",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מציין שהברשת מתבצעת מהבוהן לכיוון העקב."
+          }
+        ]
+      },
+      {
+        "question_text": "What does the narrator suggest about the time the polish routine takes?",
+        "question_type": "opinion",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Some customers expect the whole process to take only a minute or two, yet a careful shiner spends closer to ten, since rushing the buffing stage leaves the wax looking cloudy instead of glossy."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "it should take under a minute",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "המרצה אומר שהתהליך המקצועי לוקח קרוב לעשר דקות, לא פחות מדקה."
+          },
+          {
+            "text": "customers usually estimate the time correctly",
+            "k_code": "K_W2",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "המרצה מציין שציפיית הלקוחות שגויה, שכן התהליך לוקח הרבה יותר זמן."
+          },
+          {
+            "text": "it takes longer than most expect",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מנגיד בין הציפייה של הלקוחות לבין הזמן האמיתי שמקצוען מקדיש."
+          },
+          {
+            "text": "the buffing stage can be skipped",
+            "k_code": "K_W3",
+            "fail_mode": "invented-claim",
+            "explanation_he": "המרצה אומר שדילוג על שלב ההברקה משאיר את השעווה עכורה, לא שאפשר לדלג עליו."
+          }
+        ]
+      }
+    ],
+    "_key": "F10"
+  },
+  {
+    "title": "Restringing a Tennis Racket",
+    "topic": "tennis racket restringing",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Restringing a tennis racket at the shop follows a simple sequence. First the old strings are cut out from the center, released gradually so the frame does not flex unevenly while tension drops on one side only. Once the frame is bare, a fresh piece of string is threaded through the main holes, running vertically from top to bottom, and each pass is pulled to the exact tension the player asked for on the machine. After the vertical strings are locked in place with small knots at the frame edge, the cross strings are woven over and under them, one at a time, starting from the throat of the racket and working up toward the top. Each cross string is also pulled to tension before being tied off. The final step is trimming the loose ends close to the knots so nothing catches on a player's fingers during a match.",
+    "highlight_spans": [
+      "cut out from the center, released gradually so the frame does not flex unevenly",
+      "threaded through the main holes, running vertically from top to bottom",
+      "the cross strings are woven over and under them"
+    ],
+    "questions": [
+      {
+        "question_text": "Why are the old strings cut out gradually rather than all at once?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "First the old strings are cut out from the center, released gradually so the frame does not flex unevenly while tension drops on one side only."
+        ],
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "so the frame does not warp",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסביר שהחיתוך ההדרגתי מונע מהמסגרת להתעקם באופן לא אחיד."
+          },
+          {
+            "text": "so the new strings fit faster",
+            "k_code": "K_W1",
+            "fail_mode": "irrelevant-mechanism",
+            "explanation_he": "מהירות התקנת המיתרים החדשים אינה קשורה לסיבה שצוינה בתמליל."
+          },
+          {
+            "text": "so the knots stay tied longer",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "אין קשר בין חיתוך המיתרים הישנים לבין חוזק הקשרים החדשים."
+          },
+          {
+            "text": "so the machine reads tension correctly",
+            "k_code": "K_W3",
+            "fail_mode": "process-conflation",
+            "explanation_he": "קריאת המתיחה במכונה שייכת לשלב הכנסת המיתרים החדשים, לא להסרת הישנים."
+          }
+        ]
+      },
+      {
+        "question_text": "In what order are the cross strings woven in relative to the main strings?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "After the vertical strings are locked in place with small knots at the frame edge, the cross strings are woven over and under them, one at a time, starting from the throat of the racket and working up toward the top."
+        ],
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "before the vertical strings are tied",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "התמליל אומר שהמיתרים האנכיים נקשרים תחילה, ורק אז נארגים המיתרים הרוחביים."
+          },
+          {
+            "text": "after the vertical strings are secured",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מציין שרק לאחר שהמיתרים האנכיים נעולים במקומם, המיתרים הרוחביים נארגים."
+          },
+          {
+            "text": "at the same time as verticals",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "התהליך מתואר כרצף שלבים נפרד, לא כפעולה מקבילה."
+          },
+          {
+            "text": "before the old strings are removed",
+            "k_code": "K_W3",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "הסרת המיתרים הישנים היא השלב הראשון בתהליך כולו, לפני כל דבר אחר."
+          }
+        ]
+      }
+    ],
+    "_key": "F11"
+  },
+  {
+    "title": "Replacing a Spade Handle",
+    "topic": "garden spade handle replacement",
+    "format": "lecture",
+    "bucket": "s60",
+    "difficulty": 3,
+    "pivot_type": null,
+    "transcript": "Replacing a broken handle on a garden spade is mostly about removing the old wood cleanly. The repair starts with drilling out the rivets that hold the handle inside the metal collar, since prying the wood out with those still in place usually splits the collar. Once the rivets are gone, the cracked handle is knocked free with a mallet, leaving just the empty metal socket. A new handle, already shaped to match the socket, is tapped in from the top until it seats fully against the collar with no visible gap. Fresh holes are drilled through the collar and handle together so the new rivets line up exactly where the old ones sat. The rivets are hammered through and the ends filed flat. A quick wipe with an oiled cloth protects the fresh wood, and the tool is ready for the garden again, well before the end of the afternoon.",
+    "highlight_spans": [
+      "drilling out the rivets that hold the handle inside the metal collar",
+      "the cracked handle is knocked free with a mallet",
+      "tapped in from the top until it seats fully against the collar"
+    ],
+    "questions": [
+      {
+        "question_text": "What is the first thing done to remove the old handle?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": [
+          "The repair starts with drilling out the rivets that hold the handle inside the metal collar, since prying the wood out with those still in place usually splits the collar."
+        ],
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "prying the wood out directly",
+            "k_code": "K_W1",
+            "fail_mode": "reversed-logic",
+            "explanation_he": "התמליל מציין במפורש שניסיון להוציא את העץ בכוח לפני קידוח המסמרות בדרך כלל סודק את הצווארון."
+          },
+          {
+            "text": "sanding down the metal collar",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "ליטוש הצווארון אינו מוזכר כלל בתהליך."
+          },
+          {
+            "text": "drilling out the old rivets",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה אומר שהתיקון מתחיל בקידוח המסמרות שמחזיקות את הידית בתוך הצווארון המתכתי."
+          },
+          {
+            "text": "soaking the handle in water",
+            "k_code": "K_W3",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "השריה במים אינה חלק מהתהליך המתואר."
+          }
+        ]
+      },
+      {
+        "question_text": "Why are fresh holes drilled through the collar and new handle together?",
+        "question_type": "detail",
+        "target_zone": "late",
+        "anchor_back_sentences": [
+          "Fresh holes are drilled through the collar and handle together so the new rivets line up exactly where the old ones sat."
+        ],
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "so the handle absorbs less moisture",
+            "k_code": "K_W1",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "ספיגת לחות אינה קשורה לסיבת הקידוח המשותף."
+          },
+          {
+            "text": "so the collar can be resized",
+            "k_code": "K_W2",
+            "fail_mode": "invented-mechanism",
+            "explanation_he": "שינוי מידת הצווארון אינו מוזכר בתמליל."
+          },
+          {
+            "text": "so the mallet grip stays even",
+            "k_code": "K_W3",
+            "fail_mode": "irrelevant-mechanism",
+            "explanation_he": "אחיזת הפטיש אינה קשורה לקידוח החורים החדשים."
+          },
+          {
+            "text": "so the new rivets align correctly",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "המרצה מסביר שהקידוח המשותף מבטיח שהמסמרות החדשות יתיישרו בדיוק במקום הישן."
+          }
+        ]
+      }
+    ],
+    "_key": "F12"
+  },
+  {
+    "title": "LQA-PROD-F: long_dialogue (millinery_hat_blocking)",
+    "topic": "An apprentice milliner asks a senior milliner to explain the order of steps that turns steamed felt into a finished blocked hat.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Priya: Owen, before I ruin another hood, can you explain how steamed felt becomes a finished hat?\nOwen: Happy to. It starts with steaming. The felt hood goes over the kettle until the fibers soften enough to stretch without tearing.\nPriya: So steaming has to come first, no matter what?\nOwen: Right, because a stiff hood would crack the moment you pulled it down over the crown block. Once it softens, you ease it over the block by hand, working outward from the center until the dome sits flush.\nPriya: And the brim comes after the crown is set?\nOwen: It does. Because the crown has already taken its shape on the block, the loose felt hanging below it can be pulled flat and worked over the brim block without dragging the dome out of shape.\nPriya: However, doesn't the brim just flop back once you let go of it?\nOwen: It would, which is why the blocking cord goes on next. You tie it tightly around the base of the crown, right where the brim meets it, and that tension holds the brim's angle while everything dries.\nPriya: So the cord is doing more work than I assumed.\nOwen: Much more. People assume the crown block alone fixes the shape, but the block only holds the dome; it's really the cord's tension that locks the brim's angle in place. Without it, the felt would slowly relax back toward flat.\nPriya: Yet the cord stays on for the entire drying time?\nOwen: For hours, yes. Only once the felt is fully dry and rigid do we cut the cord away and move to pouncing, sanding the nap lightly so the surface looks even.\nPriya: I always assumed pouncing came before blocking.\nOwen: A common mix-up. Pouncing is strictly the final stage, done only after the shape has already become permanent.",
+    "questions": [
+      {
+        "question_text": "According to Owen, why must the felt be steamed before it goes over the crown block?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because unsoftened felt cracks when stretched over the block",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "אווין אומר במפורש שכובע קשה היה נסדק ברגע שמותחים אותו מעל בלוק הכתר, ולכן חובה לרכך קודם באדים."
+          },
+          {
+            "text": "Because the brim block cannot shape unsteamed felt properly",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "זו הטענה הנכונה לגבי בלוק הכתר, אך היא מיוחסת כאן בטעות לבלוק השוליים, שמופיע רק בשלב מאוחר יותר."
+          },
+          {
+            "text": "Because the crown is blocked before any steaming starts",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך סדר הפעולות: לפי השיחה האידוי קודם לעיצוב הכתר, לא להפך."
+          },
+          {
+            "text": "Because steaming removes natural oils before dyeing begins",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בשיחה כל אזכור של הסרת שמנים או צביעה; זהו פרט מומצא שנשמע סביר אך אינו נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Owen makes about what actually holds the brim's angle in place?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The crown block's tight fit keeps the brim from moving",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "זוהי טענה מתחרה סבירה, אך אווין אומר במפורש שהבלוק רק מחזיק את הכיפה, לא את זווית השוליים."
+          },
+          {
+            "text": "The cord's tension while drying is what fixes the brim's angle",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי שאווין מדגיש: המתח של החוט בזמן הייבוש הוא שקובע את זווית השוליים, לא הבלוק."
+          },
+          {
+            "text": "Pouncing smooths the surface enough to stop the brim sagging",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "פאונסינג מוזכר רק כשלב סופי של החלקת המשטח, ולא כמה שקובע את זווית השוליים."
+          },
+          {
+            "text": "Steaming softens felt permanently so it never relaxes back to flat",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "האידוי הוא רק ריכוך זמני; השיחה אומרת שבלי החוט הלבד היה נרגע בחזרה לשטוח, בניגוד לטענה כאן."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "a stiff hood would crack the moment you pulled it down over the crown block",
+      "it's really the cord's tension that locks the brim's angle in place"
+    ],
+    "_key": "F13"
+  },
+  {
+    "title": "LQA-PROD-F: long_dialogue (silversmithing)",
+    "topic": "An apprentice silversmith asks a master to explain the sequence of raising, annealing, planishing, and chasing that turns a flat disc into a finished bowl.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Mara: Devon, could you walk me through how a flat silver disc actually turns into a bowl? I never follow the order.\nDevon: Sure. It begins with raising. You hammer the flat disc over a stake in circles, moving the metal upward and inward until it starts to curve into a rough bowl shape.\nMara: And that's all done cold, straight through?\nDevon: No, that's the trouble. Hammering work-hardens the silver, so after a few circuits the metal turns stiff and would split if you kept going. That's why annealing comes next: you heat the bowl until it glows dull red, then quench it, and the metal softens again.\nMara: So raising and annealing just alternate back and forth?\nDevon: Exactly, several times, until the rough shape is deep enough. Once the form is close to finished, planishing takes over. You switch to a smooth, polished hammer and tap the whole surface in overlapping rows to erase the raising marks and true up the curve.\nMara: However, doesn't hammering that much just leave more dents in the metal?\nDevon: It would with the wrong hammer, but a planishing hammer has no sharp edge, so each blow flattens rather than gouges. People assume raising alone gives a bowl its final smooth surface, but it's really the planishing stage that removes the ridges and leaves the metal even and reflective.\nMara: And chasing is separate from all of that work?\nDevon: Completely separate. Chasing is decorative work done afterward, pushing patterns into the surface from the front with small punches, once the bowl's shape and finish are already settled.\nMara: Yet I've seen chasing tools that look almost like planishing hammers.\nDevon: They're shaped differently once you look closely. Chasing punches are narrow and pointed, built for fine detail, not for shaping the whole bowl at once.",
+    "questions": [
+      {
+        "question_text": "According to Devon, which of the following is NOT true about raising?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "It is done by hammering the disc over a stake",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: דבון אומר שהרייזינג נעשה בהלמת הדיסק מעל עמוד ברזל."
+          },
+          {
+            "text": "It gradually curves the metal upward and inward",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המתכת זזה כלפי מעלה ופנימה עד שנוצרת צורת קערה גסה."
+          },
+          {
+            "text": "It uses a hammer with no sharp edge to prevent dents",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו פרט שגוי המיוחס בטעות לרייזינג; זו למעשה תכונת הפטיש בשלב הפלנישינג, לא ברייזינג."
+          },
+          {
+            "text": "It must alternate with annealing to continue safely",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: המתכת מתקשה מההלמה ולכן צריך להחליף בין רייזינג לחישול שוב ושוב."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Devon makes about what actually gives a raised bowl its smooth, finished surface?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Raising alone smooths the surface once the shape is deep enough",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך דבון אומר במפורש שאנשים טועים לחשוב כך; ההחלקה בפועל מגיעה מהפלנישינג."
+          },
+          {
+            "text": "Annealing removes the hammer marks left behind by raising",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "החישול רק מרכך את המתכת שוב; הסרת סימני ההלמה מיוחסת בטעות לחישול במקום לפלנישינג."
+          },
+          {
+            "text": "Chasing punches flatten the ridges before any polishing begins",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "צ'ייסינג הוא עבודה דקורטיבית שמתרחשת רק אחרי שהצורה והגימור כבר קבועים; אין קשר להחלקת הבליטות."
+          },
+          {
+            "text": "Planishing with a smooth hammer removes the ridges and evens the surface",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי שדבון מדגיש: הפלנישינג עם הפטיש החלק הוא שמסיר את הבליטות ומחליק את המשטח."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "the metal turns stiff and would split if you kept going",
+      "it's really the planishing stage that removes the ridges and leaves the metal even and reflective"
+    ],
+    "_key": "F14"
+  },
+  {
+    "title": "LQA-PROD-F: long_dialogue (whisky_distilling)",
+    "topic": "An apprentice asks a master distiller to explain the chain from mashing and fermentation through the wash still and spirit still to maturation.",
+    "format": "dialogue",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "explanation-chain",
+    "transcript": "Fiona: Callum, can you explain how barley becomes whisky? I only know it involves stills somewhere.\nCallum: Gladly. It starts with mashing. Crushed malted barley is mixed with hot water in the mash tun, and the heat releases sugars from the grain into a sweet liquid called wort.\nFiona: So the sugar has to come out before anything else can happen?\nCallum: Exactly, because fermentation depends on it. Once the wort cools, yeast is added, and it feeds on those sugars, producing alcohol and carbon dioxide. Without the sugar from mashing, the yeast would have nothing to work on.\nFiona: And that fermented liquid goes straight to the still?\nCallum: To the wash still first. It's the larger of the two, and it boils off a rough, weak spirit from the fermented wash. However, that first pass alone isn't strong enough to bottle.\nFiona: So it has to be distilled again?\nCallum: Right, in the spirit still. That second, smaller still separates the batch into early, middle, and late portions of the run, keeping only the clean middle cut and discarding the rest.\nFiona: I assumed the wash still did that separating.\nCallum: A common assumption, but no. It's the spirit still, and specifically that middle cut, that actually determines the flavor and safety of what ends up in the cask; the wash still just concentrates the alcohol.\nFiona: Yet the spirit isn't finished even after the cut?\nCallum: Not close. It goes into oak casks for maturation, sometimes for many years, where the wood slowly shapes its color and flavor before it's ever called whisky.\nFiona: So maturation is the longest stage in the whole chain?\nCallum: By far. Mashing, fermentation, and the two stills can all finish within a single week, but maturation alone can stretch on for a decade before the spirit is finally ready.",
+    "questions": [
+      {
+        "question_text": "According to the conversation, who initially assumed the wash still was responsible for separating the cut?",
+        "question_type": "speaker_ref",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Fiona, before Callum explained the actual process to her",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "פיונה אומרת במפורש 'I assumed the wash still did that separating', וקאלום מתקן אותה."
+          },
+          {
+            "text": "Callum, before Fiona corrected his description of the stills",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך תפקידים: קאלום הוא זה שמסביר ומתקן, לא פיונה שמתקנת אותו."
+          },
+          {
+            "text": "A visiting cooper touring the distillery with Fiona",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בשיחה כל אזכור של חבתן מבקר; זהו פרט מומצא שאינו נתמך בתמליל."
+          },
+          {
+            "text": "Fiona, while asking about the mash tun's sugar extraction",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "ההנחה השגויה של פיונה נאמרה בהקשר לעמדות הזיקוק, לא בהקשר לגיגית המיצוי (mash tun)."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point Callum makes about what actually determines a whisky's flavor and safety?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The wash still's rough spirit already sets the whisky's final flavor",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך קאלום אומר שהעמדה הראשונה מייצרת רק רוח גולמית וחלשה, לא את הטעם הסופי."
+          },
+          {
+            "text": "The middle cut taken in the spirit still determines the flavor and safety",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: קאלום אומר במפורש שדווקא החתך האמצעי בעמדת הרוח הוא שקובע טעם ובטיחות."
+          },
+          {
+            "text": "Maturation in oak casks is what determines the spirit's safety",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "ההבשלה מעצבת צבע וטעם לאורך זמן, אך הבטיחות מיוחסת בשיחה לבחירת החתך, לא להבשלה."
+          },
+          {
+            "text": "Fermentation length is what determines how safe the final spirit is",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אורך התסיסה אינו מוזכר כלל כגורם בטיחות; זהו פרט מומצא שלא נתמך בתמליל."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "Without the sugar from mashing, the yeast would have nothing to work on",
+      "It's the spirit still, and specifically that middle cut, that actually determines the flavor and safety of what ends up in the cask"
+    ],
+    "_key": "F15"
+  },
+  {
+    "title": "LQA-PROD-F: long_lecture (tanning_leatherworking)",
+    "topic": "A lecture explaining how a hide moves through the beamhouse, liming, the tanning pit, and currying on its way to becoming finished leather.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Long before a hide becomes usable leather, it passes through the beamhouse, the first stage of a tannery. There, workers scrape away hair and flesh from the raw skin, using a curved blade drawn across a wooden beam. This cleaning has to happen before any tanning chemical will penetrate the hide evenly. Once the beamhouse work is finished, the hide moves into liming, where it soaks for days in a solution that loosens any remaining hair follicles and swells the fibers, opening the skin's structure so that tanning agents can later soak in fully. However, liming alone does not turn a hide into leather; it only prepares the fibers to accept treatment. The hide is then rinsed and lowered into the tanning pit, a deep vat where it rests among layers of ground tree bark for weeks or even months. It is this slow soak in the tanning pit, not the earlier liming, that actually converts the raw, rotting protein of the skin into a stable material that resists decay. Many assume the beamhouse does the real transformation, since that is where the hide first starts to look clean, but the pit is where the chemistry that defines leather actually happens. Yet even a fully tanned hide is still stiff and dull when it comes out of the pit. That is what currying corrects: skilled workers work oils and greases into the leather by hand, softening it and giving it the flexible, even finish that makes it usable for saddles, boots, or bookbindings. Without currying, tanned leather would remain too rigid for most everyday purposes.",
+    "questions": [
+      {
+        "question_text": "In this lecture, what does the word \"swells\" most nearly mean when describing what happens to the fibers during liming?",
+        "question_type": "vocab_in_context",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "Makes them shrink tightly together",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל לא מתאר התכווצות; הליים מתואר כפותח את מבנה הסיבים, לא מכווץ אותו."
+          },
+          {
+            "text": "Makes them harden and resist tanning agents",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך המשמעות: הליים דווקא פותח את הסיבים כדי שחומרי העיבוד יחדרו, לא סוגר עליהם."
+          },
+          {
+            "text": "Makes them expand and open up",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "בהקשר, 'swells' מתאר את הסיבים שמתרחבים ונפתחים, מה שמאפשר לחומרי העיבוד לחדור מאוחר יותר."
+          },
+          {
+            "text": "Makes them absorb bark tannins from the pit",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "ספיגת שברי הקליפה מתרחשת בשלב מאוחר יותר בבור השיזוף, לא במהלך שלב הליים עצמו."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about which stage actually turns a hide into leather?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "The beamhouse is what truly transforms the raw hide",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, שכן שם העור נראה נקי לראשונה, אך התמליל אומר במפורש שזו טעות נפוצה."
+          },
+          {
+            "text": "Currying is what gives the hide its final softness and flexibility",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "קארינג מתואר כשלב שמרכך ומגמר עור שכבר עבר שיזוף; ההמרה הכימית עצמה מיוחסת לבור השיזוף."
+          },
+          {
+            "text": "Liming alone chemically converts hide into finished leather",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל אומר במפורש שהליים רק מכין את הסיבים ואינו הופך את העור לעור מעובד בעצמו."
+          },
+          {
+            "text": "The tanning pit is what actually converts hide into stable leather",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שדווקא ההשריה הממושכת בבור השיזוף, לא הליים, היא שהופכת את העור ליציב."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "swells the fibers, opening the skin's structure so that tanning agents can later soak in fully",
+      "It is this slow soak in the tanning pit, not the earlier liming, that actually converts the raw, rotting protein of the skin into a stable material that resists decay"
+    ],
+    "_key": "F16"
+  },
+  {
+    "title": "LQA-PROD-F: long_lecture (wood_turning_lathe)",
+    "topic": "A lecture explaining how a block of wood moves through roughing, spindle turning, faceplate mounting, and parting on a lathe.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "A block of wood destined for the lathe begins its transformation with the roughing gouge, a heavy, curved tool used to knock the corners off a square blank and turn it into a rough cylinder as it spins. This first pass removes the most material and is deliberately crude; accuracy comes later. Once the blank is round, the turner shifts to spindle turning, shaping the cylinder between the two centers of the lathe into the curves, beads, and coves that give a chair leg or a candlestick its final profile. However, not every piece is held between centers. Bowls and platters are mounted differently, screwed onto a faceplate at one end only, which lets the turner hollow out the inside face without the second center getting in the way. It is this switch to faceplate mounting, more than any single tool, that actually makes bowl turning possible, since a spindle held at both ends could never be hollowed out from the open face. Many beginners assume the roughing gouge does most of the shaping work throughout a project, but once the rough cylinder exists, the finer tools take over almost entirely. Yet even after the shape is finished, the piece is still attached to the lathe. That is where the parting tool comes in: a narrow blade that cuts straight inward to separate the finished piece cleanly from the waste wood still gripped by the chuck.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, why is the first pass with the roughing gouge deliberately crude?",
+        "question_type": "detail",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 0,
+        "options": [
+          {
+            "text": "Because its only job is removing material and rough shaping",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "התמליל אומר במפורש שהמעבר הראשון מסיר הכי הרבה חומר ומכוון להיות גס בכוונה; הדיוק מגיע רק אחר כך."
+          },
+          {
+            "text": "Because spindle turning needs an imprecise starting shape",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "עיבוד הציר (spindle turning) הוא שלב הדיוק שמגיע אחרי הגלנדר הגס, ולא הסיבה לגסותו."
+          },
+          {
+            "text": "Because accuracy must come before the corners are removed",
+            "k_code": "K-REVERSE",
+            "fail_mode": "reversed",
+            "explanation_he": "זהו היפוך הסדר: לפי התמליל הסרת הפינות קודמת לדיוק, לא להפך."
+          },
+          {
+            "text": "Because the wood must cool before finer cuts are safe",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "אין בתמליל כל אזכור של קירור העץ; זהו פרט מומצא שנשמע סביר אך אינו נתמך."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually makes bowl turning possible?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 1,
+        "options": [
+          {
+            "text": "The roughing gouge alone makes bowl turning possible from the very first cut",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר שהגלנדר הגס רק מסיר חומר בהתחלה, לא מה שמאפשר עיבוד קערות."
+          },
+          {
+            "text": "Mounting the wood on a faceplate is what makes bowl turning possible",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שהמעבר להרכבה על לוח החזית הוא מה שמאפשר לחלל את הקערה מהצד הפתוח."
+          },
+          {
+            "text": "The parting tool is what allows a bowl to be hollowed out",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "כלי החיתוך (parting tool) משמש רק להפרדת החלק המוגמר בסוף התהליך, לא לחילול הקערה."
+          },
+          {
+            "text": "Spindle turning between centers is what allows bowls to be hollowed",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "עיבוד ציר בין שני מרכזים הוא בדיוק מה שמונע חילול; לכן קערות מורכבות על לוח חזית במקום זאת."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "removes the most material and is deliberately crude",
+      "It is this switch to faceplate mounting, more than any single tool, that actually makes bowl turning possible"
+    ],
+    "_key": "F17"
+  },
+  {
+    "title": "LQA-PROD-F: long_lecture (stone_quarrying_masonry)",
+    "topic": "A lecture explaining how a quarried stone moves through plug-and-feather splitting, dressing on the banker, and coursing on its way into a finished wall.",
+    "format": "lecture",
+    "bucket": "s90",
+    "difficulty": 4,
+    "pivot_type": "pivot",
+    "transcript": "Getting a usable block of stone out of a quarry face starts with plug-and-feather splitting. Workers drill a line of shallow holes along the stone, insert two curved metal feathers into each hole, then drive a steel plug between them with a hammer, one hole at a time, until the stress finally runs a clean crack the whole length of the line. This method lets quarrymen free a block without the shattering that blasting would cause. Once a rough block is free, it goes to the banker, the mason's sturdy bench, where dressing begins: a mason squares the block's faces with a chisel and mallet, working off the quarry marks left by the split. However, dressing alone does not make a wall; a beautifully squared block still has to fit against its neighbors. That fit depends on coursing, the practice of laying dressed stones in level, continuous rows so that the joints between one course align cleanly with the row above and below. It is coursing, not the dressing itself, that actually determines whether a wall stays strong under load, since poorly aligned joints concentrate weight onto single points rather than spreading it evenly across the row. Many people assume that fine dressing work is what gives a stone wall its strength, but even roughly dressed stone holds up well if the coursing is done correctly. Yet coursing decisions are made well before the mortar ever goes in, while the mason is still setting each stone dry to check the fit.",
+    "questions": [
+      {
+        "question_text": "According to the lecture, which of the following is NOT true about plug-and-feather splitting?",
+        "question_type": "negative",
+        "target_zone": "early",
+        "anchor_back_sentences": null,
+        "correct_option_index": 2,
+        "options": [
+          {
+            "text": "A neat row of evenly spaced holes is bored along the stone's face",
+            "k_code": "K-TRUE1",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל מתאר קידוח שורה של חורים לאורך האבן."
+          },
+          {
+            "text": "Metal feathers are inserted before the plug is driven in",
+            "k_code": "K-TRUE2",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: הנוצות המתכתיות מוכנסות לפני שהיתד מוכנס ונחבט בפטיש."
+          },
+          {
+            "text": "The stone is squared on the banker before any holes are drilled",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו פרט שגוי: ריבוע האבן על הספסל (הבנקר) קורה בשלב הדרסינג, אחרי הבקיעה, לא לפניה."
+          },
+          {
+            "text": "A steel plug is driven between the feathers with a hammer",
+            "k_code": "K-TRUE3",
+            "fail_mode": "true_statement",
+            "explanation_he": "זהו פרט נכון: התמליל מתאר במפורש הכאת יתד פלדה בין הנוצות בעזרת פטיש."
+          }
+        ]
+      },
+      {
+        "question_text": "What is the main point this lecture makes about what actually determines a stone wall's strength?",
+        "question_type": "main_idea",
+        "target_zone": "late",
+        "anchor_back_sentences": null,
+        "correct_option_index": 3,
+        "options": [
+          {
+            "text": "Fine dressing work is what determines a stone wall's strength",
+            "k_code": "K-RIVAL",
+            "fail_mode": "rival_claim",
+            "explanation_he": "טענה מתחרה סבירה, אך התמליל אומר במפורש שזו הנחה שגויה נפוצה; אפילו אבן גסה מחזיקה אם הקורסינג נכון."
+          },
+          {
+            "text": "Plug-and-feather splitting determines how strong the finished wall becomes",
+            "k_code": "K-ANCHOR",
+            "fail_mode": "anchor_swap",
+            "explanation_he": "שיטת הבקיעה קובעת רק איך משחררים בלוק מהמחצבה; החוזק הסופי מיוחס בתמליל לקורסינג, לא לבקיעה."
+          },
+          {
+            "text": "The mortar added after coursing is what gives a wall its strength",
+            "k_code": "K-NEW",
+            "fail_mode": "unsupported",
+            "explanation_he": "התמליל אומר שהחלטות הקורסינג נעשות עוד לפני שהמלט נכנס כלל; אין תמיכה לטענה שהמלט הוא מקור החוזק."
+          },
+          {
+            "text": "Coursing, the alignment of the stones, is what determines a wall's strength",
+            "k_code": "CORRECT",
+            "fail_mode": null,
+            "explanation_he": "זהו הרעיון המרכזי: התמליל קובע שדווקא הקורסינג, לא הדרסינג עצמו, הוא שקובע אם הקיר יישאר חזק תחת עומס."
+          }
+        ]
+      }
+    ],
+    "highlight_spans": [
+      "the stress finally runs a clean crack the whole length of the line",
+      "It is coursing, not the dressing itself, that actually determines whether a wall stays strong under load"
+    ],
+    "_key": "F18"
+  }
+]
