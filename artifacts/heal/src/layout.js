@@ -45,8 +45,9 @@ export async function renderLayout(root, activePath) {
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
-        <a class="nav-item${activePath==='/sentence-completion'?' active':''}" data-nav="/sentence-completion">
+        <a class="nav-item" style="opacity:.5;cursor:not-allowed">
           <span class="nav-icon">${ico.sentence}</span>השלמת משפטים
+          <span class="nav-badge">בקרוב</span>
         </a>
         <a class="nav-item" style="opacity:.5;cursor:not-allowed">
           <span class="nav-icon">${ico.read}</span>קריאה
