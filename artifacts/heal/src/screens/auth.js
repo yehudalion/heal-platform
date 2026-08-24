@@ -8,8 +8,8 @@ export function renderAuth(root) {
     <div class="auth-wrap fade-in">
       <div class="auth-card">
 
-        <div class="auth-logo">HE<em>AL</em></div>
-        <div class="auth-tagline">אוצר מילים &middot; תרגול יומי</div>
+        <div class="auth-logo">High<em>Score</em></div>
+        <div class="auth-tagline">ההכנה למבחן האנגלית החדש</div>
 
         <button class="btn-google" id="googleBtn">
           ${googleIcon}

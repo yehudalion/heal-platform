@@ -8,9 +8,9 @@ export function renderTopbar() {
   const who = guest ? 'אורח' : (cachedEmail || 'מחובר');
   return `
     <div class="topbar">
-      <a class="brand" href="#/fork">
-        <span class="brand-mark">HEAL</span>
-        <span class="brand-sub">אוצר מילים</span>
+      <a class="brand" href="#/home">
+        <span class="brand-mark">HS</span>
+        <span class="brand-sub">HighScore</span>
       </a>
       <div class="topbar-right">
         <span class="who" data-who>${who}</span>

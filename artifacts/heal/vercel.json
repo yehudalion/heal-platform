@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm install --no-package-lock",
+  "buildCommand": "npx vite build",
+  "outputDirectory": "dist/public"
+}

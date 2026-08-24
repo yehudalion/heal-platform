@@ -5,16 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.config.ts",
-    "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
-    "typecheck": "echo 'no typecheck (vanilla JS)'"
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
   },
   "devDependencies": {
-    "@replit/vite-plugin-cartographer": "catalog:",
-    "@replit/vite-plugin-dev-banner": "catalog:",
-    "@replit/vite-plugin-runtime-error-modal": "catalog:",
-    "@types/node": "catalog:",
-    "vite": "catalog:"
+    "vite": "^7.3.3"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
