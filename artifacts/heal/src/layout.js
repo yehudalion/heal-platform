@@ -4,7 +4,6 @@ import { getCurrentSession, isGuest, signOut } from './supabase.js';
 const SCREEN_TITLES = {
   '/home':                 'לוח בקרה',
   '/flashcards':           'כרטיסיות',
-  '/srs':                  'חזרה מרווחת',
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
   '/sentence-completion':  'השלמת משפטים',

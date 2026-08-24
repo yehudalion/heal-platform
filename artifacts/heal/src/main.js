@@ -5,7 +5,6 @@ import { supabase, isGuest, getCurrentSession } from './supabase.js';
 // ─── Screens ─────────────────────────────────────────────────────────────────
 import { renderHome }        from './screens/home.js';
 import { renderFlashcards }  from './screens/flashcards.js';
-import { renderSrs }         from './screens/srs.js';
 import { renderRephrasing }  from './screens/rephrasing.js';
 import { renderRephraseLearn }    from './screens/rephrase-learn.js';
 import { renderRephrasePractice } from './screens/rephrase-practice.js';
@@ -76,7 +75,6 @@ route('/onboarding', requireAuth(renderOnboarding));
 // New main routes
 route('/home',         requireOnboarded(renderHome));
 route('/flashcards',   requireAuth(renderFlashcards));
-route('/srs',          requireAuth(renderSrs));
 route('/rephrasing',   requireAuth(renderRephrasing));
 route('/rephrase-learn',    requireAuth(renderRephraseLearn));
 route('/rephrase-practice', requireAuth(renderRephrasePractice));

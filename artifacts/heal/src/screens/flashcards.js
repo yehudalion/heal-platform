@@ -1,15 +1,23 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
-import { getAllRatings } from '../supabase.js';
+import { getCurrentSession } from '../supabase.js';
+import { getDueCount, getSessionStats } from '../data/srs.data.js';
 
 export async function renderFlashcards(root) {
   await renderLayout(root, '/flashcards');
   const el = getPageContent();
   el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
 
-  const ratings  = await getAllRatings();
-  const easy     = ratings.filter(r => r.rating === 'easy').length;
-  const due      = ratings.length;
+  // Data layer only (ARCHITECTURE §2.11) — the old getAllRatings() call read
+  // from a `ratings` table that does not exist in the DB and always failed
+  // silently, showing 0/0 stats. Guests have no persisted SRS state.
+  const session = await getCurrentSession();
+  const userId  = session?.user?.id ?? null;
+  const [{ data: dueCount }, { data: stats }] = userId
+    ? await Promise.all([getDueCount(userId), getSessionStats(userId)])
+    : [{ data: 0 }, { data: null }];
+  const due  = dueCount || 0;
+  const easy = stats?.in_review || 0;
 
   el.innerHTML = `
     <div class="fade-in">

@@ -202,6 +202,31 @@ export async function rateWord(userId, wordId, rating, { currentState = {}, resp
 }
 
 /**
+ * Count of words currently due for review (state = review/relearning, due_at <= now).
+ * Lightweight — no word data fetched. Used by screens that only need the count
+ * (e.g. the flashcards landing page), not a full getDueWords() call.
+ * @param {string} userId
+ * @returns {{ data: number, error: object|null }}
+ */
+export async function getDueCount(userId) {
+  try {
+    const now = new Date().toISOString()
+    const { count, error } = await supabase
+      .from('srs_progress')
+      .select('word_id', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .in('state', ['review', 'relearning'])
+      .lte('due_at', now)
+
+    if (error) throw error
+    return { data: count || 0, error: null }
+  } catch (error) {
+    console.error('srs.data.getDueCount:', error)
+    return { data: 0, error }
+  }
+}
+
+/**
  * Get session stats for the analyze screen.
  * @param {string} userId
  * @returns {{ data: object|null, error: object|null }}
