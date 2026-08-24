@@ -153,7 +153,14 @@ function calculateNextState(current, rating) {
 export async function rateWord(userId, wordId, rating, { currentState = {}, responseTimeMs = null } = {}) {
   try {
     const defaultState = { state: 'new', interval_days: 0, ease: 2.5, reps: 0, lapses: 0 }
-    const current = { ...defaultState, ...currentState }
+    // Guard against callers passing partial state (e.g. a brand-new word
+    // has no prior reps/lapses/interval_days/ease) — an explicit `undefined`
+    // key would otherwise override the default via spread and corrupt the
+    // upsert (reps becomes NaN -> null, violating the NOT NULL constraint).
+    const cleanCurrentState = Object.fromEntries(
+      Object.entries(currentState).filter(([, v]) => v !== undefined)
+    )
+    const current = { ...defaultState, ...cleanCurrentState }
     const next = calculateNextState(current, rating)
 
     // Upsert srs_progress
