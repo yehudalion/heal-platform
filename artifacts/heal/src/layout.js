@@ -17,7 +17,7 @@ export async function renderLayout(root, activePath) {
   const user    = session?.user;
   const name    = user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
   const avatar  = user?.user_metadata?.avatar_url;
-  const title   = SCREEN_TITLES[activePath] || 'HEAL';
+  const title   = SCREEN_TITLES[activePath] || 'HighScore';
 
   const avatarHtml = avatar
     ? `<img src="${avatar}" alt="">`
@@ -29,8 +29,8 @@ export async function renderLayout(root, activePath) {
       <!-- SIDEBAR -->
       <nav class="sidebar" id="sidebar">
         <div class="brand">
-          <div class="brand-mark">H</div>
-          <div class="brand-name">HE<em>AL</em></div>
+          <div class="brand-mark">HS</div>
+          <div class="brand-name">High<em>Score</em></div>
         </div>
 
         <div class="nav-lbl">ראשי</div>

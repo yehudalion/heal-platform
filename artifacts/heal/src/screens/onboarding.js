@@ -36,7 +36,7 @@ export function renderOnboarding(root) {
   root.innerHTML = `
     <div class="auth-wrap fade-in">
       <div class="auth-card" style="max-width:430px">
-        <div class="auth-logo">HE<em>AL</em></div>
+        <div class="auth-logo">High<em>Score</em></div>
         <div class="auth-tagline">שתי שאלות קצרות ומתחילים</div>
 
         <div style="text-align:right;margin-top:1.4rem">
