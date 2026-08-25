@@ -162,6 +162,9 @@ a { text-decoration: none; color: inherit; }
 
 .page {
   flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
   padding: 2rem 3rem;
 }
 
@@ -238,10 +241,10 @@ a { text-decoration: none; color: inherit; }
 .btn-session-cta:hover { transform: scale(1.04); }
 
 /* ─── Module grid ─────────────────────────────── */
-.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 11px; }
+.module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 11px; }
 .mc {
   background: var(--card); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 1.1rem 1.2rem;
+  border-radius: var(--radius); padding: 1.4rem 1.25rem;
   cursor: pointer; transition: all .18s; position: relative; overflow: hidden;
 }
 .mc:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
@@ -1128,7 +1131,7 @@ a { text-decoration: none; color: inherit; }
   border-radius: var(--radius);
   padding: 14px 16px;
   margin: 1.1rem 0;
-  max-width: 560px;
+  max-width: 760px;
 }
 .wk-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
 .wk-lbl { font-size: .8rem; color: var(--muted); font-weight: 500; }
@@ -1140,10 +1143,10 @@ a { text-decoration: none; color: inherit; }
 .daily-cta {
   display: block;
   width: 100%;
-  max-width: 560px;
+  max-width: 760px;
   border: none;
   border-radius: var(--radius);
-  padding: 19px 20px;
+  padding: 26px 24px;
   text-align: right;
   font-family: inherit;
   background: var(--green);
@@ -1154,6 +1157,30 @@ a { text-decoration: none; color: inherit; }
 .daily-cta:disabled { background: var(--green-dark); cursor: default; box-shadow: none; }
 .daily-cta-title { display: block; font-size: 1.06rem; font-weight: 700; }
 .daily-cta-sub { display: block; font-size: .78rem; font-weight: 500; opacity: .92; margin-top: 4px; }
+
+/* Dashboard composition (2026-08-25).
+   Before: .page had no max-width so the column stretched to 1685px on a 1920
+   screen, while .wk-card / .daily-cta were pinned to 560px - two different
+   layouts stacked in one page - and .module-grid used auto-fill, which built
+   8 tracks for 4 cards and squeezed each card to 189px. All measured live.
+   The :has() guard means that if the home markup ever changes these rules
+   stop applying and the page falls back to the plain stacked layout above. */
+#page-content > .fade-in:has(> .wk-card) {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  column-gap: 16px;
+  align-items: start;
+}
+#page-content > .fade-in:has(> .wk-card) > .page-title  { grid-column: 1 / -1; grid-row: 1; }
+#page-content > .fade-in:has(> .wk-card) > .page-sub    { grid-column: 1 / -1; grid-row: 2; }
+#page-content > .fade-in:has(> .wk-card) > .daily-cta   { grid-column: 1;      grid-row: 3; max-width: none; }
+#page-content > .fade-in:has(> .wk-card) > .wk-card     { grid-column: 2;      grid-row: 3; margin: 0; max-width: none; }
+#page-content > .fade-in:has(> .wk-card) > .sec-title   { grid-column: 1 / -1; grid-row: 4; }
+#page-content > .fade-in:has(> .wk-card) > .module-grid { grid-column: 1 / -1; grid-row: 5; }
+
+@media (max-width: 900px) {
+  #page-content > .fade-in:has(> .wk-card) { display: block; }
+}
 
 /* ─── Mobile bottom nav (2026-08-17, minimal by decision) ───── */
 .bottomnav { display: none; }
