@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured, setGuest } from '../supabase.js';
+import { track } from '../lib/analytics.js';
 import { navigate } from '../router.js';
 
 const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.4-1.61 4.1-5.35 4.1A5.4 5.4 0 1 1 12 6.6c1.7 0 2.85.72 3.5 1.34l2.4-2.32C16.36 4.27 14.4 3.4 12 3.4 7.13 3.4 3.2 7.33 3.2 12s3.93 8.6 8.8 8.6c5.07 0 8.45-3.56 8.45-8.57 0-.58-.06-1.02-.1-1.43z"/></svg>`;
@@ -59,6 +60,7 @@ export function renderAuth(root) {
 
   root.querySelector('#googleBtn').addEventListener('click', async () => {
     if (!supabase) { setMsg('Supabase לא מוגדר.', true); return; }
+    track('auth_google_clicked');
     setMsg('מעביר ל-Google…');
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -78,10 +80,11 @@ export function renderAuth(root) {
       options: { emailRedirectTo: window.location.origin + window.location.pathname },
     });
     if (error) setMsg(error.message, true);
-    else setMsg('בדקו את תיבת הדוא״ל — הקישור יחבר אתכם.');
+    else { track('auth_magiclink_sent'); setMsg('בדקו את תיבת הדוא״ל — הקישור יחבר אתכם.'); }
   });
 
   root.querySelector('#guestBtn').addEventListener('click', () => {
+    track('guest_started');
     setGuest(true);
     navigate('/home');
   });

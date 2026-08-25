@@ -1,4 +1,5 @@
 import { navigate } from '../router.js';
+import { track } from '../lib/analytics.js';
 import { getCurrentSession } from '../supabase.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
 
@@ -107,6 +108,12 @@ function finishSession() {
     timestamp: Date.now(),
   };
   sessionStorage.setItem('hs_last_session_summary', JSON.stringify(summary));
+  track('vocab_session_completed', {
+    total:      summary.total,
+    first_good: summary.first_good,
+    recovered:  summary.recovered,
+    carry_over: summary.carry_over,
+  });
   navigate('/vocab-analyze');
 }
 

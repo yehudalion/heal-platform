@@ -1,3 +1,5 @@
+import { trackPageView } from './lib/analytics.js';
+
 const routes = new Map();
 
 export function route(path, handler) {
@@ -42,5 +44,7 @@ async function handle() {
   const path = raw.split(/[?#]/)[0] || '/';
   const handler = routes.get(path) || routes.get('/');
   if (!handler) return;
+  // Fire-and-forget, and a no-op while ANALYTICS_ENABLED is false.
+  trackPageView(path);
   await handler(rootEl);
 }

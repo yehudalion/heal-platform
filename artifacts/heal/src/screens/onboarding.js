@@ -117,6 +117,7 @@ export function renderOnboarding(root) {
       localStorage.setItem(GUEST_PROFILE_KEY, JSON.stringify({
         ...answers, onboarding_complete: true,
       }));
+      track('onboarding_completed', { as: 'guest', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
       navigate('/home');
       return;
     }
@@ -132,6 +133,7 @@ export function renderOnboarding(root) {
       submitBtn.textContent = 'בוא נתחיל ←';
       return;
     }
+    track('onboarding_completed', { as: 'user', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
     navigate('/home');
   });
 }
