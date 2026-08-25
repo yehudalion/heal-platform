@@ -6,6 +6,9 @@
 > כל פיצ'ר כאן תועד עם: מה הוא, למה נדחה, מה כבר קיים בשבילו, ומה נדרש לממשו.
 >
 > **כלל:** לפני שמוסיפים פיצ'ר מהרשימה הזו — לבדוק ב-TASKS.md שכל Phase הרלוונטי הושלם.
+>
+> **הבקלוג החי (מה פתוח עכשיו, חוצה־צ'אטים) יושב בפרויקט: `claude/BACKLOG_next.md`.**
+> המסמך הזה נשאר מה שהוא — פיצ'רים שנדחו בכוונה מה-MVP.
 
 ---
 
@@ -153,6 +156,33 @@ When the student opens the Hub, instead of presenting separate "go practice voca
 
 **Pedagogical rationale:**
 Mixed-interleaved practice has stronger retention than blocked practice (cognitive science: Rohrer & Taylor 2007). Students who get a "daily mission" sized to their declared budget have higher completion
+
+### F-OB02 | שליטה ידנית של התלמיד בהרכב הסשן
+
+**מה זה:** לתת לתלמיד לבחור *מה* לתרגל, *כמה*, ובאיזה סדר — במקום מנה יומית
+מחושבת בלבד. ארבעה כיוונים אפשריים, טרם הוכרע:
+1. בחירת אורך סשן לפני שמתחילים (5 / 10 / 20 דק') ולא רק בהגדרות
+2. בחירת מודול + כמות פריטים ידנית
+3. "תרגל עוד 5 מהסוג הזה" — כבר קיים ב-`rephrase-analyze.js`, להרחיב לכל המודולים
+4. יומן משימות בסגנון quest-log: התלמיד בוחר מתוך 4-5 אפשרויות פתוחות
+   במקום מסלול לינארי כפוי
+
+**למה נדחה:** ה-MVP נבנה סביב מנה יומית אחת מחושבת (F-OB01). שליטה ידנית
+מוסיפה מצבים ומסכים לפני שיש משתמשים שיגידו מה הם באמת רוצים.
+
+**מה קיים:** `getDailyPlan(userId, minutes)` ב-`src/data/plan.data.js` ·
+`user_profiles.daily_time_minutes` (נבחר פעם אחת באונבורדינג) ·
+`getWeakPoints()` שכבר יודע לזהות באילו סוגים התלמיד נופל ·
+תקדים ה-drill ב-`rephrase-analyze.js`.
+
+**מה נדרש:** הכרעה של ליאון איזה מהארבעה · מסך/שכבת בחירה לפני `/card`,
+`/rephrase-practice`, `/sc-practice` · הרחבת `plan.data.js` לקבל פרמטרים
+מפורשים במקום רק `minutes`.
+
+**רציונל מעבר לנוחות:** יושב ישירות על כלל הרווחה. תלמיד שמרגיש שהמערכת
+מכתיבה לו נוטש; תלמיד ששולט בקצב חוזר.
+
+**נוסף:** 25.8.2026, לבקשת ליאון.
 
 ---
 
