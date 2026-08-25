@@ -22,6 +22,7 @@ import { getLectures, getLectureQuestions, getRecentLectureIds, startSession, co
 import { ListeningItem }                 from './item-component.js';
 import { summarizeMistakes }             from './keys.js';
 import { navigate }                      from '../router.js';
+import { getSessionLength } from '../lib/sessionPrefs.js';
 import './session.css';
 
 // ─── Module-level session state ───────────────────────────────────────────────
@@ -79,8 +80,9 @@ export async function renderSession(root) {
 
 // ─── Item selection ───────────────────────────────────────────────────────────
 /**
- * Session shape: 1 warmup (easiest continuation) + up to 2 more continuations
- * + 1 lecture_qa when one is available. Recently-seen lectures are excluded.
+ * Session shape, sized by the learner's choice on the dashboard (default 4):
+ *   1 warmup (easiest continuation) + (n-2) continuations + 1 lecture_qa.
+ * A short session (2) is warmup + lecture_qa. Recently-seen lectures excluded.
  */
 async function _selectItems(userId) {
   const { data: recentIds } = await getRecentLectureIds(userId, { limit: 10 });
@@ -101,6 +103,7 @@ async function _selectItems(userId) {
     fetchPool('lecture_qa'),
   ]);
 
+  const target = getSessionLength('listening', 4);
   const items = [];
 
   // Warmup: easiest continuation
@@ -108,8 +111,9 @@ async function _selectItems(userId) {
   const byDiff = [...contShuffled].sort((a, b) => (a.difficulty ?? 3) - (b.difficulty ?? 3));
   if (byDiff[0]) items.push(byDiff[0]);
 
-  // Core: 2 more continuations
-  items.push(...contShuffled.filter(i => i.id !== items[0]?.id).slice(0, 2));
+  // Core: continuations up to (target - 2), leaving room for one lecture_qa
+  const moreConts = Math.max(0, target - 2);
+  items.push(...contShuffled.filter(i => i.id !== items[0]?.id).slice(0, moreConts));
 
   // Core: 1 lecture_qa (multi-question item) when the pool has one
   const lqaShuffled = [...lqaPool].sort(() => Math.random() - 0.5);

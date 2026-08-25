@@ -20,6 +20,7 @@ import { getCurrentSession }     from '../supabase.js';
 import { getListeningOverview } from '../data/listening.data.js';
 import { getProfile }            from '../data/profiles.data.js';
 import { navigate }              from '../router.js';
+import { lengthPicker }          from '../lib/sessionPrefs.js';
 import './dashboard.css';
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
@@ -58,6 +59,12 @@ function _render(root, overview, examDate) {
   // "First time" = has never practised here. Drives the flow, not a menu.
   const firstTime = sessions === 0 && answered === 0;
 
+  const picker = lengthPicker('listening', [
+    { v: 2, label: 'קצר',  sub: '2 קטעים · כ־5 דק׳'  },
+    { v: 4, label: 'רגיל', sub: '4 קטעים · כ־10 דק׳' },
+    { v: 6, label: 'ארוך', sub: '6 קטעים · כ־15 דק׳' },
+  ], 4);
+
   root.innerHTML = `
     <div class="ldash-body">
       <h1 class="ldash-title">פינת האזנה 🎧</h1>
@@ -82,8 +89,9 @@ function _render(root, overview, examDate) {
         </div>
       </div>
 
-      <!-- ── One path, no picker ── -->
+      <!-- ── One path; the learner chooses length, never layer (Lion 2026-08-25) ── -->
       <div class="ldash-main" style="gap:12px;">
+        ${firstTime ? '' : picker.html}
         <button class="btn-ldash-primary" id="btn-go" style="display:flex;justify-content:space-between;align-items:center;text-align:right;">
           <span>${firstTime ? '🎧 בוא נתחיל' : '🎧 המשך תרגול'}</span>
           <span>←</span>
@@ -104,6 +112,7 @@ function _render(root, overview, examDate) {
   // "למידה / תרגול / ניתוח" is OUR vocabulary for the 3-Layer Rule and stays
   // internal (Lion, 2026-08-16). The one exception he asked to keep: the student
   // may go back to Learn at any point, so it stays as a quiet secondary link.
+  picker.wire(root);
   root.querySelector('#btn-go').addEventListener('click', () =>
     navigate(firstTime ? '/listening/learn' : '/listening/session'));
   root.querySelector('#btn-relearn')?.addEventListener('click', () => navigate('/listening/learn'));

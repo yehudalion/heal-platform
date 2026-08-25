@@ -13,6 +13,7 @@
  */
 
 import { navigate, subAnchor } from '../router.js';
+import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getCurrentSession } from '../supabase.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -20,7 +21,7 @@ import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
 import { LEARN_SEEN_KEY } from './rephrase-learn.js';
 
 // ─── Tunables ────────────────────────────────────────────────────────────────
-const PACK_SIZE   = 5;    // questions per pack (display cadence)
+const PACK_SIZE   = 5;    // default pack size; the learner's choice on the gate overrides
 const WINDOW      = 10;   // rolling window for auto-leveling (SEPARATE from pack size)
 const MIN_WINDOW  = 5;    // don't adjust level until this many answers are in the window
 // LEVEL_MIN is 2, not 1, ON PURPOSE: the published pool covers L2–L5 only. A floor
@@ -128,8 +129,8 @@ async function loadPack(root) {
   // that one type again, not to hold a difficulty. Auto-levelling still runs on the
   // answers, so a focused detour does not freeze the learner's level.
   const { data, error } = focusKey
-    ? await fetchPracticeQuestionsByKey({ key: focusKey, limit: PACK_SIZE, excludeIds: answeredIds })
-    : await fetchPracticeQuestions({ level, limit: PACK_SIZE, excludeIds: answeredIds });
+    ? await fetchPracticeQuestionsByKey({ key: focusKey, limit: getSessionLength('rephrase', PACK_SIZE), excludeIds: answeredIds })
+    : await fetchPracticeQuestions({ level, limit: getSessionLength('rephrase', PACK_SIZE), excludeIds: answeredIds });
 
   if (error) { view = 'error'; draw(root); return; }
   if (!data || data.length === 0) { view = 'empty'; draw(root); return; }

@@ -1,5 +1,6 @@
 import { navigate } from '../router.js';
 import { track } from '../lib/analytics.js';
+import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getCurrentSession } from '../supabase.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
 
@@ -272,7 +273,7 @@ export async function renderCard(root) {
     return;
   }
 
-  const { data, error } = await getDueWords(userId, { limit: 20 });
+  const { data, error } = await getDueWords(userId, { limit: getSessionLength('vocab', 12) });
   if (error || !data?.length) {
     root.innerHTML = `<div class="vc-shell">
       <header class="vc-topbar">

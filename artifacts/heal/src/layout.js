@@ -1,5 +1,21 @@
 import { navigate } from './router.js';
 import { getCurrentSession, isGuest, signOut } from './supabase.js';
+import { isLive } from './lib/modules.js';
+
+// A nav item whose live/soon state comes from lib/modules.js — the single
+// source of truth for module availability. Shipping a module = flipping its
+// status THERE; this sidebar (and, once wired, home.js) follow automatically.
+function navItem(moduleId, icon, label, route, activePath) {
+  if (!isLive(moduleId)) {
+    return `<a class="nav-item" style="opacity:.5;cursor:not-allowed">
+          <span class="nav-icon">${icon}</span>${label}
+          <span class="nav-badge">בקרוב</span>
+        </a>`;
+  }
+  return `<a class="nav-item${activePath === route ? ' active' : ''}" data-nav="${route}">
+          <span class="nav-icon">${icon}</span>${label}
+        </a>`;
+}
 
 const SCREEN_TITLES = {
   '/home':                 'לוח בקרה',
@@ -44,14 +60,8 @@ export async function renderLayout(root, activePath) {
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
-        <a class="nav-item" style="opacity:.5;cursor:not-allowed">
-          <span class="nav-icon">${ico.sentence}</span>השלמת משפטים
-          <span class="nav-badge">בקרוב</span>
-        </a>
-        <a class="nav-item" style="opacity:.5;cursor:not-allowed">
-          <span class="nav-icon">${ico.read}</span>קריאה
-          <span class="nav-badge">בקרוב</span>
-        </a>
+        ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
+        ${navItem('reading', ico.read, 'קריאה', '/reading', activePath)}
 
         <div class="nav-lbl">חשבון</div>
         <a class="nav-item${activePath==='/progress'?' active':''}" data-nav="/progress">
