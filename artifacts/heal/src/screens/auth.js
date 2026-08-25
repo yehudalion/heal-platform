@@ -10,7 +10,7 @@ export function renderAuth(root) {
       <div class="auth-card">
 
         <div class="auth-logo">High<em>Score</em></div>
-        <div class="auth-tagline">ההכנה למבחן האנגלית החדש</div>
+        <div class="auth-tagline">ההכנה למבחן הלאל</div>
 
         <button class="btn-google" id="googleBtn">
           ${googleIcon}
@@ -38,8 +38,11 @@ export function renderAuth(root) {
         </div>
 
         <button id="guestBtn" style="width:100%;padding:.82rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:.9rem;font-weight:700;color:var(--text)">
-          המשך כאורח
+          הצצה כאורח
         </button>
+        <div style="margin-top:.45rem;font-size:.73rem;text-align:center;color:var(--muted);line-height:1.5">
+          כאורח אפשר לראות הכל — לתרגול ולשמירת התקדמות צריך חשבון חינם (10 שניות עם Google).
+        </div>
 
         <div id="notice" style="margin-top:.9rem;font-size:.82rem;text-align:center;color:var(--muted);min-height:1.2em"></div>
 

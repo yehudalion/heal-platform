@@ -126,7 +126,7 @@ function _showIntroModal(root) {
     <div class="ldash-modal" role="dialog" aria-modal="true">
       <h2 class="ldash-modal-title">פינת ההאזנה — איך זה עובד? 🎧</h2>
       <div class="ldash-modal-body">
-        <p>פינה זו מכינה אותך למבחן ההאזנה של HILAL.</p>
+        <p>פינה זו מכינה אותך לחלק ההאזנה של מבחן הלאל.</p>
         <p>בכל פגישה תשמע קטעים קצרים באנגלית ותענה על שאלות הבנה.</p>
         <p><strong>יש שני סוגי תרגילים:</strong></p>
         <ul>

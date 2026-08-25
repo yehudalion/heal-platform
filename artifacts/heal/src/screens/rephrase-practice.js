@@ -111,7 +111,7 @@ export async function renderRephrasePractice(root) {
   const session = await getCurrentSession();
   userId = session?.user?.id ?? null;
   if (!userId) {
-    root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">יש להתחבר כדי לתרגל.<br><a href="#/home">← דף הבית</a></div></div></div>`;
+    root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">התרגול שומר את ההתקדמות שלך, ולכן דורש חשבון חינם.<br><a href="#/">← הרשמה של 10 שניות</a> · <a href="#/home">דף הבית</a></div></div></div>`;
     return;
   }
 

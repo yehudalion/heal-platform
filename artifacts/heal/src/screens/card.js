@@ -265,7 +265,7 @@ export async function renderCard(root) {
       </header>
       <main class="vc-main">
         <div class="vc-card">
-          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">יש להתחבר לחשבון כדי לתרגל מילים.</p>
+          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">התרגול שומר את ההתקדמות שלך, ולכן דורש חשבון חינם — ההרשמה לוקחת 10 שניות עם Google.</p>
           <button class="btn-primary" style="display:block;margin:1.25rem auto 2rem" onclick="location.hash='/'">כניסה לחשבון</button>
         </div>
         <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
