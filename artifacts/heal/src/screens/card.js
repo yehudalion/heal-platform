@@ -250,7 +250,18 @@ export async function renderCard(root) {
   const session = await getCurrentSession();
   userId = session?.user?.id ?? null;
   if (!userId) {
-    root.innerHTML = '<div class="vc-shell"><p dir="rtl" style="padding:2rem">יש להתחבר כדי לתרגל מילים.</p></div>';
+    root.innerHTML = `<div class="vc-shell">
+      <header class="vc-topbar">
+        <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      </header>
+      <main class="vc-main">
+        <div class="vc-card">
+          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">יש להתחבר לחשבון כדי לתרגל מילים.</p>
+          <button class="btn-primary" style="display:block;margin:1.25rem auto 2rem" onclick="location.hash='/'">כניסה לחשבון</button>
+        </div>
+        <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
+      </main>
+    </div>`;
     return;
   }
 
