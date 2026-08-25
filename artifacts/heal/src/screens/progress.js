@@ -32,6 +32,8 @@ import { getCurrentSession } from '../supabase.js';   // auth only
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { getProfile } from '../data/profiles.data.js';
 import { getGuestProfile } from './onboarding.js';
+import { joinWaitlist } from '../data/waitlist.data.js';
+import { track } from '../lib/analytics.js';
 
 // A point whose lift clears this is worth calling out. Below it the differences
 // are not meaningful enough to name (lift ≈ 1 means "nothing to report").
@@ -128,8 +130,13 @@ export async function renderProgress(root) {
       <div class="lock-upsell">
         <div style="font-size:1.8rem;margin-bottom:.5rem">🔒</div>
         <h4 style="font-size:.95rem;font-weight:900;margin-bottom:.4rem">ניתוח מלא נעול — דרוש מסלול כסף</h4>
-        <p style="font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.9rem">תוכנית אישית מדויקת — אילו מילים ללמוד, אילו שאלות לתרגל, מה לעשות כל יום.</p>
-        <button class="btn-primary" style="background:var(--blue)">🎯 קבל תוכנית אישית ← ₪99 לספרינט</button>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.9rem">תוכנית אישית מדויקת — אילו מילים ללמוד, אילו שאלות לתרגל, מה לעשות כל יום. נפתח בקרוב.</p>
+        <form id="waitForm" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <input id="waitEmail" type="email" required placeholder="המייל שלך" dir="ltr"
+                 style="flex:1;min-width:180px;max-width:260px;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:.85rem">
+          <button class="btn-primary" type="submit">שמרו לי מקום במחיר השקה</button>
+        </form>
+        <p id="waitMsg" style="font-size:.78rem;color:var(--muted);margin-top:.6rem">בלי ספאם — עדכון אחד כשהמסלול נפתח, במחיר מוזל למצטרפים מוקדם.</p>
       </div>
 
       <!-- PRODUCT DECISION — reproduced verbatim. The old code invented a default of
@@ -141,6 +148,21 @@ export async function renderProgress(root) {
           : 'לא הוגדר תאריך בחינה בפרופיל.'}</span>
       </div>
     </div>`;
+
+  // Waitlist form — replaces the dead ₪99 button (Lion, 2026-08-25).
+  const form = el.querySelector('#waitForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = el.querySelector('#waitMsg');
+    const res = await joinWaitlist(el.querySelector('#waitEmail').value, 'progress');
+    if (res.invalid) { msg.textContent = 'כתובת המייל לא נראית תקינה — בדקו אותה.'; return; }
+    if (!res.ok)     { msg.textContent = 'השמירה נכשלה — נסו שוב עוד רגע.'; return; }
+    track('waitlist_joined', { source: 'progress', already: !!res.already });
+    form.style.display = 'none';
+    msg.textContent = res.already
+      ? '✓ המייל הזה כבר שמור אצלנו — נעדכן אתכם ראשונים.'
+      : '✓ שמור לכם מקום — נעדכן במייל כשהמסלול נפתח.';
+  });
 }
 
 // ─── /gap — redirect only ────────────────────────────────────────────────────

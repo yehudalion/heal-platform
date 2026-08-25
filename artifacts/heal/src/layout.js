@@ -1,6 +1,7 @@
 import { navigate } from './router.js';
 import { getCurrentSession, isGuest, signOut } from './supabase.js';
 import { isLive } from './lib/modules.js';
+import { getProfile, upsertProfile } from './data/profiles.data.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -73,13 +74,18 @@ export async function renderLayout(root, activePath) {
 
         <!-- streak pill removed 2026-08-17 — wellbeing rule (no streaks);
              replaced product-wide by the weekly pace widget on /home -->
-        <div class="sidebar-foot">
+        <div class="acct-menu" id="acctMenu" hidden>
+          <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
+          <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
+        </div>
+        <button class="sidebar-foot" id="acctBtn" type="button" title="חשבון">
           <div class="foot-av">${avatarHtml}</div>
-          <div style="flex:1;min-width:0">
+          <div style="flex:1;min-width:0;text-align:right">
             <div class="foot-name">${name}</div>
             <div class="foot-plan">תוכנית חינמית</div>
           </div>
-        </div>
+          <span class="acct-chev">⌄</span>
+        </button>
       </nav>
 
       <!-- MAIN -->
@@ -122,6 +128,135 @@ export async function renderLayout(root, activePath) {
       e.preventDefault();
       navigate(el.dataset.nav);
     });
+  });
+
+  wireAccountMenu(root, user);
+}
+
+// ─── Account menu: settings + sign-out (audit 2026-08-25 item 2) ─────────────
+// Before this there was NO way to sign out or to change the exam date /
+// daily minutes chosen at onboarding. Built as an overlay inside the layout
+// on purpose: no new route, so main.js (held by the SC chat) stays untouched.
+
+function ensureAcctStyles() {
+  if (document.getElementById('acct-css')) return;
+  const s = document.createElement('style');
+  s.id = 'acct-css';
+  s.textContent = `
+.sidebar-foot { background:none; border:0; border-top:1px solid var(--border); width:100%; cursor:pointer; font-family:inherit; }
+.sidebar-foot:hover { background: var(--green-light); }
+.acct-chev { color: var(--muted); font-size:.9rem; }
+.acct-menu { position:absolute; bottom:64px; right:12px; left:12px; background:var(--card);
+  border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:0 8px 24px rgba(0,0,0,.12); padding:5px; z-index:200; }
+.acct-item { display:block; width:100%; text-align:right; background:none; border:0; font-family:inherit;
+  font-size:.86rem; font-weight:600; padding:9px 11px; border-radius:7px; cursor:pointer; color:var(--text); }
+.acct-item:hover { background: var(--green-light); }
+.acct-item--quiet { color: var(--muted); font-weight:500; }
+.acct-overlay { position:fixed; inset:0; background:rgba(20,32,26,.45); z-index:300;
+  display:flex; align-items:center; justify-content:center; }
+.acct-card { background:var(--card); border-radius:var(--radius); padding:1.6rem 1.7rem; width:min(420px, 92vw);
+  display:flex; flex-direction:column; gap:1rem; }
+.acct-min { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+.acct-min button { border:1.5px solid var(--border); background:var(--card); border-radius:var(--radius-sm);
+  padding:9px 4px; font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
+.acct-min button.on { border-color:var(--green-dark); background:var(--green-light); color:var(--green-dark); }
+`;
+  document.head.appendChild(s);
+}
+
+function wireAccountMenu(root, user) {
+  ensureAcctStyles();
+  const btn  = root.querySelector('#acctBtn');
+  const menu = root.querySelector('#acctMenu');
+  if (!btn || !menu) return;
+
+  btn.addEventListener('click', (e) => { e.stopPropagation(); menu.hidden = !menu.hidden; });
+  // One global click-away closer for the whole app lifetime. renderLayout runs
+  // on every navigation, so a per-render document listener would pile up.
+  if (!document.__acctCloser) {
+    document.__acctCloser = true;
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.acct-menu').forEach(m => { m.hidden = true; });
+    });
+  }
+
+  root.querySelector('#acctSignout')?.addEventListener('click', async () => {
+    await signOut();
+    location.hash = '#/';
+    location.reload();
+  });
+
+  root.querySelector('#acctSettings')?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    menu.hidden = true;
+    await openSettingsOverlay(user);
+  });
+}
+
+async function openSettingsOverlay(user) {
+  // Current values: profile row for a signed-in user, localStorage for a guest.
+  // 'guest_profile' is onboarding.js's key — read directly to avoid importing a
+  // screen into the layout (see GUEST_PROFILE_KEY there; keep the two in sync).
+  let examDate = '', minutes = 20;
+  if (user?.id) {
+    const { data } = await getProfile(user.id);
+    examDate = data?.exam_date ?? '';
+    minutes  = data?.daily_time_minutes ?? 20;
+  } else {
+    try {
+      const g = JSON.parse(localStorage.getItem('guest_profile')) || {};
+      examDate = g.exam_date ?? ''; minutes = g.daily_time_minutes ?? 20;
+    } catch { /* defaults stand */ }
+  }
+
+  const MINUTES = [5, 10, 15, 20, 30, 45];
+  const ov = document.createElement('div');
+  ov.className = 'acct-overlay';
+  ov.innerHTML = `
+    <div class="acct-card" dir="rtl">
+      <div style="font-size:1.05rem;font-weight:900">הגדרות</div>
+      <label style="font-size:.83rem;font-weight:700">מתי הבחינה שלך?
+        <input type="date" id="setDate" value="${examDate}"
+          style="display:block;width:100%;margin-top:6px;padding:9px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit">
+      </label>
+      <div style="font-size:.83rem;font-weight:700">כמה דקות ביום?
+        <div class="acct-min" id="setMin" style="margin-top:6px">
+          ${MINUTES.map(m => `<button type="button" data-m="${m}" class="${m === minutes ? 'on' : ''}">${m} דק׳</button>`).join('')}
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-start">
+        <button class="btn-primary" id="setSave">שמירה</button>
+        <button class="acct-item acct-item--quiet" id="setCancel" style="width:auto">ביטול</button>
+      </div>
+      <div id="setMsg" style="font-size:.78rem;color:var(--muted)"></div>
+    </div>`;
+  document.body.appendChild(ov);
+
+  let chosen = minutes;
+  ov.querySelector('#setMin').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-m]');
+    if (!b) return;
+    chosen = Number(b.dataset.m);
+    ov.querySelectorAll('#setMin button').forEach(x => x.classList.toggle('on', x === b));
+  });
+  ov.addEventListener('click', (e) => { if (e.target === ov) ov.remove(); });
+  ov.querySelector('#setCancel').addEventListener('click', () => ov.remove());
+
+  ov.querySelector('#setSave').addEventListener('click', async () => {
+    const date = ov.querySelector('#setDate').value || null;
+    const msg  = ov.querySelector('#setMsg');
+    if (user?.id) {
+      const { error } = await upsertProfile(user.id, { exam_date: date, daily_time_minutes: chosen });
+      if (error) { msg.textContent = 'השמירה נכשלה — נסו שוב.'; return; }
+    } else {
+      try {
+        const g = JSON.parse(localStorage.getItem('guest_profile')) || {};
+        localStorage.setItem('guest_profile',
+          JSON.stringify({ ...g, exam_date: date, daily_time_minutes: chosen, onboarding_complete: true }));
+      } catch { msg.textContent = 'השמירה נכשלה בדפדפן הזה.'; return; }
+    }
+    ov.remove();
+    location.reload();   // simplest correct refresh: every screen re-reads the profile
   });
 }
 

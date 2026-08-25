@@ -8,6 +8,7 @@ const MAX_REQUEUES = 2;
 
 let queue = [];
 let idx = 0;
+let sessionTotal = 0;   // distinct words this session — for the 'מתוך N' counter
 let revealed = false;
 let mnemonicIdx = 0;
 let openPanel = null;
@@ -183,7 +184,7 @@ function draw(root) {
       <a class="brand-mark vc-brand" href="#/home">hSc</a>
       <div class="vc-topbar-right">
         <button class="card-help-btn" id="helpBtn" title="הסבר שוב">?</button>
-        <span class="card-counter">מילה ${counter}</span>
+        <span class="card-counter">מילה ${counter} מתוך ${sessionTotal}</span>
       </div>
     </header>
     <main class="vc-main">
@@ -291,6 +292,7 @@ export async function renderCard(root) {
 
   // Reset session state
   queue = [...data];
+  sessionTotal = data.length;
   idx = 0;
   revealed = false;
   openPanel = null;
