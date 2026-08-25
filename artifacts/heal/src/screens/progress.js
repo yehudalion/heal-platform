@@ -31,6 +31,7 @@ import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';   // auth only
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { getProfile } from '../data/profiles.data.js';
+import { getGuestProfile } from './onboarding.js';
 
 // A point whose lift clears this is worth calling out. Below it the differences
 // are not meaningful enough to name (lift ≈ 1 means "nothing to report").
@@ -43,7 +44,9 @@ function esc(s) {
 async function load() {
   const session = await getCurrentSession();
   const userId = session?.user?.id ?? null;
-  if (!userId) return { userId: null, reports: [], profile: null };
+  // Guests get the same local exam-date/minutes cold-start home.js already uses —
+  // without this the countdown banner below wrongly claimed no exam date was set.
+  if (!userId) return { userId: null, reports: [], profile: getGuestProfile() };
   const [reports, profileRes] = await Promise.all([
     getWeakPoints(userId),
     getProfile(userId),
