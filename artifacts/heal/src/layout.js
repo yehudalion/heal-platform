@@ -53,11 +53,17 @@ export async function renderLayout(root, activePath) {
         <a class="nav-item${activePath==='/home'?' active':''}" data-nav="/home">
           <span class="nav-icon">${ico.home}</span>לוח בקרה
         </a>
-        <a class="nav-item${activePath==='/flashcards'?' active':''}" data-nav="/flashcards">
-          <span class="nav-icon">${ico.cards}</span>כרטיסיות
-        </a>
 
+        <!-- 2026-08-26 (Lion): sidebar rebuilt to actually match live modules —
+             האזנה היתה חסרה מהסרגל לגמרי, ו"כרטיסיות" היה שם
+             שונה למה שהלוח הבית קורא לאותה מודול ("אוצר מילים"). -->
         <div class="nav-lbl">תרגול</div>
+        <a class="nav-item${activePath==='/listening'?' active':''}" data-nav="/listening">
+          <span class="nav-icon">${ico.listen}</span>האזנה
+        </a>
+        <a class="nav-item${activePath==='/flashcards'?' active':''}" data-nav="/flashcards">
+          <span class="nav-icon">${ico.cards}</span>אוצר מילים
+        </a>
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
