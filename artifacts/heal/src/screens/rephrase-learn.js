@@ -182,6 +182,17 @@ const BLOCKS = [
   },
 ];
 
+// Short, approved glosses reused by screens/progress.js to fix a real bug: the
+// cross-module report named a key (e.g. "עוגן") with zero context (Lion,
+// 2026-08-26 — "אני לא אוהב שזה חסר משמעות"). Pulled verbatim from each
+// block's `kicker` above — do not add new wording here, and do not reword the
+// kickers themselves without asking (same COPY IS APPROVED rule as the file
+// header). Only 3 of the 5 blocks have a kicker; 'added' and 'nearmiss' fall
+// back to their bare title wherever KEY_GLOSS is consulted.
+export const KEY_GLOSS = Object.fromEntries(
+  BLOCKS.filter((b) => b.kicker).map((b) => [b.id, b.kicker])
+);
+
 // ─── State ───────────────────────────────────────────────────────────────────
 let step = 1;
 
