@@ -14,6 +14,11 @@ export async function getWordsByImpact({ limit = 20, offset = 0, isPremium = fal
     let query = supabase
       .from('words')
       .select('id, headword, definition_he, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, impact_score, impact_percentile')
+      // Unvalidated words (impact_score IS NULL, e.g. the missing-words batch
+      // pending review) must never surface via importance ranking, regardless
+      // of tier. NULLS FIRST is Postgres' default on DESC, so without this
+      // filter they would outrank every real word. (Lion + Cowork, 2026-08-26)
+      .not('impact_score', 'is', null)
       .order('impact_score', { ascending: false })
       .range(offset, offset + limit - 1)
 
@@ -62,6 +67,8 @@ export async function searchWords(query, { isPremium = false } = {}) {
       .from('words')
       .select('id, headword, definition_he, impact_percentile')
       .or(`headword.ilike.%${query}%,definition_he.ilike.%${query}%`)
+      // Same reason as getWordsByImpact above — exclude unvalidated words.
+      .not('impact_score', 'is', null)
       .order('impact_score', { ascending: false })
       .limit(20)
 

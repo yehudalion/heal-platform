@@ -378,3 +378,24 @@
   text-align: center;
   margin: 2px 0 0;
 }
+
+/* ── Exercise-type split (Lion, 2026-08-26): continuation vs lecture_qa ── */
+.ldash-type-split {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ldash-type-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #E0EBE4);
+  border-radius: var(--radius-sm, 12px);
+  padding: 10px 14px;
+}
+.ldash-type-ico { font-size: 1.05rem; flex-shrink: 0; }
+.ldash-type-lbl { font-size: .85rem; font-weight: 600; color: var(--text, #1A2E22); flex: 1; }
+.ldash-type-val { font-size: .85rem; font-weight: 700; color: var(--green, #4CAF6F); white-space: nowrap; }
+.ldash-type-n { font-weight: 400; color: var(--muted, #7A8C80); font-size: .78rem; }
+.ldash-type-empty { color: var(--muted, #7A8C80); font-weight: 400; font-size: .8rem; }

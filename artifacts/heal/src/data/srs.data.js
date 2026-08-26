@@ -42,6 +42,11 @@ export async function getDueWords(userId, { limit = 20, isPremium = false } = {}
       let newQuery = supabase
         .from('words')
         .select('id, headword, definition_he, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, impact_score, impact_percentile')
+        // Unvalidated words (impact_score IS NULL) must never be picked as a
+        // "new word" here, regardless of tier. NULLS FIRST is Postgres' default
+        // on DESC, so without this filter they'd outrank every real word.
+        // (Lion + Cowork, 2026-08-26)
+        .not('impact_score', 'is', null)
         .order('impact_score', { ascending: false })
         .limit(newSlotsAvailable)
 

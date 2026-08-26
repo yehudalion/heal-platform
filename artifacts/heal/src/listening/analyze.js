@@ -14,6 +14,7 @@
  */
 import { getCurrentSession }                      from '../supabase.js';
 import { getListeningHistory, getRecentMistakes } from '../data/listening.data.js';
+import { renderTypeSplit }                       from './dashboard.js';
 import { summarizeMistakes }                      from './keys.js';
 import { navigate }                               from '../router.js';
 import './dashboard.css';
@@ -46,6 +47,18 @@ function _render(root, history, mistakes) {
   const totalQ   = history.reduce((s, h) => s + (h.total_questions ?? 0), 0);
   const totalOk  = history.reduce((s, h) => s + (h.correct_count ?? 0), 0);
   const pct      = totalQ > 0 ? Math.round((totalOk / totalQ) * 100) : null;
+
+  // Split by exercise type (Lion, 2026-08-26) — same shape as getListeningOverview's byType.
+  const _byType = { continuation: { q: 0, c: 0 }, lecture_qa: { q: 0, c: 0 } };
+  for (const h of history) {
+    const t = h.listening_lectures?.item_type;
+    if (t && _byType[t]) { _byType[t].q += h.total_questions ?? 0; _byType[t].c += h.correct_count ?? 0; }
+  }
+  const pctOf = (b) => (b.q > 0 ? Math.round((b.c / b.q) * 100) : null);
+  const byType = {
+    continuation: { questionsAnswered: _byType.continuation.q, accuracyPct: pctOf(_byType.continuation) },
+    lecture_qa:   { questionsAnswered: _byType.lecture_qa.q,   accuracyPct: pctOf(_byType.lecture_qa) },
+  };
 
   const { headline, details } = summarizeMistakes(mistakes.map(m => m.failMode));
 
@@ -80,6 +93,8 @@ function _render(root, history, mistakes) {
           </div>
         </div>
 
+        ${renderTypeSplit(byType)}
+
         <!-- ── Descriptive mistake summary ── -->
         <div class="ldash-main" style="text-align:right;">
           <p class="ldash-main-title" style="margin-bottom:8px;">על מה היו הטעויות בתרגולים האחרונים</p>
@@ -107,7 +122,7 @@ function _render(root, history, mistakes) {
           <div style="display:flex;flex-direction:column;gap:6px;">
             ${history.map(h => `
               <div class="ldash-stat-row">
-                <span class="ldash-stat-key">${escHtml(h.listening_lectures?.title || 'קטע')}</span>
+                <span class="ldash-stat-key">${h.listening_lectures?.item_type === 'lecture_qa' ? '🎧' : '📝'} ${escHtml(h.listening_lectures?.title || 'קטע')}</span>
                 <span class="ldash-stat-val">${h.correct_count ?? 0}/${h.total_questions ?? 0}</span>
               </div>
             `).join('')}

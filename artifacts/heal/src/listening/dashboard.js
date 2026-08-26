@@ -89,6 +89,10 @@ function _render(root, overview, examDate) {
         </div>
       </div>
 
+      <!-- ── By exercise type (Lion, 2026-08-26: stats were merged into one
+           number across the two exercise types) ── -->
+      ${!firstTime ? renderTypeSplit(overview?.byType) : ''}
+
       <!-- ── One path; the learner chooses length, never layer (Lion 2026-08-25) ── -->
       <div class="ldash-main" style="gap:12px;">
         ${firstTime ? '' : picker.html}
@@ -148,6 +152,28 @@ function _showIntroModal(root) {
     overlay.classList.add('ldash-modal-overlay--out');
     setTimeout(() => overlay.remove(), 250);
   }, { once: true });
+}
+
+/**
+ * A two-row breakdown of the two exercise types (continuation / lecture_qa),
+ * shared by the dashboard and the cumulative analyze screen (Lion, 2026-08-26).
+ * byType comes from getListeningOverview / a matching shape built in analyze.js.
+ */
+export function renderTypeSplit(byType) {
+  const row = (ico, lbl, stat) => {
+    const s = stat || { questionsAnswered: 0, accuracyPct: null };
+    return `<div class="ldash-type-row">
+      <span class="ldash-type-ico">${ico}</span>
+      <span class="ldash-type-lbl">${lbl}</span>
+      <span class="ldash-type-val">${s.accuracyPct != null
+        ? `${s.accuracyPct}% <span class="ldash-type-n">· ${s.questionsAnswered} שאלות</span>`
+        : `<span class="ldash-type-empty">עוד אין נתונים</span>`}</span>
+    </div>`;
+  };
+  return `<div class="ldash-type-split">
+    ${row('📝', 'השלמת משפט', byType?.continuation)}
+    ${row('🎧', 'הבנת קטע', byType?.lecture_qa)}
+  </div>`;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

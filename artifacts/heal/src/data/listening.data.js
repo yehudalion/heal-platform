@@ -205,24 +205,48 @@ export async function saveQuestionResponse(sessionId, questionId, userId, respon
  */
 export async function getListeningOverview(userId) {
   try {
+    // Joined with listening_lectures for item_type so the dashboard can show
+    // continuation vs lecture_qa separately (Lion, 2026-08-26: "no separation
+    // in explanation, selection or statistics between the two exercise types").
+    // The join is read-only and additive - byType is new, nothing existing changed shape.
     const { data: sessions, error: sErr } = await supabase
       .from('listening_sessions')
-      .select('id, completed_at, total_questions, correct_count')
+      .select('id, completed_at, total_questions, correct_count, listening_lectures(item_type)')
       .eq('user_id', userId)
       .not('completed_at', 'is', null)
       .order('completed_at', { ascending: false })
 
     if (sErr) throw sErr
 
-    const sessionsCompleted  = (sessions || []).length
-    const questionsAnswered  = (sessions || []).reduce((s, r) => s + (r.total_questions ?? 0), 0)
-    const correctAnswered    = (sessions || []).reduce((s, r) => s + (r.correct_count ?? 0), 0)
+    const rows = sessions || []
+    const byType = { continuation: { q: 0, c: 0 }, lecture_qa: { q: 0, c: 0 } }
+    for (const r of rows) {
+      const t = r.listening_lectures?.item_type
+      if (t && byType[t]) {
+        byType[t].q += r.total_questions ?? 0
+        byType[t].c += r.correct_count ?? 0
+      }
+    }
+    const pct = (b) => (b.q > 0 ? Math.round((b.c / b.q) * 100) : null)
+
+    const sessionsCompleted  = rows.length
+    const questionsAnswered  = rows.reduce((s, r) => s + (r.total_questions ?? 0), 0)
+    const correctAnswered    = rows.reduce((s, r) => s + (r.correct_count ?? 0), 0)
     const accuracyPct        = questionsAnswered > 0
       ? Math.round((correctAnswered / questionsAnswered) * 100)
       : null
-    const lastSessionAt      = sessions?.[0]?.completed_at ?? null
+    const lastSessionAt      = rows[0]?.completed_at ?? null
 
-    return { data: { sessionsCompleted, questionsAnswered, correctAnswered, accuracyPct, lastSessionAt }, error: null }
+    return {
+      data: {
+        sessionsCompleted, questionsAnswered, correctAnswered, accuracyPct, lastSessionAt,
+        byType: {
+          continuation: { questionsAnswered: byType.continuation.q, accuracyPct: pct(byType.continuation) },
+          lecture_qa:   { questionsAnswered: byType.lecture_qa.q,   accuracyPct: pct(byType.lecture_qa) },
+        },
+      },
+      error: null,
+    }
   } catch (error) {
     console.error('listening.data.getListeningOverview:', error)
     return { data: null, error }
@@ -287,7 +311,7 @@ export async function getListeningHistory(userId, { limit = 20 } = {}) {
   try {
     const { data, error } = await supabase
       .from('listening_sessions')
-      .select('id, lecture_id, started_at, completed_at, total_questions, correct_count, listening_lectures(title, difficulty)')
+      .select('id, lecture_id, started_at, completed_at, total_questions, correct_count, listening_lectures(title, difficulty, item_type)')
       .eq('user_id', userId)
       .not('completed_at', 'is', null)
       .order('started_at', { ascending: false })
