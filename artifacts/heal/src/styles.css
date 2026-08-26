@@ -4,34 +4,39 @@
 
 /* ─── Tokens ──────────────────────────────────── */
 :root {
-  --green:        #4CAF6F;
-  --green-dark:   #3a9558;
-  --green-light:  #E8F7EE;
-  --orange:       #FF7D3B;
-  --orange-light: #FFF0E8;
-  --yellow:       #FFD166;
-  --purple:       #7B61FF;
-  --purple-light: #EEF0FF;
-  --blue:         #3B8EEA;
-  --blue-light:   #EAF2FF;
-  --red:          #e53935;
-  --red-light:    #FFEBEE;
-  --bg:           #F7F4EF;
-  --card:         #FFFFFF;
-  --text:         #1C2B20;
-  --muted:        #7A8C80;
-  --border:       #E0EBE4;
-  --radius:       18px;
-  --radius-sm:    10px;
+  --green:        #1F5C43;
+  --green-dark:   #16412F;
+  --green-light:  #E6EFE9;
+  --orange:       #B08442;
+  --orange-light: #F2E9D8;
+  --yellow:       #C9A227;
+  --purple:       #6A5A7E;
+  --purple-light: #ECE7EE;
+  --blue:         #3D6B7D;
+  --blue-light:   #E3ECEB;
+  --red:          #B4553E;
+  --red-light:    #F4E4DD;
+  --bg:           #F5F1E8;
+  --card:         #FFFDF7;
+  --text:         #14201A;
+  --muted:        #5C6B60;
+  --border:       #E3DDCC;
+  --ink-13:       rgba(20,32,26,.13);
+  --radius:       8px;
+  --radius-sm:    5px;
   --sidebar-w:    220px;
+  --serif:        'Frank Ruhl Libre', 'Frank Ruehl CLM', Georgia, serif;
+  --eng:          'EB Garamond', Georgia, 'Times New Roman', serif;
+  --grain:        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.055'/></svg>");
 }
 
 /* ─── Reset ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Inter', 'Heebo', Arial, sans-serif;
+  font-family: 'Assistant', 'Heebo', Arial, sans-serif;
   background: var(--bg);
+  background-image: var(--grain);
   color: var(--text);
   min-height: 100vh;
   direction: rtl;
@@ -1211,3 +1216,86 @@ a { text-decoration: none; color: inherit; }
   /* keep content clear of the fixed bar */
   .page { padding-bottom: 76px; }
 }
+
+/* ═══════════════════════════════════════════════
+   Design 01 — "דיו ונייר" (2026-08-26)
+   Re-skin layer: typography, print details, and
+   gradient replacements. Tokens live in :root.
+   Fonts are loaded in index.html (Google Fonts):
+   Frank Ruhl Libre / Assistant / EB Garamond.
+   ═══════════════════════════════════════════════ */
+
+/* — Hebrew display serif: headings & big numbers — */
+.page-title, .brand-name, .auth-logo,
+.stat-val, .cdb-days, .cdb-score-n,
+.rp-stat-n, .wd-score-n, .fc-stat-n,
+.session-info h3, .rp-banner h2, .feat-hero h2,
+.ftitle, .tt-info-name, .upsell-banner h3,
+.srs-done h2, .va-title, .main-definition,
+.daily-cta-title {
+  font-family: var(--serif);
+}
+.page-title { font-weight: 700; font-size: 1.55rem; letter-spacing: -.3px; }
+.brand-name { font-weight: 900; letter-spacing: -.5px; }
+.daily-cta-title { font-size: 1.22rem; font-weight: 500; }
+
+/* — Section labels: quiet letter-spaced print labels — */
+.sec-title { font-size: .8rem; font-weight: 700; color: var(--muted); letter-spacing: .3px; }
+
+/* — English exam content: EB Garamond — */
+.fc-word, .card-headword, .fc-back-word, .fc-pos, .fc-back-pos,
+.ex-text, .quiz-orig, .qopt, .ea-sentence, .ea-opt,
+.fc-panel-ltr, .vc-panel-ltr, .vc-sent-text {
+  font-family: var(--eng);
+}
+.fc-word, .card-headword { font-weight: 600; }
+.qopt, .ea-opt { font-size: .98rem; }
+.ex-text, .quiz-orig, .ea-sentence { font-size: .98rem; }
+
+/* — Print-style tags instead of pills — */
+.nav-badge, .chip, .fbadge, .fc-tier-tag, .lock-tag,
+.bonus-pill, .session-chip, .upsell-feat {
+  border-radius: 3px;
+}
+.wk-dot { border-radius: 2px; }
+
+/* — Ink shadows: softer and warmer — */
+.mc:hover, .fcard:hover { box-shadow: 0 10px 26px -8px rgba(20,32,26,.18); }
+.vc-card, .va-card { box-shadow: 0 1px 2px rgba(20,32,26,.06), 0 10px 30px -14px rgba(20,32,26,.14); }
+.daily-cta { box-shadow: 0 1px 2px rgba(20,32,26,.16), 0 14px 34px -12px rgba(18,53,40,.42); }
+
+/* — Deep-green hero gradients (replace the old flat ones) — */
+.cdb { background: linear-gradient(158deg, #1F5C43 0%, #16412F 62%, #123528 100%); }
+.daily-cta { background: linear-gradient(158deg, #1F5C43 0%, #16412F 78%); }
+.daily-cta:disabled { background: #405F51; }
+.session-card { background: linear-gradient(150deg, #B08442 0%, #8F6A33 100%); }
+.btn-session-cta { color: #8F6A33; }
+.rp-banner { background: linear-gradient(150deg, #6A5A7E 0%, #55476A 100%); }
+.feat-hero.p { background: linear-gradient(150deg, #6A5A7E, #55476A); }
+.feat-hero.g { background: linear-gradient(150deg, #1F5C43, #16412F); }
+.feat-hero.o { background: linear-gradient(150deg, #B08442, #8F6A33); }
+.feat-hero.b { background: linear-gradient(150deg, #3D6B7D, #2F5260); }
+.upsell-banner { background: linear-gradient(150deg, #16412F, #123528); }
+.btn-upsell { background: var(--yellow); color: #123528; }
+.btn-upsell:hover { background: #D9B54A; }
+
+/* — Auth screen on paper — */
+.auth-wrap { background: var(--bg); background-image: var(--grain); }
+.auth-card {
+  background: var(--card);
+  border: 1px solid var(--ink-13);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(20,32,26,.06), 0 18px 44px -18px rgba(20,32,26,.22);
+}
+.auth-logo { color: var(--green); }
+
+/* — Full-screen practice shells keep the paper — */
+.vc-shell { background-image: var(--grain); }
+
+/* — Small print details — */
+.brand-mark { border-radius: 7px; background: var(--green); font-family: var(--serif); }
+.vc-brand { background: var(--green); font-family: var(--serif); }
+.nav-item.active::before { background: var(--green); }
+.foot-av { border-color: var(--green); color: var(--green); }
+.btn-google { border-radius: 6px; border-width: 1px; }
+.feat-modal { border: 1px solid var(--ink-13); }
