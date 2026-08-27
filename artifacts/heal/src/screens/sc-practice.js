@@ -85,17 +85,16 @@ function shuffle(arr) {
   }
   return a;
 }
-// Highlight each highlight_spans phrase once, then mark the blank. Escapes
-// first — spans are plain text, never HTML.
-function renderStem(stem, spans) {
-  let html = esc(stem);
-  for (const span of spans || []) {
-    const needle = esc(span);
-    if (!needle) continue;
-    const idx = html.indexOf(needle);
-    if (idx === -1) continue;
-    html = html.slice(0, idx) + `<mark class="sp-hl">${needle}</mark>` + html.slice(idx + needle.length);
-  }
+// Escapes first (stem is plain text, never HTML), then marks the blank.
+// NOTE (Lion, 2026-08-27): highlight_spans is intentionally NOT rendered
+// here anymore -- regular practice must not visually mark the "keys"
+// (that gives the strategy away before the learner looks for it
+// themselves). The textual hint (hintBox, below) still names the key on
+// request via the existing hint button. highlight_spans stays in the
+// data/columns for a possible future reveal-after-answer use, just not
+// live in the question.
+function renderStem(stem) {
+  const html = esc(stem);
   return html.replace('___', '<span class="sp-blank">___</span>');
 }
 // SEAM: mastery-gated hint (rephrase's §2.3 pattern) will wrap this later. For
@@ -271,7 +270,7 @@ function drawQuestion(root) {
 
   root.innerHTML = shell(`
     <div class="sp-card">
-      <div class="sp-stem" dir="ltr">${renderStem(q.stem, q.highlight_spans)}</div>
+      <div class="sp-stem" dir="ltr">${renderStem(q.stem)}</div>
       ${hintShown ? hintBox(q) : ''}
       <div class="sp-opts">${optsHtml}</div>
       <div class="sp-actions">${actions}</div>
