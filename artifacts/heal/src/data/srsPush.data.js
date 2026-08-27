@@ -1,46 +1,44 @@
 import { supabase } from '../supabase.js'
 
 /**
- * srsPush.data.js — "push the words you missed into your own vocabulary loop".
+ * srsPush.data.js — "add the words I missed to my vocabulary practice".
  *
  * WHY THIS EXISTS
  * A Sentence Completion item is answered by picking one of four words. When the
  * learner picks the wrong one, two vocabulary facts are exposed at once:
  *   1. the distractor they believed  — a word they think means something it doesn't
  *   2. the correct answer they missed — a word they did not know well enough
- * Both are genuine, personally-evidenced gaps, so both are pushed.
  *
- * HOW THIS DIFFERS FROM THE NORMAL VOCABULARY LOOP (important — Lion, 2026-08-26)
+ * LEARNER-INITIATED, NEVER AUTOMATIC (Lion, 2026-08-27)
+ * Nothing is ever pushed as a side effect of answering. A wrong answer only makes
+ * the OFFER available; the learner decides. The screen calls getPushableWords()
+ * to find out whether there is anything worth offering (and to label the button
+ * with the actual words), and calls pushMissedWords() only from the click
+ * handler. This is the wellbeing rule applied to the SRS queue: the learner's
+ * practice list is theirs, and it does not silently grow every time they slip.
+ *
+ * HOW THIS DIFFERS FROM THE NORMAL VOCABULARY LOOP
  * The daily loop picks words FOR the learner by importance (`impact_score`), and
  * srs.data.js#getDueWords deliberately refuses any word whose impact_score IS NULL
  * (unvalidated content must never be ranked as "important for the exam").
  * This module is the other door: nothing is ranked, nothing is chosen for the
- * learner. A word enters only because THIS learner personally got it wrong, so
- * impact_score is irrelevant here and is never consulted. That is exactly why the
- * 2,116 pending_review words (harvested from SC distractors, no exam-frequency
- * validation) are reachable through this path and through no other.
+ * learner. A word enters only because the learner personally asked for it after
+ * missing it, so impact_score is irrelevant here and is never consulted. That is
+ * exactly why the 2,116 pending_review words (harvested from SC distractors, no
+ * exam-frequency validation) are reachable through this path and through no other.
  *
  * WHY state = 'relearning' AND NOT 'new'
  * getDueWords() fetches due cards with state IN ('review','relearning') — 'new' is
  * NOT in that list, because a 'new' row there means "already picked as a new word".
  * A pushed word written as 'new' would therefore be invisible forever: excluded
  * from the new-word picker (it is already in srs_progress) and skipped by the due
- * query. 'relearning' + due_at = now is what makes it surface in the next session,
- * and it is also honest: the learner demonstrably failed this word.
+ * query. 'relearning' + due_at = now is what makes it surface in the next session.
  * `lapses` stays 0 on purpose — the miss happened in another module, and
  * getSessionStats() reads lapses > 2 as "struggling in SRS". We do not inflate it.
  *
  * NEVER overwrites existing progress: a word already in the learner's srs_progress
- * is skipped, so a mid-schedule card is never reset to relearning by an SC miss.
+ * is skipped, so a mid-schedule card is never reset by an SC miss.
  */
-
-/** Options that are phrases, not vocabulary items, have no row in `words`.
- *  Measured 2026-08-26 over all 800 SC questions: 2304/2400 distractor slots
- *  (96%) and 768/800 correct answers resolve to a headword. The rest are
- *  grammar-shaped options ("over the past decade", "he was interrogated about").
- *  Those are silently skipped — this feature is about vocabulary, and a grammar
- *  item has nothing to push. */
-const UNMATCHED_IS_NORMAL = true
 
 /** Canonical option indexes are 1-based (see sentenceCompletion.data.js#logAttempt). */
 const FIRST_OPTION = 1
@@ -52,50 +50,52 @@ function normalizeHeadword(text) {
   return String(text ?? '').trim().toLowerCase().replace(/\s+/g, ' ')
 }
 
+/** The two words a wrong answer exposes, normalized and de-duplicated.
+ *  Pure — no I/O. */
+function candidatesFor({ options = [], chosenOption, correctOption }) {
+  const optionAt = (idx) => options[idx - FIRST_OPTION]
+  const out = []
+  for (const [source, idx] of [['chosen', chosenOption], ['correct', correctOption]]) {
+    const headword = normalizeHeadword(optionAt(idx))
+    if (!headword) continue
+    if (out.some((c) => c.headword === headword)) continue
+    out.push({ headword, source })
+  }
+  return out
+}
+
 /**
- * Push the words exposed by one wrong Sentence Completion answer into the
- * learner's SRS queue.
+ * What COULD be added, without adding anything. Read-only.
  *
- * Safe to call on every answered question: it returns immediately (no I/O) when
- * the answer was correct. Safe to call twice for the same attempt: words already
- * in srs_progress are skipped.
+ * The screen uses this to decide whether to render the offer at all and what to
+ * put on the button ("הוסף ל- lucid ו- vivid לתרגול"). Returns an empty array when
+ * the answer was correct, when the options are phrases rather than vocabulary
+ * (grammar-shaped items like "over the past decade" have no row in `words`), or
+ * when the learner already has both words in their queue — in each of those cases
+ * the button should simply not appear.
  *
- * @param {string} userId - auth.users UUID
- * @param {object} attempt
- * @param {string[]} attempt.options        - the question's `options` array, canonical order
- * @param {number}   attempt.chosenOption   - CANONICAL 1-4 index the learner picked
- * @param {number}   attempt.correctOption  - CANONICAL 1-4 index of the right answer
- * @param {boolean}  attempt.isCorrect      - when true, nothing is pushed
- * @param {string}  [attempt.attemptId]     - sc_attempts.id; when given, what was
- *                                            pushed is recorded in `pushed_words`
- * @returns {Promise<{ data: { pushed: object[], skipped: object[] }|null, error: object|null }>}
+ * Measured 2026-08-26 over all 800 SC questions: 2304/2400 distractor slots (96%)
+ * and 768/800 correct answers resolve to a headword.
+ *
+ * @param {string} userId
+ * @param {{ options: string[], chosenOption: number, correctOption: number, isCorrect?: boolean }} attempt
+ * @returns {Promise<{ data: Array<{ wordId: string, headword: string, source: 'chosen'|'correct' }>, error: object|null }>}
  */
-export async function pushMissedWords(userId, {
+export async function getPushableWords(userId, {
   options = [],
   chosenOption,
   correctOption,
   isCorrect = false,
-  attemptId = null,
 } = {}) {
   try {
-    if (!userId) throw new Error('pushMissedWords: userId is required')
-    if (isCorrect) return { data: { pushed: [], skipped: [] }, error: null }
+    if (!userId || isCorrect) return { data: [], error: null }
 
-    // 1. The two words this miss exposed, de-duplicated and normalized.
-    const optionAt = (idx) => options[idx - FIRST_OPTION]
-    const candidates = []
-    for (const [source, idx] of [['chosen', chosenOption], ['correct', correctOption]]) {
-      const raw = optionAt(idx)
-      const headword = normalizeHeadword(raw)
-      if (!headword) continue
-      if (candidates.some((c) => c.headword === headword)) continue
-      candidates.push({ headword, source, raw })
-    }
-    if (!candidates.length) return { data: { pushed: [], skipped: [] }, error: null }
+    const candidates = candidatesFor({ options, chosenOption, correctOption })
+    if (!candidates.length) return { data: [], error: null }
 
-    // 2. Resolve to real rows in `words`. `ilike` with no wildcard is a
-    //    case-insensitive equality test. No impact_score / status filter here —
-    //    see the header note: this path is personal, not importance-ranked.
+    // `ilike` with no wildcard is a case-insensitive equality test. No
+    // impact_score / status filter — see the header: this path is personal,
+    // not importance-ranked.
     const { data: matches, error: lookupError } = await supabase
       .from('words')
       .select('id, headword')
@@ -103,16 +103,12 @@ export async function pushMissedWords(userId, {
     if (lookupError) throw lookupError
 
     const byHeadword = new Map((matches || []).map((w) => [normalizeHeadword(w.headword), w]))
-    const resolved = []
-    const skipped = []
-    for (const c of candidates) {
-      const word = byHeadword.get(c.headword)
-      if (word) resolved.push({ ...c, wordId: word.id })
-      else skipped.push({ ...c, reason: 'no_matching_word' })
-    }
-    if (!resolved.length) return { data: { pushed: [], skipped }, error: null }
+    const resolved = candidates
+      .map((c) => ({ ...c, wordId: byHeadword.get(c.headword)?.id }))
+      .filter((c) => c.wordId)
+    if (!resolved.length) return { data: [], error: null }
 
-    // 3. Never disturb a card the learner already has in flight.
+    // Words already in the learner's queue are not offered again.
     const { data: existing, error: existingError } = await supabase
       .from('srs_progress')
       .select('word_id')
@@ -121,19 +117,57 @@ export async function pushMissedWords(userId, {
     if (existingError) throw existingError
 
     const alreadyTracked = new Set((existing || []).map((r) => r.word_id))
-    const toInsert = resolved.filter((r) => !alreadyTracked.has(r.wordId))
-    for (const r of resolved) {
-      if (alreadyTracked.has(r.wordId)) skipped.push({ ...r, reason: 'already_in_srs' })
+    return {
+      data: resolved.filter((r) => !alreadyTracked.has(r.wordId)),
+      error: null,
     }
-    if (!toInsert.length) return { data: { pushed: [], skipped }, error: null }
+  } catch (error) {
+    console.error('srsPush.data.getPushableWords:', error)
+    return { data: [], error }
+  }
+}
 
-    // 4. Insert as due-now relearning cards (see header for why not 'new').
-    const now = new Date().toISOString()
-    const { data: inserted, error: insertError } = await supabase
+/**
+ * Add words to the learner's vocabulary queue. CALL THIS FROM A CLICK HANDLER
+ * ONLY — never automatically after an answer (see the header).
+ *
+ * Pass the array getPushableWords() returned, so the learner adds exactly what
+ * the button offered. Passing a subset is fine and is how a per-word button
+ * would work.
+ *
+ * Safe to call twice: words already in srs_progress are skipped.
+ *
+ * @param {string} userId - auth.users UUID
+ * @param {Array<{ wordId: string, headword: string, source?: string }>} words
+ * @param {{ attemptId?: string|null }} [options] - sc_attempts.id; when given,
+ *        what was added is recorded in that row's `pushed_words` column
+ * @returns {Promise<{ data: { added: object[] }|null, error: object|null }>}
+ */
+export async function pushMissedWords(userId, words = [], { attemptId = null } = {}) {
+  try {
+    if (!userId) throw new Error('pushMissedWords: userId is required')
+    const wanted = (words || []).filter((w) => w?.wordId)
+    if (!wanted.length) return { data: { added: [] }, error: null }
+
+    // Re-check against the queue at click time: the offer may have been rendered
+    // minutes ago, and the same word can have arrived from another question since.
+    const { data: existing, error: existingError } = await supabase
       .from('srs_progress')
-      .insert(toInsert.map((r) => ({
+      .select('word_id')
+      .eq('user_id', userId)
+      .in('word_id', wanted.map((w) => w.wordId))
+    if (existingError) throw existingError
+
+    const alreadyTracked = new Set((existing || []).map((r) => r.word_id))
+    const toInsert = wanted.filter((w) => !alreadyTracked.has(w.wordId))
+    if (!toInsert.length) return { data: { added: [] }, error: null }
+
+    const now = new Date().toISOString()
+    const { error: insertError } = await supabase
+      .from('srs_progress')
+      .insert(toInsert.map((w) => ({
         user_id: userId,
-        word_id: r.wordId,
+        word_id: w.wordId,
         state: 'relearning',
         interval_days: 0,
         ease: 2.5,
@@ -142,24 +176,27 @@ export async function pushMissedWords(userId, {
         due_at: now,
         updated_at: now,
       })))
-      .select('word_id')
     if (insertError) throw insertError
 
-    const pushed = toInsert.map((r) => ({ word_id: r.wordId, headword: r.headword, source: r.source }))
+    const added = toInsert.map((w) => ({
+      word_id: w.wordId,
+      headword: w.headword,
+      source: w.source ?? null,
+    }))
 
-    // 5. Record what was pushed on the attempt itself. Non-blocking: the card is
-    //    already in the queue, and losing this annotation must not fail the answer.
+    // Annotate the attempt. Non-blocking: the cards are already in the queue and
+    // losing this annotation must not fail the learner's click.
     if (attemptId) {
       supabase
         .from('sc_attempts')
-        .update({ pushed_words: pushed })
+        .update({ pushed_words: added })
         .eq('id', attemptId)
         .then(({ error }) => {
           if (error) console.warn('srsPush: pushed_words annotation failed (non-blocking):', error)
         })
     }
 
-    return { data: { pushed, skipped }, error: null }
+    return { data: { added }, error: null }
   } catch (error) {
     console.error('srsPush.data.pushMissedWords:', error)
     return { data: null, error }
@@ -167,9 +204,9 @@ export async function pushMissedWords(userId, {
 }
 
 /**
- * How many cards currently in the learner's queue arrived through this door.
- * Feeds a future "words you missed in Sentence Completion" line on the progress
- * screen. Counts sc_attempts rows that carry a non-empty pushed_words array.
+ * How many distinct words the learner has added through this door.
+ * Feeds a future "words you added from Sentence Completion" line on the
+ * progress screen.
  * @param {string} userId
  * @returns {Promise<{ data: number, error: object|null }>}
  */
