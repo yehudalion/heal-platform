@@ -14,6 +14,14 @@
  *   4. Module grid — direct access with REAL state per tile, not a static menu.
  *
  * All data flows through src/data/*.data.js (ARCHITECTURE §2.11).
+ *
+ * Sentence Completion tile unlocked 2026-08-25 (SITEMAP §3/§4 — the module's
+ * three layers are built and routed). Its attempt count comes for free from
+ * getWeakPoints(), which already fetches a 'sentenceCompletion' report now
+ * that weakpoints.data.js registers that module's collector — no extra fetch.
+ * NOT yet a leg in plan.data.js's daily plan (that composer currently splits
+ * time between exactly two modules; turning it into a three-way split is an
+ * architecture change of its own, flagged separately, not decided here).
  */
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
@@ -55,6 +63,7 @@ export async function renderHome(root) {
   const profile   = profileRes?.data ?? null;
   const srs       = srsRes?.data ?? null;
   const rephrase  = weakReports.find((r) => r.moduleId === 'rephrase') ?? null;
+  const sc        = weakReports.find((r) => r.moduleId === 'sentenceCompletion') ?? null;
   const listening = listeningRes?.data ?? null;
   const weekly    = weeklyRes?.data ?? { activeDays: [], target: 5 };
 
@@ -93,6 +102,7 @@ export async function renderHome(root) {
   const acquired  = srs?.in_review ?? 0;
   const dueCount  = plan?.legs?.find(l => l.moduleId === 'vocab')?.targetItems ?? null;
   const rpAttempts = rephrase?.attempts ?? 0;
+  const scAttempts = sc?.attempts ?? 0;
   const lisAnswered = listening?.questionsAnswered ?? 0;
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -140,11 +150,10 @@ export async function renderHome(root) {
           <div class="mc-name">ניסוח מחדש</div>
           <div class="mc-pct">${rpAttempts ? `${rpAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
-        <div class="mc mc-o mc-locked">
-          <span class="lock-tag">🔒 בקרוב</span>
+        <div class="mc mc-o" data-nav="/sentence-completion">
           <span class="mc-icon">✏️</span>
           <div class="mc-name">השלמת משפטים</div>
-          <div class="mc-pct">בקרוב</div>
+          <div class="mc-pct">${scAttempts ? `${scAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
       </div>
     </div>`;

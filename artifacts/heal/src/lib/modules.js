@@ -16,7 +16,7 @@ export const MODULES = [
   { id: 'listening', label: 'האזנה',          route: '/listening',           status: 'live' },
   { id: 'vocab',     label: 'אוצר מילים',      route: '/flashcards',          status: 'live' },
   { id: 'rephrase',  label: 'ניסוח מחדש',      route: '/rephrasing',          status: 'live' },
-  { id: 'sc',        label: 'השלמת משפטים',    route: '/sentence-completion', status: 'soon' },
+  { id: 'sc',        label: 'השלמת משפטים',    route: '/sentence-completion', status: 'live' },
 ];
 
 export function getModule(id) {

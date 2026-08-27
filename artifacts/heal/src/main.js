@@ -11,6 +11,9 @@ import { renderRephrasePractice } from './screens/rephrase-practice.js';
 import { renderRephraseAnalyze }  from './screens/rephrase-analyze.js';
 import { renderProgress, renderGap } from './screens/progress.js';
 import { renderSentenceCompletion } from './screens/sentence-completion.js';
+import { renderScLearn }    from './screens/sc-learn.js';
+import { renderScPractice } from './screens/sc-practice.js';
+import { renderScAnalyze }  from './screens/sc-analyze.js';
 
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
@@ -82,6 +85,9 @@ route('/rephrase-analyze',  requireAuth(renderRephraseAnalyze));
 route('/progress',     requireAuth(renderProgress));
 route('/gap',          requireAuth(renderGap));
 route('/sentence-completion', requireAuth(renderSentenceCompletion));
+route('/sc-learn',     requireAuth(renderScLearn));
+route('/sc-practice',  requireAuth(renderScPractice));
+route('/sc-analyze',   requireAuth(renderScAnalyze));
 
 // Keep old /card and /gap routes for backwards compatibility
 route('/card', requireAuth(renderCard));

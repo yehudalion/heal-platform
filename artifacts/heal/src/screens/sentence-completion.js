@@ -1,76 +1,82 @@
+/**
+ * src/screens/sentence-completion.js — the Sentence Completion module gate.
+ *
+ * Rewritten 2026-08-25 (SITEMAP §3/§4): the previous version advertised four
+ * invented "coming soon" feature cards (collocations / transition words / two
+ * placeholders) that were never part of this module's real design — none of
+ * that content exists in the DB or in scKeys.js. Replaced with the same
+ * pattern rephrasing.js uses: one job, send the learner into practice.
+ *
+ * NO first-visit logic lives here on purpose — sc-practice.js already gates on
+ * LEARN_SEEN_KEY and bounces a first-timer to /sc-learn, exactly like
+ * rephrasing.js / rephrase-practice.js. Duplicating that check here would give
+ * the gate two sources of truth.
+ *
+ * HARD rules honoured:
+ *  - No direct Supabase. The one real number on this page comes from
+ *    data/sentenceCompletion.data.js.
+ *  - No invented statistics.
+ *  - Wellbeing: a count only, same as rephrasing.js.
+ */
+
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
+import { isGuest } from '../supabase.js';
+import { fetchRecentAttempts } from '../data/sentenceCompletion.data.js';
 
-const FEATURES = [
-  {
-    id: 'collocations',
-    badge: 'פיצ\'ר 1',
-    title: 'צירופים באזור המילה',
-    title_en: 'Collocations',
-    desc: 'לומדים אילו מילים "גרות" ליד המילה שאתם לומדים — פעלים, שמות תואר ומילות קישור שמופיעות איתה בטקסטים אקדמיים.',
-    color: 'var(--blue)',
-    colorLight: 'var(--blue-light)',
-    status: 'soon',
-  },
-  {
-    id: 'transitions',
-    badge: 'פיצ\'ר 2',
-    title: 'מילות קישור',
-    title_en: 'Transition Words',
-    desc: 'however, therefore, nevertheless, consequently — לזהות ולהשתמש נכון במילות המעבר שמקבעות את הלוגיקה בין משפטים.',
-    color: 'var(--green)',
-    colorLight: 'var(--green-light)',
-    status: 'soon',
-  },
-  {
-    id: 'placeholder3',
-    badge: 'פיצ\'ר 3',
-    title: 'בקרוב',
-    title_en: '',
-    desc: '[PLACEHOLDER — תיאור הפיצ\'ר יתווסף בהמשך]',
-    color: 'var(--muted)',
-    colorLight: 'var(--bg)',
-    status: 'soon',
-  },
-  {
-    id: 'placeholder4',
-    badge: 'פיצ\'ר 4',
-    title: 'בקרוב',
-    title_en: '',
-    desc: '[PLACEHOLDER — תיאור הפיצ\'ר יתווסף בהמשך]',
-    color: 'var(--muted)',
-    colorLight: 'var(--bg)',
-    status: 'soon',
-  },
-];
+const BLURB = 'משפט אנגלי אחד עם מקום ריק, וארבע אופציות. רק אחת מתאימה למקום הזה בדיוק — לא כי המילים האחרות "לא קיימות", אלא כי הן לא מתאימות למבנה או להיגיון של המשפט. זו לא שאלת אוצר מילים, זו שאלה של איפה להסתכל.';
 
 export async function renderSentenceCompletion(root) {
   await renderLayout(root, '/sentence-completion');
   const el = getPageContent();
 
   el.innerHTML = `
-    <div class="fade-in">
+    <div class="fade-in" style="max-width:620px">
       <div class="page-title">השלמת משפטים</div>
-      <div class="page-sub">ארבעה מודולים שיעזרו לך לזהות ולהשתמש בנכון במילים בהקשר אקדמי.</div>
+      <div class="page-sub">Sentence Completion</div>
 
-      <div class="rp-banner" style="margin-bottom:1.6rem">
-        <div>
-          <h2>Sentence Completion</h2>
-          <p>מעבר מלמידת מילים בודדות — להבנה כיצד הן פועלות בתוך משפטים.</p>
+      <div class="sg-card">
+        <p class="sg-blurb">${BLURB}</p>
+        <button class="btn-primary sg-cta" id="sgStart">התחל תרגול ←</button>
+        <div class="sg-links">
+          <a class="sg-guide" href="#/sc-learn">📘 מדריך</a>
+          <a class="sg-guide" href="#/sc-analyze">📊 ניתוח</a>
         </div>
-        <div class="rp-stat"><div class="rp-stat-n">4</div><div class="rp-stat-l">מודולים</div></div>
-        <div class="rp-stat" style="opacity:.45"><div class="rp-stat-n">—</div><div class="rp-stat-l">בקרוב</div></div>
       </div>
 
-      <div class="sec-title">בחר מודול</div>
-      <div class="features-grid">
-        ${FEATURES.map((f, i) => `
-          <div class="fcard f${i + 1}" style="cursor:default;opacity:${f.status === 'soon' ? '.7' : '1'}">
-            <div class="fbadge">${f.badge}</div>
-            <div class="ftitle">${f.title}${f.title_en ? ` <span style="font-weight:400;font-size:.8em;color:var(--muted)">${f.title_en}</span>` : ''}</div>
-            <div class="fdesc">${f.desc}</div>
-            <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-top:auto">בקרוב ←</div>
-          </div>`).join('')}
-      </div>
+      <div class="sg-stat" id="sgStat" hidden></div>
     </div>`;
+
+  el.querySelector('#sgStart').addEventListener('click', () => navigate('/sc-practice'));
+
+  showPractisedCount(el);
+  ensureStyles();
+}
+
+/** The only number on this page, and only when it is real. Silent on guests,
+ *  on error, and on zero — same discipline as rephrasing.js. */
+async function showPractisedCount(el) {
+  if (isGuest()) return;
+  const { data, error } = await fetchRecentAttempts({ limit: 300 });
+  if (error || !data?.length) return;
+  const box = el.querySelector('#sgStat');
+  if (!box) return;
+  box.textContent = `${data.length} שאלות שתרגלת לאחרונה`;
+  box.hidden = false;
+}
+
+function ensureStyles() {
+  if (document.getElementById('sg-gate-css')) return;
+  const s = document.createElement('style');
+  s.id = 'sg-gate-css';
+  s.textContent = `
+.sg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.6rem}
+.sg-blurb{font-size:.95rem;line-height:1.8;color:var(--text)}
+.sg-cta{width:100%;margin-top:1.4rem;padding:.85rem 1rem;font-size:1rem}
+.sg-links{display:flex;justify-content:center;gap:1.4rem;margin-top:.9rem}
+.sg-guide{color:var(--green-dark);font-weight:700;font-size:.85rem;text-decoration:none}
+.sg-guide:hover{text-decoration:underline}
+.sg-stat{margin-top:1rem;text-align:center;font-size:.82rem;color:var(--muted)}
+`;
+  document.head.appendChild(s);
 }

@@ -45,6 +45,7 @@
 
 import { supabase } from '../supabase.js'
 import { resolveTrigger } from '../lib/keys.js'
+import { resolveKey } from '../lib/scKeys.js'
 
 // Below this many attempts a module reports 'insufficient_data' and NO numbers.
 // A trend needs a sample; a single bad session is not a trend (Lion, 2026-08-05).
@@ -147,12 +148,51 @@ async function collectRephrase(userId, { attemptLimit = 2000 } = {}) {
   return { moduleId: 'rephrase', moduleLabel: 'ניסוח מחדש', attempts, tallies }
 }
 
+/**
+ * Sentence Completion collector.
+ *
+ * Unlike Rephrase, the label here belongs to the QUESTION (one clue_code per
+ * row), not to a specific distractor — so exposure is per ATTEMPT, one label
+ * per attempt, not three. resolveKey() is the same function sc-practice.js and
+ * sc-analyze.js use, so an unresolvable clue_code is excluded here exactly as
+ * it would be from a screen — no attempt is silently double-counted.
+ */
+async function collectSentenceCompletion(userId, { attemptLimit = 2000 } = {}) {
+  const { data, error } = await supabase
+    .from('sc_attempts')
+    .select(`
+      is_correct,
+      sentence_completion_questions ( clue_code )
+    `)
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(attemptLimit)
+
+  if (error) throw error
+
+  const tallies = {}
+  let attempts = 0
+
+  for (const row of data || []) {
+    const q = row.sentence_completion_questions
+    if (!q) continue
+    const key = resolveKey(q.clue_code)
+    if (!key) continue
+    attempts += 1
+    if (!tallies[key.id]) tallies[key.id] = { label: key.label, exposures: 0, misses: 0 }
+    tallies[key.id].exposures += 1
+    if (!row.is_correct) tallies[key.id].misses += 1
+  }
+
+  return { moduleId: 'sentenceCompletion', moduleLabel: 'השלמת משפטים', attempts, tallies }
+}
+
 // Registry. A module appears here only once it really implements a collector —
 // no placeholder entries, because a fabricated 'not_started' for an unbuilt module
 // reads to the learner as "you haven't practised this yet".
 // TODO T044+: vocabulary (label = the word itself) and listening (single label,
 // "כיוון") plug in here.
-const COLLECTORS = [collectRephrase]
+const COLLECTORS = [collectRephrase, collectSentenceCompletion]
 
 /**
  * The contract. Returns one report per module that implements it.
