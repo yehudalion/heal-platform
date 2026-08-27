@@ -7,7 +7,7 @@
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: var(--bg, #F5F8F6);
+  background: var(--bg, #F5F1E8);
 }
 
 /* ── Loading ──── */
@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   font-size: 0.9rem;
 }
 
@@ -54,7 +54,7 @@
 .sess-header-title {
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   flex: 1;
   text-align: center;
 }
@@ -62,7 +62,7 @@
 .btn-sess-exit {
   background: none;
   border: none;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   font-size: 1.1rem;
   cursor: pointer;
   padding: 4px 8px;
@@ -86,7 +86,7 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
 }
 
 .sess-dots {
@@ -99,21 +99,21 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--border, #E0EBE4);
+  background: var(--border, #E3DDCC);
   transition: background 0.2s;
   flex-shrink: 0;
 }
 
-.sess-dot--done   { background: var(--green, #4CAF6F); }
+.sess-dot--done   { background: var(--green, #1F5C43); }
 .sess-dot--active {
-  background: var(--green, #4CAF6F);
+  background: var(--green, #1F5C43);
   box-shadow: 0 0 0 3px rgba(76, 175, 111, 0.22);
 }
 
 /* ── Warmup brief card ──── */
 .sess-card {
-  background: var(--card, #fff);
-  border: 1px solid var(--border, #E0EBE4);
+  background: var(--card, #FFFDF7);
+  border: 1px solid var(--border, #E3DDCC);
   border-radius: var(--radius, 18px);
   padding: 28px 20px 24px;
   display: flex;
@@ -128,13 +128,13 @@
 .sess-card-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   margin: 0;
 }
 
 .sess-card-sub {
   font-size: 0.88rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   line-height: 1.6;
   margin: 0;
   max-width: 300px;
@@ -152,7 +152,7 @@
 
 .btn-sess-primary {
   padding: 13px 24px;
-  background: var(--green, #4CAF6F);
+  background: var(--green, #1F5C43);
   color: #fff;
   border: none;
   border-radius: var(--radius-sm, 12px);
@@ -171,8 +171,8 @@
 .btn-sess-secondary {
   padding: 10px 24px;
   background: transparent;
-  color: var(--muted, #7A8C80);
-  border: 1.5px solid var(--border, #E0EBE4);
+  color: var(--muted, #5C6B60);
+  border: 1.5px solid var(--border, #E3DDCC);
   border-radius: var(--radius-sm, 12px);
   font-size: 0.88rem;
   cursor: pointer;
@@ -183,12 +183,12 @@
   direction: rtl;
 }
 
-.btn-sess-secondary:active { border-color: var(--muted, #7A8C80); }
+.btn-sess-secondary:active { border-color: var(--muted, #5C6B60); }
 
 /* ── Cooldown / Summary ──── */
 .sess-summary {
-  background: var(--card, #fff);
-  border: 1px solid var(--border, #E0EBE4);
+  background: var(--card, #FFFDF7);
+  border: 1px solid var(--border, #E3DDCC);
   border-radius: var(--radius, 18px);
   padding: 28px 20px 24px;
   display: flex;
@@ -204,7 +204,7 @@
 .sess-summary-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   margin: 0;
 }
 
@@ -225,20 +225,20 @@
 .sess-stat-val {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--green, #4CAF6F);
+  color: var(--green, #1F5C43);
   line-height: 1.1;
 }
 
 .sess-stat-lbl {
   font-size: 0.68rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .sess-insight {
   font-size: 0.9rem;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   line-height: 1.55;
   margin: 0;
   padding: 12px 16px;
@@ -263,13 +263,13 @@
 .sess-readiness-val {
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--green, #4CAF6F);
+  color: var(--green, #1F5C43);
   line-height: 1.1;
 }
 
 .sess-readiness-lbl {
   font-size: 0.72rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

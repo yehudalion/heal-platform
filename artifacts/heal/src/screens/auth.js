@@ -37,7 +37,7 @@ export function renderAuth(root) {
           <div style="flex:1;height:1px;background:var(--border)"></div>
         </div>
 
-        <button id="guestBtn" style="width:100%;padding:.82rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:.9rem;font-weight:700;color:var(--text)">
+        <button id="guestBtn" style="width:100%;padding:.82rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:.9rem;font-weight:700;color:var(--text)">
           הצצה כאורח
         </button>
         <div style="margin-top:.45rem;font-size:.73rem;text-align:center;color:var(--muted);line-height:1.5">

@@ -315,7 +315,7 @@ const RL_CSS = `
 .rl-lead-in{padding:.5rem .3rem 1rem;font-size:.88rem;line-height:1.65;color:var(--muted)}
 .rl-sub{font-size:.9rem;color:var(--muted);margin-top:.35rem}
 .rl-warns{display:flex;flex-direction:column;gap:.5rem;margin-top:1.2rem}
-.rl-warn{background:var(--orange-light);color:#b5551f;border-radius:var(--radius-sm);padding:.6rem .9rem;font-size:.88rem;font-weight:700;line-height:1.5}
+.rl-warn{background:var(--orange-light);color:var(--orange);border-radius:var(--radius-sm);padding:.6rem .9rem;font-size:.88rem;font-weight:700;line-height:1.5}
 .rl-cta{width:100%;margin-top:1.4rem;padding:.85rem 1rem;font-size:1rem}
 
 .rl-focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-light)}
@@ -335,7 +335,7 @@ const RL_CSS = `
 .rl-ex-row{display:flex;gap:.6rem;align-items:baseline}
 .rl-tag{flex:0 0 auto;font-size:.7rem;font-weight:800;border-radius:999px;padding:.15rem .55rem}
 .rl-tag-src{background:var(--card);color:var(--muted);border:1px solid var(--border)}
-.rl-tag-wrong{background:var(--orange-light);color:#b5551f}
+.rl-tag-wrong{background:var(--orange-light);color:var(--orange)}
 /* flex:1 — without it a short English line shrinks to its own width and, inside an
    RTL row, drifts to the right instead of aligning under the line above it. */
 .rl-en{flex:1 1 auto;direction:ltr;text-align:left;font-size:.92rem;line-height:1.55;color:var(--text)}

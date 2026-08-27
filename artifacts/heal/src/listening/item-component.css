@@ -17,15 +17,15 @@
   justify-content: center;
   gap: 12px;
   padding: 60px 0;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   font-size: 0.9rem;
 }
 
 .spinner {
   width: 22px;
   height: 22px;
-  border: 3px solid var(--border, #E0EBE4);
-  border-top-color: var(--green, #4CAF6F);
+  border: 3px solid var(--border, #E3DDCC);
+  border-top-color: var(--green, #1F5C43);
   border-radius: 50%;
   animation: lic-spin 0.7s linear infinite;
   flex-shrink: 0;
@@ -39,7 +39,7 @@
 .lic-error {
   padding: 24px;
   text-align: center;
-  color: var(--red, #e53935);
+  color: var(--red, #B4553E);
   font-size: 0.9rem;
 }
 
@@ -56,7 +56,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   margin-bottom: 8px;
 }
 
@@ -69,7 +69,7 @@
 .lic-question-text {
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   line-height: 1.5;
 }
 
@@ -84,14 +84,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--card, #fff);
-  border: 2px solid var(--border, #E0EBE4);
+  background: var(--card, #FFFDF7);
+  border: 2px solid var(--border, #E3DDCC);
   border-radius: var(--radius-sm, 12px);
   padding: 14px 16px;
   text-align: right;
   cursor: pointer;
   font-size: 0.95rem;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   transition: border-color 0.14s, background 0.14s;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -99,7 +99,7 @@
 }
 
 .lic-option:not(:disabled):hover {
-  border-color: var(--green, #4CAF6F);
+  border-color: var(--green, #1F5C43);
   background: rgba(76, 175, 111, 0.05);
 }
 
@@ -112,13 +112,13 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--border, #E0EBE4);
+  background: var(--border, #E3DDCC);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   transition: background 0.14s, color 0.14s;
 }
 
@@ -129,22 +129,22 @@
 
 /* ── Correct / wrong states ──── */
 .lic-option--correct {
-  border-color: var(--green, #4CAF6F) !important;
+  border-color: var(--green, #1F5C43) !important;
   background: rgba(76, 175, 111, 0.08) !important;
 }
 
 .lic-option--correct .lic-option-letter {
-  background: var(--green, #4CAF6F);
+  background: var(--green, #1F5C43);
   color: #fff;
 }
 
 .lic-option--wrong {
-  border-color: var(--red, #e53935) !important;
+  border-color: var(--red, #B4553E) !important;
   background: rgba(229, 57, 53, 0.06) !important;
 }
 
 .lic-option--wrong .lic-option-letter {
-  background: var(--red, #e53935);
+  background: var(--red, #B4553E);
   color: #fff;
 }
 
@@ -154,12 +154,12 @@
 
 /* ── Silent mode: neutral selected highlight ──── */
 .lic-option--selected {
-  border-color: var(--muted, #7A8C80) !important;
+  border-color: var(--muted, #5C6B60) !important;
   background: rgba(122, 140, 128, 0.07) !important;
 }
 
 .lic-option--selected .lic-option-letter {
-  background: var(--muted, #7A8C80);
+  background: var(--muted, #5C6B60);
   color: #fff;
 }
 
@@ -173,7 +173,7 @@
 .btn-lic-continue {
   width: 100%;
   padding: 14px 24px;
-  background: var(--green, #4CAF6F);
+  background: var(--green, #1F5C43);
   color: #fff;
   border: none;
   border-radius: var(--radius-sm, 12px);
@@ -194,9 +194,9 @@
   align-items: center;
   gap: 8px;
   font-size: 0.82rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   background: rgba(122, 140, 128, 0.08);
-  border: 1px dashed var(--border, #E0EBE4);
+  border: 1px dashed var(--border, #E3DDCC);
   border-radius: 8px;
   padding: 8px 14px;
   margin-top: -8px;
@@ -204,7 +204,7 @@
 
 .lic-audio-lock-icon {
   font-size: 0.72rem;
-  color: var(--green, #4CAF6F);
+  color: var(--green, #1F5C43);
 }
 
 /* ── Locked options (before audio plays) ──── */
@@ -216,8 +216,8 @@
 
 /* ── Feedback panel ──── */
 .lic-feedback {
-  background: var(--card, #fff);
-  border: 1px solid var(--border, #E0EBE4);
+  background: var(--card, #FFFDF7);
+  border: 1px solid var(--border, #E3DDCC);
   border-radius: var(--radius, 18px);
   padding: 18px 20px;
 }
@@ -238,8 +238,8 @@
   margin-bottom: 10px;
 }
 
-.lic-verdict--ok  { color: var(--green, #4CAF6F); }
-.lic-verdict--err { color: var(--red, #e53935); }
+.lic-verdict--ok  { color: var(--green, #1F5C43); }
+.lic-verdict--err { color: var(--red, #B4553E); }
 
 .lic-verdict-icon {
   font-size: 1.15rem;
@@ -249,19 +249,19 @@
 /* Correct answer label (shown when answer is wrong) */
 .lic-correct-label {
   font-size: 0.82rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   margin-bottom: 6px;
 }
 
-.lic-correct-label strong { color: var(--text, #1A2E22); }
+.lic-correct-label strong { color: var(--text, #14201A); }
 
 /* Part 1: Correct option explanation */
 .lic-correct-expl {
   font-size: 0.88rem;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   line-height: 1.55;
   background: rgba(76, 175, 111, 0.07);
-  border-right: 3px solid var(--green, #4CAF6F);
+  border-right: 3px solid var(--green, #1F5C43);
   padding: 8px 12px;
   border-radius: 0 6px 6px 0;
 }
@@ -277,7 +277,7 @@
 /* Part 2: Why wrong */
 .lic-wrong-section {
   background: rgba(229, 57, 53, 0.05);
-  border-right: 3px solid var(--red, #e53935);
+  border-right: 3px solid var(--red, #B4553E);
   border-radius: 0 6px 6px 0;
   padding: 8px 12px;
 }
@@ -287,20 +287,20 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--red, #e53935);
+  color: var(--red, #B4553E);
   margin-bottom: 4px;
 }
 
 .lic-wrong-expl {
   font-size: 0.88rem;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   line-height: 1.55;
 }
 
 /* Part 3: "איך יכולת לדעת?" cue block */
 .lic-cue-section {
-  background: rgba(2, 136, 209, 0.07);
-  border-right: 3px solid #0288d1;
+  background: rgba(61, 107, 125, 0.07);
+  border-right: 3px solid var(--blue);
   border-radius: 0 6px 6px 0;
   padding: 10px 12px;
 }
@@ -308,14 +308,14 @@
 .lic-cue-title {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #0277bd;
+  color: var(--blue);
   margin-bottom: 6px;
   letter-spacing: 0.02em;
 }
 
 .lic-cue-quote {
   font-size: 0.88rem;
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   line-height: 1.55;
   font-style: italic;
   margin-bottom: 5px;
@@ -323,7 +323,7 @@
 
 .lic-cue-signal {
   font-size: 0.8rem;
-  color: #0277bd;
+  color: var(--blue);
   line-height: 1.45;
 }
 
@@ -344,9 +344,9 @@
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #7B5500;
-  background: rgba(255, 193, 7, 0.18);
-  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: var(--orange);
+  background: rgba(176, 132, 66, 0.18);
+  border: 1px solid rgba(176, 132, 66, 0.4);
   padding: 4px 10px;
   border-radius: 20px;
 }
@@ -357,12 +357,12 @@
   align-items: flex-start;
   gap: 10px;
   font-size: 0.88rem;
-  color: var(--muted, #7A8C80);
+  color: var(--muted, #5C6B60);
   line-height: 1.5;
 }
 
 .lic-expl--correct {
-  color: var(--text, #1A2E22);
+  color: var(--text, #14201A);
   font-weight: 600;
 }
 
@@ -371,7 +371,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--border, #E0EBE4);
+  background: var(--border, #E3DDCC);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,7 +381,7 @@
 }
 
 .lic-expl--correct .lic-expl-letter {
-  background: var(--green, #4CAF6F);
+  background: var(--green, #1F5C43);
   color: #fff;
 }
 

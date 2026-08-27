@@ -57,7 +57,7 @@ export async function renderDiagnostic(root) {
   if (!session) {
     root.innerHTML = `
       <div class="diag-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;">
-        <p style="font-size:1.05rem;color:var(--text,#1A2E22);font-weight:600;">יש להתחבר לחשבון כדי להתחיל את האבחון</p>
+        <p style="font-size:1.05rem;color:var(--text, #14201A);font-weight:600;">יש להתחבר לחשבון כדי להתחיל את האבחון</p>
         <button class="btn-diag-primary" style="max-width:240px" onclick="location.hash='/'">כניסה לחשבון</button>
       </div>`;
     return;

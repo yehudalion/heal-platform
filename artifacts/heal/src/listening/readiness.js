@@ -47,17 +47,17 @@ export function renderListeningLearn(root) {
           מילים כמו אלה הן רמזור. כששומעים אותן — הקטע מודיע מה יקרה עכשיו:
         </p>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:.92rem;">
-          <div><span dir="ltr" style="font-weight:700;color:var(--green,#4CAF6F);">however · but · even so</span> — שינוי כיוון: מה שנאמר עד עכשיו מקבל "אבל"</div>
-          <div><span dir="ltr" style="font-weight:700;color:var(--green,#4CAF6F);">therefore · as a result</span> — מסקנה: עכשיו יגיע "ולכן…"</div>
-          <div><span dir="ltr" style="font-weight:700;color:var(--green,#4CAF6F);">for example · for one thing</span> — פירוט: דוגמה לרעיון שכבר נאמר</div>
-          <div><span dir="ltr" style="font-weight:700;color:var(--green,#4CAF6F);">in other words</span> — ניסוח מחדש: אותו רעיון במילים אחרות</div>
+          <div><span dir="ltr" style="font-weight:700;color:var(--green, #1F5C43);">however · but · even so</span> — שינוי כיוון: מה שנאמר עד עכשיו מקבל "אבל"</div>
+          <div><span dir="ltr" style="font-weight:700;color:var(--green, #1F5C43);">therefore · as a result</span> — מסקנה: עכשיו יגיע "ולכן…"</div>
+          <div><span dir="ltr" style="font-weight:700;color:var(--green, #1F5C43);">for example · for one thing</span> — פירוט: דוגמה לרעיון שכבר נאמר</div>
+          <div><span dir="ltr" style="font-weight:700;color:var(--green, #1F5C43);">in other words</span> — ניסוח מחדש: אותו רעיון במילים אחרות</div>
         </div>
       </div>
 
       <!-- ── Worked example with the connective highlighted ── -->
       <div class="ldash-main" style="text-align:right;">
         <p class="ldash-main-title" style="margin-bottom:8px;">דוגמה — שימו לב למילה המודגשת</p>
-        <p dir="ltr" style="margin:0 0 12px;text-align:left;line-height:1.8;font-size:.95rem;background:var(--bg,#F4F8F5);border-radius:10px;padding:12px 14px;">
+        <p dir="ltr" style="margin:0 0 12px;text-align:left;line-height:1.8;font-size:.95rem;background:var(--bg, #F5F1E8);border-radius:10px;padding:12px 14px;">
           Ancient Roman soldiers were paid an allowance to buy salt, called a
           "salarium."
           <mark style="background:#FFE9A8;border-radius:4px;padding:0 4px;font-weight:700;">Over time, however,</mark>

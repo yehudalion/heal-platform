@@ -163,11 +163,11 @@ function ensureStyles() {
 .ra-head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
 .ra-key{font-size:1rem;font-weight:800;color:var(--green-dark);text-decoration:underline}
 .ra-nums{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto}
-.ra-note{font-size:.75rem;color:#b5551f;margin-top:.3rem}
+.ra-note{font-size:.75rem;color:var(--orange);margin-top:.3rem}
 .ra-ex{background:var(--bg);border-radius:var(--radius-sm);padding:.85rem .95rem;margin-top:.9rem}
 .ra-ex-lbl{font-size:.7rem;font-weight:800;color:var(--muted);margin-bottom:.25rem}
 .ra-en{direction:ltr;text-align:left;font-size:.9rem;line-height:1.55;margin-bottom:.7rem}
-.ra-chosen{color:#b5551f}
+.ra-chosen{color:var(--orange)}
 .ra-why{background:var(--blue-light);border-radius:var(--radius-sm);padding:.55rem .75rem;font-size:.85rem;line-height:1.6}
 .ra-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-top:1rem}
 .ra-drill{display:inline-block;padding:.6rem 1.1rem;font-size:.87rem;text-decoration:none}

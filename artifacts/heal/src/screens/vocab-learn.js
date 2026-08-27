@@ -174,7 +174,7 @@ function injectStyles() {
       font-size: 0.88rem;
       line-height: 1.7;
       opacity: 0.75;
-      background: rgba(37, 99, 235, 0.06);
+      background: rgba(31, 92, 67, 0.06);
       border-radius: 8px;
       padding: 0.9rem 1rem;
       margin: 0;
@@ -184,7 +184,7 @@ function injectStyles() {
       padding: 0.9rem;
       font-size: 1.1rem;
       font-weight: 700;
-      background: var(--accent, #2563eb);
+      background: var(--green);
       color: #fff;
       border: none;
       border-radius: 10px;

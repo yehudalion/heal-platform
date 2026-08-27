@@ -27,7 +27,7 @@ export async function renderListeningAnalyze(root) {
   if (!session) {
     root.innerHTML = `
       <div class="ldash-body" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text,#1A2E22)">יש להתחבר לחשבון</p>
+        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון</p>
         <button class="btn-ldash-primary" style="max-width:220px"
           onclick="location.hash='/'">כניסה לחשבון</button>
       </div>`;

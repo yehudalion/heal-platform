@@ -454,7 +454,7 @@ const RP_CSS = `
 .rp-opt.chosen-wrong .rp-opt-tag{color:var(--muted)}
 .rp-actions{margin-top:1rem}
 .rp-hint{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-light);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;font-size:.85rem;cursor:pointer}
-.rp-hintbox{background:var(--purple-light);color:#4a3aa8;border-radius:var(--radius-sm);padding:.7rem .95rem;margin-bottom:1rem;font-size:.88rem;line-height:1.5}
+.rp-hintbox{background:var(--purple-light);color:var(--purple);border-radius:var(--radius-sm);padding:.7rem .95rem;margin-bottom:1rem;font-size:.88rem;line-height:1.5}
 .rp-expl{background:var(--bg);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:.9rem;line-height:1.6;margin-bottom:.7rem}
 .rp-expl-good{background:var(--green-light)}
 .rp-help{background:var(--blue-light)}
@@ -476,7 +476,7 @@ const RP_CSS = `
 .rp-sum-sub{font-size:.9rem;color:var(--text)}
 .rp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .rp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
-.rp-levelmsg.down{background:var(--orange-light);color:#b5551f}
+.rp-levelmsg.down{background:var(--orange-light);color:var(--orange)}
 .rp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .rp-insight-body{font-size:.88rem;line-height:1.7}

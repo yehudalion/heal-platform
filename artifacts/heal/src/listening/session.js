@@ -51,7 +51,7 @@ export async function renderSession(root) {
   if (!session) {
     root.innerHTML = `
       <div class="sess-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text,#1A2E22)">יש להתחבר לחשבון כדי להתחיל</p>
+        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון כדי להתחיל</p>
         <button class="btn-sess-primary" style="max-width:220px"
           onclick="location.hash='/'">כניסה לחשבון</button>
       </div>`;
@@ -281,7 +281,7 @@ async function _showCooldown(root) {
         ${details.length ? `
           <div style="width:100%;max-width:480px;text-align:right;display:flex;flex-direction:column;gap:8px;margin-top:4px;">
             ${details.map(d => `
-              <div style="display:flex;gap:8px;align-items:flex-start;font-size:.9rem;color:var(--text,#1A2E22);">
+              <div style="display:flex;gap:8px;align-items:flex-start;font-size:.9rem;color:var(--text, #14201A);">
                 <span style="flex-shrink:0;">🔑</span>
                 <span>${escHtml(d.label)}${d.n > 1 ? ` <strong>(×${d.n})</strong>` : ''}</span>
               </div>

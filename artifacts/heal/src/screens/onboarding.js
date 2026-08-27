@@ -44,7 +44,7 @@ export function renderOnboarding(root) {
             מתי הבחינה שלך?
           </label>
           <input type="date" id="ob-exam-date" min="${minDate}"
-            style="width:100%;padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:inherit;background:white" />
+            style="width:100%;padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:inherit;background:var(--card)" />
           <div style="font-size:.76rem;color:var(--muted);margin-top:.35rem">
             עוד לא נרשמת? בחר תאריך משוער — אפשר לעדכן בכל רגע.
           </div>
@@ -57,7 +57,7 @@ export function renderOnboarding(root) {
           <div id="ob-minutes" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
             ${MINUTE_OPTIONS.map(m => `
               <button type="button" class="ob-min-btn" data-minutes="${m}"
-                style="padding:.72rem 0;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:.95rem;font-weight:700;font-family:inherit;color:var(--text)">
+                style="padding:.72rem 0;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:.95rem;font-weight:700;font-family:inherit;color:var(--text)">
                 ${m} דק׳
               </button>`).join('')}
           </div>
