@@ -68,7 +68,6 @@ export async function renderLayout(root, activePath) {
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
         ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
-        ${navItem('reading', ico.read, 'קריאה', '/reading', activePath)}
 
         <div class="nav-lbl">חשבון</div>
         <a class="nav-item${activePath==='/progress'?' active':''}" data-nav="/progress">
@@ -276,7 +275,6 @@ const ico = {
   home: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 6.5L8 2l6 4.5V14H10v-4H6v4H2z"/></svg>`,
   cards:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="14" height="10" rx="2"/><path d="M4 4V3a1 1 0 011-1h6a1 1 0 011 1v1"/></svg>`,
   rephrase:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H5M9 5l-3 3 3 3"/><path d="M2 8h2" stroke-dasharray="1.5 1.5"/></svg>`,
-  read:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="1" width="12" height="14" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>`,
   chart:   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l4-4 3 3 5-7"/></svg>`,
   listen:  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v-1a5 5 0 0110 0v1"/><rect x="2" y="10" width="3" height="4" rx="1"/><rect x="11" y="10" width="3" height="4" rx="1"/></svg>`,
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
