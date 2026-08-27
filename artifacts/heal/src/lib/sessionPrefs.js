@@ -88,3 +88,85 @@ export function lengthPicker(module, options, fallback) {
   }
   return { html, wire };
 }
+
+// ─── Practice-type preference (listening: mixed / one type only) ────────────
+// Added 2026-08-26 (Lion): the 14.8 decision that the Learn LESSON stays one
+// unified lesson (no split by exercise type - the student doesn't know which
+// type they'll get on the real exam) is untouched. This is a different thing:
+// letting the student SEE that 2 types exist and CHOOSE to drill just one, if
+// they want extra reps on their weaker type. Default stays 'mixed' - the
+// exam-like unpredictability - so nothing changes for a student who never
+// touches this picker.
+
+const TYPE_KEY = 'hs:sessionPrefsType';
+
+function readAllTypes() {
+  try { return JSON.parse(localStorage.getItem(TYPE_KEY) || '{}') || {}; }
+  catch { return {}; }
+}
+
+/** The learner's chosen practice type for a module, or the module's default. */
+export function getSessionType(module, fallback) {
+  const v = readAllTypes()[module];
+  return typeof v === 'string' && v ? v : fallback;
+}
+
+export function setSessionType(module, v) {
+  try {
+    const all = readAllTypes();
+    all[module] = v;
+    localStorage.setItem(TYPE_KEY, JSON.stringify(all));
+  } catch { /* private mode: the choice just won't persist */ }
+}
+
+function ensureTypeStyles() {
+  if (document.getElementById('hs-type-css')) return;
+  const s = document.createElement('style');
+  s.id = 'hs-type-css';
+  // Same look as the length picker (.hs-len*) - deliberately identical, just a
+  // separate class so the two pickers' wire() calls don't collide on selector.
+  s.textContent = `
+.hs-typerow { display:flex; gap:8px; margin:0 0 1rem; }
+.hs-type {
+  flex:1; border:1.5px solid var(--border); background:var(--card);
+  border-radius: var(--radius-sm); padding:10px 8px; cursor:pointer;
+  font-family:inherit; text-align:center; transition: border-color .15s, background .15s;
+}
+.hs-type-t { display:block; font-size:.85rem; font-weight:800; }
+.hs-type-s { display:block; font-size:.7rem; color:var(--muted); margin-top:2px; }
+.hs-type.on { border-color: var(--green-dark); background: var(--green-light); }
+.hs-type.on .hs-type-t { color: var(--green-dark); }
+`;
+  document.head.appendChild(s);
+}
+
+/**
+ * Render a practice-type picker - same shape/contract as lengthPicker().
+ * @param {string} module   pref key, e.g. 'listening'
+ * @param {{v:string,label:string,sub:string}[]} options
+ * @param {string} fallback default when the learner never chose (e.g. 'mixed')
+ * @returns {{html:string, wire:(root:HTMLElement, onChange?:(v:string)=>void)=>void}}
+ */
+export function typePicker(module, options, fallback) {
+  const current = getSessionType(module, fallback);
+  const html = `<div class="hs-typerow" data-module="${module}">` + options.map(o => `
+    <button type="button" class="hs-type${o.v === current ? ' on' : ''}" data-v="${o.v}">
+      <span class="hs-type-t">${o.label}</span>
+      <span class="hs-type-s">${o.sub}</span>
+    </button>`).join('') + `</div>`;
+
+  function wire(root, onChange) {
+    ensureTypeStyles();
+    const row = root.querySelector(`.hs-typerow[data-module="${module}"]`);
+    if (!row) return;
+    row.querySelectorAll('.hs-type').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.v;
+        setSessionType(module, v);
+        row.querySelectorAll('.hs-type').forEach(b => b.classList.toggle('on', b === btn));
+        if (onChange) onChange(v);
+      });
+    });
+  }
+  return { html, wire };
+}

@@ -20,7 +20,7 @@ import { getCurrentSession }     from '../supabase.js';
 import { getListeningOverview } from '../data/listening.data.js';
 import { getProfile }            from '../data/profiles.data.js';
 import { navigate }              from '../router.js';
-import { lengthPicker }          from '../lib/sessionPrefs.js';
+import { lengthPicker, typePicker } from '../lib/sessionPrefs.js';
 import './dashboard.css';
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
@@ -59,6 +59,17 @@ function _render(root, overview, examDate) {
   // "First time" = has never practised here. Drives the flow, not a menu.
   const firstTime = sessions === 0 && answered === 0;
 
+  // Practice-type filter (Lion, 2026-08-26): the Learn lesson stays one
+  // unified lesson (14.8 decision, untouched) - this only lets the student
+  // SEE that 2 exercise types exist and CHOOSE to drill just one. Default
+  // 'mixed' keeps the exam-like unpredictability for anyone who never
+  // touches the picker.
+  const typePickerW = typePicker('listening', [
+    { v: 'mixed',        label: 'מעורב',        sub: 'כמו במבחן' },
+    { v: 'continuation', label: 'השלמת משפט',  sub: '📝 בלבד' },
+    { v: 'lecture_qa',   label: 'הבנת קטע',    sub: '🎧 בלבד' },
+  ], 'mixed');
+
   const picker = lengthPicker('listening', [
     { v: 2, label: 'קצר',  sub: '2 קטעים · כ־5 דק׳'  },
     { v: 4, label: 'רגיל', sub: '4 קטעים · כ־10 דק׳' },
@@ -95,7 +106,7 @@ function _render(root, overview, examDate) {
 
       <!-- ── One path; the learner chooses length, never layer (Lion 2026-08-25) ── -->
       <div class="ldash-main" style="gap:12px;">
-        ${firstTime ? '' : picker.html}
+        ${firstTime ? '' : typePickerW.html + picker.html}
         <button class="btn-ldash-primary" id="btn-go" style="display:flex;justify-content:space-between;align-items:center;text-align:right;">
           <span>${firstTime ? '🎧 בוא נתחיל' : '🎧 המשך תרגול'}</span>
           <span>←</span>
@@ -117,6 +128,7 @@ function _render(root, overview, examDate) {
   // internal (Lion, 2026-08-16). The one exception he asked to keep: the student
   // may go back to Learn at any point, so it stays as a quiet secondary link.
   picker.wire(root);
+  typePickerW.wire(root);
   root.querySelector('#btn-go').addEventListener('click', () =>
     navigate(firstTime ? '/listening/learn' : '/listening/session'));
   root.querySelector('#btn-relearn')?.addEventListener('click', () => navigate('/listening/learn'));

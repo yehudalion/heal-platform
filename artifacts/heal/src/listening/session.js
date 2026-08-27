@@ -22,7 +22,7 @@ import { getLectures, getLectureQuestions, getRecentLectureIds, startSession, co
 import { ListeningItem }                 from './item-component.js';
 import { summarizeMistakes }             from './keys.js';
 import { navigate }                      from '../router.js';
-import { getSessionLength } from '../lib/sessionPrefs.js';
+import { getSessionLength, getSessionType } from '../lib/sessionPrefs.js';
 import './session.css';
 
 // ─── Module-level session state ───────────────────────────────────────────────
@@ -98,12 +98,40 @@ async function _selectItems(userId) {
     return pool || [];
   };
 
+  // Warmup + core, built from one already-fetched pool: easiest item first,
+  // then (target - 1) more, shuffled. Shared by both single-type branches
+  // below so 'continuation only' and 'lecture_qa only' behave identically
+  // apart from which pool they draw from.
+  const oneTypeSession = (pool, target) => {
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const byDiff = [...shuffled].sort((a, b) => (a.difficulty ?? 3) - (b.difficulty ?? 3));
+    const out = [];
+    if (byDiff[0]) out.push(byDiff[0]);
+    out.push(...shuffled.filter(i => i.id !== out[0]?.id).slice(0, Math.max(0, target - 1)));
+    return out;
+  };
+
+  const target = getSessionLength('listening', 4);
+
+  // Practice-type filter (Lion, 2026-08-26 - lib/sessionPrefs.js's typePicker
+  // on the dashboard). 'mixed' is the ORIGINAL, unchanged composition below -
+  // this is additive, not a rewrite of the default path.
+  const type = getSessionType('listening', 'mixed');
+
+  if (type === 'continuation') {
+    return oneTypeSession(await fetchPool('continuation'), target);
+  }
+  if (type === 'lecture_qa') {
+    return oneTypeSession(await fetchPool('lecture_qa'), target);
+  }
+
+  // 'mixed' (default): 1 warmup (easiest continuation) + up to (target - 2)
+  // more continuations + 1 lecture_qa when the pool has one.
   const [contPool, lqaPool] = await Promise.all([
     fetchPool('continuation'),
     fetchPool('lecture_qa'),
   ]);
 
-  const target = getSessionLength('listening', 4);
   const items = [];
 
   // Warmup: easiest continuation
