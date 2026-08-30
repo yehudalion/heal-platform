@@ -207,6 +207,8 @@ export function renderRephraseLearn(root) {
   requestAnimationFrame(() => {
     const el = document.getElementById(`rl-block-${wanted.id}`);
     if (!el) return;
+    el.classList.add('open');
+    el.querySelector('[data-block-toggle]')?.setAttribute('aria-expanded', 'true');
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     el.classList.add('rl-focus');
   });
@@ -218,6 +220,13 @@ function draw(root) {
   if (step === 1) {
     root.querySelector('#rlNext').addEventListener('click', () => { step = 2; draw(root); window.scrollTo(0, 0); });
   } else {
+    root.querySelectorAll('[data-block-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sec = btn.closest('.rl-block');
+        const open = sec.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    });
     root.querySelector('#rlBack').addEventListener('click', () => { step = 1; draw(root); window.scrollTo(0, 0); });
     root.querySelector('#rlStart').addEventListener('click', () => {
       localStorage.setItem(LEARN_SEEN_KEY, 'true');
@@ -263,16 +272,20 @@ function screenTwo() {
 
 // STABLE id — the future "ללמוד עוד" link from practice targets rl-block-<id>.
 function block(b) {
+  // Progressive disclosure (Lion, 2026-08-27): the head (number + title) is
+  // always visible; intro + worked examples are collapsed by default and open
+  // on click. Deep links (see renderRephraseLearn) force one block open.
   return `${b.lead ? `<p class="rl-lead-in">${b.lead}</p>` : ''}
   <section class="rl-card rl-block" id="rl-block-${b.id}">
-    <div class="rl-block-head">
+    <button type="button" class="rl-block-head" data-block-toggle aria-expanded="false">
       <span class="rl-num">${b.n}</span>
-      <div>
-        <h2 class="rl-h2">${b.title}${b.kicker ? ` <span class="rl-kicker">(${b.kicker})</span>` : ''}</h2>
-        ${b.intro ? `<p class="rl-intro">${b.intro}</p>` : ''}
-      </div>
+      <h2 class="rl-h2">${b.title}${b.kicker ? ` <span class="rl-kicker">(${b.kicker})</span>` : ''}</h2>
+      <span class="rl-chev">▾</span>
+    </button>
+    <div class="rl-block-body">
+      ${b.intro ? `<p class="rl-intro">${b.intro}</p>` : ''}
+      ${b.parts.map(part).join('')}
     </div>
-    ${b.parts.map(part).join('')}
   </section>`;
 }
 
@@ -319,10 +332,14 @@ const RL_CSS = `
 .rl-cta{width:100%;margin-top:1.4rem;padding:.85rem 1rem;font-size:1rem}
 
 .rl-focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-light)}
-.rl-block-head{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:1.1rem}
+.rl-block-head{display:flex;gap:.8rem;align-items:center;width:100%;background:none;border:none;padding:0;margin:0;cursor:pointer;text-align:right;font:inherit;color:inherit}
 .rl-num{flex:0 0 auto;width:1.85rem;height:1.85rem;border-radius:999px;background:var(--green-light);color:var(--green-dark);font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center}
-.rl-h2{font-size:1.1rem;font-weight:800;line-height:1.4}
+.rl-h2{flex:1;font-size:1.1rem;font-weight:800;line-height:1.4}
 .rl-kicker{font-weight:700;font-size:.85rem;color:var(--muted)}
+.rl-chev{flex:0 0 auto;font-size:.8rem;color:var(--muted);transition:transform .2s ease}
+.rl-block.open .rl-chev{transform:rotate(180deg)}
+.rl-block-body{display:none;margin-top:1.1rem}
+.rl-block.open .rl-block-body{display:block}
 .rl-intro{font-size:.9rem;line-height:1.65;color:var(--text);margin-top:.3rem}
 
 .rl-part{border-top:1px solid var(--border);padding-top:.9rem;margin-top:.9rem}
