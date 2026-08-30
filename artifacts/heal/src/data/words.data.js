@@ -84,3 +84,56 @@ export async function searchWords(query, { isPremium = false } = {}) {
     return { data: null, error }
   }
 }
+
+/**
+ * Dictionary/browse — list or search ALL words with real content, regardless
+ * of impact_score. Deliberately separate from getWordsByImpact/searchWords
+ * above: those exclude unscored words on purpose, because impact_score is
+ * the project's one algorithmic driver for practice/SRS selection (never
+ * mix ranking logic with a plain reference tool). This is what surfaces the
+ * 2,116 'pending_review' words that already have full content (definition,
+ * audio, examples, mnemonics) but no impact_score yet — see
+ * PLAN_depth_and_new_corners.md. Free for all users (no isPremium gate) per
+ * PLAN_levels_analytics_corners.md's monetization table — the dictionary is
+ * one of the free, always-open habit-builders.
+ * (מוצר/UX chat, 2026-08-29)
+ */
+export async function browseDictionary({ query = '', limit = 40, offset = 0 } = {}) {
+  try {
+    let q = supabase
+      .from('words')
+      .select('id, headword, definition_he, definition, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, pos')
+      .in('status', ['done', 'pending_review'])
+      .order('headword', { ascending: true })
+      .range(offset, offset + limit - 1)
+    const trimmed = query.trim()
+    if (trimmed) {
+      q = q.or(`headword.ilike.%${trimmed}%,definition_he.ilike.%${trimmed}%,definition.ilike.%${trimmed}%`)
+    }
+    const { data, error } = await q
+    if (error) throw error
+    return { data, error: null }
+  } catch (error) {
+    console.error('words.data.browseDictionary:', error)
+    return { data: null, error }
+  }
+}
+
+/**
+ * Total dictionary size (done + pending_review) — a real DB count, not a
+ * hardcoded number, so the figure shown to students never goes stale as
+ * content is added ("no invented numbers" rule).
+ */
+export async function getDictionaryCount() {
+  try {
+    const { count, error } = await supabase
+      .from('words')
+      .select('id', { count: 'exact', head: true })
+      .in('status', ['done', 'pending_review'])
+    if (error) throw error
+    return { count: count ?? 0, error: null }
+  } catch (error) {
+    console.error('words.data.getDictionaryCount:', error)
+    return { count: 0, error }
+  }
+}
