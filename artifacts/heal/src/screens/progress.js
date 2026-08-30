@@ -218,6 +218,8 @@ export async function renderProgress(root) {
       ${!userId ? signedOut()
         : cardsHtml || `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
 
+      ${userId && cardsHtml ? `<p style="text-align:center;margin-top:.4rem"><a class="wp-deep" href="#/insights">תובנות מפורטות על כל הפעילות שלכם ←</a></p>` : ''}
+
       <p class="wp-foot">המספרים מתארים את הסשנים שנאספו, לא הערכה כוללת.</p>
 
       <!-- PRODUCT DECISION — reproduced verbatim, not this refactor's call -->
