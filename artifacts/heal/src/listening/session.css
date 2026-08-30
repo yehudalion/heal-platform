@@ -74,6 +74,23 @@
 
 .btn-sess-exit:hover { background: rgba(0,0,0,0.06); }
 
+.btn-sess-guide {
+  background: none;
+  border: 1.5px solid var(--border, #E3DDCC);
+  color: var(--muted, #5C6B60);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.btn-sess-guide:hover { background: rgba(0,0,0,0.06); }
+
 /* ── Progress dots ──── */
 .sess-progress {
   display: flex;

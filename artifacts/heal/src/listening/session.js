@@ -305,11 +305,16 @@ async function _showCooldown(root) {
 
 // ─── UI helpers ───────────────────────────────────────────────────────────────
 function _header() {
+  // Reachable "how do I solve this" mid-session (Lion, 2026-08-27 — the same
+  // always-there guide link rephrase-practice.js already has via "📘 מדריך").
+  // Points at listening/readiness.js's renderListeningLearn, already reachable
+  // pre-session from the dashboard's "חזרה להסבר" button — this just makes it
+  // reachable DURING a session too, not only before starting one.
   return `
     <div class="sess-header">
       <button class="btn-sess-exit" id="btn-exit" title="יציאה מהפגישה">✕</button>
       <span class="sess-header-title">פגישת תרגול</span>
-      <span style="width:36px"></span>
+      <button class="btn-sess-guide" id="btn-guide" title="איך מקשיבים נכון">?</button>
     </div>`;
 }
 
@@ -322,6 +327,7 @@ function _attachExitBtn(root) {
   const btn = root.querySelector('#btn-exit');
   if (!btn) return;
   btn.addEventListener('click', () => navigate('/home'));
+  root.querySelector('#btn-guide')?.addEventListener('click', () => navigate('/listening/learn'));
 }
 
 function _progressBar(currentIndex, total) {
