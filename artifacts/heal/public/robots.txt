@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://highscore-eight.vercel.app/sitemap.xml
