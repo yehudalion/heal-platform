@@ -47,6 +47,11 @@ export function renderAuth(root) {
         <div id="notice" style="margin-top:.9rem;font-size:.82rem;text-align:center;color:var(--muted);min-height:1.2em"></div>
 
         <div style="margin-top:1.4rem;font-size:.76rem;color:var(--muted)">כלי לימוד ממוקד. ללא פרסומות. ללא רעש.</div>
+        <!-- Privacy link, 2026-08-29: a policy nobody can find does not do its job,
+             and this is the screen where the learner actually decides to sign up. -->
+        <div style="margin-top:.5rem;font-size:.72rem;color:var(--muted)">
+          <a href="/privacy/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדיניות פרטיות</a>
+        </div>
       </div>
     </div>
   `;
