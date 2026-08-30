@@ -18,11 +18,12 @@ import { renderScAnalyze }  from './screens/sc-analyze.js';
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
 import { renderOnboarding, getGuestProfile } from './screens/onboarding.js';
-import { renderFork }  from './screens/fork.js';
-import { renderLevel } from './screens/level.js';
 import { renderCard }  from './screens/card.js';
 import { renderVocabLearn } from './screens/vocab-learn.js';
 import { renderVocabAnalyze } from './screens/vocab-analyze.js';
+import { renderDictionary } from './screens/dictionary.js';
+import { renderMistakeNotebook } from './screens/mistake-notebook.js';
+import { renderInsights } from './screens/insights.js';
 
 // ─── Listening section ────────────────────────────────────────────────────────
 // test-page.js + item-test-page.js deleted 2026-08-14 (SITEMAP §4 "נמחקים,
@@ -69,8 +70,7 @@ route('/', async (root) => {
   if (session || isGuest()) { navigate('/home'); return; }
   renderAuth(root);
 });
-route('/fork',  requireAuth(renderFork));
-route('/level', requireAuth(renderLevel));
+// fork.js/level.js removed 2026-08-28 — dead pre-redesign screens, zero navigate() references anywhere in the app.
 
 // Onboarding (SITEMAP §1 — two questions, shown once)
 route('/onboarding', requireAuth(renderOnboarding));
@@ -93,6 +93,9 @@ route('/sc-analyze',   requireAuth(renderScAnalyze));
 route('/card', requireAuth(renderCard));
 route('/vocab-learn', requireAuth(renderVocabLearn));
 route('/vocab-analyze', requireAuth(renderVocabAnalyze));
+route('/dictionary', requireAuth(renderDictionary));
+route('/mistake-notebook', requireAuth(renderMistakeNotebook));
+route('/insights', requireAuth(renderInsights));
 
 // ─── Listening section routes ────────────────────────────────────────────────
 route('/listening/diagnostic', requireAuth(renderDiagnostic));         // M4 — PARKED, not in the entry path (SITEMAP: "לא נמחק, לא פעיל"). Reachable by direct URL only; nothing links here.

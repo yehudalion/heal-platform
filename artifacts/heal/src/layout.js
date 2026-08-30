@@ -24,6 +24,9 @@ const SCREEN_TITLES = {
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
   '/sentence-completion':  'השלמת משפטים',
+  '/dictionary':           'מילון',
+  '/mistake-notebook':     'מחברת טעויות',
+  '/insights':             'התובנות שלי',
 };
 
 // Render the full shell (sidebar + topbar + empty #page-content)
@@ -64,12 +67,18 @@ export async function renderLayout(root, activePath) {
         <a class="nav-item${activePath==='/flashcards'?' active':''}" data-nav="/flashcards">
           <span class="nav-icon">${ico.cards}</span>אוצר מילים
         </a>
+        <a class="nav-item${activePath==='/dictionary'?' active':''}" data-nav="/dictionary">
+          <span class="nav-icon">${ico.book}</span>מילון
+        </a>
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
         ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
 
         <div class="nav-lbl">חשבון</div>
+        <a class="nav-item${activePath==='/mistake-notebook'?' active':''}" data-nav="/mistake-notebook">
+          <span class="nav-icon">${ico.notebook}</span>מחברת טעויות
+        </a>
         <a class="nav-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="nav-icon">${ico.chart}</span>ההתקדמות שלי
         </a>
@@ -278,4 +287,7 @@ const ico = {
   chart:   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l4-4 3 3 5-7"/></svg>`,
   listen:  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v-1a5 5 0 0110 0v1"/><rect x="2" y="10" width="3" height="4" rx="1"/><rect x="11" y="10" width="3" height="4" rx="1"/></svg>`,
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
+  book:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3.6c-1.4-1-3.2-1.2-5-.9v9c1.8-.3 3.6-.1 5 .9 1.4-1 3.2-1.2 5-.9v-9c-1.8-.3-3.6-.1-5 .9z"/><path d="M8 3.6v9"/></svg>`,
+  notebook:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2" width="11" height="12" rx="1.5"/><path d="M5.5 6h5M5.5 9h5M5.5 12h3"/></svg>`,
+  insights:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 14V2M2 14h12"/><rect x="4" y="9" width="2.4" height="5" rx=".5"/><rect x="7.8" y="6" width="2.4" height="8" rx=".5"/><rect x="11.6" y="3.5" width="2.4" height="10.5" rx=".5"/></svg>`,
 };
