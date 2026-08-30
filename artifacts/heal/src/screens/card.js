@@ -161,7 +161,10 @@ function draw(root) {
       ? `<button class="vc-mnem-cycle" id="mnemCycleBtn" title="אסוציאציה הבאה">↻</button>`
       : '';
     panelContent = `<div class="vc-panel-content vc-panel-rtl vc-mnem-row">
-      <span id="mnemText">${assoc[mnemonicIdx]}</span>
+      <div class="vc-mnem-wrap">
+        <div class="vc-mnem-hint">🔗 חפשו בתוך המשפט את הצליל שדומה למילה באנגלית — הוא הגשר לזכירה</div>
+        <span id="mnemText">${assoc[mnemonicIdx]}</span>
+      </div>
       ${cyclerHtml}
     </div>`;
   }

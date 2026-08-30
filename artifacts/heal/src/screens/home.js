@@ -31,6 +31,8 @@ import { getSessionStats } from '../data/srs.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { getListeningOverview } from '../data/listening.data.js';
 import { getWeeklyActivity, getDailyPlan, nextLeg } from '../data/plan.data.js';
+import { getCoverage } from '../data/coverage.data.js';
+import { LEARN_BLOCKS } from './rephrase-learn.js';
 import { getGuestProfile } from './onboarding.js';
 
 const GREETING = () => {
@@ -52,12 +54,13 @@ export async function renderHome(root) {
   const name    = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
 
   // ── Data (guests get cold-start defaults — no per-user rows exist) ──────────
-  const [profileRes, srsRes, weakReports, listeningRes, weeklyRes] = await Promise.all([
+  const [profileRes, srsRes, weakReports, listeningRes, weeklyRes, coverageRes] = await Promise.all([
     userId ? getProfile(userId)           : Promise.resolve({ data: getGuestProfile() }),
     userId ? getSessionStats(userId)      : Promise.resolve({ data: null }),
     userId ? getWeakPoints(userId)        : Promise.resolve([]),
     userId ? getListeningOverview(userId) : Promise.resolve({ data: null }),
     userId ? getWeeklyActivity(userId)    : Promise.resolve({ data: { activeDays: [], target: 5 } }),
+    userId ? getCoverage(userId)          : Promise.resolve({ data: null }),
   ]);
 
   const profile   = profileRes?.data ?? null;
@@ -105,6 +108,20 @@ export async function renderHome(root) {
   const scAttempts = sc?.attempts ?? 0;
   const lisAnswered = listening?.questionsAnswered ?? 0;
 
+  // Coverage bars (Lion, 2026-08-27: "fill the empty home screen with graphs").
+  // Same source of truth as /progress (data/coverage.data.js + weakpoints.data.js
+  // reports) — never a second, inconsistent number. total<=0 or missing data
+  // renders no bar at all, never a fabricated percentage (coverageBar.js rule).
+  const coverage = coverageRes?.data ?? null;
+  const modPct = (done, total) =>
+    (Number.isFinite(total) && total > 0) ? Math.max(0, Math.min(100, Math.round((done / total) * 100))) : null;
+  const vocabPct = coverage?.vocab ? modPct(coverage.vocab.done, coverage.vocab.total) : null;
+  const listenPct = coverage?.listening ? modPct(coverage.listening.done, coverage.listening.total) : null;
+  const rephrasePct = (rephrase?.status === 'ok')
+    ? modPct((rephrase.points?.length ?? 0) + (rephrase.suppressed?.length ?? 0), LEARN_BLOCKS.length)
+    : null;
+  const bar = (pct) => (pct === null ? '' : `<div class="mc-bar"><div class="mc-fill" style="width:${pct}%"></div></div>`);
+
   // ── Render ──────────────────────────────────────────────────────────────────
   el.innerHTML = `
     <div class="fade-in">
@@ -113,13 +130,17 @@ export async function renderHome(root) {
         ? `הבחינה בעוד ${daysLeft} ימים.`
         : 'אפשר להגדיר תאריך בחינה בכל רגע.'}</div>
 
-      <!-- Weekly pace (replaces the streak — wellbeing rule) -->
-      <div class="wk-card">
+      <!-- Weekly pace (replaces the streak — wellbeing rule).
+           2026-08-30 (Lion): also the home screen's entry point to
+           "ההתקדמות שלי" — data-nav is wired for free by the existing
+           [data-nav] click handler below, same one the module tiles use. -->
+      <div class="wk-card" data-nav="/progress">
         <div class="wk-top">
           <span class="wk-lbl">השבוע</span>
           <span class="wk-count">${activeCount} מתוך ${weekly.target} ימים</span>
         </div>
         <div class="wk-dots">${dots}</div>
+        <div class="wk-more">לצפייה בהתקדמות המלאה ←</div>
       </div>
 
       <!-- One primary CTA -->
@@ -132,26 +153,29 @@ export async function renderHome(root) {
       <div class="sec-title" style="margin-top:1.4rem">או תרגל נושא מסוים</div>
       <div class="module-grid">
         <div class="mc mc-g" data-nav="/listening">
-          <span class="mc-icon">🎧</span>
+          <div class="mc-icon-wrap"><span class="mc-icon">🎧</span></div>
           <div class="mc-name">האזנה</div>
+          ${bar(listenPct)}
           <div class="mc-pct">${lisAnswered
             ? `${lisAnswered} שאלות שענית · דיוק ${listening?.accuracyPct ?? '—'}%`
             : '250 קטעים מחכים לך'}</div>
         </div>
-        <div class="mc mc-g" data-nav="/card">
-          <span class="mc-icon">🗂️</span>
+        <div class="mc mc-b" data-nav="/card">
+          <div class="mc-icon-wrap"><span class="mc-icon">🗂️</span></div>
           <div class="mc-name">אוצר מילים</div>
+          ${bar(vocabPct)}
           <div class="mc-pct">${dueCount
             ? `${dueCount} מילים לחזרה היום`
             : (acquired ? `${acquired} מילים נרכשו` : 'עוד לא התחלת')}</div>
         </div>
         <div class="mc mc-p" data-nav="/rephrasing">
-          <span class="mc-icon">✍️</span>
+          <div class="mc-icon-wrap"><span class="mc-icon">✍️</span></div>
           <div class="mc-name">ניסוח מחדש</div>
+          ${bar(rephrasePct)}
           <div class="mc-pct">${rpAttempts ? `${rpAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
         <div class="mc mc-o" data-nav="/sentence-completion">
-          <span class="mc-icon">✏️</span>
+          <div class="mc-icon-wrap"><span class="mc-icon">✏️</span></div>
           <div class="mc-name">השלמת משפטים</div>
           <div class="mc-pct">${scAttempts ? `${scAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
