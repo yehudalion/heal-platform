@@ -43,7 +43,7 @@ export async function getWeakPointsChart(userId) {
     const items = []
     for (const r of ready) {
       for (const p of r.points) {
-        if (p.lift > 1.05) items.push({ id: `${r.moduleId}:${p.id}`, label: p.label, moduleLabel: r.moduleLabel, lift: p.lift })
+        if (p.lift > 1.05) items.push({ id: `${r.moduleId}:${p.id}`, moduleId: r.moduleId, pointId: p.id, label: p.label, moduleLabel: r.moduleLabel, lift: p.lift })
       }
     }
     items.sort((a, b) => b.lift - a.lift)
@@ -199,30 +199,49 @@ const MODULE_TIMING = [
   { id: 'sc', label: 'השלמת משפטים', table: 'sc_attempts', dateCol: 'created_at', timeCol: 'time_ms' },
   { id: 'listening', label: 'האזנה', table: 'listening_question_responses', dateCol: 'responded_at', timeCol: 'response_time_ms' },
 ]
-const MIN_MODULE_ATTEMPTS = 8
-const ACCURACY_WINDOW_DAYS = 30
-const MIN_TIMED_ATTEMPTS = 10
-const MIN_HINT_ATTEMPTS = 10
-const MIN_LISTENING_ATTEMPTS = 8
+// Weekly windows, not monthly (Lion, 31.8: "תשווה שבועות לא חודשים").
+// The attempt bar drops with the window: 8 attempts was a low bar across 30
+// days and a steep one across 7, so 5 keeps roughly the same reachability.
+const MIN_MODULE_ATTEMPTS = 5
+const ACCURACY_WINDOW_DAYS = 7
+const MIN_MISTAKES = 5
 
 export async function getAccuracyByModule(userId) {
   try {
     if (!userId) return { status: 'guest', modules: [] }
-    const since = new Date(Date.now() - ACCURACY_WINDOW_DAYS * 86400000).toISOString()
-    const results = await Promise.allSettled(
-      MODULE_TIMING.map((m) =>
-        supabase.from(m.table).select('is_correct').eq('user_id', userId).gte(m.dateCol, since)
-      )
-    )
+    const now = Date.now()
+    const sinceCur = new Date(now - ACCURACY_WINDOW_DAYS * 86400000).toISOString()
+    const sincePrev = new Date(now - 2 * ACCURACY_WINDOW_DAYS * 86400000).toISOString()
+
+    const [curr, prev] = await Promise.all([
+      Promise.allSettled(MODULE_TIMING.map((m) =>
+        supabase.from(m.table).select('is_correct').eq('user_id', userId).gte(m.dateCol, sinceCur)
+      )),
+      Promise.allSettled(MODULE_TIMING.map((m) =>
+        supabase.from(m.table).select('is_correct').eq('user_id', userId).gte(m.dateCol, sincePrev).lt(m.dateCol, sinceCur)
+      )),
+    ])
+
+    const pct = (rows) => rows.length ? Math.round((rows.filter((r) => r.is_correct).length / rows.length) * 100) : null
+    const rowsOf = (settled, i) => settled[i].status === 'fulfilled' ? (settled[i].value?.data || []) : []
+
     const modules = MODULE_TIMING.map((m, i) => {
-      const rows = results[i].status === 'fulfilled' ? (results[i].value?.data || []) : []
-      const attempts = rows.length
-      const correct = rows.filter((r) => r.is_correct).length
-      const ready = attempts >= MIN_MODULE_ATTEMPTS
+      const cur = rowsOf(curr, i)
+      const pre = rowsOf(prev, i)
+      const ready = cur.length >= MIN_MODULE_ATTEMPTS
+      const accuracy = ready ? pct(cur) : null
+      // Only claim a direction when BOTH windows cleared the bar — otherwise a
+      // 2-attempt week would "prove" a trend it cannot support.
+      const prevAccuracy = pre.length >= MIN_MODULE_ATTEMPTS ? pct(pre) : null
+      let direction = null
+      if (accuracy !== null && prevAccuracy !== null) {
+        const d = accuracy - prevAccuracy
+        direction = d >= 3 ? 'up' : d <= -3 ? 'down' : 'same'
+      }
       return {
-        id: m.id, label: m.label, attempts, min: MIN_MODULE_ATTEMPTS,
+        id: m.id, label: m.label, attempts: cur.length, min: MIN_MODULE_ATTEMPTS,
         status: ready ? 'ready' : 'building',
-        accuracy: ready ? Math.round((correct / attempts) * 100) : null,
+        accuracy, prevAccuracy, direction,
       }
     })
     return { status: 'ready', modules }
@@ -232,116 +251,77 @@ export async function getAccuracyByModule(userId) {
   }
 }
 
-export async function getResponseTimeTrend(userId) {
+// ─── 6. הצמיחה המצתברת שלכם ─── total practice actions across all four
+//        activity tables, cumulative week over week. Reuses the same
+//        four-table union as getWeeklyActivity (#8) but never resets: a
+//        cumulative count can only go up, so there's no "bad day" to color
+//        and no way to "fail" it (wellbeing rule) — replaces the response-
+//        time card Lion rejected, 30.8.
+export async function getCumulativeGrowth(userId) {
   try {
     if (!userId) return { status: 'guest' }
-    const results = await Promise.allSettled(
-      MODULE_TIMING.map((m) =>
-        supabase.from(m.table).select(`${m.dateCol}, ${m.timeCol}`).eq('user_id', userId).not(m.timeCol, 'is', null)
-      )
-    )
+    const [r1, r2, r3, r4] = await Promise.allSettled([
+      supabase.from('restatement_attempts').select('attempted_at').eq('user_id', userId),
+      supabase.from('sc_attempts').select('created_at').eq('user_id', userId),
+      supabase.from('listening_question_responses').select('responded_at').eq('user_id', userId),
+      supabase.from('srs_review_log').select('reviewed_at').eq('user_id', userId),
+    ])
     const rows = []
-    results.forEach((r, i) => {
-      if (r.status !== 'fulfilled') return
-      const m = MODULE_TIMING[i]
-      for (const row of r.value?.data || []) {
-        const ms = Number(row[m.timeCol])
-        const ts = row[m.dateCol]
-        if (ms > 0 && ts) rows.push({ ts, ms })
+    const collect = (settled, field) => {
+      if (settled.status !== 'fulfilled') return
+      for (const row of settled.value?.data || []) {
+        if (row[field]) rows.push(row[field])
       }
-    })
-    if (rows.length < MIN_TIMED_ATTEMPTS) return { status: 'building', total: rows.length, min: MIN_TIMED_ATTEMPTS }
+    }
+    collect(r1, 'attempted_at')
+    collect(r2, 'created_at')
+    collect(r3, 'responded_at')
+    collect(r4, 'reviewed_at')
+    if (rows.length < MIN_TOTAL_ACTIONS) return { status: 'building', total: rows.length, min: MIN_TOTAL_ACTIONS }
 
-    rows.sort((a, b) => new Date(a.ts) - new Date(b.ts))
+    rows.sort((a, b) => new Date(a) - new Date(b))
     const buckets = new Map()
-    for (const row of rows) {
-      const key = mondayOf(row.ts)
-      const b = buckets.get(key) || { sum: 0, n: 0 }
-      b.sum += row.ms
-      b.n += 1
-      buckets.set(key, b)
+    for (const ts of rows) {
+      const key = mondayOf(ts)
+      buckets.set(key, (buckets.get(key) || 0) + 1)
     }
-    const series = [...buckets.entries()].map(([week, b]) => ({ week, avgMs: b.sum / b.n })).slice(-10)
-
-    let pctFaster = null
-    if (series.length >= 2) {
-      const first = series[0].avgMs
-      const last = series[series.length - 1].avgMs
-      if (first > 0) pctFaster = Math.round(((first - last) / first) * 100)
-    }
-    return { status: 'ready', series, pctFaster, total: rows.length }
+    let running = 0
+    const series = [...buckets.entries()].slice(-20).map(([week, n]) => {
+      running += n
+      return { week, cumulative: running }
+    })
+    return { status: 'ready', series, total: rows.length }
   } catch (err) {
-    console.error('insights.data.getResponseTimeTrend:', err)
+    console.error('insights.data.getCumulativeGrowth:', err)
     return { status: 'error', total: 0 }
   }
 }
 
-const HINT_SOURCES = [
-  { table: 'restatement_attempts', dateCol: 'attempted_at' },
-  { table: 'listening_question_responses', dateCol: 'responded_at' },
-]
-
-export async function getHintWeaning(userId) {
+// ─── 7. התקדמות במחברת הטעויות ─── how many of the mistakes already surfaced
+//        in the Mistake Notebook (mistake_marks — a table that existed with
+//        zero charts using it until now) have been marked understood.
+//        Frames an open count as something to work through, never a
+//        judgment — replaces the "גמילה מרמזים" hint-usage card Lion
+//        rejected, 30.8.
+export async function getMistakeNotebookProgress(userId) {
   try {
     if (!userId) return { status: 'guest' }
-    const results = await Promise.allSettled(
-      HINT_SOURCES.map((s) => supabase.from(s.table).select(`${s.dateCol}, hint_used`).eq('user_id', userId))
-    )
-    const rows = []
-    results.forEach((r, i) => {
-      if (r.status !== 'fulfilled') return
-      const s = HINT_SOURCES[i]
-      for (const row of r.value?.data || []) {
-        if (row[s.dateCol]) rows.push({ ts: row[s.dateCol], hint: !!row.hint_used })
-      }
-    })
-    if (rows.length < MIN_HINT_ATTEMPTS) return { status: 'building', total: rows.length, min: MIN_HINT_ATTEMPTS }
-
-    rows.sort((a, b) => new Date(a.ts) - new Date(b.ts))
-    const buckets = new Map()
-    for (const row of rows) {
-      const key = mondayOf(row.ts)
-      const b = buckets.get(key) || { hints: 0, n: 0 }
-      b.hints += row.hint ? 1 : 0
-      b.n += 1
-      buckets.set(key, b)
+    const [rWrong, scWrong, lWrong, marks] = await Promise.allSettled([
+      supabase.from('restatement_attempts').select('question_id').eq('user_id', userId).eq('is_correct', false),
+      supabase.from('sc_attempts').select('question_id').eq('user_id', userId).eq('is_correct', false),
+      supabase.from('listening_question_responses').select('question_id').eq('user_id', userId).eq('is_correct', false),
+      supabase.from('mistake_marks').select('id').eq('user_id', userId),
+    ])
+    const distinctCount = (settled) => {
+      if (settled.status !== 'fulfilled') return 0
+      return new Set((settled.value?.data || []).map((r) => r.question_id)).size
     }
-    const series = [...buckets.entries()].map(([week, b]) => ({ week, pct: Math.round((b.hints / b.n) * 100) })).slice(-10)
-
-    let pointsDropped = null
-    if (series.length >= 2) pointsDropped = series[0].pct - series[series.length - 1].pct
-    return { status: 'ready', series, pointsDropped, total: rows.length }
+    const total = distinctCount(rWrong) + distinctCount(scWrong) + distinctCount(lWrong)
+    const resolved = marks.status === 'fulfilled' ? (marks.value?.data || []).length : 0
+    if (total < MIN_MISTAKES) return { status: 'building', total, min: MIN_MISTAKES }
+    return { status: 'ready', total, resolved: Math.min(resolved, total) }
   } catch (err) {
-    console.error('insights.data.getHintWeaning:', err)
-    return { status: 'error', total: 0 }
-  }
-}
-
-export async function getListeningIndependence(userId) {
-  try {
-    if (!userId) return { status: 'guest' }
-    const { data, error } = await supabase
-      .from('listening_question_responses')
-      .select('responded_at, replays_used, transcript_viewed')
-      .eq('user_id', userId)
-    if (error) throw error
-    const rows = (data || []).filter((r) => r.responded_at)
-    if (rows.length < MIN_LISTENING_ATTEMPTS) return { status: 'building', total: rows.length, min: MIN_LISTENING_ATTEMPTS }
-
-    rows.sort((a, b) => new Date(a.responded_at) - new Date(b.responded_at))
-    const buckets = new Map()
-    for (const row of rows) {
-      const key = mondayOf(row.responded_at)
-      const b = buckets.get(key) || { sum: 0, n: 0 }
-      b.sum += Number(row.replays_used) || 0
-      b.n += 1
-      buckets.set(key, b)
-    }
-    const series = [...buckets.entries()].map(([week, b]) => ({ week, avgReplays: b.sum / b.n })).slice(-10)
-    const transcriptPct = Math.round((rows.filter((r) => r.transcript_viewed).length / rows.length) * 100)
-    return { status: 'ready', series, transcriptPct, total: rows.length }
-  } catch (err) {
-    console.error('insights.data.getListeningIndependence:', err)
+    console.error('insights.data.getMistakeNotebookProgress:', err)
     return { status: 'error', total: 0 }
   }
 }
