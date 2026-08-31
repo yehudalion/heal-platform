@@ -123,6 +123,8 @@ export function renderScLearn(root) {
   requestAnimationFrame(() => {
     const el = document.getElementById(`sl-block-${wanted.id}`);
     if (!el) return;
+    el.classList.add('open');
+    el.querySelector('[data-block-toggle]')?.setAttribute('aria-expanded', 'true');
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     el.classList.add('sl-focus');
   });
@@ -134,6 +136,13 @@ function draw(root) {
   if (step === 1) {
     root.querySelector('#slNext').addEventListener('click', () => { step = 2; draw(root); window.scrollTo(0, 0); });
   } else {
+    root.querySelectorAll('[data-block-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sec = btn.closest('.sl-block');
+        const open = sec.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    });
     root.querySelector('#slBack').addEventListener('click', () => { step = 1; draw(root); window.scrollTo(0, 0); });
     root.querySelector('#slStart').addEventListener('click', () => {
       localStorage.setItem(LEARN_SEEN_KEY, 'true');
@@ -177,16 +186,20 @@ function screenTwo() {
     </div>`;
 }
 
+// Progressive disclosure (same pattern as rephrase-learn.js): number + title
+// always visible, worked examples collapsed by default and opened on click.
+// Deep links (see renderScLearn) force one block open.
 function block(b) {
   return `<section class="sl-card sl-block" id="sl-block-${b.id}">
-    <div class="sl-block-head">
+    <button type="button" class="sl-block-head" data-block-toggle aria-expanded="false">
       <span class="sl-num">${b.n}</span>
-      <div>
-        <h2 class="sl-h2">${b.title}${b.kicker ? ` <span class="sl-kicker" dir="ltr">(${b.kicker})</span>` : ''}</h2>
-        ${b.intro ? `<p class="sl-intro">${b.intro}</p>` : ''}
-      </div>
+      <h2 class="sl-h2">${b.title}${b.kicker ? ` <span class="sl-kicker" dir="ltr">(${b.kicker})</span>` : ''}</h2>
+      <span class="sl-chev">▾</span>
+    </button>
+    <div class="sl-block-body">
+      ${b.intro ? `<p class="sl-intro">${b.intro}</p>` : ''}
+      ${b.parts.map(part).join('')}
     </div>
-    ${b.parts.map(part).join('')}
   </section>`;
 }
 
@@ -231,10 +244,14 @@ const SL_CSS = `
 .sl-cta{width:100%;margin-top:1.4rem;padding:.85rem 1rem;font-size:1rem}
 
 .sl-focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-light)}
-.sl-block-head{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:1.1rem}
+.sl-block-head{display:flex;gap:.8rem;align-items:center;width:100%;background:none;border:none;padding:0;margin:0;cursor:pointer;text-align:right;font:inherit;color:inherit}
 .sl-num{flex:0 0 auto;width:1.85rem;height:1.85rem;border-radius:999px;background:var(--green-light);color:var(--green-dark);font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center}
-.sl-h2{font-size:1.1rem;font-weight:800;line-height:1.4}
+.sl-h2{flex:1;font-size:1.1rem;font-weight:800;line-height:1.4}
 .sl-kicker{font-weight:700;font-size:.85rem;color:var(--muted)}
+.sl-chev{flex:0 0 auto;font-size:.8rem;color:var(--muted);transition:transform .2s ease}
+.sl-block.open .sl-chev{transform:rotate(180deg)}
+.sl-block-body{display:none;margin-top:1.1rem}
+.sl-block.open .sl-block-body{display:block}
 .sl-intro{font-size:.9rem;line-height:1.65;color:var(--text);margin-top:.3rem}
 
 .sl-part{border-top:1px solid var(--border);padding-top:.9rem;margin-top:.9rem}
