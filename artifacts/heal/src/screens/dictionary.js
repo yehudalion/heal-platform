@@ -1,5 +1,8 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { browseDictionary, getDictionaryCount } from '../data/words.data.js';
+import { getCurrentSession } from '../supabase.js';
+import { setVocabPool } from '../data/srs.data.js';
+import { getProfile } from '../data/profiles.data.js';
 
 // Dictionary / browse screen (מוצר/UX chat, 2026-08-29 — PLAN_depth_and_new_corners.md).
 // Zero new content: surfaces the 2,666 words (550 'done' + 2,116
@@ -57,6 +60,7 @@ export async function renderDictionary(root) {
       <div class="dict-search-wrap">
         <input type="text" id="dictSearch" class="dict-search" placeholder="חפשו מילה או פירוש..." autocomplete="off">
       </div>
+      <div id="dictPool" class="dict-pool" hidden></div>
       <div id="dictList" class="dict-list"><div class="spinner-wrap"><div class="spinner"></div></div></div>
       <div id="dictMore" class="dict-more-wrap"></div>
     </div>`;
@@ -66,6 +70,42 @@ export async function renderDictionary(root) {
     const sub = el.querySelector('#dictSub');
     if (sub && count) sub.textContent = `${count.toLocaleString('he-IL')} מילים באוצר המילים שלנו, לעיון חופשי — בלי הגבלה.`;
   });
+
+  // ── The explicit "add the extension words to my practice" request ──
+  // This is the right screen for it and nowhere else: the Dictionary is the
+  // one place a learner actually SEES the 2,116 unscored words. Asking here
+  // turns a dead end ("why do I never get these?") into one tap.
+  // The other half of Lion's model — automatic promotion once the core pool
+  // runs out — lives in data/srs.data.js and needs no UI.
+  (async () => {
+    const box = el.querySelector('#dictPool');
+    if (!box) return;
+    const session = await getCurrentSession();
+    const userId = session?.user?.id ?? null;
+    if (!userId) return;                 // guests practise the core pool only
+
+    const { data: profile } = await getProfile(userId);
+    const alreadyIn = profile?.vocab_pool === 'extended';
+    box.hidden = false;
+
+    if (alreadyIn) {
+      box.innerHTML = `<span class="dict-pool-on">✓ כל המילים כאן כלולות בתרגול היומי שלכם</span>`;
+      return;
+    }
+    box.innerHTML = `
+      <span>חלק מהמילים כאן עדיין לא נכנסות לתרגול היומי — אנחנו מתחילים מהמילים המשתלמות ביותר.</span>
+      <button type="button" class="dict-pool-btn" id="dictPoolAdd">הוסיפו גם אותן לתרגול שלי</button>`;
+
+    box.querySelector('#dictPoolAdd')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      btn.disabled = true;
+      btn.textContent = 'מוסיפים…';
+      const { error } = await setVocabPool(userId, 'extended');
+      box.innerHTML = error
+        ? `<span>לא הצלחנו לעדכן כרגע. נסו שוב מאוחר יותר.</span>`
+        : `<span class="dict-pool-on">✓ מעכשיו גם המילים האלה ייכנסו לתרגול היומי שלכם</span>`;
+    });
+  })();
 
   let offset = 0;
   let query = '';
@@ -135,6 +175,11 @@ function ensureStyles() {
   const s = document.createElement('style');
   s.id = 'dict-css';
   s.textContent = `
+.dict-pool{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;background:var(--orange-light);border-radius:var(--radius-sm);padding:.7rem .9rem;margin-bottom:.9rem;font-size:.84rem;line-height:1.6}
+.dict-pool-btn{background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);padding:.4rem .9rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit}
+.dict-pool-btn:hover{background:var(--green-dark)}
+.dict-pool-btn:disabled{opacity:.6;cursor:default}
+.dict-pool-on{font-weight:700;color:var(--green-dark)}
 .dict-wrap { max-width: 720px; }
 .dict-search-wrap { margin: 1rem 0 1.3rem; }
 .dict-search { width:100%; padding:.85rem 1.1rem; border:1.5px solid var(--border); border-radius:var(--radius);

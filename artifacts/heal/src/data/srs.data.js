@@ -2,6 +2,84 @@ import { supabase } from '../supabase.js'
 
 const MAX_NEW_PER_SESSION = 10
 
+// Columns every "word" row in this file selects. One constant so the core and
+// extension queries can never drift apart.
+const WORD_FIELDS =
+  'id, headword, definition_he, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, impact_score, impact_percentile'
+
+// ─── Vocabulary pool model (Lion, 2026-08-31) ────────────────────────────────
+// "ה-550 מילים הראשונות אמורות להגיע אוטומטית. לעומת זאת שאר המילים בלי
+//  אימפקט סקור מגיעות רק לבקשת התלמיד או לחלופין אחרי שהוא סיים את ה-550."
+//
+//   core      — the 550 words that have an impact_score. Served automatically.
+//   extended  — the 2,116 unscored words. Served ONLY once the learner asked
+//               (user_profiles.vocab_pool = 'extended') or once core ran out,
+//               at which point this file promotes them automatically.
+//
+// The guard that unscored words are never served *by accident* is unchanged —
+// it just became conditional instead of absolute.
+//
+// ⚠️ FREE_PERCENTILE_FLOOR was `64` and applied to every non-premium learner,
+// which cut the automatic pool from 550 words to **198** (measured 31.8) and
+// made the coverage bar mathematically unreachable for a free account. That
+// directly contradicts Lion's instruction above, so it is disabled. It is left
+// here rather than deleted because re-enabling it is a MONETIZATION decision,
+// not a code cleanup: set it back to 64 to restore the old paywall.
+const FREE_PERCENTILE_FLOOR = null
+
+/** Read the learner's pool. Never throws; anything unexpected means 'core'. */
+async function getVocabPool(userId) {
+  if (!userId) return 'core'
+  try {
+    const { data } = await supabase
+      .from('user_profiles')
+      .select('vocab_pool')
+      .eq('user_id', userId)
+      .maybeSingle()
+    return data?.vocab_pool === 'extended' ? 'extended' : 'core'
+  } catch (error) {
+    console.error('srs.data.getVocabPool:', error)
+    return 'core'
+  }
+}
+
+/**
+ * Set the learner's pool. Exported so the Dictionary screen can offer the
+ * explicit "add these to my practice" request. Guest (no userId) = no-op.
+ */
+export async function setVocabPool(userId, pool) {
+  if (!userId || (pool !== 'core' && pool !== 'extended')) return { error: null }
+  try {
+    const { error } = await supabase
+      .from('user_profiles')
+      .upsert({ user_id: userId, vocab_pool: pool }, { onConflict: 'user_id' })
+    if (error) throw error
+    return { error: null }
+  } catch (error) {
+    console.error('srs.data.setVocabPool:', error)
+    return { error }
+  }
+}
+
+/** One page of unseen words from a single pool. Returns [] on any failure. */
+async function fetchNewWords({ scored, seenWordIds, limit }) {
+  if (limit <= 0) return []
+  try {
+    let q = supabase.from('words').select(WORD_FIELDS).limit(limit)
+    q = scored
+      ? q.not('impact_score', 'is', null).order('impact_score', { ascending: false })
+      : q.is('impact_score', null).order('headword', { ascending: true })
+    if (scored && FREE_PERCENTILE_FLOOR !== null) q = q.gte('impact_percentile', FREE_PERCENTILE_FLOOR)
+    if (seenWordIds.length > 0) q = q.not('id', 'in', `(${seenWordIds.join(',')})`)
+    const { data, error } = await q
+    if (error) throw error
+    return data || []
+  } catch (error) {
+    console.error('srs.data.fetchNewWords:', error)
+    return []
+  }
+}
+
 /**
  * Get words due for review today, plus new words to fill the session.
  * Priority: overdue reviews first, then new words by impact_score.
@@ -34,33 +112,32 @@ export async function getDueWords(userId, { limit = 20, isPremium = false } = {}
 
     const seenWordIds = allProgress.map(p => p.word_id)
 
-    // 3. Get new words (not yet seen), ordered by impact_score
+    // 3. Get new words (not yet seen). Core pool first, always — the extension
+    //    pool only fills what core could not (see the pool model up top).
     const newSlotsAvailable = Math.max(0, MAX_NEW_PER_SESSION - dueReviews.length)
     let newWordsData = []
 
     if (newSlotsAvailable > 0) {
-      let newQuery = supabase
-        .from('words')
-        .select('id, headword, definition_he, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, impact_score, impact_percentile')
-        // Unvalidated words (impact_score IS NULL) must never be picked as a
-        // "new word" here, regardless of tier. NULLS FIRST is Postgres' default
-        // on DESC, so without this filter they'd outrank every real word.
-        // (Lion + Cowork, 2026-08-26)
-        .not('impact_score', 'is', null)
-        .order('impact_score', { ascending: false })
-        .limit(newSlotsAvailable)
+      const pool = await getVocabPool(userId)
+      let picked = await fetchNewWords({ scored: true, seenWordIds, limit: newSlotsAvailable })
 
-      if (seenWordIds.length > 0) {
-        newQuery = newQuery.not('id', 'in', `(${seenWordIds.join(',')})`)
+      if (picked.length < newSlotsAvailable) {
+        // Core is exhausted for this learner. Either they already opted in, or
+        // this is the moment they earn the extension — Lion's "או לחלופין
+        // אחרי שהוא סיים את ה-550".
+        if (pool === 'core') {
+          // fire-and-forget: a failed promotion must not fail the session
+          setVocabPool(userId, 'extended')
+        }
+        const extra = await fetchNewWords({
+          scored: false,
+          seenWordIds,
+          limit: newSlotsAvailable - picked.length,
+        })
+        picked = [...picked, ...extra]
       }
 
-      if (!isPremium) {
-        newQuery = newQuery.gte('impact_percentile', 64)
-      }
-
-      const { data: newWords, error: newError } = await newQuery
-      if (newError) throw newError
-      newWordsData = newWords.map(w => ({ ...w, word_id: w.id, state: 'new' }))
+      newWordsData = picked.map(w => ({ ...w, word_id: w.id, state: 'new' }))
     }
 
     // 4. Fetch full word data for due reviews
@@ -70,7 +147,7 @@ export async function getDueWords(userId, { limit = 20, isPremium = false } = {}
     if (reviewWordIds.length > 0) {
       const { data: reviewWords, error: rwError } = await supabase
         .from('words')
-        .select('id, headword, definition_he, surface_1, mnemonic, mnemonic_2, mnemonic_3, audio_word_url, audio_sentence_url, impact_score, impact_percentile')
+        .select(WORD_FIELDS)
         .in('id', reviewWordIds)
 
       if (rwError) throw rwError

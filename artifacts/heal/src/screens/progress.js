@@ -157,11 +157,32 @@ function reportCard(r) {
 
 /** Vocab has no weak-point collector yet (TODO T044+ in weakpoints.data.js) —
  * this card is coverage-only until one exists. */
+// Two independent bars, never one (Lion, 2026-08-31: "הפס חייב רק להתקדם").
+// A combined bar would drop a learner from 100% to ~21% the moment they open
+// the extension pool. Core keeps its finished state as an achievement; the
+// extension bar starts its own climb. See data/coverage.data.js for why the
+// denominators are frozen per learner rather than counted from the library.
 function vocabCard(coverage) {
-  const v = coverage?.vocab;
-  if (!v) return '';
-  const bar = renderCoverageBar({ label: 'אוצר מילים', done: v.done, total: v.total, unit: 'מילים בסבב חזרות' });
-  return `<div class="wp-card">${bar}</div>`;
+  const core = coverage?.vocabCore ?? coverage?.vocab;
+  if (!core) return '';
+  const parts = [];
+
+  if (core.complete) {
+    parts.push(`<p class="wp-achieved">✓ סיימתם את כל ${core.total} מילות הליבה</p>`);
+  } else {
+    parts.push(renderCoverageBar({
+      label: 'מילות הליבה', done: core.done, total: core.total, unit: 'מילים בסבב חזרות',
+    }));
+  }
+
+  const ext = coverage?.vocabExtension;
+  if (ext) {
+    parts.push(renderCoverageBar({
+      label: 'מילות הרחבה', done: ext.done, total: ext.total, unit: 'מילים בסבב חזרות',
+    }));
+  }
+
+  return `<div class="wp-card">${parts.join('')}</div>`;
 }
 
 /**
@@ -292,6 +313,7 @@ function ensureStyles() {
 .wp-empty strong{color:var(--text)}
 .wp-gloss{font-weight:400;color:var(--muted)}
 .wp-deep{display:inline-block;margin-top:.8rem;font-size:.83rem;font-weight:700;color:var(--green-dark);text-decoration:none}
+.wp-achieved{margin:0 0 .7rem;font-size:.88rem;font-weight:800;color:var(--green-dark)}
 .wp-deep:hover{text-decoration:underline}
 .wp-foot{font-size:.75rem;color:var(--muted);margin-top:1.2rem;text-align:center}
 `;
