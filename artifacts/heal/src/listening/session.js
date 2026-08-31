@@ -51,7 +51,7 @@ export async function renderSession(root) {
   if (!session) {
     root.innerHTML = `
       <div class="sess-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון כדי להתחיל</p>
+        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">ההאזנה שומרת את ההתקדמות שלך, ולכן דורשת חשבון חינם — ההרשמה לוקחת 10 שניות עם Google.</p>
         <button class="btn-sess-primary" style="max-width:220px"
           onclick="location.hash='/'">כניסה לחשבון</button>
       </div>`;
@@ -163,7 +163,7 @@ function _showWarmupBrief(root) {
         <h2 class="sess-card-title">מוכן/ה להתחיל?</h2>
         <p class="sess-card-sub">
           תרגול האזנה: ${total} קטעים, בקצב שלך.<br>
-          כל קטע מושמע פעם אחת — כמו במבחן.
+          אפשר להשמיע כל קטע שוב מההתחלה (אבל לא להתקדם/לחזור בתוכו) — כמו במבחן.
         </p>
         <div class="sess-actions">
           <button class="btn-sess-primary" id="btn-start">מתחילים! ←</button>
@@ -312,7 +312,7 @@ function _header() {
   // reachable DURING a session too, not only before starting one.
   return `
     <div class="sess-header">
-      <button class="btn-sess-exit" id="btn-exit" title="יציאה מהפגישה">✕</button>
+      <button class="btn-sess-exit" id="btn-exit" title="חזרה לדף הבית">←</button>
       <span class="sess-header-title">פגישת תרגול</span>
       <button class="btn-sess-guide" id="btn-guide" title="איך מקשיבים נכון">?</button>
     </div>`;

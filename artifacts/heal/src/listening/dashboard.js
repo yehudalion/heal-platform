@@ -78,7 +78,10 @@ function _render(root, overview, examDate) {
 
   root.innerHTML = `
     <div class="ldash-body">
-      <h1 class="ldash-title">פינת האזנה 🎧</h1>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="btn-ldash-link" id="btn-home" style="padding:6px 12px;" title="חזרה לדף הבית">→ חזרה</button>
+        <h1 class="ldash-title" style="margin:0;">פינת האזנה 🎧</h1>
+      </div>
 
       <!-- ── Top strip: informational, never punitive ── -->
       <div class="ldash-strip">
@@ -132,6 +135,7 @@ function _render(root, overview, examDate) {
   root.querySelector('#btn-go').addEventListener('click', () =>
     navigate(firstTime ? '/listening/learn' : '/listening/session'));
   root.querySelector('#btn-relearn')?.addEventListener('click', () => navigate('/listening/learn'));
+  root.querySelector('#btn-home')?.addEventListener('click', () => navigate('/home'));
 }
 
 // ─── Intro modal (shown once on first visit) ──────────────────────────────────
@@ -149,7 +153,7 @@ function _showIntroModal(root) {
           <li>▸ <strong>השלמת משפט</strong> — תשמע משפט שנחתך, תבחר איך הוא ממשיך</li>
           <li>▸ <strong>הבנת קטע</strong> — תשמע קטע או שיחה, תענה על שאלות על הנאמר</li>
         </ul>
-        <p class="ldash-modal-note">⚠️ במבחן האמיתי אין השמעה חוזרת — לכן גם כאן כל קטע מושמע פעם אחת.</p>
+        <p class="ldash-modal-note">⚠️ אי אפשר להתקדם או לחזור בתוך ההקלטה, אבל אפשר להשמיע אותה שוב מההתחלה — בדיוק כמו במבחן.</p>
       </div>
       <button class="btn-ldash-primary ldash-modal-cta" id="btn-intro-ok">
         הבנתי, בואו נתחיל ←

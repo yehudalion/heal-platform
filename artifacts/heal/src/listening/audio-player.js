@@ -18,6 +18,7 @@ const SVG = {
   lock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
   back10: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 8.5A9 9 0 1 1 4 16"/><polyline points="1,5 4,8.5 7.5,6"/><text x="8.5" y="15.5" font-size="6.5" fill="currentColor" stroke="none" font-family="inherit">10</text></svg>`,
   fwd10:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21.5 8.5A9 9 0 1 0 20 16"/><polyline points="23,5 20,8.5 16.5,6"/><text x="7.5" y="15.5" font-size="6.5" fill="currentColor" stroke="none" font-family="inherit">10</text></svg>`,
+  replay: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3,4 3,9 8,9"/></svg>`,
 };
 
 export class AudioPlayer {
@@ -30,6 +31,7 @@ export class AudioPlayer {
     this._mode = mode;
     this._locked = false;
     this._hasStarted = false;
+    this._ended = false; // single-pass: audio finished, replay (from 0) is offered
     this._onFirstPlay = onFirstPlay;
     this._raf = null;
 
@@ -83,6 +85,7 @@ export class AudioPlayer {
           <span class="ap-icon ap-icon-play">${SVG.play}</span>
           <span class="ap-icon ap-icon-pause" hidden>${SVG.pause}</span>
           <span class="ap-icon ap-icon-lock" hidden>${SVG.lock}</span>
+          <span class="ap-icon ap-icon-replay" hidden>${SVG.replay}</span>
         </button>
 
         ${isNormal ? `
@@ -111,6 +114,7 @@ export class AudioPlayer {
     this._iconPlay    = this._container.querySelector('.ap-icon-play');
     this._iconPause   = this._container.querySelector('.ap-icon-pause');
     this._iconLock    = this._container.querySelector('.ap-icon-lock');
+    this._iconReplay  = this._container.querySelector('.ap-icon-replay');
     this._seekBar     = this._container.querySelector('.ap-seek-bar');
     this._fill        = this._container.querySelector('.ap-fill');
     this._thumb       = this._container.querySelector('.ap-thumb');
@@ -174,6 +178,12 @@ export class AudioPlayer {
     if (this._howl.playing()) {
       this._howl.pause();
     } else {
+      // Single-pass clips don't rewind mid-play, but a finished clip can be
+      // replayed from the start (the real exam allows re-hearing a clip,
+      // just not skipping/scrubbing within it).
+      if (this._mode === 'single-pass' && this._ended) {
+        this._howl.seek(0);
+      }
       this._howl.play();
     }
   }
@@ -183,17 +193,20 @@ export class AudioPlayer {
       this._onFirstPlay();
     }
     this._hasStarted = true;
-    this._iconPlay.hidden  = true;
-    this._iconPause.hidden = false;
-    this._iconLock.hidden  = true;
+    this._ended = false;
+    this._iconPlay.hidden   = true;
+    this._iconPause.hidden  = false;
+    this._iconLock.hidden   = true;
+    this._iconReplay.hidden = true;
     this._btnPlay.setAttribute('aria-label', 'השהה');
     this._startRaf();
   }
 
   _syncPause() {
-    this._iconPlay.hidden  = false;
-    this._iconPause.hidden = true;
-    this._iconLock.hidden  = true;
+    this._iconPlay.hidden   = false;
+    this._iconPause.hidden  = true;
+    this._iconLock.hidden   = true;
+    this._iconReplay.hidden = true;
     this._btnPlay.setAttribute('aria-label', 'נגן');
     this._stopRaf();
     this._updateProgress();
@@ -204,13 +217,14 @@ export class AudioPlayer {
     this._updateProgress();
 
     if (this._mode === 'single-pass') {
-      this._locked = true;
-      this._iconPlay.hidden  = true;
-      this._iconPause.hidden = true;
-      this._iconLock.hidden  = false;
-      this._btnPlay.classList.add('ap-btn-locked');
-      this._btnPlay.setAttribute('aria-label', 'ההשמעה הסתיימה');
-      this._btnPlay.setAttribute('aria-disabled', 'true');
+      // The real exam allows re-hearing a clip (just not seeking within it),
+      // so a finished single-pass clip stays playable — offered as replay.
+      this._ended = true;
+      this._iconPlay.hidden   = true;
+      this._iconPause.hidden  = true;
+      this._iconLock.hidden   = true;
+      this._iconReplay.hidden = false;
+      this._btnPlay.setAttribute('aria-label', 'השמע שוב');
     } else {
       // Normal mode: reset to play state
       this._iconPlay.hidden  = false;

@@ -5,8 +5,9 @@
  * (listening_lectures / listening_questions, options as jsonb).
  *
  *   - continuation items have exactly 1 question → behaves as before.
- *   - lecture_qa items have 1-2+ questions → audio plays once (single-pass),
- *     then the questions are shown one after another WITHOUT replaying.
+ *   - lecture_qa items have 1-2+ questions → audio is single-pass (no seek/
+ *     skip within a clip) but CAN be replayed from the start, matching the
+ *     real exam; only the first full play unlocks the answer options.
  *
  * Usage (full feedback mode — practice session):
  *   const item = new ListeningItem(container, {
@@ -163,21 +164,31 @@ export class ListeningItem {
       </div>
     `;
 
-    // Stop any previous audio before mounting a new player
-    if (window._currentAudioPlayer && window._currentAudioPlayer !== this._player) {
+    // Every _renderQuestion() call rebuilds the whole DOM (including
+    // #lic-player), so the previous player instance is always stale here —
+    // release it before mounting a fresh one.
+    if (this._player) {
+      if (window._currentAudioPlayer === this._player) window._currentAudioPlayer = null;
+      try { this._player.destroy(); } catch (_) {}
+      this._player = null;
+    }
+    if (window._currentAudioPlayer) {
       try { window._currentAudioPlayer.destroy(); } catch (_) {}
       window._currentAudioPlayer = null;
     }
 
-    // Mount audio player — only for the first question; later questions of the
-    // same lecture reuse "already played" state and show no player controls
-    // reset (mounting a fresh player each render would tempt a replay).
-    if (hasAudio && !this._audioPlayed) {
+    // Mount the audio player for every question of the lecture (single-pass:
+    // no seeking/skipping within a clip, but — matching the real exam — a
+    // finished clip can be replayed from the start). Only the FIRST play of
+    // the lecture unlocks the answer options; onFirstPlay is a no-op after
+    // that, so replaying later questions' audio never re-locks anything.
+    if (hasAudio) {
       const playerEl = this._container.querySelector('#lic-player');
       this._player = new AudioPlayer(playerEl, {
         src: item.audio_url,
         mode: 'single-pass',
         onFirstPlay: () => {
+          if (this._audioPlayed) return;
           this._audioPlayed = true;
           const optEl  = this._container.querySelector('#lic-options');
           const lockEl = this._container.querySelector('#lic-audio-lock');
@@ -186,17 +197,6 @@ export class ListeningItem {
         },
       });
       window._currentAudioPlayer = this._player;
-    } else if (hasAudio && this._audioPlayed) {
-      // Later questions: the player's DOM was wiped by the re-render — release
-      // the object too, and show a static "already played" note instead.
-      if (this._player) {
-        if (window._currentAudioPlayer === this._player) window._currentAudioPlayer = null;
-        try { this._player.destroy(); } catch (_) {}
-        this._player = null;
-      }
-      const playerEl = this._container.querySelector('#lic-player');
-      if (playerEl) playerEl.innerHTML = `
-        <div class="lic-audio-lock" style="opacity:.7">✓ הקטע הושמע — ענה על סמך מה ששמעת</div>`;
     }
 
     this._questionStartMs = performance.now();
