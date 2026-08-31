@@ -23,6 +23,18 @@
       href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap"
       rel="stylesheet"
     />
+
+    <!--
+      Critical first-paint styles only (AUDIT: "הבהוב פריסה במסך הכניסה
+      בטעינה איטית"). Everything here is a no-op once styles.css applies —
+      the same values it already sets — it just prevents a white flash and a
+      zero-height #app in the gap before the bundle runs. Do NOT grow this
+      block into a second stylesheet: layout stays in styles.css.
+    -->
+    <style>
+      html, body { margin: 0; background: #F5F1E8; color: #14201A; }
+      #app { min-height: 100vh; }
+    </style>
   </head>
   <body>
     <div id="app"></div>
