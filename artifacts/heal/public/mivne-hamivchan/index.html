@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>מבנה מבחן הלאל — שלוש המיומנויות ומה כל אחת בודקת | HighScore</title>
+<meta name="description" content="מה בדיוק נבחן במבחן האנגלית החדש: קריאה, האזנה וכתיבה, איך עובד מבחן מותאם אישית, מה אומר סולם 50–150 לפי CEFR, ומה עדיין לא פורסם רשמית." />
+<link rel="canonical" href="https://highscore-eight.vercel.app/mivne-hamivchan/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#1F5C43" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="HighScore" />
+<meta property="og:locale" content="he_IL" />
+<meta property="og:title" content="מבנה מבחן הלאל — שלוש המיומנויות ומה כל אחת בודקת" />
+<meta property="og:description" content="קריאה, האזנה וכתיבה; מבחן מותאם; סולם 50–150 לפי CEFR — ומה שעדיין לא פורסם." />
+<meta property="og:url" content="https://highscore-eight.vercel.app/mivne-hamivchan/" />
+<meta property="og:image" content="https://highscore-eight.vercel.app/opengraph.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "ממה מורכב מבחן הלאל?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "המבחן בודק שלוש מיומנויות: קריאה, האזנה וכתיבה. הוא ממוחשב ומותאם אישית, כלומר רמת השאלות משתנה בהתאם לתשובות הנבחן, והציון ניתן בסולם של 50 עד 150 לפי סולם CEFR הבינלאומי."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה זה מבחן מותאם אישית?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "במבחן מותאם רמת הקושי של השאלות מגיבה לביצועים במהלך המבחן עצמו. תשובות נכונות מובילות לשאלות קשות יותר, ולכן תחושה שהשאלות מתקשות היא בדרך כלל סימן טוב ולא סימן לכישלון."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם המבנה המלא כבר פורסם?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "לא. מספר השאלות המדויק, חלוקת הזמן ומשקל כל חלק טרם פורסמו במסמך רשמי סופי. מה שכן ידוע ומאושר הוא שלוש המיומנויות, אופי המבחן הממוחשב והמותאם, וסולם הציונים."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --green:#1F5C43; --green-dark:#16412F; --green-light:#E6EFE9;
+  --orange:#B08442; --orange-light:#F2E9D8;
+  --blue:#3D6B7D; --blue-light:#E3ECEB;
+  --bg:#F5F1E8; --card:#FFFDF7; --text:#14201A; --muted:#5C6B60; --border:#E3DDCC;
+  --radius:8px; --serif:'Frank Ruhl Libre',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Assistant',Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+.top{display:flex;align-items:center;justify-content:space-between;padding:.4rem 0 1.8rem}
+.brand{display:inline-flex;align-items:center;gap:.5rem;color:var(--green-dark);text-decoration:none;font-weight:800}
+.brand-mark{background:var(--green-dark);color:#fff;border-radius:6px;padding:.25rem .5rem;font-size:.82rem;letter-spacing:.5px}
+.top-cta{background:var(--green-dark);color:#fff;text-decoration:none;border-radius:var(--radius);padding:.5rem .95rem;font-size:.84rem;font-weight:700}
+h1{font-family:var(--serif);font-size:1.85rem;font-weight:700;line-height:1.35;letter-spacing:-.3px;margin-bottom:.6rem}
+.lede{font-size:1.05rem;color:var(--muted);margin-bottom:1.5rem}
+h2{font-family:var(--serif);font-size:1.28rem;font-weight:700;margin:2.2rem 0 .7rem}
+h3{font-size:1rem;font-weight:800;margin:1.4rem 0 .4rem}
+p{margin-bottom:.9rem}
+a{color:var(--green-dark)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin:1.2rem 0}
+.note{background:var(--orange-light);border-right:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.1rem;margin:1.2rem 0;font-size:.93rem}
+.note b{color:var(--orange)}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
+th,td{text-align:right;padding:.6rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-weight:800;color:var(--muted);font-size:.8rem}
+ul{margin:0 0 .9rem 0;padding-right:1.2rem}
+li{margin-bottom:.35rem}
+.updated{font-size:.8rem;color:var(--muted);margin-bottom:1.8rem}
+.en{direction:ltr;unicode-bidi:isolate;font-weight:700}
+.ex{background:var(--bg);border-radius:var(--radius);padding:.85rem 1rem;margin:.7rem 0;line-height:1.8}
+.words{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem;margin:1.1rem 0}
+.w{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem .8rem;display:flex;flex-direction:column;gap:.1rem}
+.w-en{direction:ltr;text-align:left;font-weight:800;color:var(--green-dark);font-size:.98rem}
+.w-he{font-size:.85rem;color:var(--muted)}
+.cta{background:var(--green-light);border:1px solid var(--green);border-radius:var(--radius);padding:1.4rem 1.5rem;margin:2.4rem 0 1rem;text-align:center}
+.cta h2{margin-top:0}
+.cta-btn{display:inline-block;background:var(--green-dark);color:#fff;text-decoration:none;border-radius:var(--radius);padding:.75rem 1.6rem;font-weight:800;margin-top:.5rem}
+.foot{border-top:1px solid var(--border);margin-top:2.5rem;padding-top:1.2rem;font-size:.82rem;color:var(--muted)}
+.foot a{margin-left:1rem}
+@media(max-width:560px){h1{font-size:1.5rem}.wrap{padding:1.2rem 1rem 3rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <a class="brand" href="/"><span class="brand-mark">hSc</span> HighScore</a>
+    <a class="top-cta" href="/">לתרגול ←</a>
+  </div>
+
+  <h1>מבנה המבחן וחלקיו</h1>
+  <p class="lede">לא מה השתנה ולמה — אלא מה בפועל יופיע על המסך, ומה כל חלק דורש ממך.</p>
+  <p class="updated">עודכן: אוגוסט 2026</p>
+
+  <h2>שלוש מיומנויות, לא פרק אחד</h2>
+  <p>ההבדל המהותי בין המבחן החדש לפרק האנגלית הישן בפסיכומטרי הוא שהוא לא בודק "אנגלית" כמקשה אחת, אלא שלוש יכולות נפרדות: <strong>קריאה</strong>, <strong>האזנה</strong> ו<strong>כתיבה</strong>. אפשר להיות חזק באחת וחלש באחרת, וזה בדיוק מה שהמבחן נועד למדוד.</p>
+  <p>מבחינה מעשית זה משנה את כל ההיערכות: מי שמתכונן רק בקריאת טקסטים ופתרון שאלות אמריקאיות מכין את עצמו לשליש אחד מהמבחן.</p>
+
+  <h2>מה כל חלק דורש</h2>
+
+  <h3>קריאה</h3>
+  <p>הבנת טקסטים אקדמיים ושאלות שנשענות עליהם. כאן נבדק אוצר המילים שלכם בפועל — לא ברשימה, אלא בתוך משפט שצריך להבין. זה גם החלק שהכי דומה למה שכבר הכרתם מהפסיכומטרי ומאמירנט, ולכן גם החלק שרוב חומרי ההכנה הישנים מכסים.</p>
+  <p><a href="/otzar-milim/">איך בונים את אוצר המילים שקובע כאן</a>.</p>
+
+  <h3>האזנה</h3>
+  <p>שומעים קטעים ושיחות באנגלית ועונים על שאלות הבנה. זהו החלק החדש והמפתיע: הוא כמעט לא קיים בחומרי הכנה ותיקים, ואי אפשר לאלתר אותו. שמיעה היא מיומנות שנבנית רק בתרגול חוזר לאורך זמן.</p>
+  <p><a href="/chelek-haazana/">מה בדיוק נבדק בחלק ההאזנה</a>.</p>
+
+  <h3>כתיבה</h3>
+  <p>הפקה באנגלית — לא רק זיהוי התשובה הנכונה מבין ארבע. זו המיומנות שהכי קשה לשפר בשבוע האחרון, כי היא דורשת שליטה פעילה במילים ובמבנים, ולא רק זיהוי פסיבי שלהם.</p>
+
+  <h2>איך עובד מבחן מותאם</h2>
+  <p>המבחן ממוחשב ו<strong>מותאם אישית</strong>: רמת הקושי של השאלות מגיבה לתשובות שלכם תוך כדי. ענית נכון — השאלה הבאה תהיה קשה יותר. זה נועד למקם אתכם במדויק במעט שאלות.</p>
+  <div class="note">
+    <p style="margin:0"><b>מה שחשוב לדעת מראש:</b> אם השאלות מרגישות קשות יותר ככל שמתקדמים — זה בדרך כלל <b>סימן טוב</b>, לא סימן שאתם נכשלים. נבחנים שלא יודעים את זה נלחצים באמצע המבחן בדיוק כשהם מצליחים.</p>
+  </div>
+
+  <h2>הציון</h2>
+  <p>הציון ניתן בסולם של <strong>50 עד 150</strong>, לפי סולם <span class="en">CEFR</span> — הסולם הבינלאומי למדידת רמת שפה. חשוב להבין את המשמעות: זה לא ציון יחסי מול שאר הנבחנים כמו בפסיכומטרי, אלא מדידה של הרמה שלכם. אותו ציון גם קובע את רמת הסיווג באקדמיה ואת <a href="/ptor-anglit/">הפטור מקורסי אנגלית</a>.</p>
+
+  <h2>מה עדיין לא ידוע</h2>
+  <p>כדאי להיות ישרים לגבי הפערים: <strong>מספר השאלות המדויק, חלוקת הזמן בין החלקים ומשקלו של כל חלק בציון הסופי — טרם פורסמו במסמך רשמי סופי.</strong> מי שמבטיח לכם מספרים מדויקים היום מנחש.</p>
+  <p>מה שכן ודאי, ומה שכדאי להתכונן אליו: שלוש המיומנויות, אופי המבחן המותאם, וסולם הציונים. <a href="/mivchan-hilal/">הרקע המלא על הרפורמה ומה השתנה</a>.</p>
+
+  <div class="cta">
+    <h2>להתאמן על שלושת החלקים</h2>
+    <p style="margin-bottom:0">אוצר מילים, ניסוח מחדש, השלמת משפטים והאזנה — עם הסבר בעברית על כל שאלה. חינם בתקופת הבטא.</p>
+    <a class="cta-btn" href="/">להתחיל לתרגל ←</a>
+  </div>
+
+  <div class="foot">
+    <a href="/">דף הבית</a>
+    <a href="/mivchan-hilal/">מבחן הלאל</a>
+    <a href="/amirant-ledugma/">שאלות לדוגמה</a>
+    <a href="/ptor-anglit/">פטור באנגלית</a>
+    <a href="/chelek-haazana/">חלק ההאזנה</a>
+    <a href="/otzar-milim/">אוצר מילים</a>
+    <a href="/nisuach-mechadash/">ניסוח מחדש</a>
+    <a href="/kama-zman/">כמה זמן להתכונן</a>
+    <p style="margin-top:.8rem">HighScore — הכנה למבחן האנגלית החדש. המבנה הרשמי של הבחינה מתפרסם על ידי המרכז הארצי לבחינות ולהערכה.</p>
+  </div>
+
+</div>
+</body>
+</html>
