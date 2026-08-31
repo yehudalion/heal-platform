@@ -45,6 +45,7 @@ export function renderOnboarding(root) {
           </label>
           <input type="date" id="ob-exam-date" min="${minDate}"
             style="width:100%;padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:inherit;background:var(--card)" />
+          <div id="ob-date-echo" style="font-size:.82rem;font-weight:700;color:var(--green-dark);margin-top:.4rem;min-height:1.1em"></div>
           <div style="font-size:.76rem;color:var(--muted);margin-top:.35rem">
             עוד לא נרשמת? בחר תאריך משוער — אפשר לעדכן בכל רגע.
           </div>
@@ -79,7 +80,21 @@ export function renderOnboarding(root) {
   let chosenMinutes = null;
   const submitBtn = root.querySelector('#ob-submit');
   const dateInput = root.querySelector('#ob-exam-date');
+  const dateEcho  = root.querySelector('#ob-date-echo');
   const notice    = root.querySelector('#ob-notice');
+
+  // AUDIT fix: <input type="date"> renders in the BROWSER's locale, so an
+  // Israeli student on an en-US browser sees 12/31/2026 and can't tell month
+  // from day. Echoing the choice back in Hebrew words removes the ambiguity
+  // without giving up the native date picker.
+  const refreshDateEcho = () => {
+    if (!dateInput.value) { dateEcho.textContent = ''; return; }
+    const d = new Date(`${dateInput.value}T00:00:00`);
+    if (isNaN(d)) { dateEcho.textContent = ''; return; }
+    dateEcho.textContent = d.toLocaleDateString('he-IL', {
+      day: 'numeric', month: 'long', year: 'numeric',
+    });
+  };
 
   const refreshSubmit = () => {
     const ready = Boolean(dateInput.value && chosenMinutes);
@@ -88,7 +103,8 @@ export function renderOnboarding(root) {
     submitBtn.style.cursor = ready ? 'pointer' : 'not-allowed';
   };
 
-  dateInput.addEventListener('change', refreshSubmit);
+  dateInput.addEventListener('change', () => { refreshDateEcho(); refreshSubmit(); });
+  dateInput.addEventListener('input',  () => { refreshDateEcho(); refreshSubmit(); });
 
   root.querySelectorAll('.ob-min-btn').forEach(btn => {
     btn.addEventListener('click', () => {
