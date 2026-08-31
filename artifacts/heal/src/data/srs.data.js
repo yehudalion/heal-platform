@@ -19,27 +19,59 @@ const WORD_FIELDS =
 // The guard that unscored words are never served *by accident* is unchanged —
 // it just became conditional instead of absolute.
 //
-// ⚠️ FREE_PERCENTILE_FLOOR was `64` and applied to every non-premium learner,
-// which cut the automatic pool from 550 words to **198** (measured 31.8) and
-// made the coverage bar mathematically unreachable for a free account. That
-// directly contradicts Lion's instruction above, so it is disabled. It is left
-// here rather than deleted because re-enabling it is a MONETIZATION decision,
-// not a code cleanup: set it back to 64 to restore the old paywall.
-const FREE_PERCENTILE_FLOOR = null
+// ─── The free ceiling (Lion's decision, 2026-08-31) ──────────────────────────
+// A free learner gets the 198 highest-impact words; a paying one gets all 550.
+// Lion: "טוב לי שתלמיד לא פרימיום יראה אוצר לא שלם — זה מה שיגרום לו בסוף לשלם."
+//
+// This gate already existed and was doing exactly this — but INVISIBLY. Nothing
+// in the UI said it was there, so a free learner simply ran dry against a
+// coverage bar whose denominator was 550 and could therefore never pass 36%.
+// A paywall nobody can see does not convert; it just makes the product feel
+// empty. So the gate stays and the UI now shows it: the bar keeps the full 550
+// denominator and renders the unreachable part as a locked segment
+// (see data/coverage.data.js → reachable, and lib/coverageBar.js).
+//
+// Percentile, not a row count, because that is the mechanism that was already
+// here and the one Lion approved ("198 — כמו שהיה"). Note the consequence: if
+// impact_percentile is ever recomputed over a larger scored set, the free tier
+// changes size with it. That moves the lock marker; it never moves the bar.
+const FREE_PERCENTILE_FLOOR = 64
 
-/** Read the learner's pool. Never throws; anything unexpected means 'core'. */
-async function getVocabPool(userId) {
-  if (!userId) return 'core'
+// ⚠️ INTERIM, NOT A DECISION. Whether a free learner ever receives the 2,116
+// unranked extension words is exactly the question Lion deferred to a dedicated
+// "מה נעול ומה לא לחינם" conversation (claude/MONETIZATION_decisions.md §2).
+// Until that conversation, the extension is paid-only — because the alternative
+// (198 free words, then 2,116 free ones) would cancel the ceiling decided above
+// the moment it is reached. Flip this one constant when the call is made.
+const EXTENSION_REQUIRES_PREMIUM = true
+
+/**
+ * Pool + tier in one read. Never throws; anything unexpected reads as the
+ * safest state (core pool, free tier).
+ *
+ * `isPremium` was previously a caller-supplied parameter that NO caller ever
+ * passed, so every learner silently defaulted to free. It is derived from the
+ * profile here so the tier is a real fact about the account rather than an
+ * argument nobody remembers to send.
+ */
+async function getLearnerState(userId) {
+  const fallback = { pool: 'core', isPremium: false }
+  if (!userId) return fallback
   try {
     const { data } = await supabase
       .from('user_profiles')
-      .select('vocab_pool')
+      .select('vocab_pool, paid_track, paid_expires_at')
       .eq('user_id', userId)
       .maybeSingle()
-    return data?.vocab_pool === 'extended' ? 'extended' : 'core'
+    if (!data) return fallback
+    const notExpired = !data.paid_expires_at || new Date(data.paid_expires_at) > new Date()
+    return {
+      pool: data.vocab_pool === 'extended' ? 'extended' : 'core',
+      isPremium: Boolean(data.paid_track) && notExpired,
+    }
   } catch (error) {
-    console.error('srs.data.getVocabPool:', error)
-    return 'core'
+    console.error('srs.data.getLearnerState:', error)
+    return fallback
   }
 }
 
@@ -62,14 +94,16 @@ export async function setVocabPool(userId, pool) {
 }
 
 /** One page of unseen words from a single pool. Returns [] on any failure. */
-async function fetchNewWords({ scored, seenWordIds, limit }) {
+async function fetchNewWords({ scored, seenWordIds, limit, isPremium }) {
   if (limit <= 0) return []
   try {
     let q = supabase.from('words').select(WORD_FIELDS).limit(limit)
     q = scored
       ? q.not('impact_score', 'is', null).order('impact_score', { ascending: false })
       : q.is('impact_score', null).order('headword', { ascending: true })
-    if (scored && FREE_PERCENTILE_FLOOR !== null) q = q.gte('impact_percentile', FREE_PERCENTILE_FLOOR)
+    if (scored && !isPremium && FREE_PERCENTILE_FLOOR !== null) {
+      q = q.gte('impact_percentile', FREE_PERCENTILE_FLOOR)
+    }
     if (seenWordIds.length > 0) q = q.not('id', 'in', `(${seenWordIds.join(',')})`)
     const { data, error } = await q
     if (error) throw error
@@ -84,10 +118,11 @@ async function fetchNewWords({ scored, seenWordIds, limit }) {
  * Get words due for review today, plus new words to fill the session.
  * Priority: overdue reviews first, then new words by impact_score.
  * @param {string} userId
- * @param {{ limit?: number, isPremium?: boolean }} options
+ * @param {{ limit?: number }} options
+ * @returns tier and pool state in `meta` — no caller has to pass either in
  * @returns {{ data: object[]|null, error: object|null }}
  */
-export async function getDueWords(userId, { limit = 20, isPremium = false } = {}) {
+export async function getDueWords(userId, { limit = 20 } = {}) {
   try {
     const now = new Date().toISOString()
 
@@ -116,27 +151,36 @@ export async function getDueWords(userId, { limit = 20, isPremium = false } = {}
     //    pool only fills what core could not (see the pool model up top).
     const newSlotsAvailable = Math.max(0, MAX_NEW_PER_SESSION - dueReviews.length)
     let newWordsData = []
+    let coreExhausted = false
+    // Additive third field. Existing callers destructure { data, error } only,
+    // so this cannot break them.
+    let meta = { pool: 'core', isPremium: false, coreExhausted: false }
 
     if (newSlotsAvailable > 0) {
-      const pool = await getVocabPool(userId)
-      let picked = await fetchNewWords({ scored: true, seenWordIds, limit: newSlotsAvailable })
+      const { pool, isPremium } = await getLearnerState(userId)
+      let picked = await fetchNewWords({ scored: true, seenWordIds, limit: newSlotsAvailable, isPremium })
 
       if (picked.length < newSlotsAvailable) {
-        // Core is exhausted for this learner. Either they already opted in, or
-        // this is the moment they earn the extension — Lion's "או לחלופין
-        // אחרי שהוא סיים את ה-550".
-        if (pool === 'core') {
-          // fire-and-forget: a failed promotion must not fail the session
-          setVocabPool(userId, 'extended')
+        // The learner has exhausted every word their tier can reach.
+        coreExhausted = true
+
+        if (!EXTENSION_REQUIRES_PREMIUM || isPremium) {
+          // Lion's "או לחלופין אחרי שהוא סיים את ה-550" — nobody hits a wall.
+          if (pool === 'core') setVocabPool(userId, 'extended')  // fire-and-forget
+          const extra = await fetchNewWords({
+            scored: false,
+            seenWordIds,
+            limit: newSlotsAvailable - picked.length,
+            isPremium,
+          })
+          picked = [...picked, ...extra]
         }
-        const extra = await fetchNewWords({
-          scored: false,
-          seenWordIds,
-          limit: newSlotsAvailable - picked.length,
-        })
-        picked = [...picked, ...extra]
+        // A free learner gets no filler here on purpose: running out IS the
+        // conversion moment, and it is the screen's job to explain it and point
+        // at the waitlist — never to leave a silent dead end.
       }
 
+      meta = { pool, isPremium, coreExhausted }
       newWordsData = picked.map(w => ({ ...w, word_id: w.id, state: 'new' }))
     }
 
@@ -159,7 +203,7 @@ export async function getDueWords(userId, { limit = 20, isPremium = false } = {}
     }
 
     const data = [...reviewWordsData, ...newWordsData].slice(0, limit)
-    return { data, error: null }
+    return { data, error: null, meta }
   } catch (error) {
     console.error('srs.data.getDueWords:', error)
     return { data: null, error }

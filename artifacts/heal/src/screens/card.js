@@ -3,6 +3,8 @@ import { track } from '../lib/analytics.js';
 import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getCurrentSession } from '../supabase.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
+import { getCoverage } from '../data/coverage.data.js';
+import { joinWaitlist } from '../data/waitlist.data.js';
 
 const MAX_REQUEUES = 2;
 
@@ -250,6 +252,105 @@ function draw(root) {
   });
 }
 
+/**
+ * The free-tier learner has exhausted the 198-word core (impact_percentile >= 64)
+ * — meta.coreExhausted from getDueWords(). This IS the conversion moment
+ * (Lion, 31.8: "טוב לי שתלמיד לא פרימיום יראה אוצר לא שלם"), so it gets its own
+ * screen instead of the generic "come back tomorrow" dead end. Numbers are real
+ * (getCoverage), never invented — same discipline as progress.js.
+ */
+async function renderCoreExhausted(root, userId) {
+  let locked = null;
+  try {
+    const coverage = await getCoverage(userId);
+    const core = coverage?.vocabCore ?? coverage?.vocab;
+    if (core && Number.isFinite(core.reachable) && Number.isFinite(core.total)) {
+      locked = core.total - core.reachable;
+    }
+  } catch (_) { /* screen still works without the exact count */ }
+
+  const lockedLine = locked > 0
+    ? `<p style="font-size:.85rem;color:var(--muted);margin:.3rem 0 0">${locked} מילים נוספות ממתינות בגרסה המלאה.</p>`
+    : '';
+
+  root.innerHTML = `<div class="vc-shell fade-in">
+    <header class="vc-topbar">
+      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+    </header>
+    <main class="vc-main">
+      <div class="vc-card" style="text-align:center;padding:2rem 1.6rem">
+        <div style="font-size:2rem;margin-bottom:.6rem">🌱</div>
+        <h3 style="font-size:1.05rem;font-weight:900;margin-bottom:.5rem">סיימתם את כל מילות הליבה החינמית</h3>
+        <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:.2rem">התרגול שלכם ממשיך לרוץ על המילים האלה במרווחים הנכונים, בדיוק כמו עד היום — הן לא נעלמות.</p>
+        ${lockedLine}
+        <div class="lock-upsell" style="margin-top:1.3rem">
+          <div style="font-size:1.6rem;margin-bottom:.4rem">🔒</div>
+          <h4 style="font-size:.92rem;font-weight:900;margin-bottom:.4rem">מילים נוספות נפתחות בגרסה המלאה</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:.9rem">כל 550 המילים המדורגות והמאומתות, מעבר ל-198 הראשונות. נפתח בקרוב.</p>
+          <form id="waitForm" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+            <input id="waitEmail" type="email" required placeholder="המייל שלך" dir="ltr"
+                   style="flex:1;min-width:180px;max-width:260px;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:.85rem">
+            <button class="btn-primary" type="submit">שמרו לי מקום במחיר השקה</button>
+          </form>
+          <p id="waitMsg" style="font-size:.78rem;color:var(--muted);margin-top:.6rem">בלי ספאם — עדכון אחד כשהמסלול נפתח, במחיר מוזל למצטרפים מוקדם.</p>
+        </div>
+        <p style="font-size:.82rem;margin-top:1.3rem"><a href="#/home" style="color:var(--green-dark);font-weight:700;text-decoration:none">להמשך תרגול במודולים אחרים ←</a></p>
+      </div>
+    </main>
+  </div>`;
+
+  track('vocab_core_exhausted_seen', {});
+
+  const form = root.querySelector('#waitForm');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = root.querySelector('#waitMsg');
+    const res = await joinWaitlist(root.querySelector('#waitEmail').value, 'vocab_core_exhausted');
+    if (res.invalid) { msg.textContent = 'כתובת המייל לא נראית תקינה — בדקו אותה.'; return; }
+    if (!res.ok)     { msg.textContent = 'השמירה נכשלה — נסו שוב עוד רגע.'; return; }
+    track('waitlist_joined', { source: 'vocab_core_exhausted', already: !!res.already });
+    form.style.display = 'none';
+    msg.textContent = res.already
+      ? '✓ המייל הזה כבר שמור אצלנו — נעדכן אתכם ראשונים.'
+      : '✓ שמור לכם מקום — נעדכן במייל כשהמסלול נפתח.';
+  });
+}
+
+/**
+ * Rare edge: a premium/extended learner has exhausted BOTH pools (550 core +
+ * 2,116 extension). No paywall here — they're already paying. Just a clean
+ * "you did it" instead of the generic dead end.
+ */
+function renderAllWordsExhausted(root) {
+  root.innerHTML = `<div class="vc-shell fade-in">
+    <header class="vc-topbar">
+      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+    </header>
+    <main class="vc-main">
+      <div class="vc-card" style="text-align:center;padding:2rem 1.6rem">
+        <div style="font-size:2rem;margin-bottom:.6rem">🏆</div>
+        <h3 style="font-size:1.05rem;font-weight:900;margin-bottom:.5rem">תרגלתם את כל אוצר המילים</h3>
+        <p style="font-size:.88rem;color:var(--muted);line-height:1.7">אין כרגע מילים חדשות ללמוד — התרגול ימשיך במילים שכבר הכרתם, במרווחים הנכונים. חזרו מחר.</p>
+        <p style="font-size:.82rem;margin-top:1.3rem"><a href="#/home" style="color:var(--green-dark);font-weight:700;text-decoration:none">← דף הבית</a></p>
+      </div>
+    </main>
+  </div>`;
+}
+
+function renderNothingDueToday(root) {
+  root.innerHTML = `<div class="vc-shell">
+      <header class="vc-topbar">
+        <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      </header>
+      <main class="vc-main">
+        <div class="vc-card">
+          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem">אין מילים לתרגול כרגע. חזור מחר!</p>
+        </div>
+        <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
+      </main>
+    </div>`;
+}
+
 export async function renderCard(root) {
   const learnSeen = localStorage.getItem('hs_vocab_learn_seen');
   if (!learnSeen) {
@@ -277,19 +378,21 @@ export async function renderCard(root) {
     return;
   }
 
-  const { data, error } = await getDueWords(userId, { limit: getSessionLength('vocab', 12) });
-  if (error || !data?.length) {
-    root.innerHTML = `<div class="vc-shell">
-      <header class="vc-topbar">
-        <a class="brand-mark vc-brand" href="#/home">hSc</a>
-      </header>
-      <main class="vc-main">
-        <div class="vc-card">
-          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem">אין מילים לתרגול כרגע. חזור מחר!</p>
-        </div>
-        <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
-      </main>
-    </div>`;
+  const { data, error, meta } = await getDueWords(userId, { limit: getSessionLength('vocab', 12) });
+
+  if (error) {
+    renderNothingDueToday(root);
+    return;
+  }
+
+  if (!data?.length) {
+    if (meta?.coreExhausted && !meta?.isPremium) {
+      await renderCoreExhausted(root, userId);
+    } else if (meta?.coreExhausted && meta?.isPremium) {
+      renderAllWordsExhausted(root);
+    } else {
+      renderNothingDueToday(root);
+    }
     return;
   }
 

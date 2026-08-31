@@ -86,10 +86,22 @@ export async function renderDictionary(root) {
 
     const { data: profile } = await getProfile(userId);
     const alreadyIn = profile?.vocab_pool === 'extended';
+    const notExpired = !profile?.paid_expires_at || new Date(profile.paid_expires_at) > new Date();
+    const isPremium = Boolean(profile?.paid_track) && notExpired;
     box.hidden = false;
 
     if (alreadyIn) {
       box.innerHTML = `<span class="dict-pool-on">✓ כל המילים כאן כלולות בתרגול היומי שלכם</span>`;
+      return;
+    }
+
+    // No dead buttons. While the extension pool is paid-only
+    // (EXTENSION_REQUIRES_PREMIUM in data/srs.data.js — an interim state, not a
+    // decision), a free learner pressing "add them" would flip a flag and still
+    // receive nothing. So they get the honest sentence instead, and the offer
+    // appears only for an account that can actually act on it.
+    if (!isPremium) {
+      box.innerHTML = `<span>המילון פתוח לכם במלואו לעיון. התרגול היומי מתחיל מהמילים המשתלמות ביותר, ונפתח לשאר בגרסה המלאה.</span>`;
       return;
     }
     box.innerHTML = `

@@ -172,7 +172,11 @@ function vocabCard(coverage) {
   } else {
     parts.push(renderCoverageBar({
       label: 'מילות הליבה', done: core.done, total: core.total, unit: 'מילים בסבב חזרות',
+      reachable: core.reachable,
     }));
+    if (Number.isFinite(core.reachable) && core.reachable < core.total) {
+      parts.push(`<p class="wp-locked">${core.total - core.reachable} מילים נוספות נפתחות בגרסה המלאה.</p>`);
+    }
   }
 
   const ext = coverage?.vocabExtension;
@@ -314,6 +318,7 @@ function ensureStyles() {
 .wp-gloss{font-weight:400;color:var(--muted)}
 .wp-deep{display:inline-block;margin-top:.8rem;font-size:.83rem;font-weight:700;color:var(--green-dark);text-decoration:none}
 .wp-achieved{margin:0 0 .7rem;font-size:.88rem;font-weight:800;color:var(--green-dark)}
+.wp-locked{margin:-.3rem 0 .7rem;font-size:.76rem;color:var(--muted)}
 .wp-deep:hover{text-decoration:underline}
 .wp-foot{font-size:.75rem;color:var(--muted);margin-top:1.2rem;text-align:center}
 `;

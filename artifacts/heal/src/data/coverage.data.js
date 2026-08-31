@@ -92,10 +92,15 @@ async function countMastered(userId, { scored }) {
 }
 
 /** Size of a pool in the library right now. Only ever used to FREEZE a goal. */
-async function countPool({ scored }) {
+// Kept in sync with FREE_PERCENTILE_FLOOR in data/srs.data.js — that file
+// decides who is served which word; this one only describes it on the bar.
+const FREE_PERCENTILE_FLOOR = 64
+
+async function countPool({ scored, freeOnly = false }) {
   try {
     let q = supabase.from('words').select('id', { count: 'exact', head: true })
     q = scored ? q.not('impact_score', 'is', null) : q.is('impact_score', null)
+    if (scored && freeOnly) q = q.gte('impact_percentile', FREE_PERCENTILE_FLOOR)
     const { count, error } = await q
     if (error) throw error
     return count ?? 0
@@ -128,7 +133,7 @@ export async function getCoverage(userId) {
     const [profileRes, coreDone, listenRows, listenTotal] = await Promise.all([
       supabase
         .from('user_profiles')
-        .select('vocab_pool, vocab_core_goal, vocab_ext_goal')
+        .select('vocab_pool, vocab_core_goal, vocab_ext_goal, paid_track, paid_expires_at')
         .eq('user_id', userId)
         .maybeSingle(),
       countMastered(userId, { scored: true }),
@@ -148,6 +153,8 @@ export async function getCoverage(userId) {
 
     const profile = profileRes?.data ?? null
     const pool = profile?.vocab_pool === 'extended' ? 'extended' : 'core'
+    const notExpired = !profile?.paid_expires_at || new Date(profile.paid_expires_at) > new Date()
+    const isPremium = Boolean(profile?.paid_track) && notExpired
 
     // ── core goal: frozen on first read, never recomputed ──
     let coreGoal = profile?.vocab_core_goal ?? null
@@ -167,12 +174,25 @@ export async function getCoverage(userId) {
       extension = { done: await countMastered(userId, { scored: false }), total: extGoal ?? 0 }
     }
 
+    // How much of the frozen goal this learner can actually reach on their tier.
+    // The denominator stays the full 550 so the bar never moves backwards; the
+    // gap between `reachable` and `total` is what the UI draws as locked.
+    // Counted live on purpose — it is a marker, not a goal, and if the free
+    // tier ever changes size the marker should follow it.
+    const reachable = isPremium ? (coreGoal ?? 0) : await countPool({ scored: true, freeOnly: true })
+
     const listeningDone = new Set((listenRows.data || []).map((r) => r.lecture_id)).size
-    const core = { done: coreDone, total: coreGoal ?? 0, complete: coreGoal > 0 && coreDone >= coreGoal }
+    const core = {
+      done: coreDone,
+      total: coreGoal ?? 0,
+      reachable: Math.min(reachable, coreGoal ?? 0),
+      complete: coreGoal > 0 && coreDone >= coreGoal,
+    }
 
     return {
       data: {
         vocab:          { done: core.done, total: core.total },   // back-compat
+        isPremium,
         vocabCore:      core,
         vocabExtension: extension,
         pool,

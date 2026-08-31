@@ -28,15 +28,25 @@ function esc(s) {
  *   unit  — caption after the fraction ("מילים בסבב חזרות", "הרצאות שהושלמו")
  * @returns {string} HTML for one bar block. Wrap it in the caller's own card.
  */
-export function renderCoverageBar({ label, done, total, unit = '' }) {
+export function renderCoverageBar({ label, done, total, unit = '', reachable = null }) {
   const hasData = Number.isFinite(total) && total > 0;
   const pct = hasData ? Math.max(0, Math.min(100, Math.round((done / total) * 100))) : 0;
   const fraction = hasData
     ? `${done}/${total}${unit ? ' ' + esc(unit) : ''}`
     : 'אין עדיין נתונים';
+  // A locked tail, not a smaller bar: the denominator stays whole so the fill
+  // can never move backwards, and the part this learner cannot reach yet is
+  // drawn rather than hidden. Lion, 2026-08-31: a ceiling nobody can see does
+  // not sell anything — it just makes the product feel empty.
+  const showLock = hasData && Number.isFinite(reachable) && reachable > 0 && reachable < total;
+  const lockStart = showLock ? Math.round((reachable / total) * 100) : null;
+  const lock = showLock
+    ? `<div class="cov-locked" style="inset-inline-start:${lockStart}%;width:${100 - lockStart}%"></div>`
+    : '';
+
   return `<div class="cov-mod">
     <div class="cov-head"><b>${esc(label)}</b><span>${fraction}</span></div>
-    <div class="cov-bar"><div class="cov-fill" style="width:${pct}%"></div></div>
+    <div class="cov-bar">${lock}<div class="cov-fill" style="width:${pct}%"></div></div>
   </div>`;
 }
 
@@ -50,7 +60,8 @@ export function ensureCoverageBarStyles() {
 .cov-head{display:flex;justify-content:space-between;align-items:baseline;font-size:.86rem}
 .cov-head b{font-weight:800}
 .cov-head span{color:var(--muted);font-size:.74rem;font-weight:700}
-.cov-bar{height:8px;border-radius:4px;background:var(--border);overflow:hidden}
+.cov-bar{position:relative;height:8px;border-radius:4px;background:var(--border);overflow:hidden}
+.cov-locked{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,transparent,transparent 3px,var(--card) 3px,var(--card) 6px);opacity:.9}
 .cov-fill{height:100%;background:var(--green);border-radius:4px;transition:width .3s ease}
 `;
   document.head.appendChild(s);
