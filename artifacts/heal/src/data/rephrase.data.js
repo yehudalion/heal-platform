@@ -148,6 +148,9 @@ export async function logAttempt({
   hintUsed = null,
   practiceMode = null,
 } = {}) {
+  // Guest — no account to attach the attempt to. A safe no-op, not an error:
+  // the screen's fire-and-forget .catch() must never see a rejection here.
+  if (!userId) return { data: null, error: null }
   try {
     const { data, error } = await supabase
       .from('restatement_attempts')

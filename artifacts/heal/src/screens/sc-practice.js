@@ -17,7 +17,7 @@
  */
 
 import { navigate, subAnchor } from '../router.js';
-import { getCurrentSession } from '../supabase.js';
+import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/sentenceCompletion.data.js';
 import { getPushableWords, pushMissedWords } from '../data/srsPush.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -40,6 +40,7 @@ const GENERIC_HINT = 'אל תסתפקו במילה הכי "יפה" — בדקו 
 
 // ─── Session state (in memory only) ───────────────────────────────────────────
 let userId = null;
+let isGuestLearner = false;   // no wall — guest keeps practising, see lib/learner.js
 let level = START_LEVEL;
 let packLevel = START_LEVEL;
 const answeredIds = [];
@@ -113,15 +114,16 @@ export async function renderScPractice(root) {
   ensureStyles();
   root.innerHTML = `<div class="sp-shell fade-in"><div class="sp-card"><div class="sp-center">טוען שאלות…</div></div></div>`;
 
-  const session = await getCurrentSession();
-  userId = session?.user?.id ?? null;
-  if (!userId) {
-    root.innerHTML = `<div class="sp-shell fade-in"><div class="sp-card"><div class="sp-center">יש להתחבר כדי לתרגל.<br><a href="#/home">← דף הבית</a></div></div></div>`;
-    return;
-  }
+  // Guest mode (Lion, 27.8) — same fix as rephrase-practice.js. This screen's
+  // old wall was worse than the others: "יש להתחבר כדי לתרגל" sent a guest
+  // straight back to the home page with NO signup path at all (audited 31.8).
+  const learner = await getLearner();
+  userId = learner.id;
+  isGuestLearner = learner.isGuest;
 
   level = START_LEVEL;
   answeredIds.length = 0;
+  if (isGuestLearner) answeredIds.push(...getGuestSeenIds('sc'));
   rolling.length = 0;
   await loadPack(root);
 }
@@ -173,6 +175,7 @@ function onChoose(root, d) {
   rolling.push(isCorrect);
   if (rolling.length > WINDOW) rolling.shift();
   answeredIds.push(q.id);
+  if (isGuestLearner) addGuestSeenIds('sc', [q.id]);
   adjustLevel();
 
   // Fire-and-forget for the base log; the optional meta_response tag (if the
@@ -183,7 +186,7 @@ function onChoose(root, d) {
 
   // Find out whether there is anything worth offering. READ-ONLY — nothing
   // reaches the learner's practice queue until they press the button.
-  if (!isCorrect) {
+  if (!isCorrect && userId) {   // pushing a missed word to SRS needs an account
     getPushableWords(userId, {
       options: q.options,
       chosenOption,
@@ -415,6 +418,7 @@ function drawSummary(root) {
       <div class="sp-sum-total" id="spTotal"></div>
       ${levelMsg}
       <div class="sp-insight" id="spInsight" hidden></div>
+      ${isGuestLearner ? `<div class="sp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. <a href="#/">חשבון חינם</a> ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.</div>` : ''}
       <div class="sp-nextstep">מה עכשיו?</div>
       <div class="sp-sum-btns">
         <button class="btn-primary" id="spMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -528,6 +532,8 @@ const SP_CSS = `
 .sp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .sp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
 .sp-levelmsg.down{background:var(--orange-light);color:#b5551f}
+.sp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
+.sp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
 .sp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .sp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .sp-insight-body{font-size:.88rem;line-height:1.7}

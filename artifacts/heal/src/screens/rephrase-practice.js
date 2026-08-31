@@ -14,7 +14,7 @@
 
 import { navigate, subAnchor } from '../router.js';
 import { getSessionLength } from '../lib/sessionPrefs.js';
-import { getCurrentSession } from '../supabase.js';
+import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
@@ -42,6 +42,7 @@ const GENERIC_HINT = 'אל תסמוך על אורך האופציה או על כ�
 
 // ─── Session state (in memory only — never localStorage, never DB) ───────────
 let userId = null;
+let isGuestLearner = false;   // no wall — guest keeps practising, see lib/learner.js
 let level = START_LEVEL;          // live difficulty; may change after each answer
 let packLevel = START_LEVEL;      // the level the CURRENT pack was fetched at
 const answeredIds = [];           // → p_exclude, so questions never repeat in a session
@@ -108,16 +109,20 @@ export async function renderRephrasePractice(root) {
   ensureStyles();
   root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">טוען שאלות…</div></div></div>`;
 
-  const session = await getCurrentSession();
-  userId = session?.user?.id ?? null;
-  if (!userId) {
-    root.innerHTML = `<div class="rp-shell fade-in"><div class="rp-card"><div class="rp-center">התרגול שומר את ההתקדמות שלך, ולכן דורש חשבון חינם.<br><a href="#/">← הרשמה של 10 שניות</a> · <a href="#/home">דף הבית</a></div></div></div>`;
-    return;
-  }
+  // Guest mode (Lion, 27.8: "כל הפלטפורמה חדשנית; אין סיבה להפלות מודול אחד").
+  // No wall — the data layer never needed an account to serve a question, only
+  // the writes did, and those are now safe no-ops for a null userId. The
+  // conversion moment moves to the end of the pack instead (drawSummary()).
+  const learner = await getLearner();
+  userId = learner.id;
+  isGuestLearner = learner.isGuest;
 
   // reset the whole session
   level = START_LEVEL;
   answeredIds.length = 0;
+  // A guest's own "seen" history lives in their browser, not the DB — seed it
+  // so a returning guest doesn't get the exact same pack again.
+  if (isGuestLearner) answeredIds.push(...getGuestSeenIds('rephrase'));
   rolling.length = 0;
   await loadPack(root);
 }
@@ -170,6 +175,7 @@ function onChoose(root, d) {
   rolling.push(isCorrect);
   if (rolling.length > WINDOW) rolling.shift();
   answeredIds.push(q.id);
+  if (isGuestLearner) addGuestSeenIds('rephrase', [q.id]);
   adjustLevel();
 
   // Fire-and-forget — a failed log must never block practice (house style: card.js).
@@ -352,6 +358,7 @@ function drawSummary(root) {
       <div class="rp-sum-total" id="rpTotal"></div>
       ${levelMsg}
       <div class="rp-insight" id="rpInsight" hidden></div>
+      ${isGuestLearner ? `<div class="rp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. <a href="#/">חשבון חינם</a> ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.</div>` : ''}
       <div class="rp-nextstep">מה עכשיו?</div>
       <div class="rp-sum-btns">
         <button class="btn-primary" id="rpMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -477,6 +484,8 @@ const RP_CSS = `
 .rp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .rp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
 .rp-levelmsg.down{background:var(--orange-light);color:var(--orange)}
+.rp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
+.rp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
 .rp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .rp-insight-body{font-size:.88rem;line-height:1.7}
