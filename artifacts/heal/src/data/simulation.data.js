@@ -111,20 +111,30 @@ export async function loadForm(code) {
     const scIds  = rows.filter((r) => r.item_kind === 'sc').map((r) => r.item_id)
     const rsIds  = rows.filter((r) => r.item_kind === 'restatement').map((r) => r.item_id)
     const lqIds  = rows.filter((r) => r.item_kind === 'listening').map((r) => r.item_id)
+    const rdIds  = rows.filter((r) => r.item_kind === 'reading').map((r) => r.item_id)
     const lecIds = [...new Set(rows.map((r) => r.lecture_id).filter(Boolean))]
 
-    const [scRes, rsRes, lqRes, lecRes] = await Promise.all([
+    const [scRes, rsRes, lqRes, lecRes, rdRes] = await Promise.all([
       scIds.length  ? supabase.from('sentence_completion_questions').select('*').in('id', scIds)   : { data: [] },
       rsIds.length  ? supabase.from('restatement_questions').select('*').in('id', rsIds)           : { data: [] },
       lqIds.length  ? supabase.from('listening_questions').select('*').in('id', lqIds)             : { data: [] },
       lecIds.length ? supabase.from('listening_lectures').select('*').in('id', lecIds)             : { data: [] },
+      rdIds.length  ? supabase.from('reading_questions').select('*').in('id', rdIds)               : { data: [] },
     ])
+
+    // קטע קריאה אחד משותף לחמש שאלות — שליפה שנייה, תלוית-תוצאה, לפי passage_id
+    // שמופיע בתוך שורות reading_questions (אין עמודת passage_id ב-simulation_form_items עצמה).
+    const passageIds = [...new Set((rdRes.data || []).map((q) => q.passage_id).filter(Boolean))]
+    const { data: passageRows } = passageIds.length
+      ? await supabase.from('reading_passages').select('*').in('id', passageIds)
+      : { data: [] }
 
     const byId = (arr) => new Map((arr || []).map((x) => [x.id, x]))
     const scMap = byId(scRes.data), rsMap = byId(rsRes.data)
     const lqMap = byId(lqRes.data), lecMap = byId(lecRes.data)
+    const rdMap = byId(rdRes.data), passageMap = byId(passageRows)
 
-    const items = rows.map((r) => normalize(r, { scMap, rsMap, lqMap, lecMap })).filter(Boolean)
+    const items = rows.map((r) => normalize(r, { scMap, rsMap, lqMap, lecMap, rdMap, passageMap })).filter(Boolean)
 
     // פרק בלי פריטים מדולג לגמרי — כך פרק הבנת הנקרא השמור לא מופיע לנבחן
     // כפרק ריק, אבל גם לא צריך למחוק אותו כדי להריץ את האבחון.
@@ -215,6 +225,28 @@ function normalize(row, maps) {
       correctIndex: idx.indexOf(0),
       mechanisms:   [q.mechanism_1, q.mechanism_2, q.mechanism_3],
       topic:        q.topic,
+    }
+  }
+
+  if (row.item_kind === 'reading') {
+    const q = maps.rdMap.get(row.item_id)
+    if (!q) return null
+    const passage = maps.passageMap.get(q.passage_id) || {}
+    // options/explanations_he הם מערכי מחרוזות פשוטים, בסיס 0 — ראו HANDOFF_reading_comprehension_build.md §4.2,
+    // במכוון שונה מ-listening_questions (מערך אובייקטים) ומ-sentence_completion_questions (בסיס 1).
+    return {
+      ...base,
+      prompt:         q.question_text,
+      options:        Array.isArray(q.options) ? q.options : [],
+      correctIndex:   q.correct_option_index ?? 0,     // הבנק שומר בבסיס 0
+      explanations:   Array.isArray(q.explanations_he) ? q.explanations_he : null,
+      questionType:   q.question_type,
+      windowSize:     q.window_size,
+      highlightSpans: q.highlight_spans,
+      passageId:      q.passage_id,
+      passageTitle:   passage.title,
+      passageBody:    passage.body,
+      passageTopic:   passage.topic,
     }
   }
 
