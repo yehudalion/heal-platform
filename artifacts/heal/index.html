@@ -14,7 +14,13 @@
     <meta property="og:locale" content="he_IL" />
     <meta property="og:title" content="HighScore — הכנה למבחן הלאל" />
     <meta property="og:description" content="אוצר מילים, ניסוח מחדש והאזנה — עם הסברים בעברית על כל שאלה. ללא פרסומות." />
-    <meta property="og:image" content="/opengraph.jpg" />
+    <!-- SEO 2026-09-01: og:image היה נתיב יחסי, ופייסבוק/וואטסאפ דורשים
+         כתובת מלאה — בלעדיה כרטיס השיתוף יוצא בלי תמונה. נוספו גם
+         og:url ו-canonical, שהיו חסרים לגמרי בדף הבית (בשמונת עמודי
+         ה-SEO הם קיימים מלכתחילה). -->
+    <meta property="og:image" content="https://highscore-eight.vercel.app/opengraph.jpg" />
+    <meta property="og:url" content="https://highscore-eight.vercel.app/" />
+    <link rel="canonical" href="https://highscore-eight.vercel.app/" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
