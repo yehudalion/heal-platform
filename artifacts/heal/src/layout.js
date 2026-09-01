@@ -1,5 +1,6 @@
 import { navigate } from './router.js';
 import { getCurrentSession, isGuest, signOut } from './supabase.js';
+import { deleteMyAccount } from './data/account.data.js';
 import { isLive } from './lib/modules.js';
 import { getProfile, upsertProfile } from './data/profiles.data.js';
 
@@ -91,6 +92,7 @@ export async function renderLayout(root, activePath) {
         <div class="acct-menu" id="acctMenu" hidden>
           <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
           <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
+          <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
         </div>
         <button class="sidebar-foot" id="acctBtn" type="button" title="חשבון">
           <div class="foot-av">${avatarHtml}</div>
@@ -166,6 +168,13 @@ function ensureAcctStyles() {
   font-size:.86rem; font-weight:600; padding:9px 11px; border-radius:7px; cursor:pointer; color:var(--text); }
 .acct-item:hover { background: var(--green-light); }
 .acct-item--quiet { color: var(--muted); font-weight:500; }
+.acct-item--danger { color: var(--red, #B4553E); font-weight:500; border-top:1px solid var(--border); }
+.acct-item--danger:hover { background: var(--red-light, #F4E4DD); }
+.del-confirm-input { width:100%; margin-top:6px; padding:9px 11px; border:1.5px solid var(--border);
+  border-radius:var(--radius-sm); font-family:inherit; font-size:.95rem; }
+.btn-danger { background: var(--red, #B4553E); color:#fff; border:0; border-radius:var(--radius-sm);
+  padding:.6rem 1.1rem; font-family:inherit; font-weight:800; cursor:pointer; }
+.btn-danger:disabled { opacity:.45; cursor:not-allowed; }
 .acct-overlay { position:fixed; inset:0; background:rgba(20,32,26,.45); z-index:300;
   display:flex; align-items:center; justify-content:center; }
 .acct-card { background:var(--card); border-radius:var(--radius); padding:1.6rem 1.7rem; width:min(420px, 92vw);
@@ -204,6 +213,70 @@ function wireAccountMenu(root, user) {
     e.stopPropagation();
     menu.hidden = true;
     await openSettingsOverlay(user);
+  });
+
+  root.querySelector('#acctDelete')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.hidden = true;
+    openDeleteOverlay(user);
+  });
+}
+
+// ─── מחיקת חשבון ─────────────────────────────────────────────────────────────
+// זכות חוקית, ומדיניות הפרטיות שלנו כבר מבטיחה אותה. המחיקה עצמה רצה בפונקציית
+// הקצה 'delete-account' בהרשאות שירות: הלקוח לא יכול למחוק משתמש בעצמו, ואסור
+// שיוכל. הזהות נלקחת שם מה-JWT ולא מגוף הבקשה, כך שאי אפשר למחוק חשבון של אחר.
+// המשתמש מקליד מילה כדי לאשר — לא confirm() — כדי שהפעולה תהיה מכוונת ולא החלקה.
+const DELETE_CONFIRM_WORD = 'מחק';
+
+function openDeleteOverlay(user) {
+  const ov = document.createElement('div');
+  ov.className = 'acct-overlay';
+  ov.innerHTML = `
+    <div class="acct-card" dir="rtl">
+      <div style="font-size:1.05rem;font-weight:900">מחיקת החשבון</div>
+      <div style="font-size:.9rem;line-height:1.6">
+        הפעולה הזו <strong>אינה הפיכה</strong>. יימחקו לצמיתות ההתקדמות שלך באוצר
+        המילים, היסטוריית התרגול בכל הפינות, מחברת הטעויות וההגדרות. לא נשמור עותק.
+      </div>
+      <label style="font-size:.83rem;font-weight:700">
+        כדי לאשר, הקלד/י <span style="color:var(--red,#B4553E)">${DELETE_CONFIRM_WORD}</span>
+        <input type="text" class="del-confirm-input" id="delWord" autocomplete="off" dir="rtl">
+      </label>
+      <div style="display:flex;gap:8px;justify-content:flex-start">
+        <button class="btn-danger" id="delGo" disabled>מחיקה סופית</button>
+        <button class="acct-item acct-item--quiet" id="delCancel" style="width:auto">ביטול</button>
+      </div>
+      <div id="delMsg" style="font-size:.8rem;color:var(--muted)"></div>
+    </div>`;
+  document.body.appendChild(ov);
+
+  const input = ov.querySelector('#delWord');
+  const go    = ov.querySelector('#delGo');
+  const msg   = ov.querySelector('#delMsg');
+
+  const close = () => ov.remove();
+  ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+  ov.querySelector('#delCancel').addEventListener('click', close);
+
+  input.addEventListener('input', () => {
+    go.disabled = input.value.trim() !== DELETE_CONFIRM_WORD;
+  });
+  input.focus();
+
+  go.addEventListener('click', async () => {
+    go.disabled = true;
+    msg.textContent = 'מוחק…';
+    const { error } = await deleteMyAccount();
+    if (error) {
+      // נשארים במסך: עדיף שהתלמיד יראה שהמחיקה נכשלה מאשר שיחשוב שהיא הצליחה.
+      msg.textContent = `המחיקה נכשלה: ${error}. אפשר לנסות שוב, או לפנות אלינו במייל.`;
+      go.disabled = false;
+      return;
+    }
+    await signOut();
+    location.hash = '#/';
+    location.reload();
   });
 }
 
