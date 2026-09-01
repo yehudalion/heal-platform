@@ -1197,7 +1197,18 @@ a { text-decoration: none; color: inherit; }
 #page-content > .fade-in:has(> .wk-card) > .wk-card     { grid-column: 2;      grid-row: 3; margin: 0; max-width: none; }
 #page-content > .fade-in:has(> .wk-card) > .sec-title   { grid-column: 1 / -1; grid-row: 4; }
 #page-content > .fade-in:has(> .wk-card) > .module-grid { grid-column: 1 / -1; grid-row: 5; }
-#page-content > .fade-in:has(> .wk-card) > .guides-strip { grid-column: 1 / -1; grid-row: 6; }
+/* Home rows 6-9, added 2026-09-01. Only one of .diag-empty / .diag-sec-title
+   is ever present, so they share row 6. No row-gap is defined on this grid,
+   so an unused row collapses to zero height and leaves no gap.
+   ORDER MATTERS: .diag-sec-title and .guides-sec-title also carry the
+   .sec-title class, whose rule above pins row 4 at equal specificity.
+   These rules win only because they come later. Do not move them above
+   the .sec-title rule, and do not reorder this block. */
+#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 6; }
+#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 6; }
+#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 7; }
+#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 9; }
 
 @media (max-width: 900px) {
   #page-content > .fade-in:has(> .wk-card) { display: block; }
@@ -1317,18 +1328,54 @@ a { text-decoration: none; color: inherit; }
 .feat-modal { border: 1px solid var(--ink-13); }
 
 
-/* --- Guides strip on the home screen (2026-09-01) -----------------------
-   Seventh child of the home layout. Its grid-row is declared with the other
-   home rules above; this block is only the visual treatment. */
-.guides-strip {
-  display: flex; align-items: center; gap: .9rem;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: .95rem 1.1rem;
-  margin-top: 1.4rem; cursor: pointer;
+/* --- Home: diagnostic band + guides section (2026-09-01) ----------------
+   Grid placement for these lives with the other home rules above; this block
+   is the visual treatment only. Both sections degrade to plain stacked flow
+   below 900px, where the :has() grid is switched off. */
+
+/* Invitation shown until the learner has a completed diagnostic. Deliberately
+   NOT a row of 0% tiles: a dashboard full of zeros reads as less serious, not
+   more, and punishes a student for having just arrived. */
+.diag-empty {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--green-light); border: 1px solid var(--green);
+  border-radius: 10px; padding: 1.05rem 1.2rem; margin-top: 1.6rem; cursor: pointer;
 }
-.guides-strip:hover { border-color: var(--green); }
-.gs-icon { font-size: 1.35rem; flex-shrink: 0; }
-.gs-text { flex: 1; min-width: 0; }
-.gs-title { font-weight: 800; font-size: .95rem; margin-bottom: .15rem; }
-.gs-sub { font-size: .82rem; color: var(--muted); line-height: 1.55; }
-.gs-arrow { color: var(--muted); flex-shrink: 0; }
+.de-text { flex: 1; min-width: 0; }
+.de-title { font-weight: 800; font-size: .98rem; color: var(--green-dark); margin-bottom: .15rem; }
+.de-sub { font-size: .84rem; color: var(--muted); line-height: 1.55; }
+.de-btn { flex-shrink: 0; background: var(--green-dark); color: #fff; border-radius: 8px;
+  padding: .55rem 1.1rem; font-size: .86rem; font-weight: 800; white-space: nowrap; }
+
+/* Results of the last diagnostic, one tile per skill. */
+.diag-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: .6rem; cursor: pointer;
+}
+.dg-tile {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: .85rem .95rem;
+}
+.dg-tile-main { background: var(--green-light); border-color: var(--green); }
+.dg-val { font-size: 1.35rem; font-weight: 900; color: var(--green-dark);
+  font-variant-numeric: tabular-nums; line-height: 1.2; }
+.dg-val-big { font-size: 1.75rem; }
+.dg-lbl { font-size: .78rem; color: var(--muted); font-weight: 700; margin-top: .1rem; }
+.dg-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; margin-top: .55rem; }
+.dg-bar-fill { height: 100%; background: var(--green); border-radius: 99px; }
+
+/* Guides section — three real cards, not a one-line strip. */
+.guides-sec-title { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.hg-all { font-size: .82rem; font-weight: 700; color: var(--green-dark);
+  margin-inline-start: auto; cursor: pointer; text-decoration: underline; }
+.guides-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .7rem;
+}
+.hg-card {
+  display: block; background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1rem 1.1rem; text-decoration: none; color: var(--text);
+}
+.hg-card:hover { border-color: var(--green); }
+.hg-title { font-weight: 800; font-size: .93rem; line-height: 1.5; margin-bottom: .3rem; }
+.hg-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+.hg-more { font-size: .8rem; font-weight: 700; color: var(--green-dark); margin-top: .6rem; }

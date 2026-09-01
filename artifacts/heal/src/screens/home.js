@@ -34,6 +34,8 @@ import { getWeeklyActivity, getDailyPlan, nextLeg } from '../data/plan.data.js';
 import { getCoverage } from '../data/coverage.data.js';
 import { LEARN_BLOCKS } from './rephrase-learn.js';
 import { getGuestProfile } from './onboarding.js';
+import { listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
+import { GUIDES } from './guides.js';
 
 const GREETING = () => {
   const h = new Date().getHours();
@@ -123,6 +125,10 @@ export async function renderHome(root) {
   const bar = (pct) => (pct === null ? '' : `<div class="mc-bar"><div class="mc-fill" style="width:${pct}%"></div></div>`);
 
   // ── Render ──────────────────────────────────────────────────────────────────
+  // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
+  const { data: simAttempts } = await listAttempts(userId, 1);
+  const lastSim = (simAttempts || [])[0] ?? null;
+
   el.innerHTML = `
     <div class="fade-in">
       <div class="page-title">${GREETING()}, ${name}</div>
@@ -181,18 +187,9 @@ export async function renderHome(root) {
         </div>
       </div>
 
-      <!-- 2026-09-01 (Lion): תשעת המדריכים היו נגישים רק דרך גוגל — משתמש
-           שכבר בפנים לא נתקל בהם בשום מקום. זה הילד השביעי בפריסת הבית,
-           ולכן נוסף לו כלל grid-row מפורש ב-styles.css (שורה 6); בלעדיו
-           הוא היה מוצב אוטומטית ושובר את הפריסה בדסקטופ. -->
-      <div class="guides-strip" data-nav="/guides">
-        <span class="gs-icon">📖</span>
-        <div class="gs-text">
-          <div class="gs-title">מדריכים למבחן</div>
-          <div class="gs-sub">מה זה הלאל, מה ההבדל מאמירם, ומה נבדק בכל חלק — בלי הרשמה</div>
-        </div>
-        <span class="gs-arrow">←</span>
-      </div>
+      ${diagnosticBand(lastSim)}
+
+      ${guidesSection()}
     </div>`;
 
   const daily = el.querySelector('#btn-daily');
@@ -200,4 +197,63 @@ export async function renderHome(root) {
   el.querySelectorAll('[data-nav]').forEach(tile => {
     tile.addEventListener('click', () => navigate(tile.dataset.nav));
   });
+}
+
+/**
+ * פס המדדים — תוצאות האבחון האחרון, מיומנות-מיומנות.
+ *
+ * מכוון: **אין כאן מצב אפס עם אפסים.** מי שעוד לא עשה אבחון מקבל הזמנה
+ * לעשות אותו, ולא ארבעה עיגולים על 0% — לוח מחוונים מלא אפסים נראה פחות
+ * רציני, לא יותר, והוא גם מעניש תלמיד על כך שרק הגיע.
+ */
+function diagnosticBand(last) {
+  if (!last || !Array.isArray(last.section_stats) || !last.section_stats.length) {
+    return `
+      <div class="diag-empty" data-nav="/simulation">
+        <div class="de-text">
+          <div class="de-title">עוד לא עשית אבחון רמה</div>
+          <div class="de-sub">כ-25 דקות, ובסוף דוח שמראה בדיוק באיזו מיומנות אתה חזק ואיפה הפער</div>
+        </div>
+        <span class="de-btn">לאבחון ←</span>
+      </div>`;
+  }
+
+  const overall = last.total_answered
+    ? Math.round((last.total_correct / last.total_answered) * 100) : 0;
+
+  const tiles = last.section_stats
+    .filter((st) => st.accuracy != null)
+    .map((st) => `
+      <div class="dg-tile">
+        <div class="dg-val">${st.accuracy}%</div>
+        <div class="dg-lbl">${SECTION_LABELS[st.kind] || st.kind}</div>
+        <div class="dg-bar"><div class="dg-bar-fill" style="width:${st.accuracy}%"></div></div>
+      </div>`).join('');
+
+  return `
+    <div class="sec-title diag-sec-title" style="margin-top:1.6rem">האבחון האחרון שלך</div>
+    <div class="diag-grid" data-nav="/simulation">
+      <div class="dg-tile dg-tile-main">
+        <div class="dg-val dg-val-big">${overall}%</div>
+        <div class="dg-lbl">דיוק כללי</div>
+      </div>
+      ${tiles}
+    </div>`;
+}
+
+/** מדור המדריכים — שלושה כרטיסים אמיתיים + מעבר לכולם. */
+function guidesSection() {
+  const cards = GUIDES.slice(0, 3).map((g) => `
+    <a class="hg-card" href="${g.href}">
+      <div class="hg-title">${g.title}</div>
+      <div class="hg-desc">${g.desc}</div>
+      <div class="hg-more">לקריאה ←</div>
+    </a>`).join('');
+
+  return `
+    <div class="sec-title guides-sec-title" style="margin-top:1.8rem">
+      מדריכים למבחן
+      <span class="hg-all" data-nav="/guides">כל ${GUIDES.length} המדריכים ←</span>
+    </div>
+    <div class="guides-grid">${cards}</div>`;
 }
