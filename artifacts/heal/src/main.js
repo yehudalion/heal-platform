@@ -1,5 +1,6 @@
 import './styles.css';
 import { route, startRouter, navigate } from './router.js';
+import { installErrorLog } from './lib/errorLog.js';
 import { supabase, isGuest, getCurrentSession } from './supabase.js';
 
 // ─── Screens ─────────────────────────────────────────────────────────────────
@@ -117,4 +118,7 @@ if (supabase) {
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
+// לפני הראוטר: שגיאה בטעינת המסך הראשון היא בדיוק זו שנרצה לראות.
+installErrorLog();
+
 startRouter(app);

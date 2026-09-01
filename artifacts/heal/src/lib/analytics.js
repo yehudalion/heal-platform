@@ -32,7 +32,10 @@ import { logEvent } from '../data/analytics.data.js'
 // ─────────────────────────────────────────────────────────────────────────────
 // THE SWITCH. Flip to true when the beta starts, not before.
 // ─────────────────────────────────────────────────────────────────────────────
-export const ANALYTICS_ENABLED = false
+// הודלק 31.8.2026 לקראת הבטא. מדיניות הפרטיות מתארת את האיסוף הזה (סעיף 2,
+// שורת "שימוש"), ולכן ההדלקה לא מקדימה את המסמך. לפני שבודקים נתונים —
+// לפתוח פעם אחת ?internal=1 בכל דפדפן שלך, אחרת הפעילות שלך מזהמת את המדגם.
+export const ANALYTICS_ENABLED = true
 
 const INTERNAL_KEY = 'hs:internal'
 const SESSION_KEY  = 'hs:analytics:sid'

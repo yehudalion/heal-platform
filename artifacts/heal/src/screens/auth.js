@@ -17,26 +17,6 @@ export function renderAuth(root) {
           המשך עם Google
         </button>
 
-        <div class="auth-social">או באמצעות דוא״ל</div>
-
-        <form id="emailForm" style="display:flex;gap:8px;margin-top:.8rem">
-          <input
-            type="email" id="emailInput"
-            placeholder="כתובת דוא״ל"
-            required autocomplete="email"
-            style="flex:1;padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.88rem;font-family:inherit;direction:rtl"
-          />
-          <button type="submit" style="padding:.72rem 1rem;background:var(--green);color:white;border:none;border-radius:var(--radius-sm);font-size:.85rem;font-weight:700;white-space:nowrap">
-            שלח קישור
-          </button>
-        </form>
-
-        <div style="display:flex;align-items:center;gap:10px;margin:1.1rem 0;color:var(--muted);font-size:.78rem">
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-          או
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-        </div>
-
         <button id="guestBtn" style="width:100%;padding:.82rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:.9rem;font-weight:700;color:var(--text)">
           הצצה כאורח
         </button>
@@ -51,6 +31,8 @@ export function renderAuth(root) {
              and this is the screen where the learner actually decides to sign up. -->
         <div style="margin-top:.5rem;font-size:.72rem;color:var(--muted)">
           <a href="/privacy/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדיניות פרטיות</a>
+          <span style="opacity:.6"> · </span>
+          <a href="/terms/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">תנאי שימוש</a>
         </div>
       </div>
     </div>
@@ -75,20 +57,6 @@ export function renderAuth(root) {
       options: { redirectTo: window.location.origin + window.location.pathname },
     });
     if (error) setMsg(error.message, true);
-  });
-
-  root.querySelector('#emailForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!supabase) { setMsg('Supabase לא מוגדר.', true); return; }
-    const email = root.querySelector('#emailInput').value.trim();
-    if (!email) return;
-    setMsg('שולח קישור התחברות…');
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: window.location.origin + window.location.pathname },
-    });
-    if (error) setMsg(error.message, true);
-    else { track('auth_magiclink_sent'); setMsg('בדקו את תיבת הדוא״ל — הקישור יחבר אתכם.'); }
   });
 
   root.querySelector('#guestBtn').addEventListener('click', () => {
