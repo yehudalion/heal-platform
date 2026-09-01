@@ -30,6 +30,7 @@ const SCREEN_TITLES = {
   '/mistake-notebook':     'מחברת טעויות',
   '/insights':             'התובנות שלי',
   '/simulation':           'אבחון רמה',
+  '/guides':               'מדריכים',
 };
 
 // Render the full shell (sidebar + topbar + empty #page-content)
@@ -80,6 +81,11 @@ export async function renderLayout(root, activePath) {
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
         ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
+
+        <div class="nav-lbl">ללמוד</div>
+        <a class="nav-item${activePath==='/guides'?' active':''}" data-nav="/guides">
+          <span class="nav-icon">📖</span>מדריכים
+        </a>
 
         <div class="nav-lbl">חשבון</div>
         <a class="nav-item${activePath==='/mistake-notebook'?' active':''}" data-nav="/mistake-notebook">
