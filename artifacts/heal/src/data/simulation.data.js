@@ -101,12 +101,12 @@ export async function loadForm(code) {
       .single()
     if (formErr) throw formErr
 
-    const { data: rows, error: itemErr } = await supabase
-      .from('simulation_form_items')
-      .select('*')
-      .eq('form_id', form.id)
-      .order('item_order')
+    const [{ data: rows, error: itemErr }, { data: sectionRows, error: secErr }] = await Promise.all([
+      supabase.from('simulation_form_items').select('*').eq('form_id', form.id).order('item_order'),
+      supabase.from('simulation_form_sections').select('*').eq('form_id', form.id).order('section_no'),
+    ])
     if (itemErr) throw itemErr
+    if (secErr) throw secErr
 
     const scIds  = rows.filter((r) => r.item_kind === 'sc').map((r) => r.item_id)
     const rsIds  = rows.filter((r) => r.item_kind === 'restatement').map((r) => r.item_id)
@@ -125,7 +125,21 @@ export async function loadForm(code) {
     const lqMap = byId(lqRes.data), lecMap = byId(lecRes.data)
 
     const items = rows.map((r) => normalize(r, { scMap, rsMap, lqMap, lecMap })).filter(Boolean)
-    return { data: { form, items }, error: null }
+
+    // פרק בלי פריטים מדולג לגמרי — כך פרק הבנת הנקרא השמור לא מופיע לנבחן
+    // כפרק ריק, אבל גם לא צריך למחוק אותו כדי להריץ את האבחון.
+    const sections = (sectionRows || [])
+      .map((r) => ({
+        no:        r.section_no,
+        kind:      r.section_kind,
+        title:     r.title,
+        seconds:   r.time_limit_seconds,
+        isPilot:   r.is_pilot === true,
+        items:     items.filter((it) => it.sectionNo === r.section_no),
+      }))
+      .filter((sec) => sec.items.length > 0)
+
+    return { data: { form, sections, items }, error: null }
   } catch (error) {
     console.error('simulation.data.loadForm:', error)
     return { data: null, error }
@@ -160,6 +174,7 @@ function scExplanationsToArray(raw, correctIndex, optionCount) {
 function normalize(row, maps) {
   const base = {
     order:       row.item_order,
+    sectionNo:   row.section_no,
     sectionKind: row.section_kind,
     itemKind:    row.item_kind,
     itemId:      row.item_id,

@@ -1,20 +1,21 @@
 /**
- * src/screens/simulation.js — שער הכניסה לאבחון (שכבת Learn + בחירת טופס).
+ * src/screens/simulation.js — שער הכניסה לאבחון.
  *
- * זה העמוד שכל עמודי ה-SEO מפנים אליו בסופו של דבר, ולכן הוא צריך לענות על
- * שתי שאלות לפני שמישהו לוחץ "התחלה": מה עומד לקרות כאן, ומה אני מקבל בסוף.
+ * זה העמוד שכל עמודי ה-SEO מפנים אליו, ולכן הוא עונה על שתי שאלות לפני
+ * שמישהו לוחץ "התחלה": מה עומד לקרות כאן, ומה מקבלים בסוף.
  *
- * חמישה טפסים קבועים, בלי חפיפה ביניהם — מי שרוצה לבדוק את עצמו שוב אחרי
- * חודש מקבל שאלות שלא ראה. הטופס עצמו רץ ב-simulation-run.js.
+ * טופס אבחון אחד בלבד (sim-1). ארבעת הטפסים הנוספים קיימים בבסיס הנתונים
+ * אבל אינם מפורסמים — הם מיועדים לשימושים אחרים שיוגדרו בשיחת ה-paywall.
+ * listForms() מחזיר רק מפורסמים, ולכן המסך הזה לא צריך לדעת עליהם.
  *
- * הבנת הנקרא עדיין לא כאן: אין לנו בנק קטעים, ולכתוב שיש פרק שאין זה בדיוק
- * סוג ההבטחה שאנחנו לא נותנים. כשהבנק ייבנה, הפרק ייכנס לטפסים הקיימים.
+ * הבנת הנקרא עדיין לא כאן: אין בנק קטעים, ולכתוב שיש פרק שאין זה בדיוק סוג
+ * ההבטחה שאנחנו לא נותנים. מקומו שמור בטופס (פרק 3) ויתמלא כשהבנק ייבנה.
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 import { getLearner } from '../lib/learner.js';
-import { listForms, listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
+import { listForms, listAttempts, loadForm } from '../data/simulation.data.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -32,21 +33,21 @@ function ensureStyles() {
 .si-facts { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.2rem; }
 .si-fact { background:var(--green-light); color:var(--green-dark); border-radius:99px;
   padding:.3rem .85rem; font-size:.82rem; font-weight:700; }
-.si-skills { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.6rem; margin:1.2rem 0; }
-.si-skill { border:1px solid var(--border); border-radius:8px; padding:.7rem .9rem; background:var(--bg); }
-.si-skill-n { font-weight:800; font-size:.9rem; margin-bottom:.15rem; }
-.si-skill-d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+.si-map { width:100%; border-collapse:collapse; font-size:.9rem; margin:.4rem 0 0; }
+.si-map th { text-align:right; font-size:.76rem; font-weight:800; color:var(--muted);
+  padding:.4rem .6rem; border-bottom:1px solid var(--border); }
+.si-map td { text-align:right; padding:.5rem .6rem; border-bottom:1px solid var(--border); }
+.si-map tr.soon td { color:var(--muted); }
+.si-tag { font-size:.7rem; font-weight:800; border-radius:99px; padding:.1rem .5rem; margin-inline-start:.35rem; }
+.si-tag-pilot { background:var(--orange-light,#F2E9D8); color:var(--orange,#B08442); }
+.si-tag-soon { background:var(--border); color:var(--muted); }
 .si-note { background:var(--orange-light,#F2E9D8); border-inline-start:3px solid var(--orange,#B08442);
   border-radius:8px; padding:.85rem 1.1rem; font-size:.88rem; line-height:1.75; margin:1.2rem 0; }
-.si-forms { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.7rem; margin-top:.8rem; }
-.si-form { background:var(--card); border:1.5px solid var(--border); border-radius:10px;
-  padding:1rem 1.1rem; text-align:right; font-family:inherit; cursor:pointer; color:var(--text); }
-.si-form:hover { border-color:var(--green); }
-.si-form-t { font-weight:800; margin-bottom:.2rem; }
-.si-form-s { font-size:.8rem; color:var(--muted); }
-.si-form-done { font-size:.78rem; color:var(--green-dark); font-weight:700; margin-top:.4rem; }
-.si-h2 { font-size:1.05rem; font-weight:800; margin:1.8rem 0 .3rem; }
-.si-past { font-size:.86rem; color:var(--muted); margin-top:.5rem; }
+.si-start { display:flex; align-items:center; gap:.9rem; flex-wrap:wrap; margin-top:1.4rem; }
+.si-btn { background:var(--green-dark); color:#fff; border:0; border-radius:8px;
+  padding:.8rem 1.9rem; font-family:inherit; font-weight:800; font-size:1rem; cursor:pointer; }
+.si-prev { font-size:.86rem; color:var(--muted); }
+.si-h2 { font-size:1.05rem; font-weight:800; margin:1.6rem 0 .3rem; }
 `;
   document.head.appendChild(s);
 }
@@ -55,92 +56,85 @@ export async function renderSimulation(root) {
   await renderLayout(root, '/simulation');
   const page = getPageContent();
   ensureStyles();
-
   page.innerHTML = `<div class="si-hero"><div class="si-lede">טוען…</div></div>`;
 
   const learner = await getLearner();
   const [{ data: forms }, { data: attempts }] = await Promise.all([
     listForms(),
-    listAttempts(learner.id, 10),
+    listAttempts(learner.id, 5),
   ]);
 
-  const doneCodes = new Map();
-  (attempts || []).forEach((a) => {
-    const code = a.simulation_forms?.code;
-    if (code && !doneCodes.has(code)) doneCodes.set(code, a);
-  });
+  const form = (forms || [])[0];
+  if (!form) {
+    page.innerHTML = `<div class="si-hero"><div class="si-lede">האבחון אינו זמין כרגע.</div></div>`;
+    return;
+  }
 
-  const formCards = (forms || []).map((f) => {
-    const done = doneCodes.get(f.code);
-    const pct = done && done.total_answered
-      ? Math.round((done.total_correct / done.total_answered) * 100) : null;
-    return `
-      <button class="si-form" data-code="${esc(f.code)}">
-        <div class="si-form-t">${esc(f.title)}</div>
-        <div class="si-form-s">${f.total_questions} שאלות · כ-${f.estimated_minutes} דקות</div>
-        ${done ? `<div class="si-form-done">✓ הושלם${pct != null ? ` · ${pct}%` : ''}</div>` : ''}
-      </button>`;
-  }).join('');
+  // הפרקים מגיעים מהטופס עצמו ולא מרשימה קשיחה כאן, כדי שפרק הבנת הנקרא
+  // יופיע אוטומטית ברגע שיהיו לו פריטים.
+  const { data: full } = await loadForm(form.code);
+  const live = full?.sections ?? [];
+  const totalQ = live.reduce((n, s) => n + s.items.length, 0);
+  const totalMin = Math.round(live.reduce((n, s) => n + s.seconds, 0) / 60);
+
+  const rows = live.map((s) => `
+    <tr>
+      <td>${esc(s.title)}${s.isPilot ? '<span class="si-tag si-tag-pilot">ניסיוני</span>' : ''}</td>
+      <td>${s.items.length}</td>
+      <td>${Math.round(s.seconds / 60)} דק'</td>
+    </tr>`).join('');
+
+  const last = (attempts || [])[0];
+  const lastPct = last && last.total_answered
+    ? Math.round((last.total_correct / last.total_answered) * 100) : null;
 
   page.innerHTML = `
     <div class="si-hero">
       <div class="si-h1">אבחון רמה</div>
       <p class="si-lede">
-        ארבעים דקות שנותנות לך תמונה אמיתית של איפה אתה עומד — לא תחושה, ולא ניחוש.
-        בסוף מחכה דוח פערים שמראה בדיוק באיזו מיומנות אתה חזק, איפה נופל, ובאיזו
-        רמת קושי אתה מפסיק להיות עקבי.
+        תמונה אמיתית של איפה אתם עומדים — לא תחושה ולא ניחוש. בסוף מחכה דוח
+        פערים שמראה באיזו מיומנות אתם חזקים, איפה נופלים, ובאיזו רמת קושי
+        אתם מפסיקים להיות עקביים.
       </p>
 
       <div class="si-facts">
-        <span class="si-fact">22 שאלות</span>
-        <span class="si-fact">4 מיומנויות</span>
-        <span class="si-fact">כ-25 דקות</span>
+        <span class="si-fact">${totalQ} שאלות</span>
+        <span class="si-fact">כ-${totalMin} דקות</span>
+        <span class="si-fact">זמן לכל פרק</span>
         <span class="si-fact">בלי הרשמה</span>
       </div>
 
-      <p class="si-lede" style="margin-bottom:0">
-        המבנה בנוי לפי הרצף הרשמי שמפרסם המרכז הארצי לבחינות ולהערכה
-        (מאל״ו): שלושה פרקי השלמת משפטים בני 4 שאלות, שני פרקי ניסוח מחדש
-        בני 3, ופרק הבנת נקרא בן 5 שיצטרף בהמשך. בסוף מגיע פרק ההאזנה —
-        פרק ניסיוני, בדיוק כמו במבחן עצמו.
+      <p class="si-lede" style="margin-bottom:.4rem">
+        המבנה בנוי לפי הרצף שמפרסם המרכז הארצי לבחינות ולהערכה (מאל״ו), וכמו
+        בבחינה עצמה <strong>הזמן מנוהל ברמת הפרק</strong>: לכל פרק שעון משלו,
+        בתוכו אפשר לנוע בין השאלות ולשנות תשובות, וזמן שנשאר לא עובר הלאה.
       </p>
 
-      <div class="si-skills">
-        <div class="si-skill">
-          <div class="si-skill-n">${esc(SECTION_LABELS.sc)}</div>
-          <div class="si-skill-d">משפט עם חסר וארבע השלמות. בודק בעיקר אוצר מילים ומבנה.</div>
-        </div>
-        <div class="si-skill">
-          <div class="si-skill-n">${esc(SECTION_LABELS.continuation)}</div>
-          <div class="si-skill-d">קטע נקטע באמצע — לבחור את ההמשך ההגיוני.</div>
-        </div>
-        <div class="si-skill">
-          <div class="si-skill-n">${esc(SECTION_LABELS.restatement)}</div>
-          <div class="si-skill-d">ארבע גרסאות למשפט אחד, רק אחת שומרת על המשמעות.</div>
-        </div>
-        <div class="si-skill">
-          <div class="si-skill-n">${esc(SECTION_LABELS.lecture_qa)}</div>
-          <div class="si-skill-d">הרצאה או שיחה, ושאלות הבנה עליה.</div>
-        </div>
-      </div>
+      <table class="si-map">
+        <thead><tr><th>פרק</th><th>שאלות</th><th>זמן</th></tr></thead>
+        <tbody>
+          ${rows}
+          <tr class="soon">
+            <td>הבנת הנקרא<span class="si-tag si-tag-soon">בקרוב</span></td>
+            <td>5</td><td>15 דק'</td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="si-note">
-        <strong>מה שלא תקבלו כאן: ציון בסולם 50–150.</strong> כדי לתרגם ביצועים לציון
-        כזה צריך כיול פסיכומטרי של כל שאלה, ואין לנו אותו — מספר שהיינו ממציאים
-        עלול לגרום לכם להחליט אם לגשת למבחן על סמך ניחוש. במקום זה תקבלו משהו
-        שימושי יותר: מפה מדויקת של הפערים.
-        <br><br>
-        <strong>הבנת הנקרא עדיין לא כלולה.</strong> היא חלק מהמבחן האמיתי, ותיכנס
-        לאבחון כשבנק הקטעים שלנו יהיה מוכן.
+        <strong>מה שלא תקבלו כאן: ציון בסולם 50–150.</strong> כדי לתרגם ביצועים
+        לציון כזה צריך כיול פסיכומטרי של כל שאלה, ואין לנו אותו — מספר שהיינו
+        ממציאים עלול לגרום לכם להחליט אם לגשת למבחן על סמך ניחוש. במקום זה
+        תקבלו אחוזי הצלחה לכל מיומנות בנפרד, ומפה מדויקת של הפערים.
       </div>
-    </div>
 
-    <div class="si-h2">בחרו טופס</div>
-    <div class="si-past">חמישה טפסים שונים לגמרי, בלי שאלות חוזרות ביניהם — אפשר לחזור ולבדוק את עצמכם בעוד חודש.</div>
-    <div class="si-forms">${formCards || '<div class="si-past">אין טפסים זמינים כרגע.</div>'}</div>
-  `;
+      <div class="si-start">
+        <button class="si-btn" id="siStart">להתחיל את האבחון</button>
+        ${lastPct != null ? `<span class="si-prev">האבחון האחרון שלכם: ${lastPct}%</span>` : ''}
+      </div>
+    </div>`;
 
-  page.querySelectorAll('.si-form').forEach((btn) => {
-    btn.addEventListener('click', () => navigate(`/simulation/run?form=${btn.dataset.code}`));
+  page.querySelector('#siStart').addEventListener('click', () => {
+    navigate(`/simulation/run?form=${form.code}`);
   });
 }
