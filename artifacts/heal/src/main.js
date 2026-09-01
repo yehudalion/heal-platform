@@ -25,6 +25,7 @@ import { renderVocabAnalyze } from './screens/vocab-analyze.js';
 import { renderDictionary } from './screens/dictionary.js';
 import { renderMistakeNotebook } from './screens/mistake-notebook.js';
 import { renderInsights } from './screens/insights.js';
+import { renderGuides }        from './screens/guides.js';
 import { renderSimulation }    from './screens/simulation.js';
 import { renderSimulationRun } from './screens/simulation-run.js';
 
@@ -103,6 +104,8 @@ route('/insights', requireAuth(renderInsights));
 // ─── Simulation / אבחון רמה ──────────────────────────────────────────────────
 // requireAuth ולא requireOnboarded: זה שער הכניסה מה-SEO, ואורח צריך להגיע
 // אליו בלי חיכוך. הדוח נשמר רק למי שמחובר — ההצעה להירשם מגיעה בסופו.
+// מדריכים: נגיש גם לאורח — זה תוכן פתוח, וזו נקודת הכניסה מה-SEO.
+route('/guides',         requireAuth(renderGuides));
 route('/simulation',     requireAuth(renderSimulation));
 route('/simulation/run', requireAuth(renderSimulationRun));
 
