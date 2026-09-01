@@ -25,6 +25,8 @@ import { renderVocabAnalyze } from './screens/vocab-analyze.js';
 import { renderDictionary } from './screens/dictionary.js';
 import { renderMistakeNotebook } from './screens/mistake-notebook.js';
 import { renderInsights } from './screens/insights.js';
+import { renderSimulation }    from './screens/simulation.js';
+import { renderSimulationRun } from './screens/simulation-run.js';
 
 // ─── Listening section ────────────────────────────────────────────────────────
 // test-page.js + item-test-page.js deleted 2026-08-14 (SITEMAP §4 "נמחקים,
@@ -97,6 +99,12 @@ route('/vocab-analyze', requireAuth(renderVocabAnalyze));
 route('/dictionary', requireAuth(renderDictionary));
 route('/mistake-notebook', requireAuth(renderMistakeNotebook));
 route('/insights', requireAuth(renderInsights));
+
+// ─── Simulation / אבחון רמה ──────────────────────────────────────────────────
+// requireAuth ולא requireOnboarded: זה שער הכניסה מה-SEO, ואורח צריך להגיע
+// אליו בלי חיכוך. הדוח נשמר רק למי שמחובר — ההצעה להירשם מגיעה בסופו.
+route('/simulation',     requireAuth(renderSimulation));
+route('/simulation/run', requireAuth(renderSimulationRun));
 
 // ─── Listening section routes ────────────────────────────────────────────────
 route('/listening/diagnostic', requireAuth(renderDiagnostic));         // M4 — PARKED, not in the entry path (SITEMAP: "לא נמחק, לא פעיל"). Reachable by direct URL only; nothing links here.
