@@ -20,6 +20,29 @@
 import { supabase } from '../supabase.js'
 import { getCurrentSession } from '../supabase.js'   // auth only
 
+// שכבה שנייה של "פנימי", ברמת החשבון ולא הדפדפן — מבוקשת ע"י ליאון 2026-09-01
+// כדי שהפעילות שלו לא תזהם את המדגם גם ממכשיר/דפדפן שלא סומן עם ?internal=1.
+// נשמר בזיכרון לכל טעינת עמוד (Map, לא TTL) כי הערך כמעט אף פעם לא משתנה
+// באמצע session; לא חוסם — כשל בשליפה נחשב "לא פנימי" ולא עוצר אירוע.
+const internalAccountCache = new Map()
+
+async function isAccountInternal(userId) {
+  if (!userId) return false
+  if (internalAccountCache.has(userId)) return internalAccountCache.get(userId)
+  try {
+    const { data } = await supabase
+      .from('user_profiles')
+      .select('is_internal')
+      .eq('user_id', userId)
+      .maybeSingle()
+    const val = data?.is_internal === true
+    internalAccountCache.set(userId, val)
+    return val
+  } catch {
+    return false
+  }
+}
+
 /**
  * Insert one event. Fire-and-forget: returns a promise the caller ignores.
  * @param {{event:string, props?:object, sessionId?:string|null, path?:string|null, referrer?:string|null, isInternal?:boolean}} e
@@ -34,6 +57,10 @@ export async function logEvent(e) {
       const session = await getCurrentSession()
       userId = session?.user?.id ?? null
     } catch { userId = null }
+
+    // חסימה ברמת חשבון — לפני שהאירוע בכלל מגיע לטבלה, כמו החסימה ברמת
+    // הדפדפן ב-lib/analytics.js. שני חסמים בלתי-תלויים, בכוונה.
+    if (userId && await isAccountInternal(userId)) return
 
     const { error } = await supabase.from('analytics_events').insert({
       event:       e.event,

@@ -53,6 +53,37 @@ async function report({ message, source, stack }) {
   }
 }
 
+/**
+ * דיווח יזום מהתלמיד ("🚩 משהו לא בסדר") — לא שגיאת JS שנתפסה אוטומטית.
+ * נכתב לאותה טבלת client_errors, עם source='user_report' כדי שאפשר יהיה
+ * להבדיל בשאילתה בין קריסות לבין דיווחי תוכן/UX. ההערה אופציונלית ותמיד
+ * מקוצרת; זה חריג מכוון לכלל "לא אוספים טקסט חופשי" — כאן זה בדיוק
+ * הכוונה: פידבק שהתלמיד בחר לכתוב, לא טקסט שנתפס בטעות.
+ * @param {string} note
+ * @returns {Promise<boolean>} true אם נשלח בהצלחה
+ */
+export async function reportUserIssue(note) {
+  try {
+    let userId = null;
+    try {
+      const { data } = await supabase.auth.getSession();
+      userId = data?.session?.user?.id ?? null;
+    } catch { /* אורח */ }
+
+    const { error } = await supabase.from('client_errors').insert({
+      user_id:    userId,
+      message:    truncate(note || '(בלי הערה)', 500),
+      source:     'user_report',
+      stack:      null,
+      route:      truncate(location.hash || '/', 200),
+      user_agent: truncate(navigator.userAgent, 300),
+    });
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
 let installed = false;
 
 /** להתקין פעם אחת, מ-main.js. קריאה חוזרת לא עושה כלום. */

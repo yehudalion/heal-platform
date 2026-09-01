@@ -3,6 +3,7 @@ import { getCurrentSession, isGuest, signOut } from './supabase.js';
 import { deleteMyAccount } from './data/account.data.js';
 import { isLive } from './lib/modules.js';
 import { getProfile, upsertProfile } from './data/profiles.data.js';
+import { reportUserIssue } from './lib/errorLog.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -28,6 +29,7 @@ const SCREEN_TITLES = {
   '/dictionary':           'מילון',
   '/mistake-notebook':     'מחברת טעויות',
   '/insights':             'התובנות שלי',
+  '/simulation':           'אבחון רמה',
 };
 
 // Render the full shell (sidebar + topbar + empty #page-content)
@@ -62,6 +64,9 @@ export async function renderLayout(root, activePath) {
              האזנה היתה חסרה מהסרגל לגמרי, ו"כרטיסיות" היה שם
              שונה למה שהלוח הבית קורא לאותה מודול ("אוצר מילים"). -->
         <div class="nav-lbl">תרגול</div>
+        <a class="nav-item${activePath==='/simulation'?' active':''}" data-nav="/simulation">
+          <span class="nav-icon">📋</span>אבחון רמה
+        </a>
         <a class="nav-item${activePath==='/listening'?' active':''}" data-nav="/listening">
           <span class="nav-icon">${ico.listen}</span>האזנה
         </a>
@@ -136,6 +141,8 @@ export async function renderLayout(root, activePath) {
         </a>
       </nav>
 
+      <button class="flag-fab" id="flagFab" type="button" title="דיווח על תקלה">🚩</button>
+
     </div>`;
 
   // Wire nav clicks
@@ -183,6 +190,11 @@ function ensureAcctStyles() {
 .acct-min button { border:1.5px solid var(--border); background:var(--card); border-radius:var(--radius-sm);
   padding:9px 4px; font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
 .acct-min button.on { border-color:var(--green-dark); background:var(--green-light); color:var(--green-dark); }
+.flag-fab { position:fixed; bottom:18px; left:18px; width:46px; height:46px; border-radius:50%;
+  background:var(--card); border:1.5px solid var(--border); box-shadow:0 4px 14px rgba(0,0,0,.15);
+  font-size:1.2rem; cursor:pointer; z-index:250; display:flex; align-items:center; justify-content:center; }
+.flag-fab:hover { background:var(--green-light); }
+@media (max-width: 900px) { .flag-fab { bottom:78px; } } /* מעל ה-bottomnav במובייל */
 `;
   document.head.appendChild(s);
 }
@@ -219,6 +231,57 @@ function wireAccountMenu(root, user) {
     e.stopPropagation();
     menu.hidden = true;
     openDeleteOverlay(user);
+  });
+
+  root.querySelector('#flagFab')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openFlagOverlay();
+  });
+}
+
+// ─── "🚩 משהו לא בסדר" ────────────────────────────────────────────────────────
+// חלופה קלה לקבוצת וואטסאפ (2026-09-01): לחיצה אחת, הערה אופציונלית, בלי
+// שום דרישת התחייבות. לתקלות טכניות (JS שקרס) כבר יש errorLog.js אוטומטי —
+// זה בשביל "משהו לא ברור/לא נכון" שלא זורק שגיאה.
+function openFlagOverlay() {
+  const ov = document.createElement('div');
+  ov.className = 'acct-overlay';
+  ov.innerHTML = `
+    <div class="acct-card" dir="rtl">
+      <div style="font-size:1.05rem;font-weight:900">🚩 משהו לא בסדר?</div>
+      <div style="font-size:.86rem;line-height:1.6;color:var(--muted)">
+        אפשר לכתוב במילה-שתיים מה קרה — ואפשר גם לשלוח בלי לכתוב כלום.
+        זה מגיע ישר אליי.
+      </div>
+      <textarea id="flagNote" rows="3" placeholder="לא חובה…" style="width:100%;padding:.6rem .7rem;
+        border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;
+        font-size:.88rem;resize:vertical"></textarea>
+      <div id="flagMsg" style="font-size:.82rem;color:var(--muted);min-height:1.1em"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="acct-item acct-item--quiet" id="flagCancel" style="width:auto">ביטול</button>
+        <button class="btn-danger" id="flagSend" style="background:var(--green-dark,var(--green))">שליחה</button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+
+  const close = () => ov.remove();
+  ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+  ov.querySelector('#flagCancel').addEventListener('click', close);
+
+  const sendBtn = ov.querySelector('#flagSend');
+  const msg = ov.querySelector('#flagMsg');
+  sendBtn.addEventListener('click', async () => {
+    sendBtn.disabled = true;
+    msg.textContent = 'שולח…';
+    const note = ov.querySelector('#flagNote').value.trim();
+    const ok = await reportUserIssue(note);
+    if (ok) {
+      msg.textContent = 'תודה, קיבלתי!';
+      setTimeout(close, 1100);
+    } else {
+      msg.textContent = 'לא הצלחתי לשלוח — נסה שוב בעוד רגע.';
+      sendBtn.disabled = false;
+    }
   });
 }
 
