@@ -34,6 +34,12 @@ export function renderAuth(root) {
           <span style="opacity:.6"> · </span>
           <a href="/terms/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">תנאי שימוש</a>
         </div>
+        <!-- SEO 2026-09-01: מסך הכניסה היה היחיד שמחבר בין האפליקציה לבין
+             8 עמודי ההסבר החינמיים (mivchan-hilal ומשם הלאה) — בלעדיו הם
+             היו "אי" נפרד שרק גוגל מכיר, ואף משתמש בפועל לא נתקל בו. -->
+        <div style="margin-top:.4rem;font-size:.72rem;color:var(--muted)">
+          <a href="/mivchan-hilal/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדריכים למבחן הלאל</a>
+        </div>
       </div>
     </div>
   `;
