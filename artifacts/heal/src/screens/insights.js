@@ -80,7 +80,7 @@ function weakPointsCard(res) {
 // ─── Card 2: הימים שבהם אתם הכי פעילים ───
 // Renamed 31.8 — "הקצב השבועי" read as "this week" and collided with the home
 // screen's weekly dots. This card is a day-of-week PATTERN over 8 weeks.
-function weeklyActivityCard(res) {
+export function weeklyActivityCard(res) {
   const TITLE = 'הימים שבהם אתם הכי פעילים';
   if (res.status === 'guest') return cardShell(TITLE, '', buildingBlock('התחברו כדי לראות את זה.'));
   if (res.status === 'error') return cardShell(TITLE, '', buildingBlock('אין כרגע נתונים להצגה.'));
@@ -141,7 +141,7 @@ function memoryCard(srs, funnel) {
 // Lion, 31.8: a number is fine — a number with no context is what reads as a
 // report card. So every module shows its own direction over the previous
 // week, and a decline is stated as a plain fact with no red flag or verdict.
-function accuracyByModuleCard(res) {
+export function accuracyByModuleCard(res) {
   const TITLE = 'הדיוק שלכם לפי מודול';
   if (res.status === 'guest') return cardShell(TITLE, '', buildingBlock('התחברו כדי לראות את זה.'));
   if (res.status === 'error') return cardShell(TITLE, '', buildingBlock('אין כרגע נתונים להצגה.'));
@@ -162,7 +162,7 @@ function accuracyByModuleCard(res) {
 }
 
 // ─── Card 5: הצמיחה המצטברת שלכם ───
-function cumulativeGrowthCard(res) {
+export function cumulativeGrowthCard(res) {
   const TITLE = 'הצמיחה המצטברת שלכם';
   if (res.status === 'guest') return cardShell(TITLE, '', buildingBlock('התחברו כדי לראות את זה.'));
   if (res.status === 'error') return cardShell(TITLE, '', buildingBlock('אין כרגע נתונים להצגה.'));
@@ -243,7 +243,8 @@ export async function renderInsights(root) {
   el.querySelector('#insGrid').innerHTML = ordered.map(c => c[0]).join('');
 }
 
-function ensureStyles() {
+/** מיוצא כדי שמסך הבית יוכל להציג את אותם כרטיסים בלי לשכפל את ה-CSS. */
+export function ensureStyles() {
   if (document.getElementById('ins-css')) return;
   const s = document.createElement('style');
   s.id = 'ins-css';

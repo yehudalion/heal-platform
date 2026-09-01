@@ -35,6 +35,22 @@ import { getCoverage } from '../data/coverage.data.js';
 import { LEARN_BLOCKS } from './rephrase-learn.js';
 import { getGuestProfile } from './onboarding.js';
 import { listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
+// שלושת המחוונים שליאון בחר למסך הבית (1.9.2026): דיוק לפי מודול, צמיחה
+// מצטברת, והימים הפעילים. הכרטיסים עצמם מיובאים מ-insights.js ולא משוכפלים
+// כאן — מקור אמת אחד, וגם מצב ה"נבנה" מגיע איתם.
+// getWeeklyActivity קיים גם ב-plan.data.js ובמשמעות אחרת לגמרי (קצב שבועי
+// מול יעד), ולכן הייבוא כאן בשם אחר.
+import {
+  getAccuracyByModule,
+  getCumulativeGrowth,
+  getWeeklyActivity as getActiveDays,
+} from '../data/insights.data.js';
+import {
+  accuracyByModuleCard,
+  cumulativeGrowthCard,
+  weeklyActivityCard,
+  ensureStyles as ensureInsightStyles,
+} from './insights.js';
 import { GUIDES } from './guides.js';
 
 const GREETING = () => {
@@ -126,8 +142,14 @@ export async function renderHome(root) {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
-  const { data: simAttempts } = await listAttempts(userId, 1);
+  const [{ data: simAttempts }, accuracyRes, growthRes, activeDaysRes] = await Promise.all([
+    listAttempts(userId, 1),
+    userId ? getAccuracyByModule(userId) : Promise.resolve({ status: 'guest', modules: [] }),
+    userId ? getCumulativeGrowth(userId) : Promise.resolve({ status: 'guest' }),
+    userId ? getActiveDays(userId)       : Promise.resolve({ status: 'guest' }),
+  ]);
   const lastSim = (simAttempts || [])[0] ?? null;
+  ensureInsightStyles();
 
   el.innerHTML = `
     <div class="fade-in">
@@ -189,6 +211,7 @@ export async function renderHome(root) {
 
       ${diagnosticBand(lastSim)}
 
+      ${metricsSection(accuracyRes, growthRes, activeDaysRes)}
       ${guidesSection()}
     </div>`;
 
@@ -241,9 +264,28 @@ function diagnosticBand(last) {
     </div>`;
 }
 
-/** מדור המדריכים — שלושה כרטיסים אמיתיים + מעבר לכולם. */
+/**
+ * שלושת המחוונים שליאון בחר. אורח לא מקבל אותם בכלל — אין לו שורות
+ * במסד, וקיר של כרטיסי "נבנה" למי שרק נכנס הוא בדיוק ההפך מרציני.
+ */
+function metricsSection(accuracy, growth, activeDays) {
+  if (!accuracy || accuracy.status === 'guest') return '';
+  return `
+    <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">
+      המספרים שלך
+      <span class="ms-all" data-nav="/insights">כל התובנות ←</span>
+    </div>
+    <div class="metrics-grid">
+      ${accuracyByModuleCard(accuracy)}
+      ${cumulativeGrowthCard(growth)}
+      ${weeklyActivityCard(activeDays)}
+    </div>`;
+}
+
+/** מדור המדריכים — שלושת המסומנים featured ב-guides.js. */
 function guidesSection() {
-  const cards = GUIDES.slice(0, 3).map((g) => `
+  const featured = GUIDES.filter((g) => g.featured);
+  const cards = featured.map((g) => `
     <a class="hg-card" href="${g.href}">
       <div class="hg-title">${g.title}</div>
       <div class="hg-desc">${g.desc}</div>

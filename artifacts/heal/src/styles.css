@@ -1207,8 +1207,10 @@ a { text-decoration: none; color: inherit; }
 #page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 6; }
 #page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 6; }
 #page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 7; }
-#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 8; }
-#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 9; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 9; }
+#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 10; }
+#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 11; }
 
 @media (max-width: 900px) {
   #page-content > .fade-in:has(> .wk-card) { display: block; }
@@ -1379,3 +1381,12 @@ a { text-decoration: none; color: inherit; }
 .hg-title { font-weight: 800; font-size: .93rem; line-height: 1.5; margin-bottom: .3rem; }
 .hg-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
 .hg-more { font-size: .8rem; font-weight: 700; color: var(--green-dark); margin-top: .6rem; }
+
+/* Metrics section on the home screen — reuses the .ins-card markup from
+   /insights, so only the section chrome is defined here. */
+.metrics-sec-title { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.ms-all { font-size: .82rem; font-weight: 700; color: var(--green-dark);
+  margin-inline-start: auto; cursor: pointer; text-decoration: underline; }
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .7rem;
+}
