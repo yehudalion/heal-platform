@@ -180,6 +180,19 @@ export async function renderHome(root) {
           <div class="mc-pct">${scAttempts ? `${scAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
       </div>
+
+      <!-- 2026-09-01 (Lion): תשעת המדריכים היו נגישים רק דרך גוגל — משתמש
+           שכבר בפנים לא נתקל בהם בשום מקום. זה הילד השביעי בפריסת הבית,
+           ולכן נוסף לו כלל grid-row מפורש ב-styles.css (שורה 6); בלעדיו
+           הוא היה מוצב אוטומטית ושובר את הפריסה בדסקטופ. -->
+      <div class="guides-strip" data-nav="/guides">
+        <span class="gs-icon">📖</span>
+        <div class="gs-text">
+          <div class="gs-title">מדריכים למבחן</div>
+          <div class="gs-sub">מה זה הלאל, מה ההבדל מאמירם, ומה נבדק בכל חלק — בלי הרשמה</div>
+        </div>
+        <span class="gs-arrow">←</span>
+      </div>
     </div>`;
 
   const daily = el.querySelector('#btn-daily');
