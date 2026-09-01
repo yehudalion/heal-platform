@@ -52,14 +52,30 @@ function normalizeHeadword(text) {
 
 /** The two words a wrong answer exposes, normalized and de-duplicated.
  *  Pure — no I/O. */
-function candidatesFor({ options = [], chosenOption, correctOption }) {
+function candidatesFor({ options = [], chosenOption, correctOption, isCorrect = false }) {
   const optionAt = (idx) => options[idx - FIRST_OPTION]
   const out = []
-  for (const [source, idx] of [['chosen', chosenOption], ['correct', correctOption]]) {
+  const add = (idx, source) => {
     const headword = normalizeHeadword(optionAt(idx))
-    if (!headword) continue
-    if (out.some((c) => c.headword === headword)) continue
+    if (!headword) return
+    if (out.some((c) => c.headword === headword)) return
     out.push({ headword, source })
+  }
+
+  if (isCorrect) {
+    // תשובה נכונה (ליאון, 1.9.2026): השלמת משפטים היא בבסיסה שאלת אוצר
+    // מילים, ומי שענה נכון לא בהכרח מכיר את כל ארבע האופציות — ולפעמים גם
+    // לא באמת את זו שבחר. לכן מוצעות כל האופציות: הנכונה קודם, ואז המסיחים.
+    // מה שכבר בתור התרגול שלו מסונן בהמשך ממילא.
+    add(correctOption, 'correct')
+    for (let idx = FIRST_OPTION; idx < FIRST_OPTION + options.length; idx++) {
+      if (idx !== correctOption) add(idx, 'distractor')
+    }
+    return out
+  }
+
+  for (const [source, idx] of [['chosen', chosenOption], ['correct', correctOption]]) {
+    add(idx, source)
   }
   return out
 }
@@ -68,8 +84,11 @@ function candidatesFor({ options = [], chosenOption, correctOption }) {
  * What COULD be added, without adding anything. Read-only.
  *
  * The screen uses this to decide whether to render the offer at all and what to
- * put on the button ("הוסף ל- lucid ו- vivid לתרגול"). Returns an empty array when
- * the answer was correct, when the options are phrases rather than vocabulary
+ * put on the button ("הוסף ל- lucid ו- vivid לתרגול"). On a WRONG answer it offers
+ * the chosen word and the correct one; on a CORRECT answer it offers the
+ * distractors instead (Lion, 2026-09-01 — the learner picked right but still may
+ * not know the other three). Returns an empty array when the options are phrases
+ * rather than vocabulary
  * (grammar-shaped items like "over the past decade" have no row in `words`), or
  * when the learner already has both words in their queue — in each of those cases
  * the button should simply not appear.
@@ -88,9 +107,9 @@ export async function getPushableWords(userId, {
   isCorrect = false,
 } = {}) {
   try {
-    if (!userId || isCorrect) return { data: [], error: null }
+    if (!userId) return { data: [], error: null }
 
-    const candidates = candidatesFor({ options, chosenOption, correctOption })
+    const candidates = candidatesFor({ options, chosenOption, correctOption, isCorrect })
     if (!candidates.length) return { data: [], error: null }
 
     // `ilike` with no wildcard is a case-insensitive equality test. No

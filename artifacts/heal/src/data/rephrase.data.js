@@ -75,7 +75,42 @@ export async function fetchPracticeQuestionsByKey({ key, limit = 5, excludeIds =
  * @param {{ limit?: number }} options
  * @returns {{ data: object[]|null, error: object|null }}
  */
-export async function fetchRecentMistakes(userId, { limit = 80 } = {}) {
+/**
+ * ספירה כוללת של תרגול ניסוח מחדש: כמה נענו, כמה נכון, כמה לא.
+ *
+ * מסך הניתוח פותח בנתונים האלה לפי בקשת ליאון (1.9.2026) — קודם התמונה
+ * הכללית, ורק אחריה הפילוח לפי סוג טעות. שתי שאילתות ספירה בלבד
+ * (`head: true`), בלי להוריד שורות.
+ *
+ * לא נגזר מ-weakpoints: שם `exposures`/`misses` נספרים לכל מפתח בנפרד,
+ * ושאלה אחת חושפת כמה מפתחות — סכימה שלהם אינה מספר השאלות.
+ */
+export async function getRephraseTotals(userId) {
+  try {
+    if (!userId) return { data: { total: 0, correct: 0, wrong: 0 }, error: null }
+
+    const [totalRes, correctRes] = await Promise.all([
+      supabase.from('restatement_attempts')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId),
+      supabase.from('restatement_attempts')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+        .eq('is_correct', true),
+    ])
+    if (totalRes.error) throw totalRes.error
+    if (correctRes.error) throw correctRes.error
+
+    const total = totalRes.count ?? 0
+    const correct = correctRes.count ?? 0
+    return { data: { total, correct, wrong: Math.max(0, total - correct) }, error: null }
+  } catch (error) {
+    console.error('rephrase.data.getRephraseTotals:', error)
+    return { data: { total: 0, correct: 0, wrong: 0 }, error }
+  }
+}
+
+export async function fetchRecentMistakes(userId, { limit = 200 } = {}) {
   try {
     if (!userId) throw new Error('fetchRecentMistakes: userId is required')
     const { data, error } = await supabase

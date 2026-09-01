@@ -26,8 +26,8 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { getCurrentSession } from '../supabase.js';        // auth only
 import { getWeakPoints } from '../data/weakpoints.data.js';
-import { fetchRecentMistakes } from '../data/rephrase.data.js';
-import { resolveTrigger } from '../lib/keys.js';
+import { fetchRecentMistakes, getRephraseTotals } from '../data/rephrase.data.js';
+import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
 import { LEARN_BLOCKS } from './rephrase-learn.js';
 
 const NOTABLE_LIFT = 1.25;
@@ -46,45 +46,83 @@ export async function renderRephraseAnalyze(root) {
   const session = await getCurrentSession();
   const userId = session?.user?.id ?? null;
 
-  let report = null, examples = new Map();
+  let report = null, examples = new Map(), totals = { total: 0, correct: 0, wrong: 0 };
   if (userId) {
-    const [reports, mistakes] = await Promise.all([
+    const [reports, mistakes, totalsRes] = await Promise.all([
       getWeakPoints(userId),
       fetchRecentMistakes(userId),
+      getRephraseTotals(userId),
     ]);
     report = reports.find((r) => r.moduleId === 'rephrase') ?? null;
-    examples = indexExamplesByLabel(mistakes.data || []);
+    examples = groupExamplesByLabel(mistakes.data || []);
+    totals = totalsRes.data;
   }
 
   el.innerHTML = `
     <div class="fade-in" style="max-width:760px">
-      <div class="page-title">ניסוח מחדש — מה כדאי לתרגל</div>
-      <div class="page-sub">לכל סוג: משפט אמיתי שטעית בו, ומה לעשות איתו.</div>
+      <div class="page-title">ניסוח מחדש — הניתוח שלי</div>
+      <div class="page-sub">קודם התמונה הכללית, ואז פילוח לפי סוג הטעות.</div>
+      ${headline(userId, totals)}
       ${body(userId, report, examples)}
       <div class="ra-back"><a href="#/rephrasing">← חזרה למודול</a></div>
     </div>`;
+
+  el.querySelectorAll('[data-block-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('[data-type]');
+      const open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 }
 
 /**
- * Most recent wrong answer per label. The chosen slot is found from the CANONICAL
- * chosen_option_index, so the label and the explanation always describe the option
- * the learner actually clicked.
+ * כל הטעויות לפי מפתח, לא רק האחרונה.
+ *
+ * המסך החדש (ליאון, 1.9.2026) פותח כל סוג טעות ומראה את השאלות שתחתיו, ולכן
+ * צריך את כולן. השורות מגיעות מהחדש לישן, והסדר נשמר.
+ *
+ * הפרשנות של המסיח נלקחת מ-chosen_option_index הקנוני, כך שהתווית וההסבר
+ * תמיד מתארים את האופציה שהתלמיד באמת לחץ עליה.
  */
-function indexExamplesByLabel(rows) {
-  const byLabel = new Map();   // rows arrive newest-first, so first write wins
+function groupExamplesByLabel(rows) {
+  const byLabel = new Map();
   for (const row of rows) {
     const q = row.restatement_questions;
     const n = row.chosen_option_index;
     if (!q || !n || n < 1 || n > 3) continue;
     const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] });
-    if (!t || byLabel.has(t.id)) continue;
-    byLabel.set(t.id, {
+    if (!t) continue;
+    if (!byLabel.has(t.id)) byLabel.set(t.id, []);
+    byLabel.get(t.id).push({
       source: q.original_sentence,
       chosen: q['distractor_' + n],
+      correct: q.correct_answer,
       why: q['explanation_' + n + '_he'],
     });
   }
   return byLabel;
+}
+
+/** התמונה הכללית, לפני כל פילוח. */
+function headline(userId, t) {
+  if (!userId || !t.total) return '';
+  const pct = Math.round((t.correct / t.total) * 100);
+  return `
+    <div class="ra-stats">
+      <div class="ra-stat">
+        <div class="ra-stat-v">${t.total}</div>
+        <div class="ra-stat-k">שאלות שפתרת</div>
+      </div>
+      <div class="ra-stat ra-stat-good">
+        <div class="ra-stat-v">${t.correct}</div>
+        <div class="ra-stat-k">נכונות · ${pct}%</div>
+      </div>
+      <div class="ra-stat">
+        <div class="ra-stat-v">${t.wrong}</div>
+        <div class="ra-stat-k">טעויות</div>
+      </div>
+    </div>`;
 }
 
 function body(userId, r, examples) {
@@ -110,38 +148,55 @@ function body(userId, r, examples) {
   }
 
   return `
-    <div class="ra-count">${r.attempts} תרגולים נאספו</div>
+    <div class="ra-sec-lbl">לפי סוג הטעות</div>
     ${withExample.map((p) => row(p, examples.get(p.id))).join('')}
     ${thin(r, withoutExample)}
     <p class="ra-foot">המספרים מתארים את הסשנים שנאספו, לא הערכה כוללת.</p>`;
 }
 
-function row(p, ex) {
+/**
+ * סוג טעות אחד, מקופל. נפתח למדריך קצר ולשאלות שתחתיו.
+ * אותו דפוס קיפול של שאר המסכים (claude/SPEC_mistake_feedback_pattern.md).
+ */
+function row(p, list) {
   const pct = Math.round(p.missRate * 100);
   const notable = p.lift !== null && p.lift >= NOTABLE_LIFT;
   const linked = LEARN_IDS.has(p.id);
-  const name = linked
-    ? `<a class="ra-key" href="#/rephrase-learn#rl-block-${p.id}">${esc(p.label)}</a>`
-    : `<span class="ra-key">${esc(p.label)}</span>`;
+  const avoid = CATEGORIES.find((c) => c.id === p.id)?.avoid || [];
 
-  return `<section class="ra-card${notable ? ' notable' : ''}">
-    <div class="ra-head">
-      ${name}
-      <span class="ra-nums">${p.misses} מתוך ${p.exposures} · ${pct}%</span>
-    </div>
-    ${notable ? `<div class="ra-note">חוזר בסשנים האחרונים יותר משאר הסוגים</div>` : ''}
-
-    <div class="ra-ex">
-      <div class="ra-ex-lbl">משפט שטעית בו</div>
+  const items = list.map((ex) => `
+    <div class="ra-q">
+      <div class="ra-ex-lbl">המשפט</div>
       <div class="ra-en" dir="ltr">${esc(ex.source)}</div>
       <div class="ra-ex-lbl">מה שבחרת</div>
       <div class="ra-en ra-chosen" dir="ltr">${esc(ex.chosen)}</div>
-      ${ex.why ? `<div class="ra-why">🔍 ${esc(ex.why)}</div>` : ''}
-    </div>
+      <div class="ra-ex-lbl">התשובה</div>
+      <div class="ra-en ra-right" dir="ltr">${esc(ex.correct)}</div>
+      ${ex.why ? `<div class="ra-why">${esc(ex.why)}</div>` : ''}
+    </div>`).join('');
 
-    <div class="ra-actions">
-      <a class="btn-primary ra-drill" href="#/rephrase-practice?key=${encodeURIComponent(p.id)}">תרגל עוד 5 מהסוג הזה ←</a>
-      ${linked ? `<a class="ra-learn" href="#/rephrase-learn#rl-block-${p.id}">📘 ההסבר על ${esc(p.label)}</a>` : ''}
+  return `<section class="ra-card${notable ? ' notable' : ''}" data-type>
+    <button type="button" class="ra-head-btn" data-block-toggle aria-expanded="false">
+      <span class="ra-key">${esc(p.label)}</span>
+      <span class="ra-nums">${p.misses} מתוך ${p.exposures} · ${pct}%</span>
+      <span class="ra-chev">▾</span>
+    </button>
+    ${notable ? `<div class="ra-note">חוזר בסשנים האחרונים יותר משאר הסוגים</div>` : ''}
+
+    <div class="ra-body">
+      ${avoid.length ? `
+        <div class="ra-avoid">
+          <div class="ra-avoid-lbl">איך להימנע מהטעות הזו</div>
+          <ol class="ra-avoid-steps">${avoid.map((a) => `<li>${esc(a)}</li>`).join('')}</ol>
+        </div>` : ''}
+
+      <div class="ra-q-lbl">${list.length === 1 ? 'השאלה שטעית בה' : `${list.length} שאלות שטעית בהן`}</div>
+      ${items}
+
+      <div class="ra-actions">
+        <a class="btn-primary ra-drill" href="#/rephrase-practice?key=${encodeURIComponent(p.id)}">תרגל עוד 5 מהסוג הזה ←</a>
+        ${linked ? `<a class="ra-learn" href="#/rephrase-learn#rl-block-${p.id}">📘 ההסבר המלא</a>` : ''}
+      </div>
     </div>
   </section>`;
 }
@@ -157,11 +212,29 @@ function ensureStyles() {
   const s = document.createElement('style');
   s.id = 'ra-css';
   s.textContent = `
-.ra-count{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:.9rem}
+.ra-sec-lbl{font-size:.85rem;font-weight:800;color:var(--text);margin-bottom:.7rem}
+.ra-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1rem 0 1.4rem}
+.ra-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem .9rem;text-align:center}
+.ra-stat-good{border-color:var(--green);background:var(--green-light)}
+.ra-stat-v{font-size:1.5rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.15}
+.ra-stat-good .ra-stat-v{color:var(--green-dark)}
+.ra-stat-k{font-size:.75rem;color:var(--muted);font-weight:700;margin-top:.15rem}
+.ra-head-btn{display:flex;align-items:baseline;gap:.6rem;width:100%;background:none;border:0;padding:0;font-family:inherit;cursor:pointer;text-align:right}
+.ra-chev{margin-inline-start:auto;color:var(--muted);transition:transform .15s ease}
+.ra-card.open .ra-chev{transform:rotate(180deg)}
+.ra-body{display:none;margin-top:.9rem}
+.ra-card.open .ra-body{display:block}
+.ra-avoid{background:var(--green-light);border-radius:var(--radius-sm);padding:.8rem .95rem;margin-bottom:1rem}
+.ra-avoid-lbl{font-size:.78rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem}
+.ra-avoid-steps{margin:0;padding-inline-start:1.1rem;font-size:.86rem;line-height:1.75}
+.ra-avoid-steps li{margin-bottom:.3rem}
+.ra-q-lbl{font-size:.78rem;font-weight:800;color:var(--muted);margin-bottom:.5rem}
+.ra-q{background:var(--bg);border-radius:var(--radius-sm);padding:.85rem .95rem;margin-bottom:.6rem}
+.ra-right{color:var(--green-dark)}
 .ra-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.3rem;margin-bottom:1rem}
 .ra-card.notable{border-color:var(--orange)}
 .ra-head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
-.ra-key{font-size:1rem;font-weight:800;color:var(--green-dark);text-decoration:underline}
+.ra-key{font-size:1rem;font-weight:800;color:var(--green-dark)}
 .ra-nums{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto}
 .ra-note{font-size:.75rem;color:var(--orange);margin-top:.3rem}
 .ra-ex{background:var(--bg);border-radius:var(--radius-sm);padding:.85rem .95rem;margin-top:.9rem}

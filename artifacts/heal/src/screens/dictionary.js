@@ -3,6 +3,8 @@ import { browseDictionary, getDictionaryCount } from '../data/words.data.js';
 import { getCurrentSession } from '../supabase.js';
 import { setVocabPool } from '../data/srs.data.js';
 import { getProfile } from '../data/profiles.data.js';
+import { getSavedWords, getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
+import { printMyDictionary } from '../lib/printDictionary.js';
 
 // Dictionary / browse screen (מוצר/UX chat, 2026-08-29 — PLAN_depth_and_new_corners.md).
 // Zero new content: surfaces the 2,666 words (550 'done' + 2,116
@@ -39,6 +41,7 @@ function wordRow(w) {
       <div class="dict-audio-row">
         ${w.audio_word_url ? `<button type="button" class="dict-audio-btn" data-audio="${w.audio_word_url}">🔊 מילה</button>` : ''}
         ${w.audio_sentence_url ? `<button type="button" class="dict-audio-btn" data-audio="${w.audio_sentence_url}">🔊 משפט</button>` : ''}
+        <button type="button" class="dict-save-btn" data-save="${w.id}">☆ למילון שלי</button>
       </div>
       ${mnemonics.length ? `
         <div class="dict-mnem">
@@ -57,12 +60,21 @@ export async function renderDictionary(root) {
     <div class="fade-in dict-wrap">
       <div class="page-title">מילון</div>
       <div class="page-sub" id="dictSub">כל אוצר המילים שלנו, לעיון חופשי — בלי הגבלה.</div>
-      <div class="dict-search-wrap">
-        <input type="text" id="dictSearch" class="dict-search" placeholder="חפשו מילה או פירוש..." autocomplete="off">
+      <div class="dict-tabs" id="dictTabs">
+        <button type="button" class="dict-tab is-on" data-tab="all">כל המילים</button>
+        <button type="button" class="dict-tab" data-tab="mine">המילון שלי</button>
       </div>
-      <div id="dictPool" class="dict-pool" hidden></div>
-      <div id="dictList" class="dict-list"><div class="spinner-wrap"><div class="spinner"></div></div></div>
-      <div id="dictMore" class="dict-more-wrap"></div>
+
+      <div id="dictPaneAll">
+        <div class="dict-search-wrap">
+          <input type="text" id="dictSearch" class="dict-search" placeholder="חפשו מילה או פירוש..." autocomplete="off">
+        </div>
+        <div id="dictPool" class="dict-pool" hidden></div>
+        <div id="dictList" class="dict-list"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+        <div id="dictMore" class="dict-more-wrap"></div>
+      </div>
+
+      <div id="dictPaneMine" hidden></div>
     </div>`;
 
   // Real count, not a hardcoded number — see getDictionaryCount()'s comment.
@@ -151,6 +163,7 @@ export async function renderDictionary(root) {
     if (rows.length < PAGE_SIZE) exhausted = true;
 
     wireRowToggles(listEl);
+    paintSaveButtons();
     moreEl.innerHTML = exhausted ? '' : `<button type="button" class="btn-primary" id="dictLoadMore">טענו עוד</button>`;
     moreEl.querySelector('#dictLoadMore')?.addEventListener('click', () => loadPage(false));
   }
@@ -179,6 +192,86 @@ export async function renderDictionary(root) {
     debounceTimer = setTimeout(() => { query = v; loadPage(true); }, 300);
   });
 
+  // ── "המילון שלי" ─────────────────────────────────────────────────────────
+  // מה שהתלמיד בחר לשמור, בנפרד מתור התרגול (ראו savedWords.data.js).
+  let savedIds = new Set();
+  let myUserId = null;
+
+  async function refreshSavedIds() {
+    const session = await getCurrentSession();
+    myUserId = session?.user?.id ?? null;
+    const { data } = await getSavedIds(myUserId);
+    savedIds = data;
+    paintSaveButtons();
+  }
+
+  /** מסמן את הכוכב בכל שורה גלויה לפי מה שכבר שמור. */
+  function paintSaveButtons() {
+    el.querySelectorAll('[data-save]').forEach((btn) => {
+      const on = savedIds.has(btn.dataset.save);
+      btn.classList.toggle('is-on', on);
+      btn.textContent = on ? '★ במילון שלי' : '☆ למילון שלי';
+    });
+  }
+
+  el.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-save]');
+    if (!btn) return;
+    e.stopPropagation();
+    if (!myUserId) {
+      btn.textContent = 'צריך חשבון';
+      setTimeout(paintSaveButtons, 1600);
+      return;
+    }
+    const id = btn.dataset.save;
+    const wasOn = savedIds.has(id);
+    // אופטימי: הכוכב מתהפך מיד, והכתיבה רצה ברקע. כישלון מחזיר אותו.
+    if (wasOn) savedIds.delete(id); else savedIds.add(id);
+    paintSaveButtons();
+    const { error } = wasOn ? await unsaveWord(myUserId, id) : await saveWord(myUserId, id);
+    if (error) {
+      if (wasOn) savedIds.add(id); else savedIds.delete(id);
+      paintSaveButtons();
+    } else if (!el.querySelector('#dictPaneMine').hidden) {
+      renderMine();
+    }
+  });
+
+  async function renderMine() {
+    const pane = el.querySelector('#dictPaneMine');
+    pane.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
+    if (!myUserId) {
+      pane.innerHTML = `<p class="dict-empty">המילון האישי נשמר לחשבון. <a href="#/">להרשמה חינם</a></p>`;
+      return;
+    }
+    const { data: words } = await getSavedWords(myUserId);
+    if (!words.length) {
+      pane.innerHTML = `<p class="dict-empty">עוד לא שמרתם מילים.<br>
+        בכל מילה כאן או בכרטיסיות יש כפתור ☆ — מה שתסמנו יופיע כאן, ואפשר יהיה לייצא לקובץ.</p>`;
+      return;
+    }
+    pane.innerHTML = `
+      <div class="dict-mine-bar">
+        <span class="dict-mine-count">${words.length} מילים</span>
+        <button type="button" class="dict-export-btn" id="dictExport">⭳ ייצוא ל-PDF</button>
+      </div>
+      <div class="dict-list" id="dictMineList">${words.map(wordRow).join('')}</div>`;
+    wireRowToggles(pane);
+    paintSaveButtons();
+    pane.querySelector('#dictExport').addEventListener('click', () => printMyDictionary(words));
+  }
+
+  el.querySelectorAll('.dict-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const mine = tab.dataset.tab === 'mine';
+      el.querySelectorAll('.dict-tab').forEach((t) => t.classList.toggle('is-on', t === tab));
+      el.querySelector('#dictPaneAll').hidden = mine;
+      el.querySelector('#dictPaneMine').hidden = !mine;
+      if (mine) renderMine();
+    });
+  });
+
+  await refreshSavedIds();
   loadPage(true);
 }
 
@@ -193,6 +286,18 @@ function ensureStyles() {
 .dict-pool-btn:disabled{opacity:.6;cursor:default}
 .dict-pool-on{font-weight:700;color:var(--green-dark)}
 .dict-wrap { max-width: 720px; }
+.dict-tabs { display:flex; gap:.4rem; margin-top:1rem; border-bottom:1px solid var(--border); }
+.dict-tab { background:none; border:0; border-bottom:2px solid transparent; padding:.55rem .9rem;
+  font-family:inherit; font-size:.9rem; font-weight:700; color:var(--muted); cursor:pointer; }
+.dict-tab.is-on { color:var(--green-dark); border-bottom-color:var(--green-dark); }
+.dict-save-btn { border:1.5px solid var(--border); background:var(--card); border-radius:999px;
+  padding:.35rem .8rem; font-family:inherit; font-size:.8rem; font-weight:700; color:var(--muted); cursor:pointer; }
+.dict-save-btn.is-on { border-color:var(--green); color:var(--green-dark); background:var(--green-light); }
+.dict-mine-bar { display:flex; align-items:center; gap:.8rem; margin:1rem 0 .9rem; }
+.dict-mine-count { font-size:.85rem; font-weight:700; color:var(--muted); }
+.dict-export-btn { margin-inline-start:auto; background:var(--green-dark); color:#fff; border:0;
+  border-radius:var(--radius-sm); padding:.5rem 1.1rem; font-family:inherit; font-size:.85rem;
+  font-weight:800; cursor:pointer; }
 .dict-search-wrap { margin: 1rem 0 1.3rem; }
 .dict-search { width:100%; padding:.85rem 1.1rem; border:1.5px solid var(--border); border-radius:var(--radius);
   font-family:inherit; font-size:.95rem; background:var(--card); }

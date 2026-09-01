@@ -46,31 +46,58 @@
 // The five student-facing labels. `cue` is the one-line check shown in the hint
 // box and in practice feedback. Wording is Lion-approved — do not reword here
 // without changing rephrase-learn.js in the same commit.
+//
+// `avoid` (added 1.9.2026) is the short how-to-avoid guide that opens inside a
+// mistake type on the Analyze screen. Two steps, in the order to do them. It
+// lives here and not in the screen so that every surface naming a key can also
+// explain it, without a second copy drifting out of sync.
 const KEY_DEFS = {
   direction: {
     id: 'direction',
     label: 'כיוון היחס',
     cue: 'זהה את שני החלקים, הבן את הכיוון, ודא שהתשובה שומרת עליהם — באותו כיוון',
+    avoid: [
+      'מצאו את שני החלקים של המשפט ואת המילה שמחברת ביניהם (but, because, although).',
+      'בדקו שבתשובה החיבור נשאר באותו כיוון — שהסיבה לא הפכה לתוצאה, ושהניגוד לא נעלם.',
+    ],
   },
   ratio: {
     id: 'ratio',
     label: 'יחס',
     cue: 'לא הכיוון, המידה — גם החלשה היא שגיאה, לא רק הגזמה',
+    avoid: [
+      'שימו לב למילים שמודדות כמות או עוצמה: most, some, rarely, always, slightly.',
+      'השוו אותן למקור. גם החלשה היא שינוי — ״רוב״ שהפך ל״חלק״ שגוי בדיוק כמו ״תמיד״.',
+    ],
   },
   anchor: {
     id: 'anchor',
-    label: 'עוגן',
+    // שם המפתח שונה מ"עוגן" ל"ישות קבועה" (ליאון, 1.9.2026): "עוגן" הוא
+    // מונח פנימי שלא אומר לתלמיד כלום. ה-id נשאר anchor כי הוא מפתח נתונים.
+    label: 'ישות קבועה',
     cue: 'שם, מספר או תאריך שהמבחן לא יכול לשנות — השאלה היא מה נטען עליו',
+    avoid: [
+      'סמנו את הפרטים שאי אפשר לשנות: שמות, מספרים, תאריכים ומקומות.',
+      'ודאו שכל אחד נשאר צמוד לאותו דבר כמו במקור. אותו מספר במקום אחר הוא שינוי משמעות.',
+    ],
   },
   added: {
     id: 'added',
     label: 'מידע שלא נאמר',
     cue: 'כל פרט, שם או פעולה — בדוק שהם נתמכים במשפט המקורי',
+    avoid: [
+      'קראו את התשובה וחפשו פרט שלא הופיע במקור — סיבה, מסקנה, שם או פעולה נוספת.',
+      'אם פרט נשמע סביר אבל לא נאמר במפורש, הוא לא שייך לשם. סביר אינו זהה לנאמר.',
+    ],
   },
   nearmiss: {
     id: 'nearmiss',
     label: 'פעולה קרובה אך שונה',
     cue: 'הפעולה נשמעת כמו במקור — בדוק שהיא אותה פעולה, לא רק שכנה שלה',
+    avoid: [
+      'זהו את הפועל המרכזי במקור, ואת הפועל שבתשובה.',
+      'בדקו אם זו באמת אותה פעולה. suggested ו-proved שכנים במשמעות אבל לא זהים.',
+    ],
   },
 };
 

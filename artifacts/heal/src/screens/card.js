@@ -2,6 +2,7 @@ import { navigate } from '../router.js';
 import { track } from '../lib/analytics.js';
 import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getCurrentSession } from '../supabase.js';
+import { getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
 import { getCoverage } from '../data/coverage.data.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
@@ -16,6 +17,7 @@ let mnemonicIdx = 0;
 let openPanel = null;
 let cardStart = 0;
 let userId = null;
+let savedIds = new Set();   // "המילון שלי" — נטען פעם אחת בכניסה למסך
 
 // session-local state (NOT persisted to DB)
 let firstRatings = {};      // wordId -> 'again' | 'hard' | 'good'
@@ -31,9 +33,27 @@ function splitDef(word) {
   return { mainDef: parts[0] || '—', extraDefs: parts.slice(1) };
 }
 
+// ─── הקראה ────────────────────────────────────────────────────────────────
+// הגרסה הקודמת יצרה `new Audio(url)` בלי לשמור הפניה, ולכן לא היה למי
+// לומר "עצור": הקראה המשיכה לנגן אל תוך הכרטיסייה הבאה, ושתי לחיצות
+// רצופות ניגנו זו על גבי זו. עכשיו יש הפניה אחת, והיא נעצרת בשלוש נקודות:
+// מעבר למילה אחרת, סיום המנה, ויציאה מהמסך.
+let currentAudio   = null;
+let audioForWordId = null;
+
+function stopAudio() {
+  if (!currentAudio) return;
+  try { currentAudio.pause(); currentAudio.currentTime = 0; } catch (_) {}
+  currentAudio = null;
+}
+
 function playAudio(url) {
   if (!url) return;
-  try { new Audio(url).play(); } catch (_) {}
+  stopAudio();                       // אף פעם לא שתי הקראות במקביל
+  try {
+    currentAudio = new Audio(url);
+    currentAudio.play();
+  } catch (_) { currentAudio = null; }
 }
 
 function handleRating(word, rating) {
@@ -103,6 +123,7 @@ function handleRating(word, rating) {
 }
 
 function finishSession() {
+  stopAudio();
   // Bundle outcomes for analyze screen
   const summary = {
     total: Object.keys(outcomes).length,
@@ -128,6 +149,11 @@ function draw(root) {
   }
 
   const word = queue[idx];
+
+  // draw() רץ גם על אותה כרטיסייה (חשיפה, פתיחת פאנל), ושם דווקא אסור
+  // לקטוע הקראה באמצע. לכן העצירה מותנית בכך שהמילה עצמה התחלפה.
+  if (audioForWordId !== word.id) { stopAudio(); audioForWordId = word.id; }
+
   const { mainDef, extraDefs } = splitDef(word);
   const assoc = getAssoc(word);
   const counter = `${Object.keys(outcomes).length + 1}`;
@@ -178,6 +204,11 @@ function draw(root) {
     </div>
     <div class="vc-panel-row">${panelBtns.join('')}</div>
     ${panelContent}
+    <div class="vc-save-row">
+      <button class="vc-save-btn${savedIds.has(word.id) ? ' is-on' : ''}" id="vcSave">
+        ${savedIds.has(word.id) ? '★ במילון שלי' : '☆ שמור למילון שלי'}
+      </button>
+    </div>
     <div class="rate-bar">
       <button class="rate-btn" data-rating="again">✗ שוב</button>
       <button class="rate-btn" data-rating="hard">~ קשה</button>
@@ -241,6 +272,27 @@ function draw(root) {
   root.querySelector('#sentAudioBtn')?.addEventListener('click', (e) => {
     e.stopPropagation();
     playAudio(word.audio_sentence_url);
+  });
+
+  root.querySelector('#vcSave')?.addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    if (!userId) {
+      btn.textContent = 'צריך חשבון חינם';
+      setTimeout(() => { btn.textContent = '☆ שמור למילון שלי'; }, 1800);
+      return;
+    }
+    const on = savedIds.has(word.id);
+    // אופטימי: הכוכב מתהפך מיד. כישלון מחזיר אותו — לא עוצרים תרגול בשביל
+    // כתיבה שנכשלה.
+    if (on) savedIds.delete(word.id); else savedIds.add(word.id);
+    btn.classList.toggle('is-on', !on);
+    btn.textContent = on ? '☆ שמור למילון שלי' : '★ במילון שלי';
+    const { error } = on ? await unsaveWord(userId, word.id) : await saveWord(userId, word.id);
+    if (error) {
+      if (on) savedIds.add(word.id); else savedIds.delete(word.id);
+      btn.classList.toggle('is-on', on);
+      btn.textContent = on ? '★ במילון שלי' : '☆ שמור למילון שלי';
+    }
   });
 
   root.querySelectorAll('.rate-btn').forEach(btn => {
@@ -352,6 +404,13 @@ function renderNothingDueToday(root) {
 }
 
 export async function renderCard(root) {
+  // יציאה מהמסך (קישור דף הבית, סרגל, כפתור אחורה) עוצרת הקראה שרצה.
+  // מאזין אחד לכל חיי האפליקציה — renderCard נקרא שוב בכל כניסה למסך.
+  if (!window.__vcAudioStopper) {
+    window.__vcAudioStopper = true;
+    window.addEventListener('hashchange', stopAudio);
+  }
+
   const learnSeen = localStorage.getItem('hs_vocab_learn_seen');
   if (!learnSeen) {
     navigate('/vocab-learn');
@@ -362,6 +421,11 @@ export async function renderCard(root) {
 
   const session = await getCurrentSession();
   userId = session?.user?.id ?? null;
+
+  // "המילון שלי" — נטען פעם אחת לכניסה למסך, כדי שהכוכב יופיע במצב הנכון
+  // כבר בכרטיסייה הראשונה. כישלון כאן לא מעניין: Set ריק פשוט מציג כוכב ריק.
+  savedIds = (await getSavedIds(userId)).data;
+
   if (!userId) {
     root.innerHTML = `<div class="vc-shell">
       <header class="vc-topbar">

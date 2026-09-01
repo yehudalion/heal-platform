@@ -36,7 +36,9 @@ const START_LEVEL = 4;
 
 const NOTABLE_LIFT = 1.25;
 
-const GENERIC_HINT = 'אל תסתפקו במילה הכי "יפה" — בדקו מה בדיוק במשפט מחייב את התשובה: המילים הצמודות, מילת הקישור, או המשפט כולו.';
+// נוסח 1.9.2026: קודם היה כאן "אל תסתפקו במילה הכי יפה". הוסר יחד עם אותו
+// ניסוח במסך ההסבר — אף אחד לא בוחר תשובה לפי יופי, וזו עצה שלא עוזרת.
+const GENERIC_HINT = 'שאלו את עצמכם מה המשפט מחייב: המילים הצמודות למקום הריק, מילת הקישור, או ההיגיון של המשפט כולו.';
 
 // ─── Session state (in memory only) ───────────────────────────────────────────
 let userId = null;
@@ -186,7 +188,7 @@ function onChoose(root, d) {
 
   // Find out whether there is anything worth offering. READ-ONLY — nothing
   // reaches the learner's practice queue until they press the button.
-  if (!isCorrect && userId) {   // pushing a missed word to SRS needs an account
+  if (userId) {                 // pushing a word to SRS needs an account
     getPushableWords(userId, {
       options: q.options,
       chosenOption,
@@ -312,7 +314,7 @@ function onMetaTag(root, tag) {
 /** The offer to add the missed words to the vocabulary queue. Renders nothing
  *  when there is nothing to offer, so a correct answer, a grammar-shaped item
  *  and an already-queued word all look the same to the learner: no button. */
-function pushBox() {
+function pushBox(isCorrect = false) {
   if (pushState === 'done') {
     return `<div class="sp-push sp-push-done">✓ נוסף לתרגול אוצר המילים שלך</div>`;
   }
@@ -320,9 +322,15 @@ function pushBox() {
   const words = pushOffer
     .map((w) => `<span class="sp-push-w" dir="ltr">${esc(w.headword)}</span>`)
     .join('');
-  const label = pushOffer.length > 1 ? 'הוסף את שתי המילים לתרגול' : 'הוסף את המילה לתרגול';
+  const n = pushOffer.length;
+  const label = n > 1 ? `הוסף את ${n} המילים לתרגול` : 'הוסף את המילה לתרגול';
+  // אחרי תשובה נכונה ההצעה צריכה הקשר: התלמיד לא טעה, אז למה מציעים לו מילים.
+  const lead = isCorrect
+    ? '<div class="sp-push-lead">מילים מהשאלה שעוד לא בתרגול שלך:</div>'
+    : '';
   return `
     <div class="sp-push">
+      ${lead}
       <div class="sp-push-words">${words}</div>
       <button class="sp-link" id="spPush" ${pushState === 'saving' ? 'disabled' : ''}>
         ${pushState === 'saving' ? 'מוסיף…' : `➕ ${label}`}
@@ -372,7 +380,7 @@ function feedback(q) {
   const last = packIdx >= pack.length - 1;
   return `
     ${body}
-    ${!isCorrect ? pushBox() : ''}
+    ${pushBox(isCorrect)}
     ${!isCorrect && !metaTagged ? metaPrompt() : ''}
     <button class="sp-link" id="spFull">${showFull ? 'הסתר הסבר לשאלה' : 'הסבר לשאלה ←'}</button>
     ${showFull ? fullExplanation(q) : ''}
@@ -512,6 +520,7 @@ const SP_CSS = `
 .sp-def-note{font-size:.78rem;color:var(--muted);font-weight:700}
 .sp-link{background:none;border:none;color:var(--green-dark);font-weight:700;font-size:.83rem;cursor:pointer;padding:.3rem 0;text-decoration:underline}
 .sp-push{background:var(--bg);border:1px dashed var(--border);border-radius:var(--radius-sm);padding:.7rem .9rem;margin-bottom:.7rem}
+.sp-push-lead{font-size:.8rem;color:var(--muted);margin-bottom:.4rem}
 .sp-push-words{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.35rem}
 .sp-push-w{font-family:var(--eng);font-size:.9rem;font-weight:600;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.1rem .45rem}
 .sp-push-done{color:var(--green-dark);font-size:.85rem;font-weight:700;border-style:solid}

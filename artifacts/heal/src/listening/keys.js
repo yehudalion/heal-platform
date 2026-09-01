@@ -19,7 +19,7 @@
 // ─── Per-mode student-facing descriptions (Practice feedback) ─────────────────
 export const KEY_LABELS = {
   // continuation
-  anchor_lost:    'התרחקות מהעוגן — התשובה חורגת ממה שהקטע בפועל אמר',
+  anchor_lost:    'התרחקות מהישות הקבועה — התשובה חורגת ממה שהקטע בפועל אמר',
   wrong_slot:     'לא עונה בדיוק על מה שהקטע ביקש בנקודה הזו',
   unsupported:    'מידע שלא נתמך בקטע',
 

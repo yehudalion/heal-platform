@@ -31,11 +31,39 @@ export const LEARN_SEEN_KEY = 'hs_sc_learn_seen';
 export const LEARN_BLOCKS = CATEGORIES.map((c) => ({ id: c.id, title: c.label }));
 
 // ─── Screen 1 ────────────────────────────────────────────────────────────────
-const INTRO_BODY = 'משפט אנגלי אחד עם מקום ריק, וארבע מילים או ביטויים שיכולים למלא אותו. רק אחד עובד. זו לא שאלת אוצר מילים — לרוב אתם מכירים את כל ארבע האופציות. השאלה היא איזו מהן מתאימה בדיוק למקום הזה, במשפט הזה.';
-const INTRO_WARNINGS = [
-  'אל תבחרו את המילה ה"יפה" ביותר — בחרו את זו שמתאימה למבנה ולהיגיון של המשפט.',
-  'לא כל מילה במשפט חשובה באותה מידה — לפעמים שתיים-שלוש מילים קובעות הכול.',
+const INTRO_BODY = 'משפט אחד באנגלית עם מקום ריק, וארבע אפשרויות למלא אותו. רק אחת נכונה.';
+
+// שוכתב 1.9.2026 לבקשת ליאון. הנוסח הקודם טען "זו לא שאלת אוצר מילים —
+// לרוב אתם מכירים את כל ארבע האופציות", וזה פשוט לא נכון: תלמיד לרוב לא
+// מכיר את כל ארבע המילים, וזו כן שאלת אוצר מילים. גם "אל תבחרו את המילה
+// ה'יפה' ביותר" הוסר — אף אחד לא בוחר לפי יופי, וזו עצה שלא עוזרת לאיש.
+const INTRO_FACTS = [
+  { k: 'אוצר מילים הוא הבסיס',
+    v: 'כדי לפסול אפשרות צריך לדעת מה היא אומרת. ככל שתכירו יותר מילים, יותר שאלות ייפתחו לכם.' },
+  { k: 'אבל לא חייבים להכיר את כולן',
+    v: 'גם כשמילה או שתיים לא מוכרות, המשפט עצמו מצמצם את מה שיכול להתאים — ולפעמים זה מספיק.' },
+  { k: 'המשפט הוא שקובע',
+    v: 'התשובה אינה המילה שהכי מתאימה לנושא, אלא זו שהמשפט הזה מחייב.' },
 ];
+
+// ההדגמה: לא "מה נכון" אלא איך חושבים. במכוון עם מילים קלות — הרעיון הוא
+// שהתלמיד יראה את מבנה החשיבה, לא שייתקע על אוצר המילים של הדוגמה עצמה.
+const INTRO_DEMO = {
+  stem: 'The library was completely ___ during exam week, so students had to wait outside for a seat.',
+  hl: 'wait outside for a seat',
+  options: ['crowded', 'empty', 'quiet', 'closed'],
+  correct: 0,
+  looking: 'מילה שמסבירה <strong>למה</strong> סטודנטים נאלצו לחכות בחוץ כדי לקבל מקום.',
+  therefore: 'אם חיכו בחוץ למקום — הגיוני שבפנים כבר <strong>לא היה מקום</strong>. כלומר הספרייה הייתה מלאה.',
+  rejects: [
+    ['empty',  'ריקה — אם הייתה ריקה, לא היה צריך לחכות בכלל.'],
+    ['quiet',  'שקטה — נכון לגבי ספריות, אבל לא מסביר את ההמתנה בחוץ.'],
+    ['closed', 'סגורה — אז לא היה אפשר לקבל מקום בכלל, והמשפט אומר שכן קיבלו.'],
+  ],
+  // בלי השורה הזו ההדגמה סותרת את פרק 1: כאן נדרש כל המשפט, ופרק 1 מלמד
+  // להתחיל דווקא מהמילים הצמודות. הבהרה מפורשת שזה אחד משלושה מקרים.
+  bridge: 'בדוגמה הזו היה צריך את כל המשפט. לפעמים מספיקות שתי המילים הצמודות למקום הריק, ולפעמים מילת קישור אחת מכריעה — <strong>שלושת המקרים האלה הם המסך הבא</strong>.',
+};
 
 // ─── Screen 2 ────────────────────────────────────────────────────────────────
 const BLOCKS = [
@@ -163,12 +191,43 @@ function shell(inner) {
 }
 
 function screenOne() {
+  const d = INTRO_DEMO;
+  const stemHtml = d.stem.replace(d.hl, `<span class="sl-hl">${d.hl}</span>`);
+  const opts = d.options.map((o, i) => `
+    <span class="sl-demo-opt${i === d.correct ? ' is-correct' : ''}" dir="ltr">${o}</span>`).join('');
+
   return `<div class="sl-card">
     <h1 class="sl-h1">מה זו שאלת השלמת משפט</h1>
     <p class="sl-lead">${INTRO_BODY}</p>
-    <div class="sl-warns">
-      ${INTRO_WARNINGS.map((w) => `<div class="sl-warn">⚠️ ${w}</div>`).join('')}
+
+    <div class="sl-facts">
+      ${INTRO_FACTS.map((f) => `
+        <div class="sl-fact">
+          <div class="sl-fact-k">${f.k}</div>
+          <div class="sl-fact-v">${f.v}</div>
+        </div>`).join('')}
     </div>
+
+    <div class="sl-demo">
+      <div class="sl-demo-lbl">איך זה נראה בפועל</div>
+      <div class="sl-demo-stem" dir="ltr">${stemHtml}</div>
+      <div class="sl-demo-opts">${opts}</div>
+
+      <div class="sl-demo-step">
+        <span class="sl-demo-tag">אנחנו מחפשים</span>${d.looking}
+      </div>
+      <div class="sl-demo-step">
+        <span class="sl-demo-tag">ולכן הגיוני ש…</span>${d.therefore}
+      </div>
+
+      <div class="sl-demo-rej">
+        ${d.rejects.map(([w, why]) => `
+          <div class="sl-demo-rej-row"><span dir="ltr">${w}</span> — ${why}</div>`).join('')}
+      </div>
+
+      <div class="sl-demo-bridge">${d.bridge}</div>
+    </div>
+
     <button class="btn-primary sl-cta" id="slNext">המשך ←</button>
   </div>`;
 }
@@ -239,6 +298,23 @@ const SL_CSS = `
 .sl-lead{font-size:1rem;line-height:1.85}
 .sl-page-head{padding:0 .3rem 1rem}
 .sl-sub{font-size:.9rem;color:var(--muted);margin-top:.35rem}
+.sl-facts{display:flex;flex-direction:column;gap:.7rem;margin-top:1.2rem}
+.sl-fact{border-inline-start:3px solid var(--green);padding-inline-start:.8rem}
+.sl-fact-k{font-weight:800;font-size:.9rem;margin-bottom:.15rem}
+.sl-fact-v{font-size:.88rem;color:var(--muted);line-height:1.7}
+.sl-demo{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.1rem;margin-top:1.3rem}
+.sl-demo-lbl{font-size:.76rem;font-weight:800;letter-spacing:.08em;color:var(--muted);margin-bottom:.6rem}
+.sl-demo-stem{font-family:var(--eng);font-size:.95rem;line-height:1.9;text-align:left;margin-bottom:.7rem}
+.sl-hl{background:var(--orange-light);border-radius:3px;padding:.05em .25em;font-weight:700}
+.sl-demo-opts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.sl-demo-opt{font-family:var(--eng);font-size:.88rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.15rem .5rem;color:var(--muted)}
+.sl-demo-opt.is-correct{border-color:var(--green);color:var(--green-dark);font-weight:700}
+.sl-demo-step{font-size:.9rem;line-height:1.8;margin-bottom:.5rem}
+.sl-demo-tag{display:inline-block;font-size:.75rem;font-weight:800;background:var(--green-light);color:var(--green-dark);border-radius:99px;padding:.1rem .55rem;margin-inline-end:.4rem}
+.sl-demo-rej{border-top:1px solid var(--border);margin-top:.7rem;padding-top:.6rem}
+.sl-demo-rej-row{font-size:.84rem;color:var(--muted);line-height:1.75}
+.sl-demo-rej-row span{font-family:var(--eng);font-weight:700;color:var(--text)}
+.sl-demo-bridge{font-size:.86rem;line-height:1.75;color:var(--text);background:var(--green-light);border-radius:var(--radius-sm);padding:.6rem .8rem;margin-top:.8rem}
 .sl-warns{display:flex;flex-direction:column;gap:.5rem;margin-top:1.2rem}
 .sl-warn{background:var(--orange-light);color:#b5551f;border-radius:var(--radius-sm);padding:.6rem .9rem;font-size:.88rem;font-weight:700;line-height:1.5}
 .sl-cta{width:100%;margin-top:1.4rem;padding:.85rem 1rem;font-size:1rem}

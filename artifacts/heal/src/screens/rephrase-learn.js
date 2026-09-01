@@ -34,7 +34,7 @@ export const LEARN_SEEN_KEY = 'hs_rephrase_learn_seen';
 export const LEARN_BLOCKS = [
   { id: 'direction', title: 'כיוון היחס' },
   { id: 'ratio',     title: 'יחס' },
-  { id: 'anchor',    title: 'עוגן' },
+  { id: 'anchor',    title: 'ישות קבועה' },
   { id: 'added',     title: 'מידע שלא נאמר' },
   { id: 'nearmiss',  title: 'פעולה קרובה אך שונה' },
 ];
@@ -127,9 +127,9 @@ const BLOCKS = [
   {
     id: 'anchor',
     n: 3,
-    title: 'עוגן',
-    kicker: 'ישות קבועה: שם, מספר, תאריך',
-    intro: 'המבחן לא יכול לשנות אותם. אם כל האופציות חולקות אותו עוגן — הוא לא המבחן; השאלה היא מה נטען עליו.',
+    title: 'ישות קבועה',
+    kicker: 'שם, מספר, תאריך',
+    intro: 'המבחן לא יכול לשנות אותם. אם כל האופציות חולקות את אותה ישות קבועה — היא לא המבחן; השאלה היא מה נטען עליה.',
     parts: [
       {
         label: null,
