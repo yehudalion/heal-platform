@@ -1390,3 +1390,13 @@ a { text-decoration: none; color: inherit; }
 .metrics-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .7rem;
 }
+
+
+/* --- "My dictionary" star on a flashcard (2026-09-01) ------------------- */
+.vc-save-row { display: flex; justify-content: center; margin: .9rem 0 .2rem; }
+.vc-save-btn {
+  border: 1.5px solid var(--border); background: var(--card); border-radius: 999px;
+  padding: .4rem 1rem; font-family: inherit; font-size: .82rem; font-weight: 700;
+  color: var(--muted); cursor: pointer;
+}
+.vc-save-btn.is-on { border-color: var(--green); color: var(--green-dark); background: var(--green-light); }
