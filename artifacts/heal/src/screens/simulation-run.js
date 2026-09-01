@@ -111,7 +111,15 @@ function ensureStyles() {
 .sim-rev-line { font-size:.86rem; line-height:1.7; }
 .sim-rev-ok { color:var(--green-dark); font-weight:700; }
 .sim-rev-no { color:var(--red,#B4553E); font-weight:700; }
-.sim-rev-expl { font-size:.86rem; color:var(--muted); line-height:1.75; margin-top:.4rem; }
+.sim-rev-head { display:flex; align-items:center; gap:.5rem; width:100%; margin-top:.6rem;
+  background:none; border:0; padding:.35rem 0; font-family:inherit; font-size:.85rem;
+  font-weight:700; color:var(--green-dark); cursor:pointer; text-align:right; }
+.sim-rev-chev { transition:transform .15s ease; }
+.sim-rev-item.open .sim-rev-chev { transform:rotate(180deg); }
+.sim-rev-body { display:none; }
+.sim-rev-item.open .sim-rev-body { display:block; }
+.sim-rev-why { font-size:.86rem; color:var(--muted); line-height:1.75; margin-top:.45rem; }
+.sim-rev-why strong { color:var(--text); }
 .sim-center { text-align:center; padding:3rem 1rem; color:var(--muted); }
 @media (max-width:560px){ .sim-body{padding:1.2rem 1rem 2.5rem} .sim-rep-h1{font-size:1.35rem} }
 `;
@@ -459,32 +467,46 @@ function drawReport() {
     const box = state.root.querySelector('#simReviewBox');
     if (!box.hidden) { box.hidden = true; revBtn.textContent = 'לסקירת התשובות'; return; }
     box.innerHTML = renderReview();
+    wireReviewToggles(box);
     box.hidden = false;
     revBtn.textContent = 'להסתיר את הסקירה';
     box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
 
+/**
+ * הסקירה לפי מפרט הטעויות המשותף (claude/SPEC_mistake_feedback_pattern.md):
+ * הבחירה השגויה מסומנת, הנכונה נדלקת, וההסבר מחכה מאחורי פאנל מקופל.
+ * 27 שאלות ברצף עם הסבר פתוח לכל אחת הן קיר טקסט — כאן זה קריטי במיוחד.
+ */
 function renderReview() {
-  return state.items.map((it) => {
+  return state.items.map((it, i) => {
     const a = state.answers.get(it.order);
     const chosen = a?.chosenIndex;
     const ok = a?.isCorrect;
 
-    // כל שלושת הבנקים מגיעים משכבת הנתונים כמערך הסברים מיושר לאופציות.
-    // התמליל הוא גיבוי אחרון בלבד.
-    let expl = '';
+    // סדר קבוע בתוך הפאנל: למה הנכונה נכונה, ואז מה לא עבד בבחירה שלך.
+    const parts = [];
     if (Array.isArray(it.explanations) && it.explanations[it.correctIndex]) {
-      expl = it.explanations[it.correctIndex];
-      if (chosen != null && !ok && it.explanations[chosen]) {
-        expl += ` · מה שבחרת: ${it.explanations[chosen]}`;
-      }
-    } else if (it.transcript) {
-      expl = `מה שנאמר בקטע: ${it.transcript}`;
+      parts.push(`<div class="sim-rev-why"><strong>למה זו התשובה:</strong> ${esc(it.explanations[it.correctIndex])}</div>`);
+    }
+    if (chosen != null && !ok && Array.isArray(it.explanations) && it.explanations[chosen]) {
+      parts.push(`<div class="sim-rev-why"><strong>מה לא עבד בבחירה שלך:</strong> ${esc(it.explanations[chosen])}</div>`);
+    }
+    if (!parts.length && it.transcript) {
+      parts.push(`<div class="sim-rev-why"><strong>מה שנאמר בקטע:</strong> ${esc(it.transcript)}</div>`);
     }
 
+    // אין הסבר בבנק — אין פאנל. לא ממציאים טקסט.
+    const panel = parts.length ? `
+      <button type="button" class="sim-rev-head" data-block-toggle data-rev="${i}" aria-expanded="false">
+        <span>${ok ? 'למה זו התשובה' : 'הסבר לי את הטעות'}</span>
+        <span class="sim-rev-chev">▾</span>
+      </button>
+      <div class="sim-rev-body">${parts.join('')}</div>` : '';
+
     return `
-      <div class="sim-rev-item">
+      <div class="sim-rev-item" data-rev-item="${i}">
         <div class="sim-sec-foot">${esc(SECTION_LABELS[it.sectionKind])} · שאלה ${it.order}</div>
         ${it.prompt ? `<div class="sim-rev-q" dir="${it.itemKind === 'listening' ? 'rtl' : 'ltr'}">${esc(it.prompt)}</div>` : ''}
         <div class="sim-rev-line">
@@ -495,7 +517,18 @@ function renderReview() {
               : `<span class="sim-rev-no">✗ בחרת:</span> <span dir="ltr">${esc(it.options[chosen])}</span>`}
         </div>
         ${!ok ? `<div class="sim-rev-line"><span class="sim-rev-ok">התשובה:</span> <span dir="ltr">${esc(it.options[it.correctIndex])}</span></div>` : ''}
-        ${expl ? `<div class="sim-rev-expl">${esc(expl)}</div>` : ''}
+        ${panel}
       </div>`;
   }).join('');
+}
+
+/** קיפול הפאנלים — אותו דפוס data-block-toggle שכבר משמש במסכי ההסבר. */
+function wireReviewToggles(box) {
+  box.querySelectorAll('[data-block-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('[data-rev-item]');
+      const open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 }
