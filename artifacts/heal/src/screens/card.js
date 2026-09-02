@@ -427,22 +427,14 @@ export async function renderCard(root) {
   // כבר בכרטיסייה הראשונה. כישלון כאן לא מעניין: Set ריק פשוט מציג כוכב ריק.
   savedIds = (await getSavedIds(userId)).data;
 
-  if (!userId) {
-    root.innerHTML = `<div class="vc-shell">
-      <header class="vc-topbar">
-        <a class="brand-mark vc-brand" href="#/home">hSc</a>
-      </header>
-      <main class="vc-main">
-        <div class="vc-card">
-          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">הכרטיסיות עובדות לפי חזרה מרווחת ולכן זוכרות מה כבר ידעת — בשביל זה צריך חשבון חינם. ההרשמה לוקחת 10 שניות עם Google.</p>
-          <button class="btn-primary" style="display:block;margin:1.25rem auto .75rem" onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
-          <p dir="rtl" style="text-align:center;font-size:.85rem;color:var(--muted);padding:0 1.5rem 1.75rem;line-height:1.7">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
-        </div>
-        <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
-      </main>
-    </div>`;
-    return;
-  }
+  // 2.9.2026 (ליאון): "אני לא רואה סיבה שלא לתת לאורח להשתמש בכל
+  // המודולים" — ובדיקה מעמיקה מאשרת שהוא צודק: handleRating() כבר עוטף את
+  // rateWord ב-if (userId) (למטה), getDueWords/getSavedIds/getCoverage כבר
+  // מוגנות ל-userId ריק ומחזירות מצב אפס נקי. הקיר כאן היה שריד מלפני
+  // getLearner()/PLAN_guest_mode_and_payments.md §1 (ראו lib/learner.js) —
+  // בלי סיבה מבנית אמיתית. ההבדל היחיד לאורח: שום דירוג לא נשמר בין
+  // ביקורים, אז כל פעם הוא מתחיל מאותה חבילת מילים לפי impact_score,
+  // בלי זכרון של מה שכבר ראה — פשרה מודעת, לא תקלה.
 
   const { data, error, meta } = await getDueWords(userId, { limit: getSessionLength('vocab', 12) });
 

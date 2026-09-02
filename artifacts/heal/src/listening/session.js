@@ -19,6 +19,7 @@
  */
 import { getCurrentSession }                                  from '../supabase.js';
 import { getLectures, getLectureQuestions, getRecentLectureIds, startSession, completeSession } from '../data/listening.data.js';
+import { getGuestSeenIds, addGuestSeenIds }                    from '../lib/learner.js';
 import { ListeningItem }                 from './item-component.js';
 import { summarizeMistakes }             from './keys.js';
 import { navigate }                      from '../router.js';
@@ -48,19 +49,17 @@ export async function renderSession(root) {
   root.className = 'sess-wrap';
   root.innerHTML = `<div class="sess-loading"><div class="spinner"></div><span>מכין פגישה…</span></div>`;
 
+  // 2.9.2026 (ליאון): "אני לא רואה סיבה שלא לתת לאורח להשתמש בכל המודולים".
+  // ההאזנה כבר לא כתובה על ה-DB באמצע התרגול (startSession/completeSession
+  // רצות רק if (session) למטה, item-component.js כבר בודק !this._sessionId
+  // לפני כתיבה) — הקיר כאן היה השריד היחיד שחסם אורח, בלי סיבה מבנית.
+  // אורח מקבל את אותו לוגיקת בחירת פריטים, עם "כבר נראה" מקומי בדפדפן
+  // (getGuestSeenIds) במקום ההיסטוריה ב-DB.
   const session = await getCurrentSession();
-  if (!session) {
-    root.innerHTML = `
-      <div class="sess-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">ההאזנה שומרת את ההתקדמות שלך, ולכן דורשת חשבון חינם — ההרשמה לוקחת 10 שניות עם Google.</p>
-        <button class="btn-sess-primary" style="max-width:220px"
-          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
-        <p style="font-size:.85rem;color:var(--muted);line-height:1.7;max-width:320px">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
-      </div>`;
-    return;
-  }
+  const userId  = session?.user?.id ?? null;
 
-  _items = await _selectItems(session.user.id);
+  _items = await _selectItems(userId);
+  if (!userId && _items.length) addGuestSeenIds('listening', _items.map(i => i.id));
 
   if (_items.length === 0) {
     root.innerHTML = `
@@ -87,7 +86,11 @@ export async function renderSession(root) {
  * A short session (2) is warmup + lecture_qa. Recently-seen lectures excluded.
  */
 async function _selectItems(userId) {
-  const { data: recentIds } = await getRecentLectureIds(userId, { limit: 10 });
+  // אורח: אין לו שורות ב-listening_sessions, אז ה"נראה לאחרונה" מגיע
+  // מ-localStorage (lib/learner.js) ולא מה-DB — אותו דפוס כמו reading-practice.js.
+  const recentIds = userId
+    ? (await getRecentLectureIds(userId, { limit: 10 })).data
+    : getGuestSeenIds('listening');
 
   const fetchPool = async (itemType) => {
     let { data: pool, error } = await getLectures({

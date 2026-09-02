@@ -29,23 +29,16 @@ export async function renderListeningDashboard(root) {
   root.className = 'ldash-wrap';
   root.innerHTML = `<div class="ldash-loading"><div class="spinner"></div><span>טוען…</span></div>`;
 
+  // 2.9.2026 (ליאון): "אני לא רואה סיבה שלא לתת לאורח להשתמש בכל המודולים".
+  // getListeningOverview/getProfile כבר שואלות .eq('user_id', userId) בלי
+  // לזרוק שגיאה על userId ריק — לאורח פשוט חוזר מצב אפס נקי (0 סשנים,
+  // אין תאריך בחינה), בדיוק כמו שמסך הבית כבר עושה לאורח בכל מקום אחר.
   const session = await getCurrentSession();
-  if (!session) {
-    root.innerHTML = `
-      <div class="ldash-body" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון</p>
-        <button class="btn-ldash-primary" style="max-width:220px"
-          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
-        <p style="font-size:.85rem;color:var(--muted);line-height:1.7;max-width:320px">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
-      </div>`;
-    return;
-  }
-
-  const userId = session.user.id;
+  const userId  = session?.user?.id ?? null;
 
   const [{ data: overview }, profileRes] = await Promise.all([
-    getListeningOverview(userId),
-    getProfile(userId),
+    userId ? getListeningOverview(userId) : Promise.resolve({ data: null }),
+    userId ? getProfile(userId)           : Promise.resolve({ data: null }),
   ]);
   const examDate = profileRes?.data?.exam_date ?? null;
 

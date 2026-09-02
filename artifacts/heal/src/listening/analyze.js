@@ -24,21 +24,15 @@ export async function renderListeningAnalyze(root) {
   root.className = 'ldash-wrap';
   root.innerHTML = `<div class="ldash-loading"><div class="spinner"></div><span>טוען…</span></div>`;
 
+  // 2.9.2026 (ליאון): פתוח לאורח כמו כל שאר המודולים. אין צורך בענף אורח
+  // נפרד — history.length === 0 (המצב שכל אורח נמצא בו, כי אין לו שורות
+  // ב-DB) כבר מצייר את מסך "עוד אין כאן מה לנתח" הקיים, בדיוק כמו למשתמש
+  // חדש שעדיין לא תרגל.
   const session = await getCurrentSession();
-  if (!session) {
-    root.innerHTML = `
-      <div class="ldash-body" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
-        <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון</p>
-        <button class="btn-ldash-primary" style="max-width:220px"
-          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה לחשבון</button>
-      </div>`;
-    return;
-  }
-
-  const userId = session.user.id;
+  const userId  = session?.user?.id ?? null;
   const [{ data: history }, { data: mistakes }] = await Promise.all([
-    getListeningHistory(userId, { limit: 15 }),
-    getRecentMistakes(userId,  { limit: 60 }),
+    userId ? getListeningHistory(userId, { limit: 15 }) : Promise.resolve({ data: [] }),
+    userId ? getRecentMistakes(userId,  { limit: 60 })  : Promise.resolve({ data: [] }),
   ]);
 
   _render(root, history || [], mistakes || []);
