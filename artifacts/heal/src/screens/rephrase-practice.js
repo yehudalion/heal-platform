@@ -61,7 +61,7 @@ let revealed = false;
 let chosenDisplay = null;
 let hintUsed = false;
 let hintShown = false;
-let showFull = false;
+let explOpen = false;   // the one mistake-feedback panel (SPEC_mistake_feedback_pattern)
 let qStart = 0;
 
 let view = 'question';            // 'question' | 'summary' | 'empty' | 'error'
@@ -156,7 +156,7 @@ function startQuestion() {
   chosenDisplay = null;
   hintUsed = false;
   hintShown = false;
-  showFull = false;
+  explOpen = false;
   qStart = Date.now();
 }
 
@@ -255,7 +255,7 @@ function drawQuestion(root) {
     let cls = '', tag = '';
     if (revealed) {
       if (canon === 0) { cls = 'correct'; tag = '✓ נכון'; }
-      else if (d === chosenDisplay) { cls = 'chosen-wrong'; tag = 'הבחירה שלך'; }
+      else if (d === chosenDisplay) { cls = 'chosen-wrong'; tag = '✗ הבחירה שלך'; }
     }
     return `<button class="rp-opt ${cls}" data-d="${d}" ${revealed ? 'disabled' : ''}>
       <span class="rp-opt-en" dir="ltr">${esc(opts[canon])}</span>
@@ -285,7 +285,7 @@ function drawQuestion(root) {
       draw(root);
     });
   } else {
-    root.querySelector('#rpFull')?.addEventListener('click', () => { showFull = !showFull; draw(root); });
+    root.querySelector('#rpExpl')?.addEventListener('click', () => { explOpen = !explOpen; draw(root); });
     root.querySelector('#rpNext')?.addEventListener('click', () => nextQuestion(root));
   }
 }
@@ -306,42 +306,64 @@ function hintBox(q) {
 function feedback(q) {
   const canon = order[chosenDisplay];
   const isCorrect = canon === 0;
-  let chosenExpl;
-  if (isCorrect) {
-    chosenExpl = `<div class="rp-expl rp-expl-good"><strong>✓ נכון.</strong> ${esc(q.correct_explanation_he || '')}</div>`;
-  } else {
-    // "מה קרה" — always shown, from the DB.
-    const whatHappened = `<div class="rp-expl"><strong>מה קרה:</strong> ${esc(q['explanation_' + canon + '_he'] || '')}</div>`;
-    // "מה היה עוזר" — only when the trigger resolves; otherwise omitted entirely.
-    const t = resolveTrigger({ category: q['trigger_category_' + canon], mechanism: q['mechanism_' + canon] });
-    let whatHelps = '';
-    if (t) {
-      const word = q['trigger_word_' + canon];
-      const detail = word ? `שים לב ל"${esc(word)}". ${esc(t.cue)}` : esc(t.cue);
-      whatHelps = `<div class="rp-expl rp-help"><strong>🔍 ${esc(t.label)} —</strong> ${detail}</div>`;
-    }
-    chosenExpl = whatHappened + whatHelps;
-  }
   const last = packIdx >= pack.length - 1;
   return `
-    ${chosenExpl}
-    <button class="rp-link" id="rpFull">${showFull ? 'הסתר ניתוח מלא' : 'הצג ניתוח מלא'}</button>
-    ${showFull ? fullAnalysis(q) : ''}
+    ${explPanel(q, isCorrect, canon)}
     <button class="btn-primary rp-next" id="rpNext">${last ? 'לסיכום המנה ←' : 'המשך ←'}</button>
   `;
 }
 
-function fullAnalysis(q) {
-  const rows = [
-    `<div class="rp-fa-row"><span class="rp-fa-lbl rp-fa-correct">התשובה הנכונה</span> ${esc(q.correct_explanation_he || '')}</div>`,
-  ];
+/** SPEC_mistake_feedback_pattern.md — one collapsed panel holds everything.
+ *  Fixed order: why the correct answer is correct, what did not work in your
+ *  choice (with its key), then the remaining distractors. The old separate
+ *  "הצג ניתוח מלא" toggle is merged in; we are not nesting two collapses.
+ *  Nothing in the bank -> no panel, and no invented text. */
+function explPanel(q, isCorrect, canon) {
+  const correctTxt = q.correct_explanation_he || '';
+  const yourTxt = isCorrect ? '' : (q['explanation_' + canon + '_he'] || '');
+
+  let keyHtml = '';
+  if (!isCorrect) {
+    const t = resolveTrigger({ category: q['trigger_category_' + canon], mechanism: q['mechanism_' + canon] });
+    if (t) {
+      const word = q['trigger_word_' + canon];
+      const detail = word ? `שים לב ל"${esc(word)}". ${esc(t.cue)}` : esc(t.cue);
+      keyHtml = `<div class="rp-expl rp-help"><strong>🔍 ${esc(t.label)} —</strong> ${detail}</div>`;
+    }
+  }
+
+  const others = [];
   for (const n of [1, 2, 3]) {
-    // Category label only when the trigger resolves; otherwise just the explanation.
+    if (n === canon) continue;
+    const txt = q['explanation_' + n + '_he'] || '';
+    if (!txt) continue;
     const t = resolveTrigger({ category: q['trigger_category_' + n], mechanism: q['mechanism_' + n] });
     const lbl = t ? `<span class="rp-fa-lbl">🔍 ${esc(t.label)}</span> ` : '';
-    rows.push(`<div class="rp-fa-row">${lbl}${esc(q['explanation_' + n + '_he'] || '')}</div>`);
+    others.push(`<div class="rp-fa-row">${lbl}${esc(txt)}</div>`);
   }
-  return `<div class="rp-fa"><div class="rp-fa-intro">כל מסיח בודק משהו אחר:</div>${rows.join('')}</div>`;
+
+  if (!correctTxt && !yourTxt && !keyHtml && !others.length) return '';
+
+  const parts = [];
+  if (correctTxt) {
+    parts.push(`<div class="rp-expl rp-expl-good"><strong>למה התשובה הנכונה נכונה:</strong> ${esc(correctTxt)}</div>`);
+  }
+  if (yourTxt) {
+    parts.push(`<div class="rp-expl"><strong>מה לא עבד בבחירה שלך:</strong> ${esc(yourTxt)}</div>`);
+  }
+  parts.push(keyHtml);
+  if (others.length) {
+    parts.push(`<div class="rp-fa"><div class="rp-fa-intro">שאר המסיחים — כל אחד בודק משהו אחר:</div>${others.join('')}</div>`);
+  }
+
+  const label = isCorrect ? 'למה זו התשובה' : 'הסבר לי את הטעות';
+  return `<section class="rp-panel${explOpen ? ' open' : ''}">
+    <button type="button" class="rp-panel-head" id="rpExpl" data-block-toggle aria-expanded="${explOpen}">
+      <span>${label}</span>
+      <span class="rp-chev">▾</span>
+    </button>
+    <div class="rp-panel-body">${parts.join('')}</div>
+  </section>`;
 }
 
 function drawSummary(root) {
@@ -471,6 +493,12 @@ const RP_CSS = `
 .rp-fa-row{font-size:.85rem;line-height:1.55;background:var(--bg);border-radius:var(--radius-sm);padding:.6rem .8rem}
 .rp-fa-lbl{display:inline-block;font-weight:800;color:var(--muted);margin-left:.4rem}
 .rp-fa-correct{color:var(--green-dark)}
+.rp-panel{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);margin-bottom:.7rem}
+.rp-panel-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:none;border:none;font:inherit;font-weight:800;font-size:.9rem;color:var(--green-dark);cursor:pointer;padding:.75rem .95rem;text-align:right}
+.rp-chev{flex:0 0 auto;font-size:.8rem;color:var(--muted);transition:transform .2s ease}
+.rp-panel.open .rp-chev{transform:rotate(180deg)}
+.rp-panel-body{display:none;padding:0 .95rem .85rem}
+.rp-panel.open .rp-panel-body{display:block}
 .rp-next{margin-top:.6rem;width:100%}
 .rp-foot{margin-top:1.4rem;text-align:center}
 .rp-foot a{color:var(--muted);font-size:.82rem;text-decoration:none}

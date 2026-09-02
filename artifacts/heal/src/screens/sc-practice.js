@@ -61,7 +61,7 @@ let revealed = false;
 let chosenDisplay = null;
 let hintUsed = false;
 let hintShown = false;
-let showFull = false;
+let explOpen = false;   // the one mistake-feedback panel (SPEC_mistake_feedback_pattern)
 let metaTagged = false;           // whether the optional lexical/strategic tag was answered (or dismissed)
 let qStart = 0;
 
@@ -156,7 +156,7 @@ function startQuestion() {
   chosenDisplay = null;
   hintUsed = false;
   hintShown = false;
-  showFull = false;
+  explOpen = false;
   metaTagged = false;
   pushOffer = [];
   pushState = 'idle';
@@ -261,7 +261,7 @@ function drawQuestion(root) {
     let cls = '', tag = '';
     if (revealed) {
       if (canonN === q.correct_option) { cls = 'correct'; tag = '✓ נכון'; }
-      else if (d === chosenDisplay) { cls = 'chosen-wrong'; tag = 'הבחירה שלך'; }
+      else if (d === chosenDisplay) { cls = 'chosen-wrong'; tag = '✗ הבחירה שלך'; }
     }
     return `<button class="sp-opt ${cls}" data-d="${d}" ${revealed ? 'disabled' : ''}>
       <span class="sp-opt-en" dir="ltr">${esc(q.options[order[d]])}</span>
@@ -291,7 +291,7 @@ function drawQuestion(root) {
       draw(root);
     });
   } else {
-    root.querySelector('#spFull')?.addEventListener('click', () => { showFull = !showFull; draw(root); });
+    root.querySelector('#spExpl')?.addEventListener('click', () => { explOpen = !explOpen; draw(root); });
     root.querySelector('#spNext')?.addEventListener('click', () => nextQuestion(root));
     root.querySelector('#spPush')?.addEventListener('click', () => onPushWords(root));
     root.querySelectorAll('.sp-meta-btn').forEach((b) =>
@@ -361,31 +361,63 @@ function hintBox(q) {
 function feedback(q) {
   const canonN = order[chosenDisplay] + 1;
   const isCorrect = canonN === q.correct_option;
+  const last = packIdx >= pack.length - 1;
+  return `
+    ${explPanel(q, isCorrect, canonN)}
+    ${pushBox(isCorrect)}
+    ${!isCorrect && !metaTagged ? metaPrompt() : ''}
+    <button class="btn-primary sp-next" id="spNext">${last ? 'לסיכום המנה ←' : 'המשך ←'}</button>
+  `;
+}
+
+/** SPEC_mistake_feedback_pattern.md — every word of explanation lives in ONE
+ *  collapsed panel. Fixed order inside: why the correct answer is correct,
+ *  what did not work in your choice, the key, and only then the remaining
+ *  options. The old separate "הסבר לשאלה ←" toggle is merged in here; two
+ *  nested collapse mechanisms were the thing we were removing.
+ *  No explanation in the bank -> no panel. We never invent one. */
+function explPanel(q, isCorrect, canonN) {
+  const correctTxt = q.explanations_he?.correct || '';
+  const yourTxt = isCorrect ? '' : (q.explanations_he?.distractors?.[String(canonN)] || '');
   const key = resolveKey(q.clue_code);
+
+  const others = [];
+  for (let n = 1; n <= 4; n++) {
+    if (n === q.correct_option || n === canonN) continue;
+    const txt = q.explanations_he?.distractors?.[String(n)];
+    if (txt) {
+      others.push(`<div class="sp-fa-row"><span class="sp-fa-w" dir="ltr">${esc(q.options[n - 1])}</span> ${esc(txt)}</div>`);
+    }
+  }
+
+  if (!correctTxt && !yourTxt && !key && !others.length) return '';
+
   const defNote = isDefinitionMove(q.clue_code)
     ? '<span class="sp-def-note">(המשפט מגדיר את המילה החסרה במפורש)</span> '
     : '';
 
-  let body;
-  if (isCorrect) {
-    body = `<div class="sp-expl sp-expl-good"><strong>✓ נכון.</strong> ${esc(q.explanations_he?.correct || '')}</div>`;
-  } else {
-    const why = q.explanations_he?.distractors?.[String(canonN)] || '';
-    body = `<div class="sp-expl"><strong>מה קרה:</strong> ${esc(why)}</div>`;
-    if (key) {
-      body += `<div class="sp-expl sp-help">${defNote}<strong>🔍 ${esc(key.label)} —</strong> ${esc(key.cue)}</div>`;
-    }
+  const parts = [];
+  if (correctTxt) {
+    parts.push(`<div class="sp-expl sp-expl-good"><strong>למה התשובה הנכונה נכונה:</strong> ${esc(correctTxt)}</div>`);
+  }
+  if (yourTxt) {
+    parts.push(`<div class="sp-expl"><strong>מה לא עבד בבחירה שלך:</strong> ${esc(yourTxt)}</div>`);
+  }
+  if (key) {
+    parts.push(`<div class="sp-expl sp-help">${defNote}<strong>🔍 ${esc(key.label)} —</strong> ${esc(key.cue)}</div>`);
+  }
+  if (others.length) {
+    parts.push(`<div class="sp-fa"><div class="sp-fa-intro">שאר האפשרויות:</div>${others.join('')}</div>`);
   }
 
-  const last = packIdx >= pack.length - 1;
-  return `
-    ${body}
-    ${pushBox(isCorrect)}
-    ${!isCorrect && !metaTagged ? metaPrompt() : ''}
-    <button class="sp-link" id="spFull">${showFull ? 'הסתר הסבר לשאלה' : 'הסבר לשאלה ←'}</button>
-    ${showFull ? fullExplanation(q) : ''}
-    <button class="btn-primary sp-next" id="spNext">${last ? 'לסיכום המנה ←' : 'המשך ←'}</button>
-  `;
+  const label = isCorrect ? 'למה זו התשובה' : 'הסבר לי את הטעות';
+  return `<section class="sp-panel${explOpen ? ' open' : ''}">
+    <button type="button" class="sp-panel-head" id="spExpl" data-block-toggle aria-expanded="${explOpen}">
+      <span>${label}</span>
+      <span class="sp-chev">▾</span>
+    </button>
+    <div class="sp-panel-body">${parts.join('')}</div>
+  </section>`;
 }
 
 // Optional, skippable, one-tap self-tag feeding sc_attempts.meta_response
@@ -400,16 +432,6 @@ function metaPrompt() {
       <button class="sp-link" id="spMetaSkip">דלג</button>
     </div>
   </div>`;
-}
-
-function fullExplanation(q) {
-  const rows = [`<div class="sp-fa-row sp-fa-correct">${esc(q.explanations_he?.correct || '')}</div>`];
-  for (let n = 1; n <= 4; n++) {
-    if (n === q.correct_option) continue;
-    const txt = q.explanations_he?.distractors?.[String(n)];
-    if (txt) rows.push(`<div class="sp-fa-row">${esc(txt)}</div>`);
-  }
-  return `<div class="sp-fa"><div class="sp-fa-intro">כל אופציה, ולמה היא לא מתאימה:</div>${rows.join('')}</div>`;
 }
 
 function drawSummary(root) {
@@ -528,6 +550,13 @@ const SP_CSS = `
 .sp-fa-intro{font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:.2rem}
 .sp-fa-row{font-size:.85rem;line-height:1.55;background:var(--bg);border-radius:var(--radius-sm);padding:.6rem .8rem}
 .sp-fa-correct{background:var(--green-light)}
+.sp-fa-w{font-family:var(--eng);font-weight:700}
+.sp-panel{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);margin-bottom:.7rem}
+.sp-panel-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:none;border:none;font:inherit;font-weight:800;font-size:.9rem;color:var(--green-dark);cursor:pointer;padding:.75rem .95rem;text-align:right}
+.sp-chev{flex:0 0 auto;font-size:.8rem;color:var(--muted);transition:transform .2s ease}
+.sp-panel.open .sp-chev{transform:rotate(180deg)}
+.sp-panel-body{display:none;padding:0 .95rem .85rem}
+.sp-panel.open .sp-panel-body{display:block}
 .sp-next{margin-top:.6rem;width:100%}
 .sp-foot{margin-top:1.4rem;text-align:center}
 .sp-foot a{color:var(--muted);font-size:.82rem;text-decoration:none}
