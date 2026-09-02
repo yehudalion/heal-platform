@@ -95,25 +95,31 @@ export async function getTodayProgress(userId) {
   midnight.setHours(0, 0, 0, 0)
   const since = midnight.toISOString()
   try {
-    const [srs, listening, rephrase] = await Promise.all([
+    const [srs, listening, rephrase, reading] = await Promise.all([
       supabase.from('srs_review_log').select('id')
         .eq('user_id', userId).gte('reviewed_at', since),
       supabase.from('listening_question_responses').select('id')
         .eq('user_id', userId).gte('responded_at', since),
       supabase.from('restatement_attempts').select('id')
         .eq('user_id', userId).gte('attempted_at', since),
+      // Reading's unit is the PASSAGE, not the question (see plan §2 below) —
+      // count distinct passage_id, not rows (5 rows for one finished passage
+      // must read as 1 done item, not 5).
+      supabase.from('reading_attempts').select('passage_id')
+        .eq('user_id', userId).gte('created_at', since),
     ])
     return {
       data: {
         vocab:     (srs.data || []).length,
         listening: (listening.data || []).length,
         rephrase:  (rephrase.data || []).length,
+        reading:   new Set((reading.data || []).map(r => r.passage_id)).size,
       },
       error: null,
     }
   } catch (error) {
     console.error('plan.data.getTodayProgress:', error)
-    return { data: { vocab: 0, listening: 0, rephrase: 0 }, error }
+    return { data: { vocab: 0, listening: 0, rephrase: 0, reading: 0 }, error }
   }
 }
 
@@ -138,8 +144,9 @@ export async function getTodayProgress(userId) {
 export async function getDailyPlan(userId, minutes) {
   try {
     // Per-module planners — each module owns its getDailyPlan (SITEMAP §6).
-    const [srsData, listeningData, rephraseData] = await Promise.all([
+    const [srsData, listeningData, rephraseData, readingData] = await Promise.all([
       import('./srs.data.js'), import('./listening.data.js'), import('./rephrase.data.js'),
+      import('./reading.data.js'),
     ])
 
     // 1. SRS first — due cards, capped at 40% of time.
@@ -168,6 +175,18 @@ export async function getDailyPlan(userId, minutes) {
       rephraseData.getDailyPlan(userId, remaining * (1 - lisShare)),
     ])
 
+    // 2b. Reading is FIXED, not adaptive (Lion, 2.9.2026: "קבוע שיהיה טקסט
+    // אחד עם השאלות עליו" — one text with its questions, every day). It does
+    // not compete with vocab/listening/rephrase for a share of `minutes`:
+    // reading.data.js's own getDailyPlan takes a minutes budget and divides
+    // by ~10/passage, so passing exactly MINUTES_PER_PASSAGE (10) always
+    // yields targetItems=1 regardless of the student's daily_time_minutes.
+    // A student with a 10-minute plan still gets a full extra passage on top
+    // — the daily plan's total minutes grows by ~10, it is not squeezed out
+    // of the other three legs' share.
+    const READING_FIXED_MINUTES = 10
+    const { data: readingPlan } = await readingData.getDailyPlan(userId, READING_FIXED_MINUTES)
+
     // 3. Subtract what was already done today → resume state.
     const { data: today } = await getTodayProgress(userId)
 
@@ -185,6 +204,13 @@ export async function getDailyPlan(userId, minutes) {
       {
         ...repPlan, label: 'ניסוח מחדש', route: '/rephrase-practice',
         doneItems: Math.min(today.rephrase, repPlan?.targetItems ?? 0),
+      },
+      {
+        // '/reading', not straight into '/reading-practice' — same reasoning
+        // as listening: the section has its own Learn layer, and the
+        // dashboard owns the first-visit-goes-to-Learn rule (SITEMAP §3).
+        ...readingPlan, label: 'הבנת הנקרא', route: '/reading',
+        doneItems: Math.min(today.reading, readingPlan?.targetItems ?? 0),
       },
     ]
       // A leg with nothing to do (e.g. no due cards) drops out of the plan.
