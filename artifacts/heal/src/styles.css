@@ -1204,13 +1204,13 @@ a { text-decoration: none; color: inherit; }
    on 2026-09-02; everything below shifted down accordingly. Every direct child of this grid must
    have a rule here; one without a rule is auto-placed and breaks the desktop
    layout silently.
-   ORDER MATTERS: .diag-sec-title, .guides-sec-title and .wod-sec-title also carry the
+   ORDER MATTERS: .diag-sec-title, .guides-sec-title and .dd-sec-title also carry the
    .sec-title class, whose rule above pins row 4 at equal specificity.
    These rules win only because they come later. Do not move them above
    the .sec-title rule, and do not reorder this block. */
 #page-content > .fade-in:has(> .wk-card) > .consent-band     { grid-column: 1 / -1; grid-row: 6; }
-#page-content > .fade-in:has(> .wk-card) > .wod-sec-title    { grid-column: 1 / -1; grid-row: 7; }
-#page-content > .fade-in:has(> .wk-card) > .wod-card         { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .dd-sec-title     { grid-column: 1 / -1; grid-row: 7; }
+#page-content > .fade-in:has(> .wk-card) > .dd-grid          { grid-column: 1 / -1; grid-row: 8; }
 #page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 9; }
 #page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 9; }
 #page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 10; }
@@ -1397,6 +1397,10 @@ a { text-decoration: none; color: inherit; }
 .metrics-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .7rem;
 }
+/* מדדי אורח נעולים (2026-09-02) — אפור, לא נעלם. "דרושה השלמה" ולא
+   "התחברו" בכוונה: השתמשנו כבר ב-ins-building הקיים לזה בפינות אחרות
+   (אין נתונים עדיין), וכאן הסיבה שונה (יש חשבון שחסר) אבל החזות זהה. */
+.ins-card--locked { opacity: .6; filter: grayscale(.4); }
 
 
 /* --- "My dictionary" star on a flashcard (2026-09-01) ------------------- */
@@ -1408,73 +1412,80 @@ a { text-decoration: none; color: inherit; }
 }
 .vc-save-btn.is-on { border-color: var(--green); color: var(--green-dark); background: var(--green-light); }
 
-/* ─── המילה של היום (2026-09-02) — תוכן, לא מדידה ───────────── */
-.wod-card {
+/* ─── היום: מילה + טיפ (2026-09-02, צומצם על פי בקשת ליאון) ───
+   שני כרטיסים קטנים זה ליד זה — לא כרטיס מלא אחד כמו שהיה למילה לבדה.
+   המשפט/המנמוניק מקופלים בברירת מחדל מאחורי dd-more (אותו data-block-toggle
+   שבשאר האתר). לטיפ אין משפט — ה-cue כבר שורה אחת. */
+.dd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .7rem; }
+.dd-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.1rem 1.25rem;
+  padding: .75rem .9rem;
   display: flex;
   flex-direction: column;
-  gap: .7rem;
+  gap: .35rem;
 }
-.wod-top { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
-.wod-w {
-  font-family: var(--eng);
-  font-size: 1.7rem;
-  font-weight: 500;
+.dd-head { display: flex; align-items: center; justify-content: space-between; gap: .4rem; }
+.dd-badge {
+  display: inline-block;
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .02em;
   color: var(--green-dark);
-  direction: ltr;
+  background: var(--green-light);
+  border-radius: 999px;
+  padding: .1rem .55rem;
 }
-.wod-def { font-size: .95rem; font-weight: 600; color: var(--text); }
-.wod-audio {
+.dd-badge-tip { color: var(--orange, #B08442); background: var(--bg); }
+.dd-audio {
   background: none;
   border: none;
-  font-size: 1rem;
+  font-size: .9rem;
   line-height: 1;
-  padding: .15rem .3rem;
+  padding: .1rem .25rem;
   border-radius: var(--radius-sm);
   color: var(--muted);
 }
-.wod-audio:hover { background: var(--green-light); }
-.wod-audio:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
-.wod-sent-row { display: flex; align-items: flex-start; gap: .4rem; }
-.wod-sent {
-  flex: 1;
+.dd-audio:hover { background: var(--green-light); }
+.dd-audio:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
+.dd-word-row { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.dd-w { font-family: var(--eng); font-size: 1.15rem; font-weight: 500; color: var(--green-dark); direction: ltr; }
+.dd-def { font-size: .82rem; font-weight: 600; color: var(--text); }
+.dd-more {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  font-size: .76rem;
+  color: var(--green-dark);
+  padding: 0;
+}
+.dd-chev { font-size: .7rem; color: var(--muted); transition: transform .2s ease; }
+.dd-card.open .dd-chev { transform: rotate(180deg); }
+.dd-word-body { display: none; }
+.dd-card.open .dd-word-body { display: flex; flex-direction: column; gap: .4rem; margin-top: .1rem; }
+.dd-sent {
   margin: 0;
   direction: ltr;
   text-align: left;
   font-family: var(--eng);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: .88rem;
+  line-height: 1.5;
   background: var(--bg);
   border-radius: var(--radius-sm);
-  padding: .65rem .8rem;
+  padding: .5rem .65rem;
 }
-.wod-mnem-head {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .6rem;
-  background: none;
-  border: none;
-  font: inherit;
-  font-weight: 800;
-  font-size: .88rem;
-  color: var(--green-dark);
-  padding: .2rem 0;
-  text-align: right;
-}
-.wod-chev { flex: 0 0 auto; font-size: .8rem; color: var(--muted); transition: transform .2s ease; }
-.wod-card.open .wod-chev { transform: rotate(180deg); }
-.wod-mnem-body { display: none; }
-.wod-card.open .wod-mnem-body { display: block; }
-.wod-mnem-hint { margin: 0 0 .35rem; font-size: .76rem; color: var(--muted); line-height: 1.5; }
-.wod-mnem { margin: 0; font-size: .9rem; line-height: 1.7; border-right: 2px solid var(--orange); padding-right: .7rem; }
-.wod-more { align-self: flex-start; font-size: .83rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
-.wod-more:hover { text-decoration: underline; }
-@media (prefers-reduced-motion: reduce) { .wod-chev { transition: none; } }
+.dd-mnem { margin: 0; font-size: .82rem; line-height: 1.6; border-right: 2px solid var(--orange); padding-right: .6rem; }
+.dd-more-link { align-self: flex-start; font-size: .76rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
+.dd-more-link:hover { text-decoration: underline; }
+.dd-tip-label { font-size: .82rem; font-weight: 800; color: var(--text); }
+.dd-tip-cue { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .dd-chev { transition: none; } }
 
 /* ─── פס ההסכמה לדיוור (2026-09-02) ──────────────────────────
    שקט בכוונה: זו לא קריאה לפעולה ואסור לה להתחרות ב-CTA הראשי.

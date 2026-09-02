@@ -19,8 +19,8 @@
  * three layers are built and routed). Its attempt count comes for free from
  * getWeakPoints(), which already fetches a 'sentenceCompletion' report now
  * that weakpoints.data.js registers that module's collector — no extra fetch.
- * NOT yet a leg in plan.data.js's daily plan (that composer currently splits
- * time between exactly two modules; turning it into a three-way split is an
+ * NOT yet a leg in plan.data.js's daily plan (that composer currently covers
+ * vocab, listening, rephrase and reading; adding SC as a fifth leg is an
  * architecture change of its own, flagged separately, not decided here).
  */
 import { renderLayout, getPageContent } from '../layout.js';
@@ -32,6 +32,7 @@ import { getWeakPoints } from '../data/weakpoints.data.js';
 import { getListeningOverview } from '../data/listening.data.js';
 import { getWeeklyActivity, getDailyPlan, nextLeg } from '../data/plan.data.js';
 import { getCoverage } from '../data/coverage.data.js';
+import { fetchRecentAttempts as fetchReadingAttempts } from '../data/reading.data.js';
 import { LEARN_BLOCKS } from './rephrase-learn.js';
 import { getGuestProfile } from './onboarding.js';
 import { listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
@@ -53,6 +54,8 @@ import {
 } from './insights.js';
 import { GUIDES } from './guides.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
+import { getDailyTip } from '../data/dailyTip.data.js';
+import { getGuestInsights } from '../data/guestAttempts.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 
 // home.js לא החזיק esc() עד עכשיו כי כל הטקסט בו היה קבוע. המילה של היום
@@ -82,13 +85,14 @@ export async function renderHome(root) {
   const name    = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
 
   // ── Data (guests get cold-start defaults — no per-user rows exist) ──────────
-  const [profileRes, srsRes, weakReports, listeningRes, weeklyRes, coverageRes] = await Promise.all([
+  const [profileRes, srsRes, weakReports, listeningRes, weeklyRes, coverageRes, readingRes] = await Promise.all([
     userId ? getProfile(userId)           : Promise.resolve({ data: getGuestProfile() }),
     userId ? getSessionStats(userId)      : Promise.resolve({ data: null }),
     userId ? getWeakPoints(userId)        : Promise.resolve([]),
     userId ? getListeningOverview(userId) : Promise.resolve({ data: null }),
     userId ? getWeeklyActivity(userId)    : Promise.resolve({ data: { activeDays: [], target: 5 } }),
     userId ? getCoverage(userId)          : Promise.resolve({ data: null }),
+    userId ? fetchReadingAttempts(userId, { limit: 300 }) : Promise.resolve({ data: [] }),
   ]);
 
   const profile   = profileRes?.data ?? null;
@@ -135,6 +139,10 @@ export async function renderHome(root) {
   const rpAttempts = rephrase?.attempts ?? 0;
   const scAttempts = sc?.attempts ?? 0;
   const lisAnswered = listening?.questionsAnswered ?? 0;
+  // Reading is counted in PASSAGES, not questions — one passage is one
+  // 15-minute block, and "5 questions" would read as trivially small next to
+  // the other tiles while representing far more work.
+  const rdPassages  = new Set((readingRes?.data ?? []).map(r => r.passage_id)).size;
 
   // Coverage bars (Lion, 2026-08-27: "fill the empty home screen with graphs").
   // Same source of truth as /progress (data/coverage.data.js + weakpoints.data.js
@@ -152,13 +160,15 @@ export async function renderHome(root) {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
-  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes, consentRes] = await Promise.all([
+  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes, tipRes, consentRes, guestInsightsRes] = await Promise.all([
     listAttempts(userId, 1),
     userId ? getAccuracyByModule(userId) : Promise.resolve({ status: 'guest', modules: [] }),
     userId ? getCumulativeGrowth(userId) : Promise.resolve({ status: 'guest' }),
     userId ? getActivityCalendar(userId) : Promise.resolve({ status: 'guest' }),
-    getWordOfDay(),   // לא תלוי במשתמש — גם אורח מקבל אותה
+    getWordOfDay(),               // לא תלוי במשתמש — גם אורח מקבל אותה
+    Promise.resolve(getDailyTip()), // סינכרוני (אין DB) — עטוף כדי לשמור על אותה תבנית Promise.all
     userId ? getConsentState(userId) : Promise.resolve({ state: 'unknown' }),
+    guest ? getGuestInsights() : Promise.resolve({ status: 'ok', modules: [] }),
   ]);
   const lastSim = (simAttempts || [])[0] ?? null;
   ensureInsightStyles();
@@ -219,15 +229,20 @@ export async function renderHome(root) {
           <div class="mc-name">השלמת משפטים</div>
           <div class="mc-pct">${scAttempts ? `${scAttempts} שאלות שתרגלת` : 'עוד לא התחלת'}</div>
         </div>
+        <div class="mc mc-g" data-nav="/reading">
+          <div class="mc-icon-wrap"><span class="mc-icon">📖</span></div>
+          <div class="mc-name">הבנת הנקרא</div>
+          <div class="mc-pct">${rdPassages ? `${rdPassages} קטעים שתרגלת` : '100 קטעים מחכים לך'}</div>
+        </div>
       </div>
 
       ${consentBand(consentRes)}
 
-      ${wordOfDaySection(wodRes)}
+      ${dailyDuoSection(wodRes, tipRes)}
 
       ${diagnosticBand(lastSim)}
 
-      ${metricsSection(accuracyRes, growthRes, calendarRes)}
+      ${metricsSection(accuracyRes, growthRes, calendarRes, guest, guestInsightsRes)}
       ${guidesSection()}
     </div>`;
 
@@ -238,12 +253,12 @@ export async function renderHome(root) {
   });
 
   // האסוציאציה מקופלת בברירת מחדל — אותו דפוס data-block-toggle שבשאר האתר.
-  el.querySelector('[data-block-toggle].wod-mnem-head')?.addEventListener('click', (e) => {
-    const sec = e.currentTarget.closest('.wod-card');
+  el.querySelector('[data-block-toggle].dd-more')?.addEventListener('click', (e) => {
+    const sec = e.currentTarget.closest('.dd-card');
     const open = sec.classList.toggle('open');
     e.currentTarget.setAttribute('aria-expanded', String(open));
   });
-  el.querySelectorAll('.wod-audio').forEach((btn) => {
+  el.querySelectorAll('.dd-audio').forEach((btn) => {
     btn.addEventListener('click', () => playWodAudio(btn.dataset.src));
   });
 
@@ -340,7 +355,8 @@ function diagnosticBand(last) {
  * שלושת המחוונים שליאון בחר. אורח לא מקבל אותם בכלל — אין לו שורות
  * במסד, וקיר של כרטיסי "נבנה" למי שרק נכנס הוא בדיוק ההפך מרציני.
  */
-function metricsSection(accuracy, growth, calendar) {
+function metricsSection(accuracy, growth, calendar, guest, guestInsights) {
+  if (guest) return guestMetricsSection(guestInsights);
   if (!accuracy || accuracy.status === 'guest') return '';
   return `
     <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">
@@ -354,13 +370,64 @@ function metricsSection(accuracy, growth, calendar) {
     </div>`;
 }
 
-/** מדור המדריכים — שלושת המסומנים featured ב-guides.js. */
 /**
- * המילה של היום — הדבר היחיד במסך הבית שהוא תוכן ולא מדידה, וזו הנקודה:
- * סיבה להיכנס גם ביום שלא תרגלת, בדיוק היום שבו מסך של גרפים ריקים מרחיק.
- * המילה נבחרת לפי התאריך ולכן זהה לכולם ויציבה לאורך היום (ראו
- * wordOfDay.data.js). בלי תוכן — הפינה לא מצוירת בכלל.
+ * מדדי אורח (ליאון, 2.9.2026): "לאורח אנחנו צריכים להראות אנליטיקס של
+ * התרגול הזה בלבד בגרפים פשוטים - 2 גרפים למשל והשאר יהיו באפור עם
+ * 'דרושה השלמה'". המקור: guestAttempts.data.js (RPC בלבד, אף פעם לא שורות
+ * גולמיות). לפני ניסיון ראשון אחד לפחות אין מה להראות, והפינה כולה לא
+ * מצוירת — קיר של "דרושה השלמה" מיד בכניסה מרתיע יותר משהוא מזמין.
  */
+function guestMetricsSection(res) {
+  if (!res || res.status !== 'ok' || !res.modules.length) return '';
+
+  const accRows = res.modules.map((m) => `
+    <div class="ins-hbar-row">
+      <div class="ins-hbar-lbl">${esc(m.label)} <span class="ins-hbar-mod">· ${m.accuracyPct}%</span></div>
+      <div class="ins-hbar-track"><div class="ins-hbar-fill" style="width:${Math.max(4, m.accuracyPct)}%"></div></div>
+    </div>`).join('');
+
+  const totalAttempts = res.modules.reduce((s, m) => s + m.attempts, 0);
+  const totalCorrect  = res.modules.reduce((s, m) => s + m.correct, 0);
+  const overallPct = totalAttempts ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+
+  const guestAccCard = `<div class="ins-card">
+    <div class="ins-card-title">הדיוק שלך עד עכשיו</div>
+    <div class="ins-card-sub">מהתרגול שעשית בלי חשבון, לפי מודול</div>
+    <div class="ins-card-body">${accRows}</div>
+  </div>`;
+
+  const guestSplitCard = `<div class="ins-card">
+    <div class="ins-card-title">כמה שאלות ענית</div>
+    <div class="ins-card-sub">${totalAttempts} שאלות בסך הכל</div>
+    <div class="ins-card-body">
+      <div class="ins-hbar-row">
+        <div class="ins-hbar-lbl">נכונות <span class="ins-hbar-mod">· ${totalCorrect} מתוך ${totalAttempts} (${overallPct}%)</span></div>
+        <div class="ins-hbar-track"><div class="ins-hbar-fill ins-hbar-fill--alt" style="width:${Math.max(4, overallPct)}%"></div></div>
+      </div>
+      <p class="ins-note">התחברות שומרת את כל זה ומראה גם איך זה משתפר עם הזמן.</p>
+    </div>
+  </div>`;
+
+  const lockedCard = (title) => `<div class="ins-card ins-card--locked">
+    <div class="ins-card-title">${esc(title)}</div>
+    <div class="ins-card-body">
+      <div class="ins-building">
+        <div class="ins-building-frame"></div>
+        <p>דרושה השלמה — נפתח עם חשבון חינם</p>
+      </div>
+    </div>
+  </div>`;
+
+  return `
+    <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">המספרים שלך</div>
+    <div class="metrics-grid">
+      ${guestAccCard}
+      ${guestSplitCard}
+      ${lockedCard('הצמיחה המצטברת שלך')}
+      ${lockedCard('לוח הפעילות שלך')}
+    </div>`;
+}
+
 /**
  * ⚖️ הסכמה לדיוור — נשאלת פעם אחת בלבד.
  *
@@ -385,31 +452,48 @@ function consentBand(res) {
     </div>`;
 }
 
-function wordOfDaySection(res) {
-  const w = res?.word;
-  if (!w) return '';
-  return `
-    <div class="sec-title wod-sec-title" style="margin-top:1.8rem">המילה של היום</div>
-    <div class="wod-card">
-      <div class="wod-top">
-        <span class="wod-w" dir="ltr">${esc(w.headword)}</span>
-        ${w.audio_word_url ? `<button class="wod-audio" data-src="${esc(w.audio_word_url)}" title="השמע" aria-label="השמע את המילה">🔊</button>` : ''}
-        <span class="wod-def">${esc(w.definition_he)}</span>
+/**
+ * "היום" — מילה + טיפ אחד ליד השני, קטנים בהרבה מהכרטיס שהיה למילה לבדה
+ * (ליאון, 2.9.2026: "המילה היומית... הרבה יותר קטנה ונשים ליד ה'טיפ
+ * היומי'... ששניהם לא יתפסו כל כך הרבה מקום"). הטיפ אינו תוכן חדש — הוא
+ * אחד משמונת ה"מפתחות" הקיימים כבר באתר (dailyTip.data.js). כל כרטיס
+ * מצייר את עצמו רק אם יש לו תוכן; אם לשניהם אין תוכן, כל הפינה נעלמת.
+ */
+function dailyDuoSection(wodRes, tipRes) {
+  const w = wodRes?.word;
+  const tip = tipRes?.tip;
+  if (!w && !tip) return '';
+
+  const wordCard = w ? `
+    <div class="dd-card dd-word">
+      <div class="dd-head">
+        <span class="dd-badge">מילה</span>
+        ${w.audio_word_url ? `<button class="dd-audio" data-src="${esc(w.audio_word_url)}" title="השמע" aria-label="השמע את המילה">🔊</button>` : ''}
       </div>
-      <div class="wod-sent-row">
-        <p class="wod-sent" dir="ltr">${esc(w.surface_1)}</p>
-        ${w.audio_sentence_url ? `<button class="wod-audio" data-src="${esc(w.audio_sentence_url)}" title="השמע משפט" aria-label="השמע את המשפט">🔊</button>` : ''}
+      <div class="dd-word-row">
+        <span class="dd-w" dir="ltr">${esc(w.headword)}</span>
+        <span class="dd-def">${esc(w.definition_he)}</span>
       </div>
-      <button type="button" class="wod-mnem-head" data-block-toggle aria-expanded="false">
-        <span>איך לזכור את זה</span>
-        <span class="wod-chev">▾</span>
+      <button type="button" class="dd-more" data-block-toggle aria-expanded="false">
+        <span>עוד</span><span class="dd-chev">▾</span>
       </button>
-      <div class="wod-mnem-body">
-        <p class="wod-mnem-hint">חפשו במשפט את הצליל שדומה למילה באנגלית — הוא הגשר לזכירה</p>
-        <p class="wod-mnem">${esc(w.mnemonic)}</p>
+      <div class="dd-word-body">
+        <p class="dd-sent" dir="ltr">${esc(w.surface_1)}</p>
+        <p class="dd-mnem">${esc(w.mnemonic)}</p>
+        <a class="dd-more-link" href="#/dictionary">עוד מילים במילון ←</a>
       </div>
-      <a class="wod-more" href="#/dictionary">עוד מילים במילון ←</a>
-    </div>`;
+    </div>` : '';
+
+  const tipCard = tip ? `
+    <div class="dd-card dd-tip">
+      <div class="dd-head"><span class="dd-badge dd-badge-tip">טיפ</span></div>
+      <div class="dd-tip-label">${esc(tip.label)}</div>
+      <p class="dd-tip-cue">${esc(tip.cue)}</p>
+    </div>` : '';
+
+  return `
+    <div class="sec-title dd-sec-title" style="margin-top:1.8rem">היום</div>
+    <div class="dd-grid">${wordCard}${tipCard}</div>`;
 }
 
 function guidesSection() {
