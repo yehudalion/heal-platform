@@ -62,3 +62,42 @@ export function logGuestAttempt(module, {
     console.warn('guestAttempts.logGuestAttempt:', err);
   }
 }
+
+/**
+ * תובנות אורח למסך הבית — אגרגציה בלבד (לא שורות גולמיות), דרך פונקציית
+ * DB בשם get_guest_insights. guest_attempts הוא INSERT-בלבד ב-RLS בכוונה
+ * (אין policy ל-SELECT בכלל): מדיניות SELECT גורפת הייתה מאפשרת לכל אחד
+ * לסרוק את השורות של כל אורח, לא רק את שלו. הפונקציה מחזירה ספירות בלבד
+ * לפי guest_id ספציפי שהקורא כבר מחזיק ב-localStorage (ראו המיגרציה
+ * guest_insights_rpc, 2.9.2026).
+ *
+ * מחזיר { status, modules }. status:
+ *   'no-guest'  — אין guestId זמין (localStorage חסום).
+ *   'empty'     — יש guestId אבל אין עדיין אף ניסיון שמור.
+ *   'error'     — הקריאה נכשלה.
+ *   'ok'        — modules הוא מערך { module, label, attempts, correct, accuracyPct }.
+ */
+const GUEST_MODULE_LABEL = { rephrase: 'ניסוח מחדש', sc: 'השלמת משפטים' };
+
+export async function getGuestInsights() {
+  const guestId = getGuestAnalyticsId();
+  if (!guestId || !supabase) return { status: 'no-guest', modules: [] };
+  try {
+    const { data, error } = await supabase.rpc('get_guest_insights', { p_guest_id: guestId });
+    if (error) return { status: 'error', modules: [] };
+    if (!data || !data.length) return { status: 'empty', modules: [] };
+    const modules = data
+      .filter((m) => m.attempts > 0)
+      .map((m) => ({
+        module: m.module,
+        label: GUEST_MODULE_LABEL[m.module] || m.module,
+        attempts: Number(m.attempts) || 0,
+        correct: Number(m.correct) || 0,
+        accuracyPct: m.attempts ? Math.round((Number(m.correct) / Number(m.attempts)) * 100) : 0,
+      }));
+    return { status: modules.length ? 'ok' : 'empty', modules };
+  } catch (err) {
+    console.warn('guestAttempts.getGuestInsights:', err);
+    return { status: 'error', modules: [] };
+  }
+}
