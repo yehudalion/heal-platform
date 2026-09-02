@@ -1,4 +1,5 @@
 import { supabase } from '../supabase.js'
+import { logGuestAttempt } from './guestAttempts.data.js'
 import { keyForMechanism, resolveTrigger } from '../lib/keys.js'
 
 // Columns the practice screen needs to render a question. Kept in one place so the
@@ -183,9 +184,16 @@ export async function logAttempt({
   hintUsed = null,
   practiceMode = null,
 } = {}) {
-  // Guest — no account to attach the attempt to. A safe no-op, not an error:
-  // the screen's fire-and-forget .catch() must never see a rejection here.
-  if (!userId) return { data: null, error: null }
+  // אורח — אין חשבון לתלות בו את הניסיון, ולכן לא כותבים ל-restatement_attempts.
+  // אבל כן שומרים את הניסיון בנפרד (2.9.2026): קודם לכן הענף הזה החזיר כלום,
+  // וכל התרגול של מי שנכנס בלי חשבון נעלם. עדיין מחזיר { data: null } כדי
+  // שהמסך, שקורא לזה fire-and-forget, לא יראה שינוי בהתנהגות.
+  if (!userId) {
+    logGuestAttempt('rephrase', {
+      questionId, chosenIndex: chosenOptionIndex, isCorrect, responseTimeMs, hintUsed,
+    })
+    return { data: null, error: null }
+  }
   try {
     const { data, error } = await supabase
       .from('restatement_attempts')

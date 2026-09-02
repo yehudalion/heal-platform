@@ -1,4 +1,5 @@
 import { supabase } from '../supabase.js'
+import { logGuestAttempt } from './guestAttempts.data.js'
 import { resolveKey } from '../lib/scKeys.js'
 
 // Full row — stem, options, correct_option, highlight_spans, explanations_he,
@@ -111,9 +112,15 @@ export async function logAttempt({
   responseTimeMs = null,
   metaResponse = null,
 } = {}) {
-  // Guest — no account to attach the attempt to. A safe no-op, not an error:
-  // the screen's fire-and-forget .then()/.catch() must never see a rejection here.
-  if (!userId) return { data: null, error: null }
+  // אורח — ראו ההערה המקבילה ב-rephrase.data.js. הניסיון נשמר ב-guest_attempts
+  // ולא ב-sc_attempts, וההחזרה נשארת { data: null } כדי לא לשנות את המסך.
+  // chosenOption כאן הוא בסיס 1 (בשונה מניסוח מחדש) — נשמר כמו שהוא.
+  if (!userId) {
+    logGuestAttempt('sc', {
+      questionId, chosenIndex: chosenOption, isCorrect, responseTimeMs,
+    })
+    return { data: null, error: null }
+  }
   try {
     const { data, error } = await supabase
       .from('sc_attempts')
