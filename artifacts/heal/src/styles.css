@@ -1200,17 +1200,23 @@ a { text-decoration: none; color: inherit; }
 /* Home rows 6-9, added 2026-09-01. Only one of .diag-empty / .diag-sec-title
    is ever present, so they share row 6. No row-gap is defined on this grid,
    so an unused row collapses to zero height and leaves no gap.
-   ORDER MATTERS: .diag-sec-title and .guides-sec-title also carry the
+   .wod-sec-title / .wod-card were inserted at rows 6-7 on 2026-09-02 and
+   everything below shifted down by two. Every direct child of this grid must
+   have a rule here; one without a rule is auto-placed and breaks the desktop
+   layout silently.
+   ORDER MATTERS: .diag-sec-title, .guides-sec-title and .wod-sec-title also carry the
    .sec-title class, whose rule above pins row 4 at equal specificity.
    These rules win only because they come later. Do not move them above
    the .sec-title rule, and do not reorder this block. */
-#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 6; }
-#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 6; }
-#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 7; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 8; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 9; }
-#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 10; }
-#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 11; }
+#page-content > .fade-in:has(> .wk-card) > .wod-sec-title    { grid-column: 1 / -1; grid-row: 6; }
+#page-content > .fade-in:has(> .wk-card) > .wod-card         { grid-column: 1 / -1; grid-row: 7; }
+#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 9; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 10; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 11; }
+#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 12; }
+#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 13; }
 
 @media (max-width: 900px) {
   #page-content > .fade-in:has(> .wk-card) { display: block; }
@@ -1400,3 +1406,71 @@ a { text-decoration: none; color: inherit; }
   color: var(--muted); cursor: pointer;
 }
 .vc-save-btn.is-on { border-color: var(--green); color: var(--green-dark); background: var(--green-light); }
+
+/* ─── המילה של היום (2026-09-02) — תוכן, לא מדידה ───────────── */
+.wod-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.wod-top { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.wod-w {
+  font-family: var(--eng);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--green-dark);
+  direction: ltr;
+}
+.wod-def { font-size: .95rem; font-weight: 600; color: var(--text); }
+.wod-audio {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  line-height: 1;
+  padding: .15rem .3rem;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+}
+.wod-audio:hover { background: var(--green-light); }
+.wod-audio:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
+.wod-sent-row { display: flex; align-items: flex-start; gap: .4rem; }
+.wod-sent {
+  flex: 1;
+  margin: 0;
+  direction: ltr;
+  text-align: left;
+  font-family: var(--eng);
+  font-size: 1rem;
+  line-height: 1.6;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: .65rem .8rem;
+}
+.wod-mnem-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 800;
+  font-size: .88rem;
+  color: var(--green-dark);
+  padding: .2rem 0;
+  text-align: right;
+}
+.wod-chev { flex: 0 0 auto; font-size: .8rem; color: var(--muted); transition: transform .2s ease; }
+.wod-card.open .wod-chev { transform: rotate(180deg); }
+.wod-mnem-body { display: none; }
+.wod-card.open .wod-mnem-body { display: block; }
+.wod-mnem-hint { margin: 0 0 .35rem; font-size: .76rem; color: var(--muted); line-height: 1.5; }
+.wod-mnem { margin: 0; font-size: .9rem; line-height: 1.7; border-right: 2px solid var(--orange); padding-right: .7rem; }
+.wod-more { align-self: flex-start; font-size: .83rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
+.wod-more:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { .wod-chev { transition: none; } }
