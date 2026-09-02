@@ -63,6 +63,11 @@ function ensureStyles() {
 .sim-dot.answered { background:var(--green-light); border-color:var(--green); color:var(--green-dark); }
 .sim-dot.current { outline:2px solid var(--green-dark); outline-offset:1px; }
 .sim-body { flex:1; width:100%; max-width:760px; margin:0 auto; padding:1.5rem 1.2rem 3rem; }
+.sim-passage{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem 1.05rem;margin-bottom:1rem;max-height:22rem;overflow-y:auto}
+.sim-passage-title{font-family:var(--eng);font-weight:700;font-size:1.02rem;color:var(--green-dark);margin-bottom:.5rem;text-align:left}
+.sim-passage-body{text-align:left;font-family:var(--eng);font-size:1rem;line-height:1.75}
+.sim-passage-body p{margin:0 0 .7rem}
+.sim-passage-body p:last-child{margin-bottom:0}
 .sim-q-num { font-size:.78rem; font-weight:800; letter-spacing:.06em; color:var(--muted); margin-bottom:.5rem; }
 .sim-prompt { font-size:1.06rem; line-height:1.85; margin-bottom:1.3rem; }
 .sim-opts { display:flex; flex-direction:column; gap:.55rem; }
@@ -256,6 +261,9 @@ function drawSectionShell() {
   const sec = curSection();
   const items = curItems();
   const hasAudio = items.some((it) => it.itemKind === 'listening');
+  // הקטע משותף לכל חמש השאלות ולכן נבנה במעטפת, בדיוק כמו הנגן: ציור מחדש
+  // בכל שאלה היה מאפס את מיקום הגלילה בתוך הקטע באמצע קריאה.
+  const reading = items.find((it) => it.itemKind === 'reading' && it.passageBody);
 
   const dots = items.map((q, i) => `
     <button class="sim-dot" data-q="${i}" title="שאלה ${i + 1}">${i + 1}</button>`).join('');
@@ -273,6 +281,7 @@ function drawSectionShell() {
           <div class="sim-audio-title" id="simAudioTitle"></div>
           <div id="simAudio"></div>
         </div>
+        ${reading ? passageBlock(reading) : ''}
         <div id="simQBody"></div>
       </div>
     </div>`;
@@ -280,6 +289,24 @@ function drawSectionShell() {
   state.root.querySelectorAll('.sim-dot').forEach((d) => {
     d.addEventListener('click', () => goTo(Number(d.dataset.q)));
   });
+}
+
+/** קטע הקריאה של הפרק. נבנה פעם אחת ולא מצויר מחדש בין שאלות.
+ *  הגוף מגיע מהמאגר עם שורות ריקות בין פסקאות. מפצלים לפסקאות ומריצים כל
+ *  אחת דרך esc() — לא מזריקים HTML מהמסד. */
+function passageBlock(it) {
+  const paras = String(it.passageBody || '')
+    .split(/\n\s*\n|\n/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((t) => `<p>${esc(t)}</p>`)
+    .join('');
+  if (!paras) return '';
+  return `
+    <div class="sim-passage">
+      ${it.passageTitle ? `<div class="sim-passage-title" dir="ltr">${esc(it.passageTitle)}</div>` : ''}
+      <div class="sim-passage-body" dir="ltr">${paras}</div>
+    </div>`;
 }
 
 /** מצייר מחדש רק את גוף השאלה. המעטפת, ובעיקר הנגן, נשארים על כנם. */

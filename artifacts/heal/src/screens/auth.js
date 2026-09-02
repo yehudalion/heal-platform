@@ -4,24 +4,62 @@ import { navigate } from '../router.js';
 
 const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.4-1.61 4.1-5.35 4.1A5.4 5.4 0 1 1 12 6.6c1.7 0 2.85.72 3.5 1.34l2.4-2.32C16.36 4.27 14.4 3.4 12 3.4 7.13 3.4 3.2 7.33 3.2 12s3.93 8.6 8.8 8.6c5.07 0 8.45-3.56 8.45-8.57 0-.58-.06-1.02-.1-1.43z"/></svg>`;
 
+/**
+ * מסך הכניסה — עמוד נחיתה, לא קופסת התחברות.
+ *
+ * 🔴 למה זה שוכתב (2.9.2026): במדידה של 35 מפגשים מפוסט בפייסבוק, **21
+ * עזבו בלי ללחוץ על שום דבר ואף אחד לא לחץ על ההרשמה**. המסך הקודם היה
+ * לוגו, טאגליין ושני כפתורים — מי שהגיע מפוסט על השינוי בבחינה נחת על דלת
+ * בלי חלון ראווה, ולא ראה מה יש בפנים לפני שנדרש להחליט.
+ *
+ * המבנה כאן: קודם החדשות (מה משתנה בדצמבר 2026), אחר כך מה המוצר עושה
+ * ובמספרים אמיתיים מהמאגר, ורק אז הכפתורים. המספרים למטה הם התוכן שקיים
+ * בפועל — לעדכן אותם רק מול שאילתה, לא מהזיכרון.
+ *
+ * "הצצה כאורח" הוחלף ב"להתחיל לתרגל": מצב האורח נפתח לתרגול אמיתי בניסוח
+ * מחדש ובהשלמת משפטים, והכיתוב הישן ("כאורח אפשר לראות הכל — לתרגול צריך
+ * חשבון") כבר לא היה נכון וביקש הרשמה בשביל משהו שהתלמיד כבר מקבל.
+ */
+
+// מספרי התוכן — אומתו מול המסד 2.9.2026.
+const CONTENT = [
+  { n: '800',   k: 'השלמת משפטים' },
+  { n: '424',   k: 'ניסוח מחדש' },
+  { n: '250',   k: 'קטעי האזנה' },
+  { n: '100',   k: 'קטעי קריאה' },
+  { n: '543',   k: 'מילים מדורגות' },
+];
+
 export function renderAuth(root) {
   root.innerHTML = `
     <div class="auth-wrap fade-in">
-      <div class="auth-card">
+      <div class="auth-card lp-card">
 
         <div class="auth-logo">High<em>Score</em></div>
         <div class="auth-tagline">ההכנה למבחן הלאל</div>
+
+        <div class="lp-kicker">מדצמבר 2026</div>
+        <h1 class="lp-h1">האנגלית יוצאת מהפסיכומטרי.</h1>
+        <p class="lp-lead">היא הופכת למבחן נפרד וממוחשב — <strong>הלאל</strong>, שיש שמכירים אותו כאמירנט. קריאה, האזנה וכתיבה, לאורך כל השנה. <strong>חומרי ההכנה הישנים לא מכסים אותו.</strong></p>
+
+        <ul class="lp-points">
+          <li><b>אבחון רמה</b> במבנה הבחינה, עם טיימר נפרד לכל פרק</li>
+          <li><b>הסבר על כל טעות</b> — למה הנכונה נכונה, ומה לא עבד בבחירה שלכם</li>
+          <li><b>תוכנית יומית</b> שמכוונת למה שאתם נופלים עליו שוב ושוב</li>
+        </ul>
+
+        <div class="lp-stats">
+          ${CONTENT.map((c) => `<div class="lp-stat"><b>${c.n}</b><span>${c.k}</span></div>`).join('')}
+        </div>
+
+        <button id="guestBtn" class="btn-start">להתחיל לתרגל — בחינם</button>
 
         <button class="btn-google" id="googleBtn">
           ${googleIcon}
           המשך עם Google
         </button>
-
-        <button id="guestBtn" style="width:100%;padding:.82rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--card);font-size:.9rem;font-weight:700;color:var(--text)">
-          הצצה כאורח
-        </button>
-        <div style="margin-top:.45rem;font-size:.73rem;text-align:center;color:var(--muted);line-height:1.5">
-          כאורח אפשר לראות הכל — לתרגול ולשמירת התקדמות צריך חשבון חינם (10 שניות עם Google).
+        <div class="lp-fine">
+          אפשר להתחיל בלי חשבון. חשבון חינם שומר את ההתקדמות ופותח את הניתוח האישי.
         </div>
 
         <div id="notice" style="margin-top:.9rem;font-size:.82rem;text-align:center;color:var(--muted);min-height:1.2em"></div>

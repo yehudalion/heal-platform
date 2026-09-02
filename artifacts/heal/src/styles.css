@@ -1512,3 +1512,41 @@ a { text-decoration: none; color: inherit; }
 .cb-err { margin: 0; flex-basis: 100%; font-size: .8rem; color: var(--red); }
 .consent-band.done { justify-content: center; border-style: solid; }
 .cb-done { font-size: .87rem; font-weight: 700; color: var(--green-dark); }
+
+/* ─── עמוד הנחיתה (2026-09-02) ────────────────────────────────
+   מחליף את קופסת ההתחברות. נמדד: מ-35 מפגשים, 21 עזבו בלי ללחוץ
+   על כלום ואף אחד לא לחץ על ההרשמה. המסך הקודם לא הראה מה יש בפנים. */
+.lp-card{max-width:32rem;text-align:right}
+.lp-kicker{
+  margin-top:1.5rem;font-size:.72rem;font-weight:800;letter-spacing:.13em;
+  color:var(--orange);display:flex;align-items:center;gap:.55rem;
+}
+.lp-kicker::after{content:"";flex:1;height:1px;background:var(--border)}
+.lp-h1{
+  margin:.5rem 0 0;font-family:var(--serif);font-weight:900;
+  font-size:clamp(1.5rem,5.5vw,2rem);line-height:1.25;text-wrap:balance;
+}
+.lp-lead{margin:.6rem 0 0;font-size:.95rem;line-height:1.7;color:var(--muted)}
+.lp-lead strong{color:var(--text);font-weight:700}
+.lp-points{margin:1.1rem 0 0;padding-inline-start:1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.lp-points li{font-size:.9rem;line-height:1.6;color:var(--muted)}
+.lp-points b{color:var(--text);font-weight:800}
+.lp-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(5rem,1fr));gap:.5rem;
+  margin:1.2rem 0 1.3rem;padding:.85rem .5rem;
+  background:var(--bg);border-radius:var(--radius-sm);
+}
+.lp-stat{text-align:center}
+.lp-stat b{
+  display:block;font-family:var(--serif);font-size:1.25rem;font-weight:900;
+  color:var(--green-dark);line-height:1.2;font-variant-numeric:tabular-nums;
+}
+.lp-stat span{font-size:.68rem;font-weight:700;color:var(--muted);line-height:1.35;display:block}
+.btn-start{
+  width:100%;padding:.9rem;border:none;border-radius:var(--radius-sm);
+  background:var(--green);color:var(--card);font:inherit;font-size:1rem;font-weight:800;
+  cursor:pointer;margin-bottom:.6rem;
+}
+.btn-start:hover{background:var(--green-dark)}
+.btn-start:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.lp-fine{margin-top:.45rem;font-size:.73rem;text-align:center;color:var(--muted);line-height:1.55}
