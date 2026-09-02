@@ -16,6 +16,7 @@ import { AudioPlayer }                 from './audio-player.js';
 import { ListeningItem }               from './item-component.js';
 import { navigate }                    from '../router.js';
 import './diagnostic.css';
+import '../lib/signIn.js';
 
 // ─── ⚠️ PARKED SCREEN — NOT part of the product's entry path ──────────────────
 // SITEMAP.md: "listening/diagnostic.js — יוצא מנתיב הכניסה. מועמד להפוך
@@ -58,7 +59,7 @@ export async function renderDiagnostic(root) {
     root.innerHTML = `
       <div class="diag-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;">
         <p style="font-size:1.05rem;color:var(--text, #14201A);font-weight:600;">יש להתחבר לחשבון כדי להתחיל את האבחון</p>
-        <button class="btn-diag-primary" style="max-width:240px" onclick="location.hash='/'">כניסה לחשבון</button>
+        <button class="btn-diag-primary" style="max-width:240px" onclick="window.__hsSignIn && window.__hsSignIn()">כניסה לחשבון</button>
       </div>`;
     return;
   }

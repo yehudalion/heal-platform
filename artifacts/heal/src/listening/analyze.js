@@ -18,6 +18,7 @@ import { renderTypeSplit }                       from './dashboard.js';
 import { summarizeMistakes }                      from './keys.js';
 import { navigate }                               from '../router.js';
 import './dashboard.css';
+import '../lib/signIn.js';
 
 export async function renderListeningAnalyze(root) {
   root.className = 'ldash-wrap';
@@ -29,7 +30,7 @@ export async function renderListeningAnalyze(root) {
       <div class="ldash-body" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
         <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון</p>
         <button class="btn-ldash-primary" style="max-width:220px"
-          onclick="location.hash='/'">כניסה לחשבון</button>
+          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה לחשבון</button>
       </div>`;
     return;
   }

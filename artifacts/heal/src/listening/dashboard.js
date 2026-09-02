@@ -22,6 +22,7 @@ import { getProfile }            from '../data/profiles.data.js';
 import { navigate }              from '../router.js';
 import { lengthPicker, typePicker } from '../lib/sessionPrefs.js';
 import './dashboard.css';
+import '../lib/signIn.js';
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
 export async function renderListeningDashboard(root) {
@@ -34,7 +35,8 @@ export async function renderListeningDashboard(root) {
       <div class="ldash-body" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
         <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">יש להתחבר לחשבון</p>
         <button class="btn-ldash-primary" style="max-width:220px"
-          onclick="location.hash='/'">כניסה לחשבון</button>
+          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.7;max-width:320px">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
       </div>`;
     return;
   }

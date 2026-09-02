@@ -24,6 +24,7 @@ import { summarizeMistakes }             from './keys.js';
 import { navigate }                      from '../router.js';
 import { getSessionLength, getSessionType } from '../lib/sessionPrefs.js';
 import './session.css';
+import '../lib/signIn.js';
 
 // ─── Module-level session state ───────────────────────────────────────────────
 let _items          = [];      // [{ id, item_type, ... }] in play order (index 0 = warmup)
@@ -53,7 +54,8 @@ export async function renderSession(root) {
       <div class="sess-screen" style="align-items:center;justify-content:center;text-align:center;gap:16px;padding-top:60px;">
         <p style="font-size:1rem;font-weight:600;color:var(--text, #14201A)">ההאזנה שומרת את ההתקדמות שלך, ולכן דורשת חשבון חינם — ההרשמה לוקחת 10 שניות עם Google.</p>
         <button class="btn-sess-primary" style="max-width:220px"
-          onclick="location.hash='/'">כניסה לחשבון</button>
+          onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.7;max-width:320px">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
       </div>`;
     return;
   }

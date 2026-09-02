@@ -6,6 +6,7 @@ import { getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
 import { getCoverage } from '../data/coverage.data.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
+import '../lib/signIn.js';
 
 const MAX_REQUEUES = 2;
 
@@ -433,8 +434,9 @@ export async function renderCard(root) {
       </header>
       <main class="vc-main">
         <div class="vc-card">
-          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">התרגול שומר את ההתקדמות שלך, ולכן דורש חשבון חינם — ההרשמה לוקחת 10 שניות עם Google.</p>
-          <button class="btn-primary" style="display:block;margin:1.25rem auto 2rem" onclick="location.hash='/'">כניסה לחשבון</button>
+          <p dir="rtl" style="text-align:center;color:var(--muted);padding:2rem 2rem 0">הכרטיסיות עובדות לפי חזרה מרווחת ולכן זוכרות מה כבר ידעת — בשביל זה צריך חשבון חינם. ההרשמה לוקחת 10 שניות עם Google.</p>
+          <button class="btn-primary" style="display:block;margin:1.25rem auto .75rem" onclick="window.__hsSignIn && window.__hsSignIn()">כניסה עם Google</button>
+          <p dir="rtl" style="text-align:center;font-size:.85rem;color:var(--muted);padding:0 1.5rem 1.75rem;line-height:1.7">לא רוצים להירשם עכשיו? אפשר לתרגל בלי חשבון ב<a href="#/rephrasing" style="color:var(--green-dark);font-weight:700">ניסוח מחדש</a> וב<a href="#/sentence-completion" style="color:var(--green-dark);font-weight:700">השלמת משפטים</a>.</p>
         </div>
         <div class="card-footer"><a href="#/home">← חזרה לדף הבית</a></div>
       </main>
