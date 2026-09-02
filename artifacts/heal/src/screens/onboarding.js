@@ -15,6 +15,7 @@
 import { navigate } from '../router.js';
 import { getCurrentSession, isGuest } from '../supabase.js';
 import { completeOnboarding } from '../data/profiles.data.js';
+import { track } from '../lib/analytics.js';
 
 export const GUEST_PROFILE_KEY = 'guest_profile';
 
@@ -26,6 +27,21 @@ export function getGuestProfile() {
   } catch {
     return null;
   }
+}
+
+/**
+ * 🔴 2.9.2026 — track() נקרא כאן בלי שיובא, וזרק ReferenceError בדיוק בין
+ * שמירת הפרופיל לבין navigate('/home'). התוצאה: הכפתור נשאר "שומר…" ונעול,
+ * והתלמיד תקוע במסך מת אחרי שסיים את ההרשמה. 12 מכשירים שונים נפגעו
+ * ביום אחד (client_errors), וזה הסביר 34 מבקרים מול אפס חשבונות פעילים.
+ *
+ * הייבוא תוקן, אבל התיקון האמיתי הוא כאן: מדידה לעולם לא חוסמת ניווט.
+ * אם track ייפול שוב מסיבה כלשהי, התלמיד ימשיך הלאה ואנחנו נאבד אירוע —
+ * זה הכיוון הנכון של הכשל.
+ */
+function safeTrack(props) {
+  try { track('onboarding_completed', props); }
+  catch (err) { console.warn('onboarding track failed:', err); }
 }
 
 export function renderOnboarding(root) {
@@ -133,7 +149,7 @@ export function renderOnboarding(root) {
       localStorage.setItem(GUEST_PROFILE_KEY, JSON.stringify({
         ...answers, onboarding_complete: true,
       }));
-      track('onboarding_completed', { as: 'guest', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
+      safeTrack({ as: 'guest', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
       navigate('/home');
       return;
     }
@@ -149,7 +165,7 @@ export function renderOnboarding(root) {
       submitBtn.textContent = 'בוא נתחיל ←';
       return;
     }
-    track('onboarding_completed', { as: 'user', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
+    safeTrack({ as: 'user', minutes: chosenMinutes, has_exam_date: !!dateInput.value });
     navigate('/home');
   });
 }
