@@ -15,6 +15,10 @@ import { renderSentenceCompletion } from './screens/sentence-completion.js';
 import { renderScLearn }    from './screens/sc-learn.js';
 import { renderScPractice } from './screens/sc-practice.js';
 import { renderScAnalyze }  from './screens/sc-analyze.js';
+import { renderReading }         from './screens/reading.js';
+import { renderReadingLearn }    from './screens/reading-learn.js';
+import { renderReadingPractice } from './screens/reading-practice.js';
+import { renderReadingAnalyze }  from './screens/reading-analyze.js';
 
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
@@ -92,6 +96,12 @@ route('/sentence-completion', requireAuth(renderSentenceCompletion));
 route('/sc-learn',     requireAuth(renderScLearn));
 route('/sc-practice',  requireAuth(renderScPractice));
 route('/sc-analyze',   requireAuth(renderScAnalyze));
+
+// ─── Reading Comprehension (3-layer, same shape as the other corners) ────────
+route('/reading',          requireAuth(renderReading));           // Section gate
+route('/reading-learn',    requireAuth(renderReadingLearn));      // Learn — the Window Method
+route('/reading-practice', requireAuth(renderReadingPractice));   // Practice — passage + 5 questions ( ?mode=exam for the timed section )
+route('/reading-analyze',  requireAuth(renderReadingAnalyze));    // Analyze — by window size
 
 // Keep old /card and /gap routes for backwards compatibility
 route('/card', requireAuth(renderCard));

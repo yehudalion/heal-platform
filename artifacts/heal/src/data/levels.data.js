@@ -28,6 +28,10 @@ import { supabase } from '../supabase.js'
 export const MODULE_LEVELS = {
   rephrase: { min: 2, max: 5, start: 2 },
   sc:       { min: 1, max: 8, start: 1 },
+  // Reading is bounded 2..7 rather than the schema's full 1..8: the bank holds a
+  // single passage at difficulty 1 and a single one at 8, so a center that
+  // drifted to either edge would hand the learner the same text every session.
+  reading:  { min: 2, max: 7, start: 4 },
 }
 
 /**

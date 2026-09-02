@@ -26,6 +26,7 @@ const SCREEN_TITLES = {
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
   '/sentence-completion':  'השלמת משפטים',
+  '/reading':              'הבנת הנקרא',
   '/dictionary':           'מילון',
   '/mistake-notebook':     'מחברת טעויות',
   '/insights':             'התובנות שלי',
@@ -64,27 +65,30 @@ export async function renderLayout(root, activePath) {
         <!-- 2026-08-26 (Lion): sidebar rebuilt to actually match live modules —
              האזנה היתה חסרה מהסרגל לגמרי, ו"כרטיסיות" היה שם
              שונה למה שהלוח הבית קורא לאותה מודול ("אוצר מילים"). -->
+        <!-- 2.9.2026 (ליאון): "תרגול" מכיל רק מודולי תרגול בפועל — אבחון
+             רמה ומילון עברו ל"ללמוד" (הם לא תרגול יומיומי, הם הכנה/עזר). -->
         <div class="nav-lbl">תרגול</div>
-        <a class="nav-item${activePath==='/simulation'?' active':''}" data-nav="/simulation">
-          <span class="nav-icon">📋</span>אבחון רמה
-        </a>
-        <a class="nav-item${activePath==='/listening'?' active':''}" data-nav="/listening">
-          <span class="nav-icon">${ico.listen}</span>האזנה
-        </a>
         <a class="nav-item${activePath==='/flashcards'?' active':''}" data-nav="/flashcards">
           <span class="nav-icon">${ico.cards}</span>אוצר מילים
-        </a>
-        <a class="nav-item${activePath==='/dictionary'?' active':''}" data-nav="/dictionary">
-          <span class="nav-icon">${ico.book}</span>מילון
         </a>
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
           <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
         </a>
         ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
+        <a class="nav-item${activePath==='/listening'?' active':''}" data-nav="/listening">
+          <span class="nav-icon">${ico.listen}</span>האזנה
+        </a>
+        ${navItem('reading', ico.reading, 'הבנת הנקרא', '/reading', activePath)}
 
         <div class="nav-lbl">ללמוד</div>
         <a class="nav-item${activePath==='/guides'?' active':''}" data-nav="/guides">
           <span class="nav-icon">📖</span>מדריכים
+        </a>
+        <a class="nav-item${activePath==='/simulation'?' active':''}" data-nav="/simulation">
+          <span class="nav-icon">📋</span>אבחון רמה
+        </a>
+        <a class="nav-item${activePath==='/dictionary'?' active':''}" data-nav="/dictionary">
+          <span class="nav-icon">${ico.book}</span>מילון
         </a>
 
         <div class="nav-lbl">חשבון</div>
@@ -431,5 +435,6 @@ const ico = {
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
   book:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3.6c-1.4-1-3.2-1.2-5-.9v9c1.8-.3 3.6-.1 5 .9 1.4-1 3.2-1.2 5-.9v-9c-1.8-.3-3.6-.1-5 .9z"/><path d="M8 3.6v9"/></svg>`,
   notebook:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2" width="11" height="12" rx="1.5"/><path d="M5.5 6h5M5.5 9h5M5.5 12h3"/></svg>`,
+  reading:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="11" height="11" rx="1.5"/><path d="M5 6h6M5 8.5h6M5 11h3.5"/></svg>`,
   insights:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 14V2M2 14h12"/><rect x="4" y="9" width="2.4" height="5" rx=".5"/><rect x="7.8" y="6" width="2.4" height="8" rx=".5"/><rect x="11.6" y="3.5" width="2.4" height="10.5" rx=".5"/></svg>`,
 };
