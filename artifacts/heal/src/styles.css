@@ -1200,23 +1200,24 @@ a { text-decoration: none; color: inherit; }
 /* Home rows 6-9, added 2026-09-01. Only one of .diag-empty / .diag-sec-title
    is ever present, so they share row 6. No row-gap is defined on this grid,
    so an unused row collapses to zero height and leaves no gap.
-   .wod-sec-title / .wod-card were inserted at rows 6-7 on 2026-09-02 and
-   everything below shifted down by two. Every direct child of this grid must
+   .consent-band (row 6) and .wod-sec-title/.wod-card (rows 7-8) were inserted
+   on 2026-09-02; everything below shifted down accordingly. Every direct child of this grid must
    have a rule here; one without a rule is auto-placed and breaks the desktop
    layout silently.
    ORDER MATTERS: .diag-sec-title, .guides-sec-title and .wod-sec-title also carry the
    .sec-title class, whose rule above pins row 4 at equal specificity.
    These rules win only because they come later. Do not move them above
    the .sec-title rule, and do not reorder this block. */
-#page-content > .fade-in:has(> .wk-card) > .wod-sec-title    { grid-column: 1 / -1; grid-row: 6; }
-#page-content > .fade-in:has(> .wk-card) > .wod-card         { grid-column: 1 / -1; grid-row: 7; }
-#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 8; }
-#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 8; }
-#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 9; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 10; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 11; }
-#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 12; }
-#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 13; }
+#page-content > .fade-in:has(> .wk-card) > .consent-band     { grid-column: 1 / -1; grid-row: 6; }
+#page-content > .fade-in:has(> .wk-card) > .wod-sec-title    { grid-column: 1 / -1; grid-row: 7; }
+#page-content > .fade-in:has(> .wk-card) > .wod-card         { grid-column: 1 / -1; grid-row: 8; }
+#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 9; }
+#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 9; }
+#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 10; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 11; }
+#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 12; }
+#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 13; }
+#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 14; }
 
 @media (max-width: 900px) {
   #page-content > .fade-in:has(> .wk-card) { display: block; }
@@ -1474,3 +1475,40 @@ a { text-decoration: none; color: inherit; }
 .wod-more { align-self: flex-start; font-size: .83rem; font-weight: 700; color: var(--green-dark); text-decoration: none; }
 .wod-more:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) { .wod-chev { transition: none; } }
+
+/* ─── פס ההסכמה לדיוור (2026-09-02) ──────────────────────────
+   שקט בכוונה: זו לא קריאה לפעולה ואסור לה להתחרות ב-CTA הראשי.
+   מוצג פעם אחת בלבד, ואחרי תשובה מוחלף בהודעת אישור באותו מקום. */
+.consent-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem .9rem;
+  margin-top: 1.4rem;
+  padding: .75rem 1rem;
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+.cb-text { margin: 0; flex: 1 1 18rem; font-size: .85rem; line-height: 1.6; color: var(--muted); }
+.cb-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.cb-btn {
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+.cb-yes { background: var(--green-light); border-color: var(--green-light); color: var(--green-dark); }
+.cb-yes:hover:not(:disabled) { border-color: var(--green); }
+.cb-no:hover:not(:disabled) { border-color: var(--muted); }
+.cb-btn:disabled { opacity: .5; cursor: default; }
+.cb-btn:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.cb-err { margin: 0; flex-basis: 100%; font-size: .8rem; color: var(--red); }
+.consent-band.done { justify-content: center; border-style: solid; }
+.cb-done { font-size: .87rem; font-weight: 700; color: var(--green-dark); }

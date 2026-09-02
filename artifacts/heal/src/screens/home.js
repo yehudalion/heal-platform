@@ -53,6 +53,7 @@ import {
 } from './insights.js';
 import { GUIDES } from './guides.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
+import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 
 // home.js לא החזיק esc() עד עכשיו כי כל הטקסט בו היה קבוע. המילה של היום
 // היא התוכן הראשון שמגיע מהמסד, ולכן חייבת בריחה.
@@ -76,6 +77,7 @@ export async function renderHome(root) {
 
   const session = await getCurrentSession();
   const userId  = session?.user?.id ?? null;
+  currentUserId = userId;   // ה-handler של פס ההסכמה רץ מחוץ לפונקציה הזו
   const guest   = isGuest() && !userId;
   const name    = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
 
@@ -150,12 +152,13 @@ export async function renderHome(root) {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
-  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes] = await Promise.all([
+  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes, consentRes] = await Promise.all([
     listAttempts(userId, 1),
     userId ? getAccuracyByModule(userId) : Promise.resolve({ status: 'guest', modules: [] }),
     userId ? getCumulativeGrowth(userId) : Promise.resolve({ status: 'guest' }),
     userId ? getActivityCalendar(userId) : Promise.resolve({ status: 'guest' }),
     getWordOfDay(),   // לא תלוי במשתמש — גם אורח מקבל אותה
+    userId ? getConsentState(userId) : Promise.resolve({ state: 'unknown' }),
   ]);
   const lastSim = (simAttempts || [])[0] ?? null;
   ensureInsightStyles();
@@ -218,6 +221,8 @@ export async function renderHome(root) {
         </div>
       </div>
 
+      ${consentBand(consentRes)}
+
       ${wordOfDaySection(wodRes)}
 
       ${diagnosticBand(lastSim)}
@@ -241,6 +246,35 @@ export async function renderHome(root) {
   el.querySelectorAll('.wod-audio').forEach((btn) => {
     btn.addEventListener('click', () => playWodAudio(btn.dataset.src));
   });
+
+  el.querySelectorAll('.cb-btn').forEach((btn) => {
+    btn.addEventListener('click', () => onConsent(el, btn.dataset.answer === 'yes'));
+  });
+}
+
+// נקבע בכל רינדור של המסך. ה-handler של פס ההסכמה הוא פונקציה ברמת המודול
+// ולכן אין לו גישה ל-userId המקומי של render.
+let currentUserId = null;
+
+/** שומר את ההכרעה ומחליף את הפס בהודעה. הפס לא חוזר — נשאלים פעם אחת. */
+async function onConsent(el, yes) {
+  const band = el.querySelector('.consent-band');
+  if (!band) return;
+  band.querySelectorAll('.cb-btn').forEach((b) => { b.disabled = true; });
+
+  const { error } = await setConsent(currentUserId, yes, 'home');
+  if (error) {
+    console.warn('betaConsent.setConsent failed:', error);
+    band.querySelectorAll('.cb-btn').forEach((b) => { b.disabled = false; });
+    const err = band.querySelector('.cb-err');
+    if (err) err.hidden = false;
+    return;
+  }
+  // גם "לא" מקבל אישור ולא היעלמות שקטה — אחרת התלמיד לא יודע שנשמע.
+  band.classList.add('done');
+  band.innerHTML = yes
+    ? '<span class="cb-done">✓ תודה. אעדכן אתכם כשיהיה משהו חדש.</span>'
+    : '<span class="cb-done">✓ נרשם. לא נשלח לכם מיילים.</span>';
 }
 
 // הקראה: הפניה אחת ששומרים כדי שאפשר יהיה לעצור אותה. שתי לחיצות רצופות
@@ -327,6 +361,30 @@ function metricsSection(accuracy, growth, calendar) {
  * המילה נבחרת לפי התאריך ולכן זהה לכולם ויציבה לאורך היום (ראו
  * wordOfDay.data.js). בלי תוכן — הפינה לא מצוירת בכלל.
  */
+/**
+ * ⚖️ הסכמה לדיוור — נשאלת פעם אחת בלבד.
+ *
+ * המייל של התלמיד כבר אצלנו מהתחברות גוגל, אבל הרשמה למוצר אינה הסכמה
+ * לקבל ממנו דיוור (חוק התקשורת, תיקון 40). הפס הזה הוא המקום היחיד
+ * שבו נוצרת רשימת תפוצה חוקית.
+ *
+ * מוצג אך ורק במצב 'unasked'. מי שענה — כן או לא — לא נשאל שוב, וגם
+ * אורח לא נשאל: אין לו חשבון, אין מייל, ואין למה לשייך את ההסכמה.
+ * הנוסח שמוצג הוא בדיוק המחרוזת שנשמרת (CONSENT_TEXT), לא ניסוח מקביל.
+ */
+function consentBand(res) {
+  if (res?.state !== 'unasked') return '';
+  return `
+    <div class="consent-band">
+      <p class="cb-text">${esc(CONSENT_TEXT)}</p>
+      <div class="cb-actions">
+        <button type="button" class="cb-btn cb-yes" data-answer="yes">כן, עדכנו אותי</button>
+        <button type="button" class="cb-btn cb-no" data-answer="no">לא, תודה</button>
+      </div>
+      <p class="cb-err" hidden>לא הצלחנו לשמור. אפשר לנסות שוב.</p>
+    </div>`;
+}
+
 function wordOfDaySection(res) {
   const w = res?.word;
   if (!w) return '';
