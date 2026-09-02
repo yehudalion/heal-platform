@@ -39,201 +39,21 @@ export async function signOut() {
   localStorage.removeItem(GUEST_RATINGS_KEY);
 }
 
-// ─── Ratings ──────────────────────────────────────────────────────────────────
-export async function recordRating(wordId, rating) {
-  if (isGuest() || !supabase) {
-    const all = JSON.parse(localStorage.getItem(GUEST_RATINGS_KEY) || "{}");
-    all[wordId] = { rating, at: Date.now() };
-    localStorage.setItem(GUEST_RATINGS_KEY, JSON.stringify(all));
-    return { ok: true };
-  }
-  const session = await getCurrentSession();
-  if (!session) return { ok: false, error: "Not signed in" };
-  const { error } = await supabase.from("ratings").upsert(
-    { user_id: session.user.id, word_id: wordId, rating },
-    { onConflict: "user_id,word_id" }
-  );
-  return error ? { ok: false, error: error.message } : { ok: true };
-}
-
-export async function getAllRatings() {
-  if (isGuest() || !supabase) {
-    const all = JSON.parse(localStorage.getItem(GUEST_RATINGS_KEY) || "{}");
-    return Object.entries(all).map(([word_id, v]) => ({ word_id, rating: v.rating }));
-  }
-  const session = await getCurrentSession();
-  if (!session) return [];
-  const { data, error } = await supabase
-    .from("ratings")
-    .select("word_id, rating")
-    .eq("user_id", session.user.id);
-  return error ? [] : (data || []);
-}
-
-// ─── Local words fallback (words.json) ───────────────────────────────────────
-// Used when Supabase words table is empty or unavailable.
-// Maps local schema → Supabase schema so normaliseRows works on both.
-async function getLocalWords() {
-  const { default: raw } = await import('./data/words.json', { with: { type: 'json' } }).catch(
-    () => import('./data/words.json')
-  );
-  return raw.map((w, i) => ({
-    id:                 w.id,
-    headword:           w.headword,
-    pos:                w.pos || '',
-    tier:               w.level === 'advanced' ? 'A' : w.level === 'intermediate' ? 'B' : 'C',
-    impact_score:       String((1.0 - i * 0.01).toFixed(2)),
-    definition:         w.definition || '',
-    definition_he:      '',
-    sentence:           w.sentence || '',
-    sentence_he:        '',
-    mnemonic:           null,
-    mnemonic_2:         null,
-    mnemonic_3:         null,
-    audio_word_url:     w.audio_url || null,
-    // Reuse word audio for sentence panel until real sentence audio is available
-    audio_sentence_url: w.audio_url || null,
-  }));
-}
-
-// ─── Words — all columns restored ────────────────────────────────────────────
-export async function getWords() {
-  if (!supabase) return getLocalWords();
-  const { data, error } = await supabase
-    .from("words")
-    .select(
-      "id, headword, tier, impact_score, pos, " +
-      "definition, definition_he, " +
-      "surface_1, " +
-      "mnemonic, mnemonic_2, mnemonic_3, " +
-      "audio_word_url, audio_sentence_url"
-    )
-    .in("tier", ["gold", "silver"])
-    .order("impact_score", { ascending: false });
-  const result = error ? [] : (data || []);
-  // If Supabase table is empty, fall back to local words
-  return result.length > 0 ? result : getLocalWords();
-}
-
-// ─── SRS helpers ──────────────────────────────────────────────────────────────
-// Returns words due for review today, topped up with new words to reach `limit`
-export async function getDueWords(limit = 20) {
-  if (!supabase) return [];
-  const session = await getCurrentSession();
-  if (!session && !isGuest()) return [];
-
-  const now = new Date().toISOString();
-
-  if (!isGuest() && session) {
-    // Due reviews first
-    const { data: due } = await supabase
-      .from("words")
-      .select(
-        "id, headword, tier, impact_score, pos, " +
-        "definition, definition_he, " +
-        "surface_1, " +
-        "mnemonic, mnemonic_2, mnemonic_3, " +
-        "audio_word_url, audio_sentence_url, " +
-        "ratings!left(ease_factor, review_count, next_review)"
-      )
-      .in("tier", ["gold", "silver"])
-      .eq("ratings.user_id", session.user.id)
-      .lte("ratings.next_review", now)
-      .order("impact_score", { ascending: false })
-      .limit(limit);
-
-    const result = normaliseRows(due || []);
-
-    if (result.length >= limit) return result;
-
-    // Top up with unseen words
-    const seenIds = result.map((w) => w.id).filter(Boolean);
-    let q = supabase
-      .from("words")
-      .select(
-        "id, headword, tier, impact_score, pos, " +
-        "definition, definition_he, " +
-        "surface_1, " +
-        "mnemonic, mnemonic_2, mnemonic_3, " +
-        "audio_word_url, audio_sentence_url"
-      )
-      .in("tier", ["gold", "silver"])
-      .order("impact_score", { ascending: false })
-      .limit(limit - result.length + 10);
-
-    if (seenIds.length) q = q.not("id", "in", `(${seenIds.join(",")})`);
-
-    const { data: fresh } = await q;
-    const combined = [...result, ...normaliseRows(fresh || []).slice(0, limit - result.length)];
-    if (combined.length > 0) return combined;
-    // Fall through to guest path if auth queries returned nothing
-  }
-
-  // Guest (or auth fallback) — return top words normalised
-  return getWords().then((ws) => normaliseRows(ws).slice(0, limit));
-}
-
-function normaliseRows(rows) {
-  return rows.map((w) => ({
-    id:           w.id,
-    word:         w.headword,
-    pos:          w.pos || "",
-    tier:         w.tier === 'gold' ? 'A' : w.tier === 'silver' ? 'B' : w.tier || 'C',
-    impact:       parseFloat(w.impact_score) || 0,
-    def:          w.definition || "",
-    def_he:       w.definition_he || w.definition || "",
-    sentence:     w.surface_1 || w.sentence || "",
-    sentence_he:  "",
-    meanings:     [w.definition_he].filter(Boolean),
-    assoc:        [w.mnemonic, w.mnemonic_2, w.mnemonic_3].filter(Boolean),
-    audioWord:    w.audio_word_url   || null,
-    audioSentence:w.audio_sentence_url || null,
-    // SRS state (may be null for new words)
-    easeFactor:   w.ratings?.[0]?.ease_factor  ?? 2.5,
-    reviewCount:  w.ratings?.[0]?.review_count ?? 0,
-  }));
-}
-
-// ─── SRS — save rating with SM-2 ─────────────────────────────────────────────
-export function calcNextReview(rating, ef = 2.5, count = 0) {
-  let interval, newEF = ef;
-  if (rating === "hard")        { interval = 1; newEF = Math.max(1.3, ef - 0.2); }
-  else if (rating === "medium") { interval = count <= 1 ? 3 : Math.round(count * ef); }
-  else                          { interval = count <= 1 ? 4 : Math.round(count * ef * 1.3); newEF = Math.min(2.5, ef + 0.1); }
-  const next = new Date();
-  next.setDate(next.getDate() + interval);
-  return { nextReview: next.toISOString(), newEF };
-}
-
-export async function saveSrsRating(wordId, rating, ef, count) {
-  if (isGuest() || !supabase) return recordRating(wordId, rating);
-  const session = await getCurrentSession();
-  if (!session) return { ok: false };
-  const { nextReview, newEF } = calcNextReview(rating, ef, count);
-  const { error } = await supabase.from("ratings").upsert(
-    {
-      user_id:      session.user.id,
-      word_id:      wordId,
-      rating,
-      ease_factor:  newEF,
-      review_count: count + 1,
-      next_review:  nextReview,
-    },
-    { onConflict: "user_id,word_id" }
-  );
-  return error ? { ok: false } : { ok: true };
-}
-
-// ─── Level ────────────────────────────────────────────────────────────────────
-export function getLevel() {
-  return localStorage.getItem(LEVEL_KEY) || "intermediate";
-}
-export function setLevel(level) {
-  localStorage.setItem(LEVEL_KEY, level);
-}
-
-// ─── Audio playback ───────────────────────────────────────────────────────────
-export function playAudio(url) {
-  if (!url) return;
-  try { new Audio(url).play(); } catch (_) {}
-}
+// ─── מה שהיה כאן והוסר (2.9.2026) ────────────────────────────────────────────
+//
+// הקובץ הזה החזיק שתי שכבות זו על גבי זו: שכבת ההתחברות שלמעלה, שהיא חיה
+// ומיובאת בעשרות מקומות, ומתחתיה שכבת דאטה מלפני העיצוב מחדש שאף קובץ
+// באפליקציה לא ייבא כבר: recordRating, getAllRatings, getWords, getDueWords,
+// saveSrsRating, calcNextReview, getLevel, setLevel, playAudio, getLocalWords,
+// והנפילה-לאחור ל-src/data/words.json.
+//
+// 🔴 הסיבה האמיתית להסרה, לא רק ניקיון: getWords() סיננה
+// `.in("tier", ["gold","silver"])` — מנגנון סינון שלישי של המילים שלא מתועד
+// בשום מקום וסותר את שני המנגנונים החיים (impact_score, ובריכת ליבה/הרחבה).
+// היא ישבה ליד פונקציות שכן בשימוש ונראתה סבירה לגמרי. צ'אט שהיה צריך
+// "להביא מילים" ורואה פונקציה בשם getWords היה לוקח אותה, והמילים היו
+// מסוננות לפי tier — תווית שהוכרעה כשיווקית בלבד. זה לא היה זועק בשום שלב.
+//
+// שכבת הדאטה הנכונה: src/data/*.data.js בלבד. מסכים לא קוראים ל-supabase
+// ישירות (ARCHITECTURE.md). getLevel/setLevel הוחלפו מזמן ב-
+// user_module_levels + src/data/levels.data.js.
