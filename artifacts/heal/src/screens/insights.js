@@ -1,6 +1,6 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { getCurrentSession } from '../supabase.js';
-import { getWeakPointsChart, getWeeklyActivity, getSrsGrowth, getVocabFunnel, getAccuracyByModule, getCumulativeGrowth, getMistakeNotebookProgress } from '../data/insights.data.js';
+import { getWeakPointsChart, getActivityCalendar, getSrsGrowth, getVocabFunnel, getAccuracyByModule, getCumulativeGrowth, getMistakeNotebookProgress } from '../data/insights.data.js';
 
 // "התובנות שלי" (מוצר/UX chat, 2026-08-30) — 8 of the 9 charts scoped in
 // claude/PLAN_levels_analytics_corners.md §1, all following the same
@@ -77,26 +77,76 @@ function weakPointsCard(res) {
   return cardShell(TITLE, 'מדורג לפי כמה פעמים זה מבלבל אתכם יחסית לשאר', bars);
 }
 
-// ─── Card 2: הימים שבהם אתם הכי פעילים ───
-// Renamed 31.8 — "הקצב השבועי" read as "this week" and collided with the home
-// screen's weekly dots. This card is a day-of-week PATTERN over 8 weeks.
-export function weeklyActivityCard(res) {
-  const TITLE = 'הימים שבהם אתם הכי פעילים';
+// ─── Card 2: לוח הפעילות ───
+// החליף את עמודות "הימים שבהם אתם הכי פעילים" (ליאון, 2.9): אותו דאטה,
+// אבל 10 שבועות במקום ממוצע יום-בשבוע, ובריחוף רואים את הזמן בפועל.
+const HE_MONTHS = ['בינואר','בפברואר','במרץ','באפריל','במאי','ביוני',
+                   'ביולי','באוגוסט','בספטמבר','באוקטובר','בנובמבר','בדצמבר'];
+
+/** משך בעברית. מתחת לשעה — דקות שלמות, כי "0.3 שעות" לא אומר כלום.
+ *  ריבוי עברי אמיתי: "דקה" / "שתי דקות" / "שעתיים" — לא "1 דקות". */
+function heMinutes(n) {
+  if (n === 1) return 'דקה';
+  if (n === 2) return 'שתי דקות';
+  return `${n} דקות`;
+}
+function heHours(n) {
+  if (n === 1) return 'שעה';
+  if (n === 2) return 'שעתיים';
+  return `${n} שעות`;
+}
+function fmtDuration(ms) {
+  const min = Math.round(ms / 60000);
+  if (min < 1) return 'פחות מדקה';
+  if (min < 60) return heMinutes(min);
+  const h = Math.floor(min / 60), r = min % 60;
+  return r ? `${heHours(h)} ו-${heMinutes(r)}` : heHours(h);
+}
+function heActions(n) {
+  return n === 1 ? 'פעולה אחת' : `${n} פעולות`;
+}
+function heDays(n) {
+  return n === 1 ? 'יום אחד' : `${n} ימים`;
+}
+
+function fmtDayHe(key) {
+  const [, m, d] = key.split('-');
+  return `${Number(d)} ${HE_MONTHS[Number(m) - 1]}`;
+}
+
+export function activityCalendarCard(res) {
+  const TITLE = 'לוח הפעילות שלך';
   if (res.status === 'guest') return cardShell(TITLE, '', buildingBlock('התחברו כדי לראות את זה.'));
   if (res.status === 'error') return cardShell(TITLE, '', buildingBlock('אין כרגע נתונים להצגה.'));
   if (res.status === 'building') {
     return cardShell(TITLE, '',
-      buildingBlock(`עוד כמה תרגולים ותראו כאן את הימים שבהם אתם הכי פעילים (${res.total}/${res.min}).`));
+      buildingBlock(`עוד כמה תרגולים ותראו כאן את לוח הפעילות שלכם (${res.total}/${res.min}).`));
   }
-  const max = Math.max(1, ...res.counts);
-  const bars = res.counts.map((c, i) => {
-    const pct = Math.max(4, Math.round((c / max) * 100));
-    return `<div class="ins-vbar-col">
-      <div class="ins-vbar-track"><div class="ins-vbar-fill" style="height:${pct}%"></div></div>
-      <div class="ins-vbar-lbl">${DOW[i]}</div>
-    </div>`;
+
+  // ספי הצבע נגזרים מהיום החזק של התלמיד עצמו, לא ממספר קבוע — אחרת מי
+  // שמתרגל מעט רואה לוח ריק לגמרי ומי שמתרגל הרבה רואה לוח אחיד.
+  const max = Math.max(1, ...res.cells.map((c) => c.n));
+  const level = (n) => (n === 0 ? 0 : n >= max * 0.75 ? 4 : n >= max * 0.5 ? 3 : n >= max * 0.25 ? 2 : 1);
+
+  const squares = res.cells.map((c) => {
+    const tip = c.n === 0
+      ? `${fmtDayHe(c.key)} — לא תרגלתם`
+      : `${fmtDayHe(c.key)} — ${heActions(c.n)}${c.ms ? `, ${fmtDuration(c.ms)}` : ''}`;
+    return `<span class="ins-cal-d l${level(c.n)}" style="grid-row:${c.dow + 1}" title="${esc(tip)}"></span>`;
   }).join('');
-  return cardShell(TITLE, 'פעולות תרגול ב-8 השבועות האחרונים, לפי יום בשבוע', `<div class="ins-vbars">${bars}</div>`);
+
+  const foot = `<div class="ins-cal-foot">
+    <span>${heActions(res.total)} ב-${heDays(res.activeDays)}${res.totalMs ? ` · ${fmtDuration(res.totalMs)} של תרגול` : ''}</span>
+    <span class="ins-cal-key">פחות
+      <span class="ins-cal-d l0"></span><span class="ins-cal-d l1"></span><span class="ins-cal-d l2"></span><span class="ins-cal-d l3"></span><span class="ins-cal-d l4"></span>
+    יותר</span>
+  </div>`;
+
+  return cardShell(TITLE, 'כל ריבוע הוא יום. ריחוף מציג כמה תרגלתם וכמה זמן זה לקח',
+    `<div class="ins-cal-wrap">
+      <div class="ins-cal-dows">${[0,2,4].map((i) => `<span style="grid-row:${i + 1}">${DOW[i]}</span>`).join('')}</div>
+      <div class="ins-cal-grid">${squares}</div>
+    </div>${foot}`);
 }
 
 // ─── Card 3: המילים שנכנסו לזיכרון ───
@@ -216,9 +266,9 @@ export async function renderInsights(root) {
 
   if (!userId) return;
 
-  const [weak, weekly, srs, funnel, accuracy, growth, mistakes] = await Promise.all([
+  const [weak, calendar, srs, funnel, accuracy, growth, mistakes] = await Promise.all([
     getWeakPointsChart(userId),
-    getWeeklyActivity(userId),
+    getActivityCalendar(userId),
     getSrsGrowth(userId),
     getVocabFunnel(userId),
     getAccuracyByModule(userId),
@@ -235,7 +285,7 @@ export async function renderInsights(root) {
     [memoryCard(srs, funnel),                 isReady(funnel)],
     [accuracyByModuleCard(accuracy),          true],
     [cumulativeGrowthCard(growth),            isReady(growth)],
-    [weeklyActivityCard(weekly),              isReady(weekly)],
+    [activityCalendarCard(calendar),          isReady(calendar)],
     [mistakeProgressCard(mistakes),           isReady(mistakes)],
   ];
   const ordered = [...cards.filter(c => c[1]), ...cards.filter(c => !c[1])];
@@ -275,6 +325,16 @@ export function ensureStyles() {
 .ins-go:hover { text-decoration:underline; }
 .ins-trend { font-size:.72rem; color:var(--muted); font-weight:700; }
 .ins-trend.up { color:var(--green-dark); }
+.ins-cal-wrap { display:flex; gap:.4rem; align-items:flex-start; overflow-x:auto; padding-top:.3rem; }
+.ins-cal-dows { display:grid; grid-template-rows:repeat(7,13px); gap:3px; font-size:.62rem; color:var(--muted); align-items:center; flex:0 0 auto; }
+.ins-cal-grid { display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,13px); gap:3px; flex:0 0 auto; }
+.ins-cal-d { width:13px; height:13px; border-radius:2px; background:var(--border); }
+.ins-cal-d.l1 { background:#CBDDD0; }
+.ins-cal-d.l2 { background:#8FBAA0; }
+.ins-cal-d.l3 { background:#4C8C6B; }
+.ins-cal-d.l4 { background:var(--green); }
+.ins-cal-foot { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; margin-top:.7rem; font-size:.75rem; color:var(--muted); }
+.ins-cal-key { display:flex; align-items:center; gap:3px; }
 .ins-vbars { display:flex; align-items:flex-end; gap:.5rem; height:100px; padding-top:.5rem; }
 .ins-vbars--growth { height:80px; }
 .ins-vbar-col { flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; gap:.35rem; }

@@ -61,37 +61,83 @@ export async function getWeakPointsChart(userId) {
   }
 }
 
-// ─── 2. מפת חום שבועית — activity by day of week, last 8 weeks. No color-coded
-//        shame for a missed day (wellbeing rule) — just "here's your pattern". ───
-export async function getWeeklyActivity(userId) {
+// ─── 2. לוח הפעילות — מפת חום יומית, 10 שבועות אחרונים. ───
+//
+// החליף (2.9.2026) את "הימים שבהם אתם הכי פעילים". אותו דאטה בדיוק, אבל
+// 70 יום נכנסים למקום שבו שבע עמודות הציגו ממוצע יום-בשבוע, ורואים רצף
+// אמיתי. יום שפוספס נשאר משבצת בהירה — אין אדום ואין רצף שנשבר (כלל הרווחה).
+//
+// לכל יום נשמר גם הזמן: לכל תשובה יש זמן תגובה נמדד, וסכומם ליום הוא זמן
+// העבודה בפועל. ⚠️ זה זמן *בתוך שאלות*, לא זמן באתר — מי שקרא מדריך חמש
+// דקות לא נספר כאן. הצגה שמרנית בכוונה, ואסור לקרוא לזה "זמן באתר".
+//
+// ⚠️ שמות העמודות אינם אחידים: sc_attempts מחזיקה time_ms, שלוש האחרות
+// response_time_ms. ערבוב מחזיר NULL בשקט ומאפס את הזמן בלי להתריע.
+const CALENDAR_DAYS = 70   // 10 שבועות — מתחלק ב-7, נכנס ברוחב כרטיס
+// תשובה בודדת נחתכת לשתי דקות: מי שהשאיר כרטיסייה פתוחה והלך (נמדד בפועל
+// עד 101 שניות) היה מנפח יום שלם בזמן שלא באמת עבד בו.
+const MAX_ITEM_MS = 120000
+
+function dayKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+export async function getActivityCalendar(userId) {
   try {
-    if (!userId) return { status: 'guest', counts: [0, 0, 0, 0, 0, 0, 0], total: 0 }
-    const since = new Date(Date.now() - LOOKBACK_DAYS * 86400000).toISOString()
+    if (!userId) return { status: 'guest', cells: [], total: 0, totalMs: 0, activeDays: 0 }
+    const since = new Date(Date.now() - CALENDAR_DAYS * 86400000).toISOString()
     const [r1, r2, r3, r4] = await Promise.allSettled([
-      supabase.from('restatement_attempts').select('attempted_at').eq('user_id', userId).gte('attempted_at', since),
-      supabase.from('sc_attempts').select('created_at').eq('user_id', userId).gte('created_at', since),
-      supabase.from('listening_question_responses').select('responded_at').eq('user_id', userId).gte('responded_at', since),
-      supabase.from('srs_review_log').select('reviewed_at').eq('user_id', userId).gte('reviewed_at', since),
+      supabase.from('restatement_attempts').select('attempted_at, response_time_ms').eq('user_id', userId).gte('attempted_at', since),
+      supabase.from('sc_attempts').select('created_at, time_ms').eq('user_id', userId).gte('created_at', since),
+      supabase.from('listening_question_responses').select('responded_at, response_time_ms').eq('user_id', userId).gte('responded_at', since),
+      supabase.from('srs_review_log').select('reviewed_at, response_time_ms').eq('user_id', userId).gte('reviewed_at', since),
     ])
-    const counts = [0, 0, 0, 0, 0, 0, 0] // JS Date#getDay(): 0=Sunday .. 6=Saturday
-    let total = 0
-    const bump = (settled, field) => {
+
+    const byDay = new Map()
+    let total = 0, totalMs = 0
+    const bump = (settled, dateField, msField) => {
       if (settled.status !== 'fulfilled') return
       for (const row of settled.value?.data || []) {
-        const d = new Date(row[field])
+        const d = new Date(row[dateField])
         if (Number.isNaN(d.getTime())) continue
-        counts[d.getDay()]++
+        const k = dayKey(d)
+        const cell = byDay.get(k) || { n: 0, ms: 0 }
+        cell.n++
+        const ms = Number(row[msField])
+        if (Number.isFinite(ms) && ms > 0) {
+          const capped = Math.min(ms, MAX_ITEM_MS)
+          cell.ms += capped
+          totalMs += capped
+        }
+        byDay.set(k, cell)
         total++
       }
     }
-    bump(r1, 'attempted_at')
-    bump(r2, 'created_at')
-    bump(r3, 'responded_at')
-    bump(r4, 'reviewed_at')
-    return { status: total >= MIN_TOTAL_ACTIONS ? 'ready' : 'building', counts, total, min: MIN_TOTAL_ACTIONS }
+    bump(r1, 'attempted_at', 'response_time_ms')
+    bump(r2, 'created_at',   'time_ms')
+    bump(r3, 'responded_at', 'response_time_ms')
+    bump(r4, 'reviewed_at',  'response_time_ms')
+
+    // מיושר לתחילת שבוע (ראשון) כדי שכל עמודה בגריד תהיה שבוע שלם.
+    const today = new Date(); today.setHours(0, 0, 0, 0)
+    const start = new Date(today); start.setDate(start.getDate() - (CALENDAR_DAYS - 1))
+    start.setDate(start.getDate() - start.getDay())
+
+    const cells = []
+    for (const d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
+      const hit = byDay.get(dayKey(d))
+      cells.push({ key: dayKey(d), dow: d.getDay(), n: hit?.n || 0, ms: hit?.ms || 0 })
+    }
+
+    return {
+      status: total >= MIN_TOTAL_ACTIONS ? 'ready' : 'building',
+      cells, total, totalMs,
+      activeDays: cells.filter((c) => c.n > 0).length,
+      min: MIN_TOTAL_ACTIONS,
+    }
   } catch (err) {
-    console.error('insights.data.getWeeklyActivity:', err)
-    return { status: 'error', counts: [0, 0, 0, 0, 0, 0, 0], total: 0 }
+    console.error('insights.data.getActivityCalendar:', err)
+    return { status: 'error', cells: [], total: 0, totalMs: 0, activeDays: 0 }
   }
 }
 

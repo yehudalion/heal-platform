@@ -38,20 +38,28 @@ import { listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
 // שלושת המחוונים שליאון בחר למסך הבית (1.9.2026): דיוק לפי מודול, צמיחה
 // מצטברת, והימים הפעילים. הכרטיסים עצמם מיובאים מ-insights.js ולא משוכפלים
 // כאן — מקור אמת אחד, וגם מצב ה"נבנה" מגיע איתם.
-// getWeeklyActivity קיים גם ב-plan.data.js ובמשמעות אחרת לגמרי (קצב שבועי
-// מול יעד), ולכן הייבוא כאן בשם אחר.
+// שימו לב: plan.data.js מייצא getWeeklyActivity במשמעות אחרת לגמרי (קצב
+// שבועי מול יעד). לוח הפעילות כאן הוא דבר אחר — מפת חום יומית.
 import {
   getAccuracyByModule,
   getCumulativeGrowth,
-  getWeeklyActivity as getActiveDays,
+  getActivityCalendar,
 } from '../data/insights.data.js';
 import {
   accuracyByModuleCard,
   cumulativeGrowthCard,
-  weeklyActivityCard,
+  activityCalendarCard,
   ensureStyles as ensureInsightStyles,
 } from './insights.js';
 import { GUIDES } from './guides.js';
+import { getWordOfDay } from '../data/wordOfDay.data.js';
+
+// home.js לא החזיק esc() עד עכשיו כי כל הטקסט בו היה קבוע. המילה של היום
+// היא התוכן הראשון שמגיע מהמסד, ולכן חייבת בריחה.
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
 
 const GREETING = () => {
   const h = new Date().getHours();
@@ -142,11 +150,12 @@ export async function renderHome(root) {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
-  const [{ data: simAttempts }, accuracyRes, growthRes, activeDaysRes] = await Promise.all([
+  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes] = await Promise.all([
     listAttempts(userId, 1),
     userId ? getAccuracyByModule(userId) : Promise.resolve({ status: 'guest', modules: [] }),
     userId ? getCumulativeGrowth(userId) : Promise.resolve({ status: 'guest' }),
-    userId ? getActiveDays(userId)       : Promise.resolve({ status: 'guest' }),
+    userId ? getActivityCalendar(userId) : Promise.resolve({ status: 'guest' }),
+    getWordOfDay(),   // לא תלוי במשתמש — גם אורח מקבל אותה
   ]);
   const lastSim = (simAttempts || [])[0] ?? null;
   ensureInsightStyles();
@@ -209,9 +218,11 @@ export async function renderHome(root) {
         </div>
       </div>
 
+      ${wordOfDaySection(wodRes)}
+
       ${diagnosticBand(lastSim)}
 
-      ${metricsSection(accuracyRes, growthRes, activeDaysRes)}
+      ${metricsSection(accuracyRes, growthRes, calendarRes)}
       ${guidesSection()}
     </div>`;
 
@@ -219,6 +230,33 @@ export async function renderHome(root) {
   if (ctaRoute) daily.addEventListener('click', () => navigate(ctaRoute));
   el.querySelectorAll('[data-nav]').forEach(tile => {
     tile.addEventListener('click', () => navigate(tile.dataset.nav));
+  });
+
+  // האסוציאציה מקופלת בברירת מחדל — אותו דפוס data-block-toggle שבשאר האתר.
+  el.querySelector('[data-block-toggle].wod-mnem-head')?.addEventListener('click', (e) => {
+    const sec = e.currentTarget.closest('.wod-card');
+    const open = sec.classList.toggle('open');
+    e.currentTarget.setAttribute('aria-expanded', String(open));
+  });
+  el.querySelectorAll('.wod-audio').forEach((btn) => {
+    btn.addEventListener('click', () => playWodAudio(btn.dataset.src));
+  });
+}
+
+// הקראה: הפניה אחת ששומרים כדי שאפשר יהיה לעצור אותה. שתי לחיצות רצופות
+// לא מנגנות זו על גבי זו, ומעבר מסך עוצר. אותו תיקון שנעשה בכרטיסיות.
+let wodAudio = null;
+function playWodAudio(url) {
+  if (!url) return;
+  if (wodAudio) { try { wodAudio.pause(); wodAudio.currentTime = 0; } catch (_) {} }
+  try { wodAudio = new Audio(url); wodAudio.play(); } catch (_) { wodAudio = null; }
+}
+if (!window.__wodAudioStopper) {
+  window.__wodAudioStopper = true;
+  window.addEventListener('hashchange', () => {
+    if (!wodAudio) return;
+    try { wodAudio.pause(); wodAudio.currentTime = 0; } catch (_) {}
+    wodAudio = null;
   });
 }
 
@@ -268,7 +306,7 @@ function diagnosticBand(last) {
  * שלושת המחוונים שליאון בחר. אורח לא מקבל אותם בכלל — אין לו שורות
  * במסד, וקיר של כרטיסי "נבנה" למי שרק נכנס הוא בדיוק ההפך מרציני.
  */
-function metricsSection(accuracy, growth, activeDays) {
+function metricsSection(accuracy, growth, calendar) {
   if (!accuracy || accuracy.status === 'guest') return '';
   return `
     <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">
@@ -278,11 +316,44 @@ function metricsSection(accuracy, growth, activeDays) {
     <div class="metrics-grid">
       ${accuracyByModuleCard(accuracy)}
       ${cumulativeGrowthCard(growth)}
-      ${weeklyActivityCard(activeDays)}
+      ${activityCalendarCard(calendar)}
     </div>`;
 }
 
 /** מדור המדריכים — שלושת המסומנים featured ב-guides.js. */
+/**
+ * המילה של היום — הדבר היחיד במסך הבית שהוא תוכן ולא מדידה, וזו הנקודה:
+ * סיבה להיכנס גם ביום שלא תרגלת, בדיוק היום שבו מסך של גרפים ריקים מרחיק.
+ * המילה נבחרת לפי התאריך ולכן זהה לכולם ויציבה לאורך היום (ראו
+ * wordOfDay.data.js). בלי תוכן — הפינה לא מצוירת בכלל.
+ */
+function wordOfDaySection(res) {
+  const w = res?.word;
+  if (!w) return '';
+  return `
+    <div class="sec-title wod-sec-title" style="margin-top:1.8rem">המילה של היום</div>
+    <div class="wod-card">
+      <div class="wod-top">
+        <span class="wod-w" dir="ltr">${esc(w.headword)}</span>
+        ${w.audio_word_url ? `<button class="wod-audio" data-src="${esc(w.audio_word_url)}" title="השמע" aria-label="השמע את המילה">🔊</button>` : ''}
+        <span class="wod-def">${esc(w.definition_he)}</span>
+      </div>
+      <div class="wod-sent-row">
+        <p class="wod-sent" dir="ltr">${esc(w.surface_1)}</p>
+        ${w.audio_sentence_url ? `<button class="wod-audio" data-src="${esc(w.audio_sentence_url)}" title="השמע משפט" aria-label="השמע את המשפט">🔊</button>` : ''}
+      </div>
+      <button type="button" class="wod-mnem-head" data-block-toggle aria-expanded="false">
+        <span>איך לזכור את זה</span>
+        <span class="wod-chev">▾</span>
+      </button>
+      <div class="wod-mnem-body">
+        <p class="wod-mnem-hint">חפשו במשפט את הצליל שדומה למילה באנגלית — הוא הגשר לזכירה</p>
+        <p class="wod-mnem">${esc(w.mnemonic)}</p>
+      </div>
+      <a class="wod-more" href="#/dictionary">עוד מילים במילון ←</a>
+    </div>`;
+}
+
 function guidesSection() {
   const featured = GUIDES.filter((g) => g.featured);
   const cards = featured.map((g) => `
