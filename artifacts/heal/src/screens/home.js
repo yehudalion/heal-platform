@@ -486,9 +486,14 @@ function dailyDuoSection(wodRes, tipRes) {
 
   const tipCard = tip ? `
     <div class="dd-card dd-tip">
-      <div class="dd-head"><span class="dd-badge dd-badge-tip">טיפ</span></div>
+      <div class="dd-head">
+        <span class="dd-badge dd-badge-tip">טיפ</span>
+        <span class="dd-tip-module">${esc(tip.moduleLabel)}</span>
+      </div>
+      <p class="dd-tip-intro">${esc(tip.intro)}</p>
       <div class="dd-tip-label">${esc(tip.label)}</div>
       <p class="dd-tip-cue">${esc(tip.cue)}</p>
+      <a class="dd-more-link" href="${esc(tip.learnHref)}">ההסבר המלא + דוגמה ←</a>
     </div>` : '';
 
   return `
