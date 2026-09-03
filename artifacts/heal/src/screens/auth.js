@@ -71,6 +71,8 @@ export function renderAuth(root) {
           <a href="/privacy/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדיניות פרטיות</a>
           <span style="opacity:.6"> · </span>
           <a href="/terms/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">תנאי שימוש</a>
+          <span style="opacity:.6"> · </span>
+          <a href="/accessibility/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">הצהרת נגישות</a>
         </div>
         <!-- SEO 2026-09-01: מסך הכניסה היה היחיד שמחבר בין האפליקציה לבין
              8 עמודי ההסבר החינמיים (mivchan-hilal ומשם הלאה) — בלעדיו הם

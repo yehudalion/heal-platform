@@ -178,7 +178,7 @@ function draw(root) {
   let panelContent = '';
   if (openPanel === 'sentence' && word.surface_1) {
     const sentenceAudioBtn = word.audio_sentence_url
-      ? `<button class="vc-sent-audio-btn" id="sentAudioBtn" title="השמע משפט">🔊</button>`
+      ? `<button class="vc-sent-audio-btn" id="sentAudioBtn" title="השמע משפט" aria-label="השמע את המשפט">🔊</button>`
       : '';
     panelContent = `<div class="vc-panel-content vc-sent-row">
       <span class="vc-sent-text" dir="ltr">${word.surface_1}</span>
@@ -221,7 +221,7 @@ function draw(root) {
     <header class="vc-topbar">
       <a class="brand-mark vc-brand" href="#/home">hSc</a>
       <div class="vc-topbar-right">
-        <button class="card-help-btn" id="helpBtn" title="הסבר שוב">?</button>
+        <button class="card-help-btn" id="helpBtn" title="הסבר שוב" aria-label="הסבר איך הפינה עובדת">?</button>
         <span class="card-counter">מילה ${counter} מתוך ${sessionTotal}</span>
       </div>
     </header>
@@ -229,7 +229,7 @@ function draw(root) {
       <div class="vc-card">
         <div class="card-headword-row">
           <div class="card-headword" dir="ltr">${word.headword}</div>
-          ${word.audio_word_url ? `<button class="audio-btn" id="audioBtn" title="השמע">🔊</button>` : ''}
+          ${word.audio_word_url ? `<button class="audio-btn" id="audioBtn" title="השמע" aria-label="השמע את המילה">🔊</button>` : ''}
         </div>
         <div class="reveal-zone">
           ${revealed ? revealedZone : hiddenZone}

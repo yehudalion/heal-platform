@@ -319,7 +319,7 @@ function _header() {
     <div class="sess-header">
       <button class="btn-sess-exit" id="btn-exit" title="חזרה לדף הבית">←</button>
       <span class="sess-header-title">פגישת תרגול</span>
-      <button class="btn-sess-guide" id="btn-guide" title="איך מקשיבים נכון">?</button>
+      <button class="btn-sess-guide" id="btn-guide" title="איך מקשיבים נכון" aria-label="איך מקשיבים נכון">?</button>
     </div>`;
 }
 

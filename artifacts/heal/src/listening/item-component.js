@@ -307,6 +307,17 @@ export class ListeningItem {
             </div>`;
         }
       }
+      // 3.9.2026 — נגישות (ת"י 5568): התמליל המלא נחשף אחרי המענה, לנכון ולשגוי.
+      // לפני המענה הוא מוסתר בכוונה — הפינה מדמה את תנאי הבחינה. <details>
+      // נגיש למקלדת ולקורא מסך בלי JS. זו ההתאמה לכבדי שמיעה שהצהרת הנגישות
+      // מבטיחה (/accessibility/ §3 "שמיעה").
+      if (this._transcript) {
+        explHtml += `
+          <details class="lic-transcript">
+            <summary>📄 תמליל הקטע</summary>
+            <p dir="ltr" lang="en">${escHtml(this._transcript)}</p>
+          </details>`;
+      }
       this._container.querySelector('#lic-explanations').innerHTML = explHtml;
       this._container.querySelector('#lic-feedback').hidden = false;
 

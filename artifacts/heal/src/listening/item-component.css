@@ -313,6 +313,9 @@
   letter-spacing: 0.02em;
 }
 
+.lic-transcript { margin-top: .9rem; border-top: 1px solid var(--border, #E3DDCC); padding-top: .6rem; }
+.lic-transcript summary { cursor: pointer; font-weight: 700; color: var(--green-dark, #16412F); }
+.lic-transcript p { margin: .5rem 0 0; font-size: .92rem; line-height: 1.7; text-align: left; color: var(--text, #14201A); }
 .lic-cue-quote {
   font-size: 0.88rem;
   color: var(--text, #14201A);

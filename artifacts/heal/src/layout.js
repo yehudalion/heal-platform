@@ -54,7 +54,8 @@ export async function renderLayout(root, activePath) {
     <div class="shell fade-in">
 
       <!-- SIDEBAR -->
-      <nav class="sidebar" id="sidebar">
+      <a class="skip-link" href="#page-content">דילוג לתוכן הראשי</a>
+      <nav class="sidebar" id="sidebar" aria-label="ניווט ראשי">
         <div class="brand">
           <div class="brand-mark">HS</div>
           <div class="brand-name">High<em>Score</em></div>
@@ -121,8 +122,13 @@ export async function renderLayout(root, activePath) {
             <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
             <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
           `}
+          <div class="acct-legal">
+            <a href="/accessibility/" target="_blank" rel="noopener">נגישות</a> ·
+            <a href="/privacy/" target="_blank" rel="noopener">פרטיות</a> ·
+            <a href="/terms/" target="_blank" rel="noopener">תנאים</a>
+          </div>
         </div>
-        <button class="sidebar-foot" id="acctBtn" type="button" title="חשבון">
+        <button class="sidebar-foot" id="acctBtn" type="button" title="חשבון" aria-haspopup="menu" aria-controls="acctMenu">
           <div class="foot-av">${avatarHtml}</div>
           <div style="flex:1;min-width:0;text-align:right">
             <div class="foot-name">${name}</div>
@@ -139,14 +145,14 @@ export async function renderLayout(root, activePath) {
           <div class="topbar-title" id="topbar-title">${title}</div>
         </header>
         <div class="page">
-          <div id="page-content"></div>
+          <main id="page-content" tabindex="-1"></main>
         </div>
       </div>
 
       <!-- Mobile bottom nav (2026-08-17): below 900px the sidebar disappears
            and previously left NO navigation at all. Minimal by decision —
            full visual design pass comes later. -->
-      <nav class="bottomnav">
+      <nav class="bottomnav" aria-label="ניווט תחתון">
         <a class="bn-item${activePath==='/home'?' active':''}" data-nav="/home">
           <span class="bn-ico">${ico.home}</span>בית
         </a>
@@ -164,7 +170,7 @@ export async function renderLayout(root, activePath) {
         </a>
       </nav>
 
-      <button class="flag-fab" id="flagFab" type="button" title="דיווח על תקלה">🚩</button>
+      <button class="flag-fab" id="flagFab" type="button" title="דיווח על תקלה" aria-label="דיווח על תקלה">🚩</button>
 
     </div>`;
 
@@ -198,6 +204,8 @@ function ensureAcctStyles() {
   font-size:.86rem; font-weight:600; padding:9px 11px; border-radius:7px; cursor:pointer; color:var(--text); }
 .acct-item:hover { background: var(--green-light); }
 .acct-item--quiet { color: var(--muted); font-weight:500; }
+.acct-legal { padding:.55rem .9rem .35rem; font-size:.72rem; color:var(--muted); border-top:1px solid var(--border); text-align:center; }
+.acct-legal a { color:var(--muted); text-decoration:underline; }
 .acct-item--cta { color: var(--green-dark); font-weight:800; background: var(--green-light);
   border-bottom:1px solid var(--border); }
 .acct-item--cta:hover { background: var(--green-light); filter:brightness(.97); }
