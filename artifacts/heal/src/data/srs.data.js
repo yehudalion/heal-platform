@@ -122,30 +122,42 @@ async function fetchNewWords({ scored, seenWordIds, limit, isPremium }) {
  * @returns tier and pool state in `meta` — no caller has to pass either in
  * @returns {{ data: object[]|null, error: object|null }}
  */
-export async function getDueWords(userId, { limit = 20 } = {}) {
+export async function getDueWords(userId, { limit = 20, guestSeenIds = [] } = {}) {
   try {
     const now = new Date().toISOString()
 
-    // 1. Get due reviews (state = review or relearning, due_at <= now)
-    const { data: dueReviews, error: reviewError } = await supabase
-      .from('srs_progress')
-      .select('word_id, state, interval_days, ease, due_at, reps, lapses')
-      .eq('user_id', userId)
-      .in('state', ['review', 'relearning'])
-      .lte('due_at', now)
-      .order('due_at', { ascending: true })
+    // 3.9.2026 — אורח (userId ריק). נמצא בבדיקה מקצה לקצה: `.eq('user_id', null)`
+    // נשלח ל-PostgREST כ-`eq.null`, ופוסטגרס מנסה להמיר את המחרוזת "null"
+    // ל-uuid ונכשל (22P02). השאילתה זרקה, המסך הציג "אין מילים לתרגול כרגע.
+    // חזור מחר!" — וזה היה היעד של "המנה של היום" לכל אורח חדש. לאורח אין
+    // srs_progress בכלל, אז מדלגים על שתי השאילתות: אין חזרות, ומה שכבר
+    // ראה בדפדפן הזה מגיע מ-lib/learner.js דרך guestSeenIds (card.js).
+    let dueReviews = []
+    let seenWordIds = Array.isArray(guestSeenIds) ? guestSeenIds : []
 
-    if (reviewError) throw reviewError
+    if (userId) {
+      // 1. Get due reviews (state = review or relearning, due_at <= now)
+      const { data: reviews, error: reviewError } = await supabase
+        .from('srs_progress')
+        .select('word_id, state, interval_days, ease, due_at, reps, lapses')
+        .eq('user_id', userId)
+        .in('state', ['review', 'relearning'])
+        .lte('due_at', now)
+        .order('due_at', { ascending: true })
 
-    // 2. Get IDs already in progress (to exclude from new words)
-    const { data: allProgress, error: progressError } = await supabase
-      .from('srs_progress')
-      .select('word_id')
-      .eq('user_id', userId)
+      if (reviewError) throw reviewError
+      dueReviews = reviews || []
 
-    if (progressError) throw progressError
+      // 2. Get IDs already in progress (to exclude from new words)
+      const { data: allProgress, error: progressError } = await supabase
+        .from('srs_progress')
+        .select('word_id')
+        .eq('user_id', userId)
 
-    const seenWordIds = allProgress.map(p => p.word_id)
+      if (progressError) throw progressError
+
+      seenWordIds = (allProgress || []).map(p => p.word_id)
+    }
 
     // 3. Get new words (not yet seen). Core pool first, always — the extension
     //    pool only fills what core could not (see the pool model up top).

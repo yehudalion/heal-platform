@@ -4,6 +4,7 @@ import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getCurrentSession } from '../supabase.js';
 import { getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
+import { getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { getCoverage } from '../data/coverage.data.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
 import '../lib/signIn.js';
@@ -429,14 +430,21 @@ export async function renderCard(root) {
 
   // 2.9.2026 (ליאון): "אני לא רואה סיבה שלא לתת לאורח להשתמש בכל
   // המודולים" — ובדיקה מעמיקה מאשרת שהוא צודק: handleRating() כבר עוטף את
-  // rateWord ב-if (userId) (למטה), getDueWords/getSavedIds/getCoverage כבר
-  // מוגנות ל-userId ריק ומחזירות מצב אפס נקי. הקיר כאן היה שריד מלפני
+  // rateWord ב-if (userId) (למטה), getSavedIds/getCoverage כבר
+  // מוגנות ל-userId ריק. getDueWords תוקנה ב-3.9 (ראו שם). הקיר כאן היה שריד מלפני
   // getLearner()/PLAN_guest_mode_and_payments.md §1 (ראו lib/learner.js) —
   // בלי סיבה מבנית אמיתית. ההבדל היחיד לאורח: שום דירוג לא נשמר בין
   // ביקורים, אז כל פעם הוא מתחיל מאותה חבילת מילים לפי impact_score,
   // בלי זכרון של מה שכבר ראה — פשרה מודעת, לא תקלה.
 
-  const { data, error, meta } = await getDueWords(userId, { limit: getSessionLength('vocab', 12) });
+  // 3.9.2026: לאורח מעבירים את מה שכבר ראה בדפדפן הזה (localStorage, עד 300
+  // מזהים — lib/learner.js), כדי שכניסה חוזרת לא תתחיל מאותה חבילה. ראו את
+  // ההערה בתוך getDueWords על למה זה חייב לעקוף את srs_progress לגמרי.
+  const { data, error, meta } = await getDueWords(userId, {
+    limit: getSessionLength('vocab', 12),
+    guestSeenIds: userId ? [] : getGuestSeenIds('vocab'),
+  });
+  if (!userId && data?.length) addGuestSeenIds('vocab', data.map(w => w.word_id || w.id));
 
   if (error) {
     renderNothingDueToday(root);

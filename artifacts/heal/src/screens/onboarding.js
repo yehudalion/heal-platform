@@ -83,7 +83,7 @@ export function renderOnboarding(root) {
           </div>
         </div>
 
-        <button id="ob-submit" disabled
+        <button id="ob-submit" aria-disabled="true"
           style="width:100%;margin-top:1.6rem;padding:.9rem;border:none;border-radius:var(--radius-sm);background:var(--green);color:white;font-size:1rem;font-weight:700;font-family:inherit;opacity:.5;cursor:not-allowed">
           בוא נתחיל ←
         </button>
@@ -112,14 +112,36 @@ export function renderOnboarding(root) {
     });
   };
 
+  // 3.9.2026 — נמצא בבדיקה מקצה לקצה: הכפתור היה `disabled` עד שממלאים גם
+  // תאריך וגם דקות. כפתור disabled לא מגיב ללחיצה בכלל (הדפדפן לא שולח
+  // אירוע) — תלמיד שלחץ ולא קרה כלום לא קיבל שום רמז מה חסר, ובמובייל גם
+  // לא ברור שבורר התאריך לחיץ. המשתמש הרשום הראשון (3.9, 10:47) נעצר בדיוק
+  // במסך הזה. עכשיו הכפתור "רך": נראה כבוי, אבל לחיצה עליו אומרת מה חסר
+  // ומכוונת לשדה. `disabled` האמיתי נשאר רק לזמן השמירה (למניעת לחיצה כפולה).
+  const isReady = () => Boolean(dateInput.value && chosenMinutes);
   const refreshSubmit = () => {
-    const ready = Boolean(dateInput.value && chosenMinutes);
-    submitBtn.disabled = !ready;
+    const ready = isReady();
+    submitBtn.disabled = false;
+    submitBtn.setAttribute('aria-disabled', String(!ready));
     submitBtn.style.opacity = ready ? '1' : '.5';
     submitBtn.style.cursor = ready ? 'pointer' : 'not-allowed';
   };
+  const explainMissing = () => {
+    const missing = [];
+    if (!dateInput.value) missing.push('תאריך בחינה');
+    if (!chosenMinutes)   missing.push('כמה דקות ביום');
+    notice.textContent = `כדי להמשיך צריך לבחור ${missing.join(' ו')} — אפשר לשנות אחר כך.`;
+    if (!dateInput.value) {
+      dateInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      try { dateInput.showPicker?.(); } catch (_) {}
+      dateInput.focus();
+    } else {
+      root.querySelector('.ob-min-btn')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
-  dateInput.addEventListener('change', () => { refreshDateEcho(); refreshSubmit(); });
+  const clearNotice = () => { if (notice.textContent.startsWith('כדי להמשיך')) notice.textContent = ''; };
+  dateInput.addEventListener('change', () => { refreshDateEcho(); refreshSubmit(); clearNotice(); });
   dateInput.addEventListener('input',  () => { refreshDateEcho(); refreshSubmit(); });
 
   root.querySelectorAll('.ob-min-btn').forEach(btn => {
@@ -132,11 +154,13 @@ export function renderOnboarding(root) {
         b.style.color        = on ? 'var(--green-dark)' : 'var(--text)';
       });
       refreshSubmit();
+      clearNotice();
     });
   });
 
   submitBtn.addEventListener('click', async () => {
     if (submitBtn.disabled) return;
+    if (!isReady()) { explainMissing(); return; }
     submitBtn.disabled = true;
     submitBtn.textContent = 'שומר…';
 
