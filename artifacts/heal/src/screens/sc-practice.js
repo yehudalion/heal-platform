@@ -18,6 +18,8 @@
 
 import { navigate, subAnchor } from '../router.js';
 import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
+import { getLevelCenter, saveLevelCenter } from '../data/levels.data.js';
+import { startGoogleSignIn } from '../lib/signIn.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/sentenceCompletion.data.js';
 import { getPushableWords, pushMissedWords } from '../data/srsPush.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -123,7 +125,10 @@ export async function renderScPractice(root) {
   userId = learner.id;
   isGuestLearner = learner.isGuest;
 
-  level = START_LEVEL;
+  // 3.9.2026 — ראו את ההערה המקבילה ב-rephrase-practice.js: הרמה נשמרת עכשיו
+  // בין סשנים (levels.data.js), במקום להתאפס ל-START_LEVEL בכל כניסה.
+  const lvl = await getLevelCenter(userId, 'sc');
+  level = Math.min(LEVEL_MAX, Math.max(LEVEL_MIN, Math.round(lvl.center)));
   answeredIds.length = 0;
   if (isGuestLearner) answeredIds.push(...getGuestSeenIds('sc'));
   rolling.length = 0;
@@ -217,6 +222,7 @@ function adjustLevel() {
   if (next === level || levelAdjustedThisPack) return;
   level = next;
   levelAdjustedThisPack = true;
+  saveLevelCenter(userId, 'sc', next).catch(() => {});
 }
 
 function nextQuestion(root) {
@@ -243,8 +249,8 @@ function shell(inner) {
       <a class="sp-brand" href="#/sentence-completion">← השלמת משפטים</a>
       <div class="sp-meta">
         ${focusLabel ? `<span class="sp-chip sp-focuschip">🎯 ${esc(focusLabel)}</span>` : ''}
-        ${showMeta ? `<span class="sp-chip">רמה ${packLevel}</span>
-        <span class="sp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        <!-- 3.9.2026: צ'יפ "רמה N" הוסר — ראו rephrase-practice.js. -->
+        ${showMeta ? `<span class="sp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
         <a class="sp-chip sp-guide" href="#/sc-learn">📘 מדריך</a>
       </div>
     </div>
@@ -436,9 +442,10 @@ function metaPrompt() {
 
 function drawSummary(root) {
   const total = pack.length;
+  // 3.9.2026 — בלי מספר רמה. זו השורה שההנדאוף (§8.4.1) סימן במפורש לתיקון.
   let levelMsg = '';
-  if (level > packLevel) levelMsg = `<div class="sp-levelmsg up">עולים רמה! 🚀 המנה הבאה ברמה ${level}.</div>`;
-  else if (level < packLevel) levelMsg = `<div class="sp-levelmsg down">בוא נתרגל עוד קצת ברמה הזו 💪 המנה הבאה ברמה ${level}.</div>`;
+  if (level > packLevel) levelMsg = `<div class="sp-levelmsg up">מעלים רמה! 🚀 המנה הבאה תהיה מאתגרת יותר.</div>`;
+  else if (level < packLevel) levelMsg = `<div class="sp-levelmsg down">נתרגל עוד קצת באותה רמה 💪 המנה הבאה תהיה קצת יותר נגישה.</div>`;
 
   root.innerHTML = shell(`
     <div class="sp-card sp-summary">
@@ -448,7 +455,8 @@ function drawSummary(root) {
       <div class="sp-sum-total" id="spTotal"></div>
       ${levelMsg}
       <div class="sp-insight" id="spInsight" hidden></div>
-      ${isGuestLearner ? `<div class="sp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. <a href="#/">חשבון חינם</a> ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.</div>` : ''}
+      ${isGuestLearner ? `<div class="sp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. חשבון חינם ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.
+        <button type="button" class="sp-guest-cta" id="spSignIn">להמשיך עם Google ←</button></div>` : ''}
       <div class="sp-nextstep">מה עכשיו?</div>
       <div class="sp-sum-btns">
         <button class="btn-primary" id="spMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -458,6 +466,7 @@ function drawSummary(root) {
       </div>
     </div>
   `);
+  root.querySelector('#spSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
   root.querySelector('#spMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#spDone').addEventListener('click', () => navigate('/home'));
   fillSummaryExtras(root);
@@ -572,6 +581,8 @@ const SP_CSS = `
 .sp-levelmsg.down{background:var(--orange-light);color:#b5551f}
 .sp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
 .sp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
+.sp-guest-cta{display:block;width:100%;margin-top:.7rem;padding:.62rem 1rem;border:0;border-radius:var(--radius-sm);background:var(--green-dark);color:#fff;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.sp-guest-cta:hover{filter:brightness(1.08)}
 .sp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .sp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .sp-insight-body{font-size:.88rem;line-height:1.7}

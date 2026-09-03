@@ -27,7 +27,10 @@ import { supabase } from '../supabase.js'
 /** Range and cold-start per module. Mirrors the constants in the practice screens. */
 export const MODULE_LEVELS = {
   rephrase: { min: 2, max: 5, start: 2 },
-  sc:       { min: 1, max: 8, start: 1 },
+  // 3.9.2026 — start תוקן מ-1 ל-4: sc-practice.js פותח ב-START_LEVEL = 4, והכותרת
+  // כאן מבטיחה "Mirrors the constants in the practice screens". כל עוד זה היה 1,
+  // החיווט של הפונקציה הזה היה מפיל כל תלמיד חדש בהשלמת משפטים מרמה 4 לרמה 1.
+  sc:       { min: 1, max: 8, start: 4 },
   // Reading is bounded 2..7 rather than the schema's full 1..8: the bank holds a
   // single passage at difficulty 1 and a single one at 8, so a center that
   // drifted to either edge would hand the learner the same text every session.

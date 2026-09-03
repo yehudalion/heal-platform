@@ -1,5 +1,6 @@
 import { navigate } from './router.js';
 import { getCurrentSession, isGuest, signOut } from './supabase.js';
+import { startGoogleSignIn } from './lib/signIn.js';
 import { deleteMyAccount } from './data/account.data.js';
 import { isLive } from './lib/modules.js';
 import { getProfile, upsertProfile } from './data/profiles.data.js';
@@ -40,6 +41,8 @@ export async function renderLayout(root, activePath) {
   const session = await getCurrentSession();
   const user    = session?.user;
   const name    = user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
+  // אורח = דגל מקומי, לא סשן Supabase (lib/learner.js). התפריט למטה נגזר מזה.
+  const isGuestLearner = !user && isGuest();
   const avatar  = user?.user_metadata?.avatar_url;
   const title   = SCREEN_TITLES[activePath] || 'HighScore';
 
@@ -104,16 +107,26 @@ export async function renderLayout(root, activePath) {
 
         <!-- streak pill removed 2026-08-17 — wellbeing rule (no streaks);
              replaced product-wide by the weekly pace widget on /home -->
+        <!-- 3.9.2026 — נמצא בבדיקה מקצה לקצה: לאורח התפריט הציג "התנתקות"
+             ו"מחיקת חשבון" (שניהם חסרי משמעות בלי חשבון), ולא הייתה שום דרך
+             להירשם מתוך האפליקציה — לא כאן, לא בסיידבר, ולא בשום מסך תרגול.
+             18 אורחים ב-2.9 ואפס הרשמות. זה היה פער ההמרה המרכזי. -->
         <div class="acct-menu" id="acctMenu" hidden>
-          <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
-          <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
-          <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
+          ${isGuestLearner ? `
+            <button class="acct-item acct-item--cta" id="acctSignin">להמשיך עם Google</button>
+            <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
+            <button class="acct-item acct-item--quiet" id="acctExitGuest">יציאה ממצב אורח</button>
+          ` : `
+            <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
+            <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
+            <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
+          `}
         </div>
         <button class="sidebar-foot" id="acctBtn" type="button" title="חשבון">
           <div class="foot-av">${avatarHtml}</div>
           <div style="flex:1;min-width:0;text-align:right">
             <div class="foot-name">${name}</div>
-            <div class="foot-plan">תוכנית חינמית</div>
+            <div class="foot-plan">${isGuestLearner ? 'אורח — ההתקדמות לא נשמרת' : 'תוכנית חינמית'}</div>
           </div>
           <span class="acct-chev">⌄</span>
         </button>
@@ -185,6 +198,9 @@ function ensureAcctStyles() {
   font-size:.86rem; font-weight:600; padding:9px 11px; border-radius:7px; cursor:pointer; color:var(--text); }
 .acct-item:hover { background: var(--green-light); }
 .acct-item--quiet { color: var(--muted); font-weight:500; }
+.acct-item--cta { color: var(--green-dark); font-weight:800; background: var(--green-light);
+  border-bottom:1px solid var(--border); }
+.acct-item--cta:hover { background: var(--green-light); filter:brightness(.97); }
 .acct-item--danger { color: var(--red, #B4553E); font-weight:500; border-top:1px solid var(--border); }
 .acct-item--danger:hover { background: var(--red-light, #F4E4DD); }
 .del-confirm-input { width:100%; margin-top:6px; padding:9px 11px; border:1.5px solid var(--border);
@@ -224,6 +240,20 @@ function wireAccountMenu(root, user) {
       document.querySelectorAll('.acct-menu').forEach(m => { m.hidden = true; });
     });
   }
+
+  root.querySelector('#acctSignin')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.hidden = true;
+    startGoogleSignIn();
+  });
+
+  // "יציאה ממצב אורח" — מנקה את הדגל המקומי בלבד (אין סשן להתנתק ממנו) ומחזיר
+  // לעמוד הפתיחה. שם יש גם Google וגם כניסה חוזרת כאורח.
+  root.querySelector('#acctExitGuest')?.addEventListener('click', async () => {
+    await signOut();
+    location.hash = '#/';
+    location.reload();
+  });
 
   root.querySelector('#acctSignout')?.addEventListener('click', async () => {
     await signOut();

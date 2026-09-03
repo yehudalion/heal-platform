@@ -17,6 +17,8 @@ import { getSessionLength } from '../lib/sessionPrefs.js';
 import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
+import { getLevelCenter, saveLevelCenter } from '../data/levels.data.js';
+import { startGoogleSignIn } from '../lib/signIn.js';
 import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
 import { LEARN_SEEN_KEY } from './rephrase-learn.js';
 
@@ -118,7 +120,13 @@ export async function renderRephrasePractice(root) {
   isGuestLearner = learner.isGuest;
 
   // reset the whole session
-  level = START_LEVEL;
+  // 3.9.2026 — עד עכשיו זה היה `level = START_LEVEL` תמיד, כלומר תלמיד שטיפס
+  // כל השבוע חזר למחרת לרמה הקלה ביותר בבנק בלי הסבר. levels.data.js נבנה
+  // בדיוק בשביל זה ב-29.8 אבל חוּוט רק בהבנת הנקרא (נמצא בבדיקה מקצה לקצה,
+  // 3.9: user_module_levels היה ריק גם אחרי 25 תרגולים). המסך הזה שולף
+  // שאלות לפי רמה שלמה, ולכן מעגלים את המרכז המתמשך.
+  const lvl = await getLevelCenter(userId, 'rephrase');
+  level = Math.min(LEVEL_MAX, Math.max(LEVEL_MIN, Math.round(lvl.center)));
   answeredIds.length = 0;
   // A guest's own "seen" history lives in their browser, not the DB — seed it
   // so a returning guest doesn't get the exact same pack again.
@@ -210,6 +218,9 @@ function adjustLevel() {
   if (next === level || levelAdjustedThisPack) return;
   level = next;
   levelAdjustedThisPack = true;
+  // fire-and-forget: אורח הוא no-op בתוך saveLevelCenter, וכישלון כתיבה כאן
+  // לעולם לא עוצר תרגול — מאבדים התאמה לסשן אחד, לא את המסך.
+  saveLevelCenter(userId, 'rephrase', next).catch(() => {});
 }
 
 function nextQuestion(root) {
@@ -236,8 +247,10 @@ function shell(inner) {
       <a class="rp-brand" href="#/rephrasing">← ניסוח מחדש</a>
       <div class="rp-meta">
         ${focusLabel ? `<span class="rp-chip rp-focuschip">🎯 ${esc(focusLabel)}</span>` : ''}
-        ${showMeta ? `<span class="rp-chip">רמה ${packLevel}</span>
-        <span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        <!-- 3.9.2026: צ'יפ "רמה N" הוסר. ליאון: "לא רוצה שהתלמיד ידע מה הרמה
+             של השאלה שלפניו" (HANDOFF_product_ux_chat §8.4.1), וגם עובדתית
+             המנה מכילה כמה רמות יחד. הרמה נשארת פנימית — ראו levels.data.js. -->
+        ${showMeta ? `<span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
         <a class="rp-chip rp-guide" href="#/rephrase-learn">📘 מדריך</a>
       </div>
     </div>
@@ -368,9 +381,12 @@ function explPanel(q, isCorrect, canon) {
 
 function drawSummary(root) {
   const total = pack.length;
+  // 3.9.2026 — בלי מספר רמה (אותו כלל כמו הצ'יפ למעלה). הכיוון כן נאמר:
+  // "מספר בלי הקשר קורא כמו תעודה; מספר עם כיוון קורא כמו התקדמות"
+  // (PRINCIPLE_north_star) — כאן נשאר הכיוון בלבד, בלי המספר.
   let levelMsg = '';
-  if (level > packLevel) levelMsg = `<div class="rp-levelmsg up">עולים רמה! 🚀 המנה הבאה ברמה ${level}.</div>`;
-  else if (level < packLevel) levelMsg = `<div class="rp-levelmsg down">בוא נתרגל עוד קצת ברמה הזו 💪 המנה הבאה ברמה ${level}.</div>`;
+  if (level > packLevel) levelMsg = `<div class="rp-levelmsg up">מעלים רמה! 🚀 המנה הבאה תהיה מאתגרת יותר.</div>`;
+  else if (level < packLevel) levelMsg = `<div class="rp-levelmsg down">נתרגל עוד קצת באותה רמה 💪 המנה הבאה תהיה קצת יותר נגישה.</div>`;
 
   root.innerHTML = shell(`
     <div class="rp-card rp-summary">
@@ -380,7 +396,8 @@ function drawSummary(root) {
       <div class="rp-sum-total" id="rpTotal"></div>
       ${levelMsg}
       <div class="rp-insight" id="rpInsight" hidden></div>
-      ${isGuestLearner ? `<div class="rp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. <a href="#/">חשבון חינם</a> ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.</div>` : ''}
+      ${isGuestLearner ? `<div class="rp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. חשבון חינם ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.
+        <button type="button" class="rp-guest-cta" id="rpSignIn">להמשיך עם Google ←</button></div>` : ''}
       <div class="rp-nextstep">מה עכשיו?</div>
       <div class="rp-sum-btns">
         <button class="btn-primary" id="rpMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -390,6 +407,9 @@ function drawSummary(root) {
       </div>
     </div>
   `);
+  // 3.9.2026 — עד עכשיו הניסוח הזכיר Google אבל לא היה שום כפתור, והקישור
+  // הוביל לעמוד הפתיחה. אורח שרצה חשבון היה צריך לנחש. עכשיו זו לחיצה אחת.
+  root.querySelector('#rpSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
   root.querySelector('#rpMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#rpDone').addEventListener('click', () => navigate('/home'));
   fillSummaryExtras(root);
@@ -514,6 +534,8 @@ const RP_CSS = `
 .rp-levelmsg.down{background:var(--orange-light);color:var(--orange)}
 .rp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
 .rp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
+.rp-guest-cta{display:block;width:100%;margin-top:.7rem;padding:.62rem 1rem;border:0;border-radius:var(--radius-sm);background:var(--green-dark);color:#fff;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.rp-guest-cta:hover{filter:brightness(1.08)}
 .rp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .rp-insight-body{font-size:.88rem;line-height:1.7}
