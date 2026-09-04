@@ -1,6 +1,5 @@
-import { supabase, isSupabaseConfigured, setGuest } from '../supabase.js';
+import { supabase, isSupabaseConfigured } from '../supabase.js';
 import { track } from '../lib/analytics.js';
-import { navigate } from '../router.js';
 
 const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.4-1.61 4.1-5.35 4.1A5.4 5.4 0 1 1 12 6.6c1.7 0 2.85.72 3.5 1.34l2.4-2.32C16.36 4.27 14.4 3.4 12 3.4 7.13 3.4 3.2 7.33 3.2 12s3.93 8.6 8.8 8.6c5.07 0 8.45-3.56 8.45-8.57 0-.58-.06-1.02-.1-1.43z"/></svg>`;
 
@@ -16,9 +15,9 @@ const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" 
  * ובמספרים אמיתיים מהמאגר, ורק אז הכפתורים. המספרים למטה הם התוכן שקיים
  * בפועל — לעדכן אותם רק מול שאילתה, לא מהזיכרון.
  *
- * "הצצה כאורח" הוחלף ב"להתחיל לתרגל": מצב האורח נפתח לתרגול אמיתי בניסוח
- * מחדש ובהשלמת משפטים, והכיתוב הישן ("כאורח אפשר לראות הכל — לתרגול צריך
- * חשבון") כבר לא היה נכון וביקש הרשמה בשביל משהו שהתלמיד כבר מקבל.
+ * מצב אורח הוסר לגמרי (3.9.2026, החלטת ליאון) — ראו BACKLOG_next.md. ה-CTA
+ * היחיד עכשיו הוא Google, וההרשמה לוקחת כ-10 שניות; אין יותר מסלול תרגול
+ * בלי חשבון.
  */
 
 // מספרי התוכן — אומתו מול המסד 2.9.2026.
@@ -27,7 +26,10 @@ const CONTENT = [
   { n: '424',   k: 'ניסוח מחדש' },
   { n: '250',   k: 'קטעי האזנה' },
   { n: '100',   k: 'קטעי קריאה' },
-  { n: '543',   k: 'מילים מדורגות' },
+  // 823 = המילים בעלות impact_score אחרי שלב ג (4.9.2026). מספר סטטי בכוונה:
+  // דף הנחיתה נטען לפני התחברות ואסור שיחכה לשאילתה. לעדכן ידנית כשהמאגר גדל —
+  // המקור: select count(*) from words where impact_score is not null.
+  { n: '823',   k: 'מילים מדורגות' },
 ];
 
 export function renderAuth(root) {
@@ -52,17 +54,79 @@ export function renderAuth(root) {
           ${CONTENT.map((c) => `<div class="lp-stat"><b>${c.n}</b><span>${c.k}</span></div>`).join('')}
         </div>
 
-        <button id="guestBtn" class="btn-start">להתחיל לתרגל — בחינם</button>
-
-        <button class="btn-google" id="googleBtn">
+        <button class="btn-google btn-start" id="googleBtn">
           ${googleIcon}
-          המשך עם Google
+          להתחיל לתרגל עם Google — בחינם
         </button>
+
+        <!-- 3.9.2026 — אחרי הסרת מצב האורח זו הדרך היחידה להתנסות לפני הרשמה,
+             והיא מכוונת: חמש שאלות עם הסבר מלא, בלי חשבון ובלי התחייבות.
+             4.9.2026 — הורחב לארבעה כלים. דלת חינמית אחת הייתה מעט מדי:
+             מבקר שלא בא בדיוק במצב רוח של מבחן לא היה לו מה לעשות כאן. כל
+             ארבעתם עומדים בפני עצמם, אף אחד מהם לא דורש היסטוריית תלמיד,
+             וכולם נגמרים באותה הזמנה להירשם. -->
+        <a class="lp-daily" href="#/daily">
+          <span class="lp-daily-k">חדש · בלי הרשמה</span>
+          <span class="lp-daily-t">האתגר היומי — 5 שאלות אנגלית</span>
+          <span class="lp-daily-s">אותן שאלות לכל מי שנכנס היום, עם הסבר מלא על כל אחת ←</span>
+        </a>
+
+        <div class="lp-free">
+          <div class="lp-free-h">עוד דברים שפתוחים כאן בלי חשבון</div>
+          <div class="lp-free-grid">
+            <a class="lp-free-card" href="#/word-of-day">
+              <span class="lp-free-ico">🔤</span>
+              <span class="lp-free-t">המילה של היום</span>
+              <span class="lp-free-s">מילה אחת, עם משפט, שמע ועוגן לזכירה</span>
+            </a>
+            <a class="lp-free-card" href="#/vocab-sprint">
+              <span class="lp-free-ico">⚡</span>
+              <span class="lp-free-t">ספרינט של דקה</span>
+              <span class="lp-free-s">60 שניות. כמה מילים תספיקו?</span>
+            </a>
+            <a class="lp-free-card" href="#/guides">
+              <span class="lp-free-ico">📖</span>
+              <span class="lp-free-t">שמונה מדריכים</span>
+              <span class="lp-free-s">מה זה הלאל, מבנה הבחינה, והפטור</span>
+            </a>
+          </div>
+        </div>
         <div class="lp-fine">
-          אפשר להתחיל בלי חשבון. חשבון חינם שומר את ההתקדמות ופותח את הניתוח האישי.
+          ההרשמה לוקחת כ-10 שניות. חשבון חינם שומר את ההתקדמות ופותח את הניתוח האישי.
         </div>
 
         <div id="notice" style="margin-top:.9rem;font-size:.82rem;text-align:center;color:var(--muted);min-height:1.2em"></div>
+
+        <!-- מה ידוע היום על הבחינה (3.9.2026).
+             במתכוון אין כאן טבלת מועדים: נכון להיום מאל״ו לא פרסמו מועדים
+             רשמיים לבחינת הלאל, ולוח מועדים מומצא הוא בדיוק סוג הדבר
+             שהורס אמון אצל מי שבודק אותנו מול מקור רשמי. אומרים מה ידוע,
+             ואומרים במפורש מה עוד לא. -->
+        <div class="lp-facts">
+          <div class="lp-facts-t">מה ידוע היום על הבחינה</div>
+          <ul>
+            <li>מדצמבר 2026 הפסיכומטרי כבר לא כולל פרק אנגלית</li>
+            <li>הבחינה החדשה ממוחשבת ומותאמת לרמת הנבחן</li>
+            <li>שלוש מיומנויות: קריאה, האזנה והבעה בכתב</li>
+            <li>טווח הציון 50–150, לצד רמת CEFR</li>
+          </ul>
+          <div class="lp-facts-note">מועדים רשמיים טרם פורסמו. ברגע שיפורסמו, הם יופיעו כאן.</div>
+        </div>
+
+        <!-- ✍️ ליאון: הטקסט הזה כתוב בשמך ומופיע לכל מבקר — עבור עליו ותקן.
+             אצל המתחרה יש בדיוק בלוק כזה מהמייסד, והוא אחד הדברים שגורמים
+             לאתר להרגיש אנושי ולא כמו מוצר גנרי. -->
+        <div class="lp-founder">
+          <div class="lp-founder-t">למה בניתי את זה</div>
+          <p>
+            לימדתי אנגלית לבחינות במשך חמש שנים, וראיתי את אותה סצנה חוזרת:
+            תלמיד שמבין את החומר, נתקע על סוג שאלה מסוים, ואף אחד לא מראה לו
+            <em>למה</em> הוא נתקע שם. כשהתפרסם שהאנגלית יוצאת מהפסיכומטרי הבנתי
+            שכל חומרי ההכנה הקיימים מכוונים לבחינה אחרת — אז בניתי את מה
+            שהייתי רוצה לתת לתלמידים שלי.
+          </p>
+          <p class="lp-founder-sig">ליאון · HighScore</p>
+        </div>
 
         <div style="margin-top:1.4rem;font-size:.76rem;color:var(--muted)">כלי לימוד ממוקד. ללא פרסומות. ללא רעש.</div>
         <!-- Privacy link, 2026-08-29: a policy nobody can find does not do its job,
@@ -91,7 +155,7 @@ export function renderAuth(root) {
   };
 
   if (!isSupabaseConfigured) {
-    setMsg('Supabase לא מוגדר — השתמשו ב"המשך כאורח".', true);
+    setMsg('Supabase לא מוגדר.', true);
   }
 
   root.querySelector('#googleBtn').addEventListener('click', async () => {
@@ -103,11 +167,5 @@ export function renderAuth(root) {
       options: { redirectTo: window.location.origin + window.location.pathname },
     });
     if (error) setMsg(error.message, true);
-  });
-
-  root.querySelector('#guestBtn').addEventListener('click', () => {
-    track('guest_started');
-    setGuest(true);
-    navigate('/home');
   });
 }

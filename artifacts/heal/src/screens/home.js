@@ -25,7 +25,10 @@
  */
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
-import { getCurrentSession, isGuest } from '../supabase.js';
+import { getCurrentSession } from '../supabase.js';
+import { getGamificationState, getBadges, getTodayMissions } from '../data/gamification.data.js';
+import { rankFor, RANKS, BADGES, badgeInfo } from '../lib/xp.js';
+import { todayKey, playedToday, lastResult } from '../data/daily.data.js';
 import { getProfile } from '../data/profiles.data.js';
 import { getSessionStats } from '../data/srs.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -34,7 +37,6 @@ import { getWeeklyActivity, getDailyPlan, nextLeg } from '../data/plan.data.js';
 import { getCoverage } from '../data/coverage.data.js';
 import { fetchRecentAttempts as fetchReadingAttempts } from '../data/reading.data.js';
 import { LEARN_BLOCKS } from './rephrase-learn.js';
-import { getGuestProfile } from './onboarding.js';
 import { listAttempts, SECTION_LABELS } from '../data/simulation.data.js';
 // שלושת המחוונים שליאון בחר למסך הבית (1.9.2026): דיוק לפי מודול, צמיחה
 // מצטברת, והימים הפעילים. הכרטיסים עצמם מיובאים מ-insights.js ולא משוכפלים
@@ -55,7 +57,6 @@ import {
 import { GUIDES } from './guides.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { getDailyTip } from '../data/dailyTip.data.js';
-import { getGuestInsights } from '../data/guestAttempts.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 
 // home.js לא החזיק esc() עד עכשיו כי כל הטקסט בו היה קבוע. המילה של היום
@@ -81,18 +82,17 @@ export async function renderHome(root) {
   const session = await getCurrentSession();
   const userId  = session?.user?.id ?? null;
   currentUserId = userId;   // ה-handler של פס ההסכמה רץ מחוץ לפונקציה הזו
-  const guest   = isGuest() && !userId;
   const name    = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
 
-  // ── Data (guests get cold-start defaults — no per-user rows exist) ──────────
+  // מצב אורח הוסר 3.9.2026 — מי שמגיע לכאן תמיד מחובר (requireOnboarded ב-main.js).
   const [profileRes, srsRes, weakReports, listeningRes, weeklyRes, coverageRes, readingRes] = await Promise.all([
-    userId ? getProfile(userId)           : Promise.resolve({ data: getGuestProfile() }),
-    userId ? getSessionStats(userId)      : Promise.resolve({ data: null }),
-    userId ? getWeakPoints(userId)        : Promise.resolve([]),
-    userId ? getListeningOverview(userId) : Promise.resolve({ data: null }),
-    userId ? getWeeklyActivity(userId)    : Promise.resolve({ data: { activeDays: [], target: 5 } }),
-    userId ? getCoverage(userId)          : Promise.resolve({ data: null }),
-    userId ? fetchReadingAttempts(userId, { limit: 300 }) : Promise.resolve({ data: [] }),
+    getProfile(userId),
+    getSessionStats(userId),
+    getWeakPoints(userId),
+    getListeningOverview(userId),
+    getWeeklyActivity(userId),
+    getCoverage(userId),
+    fetchReadingAttempts(userId, { limit: 300 }),
   ]);
 
   const profile   = profileRes?.data ?? null;
@@ -159,16 +159,17 @@ export async function renderHome(root) {
   const bar = (pct) => (pct === null ? '' : `<div class="mc-bar"><div class="mc-fill" style="width:${pct}%"></div></div>`);
 
   // ── Render ──────────────────────────────────────────────────────────────────
-  // האבחון האחרון — מזין את פס המדדים. אורח לא שומר ניסיונות, ולכן ריק.
-  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes, tipRes, consentRes, guestInsightsRes] = await Promise.all([
+  const [{ data: simAttempts }, accuracyRes, growthRes, calendarRes, wodRes, tipRes, consentRes, gmState, badgeCodes, missions] = await Promise.all([
     listAttempts(userId, 1),
-    userId ? getAccuracyByModule(userId) : Promise.resolve({ status: 'guest', modules: [] }),
-    userId ? getCumulativeGrowth(userId) : Promise.resolve({ status: 'guest' }),
-    userId ? getActivityCalendar(userId) : Promise.resolve({ status: 'guest' }),
-    getWordOfDay(),               // לא תלוי במשתמש — גם אורח מקבל אותה
+    getAccuracyByModule(userId),
+    getCumulativeGrowth(userId),
+    getActivityCalendar(userId),
+    getWordOfDay(),
     Promise.resolve(getDailyTip()), // סינכרוני (אין DB) — עטוף כדי לשמור על אותה תבנית Promise.all
-    userId ? getConsentState(userId) : Promise.resolve({ state: 'unknown' }),
-    guest ? getGuestInsights() : Promise.resolve({ status: 'ok', modules: [] }),
+    getConsentState(userId),
+    getGamificationState(),
+    getBadges(userId),
+    getTodayMissions(),
   ]);
   const lastSim = (simAttempts || [])[0] ?? null;
   ensureInsightStyles();
@@ -179,6 +180,10 @@ export async function renderHome(root) {
       <div class="page-sub">${daysLeft !== null
         ? `הבחינה בעוד ${daysLeft} ימים.`
         : 'אפשר להגדיר תאריך בחינה בכל רגע.'}</div>
+
+      ${gamificationCard(gmState, badgeCodes)}
+      ${dailyChallengeTile()}
+      ${missionsCard(missions)}
 
       <!-- Weekly pace (replaces the streak — wellbeing rule).
            2026-08-30 (Lion): also the home screen's entry point to
@@ -234,6 +239,11 @@ export async function renderHome(root) {
           <div class="mc-name">הבנת הנקרא</div>
           <div class="mc-pct">${rdPassages ? `${rdPassages} קטעים שתרגלת` : '100 קטעים מחכים לך'}</div>
         </div>
+        <div class="mc mc-b" data-nav="/affix">
+          <div class="mc-icon-wrap"><span class="mc-icon">🔤</span></div>
+          <div class="mc-name">תחיליות וסופיות</div>
+          <div class="mc-pct">לפענח מילה שלא הכרת</div>
+        </div>
       </div>
 
       ${consentBand(consentRes)}
@@ -242,7 +252,7 @@ export async function renderHome(root) {
 
       ${diagnosticBand(lastSim)}
 
-      ${metricsSection(accuracyRes, growthRes, calendarRes, guest, guestInsightsRes)}
+      ${metricsSection(accuracyRes, growthRes, calendarRes)}
       ${guidesSection()}
     </div>`;
 
@@ -352,12 +362,130 @@ function diagnosticBand(last) {
 }
 
 /**
- * שלושת המחוונים שליאון בחר. אורח לא מקבל אותם בכלל — אין לו שורות
- * במסד, וקיר של כרטיסי "נבנה" למי שרק נכנס הוא בדיוק ההפך מרציני.
+ * שלוש המשימות של היום. מוצגות רק כשיש נתונים, ונעלמות כשכולן הושלמו — כרטיס
+ * שמראה שלושה וי ירוקים כל הערב הוא רעש, לא תגמול.
  */
-function metricsSection(accuracy, growth, calendar, guest, guestInsights) {
-  if (guest) return guestMetricsSection(guestInsights);
-  if (!accuracy || accuracy.status === 'guest') return '';
+function missionsCard(missions) {
+  if (!missions?.length) return '';
+  const doneCount = missions.filter((m) => m.done).length;
+  if (doneCount === missions.length) {
+    return `<div class="ms-card ms-card--all">
+      <span class="ms-all-ico">🎉</span>
+      <span>סיימת את שלוש המשימות של היום. מכאן זה בונוס.</span>
+    </div>`;
+  }
+  const rows = missions.map((m) => `
+    <button class="ms-row ${m.done ? 'is-done' : ''}" data-nav="${m.href}">
+      <span class="ms-check">${m.done ? '✓' : ''}</span>
+      <span class="ms-txt">
+        <span class="ms-label">${esc(m.label)}</span>
+        <span class="ms-sub">${esc(m.sub)}</span>
+      </span>
+      <span class="ms-count">${m.progress}/${m.target}</span>
+    </button>`).join('');
+  return `
+    <div class="ms-card">
+      <div class="ms-head">
+        <span class="ms-title">המשימות של היום</span>
+        <span class="ms-prog">${doneCount}/${missions.length}</span>
+      </div>
+      ${rows}
+    </div>`;
+}
+
+/**
+ * אריח האתגר היומי במסך הבית.
+ *
+ * מבדיל בין שני מצבים שונים שנראים דומים: מי שעוד לא שיחק היום מקבל הזמנה,
+ * ומי שכבר שיחק — כולל מי ששיחק כאורח לפני שנרשם, כי הסימון יושב ב-localStorage
+ * של אותו דפדפן — רואה את התוצאה שלו ולא הזמנה חוזרת. תלמיד שנרשם מיד אחרי
+ * האתגר לא אמור להיתקל באותה קריאה לפעולה פעמיים.
+ */
+function dailyChallengeTile() {
+  const date = todayKey();
+  const done = playedToday(date);
+  const prev = done ? lastResult() : null;
+  const scoreTxt = prev && prev.date === date ? `${prev.correct}/${prev.total} היום` : 'הושלם היום';
+  return `
+    <button class="dd-daily" data-nav="/daily">
+      <span class="dd-daily-ico">${done ? '✅' : '🎯'}</span>
+      <span>
+        <span class="dd-daily-t">האתגר היומי</span>
+        <span class="dd-daily-s">${done
+          ? 'אתגר חדש מחכה מחר בחצות'
+          : '5 שאלות אנגלית · אותן שאלות לכל הנבחנים היום'}</span>
+      </span>
+      ${done ? `<span class="dd-daily-done">${scoreTxt}</span>` : ''}
+    </button>`;
+}
+
+/**
+ * כרטיס המשחוק במסך הבית: דרגה, פס התקדמות לדרגה הבאה, רצף ותגים.
+ *
+ * שלוש החלטות ניסוח שנובעות מכלל הרווחה:
+ *  · "דרגה" ולא "רמה" — רמה היא הקושי הפנימי של השאלה ולא מוצגת לעולם.
+ *  · רצף 0 נכתב "מתחילים רצף חדש", לא "איבדת את הרצף".
+ *  · מדברים על מה שיש לתלמיד, לא על מה שאין ולא על מה שעלול לקרות
+ *    (ליאון, 4.9.2026).
+ *  · ולכן המגן לא מוזכר כל יום. הוא מופיע ביום היחיד שבו הוא רלוונטי:
+ *    אתמול הוחמץ, והיום הוא ההזדמנות האחרונה שבה תרגול עוד שומר על
+ *    הרצף. שאר הימים — אין על מה לדבר, ותזכורת יומית על מגן היא רק
+ *    תזכורת יומית שאפשר לפספס.
+ *
+ * מחזיר מחרוזת ריקה אם אין נתונים — שכבת עידוד שנופלת לא מורידה איתה את המסך.
+ */
+function gamificationCard(gm, badgeCodes = []) {
+  if (!gm) return '';
+  const r = rankFor(gm.xp || 0);
+  const into = gm.xp_into_rank ?? 0;
+  const per = gm.xp_per_rank || 300;
+  const pct = Math.max(2, Math.min(100, Math.round((into / per) * 100)));
+  const isTop = r.index >= RANKS.length;
+  const streak = gm.streak || 0;
+
+  const streakHtml = streak > 0
+    ? `<div class="gm-streak">🔥 ${streak} ${streak === 1 ? 'יום' : 'ימים'} ברצף</div>`
+    : `<div class="gm-streak gm-streak--off">מתחילים רצף חדש היום</div>`;
+
+  const shieldHtml = gm.streak_at_risk
+    ? `<div class="gm-shield gm-shield--now">🛡️ יום מוגן — תרגול היום שומר על הרצף שלך. מחר המגן כבר לא יחזיק אותו.</div>`
+    : '';
+
+  const earned = new Set(badgeCodes || []);
+  const badgesHtml = earned.size
+    ? `<div class="gm-badges">${[...earned].slice(-6).map((c) => {
+        const b = badgeInfo(c);
+        return b ? `<span class="gm-badge" title="${esc(b.desc)}">${b.icon} <b>${esc(b.name)}</b></span>` : '';
+      }).join('')}</div>`
+    : '';
+
+  return `
+    <div class="gm-card">
+      <div class="gm-rank">
+        <span class="gm-rank-icon">${r.icon}</span>
+        <div>
+          <div class="gm-rank-name">${esc(r.name)}</div>
+          <div class="gm-rank-sub">${gm.xp || 0} נקודות ניסיון</div>
+        </div>
+      </div>
+      <div class="gm-bar-wrap">
+        <div class="gm-bar"><div class="gm-fill" style="width:${isTop ? 100 : pct}%"></div></div>
+        <div class="gm-bar-lbl">
+          <span>${isTop ? 'הדרגה הגבוהה ביותר' : `עוד ${per - into} נקודות לדרגה הבאה`}</span>
+          <span>${isTop ? '' : `${into}/${per}`}</span>
+        </div>
+      </div>
+      ${streakHtml}
+    </div>
+    ${shieldHtml || badgesHtml ? `<div style="margin:-.55rem 0 1rem">${shieldHtml}${badgesHtml}</div>` : ''}
+  `;
+}
+
+/**
+ * שלושת המחוונים שליאון בחר.
+ */
+function metricsSection(accuracy, growth, calendar) {
+  if (!accuracy) return '';
   return `
     <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">
       המספרים שלך
@@ -370,63 +498,6 @@ function metricsSection(accuracy, growth, calendar, guest, guestInsights) {
     </div>`;
 }
 
-/**
- * מדדי אורח (ליאון, 2.9.2026): "לאורח אנחנו צריכים להראות אנליטיקס של
- * התרגול הזה בלבד בגרפים פשוטים - 2 גרפים למשל והשאר יהיו באפור עם
- * 'דרושה השלמה'". המקור: guestAttempts.data.js (RPC בלבד, אף פעם לא שורות
- * גולמיות). לפני ניסיון ראשון אחד לפחות אין מה להראות, והפינה כולה לא
- * מצוירת — קיר של "דרושה השלמה" מיד בכניסה מרתיע יותר משהוא מזמין.
- */
-function guestMetricsSection(res) {
-  if (!res || res.status !== 'ok' || !res.modules.length) return '';
-
-  const accRows = res.modules.map((m) => `
-    <div class="ins-hbar-row">
-      <div class="ins-hbar-lbl">${esc(m.label)} <span class="ins-hbar-mod">· ${m.accuracyPct}%</span></div>
-      <div class="ins-hbar-track"><div class="ins-hbar-fill" style="width:${Math.max(4, m.accuracyPct)}%"></div></div>
-    </div>`).join('');
-
-  const totalAttempts = res.modules.reduce((s, m) => s + m.attempts, 0);
-  const totalCorrect  = res.modules.reduce((s, m) => s + m.correct, 0);
-  const overallPct = totalAttempts ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
-
-  const guestAccCard = `<div class="ins-card">
-    <div class="ins-card-title">הדיוק שלך עד עכשיו</div>
-    <div class="ins-card-sub">מהתרגול שעשית בלי חשבון, לפי מודול</div>
-    <div class="ins-card-body">${accRows}</div>
-  </div>`;
-
-  const guestSplitCard = `<div class="ins-card">
-    <div class="ins-card-title">כמה שאלות ענית</div>
-    <div class="ins-card-sub">${totalAttempts} שאלות בסך הכל</div>
-    <div class="ins-card-body">
-      <div class="ins-hbar-row">
-        <div class="ins-hbar-lbl">נכונות <span class="ins-hbar-mod">· ${totalCorrect} מתוך ${totalAttempts} (${overallPct}%)</span></div>
-        <div class="ins-hbar-track"><div class="ins-hbar-fill ins-hbar-fill--alt" style="width:${Math.max(4, overallPct)}%"></div></div>
-      </div>
-      <p class="ins-note">התחברות שומרת את כל זה ומראה גם איך זה משתפר עם הזמן.</p>
-    </div>
-  </div>`;
-
-  const lockedCard = (title) => `<div class="ins-card ins-card--locked">
-    <div class="ins-card-title">${esc(title)}</div>
-    <div class="ins-card-body">
-      <div class="ins-building">
-        <div class="ins-building-frame"></div>
-        <p>דרושה השלמה — נפתח עם חשבון חינם</p>
-      </div>
-    </div>
-  </div>`;
-
-  return `
-    <div class="sec-title metrics-sec-title" style="margin-top:1.8rem">המספרים שלך</div>
-    <div class="metrics-grid">
-      ${guestAccCard}
-      ${guestSplitCard}
-      ${lockedCard('הצמיחה המצטברת שלך')}
-      ${lockedCard('לוח הפעילות שלך')}
-    </div>`;
-}
 
 /**
  * ⚖️ הסכמה לדיוור — נשאלת פעם אחת בלבד.

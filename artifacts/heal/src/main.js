@@ -30,6 +30,14 @@ import { renderDictionary } from './screens/dictionary.js';
 import { renderMistakeNotebook } from './screens/mistake-notebook.js';
 import { renderInsights } from './screens/insights.js';
 import { renderGuides }        from './screens/guides.js';
+import { renderDaily }         from './screens/daily.js';
+import { renderAffix }         from './screens/affix.js';
+import { renderAffixLearn }    from './screens/affix-learn.js';
+import { renderAffixPractice } from './screens/affix-practice.js';
+import { renderAffixAnalyze }  from './screens/affix-analyze.js';
+import { renderWordWall }     from './screens/word-wall.js';
+import { renderVocabSprint }  from './screens/vocab-sprint.js';
+import { renderWordOfDay }    from './screens/word-of-day.js';
 import { renderSimulation }    from './screens/simulation.js';
 import { renderSimulationRun } from './screens/simulation-run.js';
 
@@ -78,6 +86,10 @@ route('/', async (root) => {
   if (session || isGuest()) { navigate('/home'); return; }
   renderAuth(root);
 });
+
+// האתגר היומי — הנתיב הציבורי היחיד. במתכוון בלי requireAuth: זו הדלת שדרכה
+// מגיע מי שראה פוסט ועוד אין לו חשבון (3.9.2026). כל שאר המסכים דורשים כניסה.
+route('/daily', renderDaily);
 // fork.js/level.js removed 2026-08-28 — dead pre-redesign screens, zero navigate() references anywhere in the app.
 
 // Onboarding (SITEMAP §1 — two questions, shown once)
@@ -97,6 +109,24 @@ route('/sc-learn',     requireAuth(renderScLearn));
 route('/sc-practice',  requireAuth(renderScPractice));
 route('/sc-analyze',   requireAuth(renderScAnalyze));
 
+// ─── תחיליות וסופיות — פינה חמישית, אותן שלוש שכבות (3.9.2026) ──────────────
+route('/affix',          requireAuth(renderAffix));
+route('/affix-learn',    requireAuth(renderAffixLearn));
+route('/affix-practice', requireAuth(renderAffixPractice));
+route('/affix-analyze',  requireAuth(renderAffixAnalyze));
+
+// ─── אוצר מילים: שני מסכים חדשים (3.9.2026) ─────────────────────────────────
+// קיר המילים מראה התקדמות שאי אפשר להרגיש מפס אחוזים; הספרינט מייצר את ההרגל
+// שמחזיר לתרגול. שניהם משלימים את לולאת ה-SRS ולא מחליפים אותה.
+route('/word-wall',    requireAuth(renderWordWall));
+// ── כלים חינמיים, בלי חשבון (4.9.2026) ─────────────────────────────────────
+// מאז שמצב האורח הוסר נשאר נתיב ציבורי אחד בלבד (/daily), בזמן שהמתחרה
+// מחזיק ארבעה כלים חינמיים נפרדים. שלושת אלה נבחרו כי אף אחד מהם לא דורש
+// היסטוריית תלמיד: הספרינט שומר שיא ב-localStorage, המילה של היום נבחרת
+// לפי התאריך, והמדריכים הם תוכן קריאה. כל השאר נשאר מאחורי התחברות.
+route('/vocab-sprint', renderVocabSprint);
+route('/word-of-day',  renderWordOfDay);
+
 // ─── Reading Comprehension (3-layer, same shape as the other corners) ────────
 route('/reading',          requireAuth(renderReading));           // Section gate
 route('/reading-learn',    requireAuth(renderReadingLearn));      // Learn — the Window Method
@@ -115,7 +145,7 @@ route('/insights', requireAuth(renderInsights));
 // requireAuth ולא requireOnboarded: זה שער הכניסה מה-SEO, ואורח צריך להגיע
 // אליו בלי חיכוך. הדוח נשמר רק למי שמחובר — ההצעה להירשם מגיעה בסופו.
 // מדריכים: נגיש גם לאורח — זה תוכן פתוח, וזו נקודת הכניסה מה-SEO.
-route('/guides',         requireAuth(renderGuides));
+route('/guides',         renderGuides);   // ציבורי — ראו ההערה ליד /vocab-sprint
 route('/simulation',     requireAuth(renderSimulation));
 route('/simulation/run', requireAuth(renderSimulationRun));
 
