@@ -5,6 +5,7 @@ import { isLive } from './lib/modules.js';
 import { getProfile, upsertProfile } from './data/profiles.data.js';
 import { reportUserIssue } from './lib/errorLog.js';
 import { startGoogleSignIn } from './lib/signIn.js';
+import { BRAND, BRAND_PARTS, BRAND_MARK } from './lib/brand.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -22,7 +23,8 @@ function navItem(moduleId, icon, label, route, activePath) {
 }
 
 const SCREEN_TITLES = {
-  '/home':                 'לוח בקרה',
+  '/home':                 'בית',
+  '/practice':             'תרגול',
   '/flashcards':           'כרטיסיות',
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
@@ -32,7 +34,7 @@ const SCREEN_TITLES = {
   '/dictionary':           'מילון',
   '/mistake-notebook':     'מחברת טעויות',
   '/insights':             'התובנות שלי',
-  '/simulation':           'אבחון רמה',
+  '/simulation':           'סימולציה',
   '/guides':               'מדריכים',
   '/word-of-day':          'המילה של היום',
   '/vocab-sprint':         'ספרינט מילים',
@@ -46,7 +48,7 @@ export async function renderLayout(root, activePath) {
   const user    = session?.user;
   const name    = user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
   const avatar  = user?.user_metadata?.avatar_url;
-  const title   = SCREEN_TITLES[activePath] || 'HighScore';
+  const title   = SCREEN_TITLES[activePath] || BRAND;
 
   const avatarHtml = avatar
     ? `<img src="${avatar}" alt="">`
@@ -71,8 +73,8 @@ export async function renderLayout(root, activePath) {
   const guestSidebar = `
       <nav class="sidebar" id="sidebar" aria-label="ניווט ראשי">
         <div class="brand">
-          <div class="brand-mark">HS</div>
-          <div class="brand-name">High<em>Score</em></div>
+          <div class="brand-mark">${BRAND_MARK}</div>
+          <div class="brand-name">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
         </div>
 
         <div class="nav-lbl">חינם, בלי חשבון</div>
@@ -99,51 +101,44 @@ export async function renderLayout(root, activePath) {
   const sidebarHtml   = anon ? guestSidebar    : `
       <nav class="sidebar" id="sidebar" aria-label="ניווט ראשי">
         <div class="brand">
-          <div class="brand-mark">HS</div>
-          <div class="brand-name">High<em>Score</em></div>
+          <div class="brand-mark">${BRAND_MARK}</div>
+          <div class="brand-name">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
         </div>
 
-        <div class="nav-lbl">ראשי</div>
         <a class="nav-item${activePath==='/home'?' active':''}" data-nav="/home">
-          <span class="nav-icon">${ico.home}</span>לוח בקרה
+          <span class="nav-icon">${ico.home}</span>בית
         </a>
 
-        <!-- 2026-08-26 (Lion): sidebar rebuilt to actually match live modules —
-             האזנה היתה חסרה מהסרגל לגמרי, ו"כרטיסיות" היה שם
-             שונה למה שהלוח הבית קורא לאותה מודול ("אוצר מילים"). -->
-        <!-- 2.9.2026 (ליאון): "תרגול" מכיל רק מודולי תרגול בפועל — אבחון
-             רמה ומילון עברו ל"ללמוד" (הם לא תרגול יומיומי, הם הכנה/עזר). -->
-        <div class="nav-lbl">תרגול</div>
+        <!-- סשן שבת 1 (5.9.2026), החלטת יהודה: שתי קבוצות — "הפינות" (שש,
+             נקודת צבע בגוון הפינה, אותו גוון כמו במשבצות הבית) ואז "כלים".
+             לפני כן היו שלוש קבוצות ותשע כניסות, ומחברת הטעויות ישבה כ"פינה"
+             למרות שהיא דוח — היא עברה לתוך "ההתקדמות שלי". -->
+        <div class="nav-lbl">הפינות</div>
         <a class="nav-item${activePath==='/flashcards'?' active':''}" data-nav="/flashcards">
-          <span class="nav-icon">${ico.cards}</span>אוצר מילים
+          <span class="nav-icon"><i class="nav-hue nav-hue-g"></i></span>אוצר מילים
         </a>
         <a class="nav-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
-          <span class="nav-icon">${ico.rephrase}</span>ניסוח מחדש
+          <span class="nav-icon"><i class="nav-hue nav-hue-o"></i></span>ניסוח מחדש
         </a>
-        ${navItem('sc', ico.sentence, 'השלמת משפטים', '/sentence-completion', activePath)}
         <a class="nav-item${activePath==='/listening'?' active':''}" data-nav="/listening">
-          <span class="nav-icon">${ico.listen}</span>האזנה
+          <span class="nav-icon"><i class="nav-hue nav-hue-b"></i></span>האזנה
         </a>
-        ${navItem('reading', ico.reading, 'הבנת הנקרא', '/reading', activePath)}
-        ${navItem('affix', '🔤', 'תחיליות וסופיות', '/affix', activePath)}
+        ${navItem('sc', '<i class="nav-hue nav-hue-y"></i>', 'השלמת משפטים', '/sentence-completion', activePath)}
+        ${navItem('reading', '<i class="nav-hue nav-hue-p"></i>', 'הבנת הנקרא', '/reading', activePath)}
+        ${navItem('affix', '<i class="nav-hue nav-hue-c"></i>', 'תחיליות וסופיות', '/affix', activePath)}
 
-        <div class="nav-lbl">ללמוד</div>
-        <a class="nav-item${activePath==='/guides'?' active':''}" data-nav="/guides">
-          <span class="nav-icon">📖</span>מדריכים
-        </a>
+        <div class="nav-lbl">כלים</div>
         <a class="nav-item${activePath==='/simulation'?' active':''}" data-nav="/simulation">
-          <span class="nav-icon">📋</span>אבחון רמה
+          <span class="nav-icon">🧪</span>סימולציה
         </a>
         <a class="nav-item${activePath==='/dictionary'?' active':''}" data-nav="/dictionary">
           <span class="nav-icon">${ico.book}</span>מילון
         </a>
-
-        <div class="nav-lbl">חשבון</div>
-        <a class="nav-item${activePath==='/mistake-notebook'?' active':''}" data-nav="/mistake-notebook">
-          <span class="nav-icon">${ico.notebook}</span>מחברת טעויות
-        </a>
         <a class="nav-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="nav-icon">${ico.chart}</span>ההתקדמות שלי
+        </a>
+        <a class="nav-item nav-item--quiet${activePath==='/guides'?' active':''}" data-nav="/guides">
+          <span class="nav-icon">📖</span>מדריכים
         </a>
         <!-- The "דו״ח פערים" item was removed 2026-08-05: /gap merged into
              /progress, so it pointed at the same screen under a different name.
@@ -177,14 +172,11 @@ export async function renderLayout(root, activePath) {
         <a class="bn-item${activePath==='/home'?' active':''}" data-nav="/home">
           <span class="bn-ico">${ico.home}</span>בית
         </a>
-        <a class="bn-item${activePath==='/listening'?' active':''}" data-nav="/listening">
-          <span class="bn-ico">${ico.listen}</span>האזנה
+        <a class="bn-item${activePath==='/practice'?' active':''}" data-nav="/practice">
+          <span class="bn-ico">${ico.target}</span>תרגול
         </a>
-        <a class="bn-item${activePath==='/flashcards'?' active':''}" data-nav="/card">
-          <span class="bn-ico">${ico.cards}</span>מילים
-        </a>
-        <a class="bn-item${activePath==='/rephrasing'?' active':''}" data-nav="/rephrasing">
-          <span class="bn-ico">${ico.rephrase}</span>ניסוח
+        <a class="bn-item${activePath==='/dictionary'?' active':''}" data-nav="/dictionary">
+          <span class="bn-ico">${ico.book}</span>מילון
         </a>
         <a class="bn-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="bn-ico">${ico.chart}</span>התקדמות
@@ -504,6 +496,7 @@ const ico = {
   cards:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="14" height="10" rx="2"/><path d="M4 4V3a1 1 0 011-1h6a1 1 0 011 1v1"/></svg>`,
   rephrase:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H5M9 5l-3 3 3 3"/><path d="M2 8h2" stroke-dasharray="1.5 1.5"/></svg>`,
   chart:   `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l4-4 3 3 5-7"/></svg>`,
+  target:  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r=".6" fill="currentColor"/></svg>`,
   listen:  `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v-1a5 5 0 0110 0v1"/><rect x="2" y="10" width="3" height="4" rx="1"/><rect x="11" y="10" width="3" height="4" rx="1"/></svg>`,
   sentence:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h10M3 8h7M3 11h5"/><circle cx="13" cy="11" r="2"/></svg>`,
   book:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3.6c-1.4-1-3.2-1.2-5-.9v9c1.8-.3 3.6-.1 5 .9 1.4-1 3.2-1.2 5-.9v-9c-1.8-.3-3.6-.1-5 .9z"/><path d="M8 3.6v9"/></svg>`,
