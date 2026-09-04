@@ -1,6 +1,7 @@
 import { renderLayout, getPageContent } from '../layout.js';
 import { getCurrentSession } from '../supabase.js';
 import { navigate } from '../router.js';
+import { playClip } from '../lib/sound.js';
 import {
   getRephraseMistakes, getScMistakes, getListeningMistakes,
   getMistakeMarks, markMistakeResolved, unmarkMistakeResolved,
@@ -24,10 +25,8 @@ function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
 
-function playAudio(url) {
-  if (!url) return;
-  try { new Audio(url).play(); } catch (_) { /* ignore */ }
-}
+// הקראה דרך lib/sound.js: עוצרת את הקודמת, ונעצרת בכל ניווט.
+function playAudio(url) { playClip(url); }
 
 function mistakeRow(m, isResolved) {
   const keyChip = m.keyLabel ? `<span class="mn-key-chip">${escapeHtml(m.keyLabel)}</span>` : '';

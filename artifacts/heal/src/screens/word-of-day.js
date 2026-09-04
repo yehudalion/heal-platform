@@ -21,6 +21,7 @@ import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { startGoogleSignIn } from '../lib/signIn.js';
+import { playClip } from '../lib/sound.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -139,7 +140,7 @@ export async function renderWordOfDay(root) {
     </div>`;
 
   const msg = el.querySelector('#wodMsg');
-  const play = (url) => { if (url) new Audio(url).play().catch(() => {}); };
+  const play = (url) => playClip(url);   // עוצר את הקודמת; נעצר בניווט (lib/sound.js)
 
   el.querySelector('#wodAudio')?.addEventListener('click', () => play(word.audio_word_url));
   el.querySelector('#wodSentAudio')?.addEventListener('click', () => play(word.audio_sentence_url));

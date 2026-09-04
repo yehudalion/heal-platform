@@ -5,6 +5,7 @@ import { setVocabPool } from '../data/srs.data.js';
 import { getProfile } from '../data/profiles.data.js';
 import { getSavedWords, getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
 import { printMyDictionary } from '../lib/printDictionary.js';
+import { playClip } from '../lib/sound.js';
 
 // Dictionary / browse screen (מוצר/UX chat, 2026-08-29 — PLAN_depth_and_new_corners.md).
 // Zero new content: surfaces the 2,666 words (550 'done' + 2,116
@@ -15,10 +16,8 @@ import { printMyDictionary } from '../lib/printDictionary.js';
 
 const PAGE_SIZE = 40;
 
-function playAudio(url) {
-  if (!url) return;
-  try { new Audio(url).play(); } catch (_) { /* ignore */ }
-}
+// הקראה דרך lib/sound.js: עוצרת את הקודמת, ונעצרת בכל ניווט.
+function playAudio(url) { playClip(url); }
 
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));

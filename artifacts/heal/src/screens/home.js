@@ -56,6 +56,7 @@ import {
 } from './insights.js';
 import { GUIDES } from './guides.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
+import { playClip } from '../lib/sound.js';
 import { getDailyTip } from '../data/dailyTip.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 
@@ -302,22 +303,8 @@ async function onConsent(el, yes) {
     : '<span class="cb-done">✓ נרשם. לא נשלח לכם מיילים.</span>';
 }
 
-// הקראה: הפניה אחת ששומרים כדי שאפשר יהיה לעצור אותה. שתי לחיצות רצופות
-// לא מנגנות זו על גבי זו, ומעבר מסך עוצר. אותו תיקון שנעשה בכרטיסיות.
-let wodAudio = null;
-function playWodAudio(url) {
-  if (!url) return;
-  if (wodAudio) { try { wodAudio.pause(); wodAudio.currentTime = 0; } catch (_) {} }
-  try { wodAudio = new Audio(url); wodAudio.play(); } catch (_) { wodAudio = null; }
-}
-if (!window.__wodAudioStopper) {
-  window.__wodAudioStopper = true;
-  window.addEventListener('hashchange', () => {
-    if (!wodAudio) return;
-    try { wodAudio.pause(); wodAudio.currentTime = 0; } catch (_) {}
-    wodAudio = null;
-  });
-}
+// הקראה דרך lib/sound.js: הפניה אחת, עוצרת את הקודמת, ונעצרת בכל ניווט.
+function playWodAudio(url) { playClip(url); }
 
 /**
  * פס המדדים — תוצאות האבחון האחרון, מיומנות-מיומנות.

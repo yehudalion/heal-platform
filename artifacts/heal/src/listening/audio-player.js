@@ -1,5 +1,6 @@
 import _howler from 'howler';
 import './audio-player.css';
+import { registerStopper } from '../lib/sound.js';
 
 // Vite pre-bundles howler as a default export wrapping its CJS exports.
 // We extract Howl this way to handle both pre-bundled and native CJS forms.
@@ -34,6 +35,8 @@ export class AudioPlayer {
     this._ended = false; // single-pass: audio finished, replay (from 0) is offered
     this._onFirstPlay = onFirstPlay;
     this._raf = null;
+    // כל ניווט (hashchange) עוצר את הנגן — ראו lib/sound.js.
+    this._unregister = registerStopper(() => this.destroy());
 
     // Pause when browser/OS interrupts (incoming call, app switch, screen lock)
     this._visibilityHandler = () => {
@@ -269,6 +272,9 @@ export class AudioPlayer {
   }
 
   destroy() {
+    if (this._destroyed) return;   // נקרא גם מהמסך וגם מ-stopAll — פעם אחת מספיקה
+    this._destroyed = true;
+    this._unregister?.();
     this._stopRaf();
     document.removeEventListener('visibilitychange', this._visibilityHandler);
     this._howl.unload();
