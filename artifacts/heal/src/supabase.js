@@ -17,16 +17,19 @@ export const supabase = isSupabaseConfigured
   : null;
 
 // ─── Storage keys ────────────────────────────────────────────────────────────
-const GUEST_KEY         = "heal:guest";
-const GUEST_RATINGS_KEY = "heal:guest:ratings";
 const LEVEL_KEY         = "heal:level";
 
 // ─── Auth helpers ─────────────────────────────────────────────────────────────
-export function setGuest(on) {
-  on ? localStorage.setItem(GUEST_KEY, "1") : localStorage.removeItem(GUEST_KEY);
-}
+// Guest mode was removed 3.9.2026 (Lion's call) — every visitor now signs in
+// with Google before entering any screen. isGuest() stays as a permanent
+// `false` stub rather than being deleted outright, because a handful of
+// data-layer files still read it defensively (`if (!userId) ...` no-op
+// guards) and there is no value in touching all of them today just to delete
+// an already-unreachable branch. Do not resurrect setGuest() — the moment
+// something can flip this back to true, every one of those "unreachable"
+// branches becomes reachable again.
 export function isGuest() {
-  return localStorage.getItem(GUEST_KEY) === "1";
+  return false;
 }
 export async function getCurrentSession() {
   if (!supabase) return null;
@@ -35,8 +38,6 @@ export async function getCurrentSession() {
 }
 export async function signOut() {
   if (supabase) await supabase.auth.signOut();
-  setGuest(false);
-  localStorage.removeItem(GUEST_RATINGS_KEY);
 }
 
 // ─── מה שהיה כאן והוסר (2.9.2026) ────────────────────────────────────────────

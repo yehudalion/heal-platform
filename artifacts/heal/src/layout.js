@@ -1,10 +1,10 @@
 import { navigate } from './router.js';
-import { getCurrentSession, isGuest, signOut } from './supabase.js';
-import { startGoogleSignIn } from './lib/signIn.js';
+import { getCurrentSession, signOut } from './supabase.js';
 import { deleteMyAccount } from './data/account.data.js';
 import { isLive } from './lib/modules.js';
 import { getProfile, upsertProfile } from './data/profiles.data.js';
 import { reportUserIssue } from './lib/errorLog.js';
+import { startGoogleSignIn } from './lib/signIn.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -28,11 +28,15 @@ const SCREEN_TITLES = {
   '/progress':             'ההתקדמות שלי',
   '/sentence-completion':  'השלמת משפטים',
   '/reading':              'הבנת הנקרא',
+  '/affix':                'תחיליות וסופיות',
   '/dictionary':           'מילון',
   '/mistake-notebook':     'מחברת טעויות',
   '/insights':             'התובנות שלי',
   '/simulation':           'אבחון רמה',
   '/guides':               'מדריכים',
+  '/word-of-day':          'המילה של היום',
+  '/vocab-sprint':         'ספרינט מילים',
+  '/word-wall':            'קיר המילים',
 };
 
 // Render the full shell (sidebar + topbar + empty #page-content)
@@ -41,8 +45,6 @@ export async function renderLayout(root, activePath) {
   const session = await getCurrentSession();
   const user    = session?.user;
   const name    = user?.user_metadata?.full_name?.split(' ')[0] || 'חבר/ה';
-  // אורח = דגל מקומי, לא סשן Supabase (lib/learner.js). התפריט למטה נגזר מזה.
-  const isGuestLearner = !user && isGuest();
   const avatar  = user?.user_metadata?.avatar_url;
   const title   = SCREEN_TITLES[activePath] || 'HighScore';
 
@@ -50,11 +52,51 @@ export async function renderLayout(root, activePath) {
     ? `<img src="${avatar}" alt="">`
     : name[0];
 
-  root.innerHTML = `
-    <div class="shell fade-in">
 
-      <!-- SIDEBAR -->
-      <a class="skip-link" href="#page-content">דילוג לתוכן הראשי</a>
+  // ── מבקר שלא התחבר (4.9.2026) ───────────────────────────────────────────
+  // מאז שמצב האורח הוסר, חלק מהמסכים נפתחים בלי חשבון: האתגר היומי, ספרינט
+  // המילים, המילה של היום והמדריכים. הם עדיין משתמשים באותו shell, ולכן בלי
+  // הענף הזה מבקר כזה היה רואה סרגל מלא של קישורים שכולם מחזירים אותו לדף
+  // הנחיתה — הבטחה שנשברת בלחיצה. כאן הוא מקבל סרגל שמראה רק את מה שפתוח לו,
+  // וכפתור התחברות במקום תפריט חשבון שאין לו.
+  const anon = !session;
+
+  const guestTools = [
+    ['/daily',       '📅', 'האתגר היומי'],
+    ['/vocab-sprint','⚡', 'ספרינט של דקה'],
+    ['/word-of-day', '🔤', 'המילה של היום'],
+    ['/guides',      '📖', 'מדריכים'],
+  ];
+
+  const guestSidebar = `
+      <nav class="sidebar" id="sidebar" aria-label="ניווט ראשי">
+        <div class="brand">
+          <div class="brand-mark">HS</div>
+          <div class="brand-name">High<em>Score</em></div>
+        </div>
+
+        <div class="nav-lbl">חינם, בלי חשבון</div>
+        ${guestTools.map(([route, icon, label]) => `
+        <a class="nav-item${activePath === route ? ' active' : ''}" data-nav="${route}">
+          <span class="nav-icon">${icon}</span>${label}
+        </a>`).join('')}
+
+        <div class="guest-cta">
+          <p class="guest-cta-t">רוצים לשמור את ההתקדמות?</p>
+          <p class="guest-cta-s">חשבון חינם פותח את התרגול המלא, את המילון ואת המעקב.</p>
+          <button class="btn-primary" id="guestSignIn" type="button">להתחבר עם Google</button>
+        </div>
+      </nav>`;
+
+  const guestBottomNav = `
+      <nav class="bottomnav" aria-label="ניווט תחתון">
+        ${guestTools.map(([route, icon, label]) => `
+        <a class="bn-item${activePath === route ? ' active' : ''}" data-nav="${route}">
+          <span class="bn-ico">${icon}</span>${label}
+        </a>`).join('')}
+      </nav>`;
+
+  const sidebarHtml   = anon ? guestSidebar    : `
       <nav class="sidebar" id="sidebar" aria-label="ניווט ראשי">
         <div class="brand">
           <div class="brand-mark">HS</div>
@@ -83,6 +125,7 @@ export async function renderLayout(root, activePath) {
           <span class="nav-icon">${ico.listen}</span>האזנה
         </a>
         ${navItem('reading', ico.reading, 'הבנת הנקרא', '/reading', activePath)}
+        ${navItem('affix', '🔤', 'תחיליות וסופיות', '/affix', activePath)}
 
         <div class="nav-lbl">ללמוד</div>
         <a class="nav-item${activePath==='/guides'?' active':''}" data-nav="/guides">
@@ -108,20 +151,12 @@ export async function renderLayout(root, activePath) {
 
         <!-- streak pill removed 2026-08-17 — wellbeing rule (no streaks);
              replaced product-wide by the weekly pace widget on /home -->
-        <!-- 3.9.2026 — נמצא בבדיקה מקצה לקצה: לאורח התפריט הציג "התנתקות"
-             ו"מחיקת חשבון" (שניהם חסרי משמעות בלי חשבון), ולא הייתה שום דרך
-             להירשם מתוך האפליקציה — לא כאן, לא בסיידבר, ולא בשום מסך תרגול.
-             18 אורחים ב-2.9 ואפס הרשמות. זה היה פער ההמרה המרכזי. -->
+        <!-- מצב אורח הוסר לגמרי 3.9.2026 (ראו BACKLOG_next.md) — כל מי
+             שמגיע לכאן כבר מחובר, אז אין יותר ענף תפריט לאורח. -->
         <div class="acct-menu" id="acctMenu" hidden>
-          ${isGuestLearner ? `
-            <button class="acct-item acct-item--cta" id="acctSignin">להמשיך עם Google</button>
-            <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
-            <button class="acct-item acct-item--quiet" id="acctExitGuest">יציאה ממצב אורח</button>
-          ` : `
-            <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
-            <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
-            <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
-          `}
+          <button class="acct-item" id="acctSettings">⚙️ הגדרות</button>
+          <button class="acct-item acct-item--quiet" id="acctSignout">התנתקות</button>
+          <button class="acct-item acct-item--danger" id="acctDelete">מחיקת חשבון</button>
           <div class="acct-legal">
             <a href="/accessibility/" target="_blank" rel="noopener">נגישות</a> ·
             <a href="/privacy/" target="_blank" rel="noopener">פרטיות</a> ·
@@ -132,26 +167,12 @@ export async function renderLayout(root, activePath) {
           <div class="foot-av">${avatarHtml}</div>
           <div style="flex:1;min-width:0;text-align:right">
             <div class="foot-name">${name}</div>
-            <div class="foot-plan">${isGuestLearner ? 'אורח — ההתקדמות לא נשמרת' : 'תוכנית חינמית'}</div>
+            <div class="foot-plan">תוכנית חינמית</div>
           </div>
           <span class="acct-chev">⌄</span>
         </button>
-      </nav>
-
-      <!-- MAIN -->
-      <div class="main-wrap">
-        <!-- fake XP/word chips removed 2026-08-17 — they were hardcoded zeros -->
-        <header class="topbar">
-          <div class="topbar-title" id="topbar-title">${title}</div>
-        </header>
-        <div class="page">
-          <main id="page-content" tabindex="-1"></main>
-        </div>
-      </div>
-
-      <!-- Mobile bottom nav (2026-08-17): below 900px the sidebar disappears
-           and previously left NO navigation at all. Minimal by decision —
-           full visual design pass comes later. -->
+      </nav>`;
+  const bottomNavHtml = anon ? guestBottomNav  : `
       <nav class="bottomnav" aria-label="ניווט תחתון">
         <a class="bn-item${activePath==='/home'?' active':''}" data-nav="/home">
           <span class="bn-ico">${ico.home}</span>בית
@@ -168,7 +189,30 @@ export async function renderLayout(root, activePath) {
         <a class="bn-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="bn-ico">${ico.chart}</span>התקדמות
         </a>
-      </nav>
+      </nav>`;
+
+  root.innerHTML = `
+    <div class="shell fade-in">
+
+      <!-- SIDEBAR -->
+      <a class="skip-link" href="#page-content">דילוג לתוכן הראשי</a>
+      ${sidebarHtml}
+
+      <!-- MAIN -->
+      <div class="main-wrap">
+        <!-- fake XP/word chips removed 2026-08-17 — they were hardcoded zeros -->
+        <header class="topbar">
+          <div class="topbar-title" id="topbar-title">${title}</div>
+        </header>
+        <div class="page">
+          <main id="page-content" tabindex="-1"></main>
+        </div>
+      </div>
+
+      <!-- Mobile bottom nav (2026-08-17): below 900px the sidebar disappears
+           and previously left NO navigation at all. Minimal by decision —
+           full visual design pass comes later. -->
+      ${bottomNavHtml}
 
       <button class="flag-fab" id="flagFab" type="button" title="דיווח על תקלה" aria-label="דיווח על תקלה">🚩</button>
 
@@ -182,7 +226,12 @@ export async function renderLayout(root, activePath) {
     });
   });
 
-  wireAccountMenu(root, user);
+  // מבקר לא מחובר: אין תפריט חשבון לחווט, יש כפתור התחברות.
+  if (anon) {
+    root.querySelector('#guestSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
+  } else {
+    wireAccountMenu(root, user);
+  }
 }
 
 // ─── Account menu: settings + sign-out (audit 2026-08-25 item 2) ─────────────
@@ -248,20 +297,6 @@ function wireAccountMenu(root, user) {
       document.querySelectorAll('.acct-menu').forEach(m => { m.hidden = true; });
     });
   }
-
-  root.querySelector('#acctSignin')?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.hidden = true;
-    startGoogleSignIn();
-  });
-
-  // "יציאה ממצב אורח" — מנקה את הדגל המקומי בלבד (אין סשן להתנתק ממנו) ומחזיר
-  // לעמוד הפתיחה. שם יש גם Google וגם כניסה חוזרת כאורח.
-  root.querySelector('#acctExitGuest')?.addEventListener('click', async () => {
-    await signOut();
-    location.hash = '#/';
-    location.reload();
-  });
 
   root.querySelector('#acctSignout')?.addEventListener('click', async () => {
     await signOut();
