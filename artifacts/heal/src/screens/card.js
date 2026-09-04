@@ -6,6 +6,8 @@ import { getSavedIds, saveWord, unsaveWord } from '../data/savedWords.data.js';
 import { getDueWords, rateWord } from '../data/srs.data.js';
 import { getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { getCoverage } from '../data/coverage.data.js';
+import { markPractising, rewardSession } from '../lib/reward.js';
+import { XP } from '../lib/xp.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
 import '../lib/signIn.js';
 
@@ -135,6 +137,14 @@ function finishSession() {
     timestamp: Date.now(),
   };
   sessionStorage.setItem('hs_last_session_summary', JSON.stringify(summary));
+  // XP: מילה שנזכרה מיד = נכונה, מילה שחזרה אחרי טעות = עדיין למידה.
+  // first_good + recovered נספרות כ"נכונות" כי שתיהן מסתיימות בידיעה.
+  rewardSession({
+    source: 'vocab',
+    correct: summary.first_good + summary.recovered,
+    total: summary.total,
+    userId,
+  }).catch(() => {});
   track('vocab_session_completed', {
     total:      summary.total,
     first_good: summary.first_good,
@@ -192,7 +202,7 @@ function draw(root) {
       : '';
     panelContent = `<div class="vc-panel-content vc-panel-rtl vc-mnem-row">
       <div class="vc-mnem-wrap">
-        <div class="vc-mnem-hint">🔗 חפשו בתוך המשפט את הצליל שדומה למילה באנגלית — הוא הגשר לזכירה</div>
+        <div class="vc-mnem-hint">🔗 עוגנים לזכירה — הקשר, שימוש במשפט, ומאיפה המילה באה</div>
         <span id="mnemText">${assoc[mnemonicIdx]}</span>
       </div>
       ${cyclerHtml}

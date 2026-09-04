@@ -22,9 +22,14 @@ import { getLectures, getLectureQuestions, getRecentLectureIds, startSession, co
 import { getGuestSeenIds, addGuestSeenIds }                    from '../lib/learner.js';
 import { ListeningItem }                 from './item-component.js';
 import { summarizeMistakes }             from './keys.js';
+import { markPractising, rewardSession }   from '../lib/reward.js';
+import { XP }                             from '../lib/xp.js';
 import { navigate }                      from '../router.js';
 import { getSessionLength, getSessionType } from '../lib/sessionPrefs.js';
 import './session.css';
+
+// מזהה הלומד הנוכחי, לשכבת המשחוק. נקבע ב-renderSession ונקרא בסיום כל הרצאה.
+let _userId = null;
 import '../lib/signIn.js';
 
 // ─── Module-level session state ───────────────────────────────────────────────
@@ -57,6 +62,7 @@ export async function renderSession(root) {
   // (getGuestSeenIds) במקום ההיסטוריה ב-DB.
   const session = await getCurrentSession();
   const userId  = session?.user?.id ?? null;
+  _userId = userId;
 
   _items = await _selectItems(userId);
   if (!userId && _items.length) addGuestSeenIds('listening', _items.map(i => i.id));
@@ -222,6 +228,7 @@ async function _showItem(root, index) {
       feedbackMode: 'full',
       onAnswered:   (isCorrect, meta) => {
         _totalAnswered++;
+        markPractising('listening');
         if (isCorrect) { _correctCount++; _itemCorrect++; }
         else if (meta?.failMode) _mistakeModes.push(meta.failMode);
       },
@@ -230,6 +237,11 @@ async function _showItem(root, index) {
           completeSession(_currentDbSessionId, _itemCorrect)
             .catch(e => console.warn('[M5] completeSession failed:', e.message));
         }
+        // הרצאה שהושלמה היא יחידת העבודה של ההאזנה, ולכן היא נקודת ה-XP.
+        rewardSession({
+          source: 'listening', correct: _itemCorrect, total: 0,
+          extraXp: XP.listeningLecture, userId: _userId,
+        }).catch(() => {});
         _advanceToNext(root, index);
       },
     }

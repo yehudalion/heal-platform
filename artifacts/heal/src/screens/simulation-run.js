@@ -21,6 +21,8 @@ import { navigate, subAnchor } from '../router.js';
 import { getLearner } from '../lib/learner.js';
 import { track } from '../lib/analytics.js';
 import { AudioPlayer } from '../listening/audio-player.js';
+import { markPractising, rewardSession } from '../lib/reward.js';
+import { XP } from '../lib/xp.js';
 import {
   loadForm, startAttempt, saveAnswer, finishAttempt, buildReport, SECTION_LABELS,
 } from '../data/simulation.data.js';
@@ -84,6 +86,15 @@ function ensureStyles() {
 .sim-btn-ghost { background:var(--card); color:var(--text); border:1.5px solid var(--border);
   border-radius:var(--radius-sm,8px); padding:.75rem 1.3rem; font-family:inherit; font-weight:700;
   font-size:.9rem; cursor:pointer; }
+
+/* דיאלוג אישור סגירת פרק (3.9.2026) */
+.sim-confirm { position:fixed; inset:0; background:rgba(10,20,16,.55); z-index:1000;
+  display:flex; align-items:center; justify-content:center; padding:1.2rem; }
+.sim-confirm-box { background:var(--card,#fff); border-radius:var(--radius,14px); padding:1.4rem 1.3rem;
+  max-width:24rem; width:100%; box-shadow:0 20px 50px rgba(0,0,0,.28); text-align:center; }
+.sim-confirm-title { font-weight:800; font-size:1.1rem; margin-bottom:.5rem; }
+.sim-confirm-sub { font-size:.88rem; color:var(--muted); line-height:1.6; margin-bottom:1.1rem; }
+.sim-confirm-btns { display:flex; flex-direction:column; gap:.55rem; }
 .sim-btn-quiet { background:none; color:var(--muted); border:0; font-family:inherit; font-size:.85rem;
   cursor:pointer; text-decoration:underline; }
 .sim-sec-card { background:var(--card); border:1px solid var(--border); border-radius:12px;
@@ -182,6 +193,7 @@ export async function renderSimulationRun(root) {
     answers: new Map(),          // order -> { chosenIndex, isCorrect, responseMs }
     attemptId: attempt?.id ?? null,
     isGuest: learner.isGuest,
+    userId: learner.id,
     startedAt: Date.now(),
     sectionEndsAt: null,
     questionAt: Date.now(),
@@ -364,7 +376,9 @@ function drawQuestion() {
     if (state.qIdx === items.length - 1) closeSection('finished');
     else goTo(state.qIdx + 1);
   });
-  state.root.querySelector('#simEnd').addEventListener('click', () => closeSection('finished'));
+  // 3.9.2026 — נמצא בבדיקה מקצה לקצה: הכפתור סגר פרק מתוזמן מיידית, בלי דרך
+  // חזרה. לחיצה מקרית אחת במובייל הייתה מוחקת פרק שלם. אישור אחד, ולא יותר.
+  state.root.querySelector('#simEnd').addEventListener('click', () => confirmEndSection());
 }
 
 function goTo(i) {
@@ -389,6 +403,37 @@ function record(it, chosenIndex) {
   });
 }
 
+/**
+ * שואל לפני שסוגרים פרק. מציג כמה שאלות עוד לא נענו — המספר הזה הוא מה שגורם
+ * לתלמיד לעצור, הרבה יותר מהמילה "בטוח?".
+ */
+function confirmEndSection() {
+  const items = curItems();
+  const unanswered = items.filter((it) => !state.answers.has(it.order)).length;
+  const wrap = document.createElement('div');
+  wrap.className = 'sim-confirm';
+  wrap.innerHTML = `
+    <div class="sim-confirm-box" role="dialog" aria-modal="true" aria-labelledby="simConfirmTitle">
+      <div class="sim-confirm-title" id="simConfirmTitle">לסיים את הפרק?</div>
+      <div class="sim-confirm-sub">${unanswered > 0
+        ? `נשארו ${unanswered} שאלות שלא ענית עליהן. אי אפשר לחזור לפרק אחרי שהוא נסגר.`
+        : 'ענית על כל השאלות. אי אפשר לחזור לפרק אחרי שהוא נסגר.'}</div>
+      <div class="sim-confirm-btns">
+        <button class="sim-btn" id="simConfirmStay">להמשיך בפרק</button>
+        <button class="sim-btn-quiet" id="simConfirmEnd">לסיים ולעבור הלאה</button>
+      </div>
+    </div>`;
+  document.body.appendChild(wrap);
+  const close = () => wrap.remove();
+  wrap.querySelector('#simConfirmStay').addEventListener('click', close);
+  wrap.querySelector('#simConfirmEnd').addEventListener('click', () => { close(); closeSection('finished'); });
+  wrap.addEventListener('click', (e) => { if (e.target === wrap) close(); });
+  document.addEventListener('keydown', function onEsc(e) {
+    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onEsc); }
+  });
+  wrap.querySelector('#simConfirmStay').focus();
+}
+
 /** סוגר את הפרק הנוכחי ועובר הלאה. אין דרך חזרה — כמו במבחן. */
 function closeSection(reason) {
   stopTicker();
@@ -399,6 +444,10 @@ function closeSection(reason) {
     answered: curItems().filter((it) => state.answers.has(it.order)).length,
     total: curItems().length,
   });
+  rewardSession({
+    source: 'simulation_section', total: 0,
+    extraXp: XP.simulationSection, userId: state.userId, silent: true,
+  }).catch(() => {});
   state.secIdx += 1;
   state.phase = 'section-intro';
   draw();
@@ -424,6 +473,11 @@ function drawReport() {
   track('simulation_completed', {
     form: state.form.code, accuracy: report.accuracy, minutes: Math.round(elapsed / 60000),
   });
+
+  rewardSession({
+    source: 'simulation', total: 0, extraXp: XP.simulationDone,
+    userId: state.userId, badges: ['sim_first'],
+  }).catch(() => {});
 
   const meterColor = (acc) =>
     acc >= 75 ? 'var(--green)' : acc >= 50 ? 'var(--orange,#B08442)' : 'var(--red,#B4553E)';
