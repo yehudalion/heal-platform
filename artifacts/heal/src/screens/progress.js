@@ -54,6 +54,15 @@ import { LEARN_BLOCKS, KEY_GLOSS } from './rephrase-learn.js';
 import { getGuestProfile } from './onboarding.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
 import { track } from '../lib/analytics.js';
+// סשן שבת 1 (5.9.2026): הווידג'טים שעברו ממסך הבית לכאן — הבית עונה רק על
+// "מה עושים עכשיו", וכל מה שהוא דוח גר כאן. ראו progress-widgets.js.
+import { getWeeklyActivity } from '../data/plan.data.js';
+import { getGamificationState, getBadges } from '../data/gamification.data.js';
+import { listAttempts } from '../data/simulation.data.js';
+import { getAccuracyByModule, getCumulativeGrowth, getActivityCalendar } from '../data/insights.data.js';
+import { ensureStyles as ensureInsightStyles } from './insights.js';
+import { getDailyTip } from '../data/dailyTip.data.js';
+import { weeklyPaceCard, gamificationCard, diagnosticBand, metricsSection, tipCard } from './progress-widgets.js';
 
 // A point whose lift clears this is worth calling out. Below it the differences
 // are not meaningful enough to name (lift ≈ 1 means "nothing to report").
@@ -69,13 +78,22 @@ async function load() {
   // Guests get the same local exam-date/minutes cold-start home.js already uses —
   // without this the countdown banner below wrongly claimed no exam date was set.
   if (!userId) {
-    return { userId: null, reports: [], profile: getGuestProfile(), coverage: null, listeningOverview: null };
+    return { userId: null, reports: [], profile: getGuestProfile(), coverage: null, listeningOverview: null,
+             weekly: null, gmState: null, badgeCodes: [], lastSim: null, accuracyRes: null, growthRes: null, calendarRes: null, tipRes: null };
   }
-  const [reports, profileRes, coverageRes, listeningRes] = await Promise.all([
+  const [reports, profileRes, coverageRes, listeningRes,
+         weeklyRes, gmState, badgeCodes, simRes, accuracyRes, growthRes, calendarRes] = await Promise.all([
     getWeakPoints(userId),
     getProfile(userId),
     getCoverage(userId),
     getListeningOverview(userId),
+    getWeeklyActivity(userId),
+    getGamificationState(),
+    getBadges(userId),
+    listAttempts(userId, 1),
+    getAccuracyByModule(userId),
+    getCumulativeGrowth(userId),
+    getActivityCalendar(userId),
   ]);
   return {
     userId,
@@ -83,6 +101,12 @@ async function load() {
     profile: profileRes.data ?? null,
     coverage: coverageRes.data ?? null,
     listeningOverview: listeningRes.data ?? null,
+    weekly: weeklyRes?.data ?? null,
+    gmState: gmState || null,
+    badgeCodes: badgeCodes || [],
+    lastSim: (simRes?.data ?? [])[0] ?? null,
+    accuracyRes, growthRes, calendarRes,
+    tipRes: getDailyTip(),
   };
 }
 
@@ -310,8 +334,10 @@ export async function renderProgress(root) {
   el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
   ensureStyles();
   ensureCoverageBarStyles();
+  ensureInsightStyles();
 
-  const { userId, reports, profile, coverage, listeningOverview } = await load();
+  const { userId, reports, profile, coverage, listeningOverview,
+          weekly, gmState, badgeCodes, lastSim, accuracyRes, growthRes, calendarRes, tipRes } = await load();
   const target = profile?.target_score ?? null;
   const examDate = profile?.exam_date ?? null;
   const daysLeft = examDate
@@ -329,8 +355,17 @@ export async function renderProgress(root) {
       <div class="page-title">ההתקדמות שלי</div>
       <div class="page-sub">${target ? `מה עלה בסשנים האחרונים. היעד שהגדרת: ${target}.` : 'מה עלה בסשנים האחרונים, לפי סוג השאלה.'}</div>
 
+      ${userId ? weeklyPaceCard(weekly) : ''}
+      ${userId ? tipCard(tipRes) : ''}
+
       ${!userId ? signedOut()
         : cardsHtml || `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
+
+      ${userId ? diagnosticBand(lastSim) : ''}
+      ${userId ? metricsSection(accuracyRes, growthRes, calendarRes) : ''}
+
+      ${userId ? `<div class="sec-title" style="margin-top:1.8rem">הדרגה שלך</div>${gamificationCard(gmState, badgeCodes)}` : ''}
+      ${userId ? `<p style="margin:.2rem 0 1rem"><a class="wp-deep" href="#/mistake-notebook">📓 מחברת הטעויות — לתרגל שוב את מה שפספסת ←</a></p>` : ''}
 
       ${userId && cardsHtml ? `<p style="text-align:center;margin-top:.4rem"><a class="wp-deep" href="#/insights">תובנות מפורטות על כל הפעילות שלכם ←</a></p>` : ''}
 
@@ -362,6 +397,10 @@ export async function renderProgress(root) {
     </div>`;
 
   wirePlanner(el, userId, profile);
+  // הווידג'טים שעברו מהבית משתמשים ב-data-nav (פס האבחון, "כל התובנות").
+  el.querySelectorAll('[data-nav]').forEach((t) => {
+    t.addEventListener('click', () => navigate(t.dataset.nav));
+  });
 
   // Waitlist form — replaces the dead ₪99 button (Lion, 2026-08-25).
   const form = el.querySelector('#waitForm');

@@ -14,6 +14,9 @@
   --purple-light: #ECE7EE;
   --blue:         #3D6B7D;
   --blue-light:   #E3ECEB;
+  --sky:          #4A7FA0;   /* תחיליות וסופיות (סשן שבת 1) */
+  --sky-light:    #E4EDF3;
+  --gold-light:   #F5EAD6;   /* השלמת משפטים */
   --red:          #B4553E;
   --red-light:    #F4E4DD;
   --bg:           #F5F1E8;
@@ -1355,50 +1358,9 @@ a { text-decoration: none; color: inherit; }
 .daily-cta-title { display: block; font-size: 1.06rem; font-weight: 700; }
 .daily-cta-sub { display: block; font-size: .78rem; font-weight: 500; opacity: .92; margin-top: 4px; }
 
-/* Dashboard composition (2026-08-25).
-   Before: .page had no max-width so the column stretched to 1685px on a 1920
-   screen, while .wk-card / .daily-cta were pinned to 560px - two different
-   layouts stacked in one page - and .module-grid used auto-fill, which built
-   8 tracks for 4 cards and squeezed each card to 189px. All measured live.
-   The :has() guard means that if the home markup ever changes these rules
-   stop applying and the page falls back to the plain stacked layout above. */
-#page-content > .fade-in:has(> .wk-card) {
-  display: grid;
-  grid-template-columns: 1fr 330px;
-  column-gap: 16px;
-  align-items: start;
-}
-#page-content > .fade-in:has(> .wk-card) > .page-title  { grid-column: 1 / -1; grid-row: 1; }
-#page-content > .fade-in:has(> .wk-card) > .page-sub    { grid-column: 1 / -1; grid-row: 2; }
-#page-content > .fade-in:has(> .wk-card) > .daily-cta   { grid-column: 1;      grid-row: 3; max-width: none; }
-#page-content > .fade-in:has(> .wk-card) > .wk-card     { grid-column: 2;      grid-row: 3; margin: 0; max-width: none; }
-#page-content > .fade-in:has(> .wk-card) > .sec-title   { grid-column: 1 / -1; grid-row: 4; }
-#page-content > .fade-in:has(> .wk-card) > .module-grid { grid-column: 1 / -1; grid-row: 5; }
-/* Home rows 6-9, added 2026-09-01. Only one of .diag-empty / .diag-sec-title
-   is ever present, so they share row 6. No row-gap is defined on this grid,
-   so an unused row collapses to zero height and leaves no gap.
-   .consent-band (row 6) and .wod-sec-title/.wod-card (rows 7-8) were inserted
-   on 2026-09-02; everything below shifted down accordingly. Every direct child of this grid must
-   have a rule here; one without a rule is auto-placed and breaks the desktop
-   layout silently.
-   ORDER MATTERS: .diag-sec-title, .guides-sec-title and .dd-sec-title also carry the
-   .sec-title class, whose rule above pins row 4 at equal specificity.
-   These rules win only because they come later. Do not move them above
-   the .sec-title rule, and do not reorder this block. */
-#page-content > .fade-in:has(> .wk-card) > .consent-band     { grid-column: 1 / -1; grid-row: 6; }
-#page-content > .fade-in:has(> .wk-card) > .dd-sec-title     { grid-column: 1 / -1; grid-row: 7; }
-#page-content > .fade-in:has(> .wk-card) > .dd-grid          { grid-column: 1 / -1; grid-row: 8; }
-#page-content > .fade-in:has(> .wk-card) > .diag-empty       { grid-column: 1 / -1; grid-row: 9; }
-#page-content > .fade-in:has(> .wk-card) > .diag-sec-title   { grid-column: 1 / -1; grid-row: 9; }
-#page-content > .fade-in:has(> .wk-card) > .diag-grid        { grid-column: 1 / -1; grid-row: 10; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-sec-title { grid-column: 1 / -1; grid-row: 11; }
-#page-content > .fade-in:has(> .wk-card) > .metrics-grid     { grid-column: 1 / -1; grid-row: 12; }
-#page-content > .fade-in:has(> .wk-card) > .guides-sec-title { grid-column: 1 / -1; grid-row: 13; }
-#page-content > .fade-in:has(> .wk-card) > .guides-grid      { grid-column: 1 / -1; grid-row: 14; }
-
-@media (max-width: 900px) {
-  #page-content > .fade-in:has(> .wk-card) { display: block; }
-}
+/* Dashboard composition (2026-08-25) הוסר בסשן שבת 1 (5.9.2026): הגריד היה
+   מוצמד ל-`:has(> .wk-card)`, ומאז שהקצב השבועי עבר ל-/progress הכלל היה
+   נדבק דווקא למסך ההתקדמות. הקומפוזיציה של הבית החדש — .home2 למטה. */
 
 /* ─── Mobile bottom nav (2026-08-17, minimal by decision) ───── */
 .bottomnav { display: none; }
@@ -1766,3 +1728,102 @@ a { text-decoration: none; color: inherit; }
 /* שורת המגן מופיעה רק ביום שבו היא רלוונטית, ולכן מותר לה לבלוט (4.9.2026) */
 .gm-shield--now{background:var(--orange-light);border:1px solid var(--orange);
   border-radius:var(--radius-sm);padding:.45rem .7rem;color:var(--text);font-weight:600}
+
+
+/* ═══════════════════════════════════════════════
+   מסך הבית v3 + /practice + סרגל (סשן שבת 1, 5.9.2026)
+   שלושה בלוקים: כרטיס פתיחה, הפינות, המילה של היום.
+   ═══════════════════════════════════════════════ */
+.home2 { max-width: 860px; }
+.hm-head {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 1rem 1.1rem 1.1rem; display: grid; gap: .75rem; margin-bottom: 1.3rem;
+}
+.hm-hi { display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.hm-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; }
+.hm-days { font-size: .8rem; color: var(--muted); }
+.hm-days b { color: var(--text); font-weight: 800; }
+.hm-status {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .45rem;
+  background: none; border: 0; padding: 0; font: inherit; font-size: .78rem; color: var(--muted);
+  cursor: pointer; text-align: start;
+}
+.hm-status:hover { color: var(--green-dark); }
+.hm-dot { opacity: .5; }
+.hm-shield { color: var(--green-dark); font-weight: 700; }
+.hm-real {
+  display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center;
+  border: 1px solid var(--border); border-radius: 10px; padding: .55rem .75rem;
+  background: var(--bg); font: inherit; cursor: pointer; text-align: start; color: var(--text);
+}
+.hm-real:hover { border-color: var(--green); }
+.hm-real-lbl { font-size: .68rem; font-weight: 800; letter-spacing: .04em; color: var(--muted); }
+.hm-real-v { font-size: .9rem; }
+.hm-real-v b { color: var(--green-dark); font-weight: 800; }
+.hm-real-go { font-size: .74rem; color: var(--muted); }
+.hm-today {
+  background: var(--green); color: #fff; border-radius: 12px; padding: .9rem 1rem;
+  display: grid; grid-template-columns: 1fr auto; gap: .8rem; align-items: center;
+  box-shadow: 0 4px 12px rgba(31,92,67,.28);
+}
+.hm-eyebrow { font-size: .66rem; letter-spacing: .08em; opacity: .85; font-weight: 700; }
+.hm-title { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.3; margin: .15rem 0 .3rem; }
+.hm-meta { display: flex; flex-wrap: wrap; gap: .4rem; font-size: .74rem; opacity: .9; }
+.hm-meta-link { color: #fff; text-decoration: none; font-weight: 700; }
+.hm-meta-link:hover { text-decoration: underline; }
+.hm-btn {
+  background: #fff; color: var(--green-dark); border: 0; border-radius: 9px;
+  padding: .6rem 1rem; font: inherit; font-weight: 800; font-size: .9rem; cursor: pointer; white-space: nowrap;
+}
+.hm-btn:hover { background: var(--green-light); }
+.hm-sec { margin-top: 0; }
+
+/* הפינות — משבצות בגוון קבוע */
+.corners-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.corners-grid .mc { border: 1px solid var(--border); padding: 12px 14px; }
+.mc-top { display: flex; align-items: center; gap: .5rem; margin-bottom: 6px; }
+.corners-grid .mc-icon { font-size: 1.15rem; }
+.corners-grid .mc-name { font-size: .95rem; margin: 0; }
+.corners-grid .mc-bar { margin: 6px 0 6px; background: rgba(20,32,26,.08); }
+.mc-g { background: var(--green-light); }  .mc-g .mc-name { color: var(--green-dark); }
+.mc-o { background: var(--orange-light); } .mc-o .mc-name { color: var(--orange); }
+.mc-b { background: var(--blue-light); }   .mc-b .mc-name { color: var(--blue); }
+.mc-p { background: var(--purple-light); } .mc-p .mc-name { color: var(--purple); }
+.mc-y { background: var(--gold-light); }   .mc-y .mc-name { color: var(--orange); } .mc-y .mc-fill { background: var(--yellow); }
+.mc-c { background: var(--sky-light); }    .mc-c .mc-name { color: var(--sky); }    .mc-c .mc-fill { background: var(--sky); }
+.mc-sim {
+  grid-column: 1 / -1; background: var(--card);
+  display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: center;
+}
+.mc-sim .mc-top { margin: 0; }
+.mc-sim .mc-pct { margin: 0; }
+.mc-sim .mc-pct b { color: var(--green-dark); font-weight: 800; }
+.mc-go { font-size: .8rem; font-weight: 800; color: var(--green-dark); white-space: nowrap; }
+
+/* המילה של היום — שורה אחת */
+.hm-wod {
+  display: flex; justify-content: space-between; align-items: center; gap: .6rem;
+  margin: 1rem 0 0; padding: .55rem .75rem; font-size: .82rem; color: var(--muted);
+  text-decoration: none; border-radius: 10px;
+}
+.hm-wod:hover { background: var(--card); color: var(--text); }
+.hm-wod b { color: var(--text); font-family: var(--eng); font-size: 1rem; }
+.hm-wod-go { color: var(--orange); font-weight: 800; }
+
+/* סרגל — נקודות גוון לפינות */
+.nav-hue { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.nav-hue-g { background: var(--green); }  .nav-hue-o { background: var(--orange); }
+.nav-hue-b { background: var(--blue); }   .nav-hue-y { background: var(--yellow); }
+.nav-hue-p { background: var(--purple); } .nav-hue-c { background: var(--sky); }
+.nav-item--quiet { color: var(--muted); font-size: .82rem; }
+
+@media (max-width: 900px) {
+  .corners-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hm-today { grid-template-columns: 1fr; }
+  .hm-btn { width: 100%; }
+  .hm-real { grid-template-columns: 1fr auto; }
+  .hm-real-lbl { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .corners-grid .mc-name { font-size: .88rem; }
+}
