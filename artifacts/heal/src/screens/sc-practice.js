@@ -19,7 +19,10 @@
 import { navigate, subAnchor } from '../router.js';
 import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { getLevelCenter, saveLevelCenter } from '../data/levels.data.js';
-import { startGoogleSignIn } from '../lib/signIn.js';
+import { markPractising, rewardSession } from '../lib/reward.js';
+import { attachKeyNav, KEY_HINT_HTML } from '../lib/keyNav.js';
+import { itemFeedbackHtml, wireItemFeedback } from '../lib/itemFeedback.js';
+import { paceLine } from '../lib/pace.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/sentenceCompletion.data.js';
 import { getPushableWords, pushMissedWords } from '../data/srsPush.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -53,6 +56,9 @@ const rolling = [];
 let pack = [];
 let packIdx = 0;
 let packCorrect = 0;
+let detachKeys = null;
+let packMs = 0;
+let packTimed = 0;
 let levelAdjustedThisPack = false;
 let focusKey = null;
 let focusLabel = null;
@@ -149,6 +155,7 @@ async function loadPack(root) {
   packLevel = fetchedAt;
   packIdx = 0;
   packCorrect = 0;
+  packMs = 0; packTimed = 0;
   levelAdjustedThisPack = false;
   startQuestion();
   view = 'question';
@@ -177,8 +184,10 @@ function onChoose(root, d) {
   const chosenOption = order[d] + 1;              // canonical 1–4
   const isCorrect = chosenOption === q.correct_option;
   const responseTimeMs = qStart ? Date.now() - qStart : null;
+  if (responseTimeMs) { packMs += responseTimeMs; packTimed += 1; }
 
   if (isCorrect) packCorrect += 1;
+  markPractising('sc');
   rolling.push(isCorrect);
   if (rolling.length > WINDOW) rolling.shift();
   answeredIds.push(q.id);
@@ -284,11 +293,21 @@ function drawQuestion(root) {
       <div class="sp-stem" dir="ltr">${renderStem(q.stem)}</div>
       ${hintShown ? hintBox(q) : ''}
       <div class="sp-opts">${optsHtml}</div>
+      ${revealed ? '' : KEY_HINT_HTML}
       <div class="sp-actions">${actions}</div>
+      ${revealed ? itemFeedbackHtml('sc', q.id) : ''}
     </div>
   `);
 
   if (!revealed) {
+    detachKeys?.();
+    detachKeys = attachKeyNav({
+      onPick: (i) => {
+        const btn = root.querySelectorAll('.sp-opt')[i];
+        if (btn && !btn.disabled) btn.click();
+      },
+      onNext: () => root.querySelector('#spNext')?.click(),
+    });
     root.querySelectorAll('.sp-opt').forEach((b) =>
       b.addEventListener('click', () => onChoose(root, Number(b.dataset.d))));
     root.querySelector('#spHint')?.addEventListener('click', () => {
@@ -299,6 +318,7 @@ function drawQuestion(root) {
   } else {
     root.querySelector('#spExpl')?.addEventListener('click', () => { explOpen = !explOpen; draw(root); });
     root.querySelector('#spNext')?.addEventListener('click', () => nextQuestion(root));
+    wireItemFeedback(root);
     root.querySelector('#spPush')?.addEventListener('click', () => onPushWords(root));
     root.querySelectorAll('.sp-meta-btn').forEach((b) =>
       b.addEventListener('click', () => onMetaTag(root, b.dataset.tag)));
@@ -442,6 +462,8 @@ function metaPrompt() {
 
 function drawSummary(root) {
   const total = pack.length;
+  rewardSession({ source: 'sc', correct: packCorrect, total, userId }).catch(() => {});
+  const pace = paceLine('sc', packMs, packTimed);
   // 3.9.2026 — בלי מספר רמה. זו השורה שההנדאוף (§8.4.1) סימן במפורש לתיקון.
   let levelMsg = '';
   if (level > packLevel) levelMsg = `<div class="sp-levelmsg up">מעלים רמה! 🚀 המנה הבאה תהיה מאתגרת יותר.</div>`;
@@ -455,8 +477,7 @@ function drawSummary(root) {
       <div class="sp-sum-total" id="spTotal"></div>
       ${levelMsg}
       <div class="sp-insight" id="spInsight" hidden></div>
-      ${isGuestLearner ? `<div class="sp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. חשבון חינם ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.
-        <button type="button" class="sp-guest-cta" id="spSignIn">להמשיך עם Google ←</button></div>` : ''}
+      ${pace}
       <div class="sp-nextstep">מה עכשיו?</div>
       <div class="sp-sum-btns">
         <button class="btn-primary" id="spMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -466,7 +487,6 @@ function drawSummary(root) {
       </div>
     </div>
   `);
-  root.querySelector('#spSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
   root.querySelector('#spMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#spDone').addEventListener('click', () => navigate('/home'));
   fillSummaryExtras(root);
@@ -579,8 +599,6 @@ const SP_CSS = `
 .sp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .sp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
 .sp-levelmsg.down{background:var(--orange-light);color:#b5551f}
-.sp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
-.sp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
 .sp-guest-cta{display:block;width:100%;margin-top:.7rem;padding:.62rem 1rem;border:0;border-radius:var(--radius-sm);background:var(--green-dark);color:#fff;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
 .sp-guest-cta:hover{filter:brightness(1.08)}
 .sp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}

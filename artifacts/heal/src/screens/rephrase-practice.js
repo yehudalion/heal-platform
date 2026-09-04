@@ -18,7 +18,10 @@ import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js'
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { getLevelCenter, saveLevelCenter } from '../data/levels.data.js';
-import { startGoogleSignIn } from '../lib/signIn.js';
+import { markPractising, rewardSession } from '../lib/reward.js';
+import { attachKeyNav, KEY_HINT_HTML } from '../lib/keyNav.js';
+import { itemFeedbackHtml, wireItemFeedback } from '../lib/itemFeedback.js';
+import { paceLine } from '../lib/pace.js';
 import { resolveTrigger, CATEGORIES } from '../lib/keys.js';
 import { LEARN_SEEN_KEY } from './rephrase-learn.js';
 
@@ -53,6 +56,9 @@ const rolling = [];               // last-≤10 booleans (isCorrect) across pack
 let pack = [];                    // current pack (≤ PACK_SIZE questions)
 let packIdx = 0;
 let packCorrect = 0;
+let detachKeys = null;   // מנתק את מאזין המקלדת בין ציורים
+let packMs = 0;          // סך זמן המענה במנה, לשורת הקצב
+let packTimed = 0;
 let levelAdjustedThisPack = false; // one level MOVE per pack — see adjustLevel()
 let focusKey = null;               // non-null → this session drills ONE label
 let focusLabel = null;             // its student-facing label, for the header
@@ -152,6 +158,7 @@ async function loadPack(root) {
   packLevel = fetchedAt;
   packIdx = 0;
   packCorrect = 0;
+  packMs = 0; packTimed = 0;
   levelAdjustedThisPack = false;
   startQuestion();
   view = 'question';
@@ -180,6 +187,8 @@ function onChoose(root, d) {
   const responseTimeMs = qStart ? Date.now() - qStart : null;
 
   if (isCorrect) packCorrect += 1;
+  markPractising('rephrase');   // הרצף נספר על עשייה, לא על ביקור
+  if (responseTimeMs) { packMs += responseTimeMs; packTimed += 1; }
   rolling.push(isCorrect);
   if (rolling.length > WINDOW) rolling.shift();
   answeredIds.push(q.id);
@@ -285,13 +294,24 @@ function drawQuestion(root) {
       <div class="rp-stem" dir="ltr">${esc(q.original_sentence)}</div>
       ${hintShown ? hintBox(q) : ''}
       <div class="rp-opts">${optsHtml}</div>
+      ${revealed ? '' : KEY_HINT_HTML}
       <div class="rp-actions">${actions}</div>
+      ${revealed ? itemFeedbackHtml('rephrase', q.id) : ''}
     </div>
   `);
 
   if (!revealed) {
     root.querySelectorAll('.rp-opt').forEach((b) =>
       b.addEventListener('click', () => onChoose(root, Number(b.dataset.d))));
+    // מקלדת: אותו מסלול בדיוק כמו לחיצה, כולל הכפתורים המושבתים אחרי חשיפה.
+    detachKeys?.();
+    detachKeys = attachKeyNav({
+      onPick: (i) => {
+        const btn = root.querySelectorAll('.rp-opt')[i];
+        if (btn && !btn.disabled) btn.click();
+      },
+      onNext: () => root.querySelector('#rpNext')?.click(),
+    });
     root.querySelector('#rpHint')?.addEventListener('click', () => {
       hintUsed = true;
       hintShown = true;
@@ -300,6 +320,7 @@ function drawQuestion(root) {
   } else {
     root.querySelector('#rpExpl')?.addEventListener('click', () => { explOpen = !explOpen; draw(root); });
     root.querySelector('#rpNext')?.addEventListener('click', () => nextQuestion(root));
+    wireItemFeedback(root);
   }
 }
 
@@ -381,6 +402,9 @@ function explPanel(q, isCorrect, canon) {
 
 function drawSummary(root) {
   const total = pack.length;
+  // fire-and-forget: הטוסט מופיע מעל הסיכום, וכישלון שלו לא נוגע במסך.
+  rewardSession({ source: 'rephrase', correct: packCorrect, total, userId }).catch(() => {});
+  const pace = paceLine('rephrase', packMs, packTimed);
   // 3.9.2026 — בלי מספר רמה (אותו כלל כמו הצ'יפ למעלה). הכיוון כן נאמר:
   // "מספר בלי הקשר קורא כמו תעודה; מספר עם כיוון קורא כמו התקדמות"
   // (PRINCIPLE_north_star) — כאן נשאר הכיוון בלבד, בלי המספר.
@@ -396,8 +420,7 @@ function drawSummary(root) {
       <div class="rp-sum-total" id="rpTotal"></div>
       ${levelMsg}
       <div class="rp-insight" id="rpInsight" hidden></div>
-      ${isGuestLearner ? `<div class="rp-guest-nudge">תרגלתם ${total} שאלות בתור אורח. חשבון חינם ישמור את ההתקדמות ויוסיף ניתוח מלא של הדפוסים שלכם — 10 שניות עם Google.
-        <button type="button" class="rp-guest-cta" id="rpSignIn">להמשיך עם Google ←</button></div>` : ''}
+      ${pace}
       <div class="rp-nextstep">מה עכשיו?</div>
       <div class="rp-sum-btns">
         <button class="btn-primary" id="rpMore">${focusLabel ? `עוד מנה ב${esc(focusLabel)} ←` : 'עוד מנה ←'}</button>
@@ -407,9 +430,6 @@ function drawSummary(root) {
       </div>
     </div>
   `);
-  // 3.9.2026 — עד עכשיו הניסוח הזכיר Google אבל לא היה שום כפתור, והקישור
-  // הוביל לעמוד הפתיחה. אורח שרצה חשבון היה צריך לנחש. עכשיו זו לחיצה אחת.
-  root.querySelector('#rpSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
   root.querySelector('#rpMore').addEventListener('click', () => loadPack(root));
   root.querySelector('#rpDone').addEventListener('click', () => navigate('/home'));
   fillSummaryExtras(root);
@@ -532,10 +552,6 @@ const RP_CSS = `
 .rp-levelmsg{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem}
 .rp-levelmsg.up{background:var(--green-light);color:var(--green-dark)}
 .rp-levelmsg.down{background:var(--orange-light);color:var(--orange)}
-.rp-guest-nudge{margin-top:1rem;padding:.7rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;line-height:1.6;background:var(--green-light);color:var(--text)}
-.rp-guest-nudge a{color:var(--green-dark);font-weight:700;text-decoration:none}
-.rp-guest-cta{display:block;width:100%;margin-top:.7rem;padding:.62rem 1rem;border:0;border-radius:var(--radius-sm);background:var(--green-dark);color:#fff;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
-.rp-guest-cta:hover{filter:brightness(1.08)}
 .rp-insight{margin-top:1.2rem;background:var(--blue-light);border-radius:var(--radius-sm);padding:.9rem 1rem;text-align:right}
 .rp-insight-title{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.35rem}
 .rp-insight-body{font-size:.88rem;line-height:1.7}

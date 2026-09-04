@@ -41,6 +41,8 @@ import {
 } from '../data/reading.data.js';
 import { getLevelCenter, saveLevelCenter, MODULE_LEVELS } from '../data/levels.data.js';
 import { levelMix, driftCenter } from '../lib/levelMix.js';
+import { markPractising, rewardSession } from '../lib/reward.js';
+import { attachKeyNav, KEY_HINT_HTML } from '../lib/keyNav.js';
 import { LEARN_SEEN_KEY } from './reading-learn.js';
 
 const CFG = MODULE_LEVELS.reading;
@@ -49,6 +51,11 @@ const MASTERY_RUN = 3;   // 💡 stops being offered after this many correct in 
 
 // ─── Session state (in memory only) ──────────────────────────────────────────
 let userId = null;
+let detachKeys = null;
+// העדפות תצוגה של הקטע. נשמרות במכשיר: מי שהגדיל פעם אחת רוצה את זה תמיד.
+let fontStep = 0;      // 0/1/2
+let passageHidden = false;
+try { fontStep = Number(localStorage.getItem('hs:rd:font') || 0) || 0; } catch (_) { fontStep = 0; }
 let isGuestLearner = false;
 let mode = 'practice';
 let center = CFG.start;
@@ -148,6 +155,13 @@ function clockText() {
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 }
 
+/** שומר את גודל הגופן במכשיר ומצייר מחדש. */
+function setFont(el, step) {
+  fontStep = step;
+  try { localStorage.setItem('hs:rd:font', String(step)); } catch (_) { /* מצב פרטי */ }
+  draw(el);
+}
+
 // ─── Rendering ───────────────────────────────────────────────────────────────
 function draw(el) {
   if (finished) { drawSummary(el); return; }
@@ -161,7 +175,14 @@ function draw(el) {
         ${mode === 'exam' ? `<div class="rp-clock" id="rpClock">${clockText()}</div>` : ''}
       </div>
 
-      <article class="rp-passage" dir="ltr">
+      <!-- פקדי תצוגה (3.9.2026): גודל גופן והסתרת הקטע. הקטע נשאר פתוח
+           כברירת מחדל — ההסתרה היא לשאלות שכבר קראת אליהן, לא מצב עבודה. -->
+      <div class="rp-viewbar">
+        <button class="rp-vb" id="rdFontDown" title="להקטין טקסט" aria-label="להקטין את גודל הטקסט">א−</button>
+        <button class="rp-vb" id="rdFontUp" title="להגדיל טקסט" aria-label="להגדיל את גודל הטקסט">א+</button>
+        <button class="rp-vb" id="rdToggle">${passageHidden ? '📖 להציג את הקטע' : '🙈 להסתיר את הקטע'}</button>
+      </div>
+      <article class="rp-passage rp-font-${fontStep}" dir="ltr" ${passageHidden ? 'hidden' : ''}>
         <h2 class="rp-title">${esc(passage.title)}</h2>
         ${renderBody(passage.body, q)}
       </article>
@@ -172,6 +193,7 @@ function draw(el) {
         <div class="rp-opts">${q.options.map((o, i) => optionBtn(o, i, q)).join('')}</div>
         ${hintBlock(q)}
         ${feedbackBlock(q)}
+        ${KEY_HINT_HTML}
         <div class="rp-nav">
           <button class="rp-nav-btn" id="rpPrev" ${idx === 0 ? 'disabled' : ''}>הקודמת</button>
           <button class="rp-nav-btn rp-next" id="rpNext">${nextLabel()}</button>
@@ -181,9 +203,21 @@ function draw(el) {
 
   el.querySelectorAll('[data-opt]').forEach((b) =>
     b.addEventListener('click', () => choose(el, Number(b.dataset.opt))));
+  detachKeys?.();
+  detachKeys = attachKeyNav({
+    onPick: (i) => {
+      const btns = el.querySelectorAll('[data-opt]');
+      if (btns[i] && !btns[i].disabled) btns[i].click();
+    },
+    onNext: () => el.querySelector('#rpNext')?.click(),
+    onPrev: () => el.querySelector('#rpPrev')?.click(),
+  });
   el.querySelectorAll('[data-chip]').forEach((b) =>
     b.addEventListener('click', () => { idx = Number(b.dataset.chip); draw(el); }));
   el.querySelector('#rpPrev')?.addEventListener('click', () => { if (idx > 0) { idx--; draw(el); } });
+  el.querySelector('#rdFontUp')?.addEventListener('click', () => setFont(el, Math.min(2, fontStep + 1)));
+  el.querySelector('#rdFontDown')?.addEventListener('click', () => setFont(el, Math.max(0, fontStep - 1)));
+  el.querySelector('#rdToggle')?.addEventListener('click', () => { passageHidden = !passageHidden; draw(el); });
   el.querySelector('#rpNext')?.addEventListener('click', () => onNext(el));
   el.querySelector('#rpHintBtn')?.addEventListener('click', () => {
     hintOpen[idx] = !hintOpen[idx]; draw(el);
@@ -274,6 +308,7 @@ function choose(el, i) {
 
   const first = chosen[idx] === null;
   chosen[idx] = i;
+  if (first) markPractising('reading');
 
   if (mode === 'practice') {
     revealed[idx] = true;
@@ -327,6 +362,7 @@ async function finish(el) {
 
 function drawSummary(el) {
   const correct = questions.reduce((n, q, i) => n + (chosen[i] === q.correct_option_index ? 1 : 0), 0);
+  rewardSession({ source: 'reading', correct, total: questions.length, userId }).catch(() => {});
   const mins = Math.max(1, Math.round((Date.now() - startedAt) / 60000));
 
   // Descriptive, never diagnostic (SITEMAP §2): what happened in this session,
@@ -398,6 +434,13 @@ function ensureStyles() {
 .rp-chip.is-done{border-color:var(--green-dark);color:var(--green-dark)}
 .rp-chip.is-current{background:var(--green-dark);border-color:var(--green-dark);color:#fff}
 .rp-clock{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.05rem;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.3rem .7rem}
+.rp-viewbar{display:flex;gap:.4rem;justify-content:flex-end;margin-bottom:.45rem}
+.rp-vb{background:none;border:1px solid var(--border);border-radius:99px;padding:.2rem .6rem;
+  font:inherit;font-size:.74rem;color:var(--muted);cursor:pointer}
+.rp-vb:hover{border-color:var(--green);color:var(--green-dark)}
+.rp-passage.rp-font-1 p{font-size:1.06rem;line-height:2.05}
+.rp-passage.rp-font-2 p{font-size:1.18rem;line-height:2.15}
+.rp-passage.rp-font-1,.rp-passage.rp-font-2{max-height:52vh}
 .rp-passage{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem 1.5rem;max-height:46vh;overflow-y:auto;text-align:left}
 .rp-title{font-size:1.02rem;font-weight:800;margin:0 0 .8rem}
 .rp-passage p{font-size:.95rem;line-height:1.95;margin:0 0 .85rem}
