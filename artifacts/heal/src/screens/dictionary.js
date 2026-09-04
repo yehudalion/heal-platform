@@ -45,7 +45,7 @@ function wordRow(w) {
       </div>
       ${mnemonics.length ? `
         <div class="dict-mnem">
-          <div class="dict-mnem-hint">🔗 חפשו בתוך המשפט את הצליל שדומה למילה באנגלית — הוא הגשר לזכירה</div>
+          <div class="dict-mnem-hint">🔗 עוגנים לזכירה — הקשר, שימוש במשפט, ומאיפה המילה באה</div>
           ${mnemonics.map(m => `<p class="dict-mnem-line">${escapeHtml(m)}</p>`).join('')}
         </div>` : ''}
     </div>

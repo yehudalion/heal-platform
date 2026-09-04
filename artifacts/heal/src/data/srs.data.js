@@ -53,8 +53,12 @@ const EXTENSION_REQUIRES_PREMIUM = true
  * passed, so every learner silently defaulted to free. It is derived from the
  * profile here so the tier is a real fact about the account rather than an
  * argument nobody remembers to send.
+ *
+ * Exported since 4.9.2026: ספרינט המילים קרא ל-getWordsByImpact עם
+ * isPremium: true קשיח, כלומר הגיש לכל תלמיד חינמי גם את המילים שמעבר
+ * לתקרה החינמית. כל מסך שצריך לדעת מסלול חייב לשאול כאן ולא להניח.
  */
-async function getLearnerState(userId) {
+export async function getLearnerState(userId) {
   const fallback = { pool: 'core', isPremium: false }
   if (!userId) return fallback
   try {
