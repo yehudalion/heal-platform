@@ -2,6 +2,7 @@ import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { getProfile } from '../data/profiles.data.js';
 
+import { BRAND_MARK } from '../lib/brand.js';
 export async function renderVocabAnalyze(root) {
   const raw = sessionStorage.getItem('hs_last_session_summary');
   if (!raw) {
@@ -46,7 +47,7 @@ export async function renderVocabAnalyze(root) {
 
   root.innerHTML = `<div class="vc-shell fade-in">
     <header class="vc-topbar">
-      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      <a class="brand-mark vc-brand" href="#/home">${BRAND_MARK}</a>
     </header>
     <main class="vc-main">
       <div class="va-card">

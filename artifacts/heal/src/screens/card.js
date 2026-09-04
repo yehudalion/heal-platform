@@ -11,6 +11,7 @@ import { XP } from '../lib/xp.js';
 import { joinWaitlist } from '../data/waitlist.data.js';
 import '../lib/signIn.js';
 
+import { BRAND_MARK } from '../lib/brand.js';
 const MAX_REQUEUES = 2;
 
 let queue = [];
@@ -229,7 +230,7 @@ function draw(root) {
 
   root.innerHTML = `<div class="vc-shell fade-in">
     <header class="vc-topbar">
-      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      <a class="brand-mark vc-brand" href="#/home">${BRAND_MARK}</a>
       <div class="vc-topbar-right">
         <button class="card-help-btn" id="helpBtn" title="הסבר שוב" aria-label="הסבר איך הפינה עובדת">?</button>
         <span class="card-counter">מילה ${counter} מתוך ${sessionTotal}</span>
@@ -339,7 +340,7 @@ async function renderCoreExhausted(root, userId) {
 
   root.innerHTML = `<div class="vc-shell fade-in">
     <header class="vc-topbar">
-      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      <a class="brand-mark vc-brand" href="#/home">${BRAND_MARK}</a>
     </header>
     <main class="vc-main">
       <div class="vc-card" style="text-align:center;padding:2rem 1.6rem">
@@ -388,7 +389,7 @@ async function renderCoreExhausted(root, userId) {
 function renderAllWordsExhausted(root) {
   root.innerHTML = `<div class="vc-shell fade-in">
     <header class="vc-topbar">
-      <a class="brand-mark vc-brand" href="#/home">hSc</a>
+      <a class="brand-mark vc-brand" href="#/home">${BRAND_MARK}</a>
     </header>
     <main class="vc-main">
       <div class="vc-card" style="text-align:center;padding:2rem 1.6rem">
@@ -404,7 +405,7 @@ function renderAllWordsExhausted(root) {
 function renderNothingDueToday(root) {
   root.innerHTML = `<div class="vc-shell">
       <header class="vc-topbar">
-        <a class="brand-mark vc-brand" href="#/home">hSc</a>
+        <a class="brand-mark vc-brand" href="#/home">${BRAND_MARK}</a>
       </header>
       <main class="vc-main">
         <div class="vc-card">

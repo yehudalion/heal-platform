@@ -1,3 +1,4 @@
+import { BRAND, BRAND_PARTS } from '../lib/brand.js';
 /**
  * src/screens/daily.js — האתגר היומי. העמוד הציבורי היחיד של המוצר.
  *
@@ -83,13 +84,13 @@ function shell(inner) {
     <div class="dc-foot">
       <a href="/privacy/" target="_blank" rel="noopener">פרטיות</a> ·
       <a href="/accessibility/" target="_blank" rel="noopener">נגישות</a> ·
-      <a href="#/">HighScore</a>
+      <a href="#/">${BRAND}</a>
     </div></div>`
 }
 
 function drawIntro(root) {
   root.innerHTML = shell(`
-    <div class="dc-logo">High<em>Score</em></div>
+    <div class="dc-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
     <div class="dc-kicker">האתגר היומי</div>
     <h1 class="dc-h1">חמש שאלות אנגלית. בערך ארבע דקות.</h1>
     <p class="dc-lead">
@@ -276,7 +277,7 @@ async function drawResult(root) {
 }
 
 function share(grid) {
-  const text = `HighScore · האתגר היומי ${S.date}\n${S.correct}/${S.total} ${grid}\nhttps://highscore-eight.vercel.app/#/daily`
+  const text = `${BRAND} · האתגר היומי ${S.date}\n${S.correct}/${S.total} ${grid}\nhttps://highscore-eight.vercel.app/#/daily`
   if (navigator.share) {
     navigator.share({ text }).catch(() => {})
     return

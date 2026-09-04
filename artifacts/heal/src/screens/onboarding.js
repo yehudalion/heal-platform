@@ -17,6 +17,7 @@ import { getCurrentSession, isGuest } from '../supabase.js';
 import { completeOnboarding } from '../data/profiles.data.js';
 import { track } from '../lib/analytics.js';
 
+import { BRAND_PARTS } from '../lib/brand.js';
 export const GUEST_PROFILE_KEY = 'guest_profile';
 
 const MINUTE_OPTIONS = [5, 10, 15, 20, 30, 45];
@@ -52,7 +53,7 @@ export function renderOnboarding(root) {
   root.innerHTML = `
     <div class="auth-wrap fade-in">
       <div class="auth-card" style="max-width:430px">
-        <div class="auth-logo">High<em>Score</em></div>
+        <div class="auth-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
         <div class="auth-tagline">שתי שאלות קצרות ומתחילים</div>
 
         <div style="text-align:right;margin-top:1.4rem">

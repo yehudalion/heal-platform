@@ -1,3 +1,4 @@
+import { BRAND } from './brand.js';
 /**
  * src/lib/ics.js — ייצוא התוכנית השבועית ליומן.
  *
@@ -48,7 +49,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//HighScore//Study Plan//HE',
+    `PRODID:-//${BRAND}//Study Plan//HE`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
@@ -57,7 +58,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
     `DTSTART;TZID=Asia/Jerusalem:${stamp(start.getFullYear(), start.getMonth() + 1, start.getDate(), start.getHours(), start.getMinutes())}`,
     `DTEND;TZID=Asia/Jerusalem:${stamp(end.getFullYear(), end.getMonth() + 1, end.getDate(), end.getHours(), end.getMinutes())}`,
     byday ? `RRULE:FREQ=WEEKLY;BYDAY=${byday}${until}` : '',
-    'SUMMARY:תרגול אנגלית — HighScore',
+    `SUMMARY:תרגול אנגלית — ${BRAND}`,
     'DESCRIPTION:התרגול היומי שלך במבחן האנגלית. https://highscore-eight.vercel.app/',
     'BEGIN:VALARM',
     'TRIGGER:-PT10M',

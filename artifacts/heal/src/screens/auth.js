@@ -1,6 +1,7 @@
 import { supabase, isSupabaseConfigured } from '../supabase.js';
 import { track } from '../lib/analytics.js';
 
+import { BRAND, BRAND_PARTS } from '../lib/brand.js';
 const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.4-1.61 4.1-5.35 4.1A5.4 5.4 0 1 1 12 6.6c1.7 0 2.85.72 3.5 1.34l2.4-2.32C16.36 4.27 14.4 3.4 12 3.4 7.13 3.4 3.2 7.33 3.2 12s3.93 8.6 8.8 8.6c5.07 0 8.45-3.56 8.45-8.57 0-.58-.06-1.02-.1-1.43z"/></svg>`;
 
 /**
@@ -37,7 +38,7 @@ export function renderAuth(root) {
     <div class="auth-wrap fade-in">
       <div class="auth-card lp-card">
 
-        <div class="auth-logo">High<em>Score</em></div>
+        <div class="auth-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
         <div class="auth-tagline">ההכנה למבחן הלאל</div>
 
         <div class="lp-kicker">מדצמבר 2026</div>
@@ -125,7 +126,7 @@ export function renderAuth(root) {
             שכל חומרי ההכנה הקיימים מכוונים לבחינה אחרת — אז בניתי את מה
             שהייתי רוצה לתת לתלמידים שלי.
           </p>
-          <p class="lp-founder-sig">ליאון · HighScore</p>
+          <p class="lp-founder-sig">יהודה · ${BRAND}</p>
         </div>
 
         <div style="margin-top:1.4rem;font-size:.76rem;color:var(--muted)">כלי לימוד ממוקד. ללא פרסומות. ללא רעש.</div>

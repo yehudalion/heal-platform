@@ -18,6 +18,7 @@
  */
 import { navigate } from '../router.js';
 
+import { BRAND } from '../lib/brand.js';
 const SECTIONS = [
   {
     id: 'what',
@@ -81,7 +82,7 @@ export function renderVocabLearn(rootEl) {
   rootEl.innerHTML = `
     <div class="shell" dir="rtl">
       <nav class="topbar">
-        <a class="brand" href="#/home"><span class="brand-mark">HighScore</span></a>
+        <a class="brand" href="#/home"><span class="brand-mark">${BRAND}</span></a>
       </nav>
       <div class="vl-wrap">
 

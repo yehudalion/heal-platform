@@ -22,6 +22,7 @@ import { getCurrentSession } from '../supabase.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { startGoogleSignIn } from '../lib/signIn.js';
 import { playClip } from '../lib/sound.js';
+import { BRAND } from '../lib/brand.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -148,7 +149,7 @@ export async function renderWordOfDay(root) {
   el.querySelector('#wodSignIn')?.addEventListener('click', () => { startGoogleSignIn(); });
 
   el.querySelector('#wodShare')?.addEventListener('click', async () => {
-    const text = `${word.headword} — ${word.definition_he}\nהמילה של היום ב-HighScore`;
+    const text = `${word.headword} — ${word.definition_he}\nהמילה של היום ב-${BRAND}`;
     const url = `${location.origin}/#/word-of-day`;
     try {
       if (navigator.share) {

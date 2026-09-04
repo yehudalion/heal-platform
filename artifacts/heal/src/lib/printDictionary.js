@@ -1,3 +1,4 @@
+import { BRAND } from './brand.js';
 /**
  * src/lib/printDictionary.js — ייצוא "המילון שלי" ל-PDF.
  *
@@ -38,7 +39,7 @@ export function printMyDictionary(words, { name = '' } = {}) {
 
   const doc = `<!DOCTYPE html>
 <html lang="he" dir="rtl"><head><meta charset="utf-8">
-<title>המילון שלי — HighScore</title>
+<title>המילון שלי — ${BRAND}</title>
 <style>
   @page { margin: 18mm 14mm; }
   * { box-sizing: border-box; }
@@ -60,13 +61,13 @@ export function printMyDictionary(words, { name = '' } = {}) {
 <body>
   <div class="head">
     <h1>המילון שלי</h1>
-    <div class="meta">${words.length} מילים${name ? ` · ${esc(name)}` : ''} · ${esc(today)} · HighScore</div>
+    <div class="meta">${words.length} מילים${name ? ` · ${esc(name)}` : ''} · ${esc(today)} · ${BRAND}</div>
   </div>
   <table>
     <thead><tr><th></th><th>מילה</th><th>פירוש</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>
-  <div class="foot">נוצר ב-HighScore — הכנה לבחינת האנגלית</div>
+  <div class="foot">נוצר ב-${BRAND} — הכנה לבחינת האנגלית</div>
 </body></html>`;
 
   const frame = document.createElement('iframe');
