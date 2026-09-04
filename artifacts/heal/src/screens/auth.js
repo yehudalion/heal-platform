@@ -1,151 +1,219 @@
 import { supabase, isSupabaseConfigured } from '../supabase.js';
 import { track } from '../lib/analytics.js';
-
 import { BRAND, BRAND_PARTS } from '../lib/brand.js';
+
 const googleIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.4-1.61 4.1-5.35 4.1A5.4 5.4 0 1 1 12 6.6c1.7 0 2.85.72 3.5 1.34l2.4-2.32C16.36 4.27 14.4 3.4 12 3.4 7.13 3.4 3.2 7.33 3.2 12s3.93 8.6 8.8 8.6c5.07 0 8.45-3.56 8.45-8.57 0-.58-.06-1.02-.1-1.43z"/></svg>`;
 
 /**
- * מסך הכניסה — עמוד נחיתה, לא קופסת התחברות.
+ * דף הנחיתה — נכתב מחדש בסשן שבת 2 (5.9.2026).
  *
- * 🔴 למה זה שוכתב (2.9.2026): במדידה של 35 מפגשים מפוסט בפייסבוק, **21
- * עזבו בלי ללחוץ על שום דבר ואף אחד לא לחץ על ההרשמה**. המסך הקודם היה
- * לוגו, טאגליין ושני כפתורים — מי שהגיע מפוסט על השינוי בבחינה נחת על דלת
- * בלי חלון ראווה, ולא ראה מה יש בפנים לפני שנדרש להחליט.
+ * יהודה (4.9): "אני לא אוהב את דף הנחיתה. הוא משעמם ולא גורם לאנשים לרצות
+ * ללחוץ. קח השראה מהאתר שנתתי לך." ועל ההוק: "הרבה מהקהל שלנו הוא קהל של
+ * אמירנט שלא אכפת לו מהפסיכומטרי."
  *
- * המבנה כאן: קודם החדשות (מה משתנה בדצמבר 2026), אחר כך מה המוצר עושה
- * ובמספרים אמיתיים מהמאגר, ורק אז הכפתורים. המספרים למטה הם התוכן שקיים
- * בפועל — לעדכן אותם רק מול שאילתה, לא מהזיכרון.
+ * מה השתנה ולמה:
+ *  · ההוק כבר לא "האנגלית יוצאת מהפסיכומטרי" — משפט שמדבר רק למי שמתכנן
+ *    פסיכומטרי. ההוק החדש מדבר על מה שהתלמיד רוצה: ציון שקובע כמה קורסי
+ *    אנגלית יעשה בתואר (ולפעמים אפס — פטור). זה נכון גם לאמירנט וגם להלאל,
+ *    והוא מה שכל מבקר מחפש, בלי קשר לאיזה מבחן הוא ניגש.
+ *  · העמוד רחב (לא כרטיס של 32rem), עם סקשנים: הירו → כלים חינמיים בלי
+ *    חשבון (הסקשן שעובד הכי טוב אצל המתחרה) → המספרים בגדול → איך זה עובד
+ *    בשלושה צעדים → סיפור המייסד בשם יהודה → מה ידוע על הבחינה → שאלות
+ *    נפוצות → קריאה לפעולה סופית.
+ *  · מה לא נלקח מהמתחרה: לוח מובילים, "LIVE N שיחקו היום", גרדיאנטים כהים.
+ *    הזהות נשארת עריכתית (קרם, סריף, ירוק וזהב); האנרגיה מגיעה מכרטיסי
+ *    הכלים בגוונים, מהמספרים בגדול ומכפתור אחד בולט.
+ *  · כלל הניסוח "אומרים מה יש" לפי ההבהרה של יהודה: "בלי חשבון", "בלי כרטיס
+ *    אשראי" הם בשורה טובה ונשארים; "חומרי ההכנה הישנים לא מכסים" ירד.
  *
- * מצב אורח הוסר לגמרי (3.9.2026, החלטת ליאון) — ראו BACKLOG_next.md. ה-CTA
- * היחיד עכשיו הוא Google, וההרשמה לוקחת כ-10 שניות; אין יותר מסלול תרגול
- * בלי חשבון.
+ * המספרים למטה הם התוכן שקיים בפועל במסד — סטטיים בכוונה (העמוד נטען לפני
+ * התחברות ואסור שיחכה לשאילתה). לעדכן רק מול שאילתה. אומתו 5.9.2026.
  */
-
-// מספרי התוכן — אומתו מול המסד 2.9.2026.
 const CONTENT = [
-  { n: '800',   k: 'השלמת משפטים' },
-  { n: '424',   k: 'ניסוח מחדש' },
-  { n: '250',   k: 'קטעי האזנה' },
-  { n: '100',   k: 'קטעי קריאה' },
-  // 823 = המילים בעלות impact_score אחרי שלב ג (4.9.2026). מספר סטטי בכוונה:
-  // דף הנחיתה נטען לפני התחברות ואסור שיחכה לשאילתה. לעדכן ידנית כשהמאגר גדל —
-  // המקור: select count(*) from words where impact_score is not null.
-  { n: '823',   k: 'מילים מדורגות' },
+  { n: '823', k: 'מילים מדורגות',  s: 'לפי מה שבאמת מופיע במבחנים' },
+  { n: '800', k: 'השלמות משפטים',  s: 'עם הסבר על כל מסיח' },
+  { n: '424', k: 'ניסוחים מחדש',   s: 'לפי מפתחות, לא ניחוש' },
+  { n: '250', k: 'קטעי האזנה',     s: 'עם דוברים אמיתיים' },
+  { n: '100', k: 'קטעי קריאה',     s: 'ברמת הבחינה' },
 ];
+
+const FREE_TOOLS = [
+  { href: '#/daily',        hue: 'g', ico: '🎯', t: 'האתגר היומי',    s: 'חמש שאלות אנגלית, ארבע דקות, הסבר מלא על כל אחת. אותן שאלות לכל מי שנכנס היום.' },
+  { href: '#/word-of-day',  hue: 'y', ico: '🔤', t: 'המילה של היום',  s: 'מילה אחת מהמאגר, עם משפט, שמע ועוגן לזכירה.' },
+  { href: '#/vocab-sprint', hue: 'o', ico: '⚡', t: 'ספרינט של דקה',  s: 'שישים שניות, מילה ופירוש. כמה תספיקו?' },
+  { href: '#/guides',       hue: 'b', ico: '📖', t: 'עשרה מדריכים',  s: 'מה זה הלאל, מבנה הבחינה, הפטור, ואיך לגשת למבחן מותאם.' },
+];
+
+const STEPS = [
+  { n: '1', t: 'אבחון של 25 דקות',    s: 'במבנה הבחינה, עם טיימר לכל פרק. בסוף — לא ציון עירום אלא דוח: איפה אתם חזקים ואיפה הפער.' },
+  { n: '2', t: 'מנה יומית של 12 דקות', s: 'מילים שהזמן שלהן הגיע, ואז שאלות בדיוק על מה שאתם נופלים עליו. כל מה שצריך זה ללחוץ "להתחיל".' },
+  { n: '3', t: 'סימולציות וסקירה',    s: 'ציון משוער בסולם 50–150, פירוט לפי סוג שאלה, ומה לתרגל לפני הפעם הבאה.' },
+];
+
+const FAQ = [
+  { q: 'מה זה מבחן הלאל, ומה הקשר לאמירנט?',
+    a: 'הלאל הוא השם של בחינת האנגלית החדשה של מאל"ו, שמחליפה מדצמבר 2026 את פרק האנגלית בפסיכומטרי. אמירנט הוא המבחן הממוחשב שקיים כבר היום, לאורך כל השנה. שניהם בודקים את אותה אנגלית, באותו סולם (50–150), ולכן ההכנה כאן מתאימה לשניהם.' },
+  { q: 'איזה ציון נותן פטור מאנגלית?',
+    a: 'ברוב המוסדות פטור מלא מתחיל מ-134. מתחת לזה מסווגים לרמות — למשל 120–133 מתקדמים ב\', 100–119 מתקדמים א\' — וכל רמה היא קורס נוסף בתואר. כל נקודה שעולה בציון היא פחות קורסים.' },
+  { q: 'מה פתוח בחינם?',
+    a: 'ארבעה כלים בלי חשבון בכלל: האתגר היומי, המילה של היום, ספרינט של דקה, והמדריכים. חשבון חינם (התחברות עם Google, עשר שניות) פותח את האבחון, את המנה היומית ואת המעקב.' },
+  { q: 'כמה זה עולה?',
+    a: 'הגרסה המלאה תעלה פחות ממחיר שיעור פרטי אחד בחודש. עד שהתמחור נפתח, מי שנרשם עכשיו מקבל הודעה ראשון ומחיר מוזל למצטרפים מוקדם.' },
+  { q: 'כמה זמן צריך להתכונן?',
+    a: 'תלוי מאיפה מתחילים — ולכן הצעד הראשון הוא אבחון. מי שמתרגל 12 דקות ביום רואה שינוי אמיתי באוצר המילים תוך שלושה-ארבעה שבועות; הבנת הנקרא וההאזנה נבנות לאט יותר. יש על זה מדריך שלם.' },
+  { q: 'איך מתרגלים למבחן שמתאים את עצמו לנבחן?',
+    a: 'במבחן מותאם אי אפשר לחזור אחורה, ושאלה שנהיית קשה היא סימן טוב. התרגול כאן בנוי בדיוק לזה: מנות מתוזמנות, בלי דילוג לאחור, וניתוח שמראה איפה הזמן הולך. יש גם מדריך אסטרטגיה למבחן מותאם.' },
+  { q: 'צריך לדעת דקדוק?',
+    a: 'פחות ממה שנדמה. רוב השאלות נפתרות עם אוצר מילים ועם "מפתחות" — כיוון המשמעות, מילות קיצון, מילת הקישור. את המפתחות האלה לומדים כאן שאלה אחרי שאלה, עם הסבר בעברית.' },
+  { q: 'במה זה שונה מקורס הכנה?',
+    a: 'קורס מלמד את כולם את אותו דבר באותו קצב. כאן כל מנה נבנית לפי מה שאתם עונים, ההסבר מגיע מיד אחרי הטעות, ואפשר לתרגל בהסעה. ומחיר של קורס הוא כמה אלפי שקלים.' },
+];
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export function renderAuth(root) {
   root.innerHTML = `
-    <div class="auth-wrap fade-in">
-      <div class="auth-card lp-card">
+    <div class="ld fade-in">
 
-        <div class="auth-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
-        <div class="auth-tagline">ההכנה למבחן הלאל</div>
+      <header class="ld-top">
+        <div class="auth-logo ld-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
+        <nav class="ld-topnav" aria-label="ניווט">
+          <a href="#/daily">האתגר היומי</a>
+          <a href="#/guides">מדריכים</a>
+          <button class="ld-topbtn" type="button" data-google>להתחבר</button>
+        </nav>
+      </header>
 
-        <div class="lp-kicker">מדצמבר 2026</div>
-        <h1 class="lp-h1">האנגלית יוצאת מהפסיכומטרי.</h1>
-        <p class="lp-lead">היא הופכת למבחן נפרד וממוחשב — <strong>הלאל</strong>, שיש שמכירים אותו כאמירנט. קריאה, האזנה וכתיבה, לאורך כל השנה. <strong>חומרי ההכנה הישנים לא מכסים אותו.</strong></p>
-
-        <ul class="lp-points">
-          <li><b>אבחון רמה</b> במבנה הבחינה, עם טיימר נפרד לכל פרק</li>
-          <li><b>הסבר על כל טעות</b> — למה הנכונה נכונה, ומה לא עבד בבחירה שלכם</li>
-          <li><b>תוכנית יומית</b> שמכוונת למה שאתם נופלים עליו שוב ושוב</li>
-        </ul>
-
-        <div class="lp-stats">
-          ${CONTENT.map((c) => `<div class="lp-stat"><b>${c.n}</b><span>${c.k}</span></div>`).join('')}
+      <!-- ══ הירו ══ -->
+      <section class="ld-hero">
+        <div class="lp-kicker">אמירנט · הלאל · פטור באנגלית</div>
+        <h1 class="ld-h1">ציון גבוה באמירנט — פחות קורסי אנגלית בתואר. לפעמים אפס.</h1>
+        <p class="ld-lead">
+          אמירנט או הלאל, זה אותו סיפור: מבחן ממוחשב שמתאים את עצמו אליכם. כאן מתרגלים
+          במבנה שלו, עם הסבר בעברית על כל שאלה — ומתחילים בדקה הראשונה, בלי חשבון.
+        </p>
+        <div class="ld-cta-row">
+          <button class="btn-google btn-start ld-primary" type="button" data-google>
+            ${googleIcon}
+            להתחיל לתרגל עם Google — בחינם
+          </button>
+          <a class="ld-secondary" href="#/daily">או לנסות את האתגר היומי, בלי הרשמה ←</a>
         </div>
+        <div id="notice" class="ld-notice"></div>
+      </section>
 
-        <button class="btn-google btn-start" id="googleBtn">
-          ${googleIcon}
-          להתחיל לתרגל עם Google — בחינם
-        </button>
-
-        <!-- 3.9.2026 — אחרי הסרת מצב האורח זו הדרך היחידה להתנסות לפני הרשמה,
-             והיא מכוונת: חמש שאלות עם הסבר מלא, בלי חשבון ובלי התחייבות.
-             4.9.2026 — הורחב לארבעה כלים. דלת חינמית אחת הייתה מעט מדי:
-             מבקר שלא בא בדיוק במצב רוח של מבחן לא היה לו מה לעשות כאן. כל
-             ארבעתם עומדים בפני עצמם, אף אחד מהם לא דורש היסטוריית תלמיד,
-             וכולם נגמרים באותה הזמנה להירשם. -->
-        <a class="lp-daily" href="#/daily">
-          <span class="lp-daily-k">חדש · בלי הרשמה</span>
-          <span class="lp-daily-t">האתגר היומי — 5 שאלות אנגלית</span>
-          <span class="lp-daily-s">אותן שאלות לכל מי שנכנס היום, עם הסבר מלא על כל אחת ←</span>
-        </a>
-
-        <div class="lp-free">
-          <div class="lp-free-h">עוד דברים שפתוחים כאן בלי חשבון</div>
-          <div class="lp-free-grid">
-            <a class="lp-free-card" href="#/word-of-day">
-              <span class="lp-free-ico">🔤</span>
-              <span class="lp-free-t">המילה של היום</span>
-              <span class="lp-free-s">מילה אחת, עם משפט, שמע ועוגן לזכירה</span>
-            </a>
-            <a class="lp-free-card" href="#/vocab-sprint">
-              <span class="lp-free-ico">⚡</span>
-              <span class="lp-free-t">ספרינט של דקה</span>
-              <span class="lp-free-s">60 שניות. כמה מילים תספיקו?</span>
-            </a>
-            <a class="lp-free-card" href="#/guides">
-              <span class="lp-free-ico">📖</span>
-              <span class="lp-free-t">שמונה מדריכים</span>
-              <span class="lp-free-s">מה זה הלאל, מבנה הבחינה, והפטור</span>
-            </a>
-          </div>
+      <!-- ══ כלים חינמיים ══ -->
+      <section class="ld-sec">
+        <div class="ld-sec-h">
+          <h2>כלים חינמיים — בלי חשבון</h2>
+          <p>ארבעה דברים שאפשר לעשות עכשיו, לפני שמחליטים משהו.</p>
         </div>
-        <div class="lp-fine">
-          ההרשמה לוקחת כ-10 שניות. חשבון חינם שומר את ההתקדמות ופותח את הניתוח האישי.
+        <div class="ld-tools">
+          ${FREE_TOOLS.map((t) => `
+          <a class="ld-tool ld-tool-${t.hue}" href="${t.href}">
+            <span class="ld-tool-ico">${t.ico}</span>
+            <span class="ld-tool-t">${esc(t.t)}</span>
+            <span class="ld-tool-s">${esc(t.s)}</span>
+            <span class="ld-tool-go">נסו עכשיו ←</span>
+          </a>`).join('')}
         </div>
+      </section>
 
-        <div id="notice" style="margin-top:.9rem;font-size:.82rem;text-align:center;color:var(--muted);min-height:1.2em"></div>
-
-        <!-- מה ידוע היום על הבחינה (3.9.2026).
-             במתכוון אין כאן טבלת מועדים: נכון להיום מאל״ו לא פרסמו מועדים
-             רשמיים לבחינת הלאל, ולוח מועדים מומצא הוא בדיוק סוג הדבר
-             שהורס אמון אצל מי שבודק אותנו מול מקור רשמי. אומרים מה ידוע,
-             ואומרים במפורש מה עוד לא. -->
-        <div class="lp-facts">
-          <div class="lp-facts-t">מה ידוע היום על הבחינה</div>
-          <ul>
-            <li>מדצמבר 2026 הפסיכומטרי כבר לא כולל פרק אנגלית</li>
-            <li>הבחינה החדשה ממוחשבת ומותאמת לרמת הנבחן</li>
-            <li>שלוש מיומנויות: קריאה, האזנה והבעה בכתב</li>
-            <li>טווח הציון 50–150, לצד רמת CEFR</li>
-          </ul>
-          <div class="lp-facts-note">מועדים רשמיים טרם פורסמו. ברגע שיפורסמו, הם יופיעו כאן.</div>
+      <!-- ══ המספרים ══ -->
+      <section class="ld-sec ld-nums-sec">
+        <div class="ld-sec-h">
+          <h2>מה מחכה בפנים</h2>
+          <p>כל שאלה נכתבה ונבדקה ביד, עם הסבר בעברית — לא רק מה נכון, אלא למה כל מסיח אחר לא.</p>
         </div>
+        <div class="ld-nums">
+          ${CONTENT.map((c) => `
+          <div class="ld-num">
+            <b>${c.n}</b>
+            <span class="ld-num-k">${esc(c.k)}</span>
+            <span class="ld-num-s">${esc(c.s)}</span>
+          </div>`).join('')}
+        </div>
+      </section>
 
-        <!-- ✍️ ליאון: הטקסט הזה כתוב בשמך ומופיע לכל מבקר — עבור עליו ותקן.
-             אצל המתחרה יש בדיוק בלוק כזה מהמייסד, והוא אחד הדברים שגורמים
-             לאתר להרגיש אנושי ולא כמו מוצר גנרי. -->
-        <div class="lp-founder">
-          <div class="lp-founder-t">למה בניתי את זה</div>
+      <!-- ══ איך זה עובד ══ -->
+      <section class="ld-sec">
+        <div class="ld-sec-h"><h2>איך זה עובד</h2></div>
+        <div class="ld-steps">
+          ${STEPS.map((s) => `
+          <div class="ld-step">
+            <span class="ld-step-n">${s.n}</span>
+            <div><div class="ld-step-t">${esc(s.t)}</div><p class="ld-step-s">${esc(s.s)}</p></div>
+          </div>`).join('')}
+        </div>
+      </section>
+
+      <!-- ══ המייסד ══ -->
+      <!-- ✍️ יהודה: הטקסט כתוב בשמך ומופיע לכל מבקר — עבור עליו. ה-790 כתוב
+           כ"פסיכומטרי" כי זה הסולם היחיד שבו 790 אפשרי; אם התכוונת לאחר, תקן. -->
+      <section class="ld-sec ld-founder">
+        <div class="ld-founder-card">
+          <div class="ld-founder-k">למה בניתי את זה</div>
           <p>
-            לימדתי אנגלית לבחינות במשך חמש שנים, וראיתי את אותה סצנה חוזרת:
-            תלמיד שמבין את החומר, נתקע על סוג שאלה מסוים, ואף אחד לא מראה לו
-            <em>למה</em> הוא נתקע שם. כשהתפרסם שהאנגלית יוצאת מהפסיכומטרי הבנתי
-            שכל חומרי ההכנה הקיימים מכוונים לבחינה אחרת — אז בניתי את מה
-            שהייתי רוצה לתת לתלמידים שלי.
+            אני יהודה. ניגשתי לפסיכומטרי בעצמי וקיבלתי 790, ומאז חמש שנים אני מלמד אנגלית
+            לבחינות. חקרתי את המבחן לעומק — כל סוג שאלה, כל דפוס שחוזר — וראיתי את אותה
+            סצנה שוב ושוב: תלמיד שמבין אנגלית, נתקע על סוג שאלה מסוים, ואף אחד לא מראה לו
+            <em>למה</em> הוא נתקע שם.
+          </p>
+          <p>
+            אז בניתי את מה שהייתי רוצה לתת לתלמידים שלי: תרגול במבנה הבחינה, הסבר על כל
+            טעות, ותוכנית שמכוונת בדיוק למה שנופלים עליו. בלי פרסומות, בלי רעש.
           </p>
           <p class="lp-founder-sig">יהודה · ${BRAND}</p>
         </div>
+      </section>
 
-        <div style="margin-top:1.4rem;font-size:.76rem;color:var(--muted)">כלי לימוד ממוקד. ללא פרסומות. ללא רעש.</div>
-        <!-- Privacy link, 2026-08-29: a policy nobody can find does not do its job,
-             and this is the screen where the learner actually decides to sign up. -->
-        <div style="margin-top:.5rem;font-size:.72rem;color:var(--muted)">
-          <a href="/privacy/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדיניות פרטיות</a>
-          <span style="opacity:.6"> · </span>
-          <a href="/terms/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">תנאי שימוש</a>
-          <span style="opacity:.6"> · </span>
-          <a href="/accessibility/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">הצהרת נגישות</a>
+      <!-- ══ מה ידוע על הבחינה ══ -->
+      <!-- במתכוון אין כאן לוח מועדים מומצא: מאל"ו טרם פרסמו מועדים להלאל.
+           אמירנט מתקיים לאורך כל השנה — לעמוד המועדים יש קישור. -->
+      <section class="ld-sec">
+        <div class="ld-sec-h"><h2>מה ידוע היום על הבחינה</h2></div>
+        <div class="ld-facts">
+          <div class="ld-fact"><b>רשמי</b><span>מדצמבר 2026 הפסיכומטרי כבר לא כולל פרק אנגלית. האנגלית נבחנת בנפרד.</span></div>
+          <div class="ld-fact"><b>רשמי</b><span>אמירנט מתקיים לאורך כל השנה במרכזי מאל"ו, ההרשמה דרך האזור האישי, והציון בסולם 50–150.</span></div>
+          <div class="ld-fact"><b>רשמי</b><span>פטור מלא ברוב המוסדות מתחיל מ-134. מתחת לזה — סיווג לרמות.</span></div>
+          <div class="ld-fact"><b>מדווח</b><span>הלאל הוא מבחן ממוחשב ומותאם לרמת הנבחן, בשלוש מיומנויות: קריאה, האזנה והבעה בכתב.</span></div>
+          <div class="ld-fact ld-fact-open"><b>עדיין פתוח</b><span>מועדים רשמיים להלאל טרם פורסמו. ברגע שיפורסמו — הם יופיעו כאן. <a href="/moadim-vehareshama/">מועדי אמירנט והרשמה ←</a></span></div>
         </div>
-        <!-- SEO 2026-09-01: מסך הכניסה היה היחיד שמחבר בין האפליקציה לבין
-             8 עמודי ההסבר החינמיים (mivchan-hilal ומשם הלאה) — בלעדיו הם
-             היו "אי" נפרד שרק גוגל מכיר, ואף משתמש בפועל לא נתקל בו. -->
-        <div style="margin-top:.4rem;font-size:.72rem;color:var(--muted)">
-          <a href="/mivchan-hilal/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">מדריכים למבחן הלאל</a>
+      </section>
+
+      <!-- ══ שאלות ══ -->
+      <section class="ld-sec">
+        <div class="ld-sec-h"><h2>שאלות שכולם שואלים</h2></div>
+        <div class="ld-faq">
+          ${FAQ.map((f) => `
+          <details class="ld-q">
+            <summary>${esc(f.q)}</summary>
+            <p>${esc(f.a)}</p>
+          </details>`).join('')}
         </div>
-      </div>
+      </section>
+
+      <!-- ══ CTA סופי ══ -->
+      <section class="ld-final">
+        <h2>הצעד הראשון הוא אבחון של 25 דקות.</h2>
+        <p>אחריו תדעו בדיוק איפה אתם עומדים, ומה לעשות מחר בבוקר.</p>
+        <button class="btn-google btn-start ld-primary" type="button" data-google>
+          ${googleIcon}
+          להתחיל לתרגל עם Google — בחינם
+        </button>
+        <div class="lp-fine">ההרשמה לוקחת כ-10 שניות. בלי כרטיס אשראי.</div>
+      </section>
+
+      <footer class="ld-foot">
+        <span>${BRAND} · כלי הכנה עצמאי, לא קשור למאל"ו</span>
+        <span>
+          <a href="/privacy/" target="_blank" rel="noopener">מדיניות פרטיות</a> ·
+          <a href="/terms/" target="_blank" rel="noopener">תנאי שימוש</a> ·
+          <a href="/accessibility/" target="_blank" rel="noopener">הצהרת נגישות</a> ·
+          <a href="/mivchan-hilal/">מדריכים למבחן</a>
+        </span>
+      </footer>
     </div>
   `;
 
@@ -154,19 +222,18 @@ export function renderAuth(root) {
     notice.textContent = msg || '';
     notice.style.color = isErr ? 'var(--red)' : 'var(--muted)';
   };
+  if (!isSupabaseConfigured) setMsg('Supabase לא מוגדר.', true);
 
-  if (!isSupabaseConfigured) {
-    setMsg('Supabase לא מוגדר.', true);
-  }
-
-  root.querySelector('#googleBtn').addEventListener('click', async () => {
-    if (!supabase) { setMsg('Supabase לא מוגדר.', true); return; }
-    track('auth_google_clicked');
-    setMsg('מעביר ל-Google…');
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin + window.location.pathname },
+  root.querySelectorAll('[data-google]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (!supabase) { setMsg('Supabase לא מוגדר.', true); return; }
+      track('auth_google_clicked');
+      setMsg('מעביר ל-Google…');
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin + window.location.pathname },
+      });
+      if (error) setMsg(error.message, true);
     });
-    if (error) setMsg(error.message, true);
   });
 }
