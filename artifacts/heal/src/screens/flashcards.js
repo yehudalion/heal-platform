@@ -2,6 +2,7 @@ import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { getDueCount, getSessionStats } from '../data/srs.data.js';
+import { getCoreWordCount } from '../data/words.data.js';
 import { lengthPicker, getSessionLength } from '../lib/sessionPrefs.js';
 
 export async function renderFlashcards(root) {
@@ -17,6 +18,9 @@ export async function renderFlashcards(root) {
   const [{ data: dueCount }, { data: stats }] = userId
     ? await Promise.all([getDueCount(userId), getSessionStats(userId)])
     : [{ data: 0 }, { data: null }];
+  // נספר חי ולא מספר קשיח: הכותרת הציגה 550 גם אחרי ששלב ג הוסיף 280 מילים
+  // מדורגות (4.9.2026), כלומר הבטיחה לתלמיד פחות ממה שיש.
+  const { count: coreCount } = await getCoreWordCount();
   const due  = dueCount || 0;
   const easy = stats?.in_review || 0;
   const picker = lengthPicker('vocab', [
@@ -28,7 +32,7 @@ export async function renderFlashcards(root) {
   el.innerHTML = `
     <div class="fade-in">
       <div class="page-title">כרטיסיות</div>
-      <div class="page-sub">550 מילים אקדמיות עם חזרה מרווחת חכמה.</div>
+      <div class="page-sub">${coreCount.toLocaleString('he-IL')} מילים אקדמיות עם חזרה מרווחת חכמה.</div>
 
       <div style="max-width:560px;margin:0 auto">
         <div class="fc-start-card">
@@ -58,6 +62,13 @@ export async function renderFlashcards(root) {
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 3L11 8 5 13V3z"/></svg>
             התחל תרגול
           </button>
+
+          <!-- 3.9.2026 — שני מצבים משלימים ללולאת ה-SRS, לא תחליף לה:
+               הספרינט מייצר את ההרגל, והקיר מראה את ההתקדמות בעיניים. -->
+          <div class="fc-extra">
+            <a class="fc-extra-btn" href="#/vocab-sprint">⚡ ספרינט של דקה</a>
+            <a class="fc-extra-btn" href="#/word-wall">🧱 קיר המילים</a>
+          </div>
         </div>
 
       </div>

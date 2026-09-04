@@ -35,59 +35,15 @@ export async function getWordsByImpact({ limit = 20, offset = 0, isPremium = fal
   }
 }
 
-/**
- * Get a single word by ID.
- * @param {string} wordId
- * @returns {{ data: object|null, error: object|null }}
- */
-export async function getWordById(wordId) {
-  try {
-    const { data, error } = await supabase
-      .from('words')
-      .select('*')
-      .eq('id', wordId)
-      .single()
-    if (error) throw error
-    return { data, error: null }
-  } catch (error) {
-    console.error('words.data.getWordById:', error)
-    return { data: null, error }
-  }
-}
-
-/**
- * Search words by headword or definition.
- * @param {string} query
- * @param {{ isPremium?: boolean }} options
- * @returns {{ data: object[]|null, error: object|null }}
- */
-export async function searchWords(query, { isPremium = false } = {}) {
-  try {
-    let dbQuery = supabase
-      .from('words')
-      .select('id, headword, definition_he, impact_percentile')
-      .or(`headword.ilike.%${query}%,definition_he.ilike.%${query}%`)
-      // Same reason as getWordsByImpact above — exclude unvalidated words.
-      .not('impact_score', 'is', null)
-      .order('impact_score', { ascending: false })
-      .limit(20)
-
-    if (!isPremium) {
-      dbQuery = dbQuery.gte('impact_percentile', FREE_TIER_PERCENTILE_CUTOFF)
-    }
-
-    const { data, error } = await dbQuery
-    if (error) throw error
-    return { data, error: null }
-  } catch (error) {
-    console.error('words.data.searchWords:', error)
-    return { data: null, error }
-  }
-}
+// הוסרו 4.9.2026: getWordById ו-searchWords. שתיהן לא נקראו מאף מקום
+// באפליקציה, ו-searchWords הייתה מלכודת ממש מהסוג שההערה ב-supabase.js
+// מתארת — פונקציית חיפוש שנראית סבירה, יושבת ליד פונקציות בשימוש, ומחילה
+// בשקט את התקרה החינמית ואת סינון impact_score. החיפוש החי במילון הוא
+// browseDictionary למטה, שמחפש בכל 2,857 המילים בלי סינון דירוג.
 
 /**
  * Dictionary/browse — list or search ALL words with real content, regardless
- * of impact_score. Deliberately separate from getWordsByImpact/searchWords
+ * of impact_score. Deliberately separate from getWordsByImpact
  * above: those exclude unscored words on purpose, because impact_score is
  * the project's one algorithmic driver for practice/SRS selection (never
  * mix ranking logic with a plain reference tool). This is what surfaces the
@@ -135,5 +91,76 @@ export async function getDictionaryCount() {
   } catch (error) {
     console.error('words.data.getDictionaryCount:', error)
     return { count: 0, error }
+  }
+}
+
+/**
+ * Number of ranked ("core") words — those with an impact_score, i.e. the pool
+ * the spaced-repetition loop draws from. Same reason as getDictionaryCount:
+ * the כרטיסיות screen used to print a hardcoded 550, which was already off by
+ * seven and became badly wrong when vocabulary stage C added 280 ranked words
+ * on 4.9.2026. Counted live so it can never go stale again.
+ */
+export async function getCoreWordCount() {
+  try {
+    const { count, error } = await supabase
+      .from('words')
+      .select('id', { count: 'exact', head: true })
+      .not('impact_score', 'is', null)
+    if (error) throw error
+    return { count: count ?? 0, error: null }
+  } catch (error) {
+    console.error('words.data.getCoreWordCount:', error)
+    return { count: 0, error }
+  }
+}
+
+/**
+ * קיר המילים: כל מילות הליבה (אלה עם impact_score) יחד עם מצב ה-SRS של הלומד.
+ *
+ * למה שאילתה נפרדת ולא שימוש ב-getCoverage: coverage מחזיר מספרים מצטברים
+ * ("47 מתוך 550"), וקיר המילים צריך את הרשימה עצמה כדי לצייר משבצת לכל מילה.
+ * מספר מספר לתלמיד כמה הוא יודע; קיר מראה לו את זה.
+ *
+ * שתי שאילתות ולא join: הרשאות ה-RLS על srs_progress הן פר-משתמש ועל words
+ * ציבוריות, והאיחוד בצד הלקוח פשוט יותר מלהילחם ב-PostgREST על embed.
+ *
+ * @param {string|null} userId
+ * @returns {Promise<{data:{words:Array,counts:object}|null,error:Error|null}>}
+ */
+export async function getWordWall(userId) {
+  try {
+    const [wordsRes, srsRes] = await Promise.all([
+      supabase
+        .from('words')
+        .select('id, headword, definition_he, impact_score')
+        .not('impact_score', 'is', null)
+        .order('impact_score', { ascending: false })
+        .limit(1000),
+      userId
+        ? supabase.from('srs_progress').select('word_id, state, reps').eq('user_id', userId)
+        : Promise.resolve({ data: [], error: null }),
+    ])
+    if (wordsRes.error) throw wordsRes.error
+    if (srsRes.error) throw srsRes.error
+
+    const byId = new Map((srsRes.data || []).map((r) => [r.word_id, r]))
+    const counts = { total: 0, known: 0, learning: 0, fresh: 0 }
+
+    const words = (wordsRes.data || []).map((w) => {
+      const p = byId.get(w.id)
+      // שלוש מדרגות בלבד. דירוג עדין יותר היה מדויק יותר ופחות קריא —
+      // הקיר נועד להראות תמונה במבט אחד, לא להיות דוח.
+      let state = 'fresh'
+      if (p) state = (p.state === 'review' || (p.reps || 0) >= 3) ? 'known' : 'learning'
+      counts.total += 1
+      counts[state] += 1
+      return { id: w.id, word: w.headword, he: w.definition_he, state }
+    })
+
+    return { data: { words, counts }, error: null }
+  } catch (err) {
+    console.warn('words.getWordWall:', err?.message || err)
+    return { data: null, error: err }
   }
 }
