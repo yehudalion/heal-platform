@@ -41,6 +41,8 @@
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
+import { upsertProfile } from '../data/profiles.data.js';
+import { buildStudyIcs, downloadIcs } from '../lib/ics.js';
 import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';   // auth only
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -215,6 +217,93 @@ function signedOut() {
 
 // ─── /progress — the one implementation ──────────────────────────────────────
 
+/**
+ * תוכנית שבועית + ייצוא ליומן.
+ *
+ * הדבר היחיד במוצר שפועל מחוץ לאתר: אירוע חוזר ביומן עם תזכורת מביא אנשים
+ * בחזרה בלי שנשלח להם הודעה אחת. הרעיון נלקח מהמתחרה (יש להם "הוסף ליומן"),
+ * והוא זול ומשמעותי.
+ *
+ * ההעדפות נשמרות ב-user_profiles.study_plan (jsonb) — לא טבלה חדשה, כי זו
+ * העדפה אחת של משתמש אחד בלי היסטוריה.
+ */
+function plannerCard(profile) {
+  const plan = profile?.study_plan || {};
+  const days = Array.isArray(plan.days) ? plan.days : [0, 2, 4];
+  const hour = plan.hour || '18:00';
+  const minutes = plan.minutes || profile?.daily_time_minutes || 20;
+  const NAMES = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+
+  return `
+    <section class="pl-card">
+      <div class="pl-title">מתי אתם מתרגלים?</div>
+      <p class="pl-sub">בחרו ימים ושעה, ואפשר לייצא את זה כאירוע חוזר ליומן —
+        עם תזכורת עשר דקות לפני. תוכנית שיושבת ביומן נשמרת הרבה יותר טוב
+        מתוכנית שיושבת בראש.</p>
+
+      <div class="pl-days">
+        ${NAMES.map((n, i) => `
+          <button class="pl-day ${days.includes(i) ? 'is-on' : ''}" data-day="${i}"
+                  aria-pressed="${days.includes(i)}">${n}</button>`).join('')}
+      </div>
+
+      <div class="pl-row">
+        <label class="pl-lbl" for="plHour">שעה</label>
+        <input class="pl-inp" type="time" id="plHour" value="${hour}" />
+        <label class="pl-lbl" for="plMin">אורך</label>
+        <select class="pl-inp" id="plMin">
+          ${[10, 15, 20, 30, 45, 60].map((m) =>
+            `<option value="${m}" ${m === minutes ? 'selected' : ''}>${m} דק'</option>`).join('')}
+        </select>
+      </div>
+
+      <div class="pl-btns">
+        <button class="btn-primary" id="plSave">שמירת התוכנית</button>
+        <button class="pl-ghost" id="plIcs">📅 הוספה ליומן (.ics)</button>
+      </div>
+      <div class="pl-msg" id="plMsg"></div>
+    </section>`;
+}
+
+/** מחבר את הפקדים של התוכנית. נפרד מהציור, כמו שאר המסך. */
+function wirePlanner(el, userId, profile) {
+  const card = el.querySelector('.pl-card');
+  if (!card) return;
+  const sel = new Set((profile?.study_plan?.days) || [0, 2, 4]);
+
+  card.querySelectorAll('.pl-day').forEach((b) => {
+    b.addEventListener('click', () => {
+      const d = Number(b.dataset.day);
+      if (sel.has(d)) sel.delete(d); else sel.add(d);
+      b.classList.toggle('is-on');
+      b.setAttribute('aria-pressed', sel.has(d) ? 'true' : 'false');
+    });
+  });
+
+  const read = () => ({
+    days: [...sel].sort(),
+    hour: card.querySelector('#plHour').value || '18:00',
+    minutes: Number(card.querySelector('#plMin').value) || 20,
+  });
+  const msg = card.querySelector('#plMsg');
+
+  card.querySelector('#plSave').addEventListener('click', async () => {
+    const plan = read();
+    if (!plan.days.length) { msg.textContent = 'בחרו לפחות יום אחד.'; return; }
+    msg.textContent = 'שומר…';
+    const { error } = await upsertProfile(userId, { study_plan: plan });
+    msg.textContent = error ? 'השמירה נכשלה — אפשר לנסות שוב.' : 'נשמר ✓';
+  });
+
+  card.querySelector('#plIcs').addEventListener('click', () => {
+    const plan = read();
+    if (!plan.days.length) { msg.textContent = 'בחרו לפחות יום אחד.'; return; }
+    const ics = buildStudyIcs({ ...plan, examDate: profile?.exam_date || null });
+    downloadIcs(ics);
+    msg.textContent = 'הקובץ ירד — פתחו אותו ביומן Google, Apple או Outlook.';
+  });
+}
+
 export async function renderProgress(root) {
   await renderLayout(root, '/progress');
   const el = getPageContent();
@@ -247,10 +336,12 @@ export async function renderProgress(root) {
 
       <p class="wp-foot">המספרים מתארים את הסשנים שנאספו, לא הערכה כוללת.</p>
 
+      ${userId ? plannerCard(profile) : ''}
+
       <!-- PRODUCT DECISION — reproduced verbatim, not this refactor's call -->
       <div class="lock-upsell">
         <div style="font-size:1.8rem;margin-bottom:.5rem">🔒</div>
-        <h4 style="font-size:.95rem;font-weight:900;margin-bottom:.4rem">ניתוח מלא נעול — דרוש מסלול כסף</h4>
+        <h4 style="font-size:.95rem;font-weight:900;margin-bottom:.4rem">הניתוח המלא — בקרוב</h4>
         <p style="font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.9rem">תוכנית אישית מדויקת — אילו מילים ללמוד, אילו שאלות לתרגל, מה לעשות כל יום. נפתח בקרוב.</p>
         <form id="waitForm" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
           <input id="waitEmail" type="email" required placeholder="המייל שלך" dir="ltr"
@@ -269,6 +360,8 @@ export async function renderProgress(root) {
           : 'לא הוגדר תאריך בחינה בפרופיל.'}</span>
       </div>
     </div>`;
+
+  wirePlanner(el, userId, profile);
 
   // Waitlist form — replaces the dead ₪99 button (Lion, 2026-08-25).
   const form = el.querySelector('#waitForm');
