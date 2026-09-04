@@ -18,6 +18,7 @@ export const MODULES = [
   { id: 'rephrase',  label: 'ניסוח מחדש',      route: '/rephrasing',          status: 'live' },
   { id: 'sc',        label: 'השלמת משפטים',    route: '/sentence-completion', status: 'live' },
   { id: 'reading',   label: 'הבנת הנקרא',      route: '/reading',             status: 'live' },
+  { id: 'affix',     label: 'תחיליות וסופיות', route: '/affix',               status: 'live' },
 ];
 
 export function getModule(id) {

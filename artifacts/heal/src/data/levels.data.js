@@ -35,6 +35,9 @@ export const MODULE_LEVELS = {
   // single passage at difficulty 1 and a single one at 8, so a center that
   // drifted to either edge would hand the learner the same text every session.
   reading:  { min: 2, max: 7, start: 4 },
+  // 3.9.2026 — פינת התחיליות והסופיות. טווח צר יותר בכוונה: המאגר עדיין מנת
+  // כיול של 12 פריטים, ומרכז שנודד לקצה היה מגיש את אותם פריטים כל סשן.
+  affix:    { min: 3, max: 6, start: 4 },
 }
 
 /**
