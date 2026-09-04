@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>אסטרטגיית הלאל ואמירנט — איך ניגשים למבחן מותאם | Wordwise</title>
+<meta name="description" content="מבחן ממוחשב ומותאם מתנהג אחרת ממבחן על נייר: אי אפשר לחזור אחורה, השאלות נעשות קשות כשמצליחים, והזמן מנוהל לשאלה ולא לפרק. שש אסטרטגיות למבחן אמירנט והלאל, עם מה לעשות בפועל." />
+<link rel="canonical" href="https://highscore-eight.vercel.app/estrategia-hilal-amirnet/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#1F5C43" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Wordwise" />
+<meta property="og:locale" content="he_IL" />
+<meta property="og:title" content="אסטרטגיית הלאל ואמירנט — איך ניגשים למבחן מותאם" />
+<meta property="og:description" content="אי אפשר לחזור אחורה, קשה זה סימן טוב, ותקציב זמן לשאלה — שש אסטרטגיות למבחן אמירנט והלאל." />
+<meta property="og:url" content="https://highscore-eight.vercel.app/estrategia-hilal-amirnet/" />
+<meta property="og:image" content="https://highscore-eight.vercel.app/opengraph.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "אפשר לחזור לשאלה קודמת במבחן אמירנט או הלאל?",
+      "acceptedAnswer": { "@type": "Answer", "text": "לא. במבחן אמירנט אי אפשר לחזור לשאלות קודמות, וסביר שכך גם בהלאל — זו התכונה שמאפשרת למחשב להתאים את השאלה הבאה לתשובה הקודמת. לכן כל שאלה היא החלטה סופית, ואת ההרגל של \"לדלג ולחזור\" מהפסיכומטרי צריך להחליף." }
+    },
+    {
+      "@type": "Question",
+      "name": "למה השאלות נהיות קשות באמצע המבחן?",
+      "acceptedAnswer": { "@type": "Answer", "text": "כי המבחן מותאם לרמת הנבחן: תשובה נכונה מביאה שאלה קשה יותר. שאלות שנעשות קשות הן סימן שעונים נכון והמחשב מטפס למעלה כדי למצוא את הגבול שלכם." }
+    },
+    {
+      "@type": "Question",
+      "name": "איך מנהלים זמן במבחן מותאם?",
+      "acceptedAnswer": { "@type": "Answer", "text": "בתקציב זמן לשאלה, לא לפרק. מחלקים את הזמן במספר השאלות, ושאלה שעברה את התקציב פי שניים מצמצמים, מנחשים בצורה מושכלת וממשיכים. הפסד של שאלה אחת קטן בהרבה מהפסד של שלוש בגלל לחץ זמן בסוף." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --green:#1F5C43; --green-dark:#16412F; --green-light:#E6EFE9;
+  --orange:#B08442; --orange-light:#F2E9D8;
+  --blue:#3D6B7D; --blue-light:#E3ECEB;
+  --bg:#F5F1E8; --card:#FFFDF7; --text:#14201A; --muted:#5C6B60; --border:#E3DDCC;
+  --radius:8px; --serif:'Frank Ruhl Libre',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Assistant',Arial,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+.top{display:flex;align-items:center;justify-content:space-between;padding:.4rem 0 1.8rem}
+.brand{display:inline-flex;align-items:center;gap:.5rem;color:var(--green-dark);text-decoration:none;font-weight:800}
+.brand-mark{background:var(--green-dark);color:#fff;border-radius:6px;padding:.25rem .5rem;font-size:.82rem;letter-spacing:.5px}
+.top-cta{background:var(--green-dark);color:#fff;text-decoration:none;border-radius:var(--radius);padding:.5rem .95rem;font-size:.84rem;font-weight:700}
+h1{font-family:var(--serif);font-size:1.85rem;font-weight:700;line-height:1.35;letter-spacing:-.3px;margin-bottom:.6rem}
+.lede{font-size:1.05rem;color:var(--muted);margin-bottom:1.5rem}
+h2{font-family:var(--serif);font-size:1.28rem;font-weight:700;margin:2.2rem 0 .7rem;display:flex;align-items:baseline;gap:.5rem}
+h2 .num{color:var(--orange);font-size:1rem;font-weight:800}
+.sub{color:var(--muted);font-size:.88rem;margin:-.4rem 0 .8rem}
+p{margin-bottom:.9rem}
+a{color:var(--green-dark)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin:1.2rem 0}
+.note{background:var(--orange-light);border-right:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.1rem;margin:1rem 0 0;font-size:.93rem}
+.note b{color:var(--orange)}
+.finding{background:var(--green-light);border-right:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.1rem;margin:1rem 0 0;font-size:.93rem}
+.finding b{color:var(--green-dark)}
+.disclaimer{background:var(--blue-light);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.1rem;font-size:.88rem;margin:0 0 1.6rem;line-height:1.7}
+.disclaimer b{color:var(--blue)}
+ul{margin:0 0 .9rem 0;padding-right:1.2rem}
+li{margin-bottom:.35rem}
+.ladder{display:flex;align-items:flex-end;gap:.3rem;height:78px;margin:1.1rem 0 .4rem}
+.ladder div{flex:1;background:var(--green);border-radius:3px 3px 0 0;opacity:.85}
+.ladder-cap{font-size:.8rem;color:var(--muted);text-align:center;margin-bottom:.6rem}
+.action{background:var(--green-light);border:1px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:2.2rem 0 1rem}
+.action h2{margin-top:0}
+.action ol{padding-right:1.2rem}
+.action li{margin-bottom:.6rem}
+.cta{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.5rem;margin:2rem 0 1rem;text-align:center}
+.cta h2{margin-top:0;justify-content:center}
+.cta-btn{display:inline-block;background:var(--green-dark);color:#fff;text-decoration:none;border-radius:var(--radius);padding:.75rem 1.6rem;font-weight:800;margin-top:.5rem}
+.sources{font-size:.84rem;color:var(--muted);margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem}
+.sources li{margin-bottom:.5rem}
+.foot{border-top:1px solid var(--border);margin-top:2.5rem;padding-top:1.2rem;font-size:.82rem;color:var(--muted)}
+.foot a{margin-left:1rem}
+.updated{font-size:.8rem;color:var(--muted);margin-bottom:1.8rem}
+@media(max-width:560px){h1{font-size:1.5rem}.wrap{padding:1.2rem 1rem 3rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <a class="brand" href="/"><span class="brand-mark">W</span> Wordwise</a>
+    <a class="top-cta" href="/">לתרגול ←</a>
+  </div>
+
+  <h1>אסטרטגיית הלאל ואמירנט — איך ניגשים למבחן שמתאים את עצמו אליכם</h1>
+  <p class="lede">מבחן ממוחשב ומותאם מתנהג אחרת ממבחן על נייר — וחלק מהטקטיקות שלמדתם לפסיכומטרי פשוט לא עובדות בו. הנה מה שכן.</p>
+  <p class="updated">עודכן 5.9.2026</p>
+
+  <div class="disclaimer">
+    <b>לפני שממשיכים:</b> המבנה המלא והרשמי של מבחן הלאל טרם פורסם. מה שכתוב כאן מבוסס על מה שכן פורסם, ועל ההתנהגות המוכרת של מבחן <b>אמירנט</b> — המבחן הממוחשב שקיים היום ושהלאל מתפתח ממנו. כל מה שאינו ודאי מסומן ככזה.
+  </div>
+
+  <h2><span class="num">01</span> הדבר הכי חשוב להבין: המבחן מגיב לכם</h2>
+  <p class="sub">מותאם לנבחן, לא רשימה קבועה של שאלות</p>
+  <div class="card">
+    <p>אמירנט והלאל הם מבחנים <b>ממוחשבים ומותאמים</b> (אדפטיביים): המחשב בוחר את השאלה הבאה לפי איך שעניתם על הקודמת. עניתם נכון — הבאה קשה יותר. טעיתם — היא קלה יותר.</p>
+    <p>המשמעות: <b>שני נבחנים לא מקבלים את אותו מבחן.</b> אין "טופס" שאפשר לסרוק, אין שאלות קלות שנשמרות לסוף, ואי אפשר לתכנן מראש סדר מעבר על השאלות.</p>
+    <div class="finding">הציון נע בסולם <b>50–150</b>, ולצידו רמה בסולם ה-CEFR האירופי. כלומר המבחן לא רק מדרג אתכם — הוא ממקם אתכם ברמה, וזו הרמה שקובעת כמה קורסי אנגלית תעשו בתואר.</div>
+  </div>
+
+  <h2><span class="num">02</span> אי אפשר לחזור אחורה — וזה משנה הכול</h2>
+  <p class="sub">הטקטיקה הכי מוכרת מהפסיכומטרי לא עובדת כאן</p>
+  <div class="card">
+    <p>במבחן על נייר לימדו אתכם: קודם הקלות, לסמן את הקשות, לחזור אליהן בסוף. <b>במבחן מותאם זה בלתי אפשרי.</b> באמירנט לא ניתן לחזור לשאלות קודמות, וסביר שכך גם בהלאל — כי זו בדיוק התכונה שמאפשרת למחשב להתאים את השאלה הבאה.</p>
+    <div class="note"><b>מה זה אומר בפועל:</b> כל שאלה היא החלטה סופית. אם אתם רגילים לדלג ולחזור — זו ההרגלה הכי חשובה שתצטרכו להחליף לפני המבחן.</div>
+    <ul style="margin-top:1rem">
+      <li>להחליט על כל שאלה בזמן אמת, ולהמשיך הלאה.</li>
+      <li>לקרוא את השאלה עד הסוף לפני שמסמנים — ההזדמנות היחידה לתקן קריאה חפוזה היא לפני הלחיצה.</li>
+      <li>לענות על כל שאלה. אין למה לחסוך אותה.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">03</span> כשהשאלות נהיות קשות — זה סימן טוב</h2>
+  <p class="sub">התובנה שהכי מרגיעה, והכי לא אינטואיטיבית</p>
+  <div class="card">
+    <p>בערך באמצע המבחן הרבה נבחנים מרגישים שהשאלות "נהיו בלתי אפשריות" ונכנסים ללחץ. במבחן מותאם זה בדיוק הפוך: <b>שאלות שנעשות קשות יותר הן ההוכחה שאתם עונים נכון.</b> המחשב מטפס איתכם למעלה כדי למצוא את הגבול שלכם.</p>
+    <div class="ladder" aria-hidden="true">
+      <div style="height:32%"></div><div style="height:46%"></div><div style="height:58%"></div>
+      <div style="height:70%"></div><div style="height:84%"></div><div style="height:100%"></div>
+    </div>
+    <p class="ladder-cap">ככל שעונים נכון — הקושי מטפס. תחושת "קשה" היא מדד להצלחה.</p>
+    <div class="finding"><b>נבחן שכל השאלות שלו קלות</b> הוא נבחן שהמבחן מיקם נמוך. אז אם מרגיש לכם קשה בשליש האחרון: זה בדיוק מה שאמור לקרות.</div>
+  </div>
+
+  <h2><span class="num">04</span> ניהול זמן: תקציב לשאלה, לא לפרק</h2>
+  <div class="card">
+    <p>כשאי אפשר לחזור אחורה, "לחסוך זמן לסוף" מאבד את המשמעות. מה שכן עובד הוא <b>תקציב זמן לשאלה בודדת</b>: מחליטים מראש כמה זמן שאלה שווה, ואם עברתם אותו — מנחשים בצורה מושכלת וממשיכים.</p>
+    <ul>
+      <li>מחלקים את הזמן הכולל במספר השאלות — זה התקציב הממוצע.</li>
+      <li>שאלה שעברה את התקציב פי שניים היא שאלה שלוקחת שתי שאלות אחרות. עוזבים אותה.</li>
+      <li>הפסד של שאלה אחת קטן בהרבה מהפסד של שלוש בגלל לחץ זמן בסוף.</li>
+    </ul>
+    <div class="note"><b>מספר מדויק:</b> משך המבחן ומספר השאלות בהלאל טרם פורסמו רשמית. את התקציב המדויק מחשבים כשהמספרים יתפרסמו — ובינתיים מתאמנים על העיקרון, בסימולציות המתוזמנות.</div>
+  </div>
+
+  <h2><span class="num">05</span> איך מנחשים נכון</h2>
+  <p class="sub">ניחוש מושכל הוא מיומנות</p>
+  <div class="card">
+    <p>כשלא יודעים — <b>מצמצמים קודם.</b> כל אפשרות שמצליחים לפסול מכפילה את הסיכוי.</p>
+    <ul>
+      <li>פוסלים אפשרויות שסותרות את כיוון המשמעות של המשפט.</li>
+      <li>בודקים אפשרויות עם מילים מוחלטות — <i>always, never, all, none</i> — הן נכונות רק כשהמשפט באמת מוחלט.</li>
+      <li>באוצר מילים: שורש או תחילית מוכרים הם מידע — משתמשים בו.</li>
+      <li>נשארתם עם שתיים — בוחרים וממשיכים. הזמן שווה יותר מהלבטים.</li>
+    </ul>
+    <div class="finding"><b>זו בדיוק העבודה שעושים בתרגול היומי:</b> ה"מפתחות" — כיוון המשמעות, מילות קיצון, מילת הקישור, תחיליות וסופיות — הם כלי הצמצום האלה.</div>
+  </div>
+
+  <h2><span class="num">06</span> הפרקים, וכמה מילים על כתיבה</h2>
+  <div class="card">
+    <p>אמירנט בודק הבנת הנקרא (השלמת משפטים, ניסוח מחדש וקטעי קריאה). לפי מה שפורסם על הלאל, נוספים לו <b>הבנת הנשמע</b> ו<b>הבעה בכתב</b>.</p>
+    <p>פרק הכתיבה הוא השינוי הגדול. ההמלצה הפשוטה: להתאמן על טקסט קצר ומאורגן — טענה, שתי תמיכות, סיכום — במקום להתאמץ על אנגלית מרשימה. מבנה ברור שווה יותר ממילים גדולות.</p>
+    <div class="note"><b>שימו לב:</b> המשקל של כל פרק בציון הסופי של הלאל טרם פורסם. אסטרטגיה של ויתור על פרק שלם היא הימור על ניחוש.</div>
+  </div>
+
+  <div class="action">
+    <h2><span class="num">✓</span> בפועל, תעשו:</h2>
+    <ol>
+      <li><b>תתאמנו בלי לדלג.</b> בכל תרגול, מחליטים על כל שאלה וממשיכים. זו ההרגלה שהכי תשתלם ביום המבחן.</li>
+      <li><b>קבעו תקציב זמן לשאלה</b> ותתאמנו לעמוד בו. עברתם פי שניים — מצמצמים, מנחשים, ממשיכים.</li>
+      <li><b>זכרו שקשה זה טוב.</b> אם באמצע המבחן השאלות נעשות קשות — אתם עולים.</li>
+    </ol>
+    <p style="margin:.6rem 0 0;font-size:.9rem">ואיפה משבצים סימולציות בתנאי אמת — <a href="/kama-zman/">במדריך לבניית לוח הזמנים ←</a></p>
+  </div>
+
+  <div class="cta">
+    <h2>לתרגל בדיוק ככה — בלי לחזור אחורה, עם שעון</h2>
+    <p>סימולציה במבנה הבחינה, הסבר בעברית על כל שאלה, וניתוח שמראה איפה הזמן הולך.</p>
+    <a class="cta-btn" href="/">להתחיל לתרגל — בחינם</a>
+  </div>
+
+  <div class="sources">
+    <b>מקורות</b> — שימו לב לרמת האמינות ליד כל אחד:
+    <ul>
+      <li><a href="https://go.tau.ac.il/he/Psychometric-english" target="_blank" rel="noopener">אוניברסיטת תל אביב — השינוי במבנה הבחינה הפסיכומטרית מדצמבר 2026</a> (מקור מוסדי)</li>
+      <li><a href="https://www.safotsheli.co.il/english-course/%D7%9E%D7%91%D7%97%D7%9F-%D7%90%D7%9E%D7%99%D7%A8%D7%A0%D7%98" target="_blank" rel="noopener">שפות שלי — מבחן אמירנט: המנגנון המותאם ואי-החזרה אחורה</a> (גוף הכנה, מקור משני; מתייחס לאמירנט)</li>
+      <li><a href="https://kidum.com/blog/%D7%A9%D7%99%D7%A0%D7%95%D7%99%D7%99%D7%9D-%D7%91%D7%A4%D7%A1%D7%99%D7%9B%D7%95%D7%9E%D7%98%D7%A8%D7%99/" target="_blank" rel="noopener">קידום — שינויים בפסיכומטרי ובחינת הלאל</a> (גוף הכנה, מקור משני)</li>
+    </ul>
+    <p>מבנה מבחן הלאל טרם פורסם במלואו במסמך רשמי של המרכז הארצי לבחינות ולהערכה. חלק מהמידע מבוסס על מבחן אמירנט ועל פרסומים של גופי הכנה.</p>
+  </div>
+
+  <div class="foot">
+    <a href="/">Wordwise — תרגול למבחן</a>
+    <a href="/mivchan-hilal/">מה זה הלאל</a>
+    <a href="/amirant-ledugma/">שאלות לדוגמה</a>
+    <a href="/ptor-anglit/">פטור באנגלית</a>
+    <a href="/moadim-vehareshama/">מועדים והרשמה</a>
+    <a href="/mivne-hamivchan/">מבנה המבחן</a>
+    <a href="/chelek-haazana/">חלק ההאזנה</a>
+    <a href="/otzar-milim/">אוצר מילים</a>
+    <a href="/kama-zman/">כמה זמן להתכונן</a>
+    <a href="/amir-amiram-amirant/">אמיר / אמירם / אמירנט</a>
+    <a href="/accessibility/">הצהרת נגישות</a>
+    <a href="/privacy/">פרטיות</a>
+    <span>· Wordwise הוא כלי הכנה עצמאי, לא קשור למאל"ו</span>
+  </div>
+</div>
+</body>
+</html>
