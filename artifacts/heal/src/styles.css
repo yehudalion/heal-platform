@@ -1923,6 +1923,19 @@ a { text-decoration: none; color: inherit; }
   .ld-fact b { justify-self: start; }
 }
 
+
+/* האתגר היומי — פס משלו מתחת למילה של היום (יהודה, 5.9) */
+.hm-daily { display: flex; align-items: center; gap: .8rem; margin: 0 0 1rem; padding: .8rem 1rem;
+  border-radius: 14px; border: 1.5px solid var(--gold, #B08442); background: rgba(176,132,66,.07);
+  text-decoration: none; color: var(--text); transition: background .15s, transform .12s; }
+.hm-daily:hover { background: rgba(176,132,66,.14); transform: translateY(-1px); }
+.hm-daily.is-done { border-color: var(--border); background: var(--card); }
+.hm-daily-ico { font-size: 1.35rem; line-height: 1; flex: 0 0 auto; }
+.hm-daily-txt { flex: 1; min-width: 0; display: grid; gap: .1rem; }
+.hm-daily-txt b { font-size: .95rem; font-weight: 800; }
+.hm-daily-sub { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+.hm-daily-go { font-size: .8rem; font-weight: 800; color: var(--green-dark); white-space: nowrap; }
+
 /* 5.9: שורת "עובד גם כאפליקציה" בנחיתה */
 .ld-install { display: inline-block; margin-top: .9rem; padding: .55rem .9rem; border-radius: 99px;
   border: 1.5px solid var(--green-dark); color: var(--green-dark); font-weight: 800; font-size: .84rem; text-decoration: none; }

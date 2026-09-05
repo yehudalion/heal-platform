@@ -45,6 +45,10 @@ import { getDailyPlan, nextLeg } from '../data/plan.data.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 import { loadCornerState, cornersGridHtml, wireCorners } from './corners.js';
+// 5.9 (יהודה): מסך הבית הרגיש ריק — שני הגרפים הכלליים ביותר מ-/insights
+// עולים לכאן. הם מציירים "נבנה" בעצמם כשאין מספיק נתונים, אז אין מצב ריק.
+import { getAccuracyByModule, getCumulativeGrowth } from '../data/insights.data.js';
+import { accuracyByModuleCard, cumulativeGrowthCard } from './insights.js';
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -76,13 +80,15 @@ export async function renderHome(root) {
   const profile = profileRes?.data ?? null;
   const minutes = profile?.daily_time_minutes ?? 20;
 
-  const [planRes, corners, gmState, missions, wodRes, consentRes] = await Promise.all([
+  const [planRes, corners, gmState, missions, wodRes, consentRes, accuracyRes, growthRes] = await Promise.all([
     userId ? getDailyPlan(userId, minutes) : Promise.resolve({ data: null }),
     loadCornerState(userId),
     getGamificationState(),
     getTodayMissions(),
     getWordOfDay(),
     getConsentState(userId),
+    userId ? getAccuracyByModule(userId) : Promise.resolve(null),
+    userId ? getCumulativeGrowth(userId) : Promise.resolve(null),
   ]);
   const plan = planRes?.data ?? null;
 
@@ -116,9 +122,6 @@ export async function renderHome(root) {
   const dKey = todayKey();
   const dDone = playedToday(dKey);
   const dPrev = dDone ? lastResult() : null;
-  const dailyTxt = dDone
-    ? `✓ האתגר היומי${dPrev && dPrev.date === dKey ? ` ${dPrev.correct}/${dPrev.total}` : ''}`
-    : '🎯 האתגר היומי';
   const mDone = (missions || []).filter((m) => m.done).length;
   const mTxt = missions?.length ? `${mDone} מתוך ${missions.length} משימות` : '';
 
@@ -156,12 +159,32 @@ export async function renderHome(root) {
     : '';
 
   // ── המילה של היום — שורה אחת ────────────────────────────────────────────
+  // האתגר היומי — פס משלו מתחת למילה של היום (יהודה, 5.9). קודם הוא היה
+  // שורה קטנה בתוך כרטיס היום ואף אחד לא ראה אותו.
+  const dailyHtml = `
+    <a class="hm-daily${dDone ? ' is-done' : ''}" href="#/daily">
+      <span class="hm-daily-ico">${dDone ? '✓' : '🎯'}</span>
+      <span class="hm-daily-txt">
+        <b>האתגר היומי</b>
+        <span class="hm-daily-sub">${dDone
+          ? (dPrev && dPrev.date === dKey ? `נפתר היום · ${dPrev.correct} מתוך ${dPrev.total}` : 'נפתר היום')
+          : '6 שאלות, 6 דקות'}</span>
+      </span>
+      <span class="hm-daily-go">${dDone ? 'לתוצאה ←' : 'להתחיל ←'}</span>
+    </a>`;
+
   const w = wodRes?.word;
   const wodHtml = w ? `
     <a class="hm-wod" href="#/word-of-day">
       <span>🔤 המילה של היום: <b dir="ltr">${esc(w.headword)}</b> — ${esc(w.definition_he)}</span>
       <span class="hm-wod-go">←</span>
     </a>` : '';
+
+  // שני הגרפים הכלליים ביותר. כל כרטיס מצייר בעצמו מצב "עוד נבנה" כשאין
+  // מספיק תרגול, אז אין כאן ענף ריק — רק אורח לא מקבל אותם.
+  const graphsHtml = userId && accuracyRes && growthRes ? `
+      <div class="sec-title hm-sec">המספרים שלך<span class="ms-all" data-nav="/insights">כל התובנות ←</span></div>
+      <div class="metrics-grid">${accuracyByModuleCard(accuracyRes)}${cumulativeGrowthCard(growthRes)}</div>` : '';
 
   el.innerHTML = `
     <div class="fade-in home2">
@@ -176,10 +199,7 @@ export async function renderHome(root) {
           <div class="hm-today-txt">
             <div class="hm-eyebrow">${esc(eyebrow)}</div>
             <div class="hm-title">${esc(title)}</div>
-            <div class="hm-meta">
-              <a href="#/daily" class="hm-meta-link">${dailyTxt}</a>
-              ${mTxt ? `<span class="hm-dot">·</span><span>${mTxt}</span>` : ''}
-            </div>
+            ${mTxt ? `<div class="hm-meta"><span>${mTxt}</span></div>` : ''}
           </div>
           <button class="hm-btn" id="btn-daily" type="button">${btn}</button>
         </div>
@@ -191,6 +211,8 @@ export async function renderHome(root) {
       ${cornersGridHtml(corners)}
 
       ${wodHtml}
+      ${dailyHtml}
+      ${graphsHtml}
       ${consentBand(consentRes)}
     </div>`;
 
