@@ -116,8 +116,31 @@ export function showRewardToast(res, newBadges = []) {
   // requestAnimationFrame כדי שהמעבר יתפוס; ההסרה עם setTimeout ולא עם
   // transitionend, שלא נורה כלל כשהמשתמש ביקש prefers-reduced-motion.
   requestAnimationFrame(() => el.classList.add('is-in'))
+  // סשן שבת 6, פריט 51 — התנועה היחידה שהוחלט להוסיף: המספר עולה מ-0 ל-XP
+  // שהתקבל, פעם אחת, ב-600ms. בלי קונפטי. ב-prefers-reduced-motion המספר
+  // פשוט מופיע.
+  if (res.awarded) countUp(el.querySelector('.xt-xp'), res.awarded)
   setTimeout(() => {
     el.classList.remove('is-in')
     setTimeout(() => el.remove(), 400)
   }, 3600)
+}
+
+/** מונה עולה קטן: 0 → n בתוך ~600ms. מכבד prefers-reduced-motion. */
+function countUp(node, n) {
+  if (!node) return
+  const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduce || n < 5) return
+  const span = node.querySelector('span')
+  const t0 = performance.now()
+  const DUR = 600
+  const step = (t) => {
+    const k = Math.min(1, (t - t0) / DUR)
+    const eased = 1 - Math.pow(1 - k, 3)
+    node.firstChild.textContent = `+${Math.round(n * eased)} `
+    if (k < 1) requestAnimationFrame(step)
+  }
+  node.innerHTML = `+0 `
+  if (span) node.appendChild(span)
+  requestAnimationFrame(step)
 }

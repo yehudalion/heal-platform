@@ -24,6 +24,7 @@ import { pushMissedWords } from '../data/srsPush.data.js';
 import { getLearnerState } from '../data/srs.data.js';
 import { markPractising, rewardSession } from '../lib/reward.js';
 import { attachKeyNav } from '../lib/keyNav.js';
+import { shareText, shareHeader, SITE } from '../lib/share.js';   // סשן שבת 6: שיתוף תוצאה
 
 const DURATION = 60;
 const BEST_KEY = 'hs:sprint:best';
@@ -224,6 +225,7 @@ function finish() {
         <div class="vs-sub">${isRecord ? '🎉 שיא אישי חדש!' : `השיא שלך: ${S.best}`}</div>
         <div class="vs-btns">
           <button class="btn-primary" id="vsAgain">עוד סיבוב ←</button>
+          <button class="vs-share" id="vsShare">📤 שיתוף התוצאה</button>
           <a class="sg-guide" href="#/word-wall">🧱 לקיר המילים</a>
           <a class="sg-guide" href="#/flashcards">← חזרה לפינה</a>
         </div>
@@ -232,6 +234,10 @@ function finish() {
     </div>`;
 
   S.el.querySelector('#vsAgain').addEventListener('click', start);
+  S.el.querySelector('#vsShare')?.addEventListener('click', (e) => {
+    const dir = S.dir === 'he2en' ? 'עברית → אנגלית' : 'אנגלית → עברית';
+    shareText(`${shareHeader('ספרינט מילים')} · ${dir}\n⚡ ${S.score} נכונות בדקה${isRecord ? ' · שיא אישי' : ''}\n${SITE}/#/vocab-sprint`, e.currentTarget);
+  });
   S.el.querySelector('#vsAdd')?.addEventListener('click', async (e) => {
     const msg = S.el.querySelector('#vsMsg');
     e.target.disabled = true;
@@ -279,6 +285,7 @@ function ensureStyles() {
 .vs-final{font-size:3.4rem;font-weight:800;color:var(--green-dark,#16412F);line-height:1}
 .vs-sub{color:var(--muted);font-size:.9rem;margin-top:.2rem}
 .vs-btns{display:flex;flex-direction:column;gap:.6rem;align-items:center;margin-top:1.1rem}
+.vs-share{background:none;border:1.5px solid var(--border);border-radius:var(--radius-sm,10px);padding:.5rem 1rem;font:inherit;font-weight:700;cursor:pointer;color:var(--green-dark,#16412F)}
 .vs-btns .btn-primary{width:100%}
 .vs-missed{margin-top:1rem;background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius);padding:1rem}

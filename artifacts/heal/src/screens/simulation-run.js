@@ -31,6 +31,7 @@ import { scaledScore, deltaLine } from '../lib/scoreScale.js';
 import { paceLine, fmtSec } from '../lib/pace.js';
 import { resolveKey } from '../lib/scKeys.js';
 import { resolveTrigger } from '../lib/keys.js';
+import { shareText, shareHeader, SITE } from '../lib/share.js';   // סשן שבת 6: שיתוף תוצאה
 
 let state = null;
 let player = null;
@@ -677,6 +678,7 @@ function drawReport() {
       <div class="sim-actions" style="justify-content:center;margin-top:2rem">
         <button class="sim-btn" id="simReview">לסקירת כל השאלות</button>
         <button class="sim-btn-quiet" id="simAgain">סימולציה נוספת</button>
+        <button class="sim-btn-quiet" id="simShare">📤 שיתוף</button>
         <button class="sim-btn-quiet" id="simHome">חזרה</button>
       </div>
 
@@ -685,6 +687,12 @@ function drawReport() {
 
   state.root.querySelector('#simHome').addEventListener('click', () => { resetState(); navigate('/home'); });
   state.root.querySelector('#simAgain').addEventListener('click', () => { resetState(); navigate('/simulation'); });
+  state.root.querySelector('#simShare')?.addEventListener('click', (e) => {
+    // 🟩🟥 לפי סדר השאלות — כמו באתגר היומי. הציון משוער, ומסומן כך גם בשיתוף.
+    const squares = state.items.map((it) => (state.answers.get(it.order)?.isCorrect ? '🟩' : '🟥')).join('');
+    const scoreLine = scaled ? `ציון משוער ${scaled.score} (${scaled.band.code})` : `${report.totalCorrect}/${report.totalAnswered}`;
+    shareText(`${shareHeader(state.form.title || 'סימולציה')}\n${scoreLine} · ${report.totalCorrect}/${report.totalAnswered} נכונות\n${squares}\n${SITE}/#/simulation`, e.currentTarget);
+  });
   state.root.querySelector('#simSignup')?.addEventListener('click', () => { resetState(); navigate('/'); });
   state.root.querySelectorAll('[data-nav]').forEach((b) =>
     b.addEventListener('click', () => { resetState(); navigate(b.dataset.nav); }));

@@ -30,20 +30,25 @@ export const XP = {
 };
 
 /**
- * דרגות. הסף הוא XP מצטבר; המרווח קבוע (300) כדי שהתלמיד יוכל להחזיק את זה
- * בראש — "עוד 300 ואני מתמיד". השמות מתארים יכולת, לא ערך של אדם.
+ * דרגות. הסף הוא XP מצטבר. סשן שבת 6 (5.9.2026), פריט 50: הסולם היה 300 קבוע
+ * לדרגה, והדרגה העליונה (2,700) הושגה בכשלושה שבועות — מול 88 יום של הכנה.
+ * עכשיו עקומה: מדרגות קטנות בהתחלה (הצלחה מהירה כשמתחילים), ארוכות בסוף.
+ * 9,000 ≈ שלושה חודשים של תרגול יומי סביב התקרה. XP שכבר נצבר לא משתנה.
+ * ⚠️ אותם ספים בדיוק יושבים ב-DB: public.rank_thresholds() (מיגרציה
+ * gamification_rank_curve_10). לשנות — בשני המקומות יחד.
  */
+export const RANK_THRESHOLDS = [0, 150, 400, 800, 1300, 2000, 3000, 4300, 6200, 9000];
 export const RANKS = [
-  { min:    0, name: 'מתחיל',        icon: '🌱' },
-  { min:  300, name: 'מתאמן',        icon: '💪' },
-  { min:  600, name: 'מתמיד',        icon: '🔁' },
-  { min:  900, name: 'חד־עין',       icon: '👁️' },
-  { min: 1200, name: 'פותר',         icon: '🧩' },
-  { min: 1500, name: 'מיומן',        icon: '🎯' },
-  { min: 1800, name: 'שולט',         icon: '⚡' },
-  { min: 2100, name: 'מקצוען',       icon: '🏅' },
-  { min: 2400, name: 'אלוף',         icon: '🏆' },
-  { min: 2700, name: 'מוכן למבחן',   icon: '🚀' },
+  { min: RANK_THRESHOLDS[0], name: 'מתחיל',        icon: '🌱' },
+  { min: RANK_THRESHOLDS[1], name: 'מתאמן',        icon: '💪' },
+  { min: RANK_THRESHOLDS[2], name: 'מתמיד',        icon: '🔁' },
+  { min: RANK_THRESHOLDS[3], name: 'חד־עין',       icon: '👁️' },
+  { min: RANK_THRESHOLDS[4], name: 'פותר',         icon: '🧩' },
+  { min: RANK_THRESHOLDS[5], name: 'מיומן',        icon: '🎯' },
+  { min: RANK_THRESHOLDS[6], name: 'שולט',         icon: '⚡' },
+  { min: RANK_THRESHOLDS[7], name: 'מקצוען',       icon: '🏅' },
+  { min: RANK_THRESHOLDS[8], name: 'אלוף',         icon: '🏆' },
+  { min: RANK_THRESHOLDS[9], name: 'מוכן למבחן',   icon: '🚀' },
 ];
 
 /** @param {number} xp @returns {{index:number,name:string,icon:string}} */
