@@ -80,3 +80,7 @@ scripts/__pycache__/
 .claude/
 _to_delete/
 _tmp_*
+
+# הודעות קומיט של סשני שבת (קבצי עזר, לא חלק מהריפו)
+msg*.txt
+_done_msg*.txt
