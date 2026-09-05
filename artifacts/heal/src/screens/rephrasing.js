@@ -23,7 +23,9 @@ import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 import { isGuest } from '../supabase.js';
 import { fetchRecentAttempts } from '../data/rephrase.data.js';
-import { lengthPicker } from '../lib/sessionPrefs.js';
+// סשן שבת 5 (5.9.2026): "קצר/רגיל/ארוך" הוחלף במסך ההגדרות שלפני מנה
+// (טיימר / משוב / גודל) — הכרעת יהודה, פריט 28. lib/sessionSetup.js.
+import { setupCard } from '../lib/sessionSetup.js';
 
 // Verbatim excerpt from rephrase-learn.js screen 1 (approved copy, Lion 2026-08-05).
 // SOURCE OF TRUTH is rephrase-learn.js — if that text changes, change it here too.
@@ -32,11 +34,7 @@ const BLURB = 'משפט מקור באנגלית + 4 ניסוחים אפשריי�
 export async function renderRephrasing(root) {
   await renderLayout(root, '/rephrasing');
   const el = getPageContent();
-  const picker = lengthPicker('rephrase', [
-    { v: 3, label: 'קצר',  sub: '3 שאלות · כ־4 דק׳'  },
-    { v: 5, label: 'רגיל', sub: '5 שאלות · כ־7 דק׳'  },
-    { v: 8, label: 'ארוך', sub: '8 שאלות · כ־11 דק׳' },
-  ], 5);
+  const picker = setupCard('rephrase', { sizes: [5, 10, 20], defaultSize: 5 });
 
   el.innerHTML = `
     <div class="fade-in" style="max-width:620px">
@@ -58,6 +56,7 @@ export async function renderRephrasing(root) {
 
   picker.wire(el);
   el.querySelector('#rgStart').addEventListener('click', () => navigate('/rephrase-practice'));
+  // מי שהיה שמור לו 3/8 מהבורר הישן ממשיך לעבוד — getSessionLength מחזיר כל מספר חיובי.
 
   showPractisedCount(el);
   ensureStyles();

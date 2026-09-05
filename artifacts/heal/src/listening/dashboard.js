@@ -20,7 +20,8 @@ import { getCurrentSession }     from '../supabase.js';
 import { getListeningOverview } from '../data/listening.data.js';
 import { getProfile }            from '../data/profiles.data.js';
 import { navigate }              from '../router.js';
-import { lengthPicker, typePicker } from '../lib/sessionPrefs.js';
+import { typePicker } from '../lib/sessionPrefs.js';
+import { setupCard } from '../lib/sessionSetup.js';   // סשן שבת 5: גודל מנה במקום קצר/ארוך
 import './dashboard.css';
 import '../lib/signIn.js';
 
@@ -65,11 +66,8 @@ function _render(root, overview, examDate) {
     { v: 'lecture_qa',   label: 'הבנת קטע',    sub: '🎧 בלבד' },
   ], 'mixed');
 
-  const picker = lengthPicker('listening', [
-    { v: 2, label: 'קצר',  sub: '2 קטעים · כ־5 דק׳'  },
-    { v: 4, label: 'רגיל', sub: '4 קטעים · כ־10 דק׳' },
-    { v: 6, label: 'ארוך', sub: '6 קטעים · כ־15 דק׳' },
-  ], 4);
+  // גודל המנה בקטעים (2/4/6) — אותו מפתח 'listening' ש-session.js קורא.
+  const picker = setupCard('listening', { sizes: [2, 4, 6], defaultSize: 4, rows: ['size'], showTip: false });
 
   root.innerHTML = `
     <div class="ldash-body">

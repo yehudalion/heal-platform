@@ -14,6 +14,8 @@
 
 import { navigate, subAnchor } from '../router.js';
 import { getSessionLength } from '../lib/sessionPrefs.js';
+// סשן שבת 5 (5.9.2026), פריטים 27-28: משוב בסוף המנה + טיימר מהגדרות המנה.
+import { getFeedbackMode, getTimerMinutes, packTimer } from '../lib/sessionSetup.js';
 import { getLearner, getGuestSeenIds, addGuestSeenIds } from '../lib/learner.js';
 import { fetchPracticeQuestions, fetchPracticeQuestionsByKey, logAttempt } from '../data/rephrase.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
@@ -61,6 +63,10 @@ let packMs = 0;          // סך זמן המענה במנה, לשורת הקצב
 let packTimed = 0;
 let levelAdjustedThisPack = false; // one level MOVE per pack — see adjustLevel()
 let focusKey = null;               // non-null → this session drills ONE label
+let fbMode = 'each';               // 'each' | 'end' — משוב אחרי כל שאלה או בסקירה שבסוף
+let reviewing = false;             // סקירת המנה במצב 'end'
+let picks = [];                    // picks[idx] = { order, chosenDisplay, hintShown }
+let timer = null;
 let focusLabel = null;             // its student-facing label, for the header
 
 // per-question view state
@@ -160,9 +166,15 @@ async function loadPack(root) {
   packCorrect = 0;
   packMs = 0; packTimed = 0;
   levelAdjustedThisPack = false;
+  fbMode = getFeedbackMode('rephrase');
+  reviewing = false;
+  picks = [];
+  timer?.stop();
+  timer = packTimer(getTimerMinutes('rephrase'));
   startQuestion();
   view = 'question';
   draw(root);
+  timer?.start(root);
 }
 
 function startQuestion() {
@@ -207,6 +219,13 @@ function onChoose(root, d) {
     practiceMode: PRACTICE_MODE,
   }).catch((err) => console.warn('rephrase.logAttempt failed:', err));
 
+  // "בסוף המנה": שומרים את הבחירה וממשיכים בלי לחשוף — כמו במבחן.
+  if (fbMode === 'end') {
+    picks[packIdx] = { order: [...order], chosenDisplay: d, hintShown };
+    revealed = false;
+    nextQuestion(root);
+    return;
+  }
   draw(root);
 }
 
@@ -234,10 +253,33 @@ function adjustLevel() {
 
 function nextQuestion(root) {
   packIdx += 1;
-  if (packIdx >= pack.length) { view = 'summary'; draw(root); return; }
+  if (packIdx >= pack.length) {
+    if (fbMode === 'end' && !reviewing) { startReview(root); return; }
+    view = 'summary'; draw(root); return;
+  }
+  if (reviewing) { restorePick(); draw(root); return; }
   startQuestion();
   view = 'question';
   draw(root);
+}
+
+/** סקירת המנה במצב "בסוף המנה": אותו מסך שאלה, חשוף, עם הבחירה שנעשתה. */
+function startReview(root) {
+  timer?.stop();
+  reviewing = true;
+  packIdx = 0;
+  restorePick();
+  view = 'question';
+  draw(root);
+}
+
+function restorePick() {
+  const p = picks[packIdx] || {};
+  order = p.order || order;
+  chosenDisplay = p.chosenDisplay ?? null;
+  hintShown = !!p.hintShown;
+  revealed = true;
+  explOpen = false;
 }
 
 // ─── Rendering ───────────────────────────────────────────────────────────────
@@ -259,7 +301,8 @@ function shell(inner) {
         <!-- 3.9.2026: צ'יפ "רמה N" הוסר. ליאון: "לא רוצה שהתלמיד ידע מה הרמה
              של השאלה שלפניו" (HANDOFF_product_ux_chat §8.4.1), וגם עובדתית
              המנה מכילה כמה רמות יחד. הרמה נשארת פנימית — ראו levels.data.js. -->
-        ${showMeta ? `<span class="rp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        ${showMeta ? `<span class="rp-chip">${reviewing ? 'סקירה · ' : ''}שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        ${showMeta && timer && !reviewing ? `<span class="rp-chip">${timer.html()}</span>` : ''}
         <a class="rp-chip rp-guide" href="#/rephrase-learn">📘 מדריך</a>
       </div>
     </div>
@@ -401,6 +444,7 @@ function explPanel(q, isCorrect, canon) {
 }
 
 function drawSummary(root) {
+  timer?.stop();
   const total = pack.length;
   // fire-and-forget: הטוסט מופיע מעל הסיכום, וכישלון שלו לא נוגע במסך.
   rewardSession({ source: 'rephrase', correct: packCorrect, total, userId }).catch(() => {});

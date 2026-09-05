@@ -28,6 +28,10 @@ import { getPushableWords, pushMissedWords } from '../data/srsPush.data.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { resolveKey, isDefinitionMove, CATEGORIES } from '../lib/scKeys.js';
 import { LEARN_SEEN_KEY } from './sc-learn.js';
+// סשן שבת 5 (5.9.2026), פריטים 27-28: גודל מנה / משוב בסוף המנה / טיימר —
+// נקבעים במסך ההגדרות שלפני מנה (lib/sessionSetup.js).
+import { getSessionLength } from '../lib/sessionPrefs.js';
+import { getFeedbackMode, getTimerMinutes, packTimer } from '../lib/sessionSetup.js';
 
 // ─── Tunables ────────────────────────────────────────────────────────────────
 const PACK_SIZE   = 5;
@@ -62,6 +66,10 @@ let packTimed = 0;
 let levelAdjustedThisPack = false;
 let focusKey = null;
 let focusLabel = null;
+let fbMode = 'each';           // 'each' | 'end' — משוב אחרי כל שאלה או בסקירה שבסוף
+let reviewing = false;         // סקירת המנה במצב 'end': אותו מסך שאלה, חשוף
+let picks = [];                // picks[idx] = { order, chosenDisplay, hintShown } במצב 'end'
+let timer = null;
 
 // per-question view state
 let order = [0, 1, 2, 3];         // display slot d → canonical 0-based option index (canonical option NUMBER = order[d]+1)
@@ -144,9 +152,11 @@ export async function renderScPractice(root) {
 async function loadPack(root) {
   root.innerHTML = `<div class="sp-shell fade-in"><div class="sp-card"><div class="sp-center">טוען שאלות…</div></div></div>`;
   const fetchedAt = level;
+  const size = getSessionLength('sc', PACK_SIZE);
+  fbMode = getFeedbackMode('sc');
   const { data, error } = focusKey
-    ? await fetchPracticeQuestionsByKey({ key: focusKey, limit: PACK_SIZE, excludeIds: answeredIds })
-    : await fetchPracticeQuestions({ level, limit: PACK_SIZE, excludeIds: answeredIds });
+    ? await fetchPracticeQuestionsByKey({ key: focusKey, limit: size, excludeIds: answeredIds })
+    : await fetchPracticeQuestions({ level, limit: size, excludeIds: answeredIds });
 
   if (error) { view = 'error'; draw(root); return; }
   if (!data || data.length === 0) { view = 'empty'; draw(root); return; }
@@ -157,9 +167,14 @@ async function loadPack(root) {
   packCorrect = 0;
   packMs = 0; packTimed = 0;
   levelAdjustedThisPack = false;
+  reviewing = false;
+  picks = [];
+  timer?.stop();
+  timer = packTimer(getTimerMinutes('sc'));
   startQuestion();
   view = 'question';
   draw(root);
+  timer?.start(root);
 }
 
 function startQuestion() {
@@ -200,6 +215,15 @@ function onChoose(root, d) {
     .then(({ data }) => { lastAttemptId = data?.id ?? null; })
     .catch((err) => console.warn('sentenceCompletion.logAttempt failed:', err));
 
+  // "בסוף המנה": שומרים את הבחירה וממשיכים בלי לחשוף — כמו במבחן. המשוב
+  // המלא (הפאנל, המפתח, ההצעה להוסיף מילים) מגיע בסקירה שאחרי השאלה האחרונה.
+  if (fbMode === 'end') {
+    picks[packIdx] = { order: [...order], chosenDisplay: d, hintShown };
+    revealed = false;
+    nextQuestion(root);
+    return;
+  }
+
   // Find out whether there is anything worth offering. READ-ONLY — nothing
   // reaches the learner's practice queue until they press the button.
   if (userId) {                 // pushing a word to SRS needs an account
@@ -236,10 +260,36 @@ function adjustLevel() {
 
 function nextQuestion(root) {
   packIdx += 1;
-  if (packIdx >= pack.length) { view = 'summary'; draw(root); return; }
+  if (packIdx >= pack.length) {
+    if (fbMode === 'end' && !reviewing) { startReview(root); return; }
+    view = 'summary'; draw(root); return;
+  }
+  if (reviewing) { restorePick(); draw(root); return; }
   startQuestion();
   view = 'question';
   draw(root);
+}
+
+/** סקירת המנה במצב "בסוף המנה": אותו מסך שאלה, חשוף, עם הבחירה שנעשתה. */
+function startReview(root) {
+  timer?.stop();
+  reviewing = true;
+  packIdx = 0;
+  restorePick();
+  view = 'question';
+  draw(root);
+}
+
+function restorePick() {
+  const p = picks[packIdx] || {};
+  order = p.order || order;
+  chosenDisplay = p.chosenDisplay ?? null;
+  hintShown = !!p.hintShown;
+  revealed = true;
+  explOpen = false;
+  metaTagged = true;      // בסקירה לא שואלים על הסיבה לטעות — הרגע עבר
+  pushOffer = [];
+  pushState = 'idle';
 }
 
 // ─── Rendering ───────────────────────────────────────────────────────────────
@@ -259,7 +309,8 @@ function shell(inner) {
       <div class="sp-meta">
         ${focusLabel ? `<span class="sp-chip sp-focuschip">🎯 ${esc(focusLabel)}</span>` : ''}
         <!-- 3.9.2026: צ'יפ "רמה N" הוסר — ראו rephrase-practice.js. -->
-        ${showMeta ? `<span class="sp-chip">שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        ${showMeta ? `<span class="sp-chip">${reviewing ? 'סקירה · ' : ''}שאלה ${packIdx + 1} / ${pack.length}</span>` : ''}
+        ${showMeta && timer && !reviewing ? `<span class="sp-chip">${timer.html()}</span>` : ''}
         <a class="sp-chip sp-guide" href="#/sc-learn">📘 מדריך</a>
       </div>
     </div>
@@ -461,6 +512,7 @@ function metaPrompt() {
 }
 
 function drawSummary(root) {
+  timer?.stop();
   const total = pack.length;
   rewardSession({ source: 'sc', correct: packCorrect, total, userId }).catch(() => {});
   const pace = paceLine('sc', packMs, packTimed);

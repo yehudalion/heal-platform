@@ -15,12 +15,14 @@ import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { fetchAffixAttempts } from '../data/affix.data.js';
+import { setupCard } from '../lib/sessionSetup.js';   // סשן שבת 5: הגדרות לפני מנה
 
 const BLURB = 'במבחן תיתקלו במילים שלא ראיתם מעולם. זה לא כישלון — זה חלק מהתכנון. מה שאפשר לעשות זה לפרק: התחילית מספרת אם המשמעות התהפכה, והסופית מספרת אם מדובר בשם עצם, בתואר, בפועל או באדם. שתי פיסות המידע האלה לבדן הופכות ניחוש מתוך ארבע אפשרויות לניחוש מתוך שתיים.';
 
 export async function renderAffix(root) {
   await renderLayout(root, '/affix');
   const el = getPageContent();
+  const setup = setupCard('affix', { sizes: [5, 10, 20], defaultSize: 5 });
 
   el.innerHTML = `
     <div class="fade-in" style="max-width:620px">
@@ -29,6 +31,7 @@ export async function renderAffix(root) {
 
       <div class="sg-card">
         <p class="sg-blurb">${BLURB}</p>
+        ${setup.html}
         <button class="btn-primary sg-cta" id="afStart">התחל תרגול ←</button>
         <div class="sg-links">
           <a class="sg-guide" href="#/affix-learn">📘 מדריך</a>
@@ -39,6 +42,7 @@ export async function renderAffix(root) {
       <div class="sg-stat" id="afStat" hidden></div>
     </div>`;
 
+  setup.wire(el);
   el.querySelector('#afStart').addEventListener('click', () => navigate('/affix-practice'));
   showPractisedCount(el);
 }

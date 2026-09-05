@@ -3,7 +3,10 @@ import { navigate } from '../router.js';
 import { getCurrentSession } from '../supabase.js';
 import { getDueCount, getSessionStats } from '../data/srs.data.js';
 import { getCoreWordCount } from '../data/words.data.js';
-import { lengthPicker, getSessionLength } from '../lib/sessionPrefs.js';
+import { getSessionLength } from '../lib/sessionPrefs.js';
+// סשן שבת 5: "קצר/רגיל/ארוך" → שורת גודל מנה במסך ההגדרות שלפני מנה (פריט 28).
+// בכרטיסיות אין משוב ואין טיימר, ולכן רק השורה הזו.
+import { setupCard } from '../lib/sessionSetup.js';
 
 export async function renderFlashcards(root) {
   await renderLayout(root, '/flashcards');
@@ -23,11 +26,7 @@ export async function renderFlashcards(root) {
   const { count: coreCount } = await getCoreWordCount();
   const due  = dueCount || 0;
   const easy = stats?.in_review || 0;
-  const picker = lengthPicker('vocab', [
-    { v: 6,  label: 'קצר',  sub: '6 מילים · כ־3 דק׳'  },
-    { v: 12, label: 'רגיל', sub: '12 מילים · כ־6 דק׳' },
-    { v: 20, label: 'ארוך', sub: '20 מילים · כ־10 דק׳' },
-  ], 12);
+  const picker = setupCard('vocab', { sizes: [6, 12, 20], defaultSize: 12, rows: ['size'], showTip: false });
 
   el.innerHTML = `
     <div class="fade-in">

@@ -13,14 +13,17 @@ import { getCurrentSession } from '../supabase.js';
 import { fetchAffixItems, logAffixAttempt } from '../data/affix.data.js';
 import { getLevelCenter, saveLevelCenter, MODULE_LEVELS } from '../data/levels.data.js';
 import { levelMix, driftCenter } from '../lib/levelMix.js';
-import { familyInfo } from '../lib/affixKeys.js';
+import { familyInfo, AFFIX_FAMILIES } from '../lib/affixKeys.js';
+import { getSessionLength } from '../lib/sessionPrefs.js';
+import { getFeedbackMode, getTimerMinutes, packTimer } from '../lib/sessionSetup.js';
+import { subAnchor } from '../router.js';
 import { markPractising, rewardSession } from '../lib/reward.js';
 import { attachKeyNav, KEY_HINT_HTML } from '../lib/keyNav.js';
 import { AFFIX_LEARN_SEEN } from './affix-learn.js';
 import { itemFeedbackHtml, wireItemFeedback } from '../lib/itemFeedback.js';
 import { paceLine } from '../lib/pace.js';
 
-const PACK = 5;
+const PACK = 5;   // ברירת מחדל; הגודל בפועל נקרא מהגדרות המנה (sessionSetup)
 const CFG = MODULE_LEVELS.affix || { min: 2, max: 7, start: 4 };
 
 let userId = null;
@@ -37,6 +40,12 @@ let streakByFamily = {};
 let detachKeys = null;
 let packMs = 0;
 let packTimed = 0;
+// סשן שבת 5: תרגול ממוקד במשפחה (?key=NEGATION), משוב בסוף המנה, טיימר.
+let focusFamily = null;
+let fbMode = 'each';           // 'each' | 'end'
+let reviewing = false;         // במצב "בסוף המנה": עוברים על השאלות עם המשוב
+let picks = [];                // picks[idx] = { picked, hintShown } כשהמשוב נדחה לסוף
+let timer = null;
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -54,6 +63,12 @@ export async function renderAffixPractice(root) {
   const session = await getCurrentSession();
   userId = session?.user?.id ?? null;
 
+  // '#/affix-practice?key=NEGATION' — מנה ממוקדת במשפחה אחת, מגיעים אליה
+  // ממסך הניתוח או מ"התובנה שלך השבוע" ב-/progress.
+  const requested = new URLSearchParams(subAnchor()).get('key');
+  focusFamily = requested && AFFIX_FAMILIES[requested] ? requested : null;
+  fbMode = getFeedbackMode('affix');
+
   const lvl = await getLevelCenter(userId, 'affix');
   center = lvl.center;
   answeredIds = [];
@@ -65,7 +80,9 @@ export async function renderAffixPractice(root) {
 async function loadPack(el) {
   el.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div></div>`;
   const levels = levelMix(center, { min: CFG.min, max: CFG.max });
-  const { data } = await fetchAffixItems({ limit: PACK, levels, excludeIds: answeredIds });
+  const { data } = await fetchAffixItems({
+    limit: getSessionLength('affix', PACK), levels, excludeIds: answeredIds, family: focusFamily,
+  });
 
   if (!data.length) {
     el.innerHTML = `
@@ -86,12 +103,17 @@ async function loadPack(el) {
   revealed = false;
   picked = null;
   hintShown = false;
+  reviewing = false;
+  picks = [];
+  timer?.stop();
+  timer = packTimer(getTimerMinutes('affix'));
   draw(el);
+  timer?.start(el);
 }
 
 function draw(el) {
   const q = pack[packIdx];
-  qStart = Date.now();
+  if (!reviewing) qStart = Date.now();
   const fam = familyInfo(q.family_code);
 
   const opts = (q.options || []).map((o, i) => {
@@ -111,7 +133,8 @@ function draw(el) {
   el.innerHTML = `
     <div class="fade-in af-wrap">
       <div class="af-head">
-        <span class="af-prog">שאלה ${packIdx + 1} מתוך ${pack.length}</span>
+        <span class="af-prog">${reviewing ? 'סקירה · ' : ''}שאלה ${packIdx + 1} מתוך ${pack.length}${focusFamily ? ` · 🎯 ${esc(familyInfo(focusFamily).label)}` : ''}</span>
+        ${timer && !reviewing ? timer.html() : ''}
         <a class="af-guide" href="#/affix-learn#al-block-${esc(q.family_code)}">📘 ${esc(fam.label)}</a>
       </div>
 
@@ -192,19 +215,48 @@ function onChoose(el, i) {
     hintUsed: hintShown,
   }).catch(() => {});
 
+  // "בסוף המנה": שומרים את הבחירה וממשיכים בלי לחשוף — כמו במבחן. המשוב
+  // המלא מגיע בסקירה שאחרי השאלה האחרונה, באותו מסך בדיוק.
+  if (fbMode === 'end') {
+    picks[packIdx] = { picked: i, hintShown };
+    revealed = false;
+    next(el);
+    return;
+  }
   draw(el);
 }
 
 function next(el) {
-  if (packIdx === pack.length - 1) { drawSummary(el); return; }
+  if (packIdx === pack.length - 1) {
+    if (fbMode === 'end' && !reviewing) { startReview(el); return; }
+    drawSummary(el);
+    return;
+  }
   packIdx += 1;
+  if (reviewing) { restorePick(); draw(el); return; }
   revealed = false;
   picked = null;
   hintShown = false;
   draw(el);
 }
 
+function startReview(el) {
+  timer?.stop();
+  reviewing = true;
+  packIdx = 0;
+  restorePick();
+  draw(el);
+}
+
+function restorePick() {
+  const p = picks[packIdx] || {};
+  picked = p.picked ?? null;
+  hintShown = !!p.hintShown;
+  revealed = true;
+}
+
 function drawSummary(el) {
+  timer?.stop();
   const total = pack.length;
   rewardSession({ source: 'affix', correct: packCorrect, total, userId, badges: ['affix_first'] })
     .catch(() => {});

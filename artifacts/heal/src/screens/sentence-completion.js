@@ -23,12 +23,14 @@ import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
 import { isGuest } from '../supabase.js';
 import { fetchRecentAttempts } from '../data/sentenceCompletion.data.js';
+import { setupCard } from '../lib/sessionSetup.js';   // סשן שבת 5: הגדרות לפני מנה
 
 const BLURB = 'משפט אנגלי אחד עם מקום ריק, וארבע אופציות. רק אחת מתאימה למקום הזה בדיוק — לא כי המילים האחרות "לא קיימות", אלא כי הן לא מתאימות למבנה או להיגיון של המשפט. זו לא שאלת אוצר מילים, זו שאלה של איפה להסתכל.';
 
 export async function renderSentenceCompletion(root) {
   await renderLayout(root, '/sentence-completion');
   const el = getPageContent();
+  const setup = setupCard('sc', { sizes: [5, 10, 20], defaultSize: 5 });
 
   el.innerHTML = `
     <div class="fade-in" style="max-width:620px">
@@ -37,6 +39,7 @@ export async function renderSentenceCompletion(root) {
 
       <div class="sg-card">
         <p class="sg-blurb">${BLURB}</p>
+        ${setup.html}
         <button class="btn-primary sg-cta" id="sgStart">התחל תרגול ←</button>
         <div class="sg-links">
           <a class="sg-guide" href="#/sc-learn">📘 מדריך</a>
@@ -47,6 +50,7 @@ export async function renderSentenceCompletion(root) {
       <div class="sg-stat" id="sgStat" hidden></div>
     </div>`;
 
+  setup.wire(el);
   el.querySelector('#sgStart').addEventListener('click', () => navigate('/sc-practice'));
 
   showPractisedCount(el);
