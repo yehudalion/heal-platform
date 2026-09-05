@@ -79,7 +79,13 @@ function sessionId() {
 
 /** The route only — never the query string, which could carry anything. */
 function currentPath() {
-  try { return (location.hash || '#/').split('?')[0].slice(0, 200) } catch { return null }
+  try {
+    const h = (location.hash || '#/').split('?')[0]
+    // 5.9.2026: בחזרה מ-Google OAuth ה-hash הוא #access_token=<JWT>&refresh_token=…
+    // וה-JWT נכתב לטבלת האנליטיקס. אסימון גישה הוא סוד — לא נרשם, גם לא חלקית.
+    if (/(access_token|refresh_token|id_token|provider_token)=/.test(h)) return '#auth-callback'
+    return h.slice(0, 200)
+  } catch { return null }
 }
 
 /** Referrer host only. We want "where did they come from", not a full URL. */
