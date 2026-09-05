@@ -27,6 +27,12 @@ import { attachKeyNav } from '../lib/keyNav.js';
 
 const DURATION = 60;
 const BEST_KEY = 'hs:sprint:best';
+// סשן שבת 5 (5.9.2026), פריט 33 — ספרינט הפוך, עברית → אנגלית. הכרעת יהודה:
+// "מיומנות שונה: שליפה ולא זיהוי — זה מה שהשלמת משפטים דורשת." אותו מאגר,
+// אותם מסיחים; רק כיוון השאלה מתהפך. השיא נשמר בנפרד לכל כיוון (זה משחק אחר).
+// מצב Zen (בלי שעון) לא נבנה — הכרעת יהודה: הספרינט ממילא לא מעניש.
+const DIR_KEY = 'hs:sprint:dir';           // 'en2he' | 'he2en'
+const BEST_KEY_REV = 'hs:sprint:best:he2en';
 
 let S = null;
 let detachKeys = null;
@@ -60,21 +66,33 @@ export async function renderVocabSprint(root) {
   }
 
   S = { userId, pool, el, idx: 0, score: 0, streak: 0, best: 0, missed: [], seen: [],
-        left: DURATION, tick: null, q: null };
-  try { S.best = Number(localStorage.getItem(BEST_KEY) || 0) || 0; } catch (_) { S.best = 0; }
+        left: DURATION, tick: null, q: null, dir: 'en2he' };
+  try { S.dir = localStorage.getItem(DIR_KEY) === 'he2en' ? 'he2en' : 'en2he'; } catch (_) { S.dir = 'en2he'; }
+  loadBest();
 
   drawIntro();
 }
 
+function loadBest() {
+  try { S.best = Number(localStorage.getItem(S.dir === 'he2en' ? BEST_KEY_REV : BEST_KEY) || 0) || 0; } catch (_) { S.best = 0; }
+}
+
 function drawIntro() {
+  const rev = S.dir === 'he2en';
   S.el.innerHTML = `
     <div class="fade-in" style="max-width:600px">
       <div class="page-title">ספרינט מילים</div>
       <div class="page-sub">דקה אחת. כמה מילים תזהו?</div>
       <section class="vs-card vs-center">
         <div class="vs-intro-ico">⚡</div>
-        <p class="vs-lead">מוצגת מילה באנגלית וארבעה פירושים. בוחרים את הנכון,
-          וממשיכים. <b>טעות לא מורידה ניקוד</b> — היא רק לוקחת זמן.</p>
+        <div class="vs-dir" role="group" aria-label="כיוון">
+          <button type="button" class="vs-dir-btn${rev ? '' : ' on'}" data-dir="en2he">אנגלית → עברית</button>
+          <button type="button" class="vs-dir-btn${rev ? ' on' : ''}" data-dir="he2en">עברית → אנגלית</button>
+        </div>
+        <p class="vs-lead">${rev
+          ? 'מוצג פירוש בעברית וארבע מילים באנגלית. בוחרים את המילה הנכונה — זו שליפה מהראש, בדיוק מה שהשלמת משפטים דורשת.'
+          : 'מוצגת מילה באנגלית וארבעה פירושים. בוחרים את הנכון, וממשיכים.'}
+          <b>טעות לא מורידה ניקוד</b> — היא רק לוקחת זמן.</p>
         <p class="vs-lead vs-soft">בסוף תקבלו את רשימת המילים שפספסתם, ותוכלו
           להוסיף אותן לתרגול אם תרצו.</p>
         ${S.best ? `<div class="vs-best">השיא שלך: <b>${S.best}</b></div>` : ''}
@@ -83,6 +101,12 @@ function drawIntro() {
       </section>
     </div>`;
   S.el.querySelector('#vsStart').addEventListener('click', start);
+  S.el.querySelectorAll('.vs-dir-btn').forEach((b) => b.addEventListener('click', () => {
+    S.dir = b.dataset.dir === 'he2en' ? 'he2en' : 'en2he';
+    try { localStorage.setItem(DIR_KEY, S.dir); } catch (_) { /* מצב פרטי */ }
+    loadBest();
+    drawIntro();
+  }));
 }
 
 function start() {
@@ -108,19 +132,21 @@ function nextQuestion() {
     const c = pool[Math.floor(Math.random() * pool.length)];
     if (guard.has(c.id)) continue;
     guard.add(c.id);
-    others.push(c.definition_he);
+    others.push(c);
   }
-  const options = [w.definition_he, ...others];
+  const rev = S.dir === 'he2en';
+  const pick = (x) => (rev ? x.headword : x.definition_he);
+  const options = [pick(w), ...others.map(pick)];
   for (let i = options.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [options[i], options[j]] = [options[j], options[i]];
   }
-  S.q = { w, options, correct: options.indexOf(w.definition_he) };
+  S.q = { w, options, correct: options.indexOf(pick(w)), rev };
   drawQuestion();
 }
 
 function drawQuestion() {
-  const { w, options } = S.q;
+  const { w, options, rev } = S.q;
   S.el.innerHTML = `
     <div class="fade-in" style="max-width:600px">
       <div class="vs-hud">
@@ -131,9 +157,9 @@ function drawQuestion() {
       <div class="vs-track"><i id="vsBar" style="width:${(S.left / DURATION) * 100}%"></i></div>
 
       <section class="vs-card vs-center">
-        <div class="vs-word" dir="ltr">${esc(w.headword)}</div>
+        <div class="vs-word" dir="${rev ? 'rtl' : 'ltr'}">${esc(rev ? w.definition_he : w.headword)}</div>
         <div class="vs-opts">
-          ${options.map((o, i) => `<button class="vs-opt" data-i="${i}">${esc(o)}</button>`).join('')}
+          ${options.map((o, i) => `<button class="vs-opt" data-i="${i}" ${rev ? 'dir="ltr"' : ''}>${esc(o)}</button>`).join('')}
         </div>
       </section>
     </div>`;
@@ -172,7 +198,7 @@ function finish() {
   const isRecord = S.score > S.best;
   if (isRecord) {
     S.best = S.score;
-    try { localStorage.setItem(BEST_KEY, String(S.score)); } catch (_) { /* מצב פרטי */ }
+    try { localStorage.setItem(S.dir === 'he2en' ? BEST_KEY_REV : BEST_KEY, String(S.score)); } catch (_) { /* מצב פרטי */ }
   }
 
   rewardSession({
@@ -232,6 +258,9 @@ function ensureStyles() {
 .vs-lead{font-size:.92rem;line-height:1.75;color:var(--text);margin:.7rem 0 0}
 .vs-soft{color:var(--muted);font-size:.85rem}
 .vs-best{margin-top:.8rem;font-size:.85rem;color:var(--muted)}
+.vs-dir{display:flex;gap:.4rem;justify-content:center;margin:.6rem 0 .2rem}
+.vs-dir-btn{padding:.35rem .8rem;border:1.5px solid var(--border);border-radius:99px;background:var(--card);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+.vs-dir-btn.on{background:var(--green-dark,#16412F);color:#fff;border-color:var(--green-dark,#16412F)}
 .vs-hud{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
 .vs-clock{font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--green-dark,#16412F)}
 .vs-clock.is-low{color:var(--red,#B4553E)}
