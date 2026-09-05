@@ -50,6 +50,7 @@ import { renderSession }             from './listening/session.js';
 import { renderListeningDashboard }  from './listening/dashboard.js';
 import { renderListeningLearn }      from './listening/readiness.js';
 import { renderListeningAnalyze }    from './listening/analyze.js';
+import { initPwa } from './lib/pwa.js';   // סשן שבת 5: התקנה כאפליקציה
 
 const app = document.getElementById('app');
 
@@ -173,5 +174,6 @@ if (supabase) {
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 // לפני הראוטר: שגיאה בטעינת המסך הראשון היא בדיוק זו שנרצה לראות.
 installErrorLog();
+initPwa();
 
 startRouter(app);

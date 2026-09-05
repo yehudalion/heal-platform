@@ -1922,3 +1922,10 @@ a { text-decoration: none; color: inherit; }
   .ld-fact { grid-template-columns: 1fr; }
   .ld-fact b { justify-self: start; }
 }
+
+/* PWA — כפתור התקנה (סשן שבת 5, פריט 31). מוסתר עד beforeinstallprompt. */
+.pwa-install { background: none; border: 0; font-family: inherit; cursor: pointer; width: 100%; text-align: right; }
+.pwa-install--bar { display: none; position: fixed; right: 12px; left: 12px; bottom: 64px; z-index: 40;
+  background: var(--green-dark); color: #fff; border-radius: 12px; padding: 10px 14px; font-weight: 800;
+  font-size: .85rem; text-align: center; box-shadow: 0 6px 20px rgba(20,32,26,.18); }
+@media (max-width: 899px) { .pwa-install--bar:not([hidden]) { display: block; } }
