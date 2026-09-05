@@ -13,8 +13,9 @@
  * מה שמבדיל אותו ממסכי התרגול: אין משוב אחרי שאלה. אין נכון/לא נכון, אין
  * הסבר ואין רמז — הכול נפתח רק בדוח. מבחן שנותן משוב תוך כדי כבר לא מודד.
  *
- * שאר כללי הפרויקט חלים: אין הענשה, אין ציון 50–150, והדוח מדבר באחוזים
- * ובפערים. מצב אורח רץ במלואו ושום דבר לא נשמר.
+ * שאר כללי הפרויקט חלים: אין הענשה. הדוח נותן ציון משוער בסולם 50–150
+ * (יהודה, 4.9.2026 — src/lib/scoreScale.js), אחוזים לכל סוג שאלה עם כיוון מול
+ * הסימולציה הקודמת, מפתחות ('למה לשים לב') וקצב. מצב אורח רץ במלואו ושום דבר לא נשמר.
  */
 
 import { navigate, subAnchor } from '../router.js';
@@ -24,8 +25,12 @@ import { AudioPlayer } from '../listening/audio-player.js';
 import { markPractising, rewardSession } from '../lib/reward.js';
 import { XP } from '../lib/xp.js';
 import {
-  loadForm, startAttempt, saveAnswer, finishAttempt, buildReport, SECTION_LABELS,
+  loadForm, startAttempt, saveAnswer, finishAttempt, buildReport, listAttempts, SECTION_LABELS,
 } from '../data/simulation.data.js';
+import { scaledScore, deltaLine } from '../lib/scoreScale.js';
+import { paceLine, fmtSec } from '../lib/pace.js';
+import { resolveKey } from '../lib/scKeys.js';
+import { resolveTrigger } from '../lib/keys.js';
 
 let state = null;
 let player = null;
@@ -136,6 +141,25 @@ function ensureStyles() {
 .sim-rev-item.open .sim-rev-body { display:block; }
 .sim-rev-why { font-size:.86rem; color:var(--muted); line-height:1.75; margin-top:.45rem; }
 .sim-rev-why strong { color:var(--text); }
+.sim-h2 { font-size:1.05rem; font-weight:800; margin:1.6rem 0 .6rem; }
+.sim-score-card { display:inline-block; background:var(--card); border:1px solid var(--border); border-radius:14px;
+  padding:1.1rem 2rem; margin:.4rem 0 .6rem; }
+.sim-score-num { font-size:3rem; font-weight:900; color:var(--green-dark); line-height:1; font-variant-numeric:tabular-nums; }
+.sim-score-lbl { font-size:.8rem; color:var(--muted); font-weight:700; margin-top:.35rem; }
+.sim-score-band { display:inline-block; margin-top:.5rem; background:var(--green-light); color:var(--green-dark);
+  border-radius:99px; padding:.2rem .8rem; font-size:.82rem; font-weight:800; }
+.sim-score-delta { font-size:.84rem; color:var(--muted); margin-top:.5rem; min-height:1.2em; }
+.sim-score-how { max-width:34rem; margin:0 auto .4rem; font-size:.86rem; }
+.sim-delta { font-size:.78rem; font-weight:800; color:var(--muted); margin-inline-start:.3rem; }
+.sim-delta.up { color:var(--green-dark); } .sim-delta.down { color:var(--orange,#B08442); }
+.sim-key-row { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:.7rem .9rem;
+  margin-bottom:.5rem; display:grid; grid-template-columns:1fr auto; gap:.3rem .9rem; align-items:center; }
+.sim-key-label { font-weight:800; font-size:.92rem; } .sim-key-group { font-weight:600; color:var(--muted); font-size:.8rem; }
+.sim-key-foot { font-size:.8rem; color:var(--muted); }
+.sim-key-meter { grid-column:1 / -1; }
+.sim-key-go { background:none; border:1px solid var(--green-dark); color:var(--green-dark); border-radius:8px;
+  padding:.35rem .7rem; font-family:inherit; font-weight:800; font-size:.8rem; cursor:pointer; white-space:nowrap; }
+.pace-line { font-size:.82rem; color:var(--muted); margin-top:.4rem; line-height:1.6; }
 .sim-center { text-align:center; padding:3rem 1rem; color:var(--muted); }
 @media (max-width:560px){ .sim-body{padding:1.2rem 1rem 2.5rem} .sim-rep-h1{font-size:1.35rem} }
 `;
@@ -454,16 +478,107 @@ function closeSection(reason) {
 }
 
 /* ── הדוח ─────────────────────────────────────────────────────────────────── */
+
+/** תוויות סוגי שאלה בהבנת הנקרא — זהות ל-reading-analyze.js. */
+const READING_TYPE_LABEL = {
+  main_idea:         'רעיון מרכזי / כותרת',
+  explicit_detail:   'פרט מפורש',
+  inference:         'הסקה',
+  vocab_in_context:  'אוצר מילים בהקשר',
+  paragraph_purpose: 'תפקיד הפסקה',
+  reference_word:    'מילת ייחוס',
+};
+
+/** סוג פרק → מודול קצב ב-lib/pace.js. האזנה נקבעת ע"י אורך הקטע ולכן בלי קצב. */
+const PACE_MODULE = { sc: 'sc', restatement: 'rephrase', reading: 'reading' };
+
+/**
+ * המפתחות ("למה לשים לב") שהשאלה חושפת, ואם הטעות נזקפת להם.
+ * השלמת משפטים: מפתח אחד לשאלה (lib/scKeys). ניסוח מחדש: המפתח שייך למסיח,
+ * ולכן חשיפה לכל שלושת המסיחים וטעות רק למסיח שנבחר (כמו weakpoints.data.js).
+ * הבנת הנקרא: סוג השאלה. האזנה: אין תיוג עקבי בבנק — לא ממציאים.
+ * @returns {Array<{id:string,label:string,group:string,route:string|null,missed:boolean}>}
+ */
+function keysOf(it, a) {
+  const chosen = a?.chosenIndex;
+  if (chosen == null) return [];
+  const wrong = !a.isCorrect;
+
+  if (it.itemKind === 'sc') {
+    const k = resolveKey(it.clueCode);
+    return k ? [{ id: 'sc:' + k.id, label: k.label, group: 'השלמת משפטים', route: `/sc-practice?key=${k.id}`, missed: wrong }] : [];
+  }
+  if (it.itemKind === 'restatement') {
+    const out = new Map();
+    const chosenCanon = it.canonicalIdx?.[chosen];
+    for (let n = 1; n <= 3; n++) {
+      const t = resolveTrigger({ category: it.categories?.[n - 1], mechanism: it.mechanisms?.[n - 1] });
+      if (!t) continue;
+      const cur = out.get(t.id) || { id: 'rs:' + t.id, label: t.label, group: 'ניסוח מחדש', route: `/rephrase-practice?key=${t.id}`, missed: false };
+      if (wrong && chosenCanon === n) cur.missed = true;
+      out.set(t.id, cur);
+    }
+    return [...out.values()];
+  }
+  if (it.itemKind === 'reading' && it.questionType) {
+    return [{ id: 'rd:' + it.questionType, label: READING_TYPE_LABEL[it.questionType] || it.questionType,
+      group: 'הבנת הנקרא', route: '/reading-practice', missed: wrong }];
+  }
+  return [];
+}
+
+/** ספירה לפי מפתח; רק מפתחות עם שתי חשיפות לפחות — מספר על חשיפה אחת הוא רעש. */
+function buildKeyReport(items, answers) {
+  const tally = new Map();
+  for (const it of items) {
+    for (const k of keysOf(it, answers.get(it.order))) {
+      const t = tally.get(k.id) || { ...k, exposures: 0, misses: 0 };
+      t.exposures += 1;
+      if (k.missed) t.misses += 1;
+      tally.set(k.id, t);
+    }
+  }
+  return [...tally.values()]
+    .filter((t) => t.exposures >= 2)
+    .sort((x, y) => (y.misses / y.exposures) - (x.misses / x.exposures) || y.misses - x.misses);
+}
+
+/** משפט קצב לפרק, מהזמנים שנמדדו לכל שאלה. '' כשאין מדידה מספקת. */
+function sectionPace(kind) {
+  const mod = PACE_MODULE[kind];
+  if (!mod) return '';
+  let total = 0, n = 0;
+  for (const it of state.items) {
+    if (it.sectionKind !== kind) continue;
+    const a = state.answers.get(it.order);
+    if (!a || !a.responseMs) continue;
+    total += a.responseMs; n += 1;
+  }
+  return paceLine(mod, total, n);
+}
+
+/** חץ כיוון מול ניסיון קודם. "מספר עם כיוון קורא כמו התקדמות". */
+function deltaChip(cur, prev) {
+  if (cur == null || prev == null) return '';
+  const d = cur - prev;
+  if (d > 0) return `<span class="sim-delta up">↑ ${d}</span>`;
+  if (d < 0) return `<span class="sim-delta down">↓ ${Math.abs(d)}</span>`;
+  return `<span class="sim-delta">=</span>`;
+}
+
 function drawReport() {
   stopTicker();
   destroyPlayer();
 
   const report = buildReport(state.items, state.answers);
+  const scaled = scaledScore(state.items, state.answers);
   const elapsed = Date.now() - state.startedAt;
+  const isShort = String(state.form.code).startsWith('short');
 
   finishAttempt(state.attemptId, {
     totalAnswered: report.totalAnswered,
     totalCorrect:  report.totalCorrect,
+    scaledScore:   scaled?.score ?? null,
     sectionStats:  report.sections.map((s) => ({
       kind: s.kind, total: s.total, answered: s.answered, correct: s.correct,
       accuracy: s.accuracy, ceiling: s.ceiling,
@@ -471,7 +586,8 @@ function drawReport() {
   });
 
   track('simulation_completed', {
-    form: state.form.code, accuracy: report.accuracy, minutes: Math.round(elapsed / 60000),
+    form: state.form.code, accuracy: report.accuracy, scaled: scaled?.score ?? null,
+    minutes: Math.round(elapsed / 60000),
   });
 
   rewardSession({
@@ -486,16 +602,36 @@ function drawReport() {
     <div class="sim-sec-row">
       <div class="sim-sec-row-top">
         <span class="sim-sec-name">${esc(s.label)}</span>
-        <span class="sim-sec-score">${s.accuracy != null ? s.accuracy + '%' : '—'}</span>
+        <span class="sim-sec-score">${s.accuracy != null ? s.accuracy + '%' : '—'} <span data-delta="${s.kind}"></span></span>
       </div>
       <div class="sim-meter">
         <div class="sim-meter-fill" style="width:${s.accuracy ?? 0}%;background:${meterColor(s.accuracy ?? 0)}"></div>
       </div>
       <div class="sim-sec-foot">
-        ${s.correct} מתוך ${s.answered} שנענו${s.answered < s.total ? ` (${s.total - s.answered} לא נענו)` : ''}${
-          s.ceiling != null ? ` · עמדת בעקביות עד רמה ${s.ceiling}` : ''}
+        ${s.correct} מתוך ${s.answered} שנענו${s.answered < s.total ? ` · ${s.total - s.answered} נשארו פתוחות` : ''}
       </div>
+      ${sectionPace(s.kind)}
     </div>`).join('');
+
+  const keys = buildKeyReport(state.items, state.answers);
+  const keyRows = keys.map((k) => {
+    const pct = Math.round(((k.exposures - k.misses) / k.exposures) * 100);
+    const link = (k.misses > 0 && k.route)
+      ? `<button type="button" class="sim-key-go" data-nav="${esc(k.route)}">לתרגול ממוקד ←</button>` : '';
+    return `
+      <div class="sim-key-row">
+        <div class="sim-key-main">
+          <div class="sim-key-label">${esc(k.label)} <span class="sim-key-group">· ${esc(k.group)}</span></div>
+          <div class="sim-key-foot">${k.exposures - k.misses} מתוך ${k.exposures} · ${pct}%</div>
+        </div>
+        <div class="sim-meter sim-key-meter"><div class="sim-meter-fill" style="width:${pct}%;background:${meterColor(pct)}"></div></div>
+        ${link}
+      </div>`;
+  }).join('');
+  const keysBlock = keys.length ? `
+    <div class="sim-h2">למה לשים לב</div>
+    <div class="sim-rep-sub" style="margin-bottom:.8rem">המפתחות שהופיעו בסימולציה, מהחלש לחזק. מפתח עם טעות מקבל תרגול ממוקד משלו.</div>
+    ${keyRows}` : '';
 
   const insight = (report.weakest && report.strongest && report.weakest.kind !== report.strongest.kind)
     ? `<div class="sim-note">
@@ -506,53 +642,88 @@ function drawReport() {
 
   const guestBlock = state.isGuest ? `
     <div class="sim-note">
-      <strong>הדוח הזה לא נשמר.</strong> אתם מתרגלים כאורחים, ולכן ברגע שתסגרו את
-      הדף הוא ייעלם. חשבון חינם שומר אותו, ומאפשר להשוות בין אבחונים לאורך זמן.
+      <strong>חשבון חינם שומר את הדוח הזה</strong> ומראה לך בסימולציה הבאה כמה עלית בכל פרק.
       <div style="margin-top:.7rem"><button class="sim-btn" id="simSignup">להרשמה חינם</button></div>
+    </div>` : '';
+
+  const scoreCard = scaled ? `
+    <div class="sim-score-card">
+      <div class="sim-score-num">${scaled.score}</div>
+      <div class="sim-score-lbl">ציון משוער · סולם 50–150</div>
+      <div class="sim-score-band">${esc(scaled.band.code)} · ${esc(scaled.band.label)}</div>
+      <div class="sim-score-delta" id="simScoreDelta"></div>
+    </div>
+    <div class="sim-rep-sub sim-score-how">
+      הציון משוקלל לפי קושי השאלות ומתורגם לסולם הבחינה. כמו בכל סימולציה — זו הערכה,
+      ${isShort ? 'וטופס קצר נותן תמונה ראשונית; סימולציה מלאה מדייקת אותה.' : 'וסימולציות נוספות מראות את הכיוון.'}
     </div>` : '';
 
   state.root.innerHTML = `
     <div class="sim-shell"><div class="sim-body">
       <div class="sim-rep-head">
-        <div class="sim-rep-h1">דוח הפערים שלך</div>
-        <div class="sim-rep-total">${report.accuracy ?? 0}%</div>
+        <div class="sim-rep-h1">${esc(state.form.title || 'הסימולציה')} — הסיכום שלך</div>
+        ${scoreCard}
         <div class="sim-rep-sub">
-          ${report.totalCorrect} תשובות נכונות מתוך ${report.totalAnswered} שנענו · ${fmtTime(elapsed)} דקות
+          ${report.totalCorrect} תשובות נכונות מתוך ${report.totalAnswered} שנענו (${report.accuracy ?? 0}%) · ${fmtTime(elapsed)} דקות
         </div>
       </div>
 
-      <div class="sim-note">
-        <strong>זה לא ציון מבחן.</strong> אנחנו לא נותנים ציון בסולם 50–150, כי כדי
-        לתרגם ביצועים לציון כזה צריך כיול פסיכומטרי שאין לנו — ומספר לא מבוסס כאן
-        עלול לגרום לך להחליט החלטה אמיתית על סמך ניחוש. מה שיש כאן במקום זה מדויק
-        יותר בכל מקרה: איפה בדיוק הפער.
-      </div>
-
+      <div class="sim-h2">לפי סוג שאלה</div>
       ${rows}
       ${insight}
+      ${keysBlock}
       ${guestBlock}
 
       <div class="sim-actions" style="justify-content:center;margin-top:2rem">
-        <button class="sim-btn" id="simReview">לסקירת התשובות</button>
+        <button class="sim-btn" id="simReview">לסקירת כל השאלות</button>
+        <button class="sim-btn-quiet" id="simAgain">סימולציה נוספת</button>
         <button class="sim-btn-quiet" id="simHome">חזרה</button>
       </div>
 
       <div class="sim-review" id="simReviewBox" hidden></div>
     </div></div>`;
 
-  state.root.querySelector('#simHome').addEventListener('click', () => { resetState(); navigate('/simulation'); });
+  state.root.querySelector('#simHome').addEventListener('click', () => { resetState(); navigate('/home'); });
+  state.root.querySelector('#simAgain').addEventListener('click', () => { resetState(); navigate('/simulation'); });
   state.root.querySelector('#simSignup')?.addEventListener('click', () => { resetState(); navigate('/'); });
+  state.root.querySelectorAll('[data-nav]').forEach((b) =>
+    b.addEventListener('click', () => { resetState(); navigate(b.dataset.nav); }));
 
   const revBtn = state.root.querySelector('#simReview');
   revBtn.addEventListener('click', () => {
     const box = state.root.querySelector('#simReviewBox');
-    if (!box.hidden) { box.hidden = true; revBtn.textContent = 'לסקירת התשובות'; return; }
+    if (!box.hidden) { box.hidden = true; revBtn.textContent = 'לסקירת כל השאלות'; return; }
     box.innerHTML = renderReview();
     wireReviewToggles(box);
     box.hidden = false;
     revBtn.textContent = 'להסתיר את הסקירה';
     box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  fillDeltas(report, scaled);
+}
+
+/**
+ * הכיוון מול הסימולציה הקודמת (רשום בלבד). נטען אחרי הציור כדי שהדוח לא
+ * יחכה לרשת. משווים לניסיון האחרון שהושלם לפני זה, לא לפי סוג טופס — תלמיד
+ * רואה "עליתי" גם בין קצרה למלאה; זה כיוון, לא כיול.
+ */
+async function fillDeltas(report, scaled) {
+  if (!state?.userId) return;
+  const { data } = await listAttempts(state.userId, 10);
+  if (!state?.root) return;
+  const prev = (data || []).find((a) => a.id !== state.attemptId);
+  if (!prev) return;
+
+  const scoreEl = state.root.querySelector('#simScoreDelta');
+  if (scoreEl && scaled) scoreEl.textContent = deltaLine(scaled.score, prev.scaled_score);
+
+  const prevStats = Array.isArray(prev.section_stats) ? prev.section_stats : [];
+  for (const s of report.sections) {
+    const p = prevStats.find((x) => x.kind === s.kind);
+    const el = state.root.querySelector(`[data-delta="${s.kind}"]`);
+    if (el && p && p.accuracy != null && s.accuracy != null) el.innerHTML = deltaChip(s.accuracy, p.accuracy);
+  }
 }
 
 /**
@@ -588,7 +759,9 @@ function renderReview() {
 
     return `
       <div class="sim-rev-item" data-rev-item="${i}">
-        <div class="sim-sec-foot">${esc(SECTION_LABELS[it.sectionKind])} · שאלה ${it.order}</div>
+        <div class="sim-sec-foot">${esc(SECTION_LABELS[it.sectionKind])} · שאלה ${it.order}${
+          a?.responseMs ? ` · ${fmtSec(a.responseMs)}` : ''}${
+          keysOf(it, a).length ? ` · ${esc(keysOf(it, a).map((k) => k.label).join(', '))}` : ''}</div>
         ${it.prompt ? `<div class="sim-rev-q" dir="${it.itemKind === 'listening' ? 'rtl' : 'ltr'}">${esc(it.prompt)}</div>` : ''}
         <div class="sim-rev-line">
           ${chosen == null
