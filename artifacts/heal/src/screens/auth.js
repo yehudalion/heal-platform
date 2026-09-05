@@ -100,7 +100,7 @@ export function renderAuth(root) {
           </button>
           <a class="ld-secondary" href="#/daily">או לנסות את האתגר היומי, בלי הרשמה ←</a>
         </div>
-        <a class="ld-install" href="#/install">📲 עובד גם כאפליקציה בטלפון — אייקון במסך הבית, בלי חנות. איך מוסיפים ←</a>
+        <a class="ld-install" href="#/install">📲 מומלץ: להוסיף כאפליקציה למסך הבית ←</a>
         <div id="notice" class="ld-notice"></div>
       </section>
 

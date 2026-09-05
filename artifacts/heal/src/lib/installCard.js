@@ -2,6 +2,7 @@
  * src/lib/installCard.js — "הוסיפו כאפליקציה": הכרטיס הבולט. 5.9.2026 (מוצ"ש),
  * לבקשת יהודה: "בא נוסיף את ה'הוסף כאפליקציה' שיהיה ממש בולט".
  *
+ * ניסוח קצר (יהודה, 5.9): פס אחד לחיץ, בלי כותרת ותת-כותרת.
  * lib/pwa.js (סשן שבת 5) מציג כפתור רק כשהדפדפן ירה beforeinstallprompt —
  * כלומר רק בכרום/אנדרואיד. באייפון אין אירוע כזה בכלל, ולכן רוב התלמידים
  * לא ראו שום דבר. הכרטיס הזה מופיע בכל דפדפן:
@@ -15,6 +16,8 @@
 import { canInstall, promptInstall } from './pwa.js';
 import { navigate } from '../router.js';
 import { BRAND } from './brand.js';
+
+const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 const DISMISS_KEY = 'hs:install:dismissed';
 const DISMISS_DAYS = 14;
@@ -46,55 +49,47 @@ function ensureStyles() {
   const s = document.createElement('style');
   s.id = 'hs-install-css';
   s.textContent = `
-.ins-card{display:flex;align-items:center;gap:.9rem;margin:0 0 1.1rem;padding:.9rem 1.05rem;border-radius:14px;
-  background:linear-gradient(135deg,var(--green-dark,#16412F),#1f5a41);color:#fff;
-  box-shadow:0 8px 24px rgba(20,32,26,.16)}
-.ins-ico{font-size:1.9rem;line-height:1;flex:0 0 auto}
-.ins-txt{flex:1;min-width:0}
-.ins-t{font-weight:800;font-size:.98rem;line-height:1.3}
-.ins-s{font-size:.8rem;opacity:.88;margin-top:.15rem;line-height:1.5}
-.ins-acts{display:flex;flex-direction:column;gap:.35rem;align-items:stretch;flex:0 0 auto}
-.ins-btn{background:#fff;color:var(--green-dark,#16412F);border:0;border-radius:99px;padding:.5rem .95rem;
-  font:inherit;font-size:.84rem;font-weight:800;cursor:pointer;white-space:nowrap}
-.ins-btn:hover{background:#f1f5f2}
-.ins-later{background:none;border:0;color:#fff;opacity:.75;font:inherit;font-size:.74rem;cursor:pointer;padding:.1rem}
-.ins-later:hover{opacity:1;text-decoration:underline}
-@media (max-width:520px){.ins-card{flex-wrap:wrap}.ins-acts{flex-direction:row;width:100%;justify-content:flex-start;align-items:center}}
+.ins-bar{position:relative;display:block;width:100%;margin:0 0 1.1rem;padding:.95rem 2.6rem;
+  border:0;border-radius:14px;font:inherit;font-size:1.02rem;font-weight:800;color:#fff;cursor:pointer;text-align:center;
+  background:linear-gradient(135deg,var(--green-dark,#16412F),#1f5a41);
+  box-shadow:0 8px 24px rgba(20,32,26,.18);transition:transform .12s,box-shadow .12s}
+.ins-bar:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(20,32,26,.24)}
+.ins-bar:active{transform:translateY(0)}
+.ins-bar .ins-go{opacity:.9;font-weight:800}
+.ins-x{position:absolute;left:.5rem;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;
+  opacity:.6;font-size:1.15rem;line-height:1;cursor:pointer;padding:.25rem .4rem;border-radius:8px}
+.ins-x:hover{opacity:1;background:rgba(255,255,255,.14)}
+@media (max-width:400px){.ins-bar{font-size:.92rem}}
 `;
   document.head.appendChild(s);
 }
 
-/** HTML של הכרטיס, או '' אם אין מה להציג. */
+/** HTML של הפס, או '' אם אין מה להציג. */
 export function installCardHtml() {
   if (isStandalone() || dismissed()) return '';
-  const p = platform();
-  const sub = p === 'ios'
-    ? 'אייקון במסך הבית, מסך מלא, בלי סרגל כתובת — 3 לחיצות בספארי, בלי חנות.'
-    : p === 'android'
-      ? 'אייקון במסך הבית ומסך מלא — לחיצה אחת, בלי חנות ובלי הורדה.'
-      : 'חלון משלו בלי טאבים — לחיצה אחת בכרום או ב-Edge.';
-  return `<div class="ins-card" id="hsInstallCard" role="region" aria-label="התקנה כאפליקציה">
-    <div class="ins-ico">📲</div>
-    <div class="ins-txt"><div class="ins-t">הוסיפו את ${BRAND} כאפליקציה</div><div class="ins-s">${sub}</div></div>
-    <div class="ins-acts">
-      <button class="ins-btn" type="button" data-ins="go">${canInstall() ? 'להתקין עכשיו' : 'איך מוסיפים ←'}</button>
-      <button class="ins-later" type="button" data-ins="later">לא עכשיו</button>
-    </div>
+  // ניסוח קצר בכוונה (יהודה, 5.9): שורה אחת שאומרת מה עושים, לא כרטיס מסביר.
+  const cta = canInstall() ? 'מומלץ להתקין כאפליקציה' : 'מומלץ להוסיף כאפליקציה';
+  return `<div style="position:relative" data-brand="${esc(BRAND)}">
+    <button class="ins-bar" id="hsInstallCard" type="button" data-ins="go">
+      📲 ${cta} <span class="ins-go">←</span>
+    </button>
+    <button class="ins-x" type="button" data-ins="later" aria-label="לא עכשיו" title="לא עכשיו">×</button>
   </div>`;
 }
 
-/** מחבר את הכרטיס אחרי ש-innerHTML הוצב. */
+/** מחבר את הפס אחרי ש-innerHTML הוצב. */
 export function wireInstallCard(root) {
-  const card = root.querySelector('#hsInstallCard');
-  if (!card) return;
+  const bar = root.querySelector('#hsInstallCard');
+  if (!bar) return;
   ensureStyles();
-  card.querySelector('[data-ins="go"]')?.addEventListener('click', async () => {
+  const wrap = bar.parentElement;
+  bar.addEventListener('click', async () => {
     if (canInstall()) {
       const ok = await promptInstall();
-      if (ok) card.remove();
+      if (ok) wrap?.remove();
       return;
     }
     navigate('/install');
   });
-  card.querySelector('[data-ins="later"]')?.addEventListener('click', () => { dismiss(); card.remove(); });
+  wrap?.querySelector('[data-ins="later"]')?.addEventListener('click', () => { dismiss(); wrap.remove(); });
 }

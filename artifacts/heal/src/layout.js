@@ -6,7 +6,7 @@ import { getProfile, upsertProfile } from './data/profiles.data.js';
 import { reportUserIssue } from './lib/errorLog.js';
 import { startGoogleSignIn } from './lib/signIn.js';
 import { BRAND, BRAND_PARTS, BRAND_MARK } from './lib/brand.js';
-import { wireInstallButton, canInstall, promptInstall } from './lib/pwa.js';
+import { canInstall, promptInstall } from './lib/pwa.js';
 import { isStandalone } from './lib/installCard.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
@@ -188,8 +188,7 @@ export async function renderLayout(root, activePath) {
         <a class="bn-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="bn-ico">${ico.chart}</span>התקדמות
         </a>
-      </nav>
-      <button class="pwa-install pwa-install--bar" id="pwaInstallBar" type="button" hidden>📲 להתקין כאפליקציה</button>`;
+      </nav>`;
 
   root.innerHTML = `
     <div class="shell fade-in">
@@ -228,9 +227,9 @@ export async function renderLayout(root, activePath) {
 
   // התקנה כאפליקציה — שני הכפתורים (סרגל צדדי / מעל הסרגל התחתון) מוסתרים
   // עד ש-beforeinstallprompt נורה.
-  // 5.9: פריט הסרגל תמיד גלוי (חוץ מבתוך האפליקציה) — בלי prompt הוא מוביל
+  // 5.9: הפס הצף מעל הסרגל התחתון הוסר — הפס במסך הבית ממלא את מקומו.
+  // פריט הסרגל תמיד גלוי (חוץ מבתוך האפליקציה) — בלי prompt הוא מוביל
   // למדריך #/install, כי באייפון beforeinstallprompt לא נורה לעולם.
-  wireInstallButton(root.querySelector('#pwaInstallBar'));
   const sideInstall = root.querySelector('#pwaInstall');
   if (sideInstall) {
     if (isStandalone()) sideInstall.hidden = true;
