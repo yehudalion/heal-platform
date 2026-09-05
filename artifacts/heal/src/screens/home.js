@@ -48,7 +48,7 @@ import { loadCornerState, cornersGridHtml, wireCorners } from './corners.js';
 // 5.9 (יהודה): מסך הבית הרגיש ריק — שני הגרפים הכלליים ביותר מ-/insights
 // עולים לכאן. הם מציירים "נבנה" בעצמם כשאין מספיק נתונים, אז אין מצב ריק.
 import { getAccuracyByModule, getCumulativeGrowth } from '../data/insights.data.js';
-import { accuracyByModuleCard, cumulativeGrowthCard } from './insights.js';
+import { accuracyByModuleCard, cumulativeGrowthCard, ensureStyles as ensureInsightsStyles } from './insights.js';
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -185,6 +185,8 @@ export async function renderHome(root) {
   const graphsHtml = userId && accuracyRes && growthRes ? `
       <div class="sec-title hm-sec">המספרים שלך<span class="ms-all" data-nav="/insights">כל התובנות ←</span></div>
       <div class="metrics-grid">${accuracyByModuleCard(accuracyRes)}${cumulativeGrowthCard(growthRes)}</div>` : '';
+
+  if (graphsHtml) ensureInsightsStyles();
 
   el.innerHTML = `
     <div class="fade-in home2">
