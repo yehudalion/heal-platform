@@ -61,8 +61,10 @@ import { getGamificationState, getBadges } from '../data/gamification.data.js';
 import { listAttempts } from '../data/simulation.data.js';
 import { getAccuracyByModule, getCumulativeGrowth, getActivityCalendar } from '../data/insights.data.js';
 import { ensureStyles as ensureInsightStyles } from './insights.js';
-import { getDailyTip } from '../data/dailyTip.data.js';
-import { weeklyPaceCard, gamificationCard, diagnosticBand, metricsSection, tipCard } from './progress-widgets.js';
+import { weeklyPaceCard, gamificationCard, diagnosticBand, metricsSection, journeyMap, insightCard } from './progress-widgets.js';
+// סשן שבת 5 (5.9.2026): מפת המסלול + התובנה השבועית — הבלוק הראשון במסך.
+// הטיפ היומי (tipCard) עבר למסך ההגדרות שלפני מנה (lib/sessionSetup.js).
+import { getJourney, getWeeklyInsight } from '../data/journey.data.js';
 
 // A point whose lift clears this is worth calling out. Below it the differences
 // are not meaningful enough to name (lift ≈ 1 means "nothing to report").
@@ -79,10 +81,10 @@ async function load() {
   // without this the countdown banner below wrongly claimed no exam date was set.
   if (!userId) {
     return { userId: null, reports: [], profile: getGuestProfile(), coverage: null, listeningOverview: null,
-             weekly: null, gmState: null, badgeCodes: [], lastSim: null, accuracyRes: null, growthRes: null, calendarRes: null, tipRes: null };
+             weekly: null, gmState: null, badgeCodes: [], lastSim: null, accuracyRes: null, growthRes: null, calendarRes: null, journey: null, insight: null };
   }
   const [reports, profileRes, coverageRes, listeningRes,
-         weeklyRes, gmState, badgeCodes, simRes, accuracyRes, growthRes, calendarRes] = await Promise.all([
+         weeklyRes, gmState, badgeCodes, simRes, accuracyRes, growthRes, calendarRes, journeyRes, insightRes] = await Promise.all([
     getWeakPoints(userId),
     getProfile(userId),
     getCoverage(userId),
@@ -94,6 +96,8 @@ async function load() {
     getAccuracyByModule(userId),
     getCumulativeGrowth(userId),
     getActivityCalendar(userId),
+    getJourney(userId),
+    getWeeklyInsight(userId),
   ]);
   return {
     userId,
@@ -106,7 +110,8 @@ async function load() {
     badgeCodes: badgeCodes || [],
     lastSim: (simRes?.data ?? [])[0] ?? null,
     accuracyRes, growthRes, calendarRes,
-    tipRes: getDailyTip(),
+    journey: journeyRes?.data ?? null,
+    insight: insightRes?.data ?? null,
   };
 }
 
@@ -114,7 +119,7 @@ async function load() {
 
 // A module's own Analyze screen, where the depth (and the real example) lives.
 // Modules without one show the summary only — never a fake link.
-const ANALYZE_ROUTE = { rephrase: '#/rephrase-analyze', listening: '#/listening/analyze' };
+const ANALYZE_ROUTE = { rephrase: '#/rephrase-analyze', sentenceCompletion: '#/sc-analyze', affix: '#/affix-analyze', listening: '#/listening/analyze' };
 
 /**
  * Pairs a weak-point label with its one-line gloss when we have Lion-approved
@@ -337,7 +342,7 @@ export async function renderProgress(root) {
   ensureInsightStyles();
 
   const { userId, reports, profile, coverage, listeningOverview,
-          weekly, gmState, badgeCodes, lastSim, accuracyRes, growthRes, calendarRes, tipRes } = await load();
+          weekly, gmState, badgeCodes, lastSim, accuracyRes, growthRes, calendarRes, journey, insight } = await load();
   const target = profile?.target_score ?? null;
   const examDate = profile?.exam_date ?? null;
   const daysLeft = examDate
@@ -355,8 +360,9 @@ export async function renderProgress(root) {
       <div class="page-title">ההתקדמות שלי</div>
       <div class="page-sub">${target ? `מה עלה בסשנים האחרונים. היעד שהגדרת: ${target}.` : 'מה עלה בסשנים האחרונים, לפי סוג השאלה.'}</div>
 
+      ${userId ? journeyMap(journey) : ''}
+      ${userId ? insightCard(insight) : ''}
       ${userId ? weeklyPaceCard(weekly) : ''}
-      ${userId ? tipCard(tipRes) : ''}
 
       ${!userId ? signedOut()
         : cardsHtml || `<p class="wp-empty">אין עדיין נתונים להצגה.</p>`}
@@ -397,9 +403,13 @@ export async function renderProgress(root) {
     </div>`;
 
   wirePlanner(el, userId, profile);
-  // הווידג'טים שעברו מהבית משתמשים ב-data-nav (פס האבחון, "כל התובנות").
+  // הווידג'טים שעברו מהבית משתמשים ב-data-nav (פס האבחון, "כל התובנות"),
+  // וגם שורות מפת המסלול וכפתור התובנה.
   el.querySelectorAll('[data-nav]').forEach((t) => {
     t.addEventListener('click', () => navigate(t.dataset.nav));
+    t.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(t.dataset.nav); }
+    });
   });
 
   // Waitlist form — replaces the dead ₪99 button (Lion, 2026-08-25).

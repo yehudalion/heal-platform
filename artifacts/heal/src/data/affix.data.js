@@ -14,16 +14,18 @@ import { supabase } from '../supabase.js'
  * @param {object} o
  * @param {number} [o.limit]
  * @param {number[]} [o.levels] טווח difficulty_pos מבוקש
+ * @param {string} [o.family] תרגול ממוקד במשפחה אחת (family_code) — סשן שבת 5, פריט 34
  * @param {string[]} [o.excludeIds]
  * @returns {Promise<{data:Array,error:Error|null}>}
  */
-export async function fetchAffixItems({ limit = 5, levels = null, excludeIds = [] } = {}) {
+export async function fetchAffixItems({ limit = 5, levels = null, excludeIds = [], family = null } = {}) {
   try {
     let q = supabase
       .from('affix_items')
       .select('id, affix, affix_type, family_code, meaning_he, target_word, stem, options, correct_option, explanations_he, decode_note_he, difficulty_pos')
       .eq('is_published', true)
     if (levels?.length) q = q.in('difficulty_pos', levels)
+    if (family) q = q.eq('family_code', family)
     if (excludeIds?.length) q = q.not('id', 'in', `(${excludeIds.join(',')})`)
 
     const { data, error } = await q.limit(60)

@@ -159,3 +159,90 @@ export function tipCard(tipRes) {
       <a class="dd-more-link" href="${esc(tip.learnHref)}">ההסבר המלא + דוגמה ←</a>
     </div>`;
 }
+
+// ─── סשן שבת 5 (5.9.2026): מפת המסלול + התובנה שלך השבוע ────────────────────
+// פריטים 29-30 מרשימת המתחרה. המפה היא הבלוק הראשון ב-/progress: שורה לכל
+// פינה, שלוש נקודות לפי כלל שלוש השכבות (מלאה = בוצע, זהב = בתהליך, ריקה =
+// טרם), ומשפט אחד על הצעד הבא מהדאטה האמיתי (data/journey.data.js).
+// אין נעילה, אין בוסים, אין מספרי רמה — "התקדמות אמיתית נוכחת יותר".
+
+const TONE_BG = { g: 'var(--green-light)', o: 'var(--orange-light)', b: 'var(--blue-light)',
+                  y: 'var(--gold-light)', p: 'var(--purple-light)', c: 'var(--sky-light)' };
+
+function dots(c) {
+  const d = (state, title) => `<i class="jm-dot ${state === 'done' ? 'is-done' : state === 'active' ? 'is-active' : ''}" title="${esc(title)}"></i>`;
+  return `<span class="jm-dots" aria-label="למידה ${c.learn}, תרגול ${c.practice}, ניתוח ${c.analyze}">
+    ${d(c.learn, 'למידה')}${d(c.practice, 'תרגול')}${d(c.analyze, 'ניתוח')}</span>`;
+}
+
+/** מפת המסלול — שורה לכל פינה. לחיצה על שורה → הצעד הבא בפינה. */
+export function journeyMap(journey) {
+  ensureJourneyStyles();
+  const corners = journey?.corners ?? [];
+  if (!corners.length) return '';
+  const rows = corners.map((c) => `
+    <div class="jm-row" data-nav="${esc(c.nextRoute || c.route)}" role="link" tabindex="0">
+      <span class="jm-ic" style="background:${TONE_BG[c.tone] || 'var(--bg)'}">${c.icon}</span>
+      <span class="jm-body"><b>${esc(c.label)}</b><span class="jm-next">${esc(c.next)}</span></span>
+      ${dots(c)}
+    </div>`).join('');
+  return `
+    <section class="jm-card">
+      <div class="jm-head"><span class="jm-title">המסלול שלך</span><span class="jm-legend">למידה → תרגול → ניתוח</span></div>
+      ${rows}
+      <div class="jm-foot"><i class="jm-dot is-done"></i> בוצע &nbsp; <i class="jm-dot is-active"></i> בתהליך &nbsp; <i class="jm-dot"></i> טרם</div>
+    </section>`;
+}
+
+/**
+ * "התובנה שלך השבוע" — משפט אחד, לא דוח: המפתח עם הכי הרבה טעויות ב-14 יום,
+ * וכפתור אחד לתרגול ממוקד בו. בלי תובנה — אומרים זאת, לא ממציאים.
+ */
+export function insightCard(insight) {
+  ensureJourneyStyles();
+  if (!insight) {
+    return `
+    <section class="jm-ins jm-ins-empty">
+      <div class="jm-lbl">התובנה שלך השבוע</div>
+      <p>עוד אין תבנית ברורה בשבועיים האחרונים. אחרי עוד כמה מנות של ניסוח, השלמה או תחיליות — תופיע כאן עצה אחת ממוקדת.</p>
+    </section>`;
+  }
+  const where = insight.moduleId === 'affix' ? `משפחת <b>${esc(insight.keyLabel)}</b>` : `מפתח <b>${esc(insight.keyLabel)}</b>`;
+  return `
+    <section class="jm-ins">
+      <div class="jm-lbl">התובנה שלך השבוע</div>
+      <p>ב${esc(insight.moduleLabel)}, ${where} חזר בטעויות שלך ${insight.misses} פעמים
+         מתוך ${insight.exposures} בשבועיים האחרונים — יותר מכל מפתח אחר. מנה ממוקדת אחת סוגרת את הפער הזה מהר יותר מכל דבר אחר.</p>
+      <button class="btn-primary jm-go" data-nav="${esc(insight.practiceRoute)}">לתרגול ממוקד על ${esc(insight.keyLabel)} ←</button>
+    </section>`;
+}
+
+function ensureJourneyStyles() {
+  if (document.getElementById('jm-css')) return;
+  const s = document.createElement('style');
+  s.id = 'jm-css';
+  s.textContent = `
+.jm-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin-bottom:1rem;display:grid;gap:.45rem}
+.jm-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.2rem}
+.jm-title{font-weight:900;font-size:1rem}
+.jm-legend{font-size:.7rem;color:var(--muted);font-weight:700;letter-spacing:.03em}
+.jm-row{display:grid;grid-template-columns:auto 1fr auto;gap:.65rem;align-items:center;padding:.5rem .6rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;background:var(--card);transition:border-color .15s}
+.jm-row:hover,.jm-row:focus-visible{border-color:var(--green)}
+.jm-ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:1rem}
+.jm-body{display:grid;gap:1px;min-width:0}
+.jm-body b{font-size:.9rem}
+.jm-next{font-size:.76rem;color:var(--muted);line-height:1.4}
+.jm-dots{display:flex;gap:.28rem}
+.jm-dot{width:9px;height:9px;border-radius:50%;background:var(--border);display:inline-block}
+.jm-dot.is-done{background:var(--green)}
+.jm-dot.is-active{background:var(--gold,#B08442)}
+.jm-foot{font-size:.7rem;color:var(--muted);margin-top:.2rem}
+.jm-ins{border:1.5px dashed var(--gold,#B08442);background:rgba(176,132,66,.08);border-radius:12px;padding:.8rem .95rem;margin-bottom:1rem}
+.jm-ins p{margin:.3rem 0 .7rem;font-size:.9rem;line-height:1.65}
+.jm-ins-empty{border-style:dotted;opacity:.9}
+.jm-ins-empty p{margin-bottom:0;color:var(--muted);font-size:.84rem}
+.jm-lbl{font-size:.7rem;font-weight:800;color:var(--muted);letter-spacing:.04em}
+.jm-go{width:100%}
+`;
+  document.head.appendChild(s);
+}

@@ -41,9 +41,10 @@ export async function renderAffixAnalyze(root) {
     return `
       <div class="aa-row">
         <div class="aa-row-top">
-          <a class="aa-fam" href="#/affix-learn#al-block-${esc(f.code)}">${esc(info.label)} ←</a>
+          <a class="aa-fam" href="#/affix-learn#al-block-${esc(f.code)}">${esc(info.label)}</a>
           <span class="aa-num">${f.correct}/${f.total}</span>
         </div>
+        <a class="aa-drill" href="#/affix-practice?key=${encodeURIComponent(f.code)}">לתרגל ${esc(info.label)} ←</a>
         <div class="aa-bar"><i style="width:${Math.max(3, f.accuracy)}%"></i></div>
       </div>`;
   }).join('');
@@ -52,7 +53,8 @@ export async function renderAffixAnalyze(root) {
   const insight = (weakest && weakest.total >= 3 && weakest.accuracy < 70)
     ? `<div class="aa-insight">המשפחה שהכי כדאי לחזור עליה עכשיו היא
        <b>${esc(familyInfo(weakest.code).label)}</b> —
-       <a href="#/affix-learn#al-block-${esc(weakest.code)}">להסבר שלה במדריך ←</a></div>`
+       <a href="#/affix-practice?key=${encodeURIComponent(weakest.code)}">מנה ממוקדת ←</a> ·
+       <a href="#/affix-learn#al-block-${esc(weakest.code)}">ההסבר במדריך</a></div>`
     : `<div class="aa-insight">אין עדיין משפחה שבולטת לרעה. עוד כמה מנות ויהיה אפשר לומר משהו מדויק.</div>`;
 
   el.innerHTML = wrap(`
@@ -94,6 +96,8 @@ function ensureStyles() {
 .aa-row-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
 .aa-fam{font-weight:700;font-size:.9rem;color:var(--green-dark,#16412F);text-decoration:none}
 .aa-fam:hover{text-decoration:underline}
+.aa-drill{display:inline-block;margin-top:.25rem;font-size:.78rem;font-weight:800;color:var(--gold,#B08442);text-decoration:none}
+.aa-drill:hover{text-decoration:underline}
 .aa-num{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .aa-bar{height:7px;background:var(--green-light,#e8f0ea);border-radius:99px;overflow:hidden}
 .aa-bar i{display:block;height:100%;background:var(--green,#1F5C43)}
