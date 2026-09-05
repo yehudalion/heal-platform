@@ -35,6 +35,7 @@
  */
 import { renderLayout, getPageContent } from '../layout.js';
 import { navigate } from '../router.js';
+import { installCardHtml, wireInstallCard } from '../lib/installCard.js';
 import { getCurrentSession } from '../supabase.js';
 import { getGamificationState, getTodayMissions } from '../data/gamification.data.js';
 import { rankFor } from '../lib/xp.js';
@@ -184,6 +185,8 @@ export async function renderHome(root) {
         </div>
       </section>
 
+      ${installCardHtml()}
+
       <div class="sec-title hm-sec">הפינות</div>
       ${cornersGridHtml(corners)}
 
@@ -196,6 +199,7 @@ export async function renderHome(root) {
     t.addEventListener('click', () => navigate(t.dataset.nav));
   });
   wireCorners(el);
+  wireInstallCard(el);
   el.querySelectorAll('.cb-btn').forEach((btnEl) => {
     btnEl.addEventListener('click', () => onConsent(el, btnEl.dataset.answer === 'yes'));
   });

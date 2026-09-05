@@ -1923,6 +1923,10 @@ a { text-decoration: none; color: inherit; }
   .ld-fact b { justify-self: start; }
 }
 
+/* 5.9: שורת "עובד גם כאפליקציה" בנחיתה */
+.ld-install { display: inline-block; margin-top: .9rem; padding: .55rem .9rem; border-radius: 99px;
+  border: 1.5px solid var(--green-dark); color: var(--green-dark); font-weight: 800; font-size: .84rem; text-decoration: none; }
+.ld-install:hover { background: var(--green-dark); color: #fff; }
 /* PWA — כפתור התקנה (סשן שבת 5, פריט 31). מוסתר עד beforeinstallprompt. */
 .pwa-install { background: none; border: 0; font-family: inherit; cursor: pointer; width: 100%; text-align: right; }
 .pwa-install--bar { display: none; position: fixed; right: 12px; left: 12px; bottom: 64px; z-index: 40;

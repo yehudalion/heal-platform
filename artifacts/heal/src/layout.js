@@ -6,7 +6,8 @@ import { getProfile, upsertProfile } from './data/profiles.data.js';
 import { reportUserIssue } from './lib/errorLog.js';
 import { startGoogleSignIn } from './lib/signIn.js';
 import { BRAND, BRAND_PARTS, BRAND_MARK } from './lib/brand.js';
-import { wireInstallButton } from './lib/pwa.js';
+import { wireInstallButton, canInstall, promptInstall } from './lib/pwa.js';
+import { isStandalone } from './lib/installCard.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -143,8 +144,8 @@ export async function renderLayout(root, activePath) {
         </a>
         <!-- סשן שבת 5 (פריט 31): כפתור התקנה כאפליקציה — מופיע רק כשהדפדפן
              ירה beforeinstallprompt (lib/pwa.js), אחרת נשאר hidden. -->
-        <button class="nav-item nav-item--quiet pwa-install" id="pwaInstall" type="button" hidden>
-          <span class="nav-icon">📲</span>להתקין כאפליקציה
+        <button class="nav-item nav-item--quiet pwa-install" id="pwaInstall" type="button">
+          <span class="nav-icon">📲</span>להוסיף כאפליקציה
         </button>
         <!-- The "דו״ח פערים" item was removed 2026-08-05: /gap merged into
              /progress, so it pointed at the same screen under a different name.
@@ -227,8 +228,17 @@ export async function renderLayout(root, activePath) {
 
   // התקנה כאפליקציה — שני הכפתורים (סרגל צדדי / מעל הסרגל התחתון) מוסתרים
   // עד ש-beforeinstallprompt נורה.
-  wireInstallButton(root.querySelector('#pwaInstall'));
+  // 5.9: פריט הסרגל תמיד גלוי (חוץ מבתוך האפליקציה) — בלי prompt הוא מוביל
+  // למדריך #/install, כי באייפון beforeinstallprompt לא נורה לעולם.
   wireInstallButton(root.querySelector('#pwaInstallBar'));
+  const sideInstall = root.querySelector('#pwaInstall');
+  if (sideInstall) {
+    if (isStandalone()) sideInstall.hidden = true;
+    else sideInstall.addEventListener('click', async () => {
+      if (canInstall()) { if (await promptInstall()) sideInstall.hidden = true; }
+      else navigate('/install');
+    });
+  }
 
   // מבקר לא מחובר: אין תפריט חשבון לחווט, יש כפתור התחברות.
   if (anon) {

@@ -51,6 +51,7 @@ import { renderListeningDashboard }  from './listening/dashboard.js';
 import { renderListeningLearn }      from './listening/readiness.js';
 import { renderListeningAnalyze }    from './listening/analyze.js';
 import { initPwa } from './lib/pwa.js';   // סשן שבת 5: התקנה כאפליקציה
+import { renderInstall } from './screens/install.js';   // 5.9: מדריך "הוסיפו כאפליקציה" — ציבורי
 
 const app = document.getElementById('app');
 
@@ -148,7 +149,8 @@ route('/insights', requireAuth(renderInsights));
 // requireAuth ולא requireOnboarded: זה שער הכניסה מה-SEO, ואורח צריך להגיע
 // אליו בלי חיכוך. הדוח נשמר רק למי שמחובר — ההצעה להירשם מגיעה בסופו.
 // מדריכים: נגיש גם לאורח — זה תוכן פתוח, וזו נקודת הכניסה מה-SEO.
-route('/guides',         renderGuides);   // ציבורי — ראו ההערה ליד /vocab-sprint
+route('/guides',         renderGuides);
+route('/install',        renderInstall);  // ציבורי — איך מוסיפים למסך הבית (אייפון/אנדרואיד/מחשב)   // ציבורי — ראו ההערה ליד /vocab-sprint
 route('/simulation',     requireAuth(renderSimulation));
 route('/simulation/run', requireAuth(renderSimulationRun));
 

@@ -100,6 +100,7 @@ export function renderAuth(root) {
           </button>
           <a class="ld-secondary" href="#/daily">או לנסות את האתגר היומי, בלי הרשמה ←</a>
         </div>
+        <a class="ld-install" href="#/install">📲 עובד גם כאפליקציה בטלפון — אייקון במסך הבית, בלי חנות. איך מוסיפים ←</a>
         <div id="notice" class="ld-notice"></div>
       </section>
 
@@ -211,7 +212,8 @@ export function renderAuth(root) {
           <a href="/privacy/" target="_blank" rel="noopener">מדיניות פרטיות</a> ·
           <a href="/terms/" target="_blank" rel="noopener">תנאי שימוש</a> ·
           <a href="/accessibility/" target="_blank" rel="noopener">הצהרת נגישות</a> ·
-          <a href="/mivchan-hilal/">מדריכים למבחן</a>
+          <a href="/mivchan-hilal/">מדריכים למבחן</a> ·
+          <a href="#/install">להוסיף כאפליקציה</a>
         </span>
       </footer>
     </div>
