@@ -96,10 +96,10 @@ export function diagnosticBand(last) {
     return `
       <div class="diag-empty" data-nav="/simulation">
         <div class="de-text">
-          <div class="de-title">עוד לא עשית אבחון רמה</div>
-          <div class="de-sub">כ-25 דקות, ובסוף דוח שמראה בדיוק באיזו מיומנות אתה חזק ואיפה הפער</div>
+          <div class="de-title">עוד לא עשית סימולציה</div>
+          <div class="de-sub">קצרה (רבע שעה) או מלאה (כ-48 דקות), ובסוף ציון משוער בסולם 50–150 וסקירה של כל שאלה</div>
         </div>
-        <span class="de-btn">לאבחון ←</span>
+        <span class="de-btn">לסימולציות ←</span>
       </div>`;
   }
   const overall = last.total_answered
@@ -113,11 +113,11 @@ export function diagnosticBand(last) {
         <div class="dg-bar"><div class="dg-bar-fill" style="width:${st.accuracy}%"></div></div>
       </div>`).join('');
   return `
-    <div class="sec-title diag-sec-title" style="margin-top:1.6rem">האבחון האחרון שלך</div>
+    <div class="sec-title diag-sec-title" style="margin-top:1.6rem">הסימולציה האחרונה שלך</div>
     <div class="diag-grid" data-nav="/simulation">
       <div class="dg-tile dg-tile-main">
-        <div class="dg-val dg-val-big">${overall}%</div>
-        <div class="dg-lbl">דיוק כללי</div>
+        <div class="dg-val dg-val-big">${last.scaled_score != null ? last.scaled_score : overall + '%'}</div>
+        <div class="dg-lbl">${last.scaled_score != null ? 'ציון משוער' : 'דיוק כללי'}</div>
       </div>
       ${tiles}
     </div>`;

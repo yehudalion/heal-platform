@@ -1,0 +1,9 @@
+סימולציה: ציון משוער 50-150 + מדרגת CEFR
+
+למה: יהודה (4.9) — "ציון 50-150 זה יעזור לנו". ההחלטה הקודמת (בלי סולם)
+התהפכה. src/lib/scoreScale.js משקלל לפי קושי ומתרגם לסולם בעיגון כוונה
+(60%≈100, 85%≈134), תמיד עם המילה "משוער". עמודה חדשה
+simulation_attempts.scaled_score (מיגרציה simulation_attempts_scaled_score),
+finishAttempt שומר אותה, ומסך ההתקדמות מציג אותה במקום אחוז כשקיימת.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

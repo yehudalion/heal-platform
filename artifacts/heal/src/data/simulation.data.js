@@ -224,6 +224,9 @@ function normalize(row, maps) {
       explanations: idx.map((i) => canonicalExpl[i]),
       correctIndex: idx.indexOf(0),
       mechanisms:   [q.mechanism_1, q.mechanism_2, q.mechanism_3],
+      categories:   [q.trigger_category_1, q.trigger_category_2, q.trigger_category_3],
+      // לכל אופציה במסך: אינדקס קנוני (0 = הנכונה, 1..3 = מסיח) — לזיהוי המפתח של הבחירה
+      canonicalIdx: idx,
       topic:        q.topic,
     }
   }
@@ -333,6 +336,7 @@ export async function finishAttempt(attemptId, summary) {
         total_answered: summary.totalAnswered,
         total_correct:  summary.totalCorrect,
         section_stats:  summary.sectionStats,
+        scaled_score:   summary.scaledScore ?? null,   // 50-150 משוער, src/lib/scoreScale.js
       })
       .eq('id', attemptId)
     if (error) throw error
