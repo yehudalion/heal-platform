@@ -82,6 +82,17 @@ export async function getDailyChallenge(date = todayKey()) {
 
   const midRange = (q) => q.gte('difficulty_pos', 3).lte('difficulty_pos', 6)
 
+  // סשן שבת 5 (5.9.2026): עד עכשיו השורה הידנית נקראה אבל `items` שלה לא
+  // כובדו — רק intro/key_label. עכשיו שורה עם items = [{kind:'sc'|'rephrase'|
+  // 'affix', id}] קובעת בדיוק את חמש השאלות (30 ימים אצורים: 6.9–5.10).
+  // אם פריט אחד לא נמצא (נמחק/לא מפורסם) — נופלים לזרימה הדטרמיניסטית.
+  if (Array.isArray(manual?.items) && manual.items.length >= 5) {
+    const curated = await pickCurated(manual.items, rnd).catch(() => null)
+    if (curated && curated.length >= 5) {
+      return { date, manualIntro: manual.intro_he || null, keyLabel: manual.key_label_he || null, items: curated.slice(0, 5) }
+    }
+  }
+
   const [scCount, rpCount, afCount] = await Promise.all([
     countOf('sentence_completion_questions', midRange).catch(() => 0),
     countOf('restatement_questions').catch(() => 0),
@@ -129,6 +140,28 @@ export async function getDailyChallenge(date = todayKey()) {
     keyLabel: manual?.key_label_he || null,
     items: picks.slice(0, 5),
   }
+}
+
+/** שולף את הפריטים האצורים לפי סוג ומזהה, ומחזיר אותם בסדר השורה. */
+async function pickCurated(items, rnd) {
+  const out = []
+  for (const it of items) {
+    if (!it?.id || !it?.kind) continue
+    if (it.kind === 'sc') {
+      const { data } = await supabase.from('sentence_completion_questions')
+        .select('id, stem, options, correct_option, explanations_he, clue_code').eq('id', it.id).eq('is_published', true).maybeSingle()
+      if (data) out.push({ ...normSc(data), sortKey: String(out.length).padStart(2, '0') })
+    } else if (it.kind === 'rephrase') {
+      const { data } = await supabase.from('restatement_questions')
+        .select('id, original_sentence, correct_answer, distractor_1, distractor_2, distractor_3, correct_explanation_he, explanation_1_he, explanation_2_he, explanation_3_he').eq('id', it.id).eq('is_published', true).maybeSingle()
+      if (data) out.push({ ...normRp(data, rnd), sortKey: String(out.length).padStart(2, '0') })
+    } else if (it.kind === 'affix') {
+      const { data } = await supabase.from('affix_items')
+        .select('id, stem, options, correct_option, explanations_he, decode_note_he, affix, meaning_he').eq('id', it.id).eq('is_published', true).maybeSingle()
+      if (data) out.push({ ...normAf(data), sortKey: String(out.length).padStart(2, '0') })
+    }
+  }
+  return out
 }
 
 function normSc(r) {
