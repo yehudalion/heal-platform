@@ -7,6 +7,7 @@
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js';
 import { getCurrentSession } from '../supabase.js';
 import { fetchAffixSummary } from '../data/affix.data.js';
 import { familyInfo } from '../lib/affixKeys.js';
@@ -69,7 +70,10 @@ export async function renderAffixAnalyze(root) {
     <section class="aa-card">${rows}</section>
     ${insight}
     <div style="margin-top:1.2rem"><a class="btn-primary" href="#/affix-practice" style="display:block;text-align:center">מנה נוספת ←</a></div>
+    ${pushCardHtml()}
   `);
+
+  wirePushCard(el);
 }
 
 function wrap(inner) {

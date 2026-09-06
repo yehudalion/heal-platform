@@ -8,6 +8,7 @@ import { startGoogleSignIn } from './lib/signIn.js';
 import { BRAND, BRAND_PARTS, BRAND_MARK } from './lib/brand.js';
 import { canInstall, promptInstall } from './lib/pwa.js';
 import { isStandalone } from './lib/installCard.js';
+import { permission, shouldOffer, needsInstallFirst, enablePush } from './lib/push.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -443,11 +444,12 @@ async function openSettingsOverlay(user) {
   // Current values: profile row for a signed-in user, localStorage for a guest.
   // 'guest_profile' is onboarding.js's key — read directly to avoid importing a
   // screen into the layout (see GUEST_PROFILE_KEY there; keep the two in sync).
-  let examDate = '', minutes = 20;
+  let examDate = '', minutes = 20, emailOn = true;
   if (user?.id) {
     const { data } = await getProfile(user.id);
     examDate = data?.exam_date ?? '';
     minutes  = data?.daily_time_minutes ?? 20;
+    emailOn  = data?.email_reminders !== false;
   } else {
     try {
       const g = JSON.parse(localStorage.getItem('guest_profile')) || {};
@@ -470,6 +472,21 @@ async function openSettingsOverlay(user) {
           ${MINUTES.map(m => `<button type="button" data-m="${m}" class="${m === minutes ? 'on' : ''}">${m} דק׳</button>`).join('')}
         </div>
       </div>
+      ${user?.id ? `
+      <div style="border-top:1px solid var(--border);padding-top:.9rem">
+        <div style="font-size:.83rem;font-weight:700;margin-bottom:.5rem">תזכורות</div>
+
+        <label style="display:flex;gap:.55rem;align-items:flex-start;cursor:pointer">
+          <input type="checkbox" id="setEmail" ${emailOn ? 'checked' : ''} style="margin-top:.2rem">
+          <span style="font-size:.82rem;line-height:1.5">
+            תזכורת במייל כשמחכות לך חזרות
+            <span style="display:block;color:var(--muted);font-size:.76rem">מייל אחד ביום לכל היותר, ורק כשבאמת יש מה לחזור.</span>
+          </span>
+        </label>
+
+        <div id="setPushRow" style="margin-top:.7rem;font-size:.82rem;line-height:1.5"></div>
+      </div>` : ''}
+
       <div style="display:flex;gap:8px;justify-content:flex-start">
         <button class="btn-primary" id="setSave">שמירה</button>
         <button class="acct-item acct-item--quiet" id="setCancel" style="width:auto">ביטול</button>
@@ -477,6 +494,32 @@ async function openSettingsOverlay(user) {
       <div id="setMsg" style="font-size:.78rem;color:var(--muted)"></div>
     </div>`;
   document.body.appendChild(ov);
+
+  // שורת ההתראות בטלפון: מצב + פעולה. בכוונה לא checkbox — אי אפשר "לכבות"
+  // הרשאת דפדפן מתוך הדף, רק להפעיל אותה, אז תיבת סימון הייתה משקרת.
+  const pushRow = ov.querySelector('#setPushRow');
+  function paintPush() {
+    if (!pushRow) return;
+    const p = permission();
+    if (p === 'granted') {
+      pushRow.innerHTML = '<span style="font-weight:700;color:var(--green-dark,#16412F)">\u2713 התראות בטלפון פעילות</span>'
+        + '<span style="display:block;color:var(--muted);font-size:.76rem">לכיבוי — בהגדרות האתר בדפדפן.</span>';
+    } else if (needsInstallFirst()) {
+      pushRow.innerHTML = 'התראות בטלפון: <a href="#/install" style="font-weight:700">צריך קודם להוסיף למסך הבית ←</a>';
+    } else if (shouldOffer() || p === 'default') {
+      pushRow.innerHTML = '<button type="button" id="setPushOn" class="acct-item" style="width:auto;font-size:.82rem;padding:.35rem .8rem">🔔 להפעיל התראות בטלפון</button>';
+      pushRow.querySelector('#setPushOn').addEventListener('click', async (e) => {
+        e.target.disabled = true; e.target.textContent = 'רגע…';
+        await enablePush();
+        paintPush();
+      });
+    } else if (p === 'denied') {
+      pushRow.innerHTML = '<span style="color:var(--muted)">ההתראות חסומות בדפדפן. אפשר לפתוח אותן בהגדרות האתר.</span>';
+    } else {
+      pushRow.innerHTML = '<span style="color:var(--muted)">הדפדפן הזה לא תומך בהתראות.</span>';
+    }
+  }
+  paintPush();
 
   let chosen = minutes;
   ov.querySelector('#setMin').addEventListener('click', (e) => {
@@ -492,7 +535,8 @@ async function openSettingsOverlay(user) {
     const date = ov.querySelector('#setDate').value || null;
     const msg  = ov.querySelector('#setMsg');
     if (user?.id) {
-      const { error } = await upsertProfile(user.id, { exam_date: date, daily_time_minutes: chosen });
+      const emailPref = ov.querySelector('#setEmail')?.checked !== false;
+      const { error } = await upsertProfile(user.id, { exam_date: date, daily_time_minutes: chosen, email_reminders: emailPref });
       if (error) { msg.textContent = 'השמירה נכשלה — נסו שוב.'; return; }
     } else {
       try {

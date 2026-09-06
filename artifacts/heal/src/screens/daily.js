@@ -17,6 +17,7 @@ import { startGoogleSignIn } from '../lib/signIn.js'
 import { attachKeyNav, KEY_HINT_HTML } from '../lib/keyNav.js'
 import { XP } from '../lib/xp.js'
 import { rewardSession } from '../lib/reward.js'
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js'
 import {
   getDailyChallenge, saveDailyResult, getDailyStats,
   todayKey, playedToday, markPlayed, lastResult,
@@ -244,7 +245,10 @@ async function drawResult(root) {
       חמש הפינות המלאות. ההרשמה לוקחת כ-10 שניות עם Google.
     </div>`}
     <div class="dc-fine">אתגר חדש כל יום בחצות.</div>
+    ${S.userId ? pushCardHtml() : ''}
   `)
+
+  wirePushCard(root)
 
   root.querySelector('#dcShare')?.addEventListener('click', () => share(grid))
   root.querySelector('#dcHome')?.addEventListener('click', () => navigate('/home'))

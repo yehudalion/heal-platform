@@ -15,6 +15,7 @@
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js';
 import { getLearner } from '../lib/learner.js';
 import { fetchAnalyzeSummary, fetchRecentMistakes } from '../data/reading.data.js';
 
@@ -104,7 +105,11 @@ export async function renderReadingAnalyze(root) {
     <div class="ra-links ra-bottom">
       <a class="ra-link" href="#/reading-practice">לתרגול נוסף ←</a>
       <a class="ra-link" href="#/reading-learn">📘 שיטת החלון</a>
-    </div>`);
+    </div>
+
+    ${pushCardHtml()}`);
+
+  wirePushCard(el);
 
   el.querySelectorAll('[data-toggle]').forEach((b) =>
     b.addEventListener('click', () => {

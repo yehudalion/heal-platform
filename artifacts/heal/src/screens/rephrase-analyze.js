@@ -24,6 +24,7 @@
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js';
 import { getCurrentSession } from '../supabase.js';        // auth only
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { fetchRecentMistakes, getRephraseTotals } from '../data/rephrase.data.js';
@@ -65,7 +66,10 @@ export async function renderRephraseAnalyze(root) {
       ${headline(userId, totals)}
       ${body(userId, report, examples)}
       <div class="ra-back"><a href="#/rephrasing">← חזרה למודול</a></div>
+      ${pushCardHtml()}
     </div>`;
+
+  wirePushCard(el);
 
   el.querySelectorAll('[data-block-toggle]').forEach((btn) => {
     btn.addEventListener('click', () => {

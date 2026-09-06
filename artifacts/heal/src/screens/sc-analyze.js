@@ -18,6 +18,7 @@
  */
 
 import { renderLayout, getPageContent } from '../layout.js';
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js';
 import { getCurrentSession } from '../supabase.js';
 import { getWeakPoints } from '../data/weakpoints.data.js';
 import { fetchRecentMistakes } from '../data/sentenceCompletion.data.js';
@@ -56,7 +57,10 @@ export async function renderScAnalyze(root) {
       <div class="page-sub">לכל סוג: משפט אמיתי שטעית בו, ומה לעשות איתו.</div>
       ${body(userId, report, examples)}
       <div class="sa-back"><a href="#/sentence-completion">← חזרה למודול</a></div>
+      ${pushCardHtml()}
     </div>`;
+
+  wirePushCard(el);
 }
 
 /** Most recent wrong answer per label. Rows arrive newest-first (data layer),
