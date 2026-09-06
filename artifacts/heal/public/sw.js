@@ -40,3 +40,43 @@ self.addEventListener('fetch', (e) => {
     return res;
   }).catch(() => caches.match('/index.html')));
 });
+
+// ─── Web Push (6.9.2026) ────────────────────────────────────────────────────
+// תזכורת אחת ביום למי שביקש אותה, ורק אם באמת מחכות לו חזרות. הטקסט מגיע
+// מה-Edge Function (send-daily-push) — ה-SW רק מציג. אין כאן שום שפה מענישה:
+// לא "הרצף שלך נגמר" ולא "פספסת" — רק מה מחכה, ולחיצה שמביאה ישר לתרגול.
+
+self.addEventListener('push', (e) => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch { d = {}; }
+  const title = d.title || 'זמן לתרגול קצר';
+  const opts = {
+    body: d.body || 'המנה של היום מחכה.',
+    icon: '/icon-192.png',
+    badge: '/icon-192.png',
+    dir: 'rtl',
+    lang: 'he',
+    tag: d.tag || 'daily-reminder',   // התראה חדשה מחליפה ישנה, לא נערמת
+    renotify: false,
+    requireInteraction: false,
+    data: { url: d.url || '/#/home' },
+  };
+  e.waitUntil(self.registration.showNotification(title, opts));
+});
+
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const target = e.notification.data?.url || '/#/home';
+  e.waitUntil((async () => {
+    const all = await clients.matchAll({ type: 'window', includeUncontrolled: true });
+    // אם האפליקציה כבר פתוחה — לא פותחים חלון שני, רק מביאים אותה לפנים.
+    for (const c of all) {
+      if (c.url.includes(self.location.origin)) {
+        await c.focus();
+        if ('navigate' in c) { try { await c.navigate(target); } catch { /* noop */ } }
+        return;
+      }
+    }
+    await clients.openWindow(target);
+  })());
+});

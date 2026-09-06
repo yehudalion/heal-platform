@@ -3,6 +3,9 @@ import { getCurrentSession } from '../supabase.js';
 import { getProfile } from '../data/profiles.data.js';
 
 import { BRAND_MARK } from '../lib/brand.js';
+// 6.9: ההצעה לתזכורת יומית — בסוף מנה, הרגע היחיד שבו הלומד כבר יודע
+// מה הוא מקבל (claude/DIAGNOSIS_retention_2026-09-06.md).
+import { pushCardHtml, wirePushCard } from '../lib/pushCard.js';
 export async function renderVocabAnalyze(root) {
   const raw = sessionStorage.getItem('hs_last_session_summary');
   if (!raw) {
@@ -64,6 +67,7 @@ export async function renderVocabAnalyze(root) {
         </div>
 
         ${streakRow}
+        ${pushCardHtml()}
 
         <div class="va-cta-row">
           <button class="va-cta va-cta-secondary" id="vaHomeBtn">דף הבית</button>
@@ -73,6 +77,7 @@ export async function renderVocabAnalyze(root) {
     </main>
   </div>`;
 
+  wirePushCard(root);
   root.querySelector('#vaAgainBtn').addEventListener('click', () => {
     sessionStorage.removeItem('hs_last_session_summary');
     navigate('/card');

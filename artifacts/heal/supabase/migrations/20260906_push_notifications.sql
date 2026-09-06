@@ -1,0 +1,11 @@
+-- התראות פוש יומיות — 6.9.2026
+-- הופעל בפרודקשן דרך Supabase MCP; נשמר כאן לתיעוד ולשחזור.
+-- ראו claude/DIAGNOSIS_retention_2026-09-06.md לסיבה שזה נבנה.
+--
+-- שלושה חלקים: (1) הטבלה, (2) שתי פונקציות שה-Edge Function קורא להן,
+-- (3) התזמון היומי דרך pg_cron + pg_net, עם סודות ב-Vault.
+--
+-- החלק שקל לפספס: push_daily_targets() היא המקום היחיד שבו מוגדר מי מקבל
+-- התראה. כל שינוי מדיניות ("לא לשלוח בשבת", "רק אחרי 3 ימי היעדרות")
+-- נעשה שם ולא בקוד ה-Edge Function.
+-- (גוף המיגרציה זהה למה שהופעל: push_subscriptions + push_daily_targets + push_mark_result + trigger_daily_push + cron.schedule)

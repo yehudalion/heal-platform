@@ -54,17 +54,21 @@ export function renderOnboarding(root) {
     <div class="auth-wrap fade-in">
       <div class="auth-card" style="max-width:430px">
         <div class="auth-logo">${BRAND_PARTS[0]}<em>${BRAND_PARTS[1]}</em></div>
-        <div class="auth-tagline">שתי שאלות קצרות ומתחילים</div>
+        <div class="auth-tagline">שאלה אחת ומתחילים</div>
 
         <div style="text-align:right;margin-top:1.4rem">
           <label style="display:block;font-size:.92rem;font-weight:700;margin-bottom:.5rem">
-            מתי הבחינה שלך?
+            מתי הבחינה שלך? <span style="font-weight:400;color:var(--muted)">(לא חובה)</span>
           </label>
           <input type="date" id="ob-exam-date" min="${minDate}"
             style="width:100%;padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:inherit;background:var(--card)" />
           <div id="ob-date-echo" style="font-size:.82rem;font-weight:700;color:var(--green-dark);margin-top:.4rem;min-height:1.1em"></div>
+          <button type="button" id="ob-no-date"
+            style="margin-top:.5rem;background:none;border:0;padding:0;font:inherit;font-size:.8rem;font-weight:700;color:var(--green-dark);cursor:pointer;text-decoration:underline">
+            עוד לא יודע/ת — לדלג
+          </button>
           <div style="font-size:.76rem;color:var(--muted);margin-top:.35rem">
-            עוד לא נרשמת? בחר תאריך משוער — אפשר לעדכן בכל רגע.
+            מועדי הלאל טרם פורסמו. אפשר להוסיף תאריך בהגדרות בכל רגע.
           </div>
         </div>
 
@@ -119,7 +123,11 @@ export function renderOnboarding(root) {
   // לא ברור שבורר התאריך לחיץ. המשתמש הרשום הראשון (3.9, 10:47) נעצר בדיוק
   // במסך הזה. עכשיו הכפתור "רך": נראה כבוי, אבל לחיצה עליו אומרת מה חסר
   // ומכוונת לשדה. `disabled` האמיתי נשאר רק לזמן השמירה (למניעת לחיצה כפולה).
-  const isReady = () => Boolean(dateInput.value && chosenMinutes);
+  // 6.9.2026 — האבחון (DIAGNOSIS_retention_2026-09-06) מצא ש-23 מתוך 37
+  // נטשו כאן. התאריך היה חובה, בזמן שדף הנחיתה שלנו עצמו כותב שמועדי
+  // הלאל טרם פורסמו: ביקשנו לנחש תאריך במסך הראשון, וחסמנו את המוצר עד
+  // שניחשו. עכשיו רק הדקות חוסמות; תאריך הוא בונוס וניתן להוסיף בהגדרות.
+  const isReady = () => Boolean(chosenMinutes);
   const refreshSubmit = () => {
     const ready = isReady();
     submitBtn.disabled = false;
@@ -129,19 +137,17 @@ export function renderOnboarding(root) {
   };
   const explainMissing = () => {
     const missing = [];
-    if (!dateInput.value) missing.push('תאריך בחינה');
     if (!chosenMinutes)   missing.push('כמה דקות ביום');
     notice.textContent = `כדי להמשיך צריך לבחור ${missing.join(' ו')} — אפשר לשנות אחר כך.`;
-    if (!dateInput.value) {
-      dateInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      try { dateInput.showPicker?.(); } catch (_) {}
-      dateInput.focus();
-    } else {
-      root.querySelector('.ob-min-btn')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    root.querySelector('.ob-min-btn')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const clearNotice = () => { if (notice.textContent.startsWith('כדי להמשיך')) notice.textContent = ''; };
+  root.querySelector('#ob-no-date')?.addEventListener('click', () => {
+    dateInput.value = '';
+    refreshDateEcho(); refreshSubmit(); clearNotice();
+    root.querySelector('.ob-min-btn')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
   dateInput.addEventListener('change', () => { refreshDateEcho(); refreshSubmit(); clearNotice(); });
   dateInput.addEventListener('input',  () => { refreshDateEcho(); refreshSubmit(); });
 
@@ -166,7 +172,7 @@ export function renderOnboarding(root) {
     submitBtn.textContent = 'שומר…';
 
     const answers = {
-      exam_date: dateInput.value,
+      exam_date: dateInput.value || null,
       daily_time_minutes: chosenMinutes,
     };
 
