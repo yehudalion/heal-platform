@@ -1,4 +1,4 @@
-# מעל הרף — Future Features
+# עד הפטור — Future Features
 **Version:** 1.1
 **Last Updated:** 2026-07-15 (F-L04 split: MC continuation → core, free-writing stays future)
 

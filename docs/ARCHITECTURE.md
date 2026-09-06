@@ -1,4 +1,4 @@
-# מעל הרף — Architecture & Project Rules
+# עד הפטור — Architecture & Project Rules
 **Version:** 1.2  
 **Last Updated:** 2026-05-24
 
@@ -37,7 +37,7 @@ If strict adherence to a **Strong Rule** or **Guideline** would degrade UX, add 
 
 ## 1. Product Identity
 
-**Name:** מעל הרף (used both internally and publicly)  
+**Name:** עד הפטור (used both internally and publicly)  
 **Mission:** End-to-end preparation platform for the Hilal English exam (Israel, December 2026 onward).  
 **Target audience:** Any Israeli candidate sitting for the Hilal exam — not limited to medical students.  
 **Tagline:** הפלטפורמה הראשונה והיחידה בישראל שמכינה אותך להלאל מקצה לקצה.
@@ -383,7 +383,7 @@ A פועל על B הופך ל-B פועל על A. הקורבן הופך לפעי�
 > הסעיף נשמר להיסטוריה בלבד — אין לייצר לפיו תוכן חדש.
 
 מודל v4 מפריד שלושה צירים עצמאיים (חולץ מ-116 פריטים אמיתיים, 15 מבחנים רשמיים 2021–2025).
-המקור המלא: `docs/מעל הרף_Rephrase_Master_Plan_v4_2026-07-14.md`.
+המקור המלא: `docs/עד הפטור_Rephrase_Master_Plan_v4_2026-07-14.md`.
 
 **ציר 1 — מנגנון (`mechanism_1/2/3`, טקסט, R-codes).** שבעה מנגנונים. `R4` מוזג לתוך `R3`;
 `R8` הוצא משימוש.
@@ -475,7 +475,7 @@ A פועל על B הופך ל-B פועל על A. הקורבן הופך לפעי�
 | 2026-05-24 | "Traps" → "למה לשים לב" in UI only | Cultural friction in Hebrew market |
 | 2026-05-24 | Teacher partner program from launch | Realistic conversion math too slow with only organic growth |
 | 2026-05-24 | No in-app ads, ever | Tone + math + brand integrity |
-| 2026-05-24 | מעל הרף = both internal & public name | Simplicity, keeps options open |
+| 2026-05-24 | עד הפטור = both internal & public name | Simplicity, keeps options open |
 | 2026-05-24 | Intelligent Override Clause adopted | AI should be advisor, not rigid robot |
 | 2026-05-24 | Calibration Batch over per-item approval | Time efficiency without sacrificing quality |
 | 2026-05-24 | Hint button mastery-based (3 streak per key) | Performance-based, not arbitrary count |
