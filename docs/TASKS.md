@@ -1,4 +1,4 @@
-# HighScore — Task Board
+# מעל הרף — Task Board
 **Version:** 1.1
 **Last Updated:** 2026-07-15 (Listening tasks reworked per 15.7 design review)
 
@@ -84,7 +84,7 @@
 | ~~T041c~~ | ❌ **OBSOLETE** | L | ~~**Curation Pass — אצירה למכסה** — סרוק 199 legacy לפי מכסות... נרמל green_type.~~ **מיושן: התוכן נמחק ב-v4 clean-slate reset (14.7.2026).** אין legacy לאצור — 279 הפריטים נמחקו ואורכבו ל-`docs/archive/restatement_questions_pre_v4_2026-07-14.csv`. גם `green_type` עצמה כבר לא קיימת. הוחלף ב-T-CAL-V4-L2. | ~~DB `restatement_questions`~~ |
 | T041d | P2 | M | **תיקון B3/B4 רק לפי צורך** — אם אחרי T041c L5 עדיין לא מגיע ל-50: תקן את הפריטים הטובים ביותר של B3/B4 (הארכת R2 + anti-tell). אל תתחל לפני שיודעים את הפער. | DB `restatement_questions` |
 | T041e | P1 | M | **Drip Batches — L1-L2** — batches של ~20 פריטים עם דוח פיזור אוטומטי; Lion מאשר sample של 4-5. ייצור רק לאחר Move Book מאושר (T041b). | DB `restatement_questions` |
-| **T-CAL-V4-L2** | **P0** | M | **מנת כיול ראשונה של v4 — 10 פריטים** [בתהליך, נוסחה 14.7.2026] — recipe `CAL-V4-L2`, רמה 2. תיוג מלא לפי v4: `mechanism_1/2/3` (R1,R2,R3,R5,R6,R7,R9), `proximity_1/2/3` (P1/P2/P3), `transformations` (G1–G9), `relation_count`, `hard_word_count`. `is_published=false` עד אישור מפורש של Lion. מכייל את המחולל מול קורפוס האמת (`docs/truth_corpus/`) לפני ייצור בקנה מידה. | DB `restatement_questions`, `docs/HighScore_Rephrase_Master_Plan_v4_2026-07-14.md` |
+| **T-CAL-V4-L2** | **P0** | M | **מנת כיול ראשונה של v4 — 10 פריטים** [בתהליך, נוסחה 14.7.2026] — recipe `CAL-V4-L2`, רמה 2. תיוג מלא לפי v4: `mechanism_1/2/3` (R1,R2,R3,R5,R6,R7,R9), `proximity_1/2/3` (P1/P2/P3), `transformations` (G1–G9), `relation_count`, `hard_word_count`. `is_published=false` עד אישור מפורש של Lion. מכייל את המחולל מול קורפוס האמת (`docs/truth_corpus/`) לפני ייצור בקנה מידה. | DB `restatement_questions`, `docs/מעל הרף_Rephrase_Master_Plan_v4_2026-07-14.md` |
 | T042 | P1 | M | **`rephrase-learn.js`** — הסבר על 5 המפתחות עם דוגמאות. מוצג לפני תרגול ראשון. | `src/screens/rephrase-learn.js` |
 | T043 | P1 | L | **`rephrase-practice.js`** — Multiple choice + פידבק "למה לשים לב" לפי key_type של התשובה השגויה. | `src/screens/rephrase-practice.js` |
 | T044 | P1 | M | **`rephrase-analyze.js`** — סיכום session + "מפתח חלש" (המפתח עם אחוז ההצלחה הנמוך ביותר). | `src/screens/rephrase-analyze.js` |

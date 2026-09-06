@@ -1,4 +1,4 @@
-# HighScore — Methodology
+# מעל הרף — Methodology
 **Version:** 1.0
 **Last Updated:** 2026-05-24
 

@@ -106,7 +106,7 @@ export function renderAuth(root) {
       <!-- ══ הירו ══ -->
       <section class="ld-hero">
         <div class="lp-kicker">אמירנט · הלאל · פטור באנגלית</div>
-        <h1 class="ld-h1">פטור מאנגלית מתחיל ב-<span class="ld-134">134</span>.</h1>
+        <h1 class="ld-h1">הרף לפטור הוא <span class="ld-134">134</span>.<br>אנחנו לוקחים אתכם מעליו.</h1>
         <p class="ld-lead">
           כל נקודה מתחת ל-134 היא עוד קורס אנגלית בתואר — עוד סמסטר, ועוד אלפי שקלים.
           כאן מתרגלים בדיוק במבנה של אמירנט והלאל, עם הסבר בעברית על כל שאלה,
@@ -246,8 +246,8 @@ export function renderAuth(root) {
 
       <!-- ══ CTA סופי ══ -->
       <section class="ld-final">
-        <h2>כמה נקודות חסרות לכם ל-134?</h2>
-        <p>אבחון של 25 דקות ייתן את התשובה, ואת התוכנית שסוגרת את הפער.</p>
+        <h2>כמה נקודות חסרות לכם לרף?</h2>
+        <p>אבחון של 25 דקות ייתן את התשובה, ואת התוכנית שמביאה אתכם מעליו.</p>
         <button class="btn-google btn-start ld-primary" type="button" data-google>
           ${googleIcon}
           להתחיל לתרגל עם Google — בחינם

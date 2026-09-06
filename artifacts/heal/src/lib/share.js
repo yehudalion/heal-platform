@@ -30,5 +30,5 @@ export function shareText(text, btn = null) {
   }).catch(() => {});
 }
 
-/** כותרת אחידה: "Wordwise · <מה>". */
+/** כותרת אחידה: "מעל הרף · <מה>". */
 export function shareHeader(what) { return `${BRAND} · ${what}`; }

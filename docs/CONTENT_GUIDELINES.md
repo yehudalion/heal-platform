@@ -1,4 +1,4 @@
-# HighScore — Content Guidelines
+# מעל הרף — Content Guidelines
 **Version:** 1.1
 **Last Updated:** 2026-07-15 (§3 Listening rewritten; §4 Continuation spec added, old §4→§5)
 

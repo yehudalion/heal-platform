@@ -1,8 +1,8 @@
-# CLAUDE.md — HighScore
+# CLAUDE.md — מעל הרף
 
 ## What this is
 
-**HighScore** — a Hebrew-language prep platform for the **HILAL** English exam (the section
+**מעל הרף** — a Hebrew-language prep platform for the **HILAL** English exam (the section
 separating from the Psychometric). Target: learners sitting the exam from **December 2026**.
 Not a general English app. Every feature earns its place by raising the score.
 
@@ -61,7 +61,7 @@ comments — point to them, and update them when reality changes.**
 | `docs/CONTENT_GUIDELINES.md` | How content is written and QA'd. |
 | `docs/STATE.md` | What actually works right now. Counts must be **verified by query**, never from memory. |
 | `docs/TASKS.md` | The task board. Obsolete tasks are marked OBSOLETE, not deleted. |
-| `docs/HighScore_Rephrase_Master_Plan_v4_2026-07-14.md` | Rephrase module — the v4 taxonomy (R/P/G). |
+| `docs/מעל הרף_Rephrase_Master_Plan_v4_2026-07-14.md` | Rephrase module — the v4 taxonomy (R/P/G). |
 | `docs/LISTENING_FORMAT.md` | Listening module — measured format truth. |
 | `docs/CONTENT_SOURCES.md` | Licensing boundaries. |
 

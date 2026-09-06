@@ -1,6 +1,6 @@
-# Wordwise (HighScore) — Project State
+# מעל הרף (מעל הרף) — Project State
 **עודכן:** 2026-09-05 (סיום סדרת ששת סשני השבת האוטונומיים; קודם: 2026-07-10)
-**שם זמני:** Wordwise (החלטת יהודה 4.9 — `src/lib/brand.js`). הכתובת: https://highscore-eight.vercel.app/
+**שם זמני:** מעל הרף (החלטת יהודה 4.9 — `src/lib/brand.js`). הכתובת: https://highscore-eight.vercel.app/
 
 > ⚠️ הגוף הישן של המסמך (מתחת לקו) מתאר את יולי 2026 ואינו מייצג את המצב.
 > מקור האמת לתמונה המלאה: `claude/SHABBAT_REPORT_2026-09-05.md` (בפרויקט ב-Claude), `claude/SHABBAT_LOG.md`, `claude/BACKLOG_full_2026-09-04.md`.
@@ -23,7 +23,7 @@
 
 ---
 
-# HighScore — Project State
+# מעל הרף — Project State
 **Version:** 1.0  
 **Last Updated:** 2026-07-10  
 **Updated By:** Lion (Library Mode strategy + inventory analysis)
@@ -98,7 +98,7 @@
 
 #### 🔄 v4 Clean-Slate Reset (14.7.2026)
 * **אומץ Master Plan v4** — מחליף את v3.1. מבוסס על ניתוח ground-truth של **116 פריטים אמיתיים
-  מ-15 מבחנים רשמיים (2021–2025)**. מקור: `docs/HighScore_Rephrase_Master_Plan_v4_2026-07-14.md`.
+  מ-15 מבחנים רשמיים (2021–2025)**. מקור: `docs/מעל הרף_Rephrase_Master_Plan_v4_2026-07-14.md`.
 * **כל התוכן נמחק:** 279 שאלות (מתוכן 19 published) נמחקו מ-`restatement_questions`.
   **ארכיון מלא (29 עמודות) קומיט לגיט:** `docs/archive/restatement_questions_pre_v4_2026-07-14.csv`.
   אומת: 279 רשומות / 279 מזהים ייחודיים / 0 שורות פגומות / עברית תקינה.
