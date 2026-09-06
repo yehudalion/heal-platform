@@ -53,7 +53,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:hs-study-${Date.now()}@highscore`,
+    `UID:hs-study-${Date.now()}@adhaptor`,
     `DTSTAMP:${stamp(now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes())}Z`,
     `DTSTART;TZID=Asia/Jerusalem:${stamp(start.getFullYear(), start.getMonth() + 1, start.getDate(), start.getHours(), start.getMinutes())}`,
     `DTEND;TZID=Asia/Jerusalem:${stamp(end.getFullYear(), end.getMonth() + 1, end.getDate(), end.getHours(), end.getMinutes())}`,
@@ -73,7 +73,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
 }
 
 /** מוריד את הקובץ במכשיר. */
-export function downloadIcs(content, filename = 'highscore-study-plan.ics') {
+export function downloadIcs(content, filename = 'adhaptor-study-plan.ics') {
   try {
     const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);

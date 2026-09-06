@@ -30,5 +30,5 @@ export function shareText(text, btn = null) {
   }).catch(() => {});
 }
 
-/** כותרת אחידה: "מעל הרף · <מה>". */
+/** כותרת אחידה: "עד הפטור · <מה>". */
 export function shareHeader(what) { return `${BRAND} · ${what}`; }
