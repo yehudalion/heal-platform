@@ -251,12 +251,14 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
   gap: 10px;
 }
+/* 6.9: הסימן הוא "134" ולא אות בודדת — רוחב אוטומטי במקום ריבוע. */
 .brand-mark {
-  width: 34px; height: 34px;
+  min-width: 34px; height: 34px; padding: 0 .42rem;
   background: var(--green-dark);
   border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; color: white; font-weight: 900; flex-shrink: 0;
+  font-size: .95rem; letter-spacing: .01em; color: white; font-weight: 900; flex-shrink: 0;
+  font-family: var(--serif); font-variant-numeric: lining-nums;
 }
 .brand-name {
   font-size: 1.35rem; font-weight: 900; color: var(--green-dark);
@@ -1923,6 +1925,29 @@ a { text-decoration: none; color: inherit; }
   .ld-fact b { justify-self: start; }
 }
 
+
+
+/* ── מיצוב הפטור (6.9.2026) ─────────────────────────────────────────────── */
+.ld-134 { color: var(--gold, #B08442); font-variant-numeric: lining-nums; }
+.ld-badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1rem; }
+.ld-badge { font-size: .78rem; font-weight: 700; color: var(--green-dark);
+  background: rgba(22,65,47,.07); border-radius: 99px; padding: .3rem .75rem; }
+
+.ld-anchor-sec { background: rgba(176,132,66,.05); border-radius: 18px; padding: 1.6rem 1.2rem; }
+.ld-anchors { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .7rem; }
+.ld-anchor { background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 1rem 1.05rem; display: flex; flex-direction: column; gap: .25rem; }
+.ld-anchor-t { font-size: .82rem; font-weight: 700; color: var(--muted); }
+.ld-anchor-v { font-size: 1.5rem; font-weight: 900; font-family: var(--serif); line-height: 1.15;
+  font-variant-numeric: lining-nums; }
+.ld-anchor-s { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+.ld-anchor--hi  { border-color: rgba(190,90,60,.45); }
+.ld-anchor--hi  .ld-anchor-v { color: #A8452B; }
+.ld-anchor--mid .ld-anchor-v { color: var(--text); }
+.ld-anchor--us  { border: 2px solid var(--green-dark); background: rgba(22,65,47,.04); }
+.ld-anchor--us  .ld-anchor-v { color: var(--green-dark); }
+.ld-anchor-src { font-size: .74rem; color: var(--muted); line-height: 1.7; margin: .9rem 0 0; }
+.ld-anchor-src a { color: var(--green-dark); }
 
 /* האתגר היומי — פס משלו מתחת למילה של היום (יהודה, 5.9) */
 .hm-daily { display: flex; align-items: center; gap: .8rem; margin: 0 0 1rem; padding: .8rem 1rem;
