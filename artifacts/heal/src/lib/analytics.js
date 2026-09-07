@@ -39,6 +39,7 @@ export const ANALYTICS_ENABLED = true
 
 const INTERNAL_KEY = 'hs:internal'
 const SESSION_KEY  = 'hs:analytics:sid'
+const SRC_KEY      = 'hs:src'
 
 /** Read ?internal=1 / ?internal=0 once per load and remember the answer. */
 function syncInternalFlagFromUrl() {
@@ -47,6 +48,38 @@ function syncInternalFlagFromUrl() {
     if (q === '1') localStorage.setItem(INTERNAL_KEY, '1')
     if (q === '0') localStorage.removeItem(INTERNAL_KEY)
   } catch { /* private mode: ignore */ }
+}
+
+/**
+ * ?src=<tag> — מאיפה הגיע המבקר. נוסף 7.9.2026 אחרי שהתברר שה-referrer
+ * של פייסבוק הוא תמיד facebook.com / lm.facebook.com ולעולם לא שם הקבוצה,
+ * כלומר בלי פרמטר משלנו אי אפשר לדעת איזה פוסט עבד ואיזה לא.
+ *
+ * שומרים first-touch: הערך הראשון שנראה נשמר ב-localStorage ולא נדרס אחר כך,
+ * כדי שגם אירוע ההרשמה — שקורה אחרי חזרה מ-Google OAuth בלי הפרמטר — יישא
+ * את המקור המקורי.
+ *
+ * לא שומרים את ה-query string כמו שהוא (הכלל בהערה של currentPath נשאר בתוקף):
+ * רק ערך קצר שעבר סינון לתווים בטוחים. מה שלא עומד בזה נזרק בשקט.
+ */
+function sanitizeSrc(v) {
+  if (typeof v !== 'string') return null
+  const clean = v.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '')
+  return clean ? clean.slice(0, 24) : null
+}
+
+function syncSrcFromUrl() {
+  try {
+    const q = new URLSearchParams(location.search).get('src')
+    const s = sanitizeSrc(q)
+    // first-touch: כותבים רק אם עוד אין ערך
+    if (s && !localStorage.getItem(SRC_KEY)) localStorage.setItem(SRC_KEY, s)
+  } catch { /* private mode: ignore */ }
+}
+
+/** The visitor's first-touch source tag, or null. */
+export function currentSrc() {
+  try { return sanitizeSrc(localStorage.getItem(SRC_KEY)) } catch { return null }
 }
 
 /** Is this browser marked as Lion's own? */
@@ -98,6 +131,7 @@ function referrerHost() {
 }
 
 syncInternalFlagFromUrl()
+syncSrcFromUrl()
 
 /**
  * Record one product event. Fire-and-forget by design: callers must NOT await it.
@@ -111,9 +145,12 @@ export function track(event, props = {}) {
     if (isInternal()) return                // requirement 2 — never leaves the browser
     if (typeof event !== 'string' || !event) return
 
+    const base = props && typeof props === 'object' ? props : {}
+    const src  = currentSrc()
+
     logEvent({
       event: event.slice(0, 60),
-      props: props && typeof props === 'object' ? props : {},
+      props: src ? { ...base, src } : base,
       sessionId: sessionId(),
       path: currentPath(),
       referrer: referrerHost(),

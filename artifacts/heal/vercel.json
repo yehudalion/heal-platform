@@ -3,5 +3,18 @@
   "framework": "vite",
   "installCommand": "npm install --no-package-lock",
   "buildCommand": "npx vite build",
-  "outputDirectory": "dist/public"
+  "outputDirectory": "dist/public",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "highscore-eight.vercel.app"
+        }
+      ],
+      "destination": "https://adhaptor.co.il/:path*",
+      "permanent": true
+    }
+  ]
 }
