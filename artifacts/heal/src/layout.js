@@ -9,6 +9,7 @@ import { BRAND, BRAND_PARTS, BRAND_MARK } from './lib/brand.js';
 import { canInstall, promptInstall } from './lib/pwa.js';
 import { isStandalone } from './lib/installCard.js';
 import { permission, shouldOffer, needsInstallFirst, enablePush } from './lib/push.js';
+import { EMAIL_REMINDERS } from './lib/flags.js';
 
 // A nav item whose live/soon state comes from lib/modules.js — the single
 // source of truth for module availability. Shipping a module = flipping its
@@ -476,15 +477,16 @@ async function openSettingsOverlay(user) {
       <div style="border-top:1px solid var(--border);padding-top:.9rem">
         <div style="font-size:.83rem;font-weight:700;margin-bottom:.5rem">תזכורות</div>
 
+        ${EMAIL_REMINDERS ? `
         <label style="display:flex;gap:.55rem;align-items:flex-start;cursor:pointer">
           <input type="checkbox" id="setEmail" ${emailOn ? 'checked' : ''} style="margin-top:.2rem">
           <span style="font-size:.82rem;line-height:1.5">
             תזכורת במייל כשמחכות לך חזרות
             <span style="display:block;color:var(--muted);font-size:.76rem">מייל אחד ביום לכל היותר, ורק כשבאמת יש מה לחזור.</span>
           </span>
-        </label>
+        </label>` : ''}
 
-        <div id="setPushRow" style="margin-top:.7rem;font-size:.82rem;line-height:1.5"></div>
+        <div id="setPushRow" style="font-size:.82rem;line-height:1.5"></div>
       </div>` : ''}
 
       <div style="display:flex;gap:8px;justify-content:flex-start">
@@ -535,8 +537,9 @@ async function openSettingsOverlay(user) {
     const date = ov.querySelector('#setDate').value || null;
     const msg  = ov.querySelector('#setMsg');
     if (user?.id) {
-      const emailPref = ov.querySelector('#setEmail')?.checked !== false;
-      const { error } = await upsertProfile(user.id, { exam_date: date, daily_time_minutes: chosen, email_reminders: emailPref });
+      const patch = { exam_date: date, daily_time_minutes: chosen };
+      if (EMAIL_REMINDERS) patch.email_reminders = ov.querySelector('#setEmail')?.checked !== false;
+      const { error } = await upsertProfile(user.id, patch);
       if (error) { msg.textContent = 'השמירה נכשלה — נסו שוב.'; return; }
     } else {
       try {
