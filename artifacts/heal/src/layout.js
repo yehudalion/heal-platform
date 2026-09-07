@@ -190,6 +190,9 @@ export async function renderLayout(root, activePath) {
         <a class="bn-item${activePath==='/progress'?' active':''}" data-nav="/progress">
           <span class="bn-ico">${ico.chart}</span>התקדמות
         </a>
+        <button class="bn-item" id="bnAccount" type="button" aria-haspopup="dialog">
+          <span class="bn-ico">${ico.user}</span>חשבון
+        </button>
       </nav>`;
 
   root.innerHTML = `
@@ -334,6 +337,57 @@ function wireAccountMenu(root, user) {
   root.querySelector('#flagFab')?.addEventListener('click', (e) => {
     e.stopPropagation();
     openFlagOverlay();
+  });
+
+  // 7.9.2026 — הסרגל הצדדי מוסתר מתחת ל-900px, ואיתו נעלם כפתור החשבון:
+  // בטלפון לא הייתה שום דרך להגיע להגדרות, להתנתק או למחוק חשבון. משתמש
+  // בבטא דיווח על זה ("חיפשתי דרך לשנות את זמן הלמידה היומי"). זה אותו
+  // תפריט, בנקודת כניסה שקיימת גם במובייל.
+  root.querySelector('#bnAccount')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openAccountSheet(user);
+  });
+}
+
+/**
+ * תפריט החשבון כגיליון — נקודת הכניסה של המובייל.
+ * אותם פריטים בדיוק כמו בתפריט שבסרגל הצדדי; אין כאן יכולת חדשה, רק דרך
+ * להגיע אליה ממכשיר שבו הסרגל לא קיים.
+ */
+function openAccountSheet(user) {
+  ensureAcctStyles();
+  const ov = document.createElement('div');
+  ov.className = 'acct-overlay';
+  ov.innerHTML = `
+    <div class="acct-card" dir="rtl">
+      <div style="font-size:1.05rem;font-weight:900">החשבון שלי</div>
+      <button class="acct-item" id="shSettings">⚙️ הגדרות</button>
+      <button class="acct-item acct-item--quiet" id="shSignout">התנתקות</button>
+      <button class="acct-item acct-item--danger" id="shDelete">מחיקת חשבון</button>
+      <div class="acct-legal" style="text-align:center">
+        <a href="/accessibility/" target="_blank" rel="noopener">נגישות</a> ·
+        <a href="/privacy/" target="_blank" rel="noopener">פרטיות</a> ·
+        <a href="/terms/" target="_blank" rel="noopener">תנאים</a>
+      </div>
+      <button class="acct-item acct-item--quiet" id="shClose">סגירה</button>
+    </div>`;
+  document.body.appendChild(ov);
+
+  const close = () => ov.remove();
+  ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+  ov.querySelector('#shClose').addEventListener('click', close);
+  ov.querySelector('#shSettings').addEventListener('click', async () => {
+    close();
+    await openSettingsOverlay(user);
+  });
+  ov.querySelector('#shSignout').addEventListener('click', async () => {
+    await signOut();
+    location.hash = '#/';
+    location.reload();
+  });
+  ov.querySelector('#shDelete').addEventListener('click', () => {
+    close();
+    openDeleteOverlay(user);
   });
 }
 
@@ -560,6 +614,7 @@ export function getPageContent() {
 
 // SVG icons (inline, keeps zero external deps)
 const ico = {
+  user: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="5.2" r="2.7"/><path d="M2.6 14c0-2.7 2.4-4.4 5.4-4.4s5.4 1.7 5.4 4.4"/></svg>`,
   home: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 6.5L8 2l6 4.5V14H10v-4H6v4H2z"/></svg>`,
   cards:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="14" height="10" rx="2"/><path d="M4 4V3a1 1 0 011-1h6a1 1 0 011 1v1"/></svg>`,
   rephrase:`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H5M9 5l-3 3 3 3"/><path d="M2 8h2" stroke-dasharray="1.5 1.5"/></svg>`,

@@ -42,6 +42,7 @@ import { rankFor } from '../lib/xp.js';
 import { todayKey, playedToday, lastResult } from '../data/daily.data.js';
 import { getProfile } from '../data/profiles.data.js';
 import { getDailyPlan, nextLeg } from '../data/plan.data.js';
+import { readTodayMinutes, effectiveMinutes, setTodayMinutes, clearTodayMinutes } from '../lib/todayPlan.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
 import { loadCornerState, cornersGridHtml, wireCorners } from './corners.js';
@@ -78,7 +79,9 @@ export async function renderHome(root) {
 
   const profileRes = await getProfile(userId);
   const profile = profileRes?.data ?? null;
-  const minutes = profile?.daily_time_minutes ?? 20;
+  const defaultMinutes = profile?.daily_time_minutes ?? 20;
+  const minutes = effectiveMinutes(defaultMinutes);
+  const pickedToday = readTodayMinutes();
 
   const [planRes, corners, gmState, missions, wodRes, consentRes, accuracyRes, growthRes] = await Promise.all([
     userId ? getDailyPlan(userId, minutes) : Promise.resolve({ data: null }),
@@ -182,6 +185,38 @@ export async function renderHome(root) {
 
   // שני הגרפים הכלליים ביותר. כל כרטיס מצייר בעצמו מצב "עוד נבנה" כשאין
   // מספיק תרגול, אז אין כאן ענף ריק — רק אורח לא מקבל אותם.
+  // ── "כמה נלמד היום" ────────────────────────────────────────────────────
+  // מוצג רק לפני שהתחילו. באמצע מנה זו הסחה, ואחרי שסיימו אין מה לתכנן.
+  const PRESETS = [
+    [5,  'חמש דקות', 'מנה קצרה'],
+    [15, 'רבע שעה',  'המנה הרגילה'],
+    [30, 'חצי שעה',  'יום פנוי'],
+  ];
+  const planStarted = Boolean(plan?.started);
+  const timeHtml = (!userId || planStarted) ? '' : `
+    <section class="hm-time" id="hmTime">
+      <div class="hm-time-q">כמה נלמד היום?</div>
+      <div class="hm-time-opts">
+        ${PRESETS.map(([m, t, sub2]) => `
+        <button type="button" class="hm-time-opt${m === minutes ? ' on' : ''}" data-min="${m}">
+          <b>${t}</b><span>${sub2}</span>
+        </button>`).join('')}
+        <button type="button" class="hm-time-opt${pickedToday && !PRESETS.some(([m]) => m === minutes) ? ' on' : ''}" data-min="custom">
+          <b>אחר</b><span>לבחירתך</span>
+        </button>
+      </div>
+      <div class="hm-time-own" id="hmTimeOwn" hidden>
+        <label for="hmTimeInput">כמה דקות?</label>
+        <input id="hmTimeInput" type="number" inputmode="numeric" min="3" max="120" step="1" value="${minutes}">
+        <button type="button" id="hmTimeGo">בונים מנה</button>
+      </div>
+      <div class="hm-time-foot">${pickedToday
+        ? `היום בלבד · ברירת המחדל שלך היא ${defaultMinutes} דקות · <button type="button" class="hm-time-reset" id="hmTimeReset">חזרה אליה</button>`
+        : `אפשר לשנות רק להיום. ברירת המחדל שלך: ${defaultMinutes} דקות.`}</div>
+    </section>`;
+
+  if (timeHtml) ensureTimeStyles();
+
   const graphsHtml = userId && accuracyRes && growthRes ? `
       <div class="sec-title hm-sec">המספרים שלך<span class="ms-all" data-nav="/insights">כל התובנות ←</span></div>
       <div class="metrics-grid">${accuracyByModuleCard(accuracyRes)}${cumulativeGrowthCard(growthRes)}</div>` : '';
@@ -207,6 +242,7 @@ export async function renderHome(root) {
         </div>
       </section>
 
+      ${timeHtml}
       ${installCardHtml()}
 
       <div class="sec-title hm-sec">הפינות</div>
@@ -222,11 +258,73 @@ export async function renderHome(root) {
   el.querySelectorAll('[data-nav]').forEach((t) => {
     t.addEventListener('click', () => navigate(t.dataset.nav));
   });
+  el.querySelectorAll('.hm-time-opt').forEach((b) => {
+    b.addEventListener('click', () => {
+      const raw = b.dataset.min;
+      if (raw === 'custom') {
+        // שדה מוטמע ולא prompt של הדפדפן: באפליקציה מותקנת חלונית מערכת
+        // נראית זרה, ובחלק מהדפדפנים היא פשוט חסומה.
+        const own = el.querySelector('#hmTimeOwn');
+        if (!own) return;
+        own.hidden = !own.hidden;
+        if (!own.hidden) el.querySelector('#hmTimeInput')?.focus();
+        return;
+      }
+      setTodayMinutes(Number(raw));
+      renderHome(root);
+    });
+  });
+  const ownGo = () => {
+    const n = Number(el.querySelector('#hmTimeInput')?.value);
+    if (!Number.isFinite(n) || n <= 0) return;
+    setTodayMinutes(n);
+    renderHome(root);
+  };
+  el.querySelector('#hmTimeGo')?.addEventListener('click', ownGo);
+  el.querySelector('#hmTimeInput')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); ownGo(); }
+  });
+
+  el.querySelector('#hmTimeReset')?.addEventListener('click', () => {
+    clearTodayMinutes();
+    renderHome(root);
+  });
+
   wireCorners(el);
   wireInstallCard(el);
   el.querySelectorAll('.cb-btn').forEach((btnEl) => {
     btnEl.addEventListener('click', () => onConsent(el, btnEl.dataset.answer === 'yes'));
   });
+}
+
+/** הסגנון של כרטיס הזמן. מוזרק פעם אחת, כמו שאר הכרטיסים שנוספו מאוחר. */
+function ensureTimeStyles() {
+  if (document.getElementById('hm-time-css')) return;
+  const st = document.createElement('style');
+  st.id = 'hm-time-css';
+  st.textContent = `
+.hm-time{margin:1rem 0 0;padding:.95rem 1rem;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);text-align:right}
+.hm-time-q{font-weight:800;font-size:.92rem;margin-bottom:.65rem}
+.hm-time-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
+.hm-time-opt{display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;
+  padding:.55rem .3rem;border:1.5px solid var(--border);border-radius:10px;background:none;
+  font:inherit;cursor:pointer;color:inherit;text-align:center}
+.hm-time-opt b{font-size:.82rem;font-weight:800;line-height:1.2}
+.hm-time-opt span{font-size:.68rem;color:var(--muted);line-height:1.2}
+.hm-time-opt.on{border-color:var(--green-dark,#16412F);background:rgba(22,65,47,.06)}
+.hm-time-opt.on b{color:var(--green-dark,#16412F)}
+.hm-time-foot{margin-top:.6rem;font-size:.74rem;color:var(--muted);line-height:1.5}
+.hm-time-reset{background:none;border:0;padding:0;font:inherit;font-size:.74rem;color:var(--green-dark,#16412F);
+  text-decoration:underline;cursor:pointer}
+.hm-time-own{display:flex;align-items:center;gap:.5rem;margin-top:.6rem;font-size:.82rem}
+.hm-time-own input{width:5rem;padding:.4rem .5rem;border:1.5px solid var(--border);border-radius:8px;
+  font:inherit;font-size:.86rem;text-align:center}
+.hm-time-own button{background:var(--green-dark,#16412F);color:#fff;border:0;border-radius:99px;
+  padding:.42rem 1rem;font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
+@media (max-width:420px){.hm-time-opts{grid-template-columns:repeat(2,1fr)}}
+`;
+  document.head.appendChild(st);
 }
 
 /** "14 מילים לחזרה, ואז ניסוח מחדש" — משפט אחד מרגלי התוכנית. */
