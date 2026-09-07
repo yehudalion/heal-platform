@@ -12,8 +12,8 @@
  *      A browser can be marked internal, and an internal browser drops every
  *      event locally — it never reaches the network at all. The mark survives
  *      reloads. Two ways to set it, so he never needs devtools:
- *          open  https://highscore-eight.vercel.app/?internal=1   (mark)
- *          open  https://highscore-eight.vercel.app/?internal=0   (unmark)
+ *          open  https://adhaptor.co.il/?internal=1   (mark)
+ *          open  https://adhaptor.co.il/?internal=0   (unmark)
  *      Anything that does slip through is still stamped is_internal = true, so
  *      every query can exclude it. Belt and braces, on purpose.
  *

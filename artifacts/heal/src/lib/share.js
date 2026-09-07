@@ -8,7 +8,7 @@
  */
 import { BRAND } from './brand.js';
 
-export const SITE = 'https://highscore-eight.vercel.app';
+export const SITE = 'https://adhaptor.co.il';
 
 /** מחרוזת ריבועים מרשימת בוליאנים. */
 export function grid(results) {

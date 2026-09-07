@@ -59,7 +59,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
     `DTEND;TZID=Asia/Jerusalem:${stamp(end.getFullYear(), end.getMonth() + 1, end.getDate(), end.getHours(), end.getMinutes())}`,
     byday ? `RRULE:FREQ=WEEKLY;BYDAY=${byday}${until}` : '',
     `SUMMARY:תרגול אנגלית — ${BRAND}`,
-    'DESCRIPTION:התרגול היומי שלך במבחן האנגלית. https://highscore-eight.vercel.app/',
+    'DESCRIPTION:התרגול היומי שלך במבחן האנגלית. https://adhaptor.co.il/',
     'BEGIN:VALARM',
     'TRIGGER:-PT10M',
     'ACTION:DISPLAY',

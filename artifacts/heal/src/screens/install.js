@@ -38,7 +38,7 @@ details.ip-card summary{cursor:pointer;font-weight:800;font-size:1rem}
 
 const IOS = () => `
   <ol class="ip-steps">
-    <li><span>פותחים את <b>highscore-eight.vercel.app</b> ב-<b>Safari</b> (לא בכרום — באייפון רק ספארי יודע להוסיף למסך הבית).</span></li>
+    <li><span>פותחים את <b>adhaptor.co.il</b> ב-<b>Safari</b> (לא בכרום — באייפון רק ספארי יודע להוסיף למסך הבית).</span></li>
     <li><span>לוחצים על כפתור <b>השיתוף</b> <span class="ip-key">⎋</span> — הריבוע עם החץ למעלה, בתחתית המסך.</span></li>
     <li><span>גוללים ברשימה ובוחרים <b>"הוסף למסך הבית"</b> <span class="ip-key">⊕</span>, ואז <b>"הוסף"</b> בפינה.</span></li>
   </ol>
@@ -46,7 +46,7 @@ const IOS = () => `
 
 const ANDROID = `
   <ol class="ip-steps">
-    <li><span>פותחים את <b>highscore-eight.vercel.app</b> ב-<b>Chrome</b>.</span></li>
+    <li><span>פותחים את <b>adhaptor.co.il</b> ב-<b>Chrome</b>.</span></li>
     <li><span>אם מופיע כפתור <b>"להתקין עכשיו"</b> למטה — לוחצים עליו וזהו.</span></li>
     <li><span>אחרת: תפריט <span class="ip-key">⋮</span> בפינה → <b>"הוסף למסך הבית"</b> (או "התקנת אפליקציה") → <b>"התקן"</b>.</span></li>
   </ol>`;
