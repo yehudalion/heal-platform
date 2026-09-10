@@ -42,6 +42,8 @@ import { rankFor } from '../lib/xp.js';
 import { todayKey, playedToday, lastResult } from '../data/daily.data.js';
 import { getProfile } from '../data/profiles.data.js';
 import { getDailyPlan, nextLeg } from '../data/plan.data.js';
+import { getSchedule, currentWeek } from '../data/schedule.data.js';
+import { weekStripHtml, ensureScheduleStyles } from './schedule.js';
 import { readTodayMinutes, effectiveMinutes, setTodayMinutes, clearTodayMinutes } from '../lib/todayPlan.js';
 import { getWordOfDay } from '../data/wordOfDay.data.js';
 import { getConsentState, setConsent, CONSENT_TEXT } from '../data/betaConsent.data.js';
@@ -83,8 +85,12 @@ export async function renderHome(root) {
   const minutes = effectiveMinutes(defaultMinutes);
   const pickedToday = readTodayMinutes();
 
+  // הלוח נטען לפני המנה היומית: בשבועיים האחרונים המנה מורכבת אחרת (§6).
+  const { data: schedule } = userId ? await getSchedule(userId, profile) : { data: null };
+  const planOpts = schedule ? { finalMode: schedule.finalMode, dayIndex: schedule.dayIndex } : {};
+
   const [planRes, corners, gmState, missions, wodRes, consentRes, accuracyRes, growthRes] = await Promise.all([
-    userId ? getDailyPlan(userId, minutes) : Promise.resolve({ data: null }),
+    userId ? getDailyPlan(userId, minutes, planOpts) : Promise.resolve({ data: null }),
     loadCornerState(userId),
     getGamificationState(),
     getTodayMissions(),
@@ -220,11 +226,13 @@ export async function renderHome(root) {
   // ועלו לכאן. הכרטיס בולט ולא מוסתר בהגדרות — "הגדרות זה מקום שאנשים לא
   // נכנסים אליו. התוכנית היא פיצ'ר." מי שכבר בנה תוכנית מקבל שורת עריכה
   // דקה במקום הכרטיס, כדי שהמסך לא ידחוף לו שוב משהו שכבר עשה.
-  const hasPlan = Boolean(profile?.onboarding_complete);
+  const hasPlan = Boolean(profile?.onboarding_complete && schedule);
+  if (hasPlan) ensureScheduleStyles();
   const planCardHtml = !userId ? '' : (hasPlan ? `
-    <button class="hm-plan-edit" type="button" data-nav="/plan-setup">
-      <span>התוכנית שלך · ${examDate ? `${daysLeft} ימים לבחינה` : 'לוח כללי לשלושה חודשים'} · ${profile?.daily_time_minutes ?? minutes} דק׳ ביום</span>
-      <span class="hm-plan-edit-go">לשינוי ←</span>
+    ${weekStripHtml(currentWeek(schedule))}
+    <button class="hm-plan-edit" type="button" data-nav="/schedule">
+      <span>${schedule.generic ? 'לוח כללי' : `יום ${schedule.dayIndex} מתוך ${schedule.totalDays}`} · ${{ base: 'בניית בסיס', expansion: 'הרחבה ועומק', final: 'השבועיים האחרונים' }[schedule.currentPeriod]} · ${profile?.daily_time_minutes ?? minutes} דק׳ ביום</span>
+      <span class="hm-plan-edit-go">ללוח המלא ←</span>
     </button>` : `
     <button class="hm-plan" type="button" data-nav="/plan-setup">
       <span class="hm-plan-ico">🗓️</span>

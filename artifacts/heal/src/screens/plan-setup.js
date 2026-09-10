@@ -49,7 +49,7 @@ export async function renderPlanSetup(root) {
     <div class="fade-in ps-wrap">
       <section class="ps-card">
         <h1 class="ps-title">${isEdit ? 'התוכנית שלך' : 'בונים לך תוכנית עד הבחינה'}</h1>
-        <p class="ps-sub">שתי שאלות, ואז יש לך לוח למידה. אפשר לשנות אותן מתי שרוצים.</p>
+        <p class="ps-sub">שתי שאלות, ואז יש לך לוח למידה עד יום הבחינה. אפשר לשנות אותן מתי שרוצים.</p>
 
         <div class="ps-field">
           <label class="ps-label" for="ps-exam-date">מתי הבחינה שלך?</label>
@@ -129,9 +129,17 @@ export async function renderPlanSetup(root) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'שומר…';
 
+    // study_plan (jsonb): תאריך תחילת התוכנית נקבע פעם אחת ולא זז בעריכה —
+    // הלוח נמדד ממנו. update_mode לפי SPEC §8 (אוטומטי / תשאל אותי קודם).
+    const prevPlan = profile?.study_plan || {};
     const answers = {
       exam_date: dateInput.value || null,
       daily_time_minutes: chosenMinutes,
+      study_plan: {
+        ...prevPlan,
+        started_at: prevPlan.started_at || new Date().toISOString(),
+        update_mode: prevPlan.update_mode || 'auto',
+      },
     };
     const { error } = await completeOnboarding(userId, answers);
     if (error) {
@@ -141,7 +149,7 @@ export async function renderPlanSetup(root) {
       return;
     }
     safeTrack({ minutes: chosenMinutes, has_exam_date: !!dateInput.value, edit: isEdit });
-    navigate('/home');
+    navigate('/schedule');
   });
 }
 

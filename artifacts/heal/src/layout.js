@@ -29,6 +29,8 @@ function navItem(moduleId, icon, label, route, activePath) {
 const SCREEN_TITLES = {
   '/home':                 'בית',
   '/practice':             'תרגול',
+  '/schedule':             'הלוח שלי',
+  '/plan-setup':           'התוכנית שלי',
   '/flashcards':           'כרטיסיות',
   '/rephrasing':           'ניסוח מחדש',
   '/progress':             'ההתקדמות שלי',
@@ -111,6 +113,11 @@ export async function renderLayout(root, activePath) {
 
         <a class="nav-item${activePath==='/home'?' active':''}" data-nav="/home">
           <span class="nav-icon">${ico.home}</span>בית
+        </a>
+        <!-- 10.9.2026: הלוח עד הבחינה (SPEC_study_plan.md). כניסה שנייה מיד
+             אחרי הבית — זה הפיצ'ר שמצדיק מנוי, לא כלי. -->
+        <a class="nav-item${activePath==='/schedule'?' active':''}" data-nav="/schedule">
+          <span class="nav-icon">🗓️</span>הלוח שלי
         </a>
 
         <!-- סשן שבת 1 (5.9.2026), החלטת יהודה: שתי קבוצות — "הפינות" (שש,

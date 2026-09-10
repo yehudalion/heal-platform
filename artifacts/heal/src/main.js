@@ -24,6 +24,7 @@ import { renderReadingAnalyze }  from './screens/reading-analyze.js';
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
 import { renderPlanSetup } from './screens/plan-setup.js';
+import { renderSchedule } from './screens/schedule.js';
 import { renderCard }  from './screens/card.js';
 import { renderVocabLearn } from './screens/vocab-learn.js';
 import { renderVocabAnalyze } from './screens/vocab-analyze.js';
@@ -86,6 +87,7 @@ route('/daily', renderDaily);
 
 // התוכנית האישית — כאן גרות שתי השאלות שהיו באונבורדינג.
 route('/plan-setup', requireAuth(renderPlanSetup));
+route('/schedule',   requireAuth(renderSchedule));   // הלוח עד הבחינה (SPEC_study_plan.md)
 // קישורים ישנים (בוקמרקים, מיילים) לא ייפלו לריק.
 route('/onboarding', requireAuth(async () => { navigate('/home'); }));
 

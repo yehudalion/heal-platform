@@ -141,7 +141,13 @@ export async function getTodayProgress(userId) {
  * contract with those modules for now; itemIds can be added when a session
  * accepts an injected list (schema-ready, v2).
  */
-export async function getDailyPlan(userId, minutes) {
+export async function getDailyPlan(userId, minutes, opts = {}) {
+  // opts.finalMode — SPEC_study_plan.md §6: בשבועיים האחרונים אוצר המילים הוא
+  // חזרה בלבד (המנה של srs ממילא בנויה רק ממילים שהגיע זמנן — אין כאן
+  // מילים חדשות), ומתווספת סימולציה מלאה כל יום שני. opts.dayIndex קובע
+  // את הימים (זוגי = סימולציה) כך שהתוצאה דטרמיניסטית ליום.
+  const finalMode = Boolean(opts.finalMode)
+  const simDay = finalMode && ((opts.dayIndex ?? 0) % 2 === 0)
   try {
     // Per-module planners — each module owns its getDailyPlan (SITEMAP §6).
     const [srsData, listeningData, rephraseData, readingData] = await Promise.all([
@@ -192,7 +198,7 @@ export async function getDailyPlan(userId, minutes) {
 
     const legs = [
       {
-        ...vocabPlan, label: 'אוצר מילים', route: '/card',
+        ...vocabPlan, label: finalMode ? 'חזרה על מילים' : 'אוצר מילים', route: '/card',
         doneItems: Math.min(today.vocab, vocabPlan?.targetItems ?? 0),
       },
       {
@@ -213,17 +219,25 @@ export async function getDailyPlan(userId, minutes) {
         doneItems: Math.min(today.reading, readingPlan?.targetItems ?? 0),
       },
     ]
+    if (simDay) {
+      const simDone = await simulationsFinishedToday(userId)
+      legs.push({
+        moduleId: 'simulation', label: 'סימולציה מלאה', route: '/simulation',
+        targetItems: 1, doneItems: Math.min(simDone, 1), estimatedMinutes: 25,
+      })
+    }
+    const composed = legs
       // A leg with nothing to do (e.g. no due cards) drops out of the plan.
       .filter(l => l.targetItems > 0)
       .map(l => ({ ...l, done: l.doneItems >= l.targetItems }))
 
-    const totalMinutes = legs.reduce((s, l) => s + l.estimatedMinutes, 0)
-    const remainingMinutes = legs.reduce((s, l) =>
+    const totalMinutes = composed.reduce((s, l) => s + l.estimatedMinutes, 0)
+    const remainingMinutes = composed.reduce((s, l) =>
       s + (l.done ? 0 : Math.round(l.estimatedMinutes * (1 - l.doneItems / l.targetItems))), 0)
-    const started  = legs.some(l => l.doneItems > 0)
-    const finished = legs.length > 0 && legs.every(l => l.done)
+    const started  = composed.some(l => l.doneItems > 0)
+    const finished = composed.length > 0 && composed.every(l => l.done)
 
-    return { data: { legs, totalMinutes, remainingMinutes, started, finished }, error: null }
+    return { data: { legs: composed, totalMinutes, remainingMinutes, started, finished, finalMode }, error: null }
   } catch (error) {
     console.error('plan.data.getDailyPlan:', error)
     return { data: null, error }
@@ -233,4 +247,14 @@ export async function getDailyPlan(userId, minutes) {
 /** The next leg the student should enter (first unfinished, in plan order). */
 export function nextLeg(plan) {
   return plan?.legs?.find(l => !l.done) ?? null
+}
+
+/** סימולציות שהסתיימו היום — למנה של השבועיים האחרונים. */
+async function simulationsFinishedToday(userId) {
+  try {
+    const midnight = new Date(); midnight.setHours(0, 0, 0, 0)
+    const { data } = await supabase.from('simulation_attempts').select('id')
+      .eq('user_id', userId).eq('status', 'completed').gte('finished_at', midnight.toISOString())
+    return (data || []).length
+  } catch { return 0 }
 }
