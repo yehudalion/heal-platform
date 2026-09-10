@@ -53,13 +53,13 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:hs-study-${Date.now()}@adhaptor`,
+    `UID:hs-study-${Date.now()}@olimrama`,
     `DTSTAMP:${stamp(now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes())}Z`,
     `DTSTART;TZID=Asia/Jerusalem:${stamp(start.getFullYear(), start.getMonth() + 1, start.getDate(), start.getHours(), start.getMinutes())}`,
     `DTEND;TZID=Asia/Jerusalem:${stamp(end.getFullYear(), end.getMonth() + 1, end.getDate(), end.getHours(), end.getMinutes())}`,
     byday ? `RRULE:FREQ=WEEKLY;BYDAY=${byday}${until}` : '',
     `SUMMARY:תרגול אנגלית — ${BRAND}`,
-    'DESCRIPTION:התרגול היומי שלך במבחן האנגלית. https://adhaptor.co.il/',
+    'DESCRIPTION:התרגול היומי שלך במבחן האנגלית. https://olimrama.co.il/',
     'BEGIN:VALARM',
     'TRIGGER:-PT10M',
     'ACTION:DISPLAY',
@@ -73,7 +73,7 @@ export function buildStudyIcs({ days = [], hour = '18:00', minutes = 20, examDat
 }
 
 /** מוריד את הקובץ במכשיר. */
-export function downloadIcs(content, filename = 'adhaptor-study-plan.ics') {
+export function downloadIcs(content, filename = 'olimrama-study-plan.ics') {
   try {
     const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);

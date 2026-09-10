@@ -281,7 +281,7 @@ async function drawResult(root) {
 }
 
 function share(grid) {
-  const text = `${BRAND} · האתגר היומי ${S.date}\n${S.correct}/${S.total} ${grid}\nhttps://adhaptor.co.il/#/daily`
+  const text = `${BRAND} · האתגר היומי ${S.date}\n${S.correct}/${S.total} ${grid}\nhttps://olimrama.co.il/#/daily`
   if (navigator.share) {
     navigator.share({ text }).catch(() => {})
     return

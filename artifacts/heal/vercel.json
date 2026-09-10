@@ -13,7 +13,40 @@
           "value": "highscore-eight.vercel.app"
         }
       ],
-      "destination": "https://adhaptor.co.il/:path*",
+      "destination": "https://olimrama.co.il/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "adhaptor.co.il"
+        }
+      ],
+      "destination": "https://olimrama.co.il/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.adhaptor.co.il"
+        }
+      ],
+      "destination": "https://olimrama.co.il/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.olimrama.co.il"
+        }
+      ],
+      "destination": "https://olimrama.co.il/:path*",
       "permanent": true
     }
   ]

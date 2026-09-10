@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adhaptor.co.il/sitemap.xml
+Sitemap: https://olimrama.co.il/sitemap.xml

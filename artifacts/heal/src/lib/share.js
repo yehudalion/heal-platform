@@ -8,7 +8,7 @@
  */
 import { BRAND } from './brand.js';
 
-export const SITE = 'https://adhaptor.co.il';
+export const SITE = 'https://olimrama.co.il';
 
 /** מחרוזת ריבועים מרשימת בוליאנים. */
 export function grid(results) {
@@ -30,5 +30,5 @@ export function shareText(text, btn = null) {
   }).catch(() => {});
 }
 
-/** כותרת אחידה: "עד הפטור · <מה>". */
+/** כותרת אחידה: "עולים רמה · <מה>". */
 export function shareHeader(what) { return `${BRAND} · ${what}`; }
