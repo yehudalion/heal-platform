@@ -141,8 +141,8 @@ export function renderAuth(root) {
         </figure>
         <div class="ld-shots">
           <figure class="ld-shot">
-            <img src="/img/corners.webp" width="1720" height="432" alt="שש פינות התרגול: אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות" loading="lazy" decoding="async">
-            <figcaption><b>שש פינות, כל חלק בבחינה.</b> בכל אחת: למד → תרגל → נתח.</figcaption>
+            <img src="/img/corners.webp" width="1044" height="588" alt="שש פינות התרגול: אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות" loading="lazy" decoding="async">
+            <figcaption><b>שש פינות, כל חלק בבחינה.</b> אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות — ובכל אחת: למד → תרגל → נתח. ומעל כולן, סימולציה במבנה הבחינה.</figcaption>
           </figure>
           <figure class="ld-shot">
             <img src="/img/insights.webp" width="571" height="360" alt="הדיוק שלכם לפי מודול, הצמיחה המצטברת, ומילים שנכנסו לזיכרון" loading="lazy" decoding="async">

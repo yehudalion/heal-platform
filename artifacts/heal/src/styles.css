@@ -1878,8 +1878,11 @@ a { text-decoration: none; color: inherit; }
 .ld-shot img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--border); }
 .ld-shot figcaption { padding: .8rem 1rem .95rem; font-size: .9rem; line-height: 1.55; color: var(--muted); }
 .ld-shot figcaption b { color: var(--text); }
-.ld-shot-main { max-width: 760px; margin: 0 auto; }
-.ld-shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin: .9rem auto; max-width: 760px; align-items: start; }
+.ld-shot-main { max-width: 620px; margin: 0 auto; }
+.ld-shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin: .9rem auto; align-items: stretch; }
+.ld-shots .ld-shot { display: flex; flex-direction: column; }
+.ld-shots .ld-shot img { height: auto; }
+.ld-shots .ld-shot figcaption { margin-top: auto; }
 .ld-shot-main + .ld-shots, .ld-shots + .ld-shot-main { margin-top: .9rem; }
 @media (max-width: 900px) { .ld-shots { grid-template-columns: 1fr; } }
 .ld-nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: .8rem; }
