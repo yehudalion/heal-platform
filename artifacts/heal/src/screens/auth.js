@@ -136,22 +136,26 @@ export function renderAuth(root) {
           <p>לא "מאגר שאלות" — מערכת שיודעת מה לעשות היום, ומה מחר.</p>
         </div>
         <figure class="ld-shot ld-shot-main">
+          <div class="ld-shot-lbl">התוכנית האישית</div>
           <img src="/img/schedule.webp" width="1440" height="949" alt="הלוח שלי: יום 18 מתוך 44, השבוע הקרוב עם משימות וזמנים" loading="lazy" decoding="async">
           <figcaption><b>לוח למידה עד יום הבחינה.</b> שתי שאלות — מתי הבחינה וכמה דקות ביום — ויש לכם לוח שמחלק את הזמן לתקופות, ומתעדכן לפי הביצועים שלכם.</figcaption>
         </figure>
         <div class="ld-shots">
           <figure class="ld-shot">
+            <div class="ld-shot-lbl">המודולים לתרגול</div>
             <img src="/img/corners.webp" width="1044" height="588" alt="שש פינות התרגול: אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות" loading="lazy" decoding="async">
             <figcaption><b>שש פינות, כל חלק בבחינה.</b> אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות — ובכל אחת: למד → תרגל → נתח. ומעל כולן, סימולציה במבנה הבחינה.</figcaption>
           </figure>
           <figure class="ld-shot">
+            <div class="ld-shot-lbl">המדדים האישיים</div>
             <img src="/img/insights.webp" width="571" height="360" alt="הדיוק שלכם לפי מודול, הצמיחה המצטברת, ומילים שנכנסו לזיכרון" loading="lazy" decoding="async">
             <figcaption><b>המספרים שלכם.</b> דיוק לפי חלק, מילים בזיכרון, ומה עלה מהשבוע שעבר.</figcaption>
           </figure>
         </div>
           <figure class="ld-shot ld-shot-main">
+            <div class="ld-shot-lbl">ההסבר על כל טעות</div>
             <img src="/img/explain.webp" width="1276" height="788" alt="הסבר בעברית על שאלת השלמת משפטים: למה התשובה נכונה ולמה כל מסיח אחר לא" loading="lazy" decoding="async">
-            <figcaption><b>הסבר על כל טעות.</b> לא רק מה נכון — למה, ולמה כל מסיח אחר לא.</figcaption>
+            <figcaption><b>לא רק מה נכון.</b> למה — ולמה כל מסיח אחר לא.</figcaption>
           </figure>
       </section>
 

@@ -1875,6 +1875,7 @@ a { text-decoration: none; color: inherit; }
 /* ככה זה נראה בפנים — צילומי מסך אמיתיים (10.9.2026) */
 .ld-show { padding-top: .6rem; }
 .ld-shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(20,32,26,.07); }
+.ld-shot-lbl { padding: .75rem 1rem .6rem; font-weight: 800; font-size: .95rem; color: var(--green-dark); border-bottom: 1px solid var(--border); }
 .ld-shot img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--border); }
 .ld-shot figcaption { padding: .8rem 1rem .95rem; font-size: .9rem; line-height: 1.55; color: var(--muted); }
 .ld-shot figcaption b { color: var(--text); }
