@@ -110,7 +110,7 @@ export function renderAuth(root) {
         <p class="ld-lead">
           כל נקודה מתחת ל-134 היא עוד קורס אנגלית בתואר — עוד סמסטר, ועוד אלפי שקלים.
           כאן מתרגלים בדיוק במבנה של אמירנט והלאל, עם הסבר בעברית על כל שאלה,
-          ומתחילים בדקה הראשונה בלי חשבון.
+          ולוח למידה שמחלק את הזמן עד יום הבחינה.
         </p>
         <div class="ld-badges">
           <span class="ld-badge">✓ מעודכן לבחינה של דצמבר 2026</span>
@@ -125,6 +125,34 @@ export function renderAuth(root) {
         </div>
         <a class="ld-install" href="#/install">📲 מומלץ: להוסיף כאפליקציה למסך הבית ←</a>
         <div id="notice" class="ld-notice"></div>
+      </section>
+
+      <!-- ══ ככה זה נראה בפנים (10.9.2026, SPEC_entry_gate_final §5.1) ══
+           מסכים אמיתיים מהמוצר, מרונדרים מהקוד עם נתוני דמו. לא מוקאפים:
+           מה שרואים כאן הוא בדיוק מה שמקבלים אחרי ההתחברות. -->
+      <section class="ld-sec ld-show">
+        <div class="ld-sec-h">
+          <h2>ככה זה נראה בפנים</h2>
+          <p>לא "מאגר שאלות" — מערכת שיודעת מה לעשות היום, ומה מחר.</p>
+        </div>
+        <figure class="ld-shot ld-shot-main">
+          <img src="/img/schedule.webp" width="1440" height="949" alt="הלוח שלי: יום 18 מתוך 44, השבוע הקרוב עם משימות וזמנים" loading="lazy" decoding="async">
+          <figcaption><b>לוח למידה עד יום הבחינה.</b> שתי שאלות — מתי הבחינה וכמה דקות ביום — ויש לכם לוח שמחלק את הזמן לתקופות, ומתעדכן לפי הביצועים שלכם.</figcaption>
+        </figure>
+        <div class="ld-shots">
+          <figure class="ld-shot">
+            <img src="/img/corners.webp" width="1720" height="432" alt="שש פינות התרגול: אוצר מילים, ניסוח מחדש, האזנה, השלמת משפטים, הבנת הנקרא, תחיליות וסופיות" loading="lazy" decoding="async">
+            <figcaption><b>שש פינות, כל חלק בבחינה.</b> בכל אחת: למד → תרגל → נתח.</figcaption>
+          </figure>
+          <figure class="ld-shot">
+            <img src="/img/insights.webp" width="571" height="360" alt="הדיוק שלכם לפי מודול, הצמיחה המצטברת, ומילים שנכנסו לזיכרון" loading="lazy" decoding="async">
+            <figcaption><b>המספרים שלכם.</b> דיוק לפי חלק, מילים בזיכרון, ומה עלה מהשבוע שעבר.</figcaption>
+          </figure>
+        </div>
+          <figure class="ld-shot ld-shot-main">
+            <img src="/img/explain.webp" width="1276" height="788" alt="הסבר בעברית על שאלת השלמת משפטים: למה התשובה נכונה ולמה כל מסיח אחר לא" loading="lazy" decoding="async">
+            <figcaption><b>הסבר על כל טעות.</b> לא רק מה נכון — למה, ולמה כל מסיח אחר לא.</figcaption>
+          </figure>
       </section>
 
       <!-- ══ כלים חינמיים ══ -->

@@ -1872,6 +1872,16 @@ a { text-decoration: none; color: inherit; }
 .ld-tool-o { background: var(--orange-light); } .ld-tool-o .ld-tool-go { color: var(--orange); }
 .ld-tool-b { background: var(--blue-light); }   .ld-tool-b .ld-tool-go { color: var(--blue); }
 
+/* ככה זה נראה בפנים — צילומי מסך אמיתיים (10.9.2026) */
+.ld-show { padding-top: .6rem; }
+.ld-shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(20,32,26,.07); }
+.ld-shot img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--border); }
+.ld-shot figcaption { padding: .8rem 1rem .95rem; font-size: .9rem; line-height: 1.55; color: var(--muted); }
+.ld-shot figcaption b { color: var(--text); }
+.ld-shot-main { max-width: 760px; margin: 0 auto; }
+.ld-shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin: .9rem auto; max-width: 760px; align-items: start; }
+.ld-shot-main + .ld-shots, .ld-shots + .ld-shot-main { margin-top: .9rem; }
+@media (max-width: 900px) { .ld-shots { grid-template-columns: 1fr; } }
 .ld-nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: .8rem; }
 .ld-num { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem .9rem; text-align: center; display: grid; gap: .15rem; }
 .ld-num b { font-family: var(--serif); font-size: 2.3rem; font-weight: 900; color: var(--green-dark); line-height: 1; font-variant-numeric: tabular-nums; }
