@@ -94,7 +94,8 @@ export function buildSchedule({ startDate, examDate, activeDays, today = new Dat
   const exam = generic ? addDays(start, GENERIC_PLAN_DAYS) : new Date(examDate.getFullYear(), examDate.getMonth(), examDate.getDate())
   const todayKey = dayKey(today)
 
-  const totalDays = Math.max(1, diffDays(start, exam))
+  // אורך הלוח בימים, כולל יום הבחינה עצמו — זה מה שהמסך מציג כ"מתוך N".
+  const totalDays = Math.max(1, diffDays(start, exam) + 1)
   // §6: השבועיים האחרונים הם תמיד 14 הימים שלפני הבחינה (או הכול, אם אין יותר).
   const finalStart = totalDays > FINAL_PERIOD_DAYS ? addDays(exam, -FINAL_PERIOD_DAYS) : start
   const preFinalDays = Math.max(0, diffDays(start, finalStart))
@@ -127,12 +128,15 @@ export function buildSchedule({ startDate, examDate, activeDays, today = new Dat
   }
 
   const daysLeft = Math.max(0, diffDays(today, exam))
-  const dayIndex = Math.min(totalDays, Math.max(0, diffDays(start, today))) + 1
+  // 10.9.2026: הקלמפ חייב לחול על המספר הסופי ולא על ההפרש, אחרת ביום
+  // הבחינה עצמה (ואחריה) יוצא "יום 22 מתוך 21".
+  const dayIndex = Math.min(totalDays, Math.max(0, diffDays(start, today)) + 1)
+  const examPassed = !generic && diffDays(today, exam) < 0
   const current = periodOf(today)
   const doneCount = days.filter(x => x.status === 'done').length
 
   return {
-    generic, start, exam, totalDays, daysLeft, dayIndex,
+    generic, start, exam, totalDays, daysLeft, dayIndex, examPassed,
     currentPeriod: current.id,
     finalMode: current.id === PERIODS.final.id,
     periods: [

@@ -121,12 +121,19 @@ export async function renderSchedule(root) {
   const period = PERIODS[sch.currentPeriod];
 
   // ── כותרת ──
-  const headline = sch.generic
-    ? `לוח כללי · יום <b>${sch.dayIndex}</b> מתוך ${sch.totalDays}`
-    : `יום <b>${sch.dayIndex}</b> מתוך ${sch.totalDays} · <b>${sch.daysLeft}</b> ימים לבחינה`;
-  const sub = sch.generic
-    ? 'בלי תאריך בחינה בניתי לך שלושה חודשים. ברגע שתוסיף תאריך — הלוח ייבנה מחדש סביבו.'
-    : `הבחינה ב-${fmtDate(sch.exam)}.`;
+  // 10.9.2026: תאריך בחינה שכבר עבר הוא מצב אמיתי (תלמיד שהקליד תאריך ישן,
+  // או שהמועד חלף) — בלי הענף הזה הכותרת מציגה "0 ימים לבחינה" והלוח ממשיך
+  // להתנהג כאילו הוא בשבועיים האחרונים.
+  const headline = sch.examPassed
+    ? `תאריך הבחינה שהגדרת כבר עבר`
+    : sch.generic
+      ? `לוח כללי · יום <b>${sch.dayIndex}</b> מתוך ${sch.totalDays}`
+      : `יום <b>${sch.dayIndex}</b> מתוך ${sch.totalDays} · <b>${sch.daysLeft}</b> ימים לבחינה`;
+  const sub = sch.examPassed
+    ? `הלוח נבנה סביב ${fmtDate(sch.exam)}. עדכן את התאריך ואבנה אותו מחדש.`
+    : sch.generic
+      ? 'בלי תאריך בחינה בניתי לך שלושה חודשים. ברגע שתוסיף תאריך — הלוח ייבנה מחדש סביבו.'
+      : `הבחינה ב-${fmtDate(sch.exam)}.`;
 
   // ── השבוע הקרוב (סגור) ──
   const committed = sch.days.filter((d) => d.status === 'today' || d.status === 'committed');

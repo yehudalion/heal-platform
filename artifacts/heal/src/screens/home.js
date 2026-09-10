@@ -231,7 +231,7 @@ export async function renderHome(root) {
   const planCardHtml = !userId ? '' : (hasPlan ? `
     ${weekStripHtml(currentWeek(schedule))}
     <button class="hm-plan-edit" type="button" data-nav="/schedule">
-      <span>${schedule.generic ? 'לוח כללי' : `יום ${schedule.dayIndex} מתוך ${schedule.totalDays}`} · ${{ base: 'בניית בסיס', expansion: 'הרחבה ועומק', final: 'השבועיים האחרונים' }[schedule.currentPeriod]} · ${profile?.daily_time_minutes ?? minutes} דק׳ ביום</span>
+      <span>${schedule.examPassed ? 'תאריך הבחינה עבר — לעדכן' : `${schedule.generic ? 'לוח כללי' : `יום ${schedule.dayIndex} מתוך ${schedule.totalDays}`} · ${{ base: 'בניית בסיס', expansion: 'הרחבה ועומק', final: 'השבועיים האחרונים' }[schedule.currentPeriod]} · ${profile?.daily_time_minutes ?? minutes} דק׳ ביום`}</span>
       <span class="hm-plan-edit-go">ללוח המלא ←</span>
     </button>` : `
     <button class="hm-plan" type="button" data-nav="/plan-setup">
