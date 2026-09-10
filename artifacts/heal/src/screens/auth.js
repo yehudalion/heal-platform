@@ -261,6 +261,7 @@ export function renderAuth(root) {
           <a href="/privacy/" target="_blank" rel="noopener">מדיניות פרטיות</a> ·
           <a href="/terms/" target="_blank" rel="noopener">תנאי שימוש</a> ·
           <a href="/accessibility/" target="_blank" rel="noopener">הצהרת נגישות</a> ·
+          <a href="/tirgul-chinam/">תרגול חינם</a> ·
           <a href="/mivchan-hilal/">מדריכים למבחן</a> ·
           <a href="#/install">להוסיף כאפליקציה</a>
         </span>
