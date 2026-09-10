@@ -23,7 +23,7 @@ import { renderReadingAnalyze }  from './screens/reading-analyze.js';
 
 // Keep existing screens intact
 import { renderAuth }  from './screens/auth.js';
-import { renderOnboarding, getGuestProfile } from './screens/onboarding.js';
+import { renderPlanSetup } from './screens/plan-setup.js';
 import { renderCard }  from './screens/card.js';
 import { renderVocabLearn } from './screens/vocab-learn.js';
 import { renderVocabAnalyze } from './screens/vocab-analyze.js';
@@ -64,22 +64,11 @@ function requireAuth(handler) {
   };
 }
 
-// ─── Onboarding guard (SITEMAP §1) ───────────────────────────────────────────
-// Applied to /home only: the dashboard is the entry point, so this is the one
-// gate — direct links into modules stay friction-free.
-function requireOnboarded(handler) {
-  return requireAuth(async (root) => {
-    if (isGuest()) {
-      if (!getGuestProfile()?.onboarding_complete) { navigate('/onboarding'); return; }
-    } else {
-      const session = await getCurrentSession();
-      const { getProfile } = await import('./data/profiles.data.js');
-      const { data: profile } = await getProfile(session.user.id);
-      if (!profile?.onboarding_complete) { navigate('/onboarding'); return; }
-    }
-    await handler(root);
-  });
-}
+// ─── שער הכניסה: אין יותר גייט אונבורדינג (8.9.2026) ────────────────────────
+// עד היום /home היה חסום עד שהתלמיד ענה על שתי שאלות, ו-23 מתוך 37 נטשו שם
+// (DIAGNOSIS_retention_2026-09-06). לפי SPEC_entry_gate_final.md §4.1 הקיר
+// היחיד הוא ההתחברות עצמה: מיד אחריה התלמיד בתוך האתר, אפס שאלות.
+// שתי השאלות עברו למסך /plan-setup, שאליו נכנסים רק מרצון.
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
@@ -95,12 +84,14 @@ route('/', async (root) => {
 route('/daily', renderDaily);
 // fork.js/level.js removed 2026-08-28 — dead pre-redesign screens, zero navigate() references anywhere in the app.
 
-// Onboarding (SITEMAP §1 — two questions, shown once)
-route('/onboarding', requireAuth(renderOnboarding));
+// התוכנית האישית — כאן גרות שתי השאלות שהיו באונבורדינג.
+route('/plan-setup', requireAuth(renderPlanSetup));
+// קישורים ישנים (בוקמרקים, מיילים) לא ייפלו לריק.
+route('/onboarding', requireAuth(async () => { navigate('/home'); }));
 
 // New main routes
-route('/home',         requireOnboarded(renderHome));
-route('/practice',     requireOnboarded(renderPractice));   // הטאב "תרגול" במובייל — אותה רשת פינות כמו בבית
+route('/home',         requireAuth(renderHome));
+route('/practice',     requireAuth(renderPractice));   // הטאב "תרגול" במובייל — אותה רשת פינות כמו בבית
 route('/flashcards',   requireAuth(renderFlashcards));
 route('/rephrasing',   requireAuth(renderRephrasing));
 route('/rephrase-learn',    requireAuth(renderRephraseLearn));

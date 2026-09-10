@@ -215,6 +215,28 @@ export async function renderHome(root) {
         : `אפשר לשנות רק להיום. ברירת המחדל שלך: ${defaultMinutes} דקות.`}</div>
     </section>`;
 
+  // ── כרטיס "בנה לי תוכנית עד הבחינה" ────────────────────────────────────
+  // SPEC_entry_gate_final.md §4.2: שתי השאלות שהיו באונבורדינג ירדו מהשער
+  // ועלו לכאן. הכרטיס בולט ולא מוסתר בהגדרות — "הגדרות זה מקום שאנשים לא
+  // נכנסים אליו. התוכנית היא פיצ'ר." מי שכבר בנה תוכנית מקבל שורת עריכה
+  // דקה במקום הכרטיס, כדי שהמסך לא ידחוף לו שוב משהו שכבר עשה.
+  const hasPlan = Boolean(profile?.onboarding_complete);
+  const planCardHtml = !userId ? '' : (hasPlan ? `
+    <button class="hm-plan-edit" type="button" data-nav="/plan-setup">
+      <span>התוכנית שלך · ${examDate ? `${daysLeft} ימים לבחינה` : 'לוח כללי לשלושה חודשים'} · ${profile?.daily_time_minutes ?? minutes} דק׳ ביום</span>
+      <span class="hm-plan-edit-go">לשינוי ←</span>
+    </button>` : `
+    <button class="hm-plan" type="button" data-nav="/plan-setup">
+      <span class="hm-plan-ico">🗓️</span>
+      <span class="hm-plan-txt">
+        <b>בנה לי תוכנית עד הבחינה</b>
+        <span class="hm-plan-sub">שתי שאלות, ואז יש לך לוח למידה יומי שמתעדכן לפי הביצועים שלך.</span>
+      </span>
+      <span class="hm-plan-go">←</span>
+    </button>`);
+
+  ensurePlanStyles();
+
   if (timeHtml) ensureTimeStyles();
 
   const graphsHtml = userId && accuracyRes && growthRes ? `
@@ -228,7 +250,7 @@ export async function renderHome(root) {
       <section class="hm-head">
         <div class="hm-hi">
           <span class="hm-name">${GREETING()}, ${esc(name)}.</span>
-          <span class="hm-days">${daysLeft !== null ? `<b>${daysLeft}</b> ימים לבחינה` : 'אפשר להגדיר תאריך בחינה בהגדרות'}</span>
+          <span class="hm-days">${daysLeft !== null ? `<b>${daysLeft}</b> ימים לבחינה` : 'עוד לא הגדרת תאריך בחינה'}</span>
         </div>
         ${statusHtml}
         ${realHtml}
@@ -242,6 +264,7 @@ export async function renderHome(root) {
         </div>
       </section>
 
+      ${planCardHtml}
       ${timeHtml}
       ${installCardHtml()}
 
@@ -372,4 +395,28 @@ function consentBand(res) {
       </div>
       <p class="cb-err" hidden>לא הצלחנו לשמור. אפשר לנסות שוב.</p>
     </div>`;
+}
+
+let planStylesDone = false;
+function ensurePlanStyles() {
+  if (planStylesDone) return;
+  planStylesDone = true;
+  const st = document.createElement('style');
+  st.textContent = `
+    .hm-plan{display:flex;align-items:center;gap:.8rem;width:100%;text-align:right;
+      margin:.9rem 0 0;padding:1rem 1.1rem;border:1.5px solid var(--green);
+      border-radius:var(--radius);background:var(--green-light);cursor:pointer;font:inherit}
+    .hm-plan-ico{font-size:1.5rem;line-height:1}
+    .hm-plan-txt{flex:1;display:block}
+    .hm-plan-txt b{display:block;font-size:1rem;font-weight:800;color:var(--green-dark)}
+    .hm-plan-sub{display:block;font-size:.83rem;color:var(--text);opacity:.8;margin-top:.2rem;line-height:1.45}
+    .hm-plan-go{font-size:1.15rem;color:var(--green-dark);font-weight:800}
+    .hm-plan-edit{display:flex;align-items:center;gap:.6rem;width:100%;text-align:right;
+      margin:.7rem 0 0;padding:.6rem .85rem;border:1px solid var(--border);
+      border-radius:var(--radius-sm);background:var(--card);cursor:pointer;font:inherit;
+      font-size:.83rem;color:var(--muted)}
+    .hm-plan-edit span:first-child{flex:1}
+    .hm-plan-edit-go{font-weight:700;color:var(--green-dark)}
+  `;
+  document.head.appendChild(st);
 }
